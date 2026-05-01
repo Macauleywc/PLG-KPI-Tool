@@ -1,0 +1,16 @@
+{
+  "customer": "Anand International",
+  "lastUpdated": "2026-05-01T11:49:32.854Z",
+  "months": {
+    "2026-04": {
+      "cons": 103,
+      "pallets": 155,
+      "revenue": 7001.25,
+      "lates": 19,
+      "timeliness": 0.815534,
+      "avgRC": 67.97,
+      "avgRP": 45.17,
+      "avgPC": 1.5
+    }
+  }
+}
