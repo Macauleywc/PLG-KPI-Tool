@@ -7,148 +7,196 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f5f5f3; color: #1a1a1a; min-height: 100vh; }
-header { background: #1a1a1a; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.logo-plg { font-size: 16px; color: #F47920; font-weight: 700; letter-spacing: 0.05em; }
-.badge { font-size: 11px; color: #888; letter-spacing: 0.08em; text-transform: uppercase; }
-main { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
-h1 { font-size: 22px; font-weight: 600; margin-bottom: 0.3rem; }
-.subtitle { font-size: 14px; color: #666; margin-bottom: 2rem; }
-.step { margin-bottom: 2rem; }
-.step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; }
-.step-num { width: 26px; height: 26px; border-radius: 50%; background: #F47920; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
-.step-title { font-size: 15px; font-weight: 600; }
-.drop-zone { border: 1.5px dashed #ccc; border-radius: 10px; background: #fff; padding: 2rem; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; }
-.drop-zone:hover, .drop-zone.drag-over { border-color: #F47920; background: #fff8f3; }
-.drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-.drop-icon { font-size: 32px; margin-bottom: 0.5rem; }
-.drop-label { font-size: 14px; color: #555; }
-.drop-label strong { color: #F47920; }
-.drop-hint { font-size: 12px; color: #999; margin-top: 4px; }
-.file-loaded { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.75rem; }
-.file-icon { font-size: 20px; }
-.file-name { font-size: 13px; font-weight: 500; flex: 1; }
-.file-status { font-size: 12px; color: #2e7d32; font-weight: 500; }
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 1rem 0; }
-.stats-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 1rem 0; }
-.stat-card { background: #fff; border-radius: 8px; border: 0.5px solid #e0e0e0; padding: 0.75rem 1rem; }
-.stat-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-.stat-val { font-size: 22px; font-weight: 600; }
-.stat-val.orange { color: #F47920; }
-.stat-val.green { color: #2e7d32; }
-.stat-val.red { color: #c62828; }
-.section-card { background: #fff; border-radius: 10px; border: 0.5px solid #e0e0e0; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
-.section-title { font-size: 14px; font-weight: 600; margin-bottom: 1rem; color: #444; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.pill { font-size: 10px; background: #fff3e0; color: #e65100; border-radius: 4px; padding: 2px 7px; font-weight: 600; letter-spacing: 0.04em; }
-.pill-red { font-size: 10px; background: #ffebee; color: #c62828; border-radius: 4px; padding: 2px 7px; font-weight: 600; }
-.tracker-table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th { background: #1a1a1a; color: #fff; padding: 8px 12px; text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.04em; }
-td { padding: 8px 12px; border-bottom: 0.5px solid #eee; }
-tr:last-child td { border-bottom: none; }
-.existing { color: #888; }
-.new-row td { background: #fff8f0; font-weight: 500; }
-.new-row td:first-child { border-left: 3px solid #F47920; }
-.empty-row td { color: #ccc; }
-.total-row td { background: #f5f5f3; font-weight: 600; border-top: 1.5px solid #1a1a1a; }
-.late-row td { background: #fff5f5; }
-.late-row td:first-child { border-left: 3px solid #f44336; }
-.timeliness-bar { display: flex; align-items: center; gap: 6px; }
-.bar-bg { height: 5px; background: #eee; border-radius: 3px; overflow: hidden; min-width: 50px; }
-.bar-fill { height: 100%; border-radius: 3px; background: #4CAF50; }
-.bar-fill.warn { background: #FF9800; }
-.bar-fill.bad { background: #f44336; }
-.tab-bar { display: flex; gap: 2px; margin-bottom: 1.25rem; border-bottom: 1px solid #eee; }
-.tab { padding: 8px 14px; font-size: 13px; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; color: #888; background: none; border-top: none; border-left: none; border-right: none; margin-bottom: -1px; white-space: nowrap; }
-.tab.active { color: #F47920; border-bottom-color: #F47920; }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-.chart-wrap { position: relative; height: 200px; margin: 0.5rem 0; }
-.chart-wrap-lg { position: relative; height: 240px; margin: 0.5rem 0; }
-.rank-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 0.5px solid #f0f0f0; }
-.rank-row:last-child { border-bottom: none; }
-.rank-num { font-size: 11px; color: #bbb; width: 16px; text-align: right; flex-shrink: 0; }
-.rank-name { font-size: 13px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.rank-bar-wrap { width: 100px; flex-shrink: 0; }
-.rank-bar-bg { height: 4px; background: #eee; border-radius: 3px; overflow: hidden; }
-.rank-bar-fill { height: 100%; background: #F47920; border-radius: 3px; }
-.rank-val { font-size: 12px; font-weight: 600; width: 55px; text-align: right; flex-shrink: 0; }
-.ytd-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 1.5rem; }
-.ytd-card { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 0.85rem 1rem; }
-.ytd-label { font-size: 10px; color: #777; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-.ytd-val { font-size: 18px; font-weight: 700; color: #F47920; }
-.dow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-.dow-card { background: #f9f9f7; border-radius: 8px; padding: 0.6rem 0.75rem; text-align: center; border: 0.5px solid #eee; }
-.dow-label { font-size: 10px; color: #aaa; margin-bottom: 4px; text-transform: uppercase; }
-.dow-val { font-size: 15px; font-weight: 600; }
-.dow-sub { font-size: 10px; color: #999; margin-top: 2px; }
-.actions { display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap; }
-.btn { padding: 0.6rem 1.25rem; border-radius: 6px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: opacity 0.15s, transform 0.1s; }
-.btn:active { transform: scale(0.97); }
-.btn-primary { background: #F47920; color: #fff; }
-.btn-primary:hover { opacity: 0.9; }
-.btn-outline { background: #fff; color: #1a1a1a; border: 1px solid #ccc; }
-.btn-outline:hover { background: #f5f5f3; }
-.alert { border-radius: 8px; padding: 0.75rem 1rem; font-size: 13px; margin-bottom: 1rem; }
-.alert-info { background: #e3f2fd; color: #1565c0; border: 0.5px solid #90caf9; }
-.alert-warn { background: #fff3e0; color: #e65100; border: 0.5px solid #ffcc80; }
-.alert-success { background: #e8f5e9; color: #1b5e20; border: 0.5px solid #a5d6a7; }
-footer { text-align: center; padding: 2rem; font-size: 12px; color: #aaa; }
-.back-btn{display:flex;align-items:center;gap:6px;color:#888;font-size:13px;text-decoration:none;padding:6px 12px;border-radius:6px;border:1px solid #333;transition:background 0.15s;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f2f2f0;color:#1a1a1a;min-height:100vh;}
+header{background:#1a1a1a;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;border-bottom:3px solid #F47920;}
+.back-btn{display:flex;align-items:center;gap:6px;color:#888;font-size:13px;text-decoration:none;padding:6px 12px;border-radius:6px;border:1px solid #2a2a2a;transition:all 0.15s;}
 .back-btn:hover{background:#2a2a2a;color:#fff;}
-.customer-banner{background:#fff;border-bottom:3px solid #F47920;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;}
-.customer-name-display{font-size:20px;font-weight:700;}
-.gh-status{font-size:12px;color:#aaa;}
-.history-chip{background:#fff;border:0.5px solid #e0e0e0;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:500;color:#555;cursor:default;}
-.history-chip.has-data{border-color:#F47920;color:#F47920;background:#fff8f3;}
+.header-center{display:flex;align-items:center;gap:10px;}
+.logo-box{background:#F47920;color:#fff;font-size:12px;font-weight:700;padding:4px 8px;border-radius:4px;}
+.logo-text{font-size:14px;font-weight:600;color:#fff;}
+.logo-divider{width:1px;height:18px;background:#333;}
+.header-tool{font-size:12px;color:#888;}
+.gh-status{font-size:12px;color:#555;}
+.gh-status.ok{color:#4CAF50;}
+.customer-banner{background:#fff;border-bottom:1px solid #e0e0de;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.banner-left{display:flex;align-items:center;gap:14px;}
+.cust-avatar{width:44px;height:44px;border-radius:8px;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#F47920;border:2px solid #ffe0c0;}
+.cust-name{font-size:20px;font-weight:700;}
+.cust-sub{font-size:12px;color:#aaa;margin-top:2px;}
+.history-bar{background:#fff;border-bottom:1px solid #e0e0de;padding:1rem 2rem;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+.hist-item{text-align:center;}
+.hist-label{font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+.hist-val{font-size:18px;font-weight:700;color:#1a1a1a;}
+.hist-val.orange{color:#F47920;}
+.months-bar{background:#fafaf8;border-bottom:1px solid #e0e0de;padding:10px 2rem;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.months-label{font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px;flex-shrink:0;}
+.month-chip{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:#f0f0ee;border:1px solid #e0e0de;color:#bbb;}
+.month-chip.has-data{border-color:#F47920;color:#F47920;background:#fff8f3;}
+.upload-wrap{padding:1.5rem 2rem;background:#f2f2f0;}
+.section-hd{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.step-num{width:22px;height:22px;border-radius:50%;background:#F47920;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.section-hd-text{font-size:13px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.06em;}
+.drop-zone{border:1.5px dashed #d0d0ce;border-radius:10px;background:#fff;padding:2.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
+.drop-zone:hover,.drop-zone.drag-over{border-color:#F47920;background:#fff8f3;}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon-wrap{width:56px;height:56px;background:#F47920;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;}
+.drop-title{font-size:16px;font-weight:600;margin-bottom:4px;}
+.drop-sub{font-size:13px;color:#bbb;}
+.drop-hint{font-size:11px;color:#ccc;margin-top:8px;}
+.file-loaded{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e0e0de;border-radius:8px;padding:12px 16px;margin-top:12px;}
+.file-ok{width:32px;height:32px;background:#e8f5e9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.file-name{font-size:13px;font-weight:600;flex:1;}
+.file-detail{font-size:12px;color:#F47920;font-weight:500;}
+.kpi-wrap{padding:0 2rem 2rem;background:#f2f2f0;}
+.ytd-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1.25rem;}
+.ytd-card{background:#fff;border:0.5px solid #e0e0de;border-radius:8px;padding:12px 14px;border-top:3px solid #F47920;}
+.ytd-label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+.ytd-val{font-size:17px;font-weight:700;color:#1a1a1a;}
+.tab-bar{display:flex;gap:0;border-bottom:1px solid #e0e0de;margin-bottom:1.25rem;background:#fff;border-radius:8px 8px 0 0;overflow:hidden;}
+.tab{padding:10px 18px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:#888;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;white-space:nowrap;transition:all 0.15s;}
+.tab.active{color:#F47920;border-bottom-color:#F47920;background:#fff;}
+.tab:hover{color:#555;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.section-card{background:#fff;border-radius:0 0 8px 8px;border:0.5px solid #e0e0de;border-top:none;padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
+.section-card-standalone{background:#fff;border-radius:8px;border:0.5px solid #e0e0de;padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
+.section-title{font-size:13px;font-weight:600;margin-bottom:1rem;color:#555;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.pill{font-size:10px;background:#fff3e0;color:#e65100;border-radius:4px;padding:2px 7px;font-weight:600;border:1px solid #ffe0c0;}
+.pill-red{font-size:10px;background:#ffebee;color:#c62828;border-radius:4px;padding:2px 7px;font-weight:600;}
+.tracker-table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:#1a1a1a;color:#fff;padding:8px 12px;text-align:left;font-weight:500;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;}
+td{padding:8px 12px;border-bottom:0.5px solid #f0f0ee;color:#444;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#fafaf8;}
+.existing{color:#ccc;}
+.new-row td{background:#fff8f3;}
+.new-row td:first-child{border-left:2px solid #F47920;}
+.empty-row td{color:#e0e0de;}
+.total-row td{background:#f5f5f3;font-weight:600;border-top:1px solid #1a1a1a;color:#1a1a1a;}
+.late-row td{background:#fff5f5;}
+.late-row td:first-child{border-left:2px solid #f44336;}
+.otif-bar{display:flex;align-items:center;gap:8px;}
+.bar-bg{height:4px;background:#f0f0ee;border-radius:2px;overflow:hidden;min-width:50px;}
+.bar-fill{height:100%;border-radius:2px;background:#4CAF50;}
+.bar-fill.warn{background:#FF9800;}
+.bar-fill.bad{background:#f44336;}
+.rank-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid #f5f5f3;}
+.rank-row:last-child{border-bottom:none;}
+.rank-num{font-size:11px;color:#ccc;width:16px;text-align:right;flex-shrink:0;}
+.rank-name{font-size:13px;flex:1;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rank-bar-wrap{width:100px;flex-shrink:0;}
+.rank-bar-bg{height:3px;background:#f0f0ee;border-radius:2px;overflow:hidden;}
+.rank-bar-fill{height:100%;background:#F47920;border-radius:2px;}
+.rank-val{font-size:12px;font-weight:600;width:60px;text-align:right;flex-shrink:0;color:#555;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:1rem 0;}
+.stats-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:1rem 0;}
+.stat-card{background:#fafaf8;border-radius:8px;border:0.5px solid #e0e0de;padding:12px 14px;}
+.stat-label{font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+.stat-val{font-size:20px;font-weight:700;color:#1a1a1a;}
+.stat-val.orange{color:#F47920;}
+.stat-val.green{color:#2e7d32;}
+.stat-val.red{color:#c62828;}
+.chart-wrap{position:relative;height:200px;margin:0.5rem 0;}
+.chart-wrap-lg{position:relative;height:240px;margin:0.5rem 0;}
+.dow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.dow-card{background:#fafaf8;border:0.5px solid #e0e0de;border-radius:8px;padding:10px;text-align:center;}
+.dow-label{font-size:10px;color:#bbb;margin-bottom:4px;text-transform:uppercase;}
+.dow-val{font-size:14px;font-weight:700;}
+.dow-sub{font-size:10px;color:#bbb;margin-top:2px;}
+.actions-bar{position:sticky;bottom:0;background:#fff;border-top:1px solid #e0e0de;padding:1rem 2rem;display:flex;gap:10px;flex-wrap:wrap;align-items:center;z-index:50;box-shadow:0 -2px 12px rgba(0,0,0,0.06);}
+.btn{padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.15s;}
+.btn:active{transform:scale(0.97);}
+.btn-primary{background:#F47920;color:#fff;}
+.btn-primary:hover{background:#e06818;}
+.btn-dark{background:#1a1a1a;color:#fff;}
+.btn-dark:hover{background:#2a2a2a;}
+.btn-ghost{background:#fff;color:#666;border:1px solid #e0e0de;}
+.btn-ghost:hover{background:#f5f5f3;}
+.save-ok{font-size:12px;color:#2e7d32;font-weight:500;}
+.alert{border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:1rem;}
+.alert-info{background:#e3f2fd;color:#1565c0;border:0.5px solid #90caf9;}
+.alert-warn{background:#fff3e0;color:#e65100;border:0.5px solid #ffcc80;}
+footer{text-align:center;padding:1.5rem;font-size:12px;color:#bbb;border-top:1px solid #e0e0de;background:#f2f2f0;}
 </style>
 </head>
 <body>
+
 <header>
   <a href="index.html" class="back-btn">&#8592; All customers</a>
-  <div class="logo-plg">Premier Logistics Group</div>
-  <div class="badge">KPI Tool</div>
+  <div class="header-center">
+    <div class="logo-box">PLG</div>
+    <div class="logo-text">Premier Logistics Group</div>
+    <div class="logo-divider"></div>
+    <div class="header-tool">KPI Tool</div>
+  </div>
+  <div class="gh-status" id="gh-status">Connecting...</div>
 </header>
+
 <div class="customer-banner">
-  <div>
-    <div class="customer-name-display" id="customer-name-display">Loading...</div>
-    <div style="font-size:12px;color:#888;margin-top:2px">Monthly KPI tracking</div>
+  <div class="banner-left">
+    <div class="cust-avatar" id="cust-avatar">—</div>
+    <div>
+      <div class="cust-name" id="customer-name-display">Loading...</div>
+      <div class="cust-sub">Monthly KPI tracking &middot; 2026</div>
+    </div>
   </div>
-  <div class="gh-status" id="gh-status"></div>
 </div>
-<main>
+
+<div class="history-bar">
+  <div class="hist-item"><div class="hist-label">YTD Consignments</div><div class="hist-val orange" id="h-cons">—</div></div>
+  <div class="hist-item"><div class="hist-label">YTD Pallets</div><div class="hist-val" id="h-pallets">—</div></div>
+  <div class="hist-item"><div class="hist-label">YTD Revenue</div><div class="hist-val" id="h-rev">—</div></div>
+  <div class="hist-item"><div class="hist-label">YTD OTIF</div><div class="hist-val" id="h-otif">—</div></div>
+  <div class="hist-item"><div class="hist-label">YTD Lates</div><div class="hist-val" id="h-lates">—</div></div>
+</div>
+
+<div class="months-bar">
+  <span class="months-label">Months</span>
+  <div id="months-strip" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+</div>
+
+<div class="upload-wrap">
+  <div class="section-hd"><div class="step-num">1</div><div class="section-hd-text">Upload new Qargo export</div></div>
+  <div class="drop-zone" id="dz-raw">
+    <input type="file" accept=".xlsx,.xls" id="file-raw" onchange="handleRaw(this)">
+    <div class="drop-icon-wrap">&#128202;</div>
+    <div class="drop-title">Drop your Qargo Orders export here</div>
+    <div class="drop-sub">Drag and drop the Excel file, or click to browse</div>
+    <div class="drop-hint">Needs: date, status, goods pallet spaces, revenue, destination arrival, destination time window, destination city, destination postal code</div>
+  </div>
+  <div id="raw-loaded" style="display:none"></div>
+</div>
+
+<div id="kpi-wrap" class="kpi-wrap" style="display:none">
+  <div class="section-hd"><div class="step-num">2</div><div class="section-hd-text">KPI review</div></div>
   <div id="alert-area"></div>
-  <div class="step">
-    <div class="step-header"><div class="step-num">1</div><div class="step-title">Saved history</div></div>
-    <div class="section-card"><div id="history-area"><div style="font-size:13px;color:#aaa">Loading...</div></div></div>
+  <div class="ytd-strip" id="ytd-strip"></div>
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('tracker')">Monthly tracker</button>
+    <button class="tab" onclick="switchTab('trends')">Trends</button>
+    <button class="tab" onclick="switchTab('destinations')">Destinations</button>
+    <button class="tab" onclick="switchTab('performance')">Performance</button>
+    <button class="tab" onclick="switchTab('lates')">Late log</button>
   </div>
-  <div class="step">
-    <div class="step-header"><div class="step-num">2</div><div class="step-title">Upload new Qargo export (.xlsx)</div></div>
-    <div class="drop-zone" id="dz-raw">
-      <input type="file" accept=".xlsx,.xls" id="file-raw" onchange="handleRaw(this)">
-      <div class="drop-icon">&#128202;</div>
-      <div class="drop-label">Drop the Qargo <strong>Orders export</strong> here or click to browse</div>
-      <div class="drop-hint">Needs: date, status, goods pallet spaces, revenue, destination arrival, destination time window, destination city, destination postal code</div>
-    </div>
-    <div id="raw-loaded" style="display:none"></div>
-  </div>
-  <div class="step" id="step-review" style="display:none">
-    <div class="step-header"><div class="step-num">3</div><div class="step-title">Review KPIs and analytics</div></div>
-    <div id="preview-area"></div>
-  </div>
-  <div class="step" id="step-export" style="display:none">
-    <div class="step-header"><div class="step-num">4</div><div class="step-title">Save and export</div></div>
-    <div class="actions">
-      <button class="btn btn-primary" id="btn-save" onclick="saveToGitHub()">&#9650; Save to GitHub</button>
-      <button class="btn btn-primary" style="background:#444" onclick="exportTracker()">Download tracker (.xlsx)</button>
-      <button class="btn btn-outline" style="background:#1a1a1a;color:#fff;border-color:#1a1a1a" onclick="exportCustomerReport()">Download customer report (PDF)</button>
-      <button class="btn btn-outline" onclick="resetUpload()">Clear upload</button>
-    </div>
-    <div id="save-status" style="margin-top:10px;font-size:12px;color:#888"></div>
-  </div>
-</main>
+  <div id="tab-tracker" class="tab-panel active section-card"></div>
+  <div id="tab-trends" class="tab-panel section-card-standalone"></div>
+  <div id="tab-destinations" class="tab-panel section-card-standalone"></div>
+  <div id="tab-performance" class="tab-panel section-card-standalone"></div>
+  <div id="tab-lates" class="tab-panel section-card"></div>
+</div>
+
+<div class="actions-bar" id="actions-bar" style="display:none">
+  <button class="btn btn-primary" id="btn-save" onclick="saveToGitHub()">&#9650; Save to GitHub</button>
+  <button class="btn btn-dark" onclick="exportTracker()">Download tracker (.xlsx)</button>
+  <button class="btn btn-dark" onclick="exportCustomerReport()">Download PDF report</button>
+  <button class="btn btn-ghost" onclick="resetUpload()">Clear</button>
+  <span class="save-ok" id="save-status"></span>
+</div>
+
 <footer>Premier Logistics Group &middot; KPI Portal &middot; Data stored on GitHub</footer>
+
 <script>
 
 var GH_OWNER='Macauleywc',GH_REPO='PLG-KPI-Tool',GH_BRANCH='main';
@@ -226,8 +274,8 @@ function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
 
 function renderPreview(){
-  document.getElementById('step-review').style.display='block';
-  document.getElementById('step-export').style.display='block';
+  document.getElementById('kpi-wrap').style.display='block';
+  document.getElementById('actions-bar').style.display='flex';
   Object.values(chartInst).forEach(function(c){c.destroy();});chartInst={};
 
   var comp=allCompleted();
@@ -294,7 +342,7 @@ function renderPreview(){
 
   var regRows=topReg.map(function(e){var reg=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return '<tr><td>'+reg+'</td><td>'+d.cons+'</td><td>'+d.pallets+'</td><td>£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,60)+'</td></tr>';}).join('');
 
-  document.getElementById('preview-area').innerHTML=
+  var ytdStripEl=document.getElementById('ytd-strip');if(ytdStripEl){ytdStripEl.innerHTML='<div class="ytd-card"><div class="ytd-label">YTD Consignments</div><div class="ytd-val">'+tC.toLocaleString()+'</div></div><div class="ytd-card"><div class="ytd-label">YTD Pallets</div><div class="ytd-val">'+tP.toLocaleString()+'</div></div><div class="ytd-card"><div class="ytd-label">YTD Revenue</div><div class="ytd-val">£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div><div class="ytd-card"><div class="ytd-label">YTD OTIF</div><div class="ytd-val" style="color:'+(parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828')+'">'+ytdOTIF+'%</div></div><div class="ytd-card"><div class="ytd-label">YTD Lates</div><div class="ytd-val">'+tL+'</div></div>';}document.getElementById('tab-tracker').innerHTML=
     '<div class="ytd-strip">'+
       '<div class="ytd-card"><div class="ytd-label">YTD Consignments</div><div class="ytd-val">'+(tC||0).toLocaleString()+'</div></div>'+
       '<div class="ytd-card"><div class="ytd-label">YTD Pallets</div><div class="ytd-val">'+(tP||0).toLocaleString()+'</div></div>'+
@@ -549,10 +597,12 @@ function showAlert(type,msg){
 function resetUpload(){
   rawData=null;calculatedMonths={};
   Object.values(chartInst).forEach(function(c){c.destroy();});chartInst={};
-  ['raw-loaded','step-review','step-export'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+  var kw=document.getElementById('kpi-wrap');if(kw)kw.style.display='none';
+  var ab=document.getElementById('actions-bar');if(ab)ab.style.display='none';
+  var rl=document.getElementById('raw-loaded');if(rl)rl.style.display='none';
   var fr=document.getElementById('file-raw');if(fr)fr.value='';
-  document.getElementById('alert-area').innerHTML='';
-  document.getElementById('save-status').textContent='';
+  var aa=document.getElementById('alert-area');if(aa)aa.innerHTML='';
+  var ss=document.getElementById('save-status');if(ss){ss.textContent='';ss.className='save-ok';}
   var bs=document.getElementById('btn-save');if(bs){bs.textContent='Save to GitHub';bs.disabled=false;}
   buildTrackerFromSaved();
 }
@@ -580,32 +630,30 @@ function renderHistory(){
   keys.forEach(function(k){var d=savedMonthData[k];if(d){totCons+=d.cons||0;totPallets+=d.pallets||0;totRev+=d.revenue||0;totLates+=d.lates||0;}});
   var ytdOTIF=totCons>0?((totCons-totLates)/totCons*100).toFixed(2):'—';
   var col=parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828';
-  var chips=MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var otif=d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'';return'<div class="history-chip'+(has?' has-data':'')+'" title="'+(has?'Cons: '+d.cons+' | Pallets: '+d.pallets+' | OTIF: '+otif:'No data')+'">'+label+(has&&otif?' — '+otif:'')+'</div>';}).join('');
-  var el=document.getElementById('history-area');if(!el)return;
-  if(keys.length===0){el.innerHTML='<div style="font-size:13px;color:#aaa">No months saved yet. Upload a Qargo export below to get started.</div>';return;}
-  el.innerHTML='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1rem">'+
-    '<div style="background:#f8f8f6;border-radius:8px;padding:10px 14px;border-top:3px solid #F47920"><div style="font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">YTD Consignments</div><div style="font-size:20px;font-weight:700">'+totCons+'</div></div>'+
-    '<div style="background:#f8f8f6;border-radius:8px;padding:10px 14px;border-top:3px solid #F47920"><div style="font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">YTD Pallets</div><div style="font-size:20px;font-weight:700">'+totPallets+'</div></div>'+
-    '<div style="background:#f8f8f6;border-radius:8px;padding:10px 14px;border-top:3px solid #F47920"><div style="font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">YTD Revenue</div><div style="font-size:20px;font-weight:700">£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
-    '<div style="background:#1a1a1a;border-radius:8px;padding:10px 14px"><div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">YTD OTIF</div><div style="font-size:20px;font-weight:700;color:'+col+'">'+ytdOTIF+'%</div></div>'+
-  '</div><div style="font-size:11px;color:#aaa;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em">Monthly breakdown — hover for details</div>'+
-  '<div style="display:flex;gap:6px;flex-wrap:wrap">'+chips+'</div>';
+  function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  set('h-cons',totCons||'—');
+  set('h-pallets',totPallets||'—');
+  set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—');
+  set('h-lates',totLates||'—');
+  var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='—'?ytdOTIF+'%':'—';ho.style.color=col;}
+  var chips=MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var otif=d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'';return'<div class="month-chip'+(has?' has-data':'')+'" title="'+(has?'Cons: '+d.cons+' | OTIF: '+otif:'No data')+'">'+label+(has&&otif?' '+otif:'')+'</div>';}).join('');
+  var strip=document.getElementById('months-strip');if(strip)strip.innerHTML=chips||'<span style="font-size:12px;color:#ccc">No months saved yet</span>';
 }
 async function loadFromGitHub(){
   var token=getToken();
-  if(!token){document.getElementById('gh-status').textContent='No token — enter on homepage';document.getElementById('history-area').innerHTML='<div style="font-size:13px;color:#e65100">Please enter your GitHub token on the <a href="index.html">homepage</a> to load saved data.</div>';savedMonthData={};renderHistory();return;}
-  document.getElementById('gh-status').textContent='Loading...';
+  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token — enter on homepage';gs.className='gh-status';}document.getElementById('history-area').innerHTML='<div style="font-size:13px;color:#e65100">Please enter your GitHub token on the <a href="index.html">homepage</a> to load saved data.</div>';savedMonthData={};renderHistory();return;}
+  var _gs2=document.getElementById('gh-status');if(_gs2){_gs2.textContent='Loading...';_gs2.className='gh-status';}
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
     var resp=await fetch(url,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
-    if(resp.status===404){document.getElementById('gh-status').textContent='No saved data yet';savedMonthData={};ghFileSha=null;buildTrackerFromSaved();renderHistory();return;}
+    if(resp.status===404){var _gs3=document.getElementById('gh-status');if(_gs3){_gs3.textContent='No saved data yet';_gs3.className='gh-status';}savedMonthData={};ghFileSha=null;buildTrackerFromSaved();renderHistory();return;}
     var json=await resp.json();ghFileSha=json.sha;
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
     savedMonthData=decoded.months||{};
-    var mCount=Object.keys(savedMonthData).length;
+    var mCount=Object.keys(savedMonthData).length;var _gse=document.getElementById('gh-status');if(_gse){_gse.textContent=mCount+' month'+(mCount!==1?'s':'')+' saved';_gse.className='gh-status ok';}
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     buildTrackerFromSaved();renderHistory();
-  }catch(err){document.getElementById('gh-status').textContent='Error: '+err.message;}
+  }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;_gs5.className='gh-status';}}
 }
 async function saveToGitHub(){
   var token=getToken();if(!token){showAlert('warn','No GitHub token. Go to the homepage and enter it.');return;}
@@ -621,8 +669,9 @@ async function saveToGitHub(){
     var json=await resp.json();if(!resp.ok)throw new Error(json.message||'GitHub error');
     ghFileSha=json.content.sha;savedMonthData=merged;
     btn.textContent='Saved ✓';btn.disabled=false;
-    document.getElementById('save-status').innerHTML='<span style="color:#2e7d32">✓ Saved at '+new Date().toLocaleTimeString('en-GB')+'</span>';
+    var _sse=document.getElementById('save-status');if(_sse){_sse.textContent='✓ Saved at '+new Date().toLocaleTimeString('en-GB');_sse.className='save-ok';}
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+Object.keys(savedMonthData).length+' months saved</span>';
+    var _gsf=document.getElementById('gh-status');if(_gsf){_gsf.textContent=Object.keys(savedMonthData).length+' months saved';_gsf.className='gh-status ok';}
     renderHistory();showAlert('success','Saved to GitHub for '+currentCustomer+'.');
   }catch(err){btn.textContent='Save to GitHub';btn.disabled=false;showAlert('warn','Save failed: '+err.message);}
 }
@@ -631,8 +680,11 @@ window.addEventListener('load',function(){
   currentCustomer=decodeURIComponent(params.get('c')||'Customer');
   document.getElementById('customer-name-display').textContent=currentCustomer;
   document.title=currentCustomer+' — PLG KPI Tool';
+  var _av=document.getElementById('cust-avatar');if(_av)_av.textContent=currentCustomer.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
   loadFromGitHub();
 });
+
+
 
 </script>
 </body>
