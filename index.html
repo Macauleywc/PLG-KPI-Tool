@@ -222,6 +222,13 @@ function confirmAdd(){
 window.addEventListener('load',function(){
   var t=localStorage.getItem('plg_gh_token');
   if(t)document.getElementById('gh-token').value=t;
+  // Ensure default customers are loaded if list is empty or invalid
+  var stored=localStorage.getItem('plg_customers');
+  var list=null;
+  try{list=JSON.parse(stored);}catch(e){}
+  if(!Array.isArray(list)||list.length===0){
+    localStorage.setItem('plg_customers',JSON.stringify(DEFAULT_CUSTOMERS.slice()));
+  }
   renderGrid();
   if(t)loadMeta();
 });
