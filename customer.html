@@ -24,10 +24,11 @@ header{background:#1a1a1a;padding:0 2rem;display:flex;align-items:center;justify
 .cust-avatar{width:44px;height:44px;border-radius:8px;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#F47920;border:2px solid #ffe0c0;}
 .cust-name{font-size:20px;font-weight:700;}
 .cust-sub{font-size:12px;color:#aaa;margin-top:2px;}
-.history-bar{background:#fff;border-bottom:1px solid #e0e0de;padding:1rem 2rem;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
-.hist-item{text-align:center;}
-.hist-label{font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
-.hist-val{font-size:18px;font-weight:700;color:#1a1a1a;}
+.history-bar{background:#1a1a1a;border-bottom:1px solid #111;padding:0;display:grid;grid-template-columns:repeat(5,1fr);}
+.hist-item{padding:16px 20px;border-right:1px solid #2a2a2a;text-align:center;}
+.hist-item:last-child{border-right:none;}
+.hist-label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.hist-val{font-size:22px;font-weight:700;color:#fff;}
 .hist-val.orange{color:#F47920;}
 .months-bar{background:#fafaf8;border-bottom:1px solid #e0e0de;padding:10px 2rem;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
 .months-label{font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px;flex-shrink:0;}
@@ -49,10 +50,14 @@ header{background:#1a1a1a;padding:0 2rem;display:flex;align-items:center;justify
 .file-name{font-size:13px;font-weight:600;flex:1;}
 .file-detail{font-size:12px;color:#F47920;font-weight:500;}
 .kpi-wrap{padding:0 2rem 2rem;background:#f2f2f0;}
-.ytd-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1.25rem;}
-.ytd-card{background:#fff;border:0.5px solid #e0e0de;border-radius:8px;padding:12px 14px;border-top:3px solid #F47920;}
-.ytd-label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
-.ytd-val{font-size:17px;font-weight:700;color:#1a1a1a;}
+.ytd-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:1.5rem;background:#fff;border:0.5px solid #e0e0de;border-radius:10px;overflow:hidden;}
+.ytd-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:1.5rem;background:#fff;border:0.5px solid #e0e0de;border-radius:10px;overflow:hidden;}
+.ytd-card{padding:16px 20px;position:relative;border-right:0.5px solid #f0f0ee;}
+.ytd-card:last-child{border-right:none;}
+.ytd-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#F47920;}
+.ytd-label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.ytd-val{font-size:22px;font-weight:700;color:#1a1a1a;}
+.ytd-sub{font-size:11px;color:#bbb;margin-top:4px;}
 .tab-bar{display:flex;gap:0;border-bottom:1px solid #e0e0de;margin-bottom:1.25rem;background:#fff;border-radius:8px 8px 0 0;overflow:hidden;}
 .tab{padding:10px 18px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:#888;background:none;border-top:none;border-left:none;border-right:none;margin-bottom:-1px;white-space:nowrap;transition:all 0.15s;}
 .tab.active{color:#F47920;border-bottom-color:#F47920;background:#fff;}
@@ -382,7 +387,32 @@ function renderPreview(){
 
   // TAB 3: Destinations
   document.getElementById('tab-destinations').innerHTML=
-    '<div class="stats-grid-2">'+
+    '<div class="section-card-standalone"><div class="section-title">UK delivery map</div>'+
+      '<div id="uk-map-wrap" style="display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start">'+
+        '<div><canvas id="uk-map" style="width:100%;cursor:pointer"></canvas></div>'+
+        '<div id="map-legend">'+
+          '<div style="font-size:12px;font-weight:600;color:#555;margin-bottom:10px">Region breakdown</div>'+
+          '<div id="region-list"></div>'+
+          '<div style="margin-top:16px;font-size:11px;color:#bbb">Click a region on the map for details</div>'+
+          '<div style="margin-top:12px">'+
+            '<div style="font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">OTIF scale</div>'+
+            '<div style="display:flex;gap:4px;align-items:center">'+
+              '<div style="width:16px;height:16px;background:#c62828;border-radius:3px"></div><span style="font-size:11px;color:#888">Below 95%</span>'+
+            '</div>'+
+            '<div style="display:flex;gap:4px;align-items:center;margin-top:4px">'+
+              '<div style="width:16px;height:16px;background:#e65100;border-radius:3px"></div><span style="font-size:11px;color:#888">95-97%</span>'+
+            '</div>'+
+            '<div style="display:flex;gap:4px;align-items:center;margin-top:4px">'+
+              '<div style="width:16px;height:16px;background:#2e7d32;border-radius:3px"></div><span style="font-size:11px;color:#888">98%+</span>'+
+            '</div>'+
+            '<div style="display:flex;gap:4px;align-items:center;margin-top:4px">'+
+              '<div style="width:16px;height:16px;background:#e0e0de;border-radius:3px"></div><span style="font-size:11px;color:#888">No data</span>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="stats-grid-2" style="margin-top:1rem">'+
       '<div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by consignments</div>'+
         byC.map(function(d,i){return'<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.cons/maxC*100).toFixed(0)+'%"></div></div></div><div class="rank-val">'+d.cons+'</div></div>';}).join('')+
       '</div>'+
@@ -393,6 +423,9 @@ function renderPreview(){
     '<div class="section-card-standalone" style="margin-top:1rem"><div class="section-title">By UK region</div>'+
       '<div class="tracker-table-wrap"><table><thead><tr><th>Region</th><th>Cons</th><th>Pallets</th><th>Revenue</th><th>Lates</th><th>OTIF</th></tr></thead><tbody>'+regRows+'</tbody></table></div>'+
     '</div>';
+  
+  // Draw UK map after DOM is ready
+  setTimeout(function(){drawUKMap(regMap);},100);
 
   // TAB 4: Performance
   document.getElementById('tab-performance').innerHTML=
@@ -617,6 +650,129 @@ function removeLate(idx){
   var remaining=Array.from(rows).filter(function(r){return r.style.display!=='none';}).length;
   var pill=document.querySelector('#tab-lates .pill-red');
   if(pill)pill.textContent=remaining+' late';
+}
+
+function drawUKMap(regMap){
+  var canvas=document.getElementById('uk-map');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var W=canvas.offsetWidth||500;
+  canvas.width=W;canvas.height=W*1.4;
+  var H=canvas.height;
+  
+  // UK regions with approximate polygon coordinates (normalised 0-1)
+  // Each region: [name, label_x, label_y, paths...]
+  var regions=[
+    {id:'Scotland',lx:0.42,ly:0.12,color:null,paths:[[[0.3,0.0],[0.7,0.0],[0.75,0.05],[0.65,0.1],[0.7,0.18],[0.6,0.22],[0.5,0.2],[0.4,0.25],[0.35,0.2],[0.25,0.15],[0.3,0.0]]]},
+    {id:'North East',lx:0.62,ly:0.32,color:null,paths:[[[0.55,0.27],[0.72,0.27],[0.73,0.37],[0.6,0.38],[0.55,0.33]]]},
+    {id:'North West',lx:0.38,ly:0.36,color:null,paths:[[[0.32,0.27],[0.54,0.27],[0.55,0.33],[0.5,0.38],[0.42,0.42],[0.32,0.4]]]},
+    {id:'Yorkshire',lx:0.6,ly:0.42,color:null,paths:[[[0.55,0.33],[0.73,0.37],[0.72,0.48],[0.57,0.48],[0.5,0.42],[0.5,0.38]]]},
+    {id:'East Midlands',lx:0.58,ly:0.55,color:null,paths:[[[0.5,0.48],[0.72,0.48],[0.71,0.6],[0.52,0.62],[0.48,0.56]]]},
+    {id:'West Midlands',lx:0.38,ly:0.55,color:null,paths:[[[0.3,0.48],[0.5,0.48],[0.48,0.56],[0.42,0.62],[0.3,0.6]]]},
+    {id:'East of England',lx:0.7,ly:0.62,color:null,paths:[[[0.71,0.6],[0.85,0.55],[0.88,0.65],[0.78,0.72],[0.65,0.7],[0.62,0.65],[0.52,0.62]]]},
+    {id:'Wales',lx:0.22,ly:0.57,color:null,paths:[[[0.15,0.42],[0.3,0.42],[0.3,0.48],[0.3,0.6],[0.2,0.65],[0.12,0.6],[0.12,0.5]]]},
+    {id:'London',lx:0.67,ly:0.73,color:null,paths:[[[0.62,0.7],[0.72,0.7],[0.73,0.76],[0.62,0.76]]]},
+    {id:'South East',lx:0.72,ly:0.8,color:null,paths:[[[0.62,0.76],[0.73,0.76],[0.85,0.78],[0.82,0.88],[0.65,0.9],[0.55,0.85],[0.55,0.78]]]},
+    {id:'South',lx:0.38,ly:0.82,color:null,paths:[[[0.2,0.72],[0.55,0.78],[0.55,0.85],[0.45,0.92],[0.25,0.9],[0.15,0.82]]]},
+    {id:'South West',lx:0.2,ly:0.88,color:null,paths:[[[0.08,0.75],[0.2,0.72],[0.15,0.82],[0.25,0.9],[0.15,0.96],[0.05,0.9]]]},
+    {id:'Northern Ireland',lx:0.18,ly:0.22,color:null,paths:[[[0.08,0.17],[0.28,0.17],[0.28,0.28],[0.08,0.28]]]},
+  ];
+
+  var maxCons=1;
+  regions.forEach(function(r){var d=regMap[r.id];if(d&&d.cons>maxCons)maxCons=d.cons;});
+
+  function otifColor(otif,alpha){
+    var col=otif>=98?'34,139,34':otif>=95?'230,81,0':'198,40,40';
+    return'rgba('+col+','+alpha+')';
+  }
+  function getColor(r){
+    var d=regMap[r.id];
+    if(!d||d.cons===0)return{fill:'rgba(224,224,222,0.5)',stroke:'#ccc'};
+    var otif=d.cons>0?(d.cons-d.lates)/d.cons*100:0;
+    var intensity=0.3+0.7*(d.cons/maxCons);
+    return{fill:otifColor(otif,intensity),stroke:otifColor(otif,1)};
+  }
+
+  function drawRegion(r,highlight){
+    var col=getColor(r);
+    r.paths.forEach(function(path){
+      ctx.beginPath();
+      path.forEach(function(pt,i){
+        var x=pt[0]*W,y=pt[1]*H;
+        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      });
+      ctx.closePath();
+      ctx.fillStyle=highlight?'rgba(244,121,32,0.3)':col.fill;
+      ctx.fill();
+      ctx.strokeStyle=highlight?'#F47920':col.stroke;
+      ctx.lineWidth=highlight?2:1;
+      ctx.stroke();
+    });
+  }
+
+  function drawLabel(r){
+    var d=regMap[r.id];
+    var cons=d?d.cons:0;
+    var otif=d&&d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(0)+'%':'';
+    ctx.font='bold '+(W*0.022)+'px Segoe UI,sans-serif';
+    ctx.fillStyle='#fff';
+    ctx.textAlign='center';
+    ctx.shadowColor='rgba(0,0,0,0.5)';
+    ctx.shadowBlur=3;
+    ctx.fillText(r.id.length>10?r.id.split(' ')[0]:r.id,r.lx*W,r.ly*H);
+    if(cons>0){
+      ctx.font=(W*0.018)+'px Segoe UI,sans-serif';
+      ctx.fillText(cons+' cons',r.lx*W,r.ly*H+W*0.025);
+      if(otif){ctx.fillText(otif+' OTIF',r.lx*W,r.ly*H+W*0.048);}
+    }
+    ctx.shadowBlur=0;
+  }
+
+  ctx.clearRect(0,0,W,H);
+  regions.forEach(function(r){drawRegion(r,false);});
+  regions.forEach(function(r){drawLabel(r);});
+
+  // Update legend list
+  var list=document.getElementById('region-list');
+  if(list){
+    var sorted=regions.slice().sort(function(a,b){
+      var da=regMap[a.id]||{cons:0};var db=regMap[b.id]||{cons:0};
+      return db.cons-da.cons;
+    }).filter(function(r){var d=regMap[r.id];return d&&d.cons>0;});
+    list.innerHTML=sorted.map(function(r){
+      var d=regMap[r.id];
+      var otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'—';
+      var col=parseFloat(otif)>=98?'#2e7d32':parseFloat(otif)>=95?'#e65100':'#c62828';
+      return'<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #f0f0ee;font-size:12px">'+
+        '<span style="color:#555">'+r.id+'</span>'+
+        '<span style="display:flex;align-items:center;gap:8px">'+
+          '<span style="color:#888">'+d.cons+'</span>'+
+          '<span style="color:'+col+';font-weight:600">'+otif+'%</span>'+
+        '</span>'+
+      '</div>';
+    }).join('');
+  }
+
+  // Click handler
+  canvas.onclick=function(e){
+    var rect=canvas.getBoundingClientRect();
+    var mx=(e.clientX-rect.left)*(W/rect.width);
+    var my=(e.clientY-rect.top)*(H/rect.height);
+    regions.forEach(function(r){
+      r.paths.forEach(function(path){
+        ctx.beginPath();
+        path.forEach(function(pt,i){var x=pt[0]*W,y=pt[1]*H;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
+        ctx.closePath();
+        if(ctx.isPointInPath(mx,my)){
+          var d=regMap[r.id];
+          if(d&&d.cons>0){
+            var otif=((d.cons-d.lates)/d.cons*100).toFixed(1);
+            alert(r.id+'\n\nConsignments: '+d.cons+'\nPallets: '+d.pallets+'\nRevenue: \u00a3'+d.revenue.toFixed(2)+'\nLates: '+d.lates+'\nOTIF: '+otif+'%');
+          }
+        }
+      });
+    });
+  };
 }
 
 function showAlert(type,msg){
