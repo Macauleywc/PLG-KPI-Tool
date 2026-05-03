@@ -342,85 +342,100 @@ function renderPreview(){
 
   var regRows=topReg.map(function(e){var reg=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return '<tr><td>'+reg+'</td><td>'+d.cons+'</td><td>'+d.pallets+'</td><td>£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,60)+'</td></tr>';}).join('');
 
-  var ytdStripEl=document.getElementById('ytd-strip');if(ytdStripEl){ytdStripEl.innerHTML='<div class="ytd-card"><div class="ytd-label">YTD Consignments</div><div class="ytd-val">'+tC.toLocaleString()+'</div></div><div class="ytd-card"><div class="ytd-label">YTD Pallets</div><div class="ytd-val">'+tP.toLocaleString()+'</div></div><div class="ytd-card"><div class="ytd-label">YTD Revenue</div><div class="ytd-val">£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div><div class="ytd-card"><div class="ytd-label">YTD OTIF</div><div class="ytd-val" style="color:'+(parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828')+'">'+ytdOTIF+'%</div></div><div class="ytd-card"><div class="ytd-label">YTD Lates</div><div class="ytd-val">'+tL+'</div></div>';}document.getElementById('tab-tracker').innerHTML=
-    '<div class="ytd-strip">'+
-      '<div class="ytd-card"><div class="ytd-label">YTD Consignments</div><div class="ytd-val">'+(tC||0).toLocaleString()+'</div></div>'+
-      '<div class="ytd-card"><div class="ytd-label">YTD Pallets</div><div class="ytd-val">'+(tP||0).toLocaleString()+'</div></div>'+
-      '<div class="ytd-card"><div class="ytd-label">YTD Revenue</div><div class="ytd-val">£'+(tR||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
-      '<div class="ytd-card"><div class="ytd-label">YTD OTIF</div><div class="ytd-val">'+ytdOTIF+'%</div></div>'+
-      '<div class="ytd-card"><div class="ytd-label">YTD Lates</div><div class="ytd-val">'+(tL||0)+'</div></div>'+
-    '</div>'+
-    '<div class="tab-bar">'+
-      '<button class="tab active" onclick="switchTab(\'tracker\')">Monthly tracker</button>'+
-      '<button class="tab" onclick="switchTab(\'trends\')">Trends</button>'+
-      '<button class="tab" onclick="switchTab(\'destinations\')">Destinations</button>'+
-      '<button class="tab" onclick="switchTab(\'performance\')">Performance</button>'+
-      '<button class="tab" onclick="switchTab(\'lates\')">Late log ('+lateRows.length+')</button>'+
-    '</div>'+
+  var ytdStripEl=document.getElementById('ytd-strip');
+  if(ytdStripEl){ytdStripEl.innerHTML=
+    '<div class="ytd-card"><div class="ytd-label">YTD Consignments</div><div class="ytd-val">'+tC.toLocaleString()+'</div></div>'+
+    '<div class="ytd-card"><div class="ytd-label">YTD Pallets</div><div class="ytd-val">'+tP.toLocaleString()+'</div></div>'+
+    '<div class="ytd-card"><div class="ytd-label">YTD Revenue</div><div class="ytd-val">\u00a3'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
+    '<div class="ytd-card"><div class="ytd-label">YTD OTIF</div><div class="ytd-val" style="color:'+(parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828')+'">'+ytdOTIF+'%</div></div>'+
+    '<div class="ytd-card"><div class="ytd-label">YTD Lates</div><div class="ytd-val">'+tL+'</div></div>';
+  }
 
-    '<div id="tab-tracker" class="tab-panel active">'+
-      '<div class="section-card">'+
-        '<div class="section-title">Full year monthly tracker <span class="pill">OTIF = (cons − lates) / cons</span></div>'+
-        '<div class="alert alert-info" style="margin-bottom:1rem">Lates auto-calculated by comparing actual delivery arrival vs time window end. Verify before distributing.</div>'+
-        '<div class="tracker-table-wrap"><table>'+
-          '<thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Revenue</th><th>Avg Rev/Con</th><th>Avg Rev/Plt</th><th>Avg Plts/Con</th><th>OTIF</th><th>Lates</th></tr></thead>'+
-          '<tbody>'+tableRows+'</tbody>'+
-          '<tfoot><tr class="total-row"><td>Total / Avg</td><td>'+(aC||'—')+'</td><td>'+(aP||'—')+'</td>'+
-          '<td>'+(aR?'£'+aR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—')+'</td>'+
-          '<td>'+(aC&&aR?'£'+(aR/aC).toFixed(2):'—')+'</td>'+
-          '<td>'+(aP&&aR?'£'+(aR/aP).toFixed(2):'—')+'</td>'+
-          '<td>'+(aC&&aP?(aP/aC).toFixed(1):'—')+'</td>'+
-          '<td>'+totalOTIF+'</td><td>'+(aL!=null?aL:'—')+'</td></tr></tfoot>'+
-        '</table></div>'+
+  // TAB 1: Monthly tracker
+  document.getElementById('tab-tracker').innerHTML=
+    '<div class="section-title">Full year monthly tracker <span class="pill">OTIF = (cons \u2212 lates) / cons</span></div>'+
+    '<div class="alert alert-info" style="margin-bottom:1rem">Lates auto-calculated by comparing actual delivery arrival vs time window end.</div>'+
+    '<div class="tracker-table-wrap"><table>'+
+      '<thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Revenue</th><th>Avg Rev/Con</th><th>Avg Rev/Plt</th><th>Avg Plts/Con</th><th>OTIF</th><th>Lates</th></tr></thead>'+
+      '<tbody>'+tableRows+'</tbody>'+
+      '<tfoot><tr class="total-row">'+
+        '<td>Total / Avg</td>'+
+        '<td>'+(aC||'\u2014')+'</td>'+
+        '<td>'+(aP||'\u2014')+'</td>'+
+        '<td>'+(aR?'\u00a3'+aR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'\u2014')+'</td>'+
+        '<td>'+(aC&&aR?'\u00a3'+(aR/aC).toFixed(2):'\u2014')+'</td>'+
+        '<td>'+(aP&&aR?'\u00a3'+(aR/aP).toFixed(2):'\u2014')+'</td>'+
+        '<td>'+(aC&&aP?(aP/aC).toFixed(1):'\u2014')+'</td>'+
+        '<td>'+totalOTIF+'</td>'+
+        '<td>'+(aL!=null?aL:'\u2014')+'</td>'+
+      '</tr></tfoot>'+
+    '</table></div>';
+
+  // TAB 2: Trends
+  document.getElementById('tab-trends').innerHTML=
+    '<div class="section-card-standalone"><div class="section-title">OTIF trend + 3-month rolling average</div><div class="chart-wrap-lg"><canvas id="chart-otif"></canvas></div></div>'+
+    '<div class="stats-grid-2">'+
+      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Consignments by month</div><div class="chart-wrap"><canvas id="chart-cons"></canvas></div></div>'+
+      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Revenue by month</div><div class="chart-wrap"><canvas id="chart-rev"></canvas></div></div>'+
+    '</div>'+
+    '<div class="section-card-standalone" style="margin-top:1rem"><div class="section-title">Avg revenue per consignment</div><div class="chart-wrap"><canvas id="chart-arc"></canvas></div></div>';
+
+  // TAB 3: Destinations
+  document.getElementById('tab-destinations').innerHTML=
+    '<div class="stats-grid-2">'+
+      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by consignments</div>'+
+        byC.map(function(d,i){return'<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.cons/maxC*100).toFixed(0)+'%"></div></div></div><div class="rank-val">'+d.cons+'</div></div>';}).join('')+
+      '</div>'+
+      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by revenue</div>'+
+        byR.map(function(d,i){return'<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.revenue/maxR*100).toFixed(0)+'%"></div></div></div><div class="rank-val">\u00a3'+d.revenue.toFixed(0)+'</div></div>';}).join('')+
       '</div>'+
     '</div>'+
+    '<div class="section-card-standalone" style="margin-top:1rem"><div class="section-title">By UK region</div>'+
+      '<div class="tracker-table-wrap"><table><thead><tr><th>Region</th><th>Cons</th><th>Pallets</th><th>Revenue</th><th>Lates</th><th>OTIF</th></tr></thead><tbody>'+regRows+'</tbody></table></div>'+
+    '</div>';
 
-    '<div id="tab-trends" class="tab-panel">'+
-      '<div class="section-card"><div class="section-title">OTIF trend + rolling 3-month average</div><div class="chart-wrap-lg"><canvas id="chart-otif"></canvas></div></div>'+
-      '<div class="stats-grid-2">'+
-        '<div class="section-card" style="margin:0"><div class="section-title">Consignments by month</div><div class="chart-wrap"><canvas id="chart-cons"></canvas></div></div>'+
-        '<div class="section-card" style="margin:0"><div class="section-title">Revenue by month</div><div class="chart-wrap"><canvas id="chart-rev"></canvas></div></div>'+
-      '</div>'+
-      '<div class="section-card" style="margin-top:1rem"><div class="section-title">Avg revenue per consignment trend</div><div class="chart-wrap"><canvas id="chart-arc"></canvas></div></div>'+
-      '<div class="section-card"><div class="section-title">Avg revenue per pallet trend</div><div class="chart-wrap"><canvas id="chart-arp"></canvas></div></div>'+
+  // TAB 4: Performance
+  document.getElementById('tab-performance').innerHTML=
+    '<div class="section-card-standalone"><div class="section-title">OTIF by delivery type</div>'+
+      '<div class="tracker-table-wrap"><table><thead><tr><th>Delivery type</th><th>Consignments</th><th>Lates</th><th>OTIF</th></tr></thead><tbody>'+typeRows+'</tbody></table></div>'+
     '</div>'+
-
-    '<div id="tab-destinations" class="tab-panel">'+
-      '<div class="stats-grid-2">'+
-        '<div class="section-card" style="margin:0"><div class="section-title">Top 10 by consignments</div>'+byC.map(function(d,i){return '<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name" title="'+d.name+', '+d.city+'">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.cons/maxC*100).toFixed(0)+'%"></div></div></div><div class="rank-val">'+d.cons+'</div></div>';}).join('')+'</div>'+
-        '<div class="section-card" style="margin:0"><div class="section-title">Top 10 by revenue</div>'+byR.map(function(d,i){return '<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name" title="'+d.name+', '+d.city+'">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.revenue/maxR*100).toFixed(0)+'%"></div></div></div><div class="rank-val">£'+d.revenue.toFixed(0)+'</div></div>';}).join('')+'</div>'+
-      '</div>'+
-      '<div class="section-card" style="margin-top:1rem"><div class="section-title">By UK region</div><div class="tracker-table-wrap"><table>'+
-        '<thead><tr><th>Region</th><th>Cons</th><th>Pallets</th><th>Revenue</th><th>Lates</th><th>OTIF</th></tr></thead>'+
-        '<tbody>'+regRows+'</tbody>'+
-      '</table></div></div>'+
-    '</div>'+
-
-    '<div id="tab-performance" class="tab-panel">'+
-      '<div class="section-card"><div class="section-title">OTIF by delivery type</div><div class="tracker-table-wrap"><table>'+
-        '<thead><tr><th>Delivery type</th><th>Consignments</th><th>Lates</th><th>OTIF</th></tr></thead>'+
-        '<tbody>'+typeRows+'</tbody>'+
-      '</table></div></div>'+
-      '<div class="section-card"><div class="section-title">OTIF by day of week (delivery date)</div><div class="dow-grid">'+dowCards+'</div></div>'+
-      '<div class="section-card"><div class="section-title">Commercial summary</div><div class="stats-grid">'+
-        '<div class="stat-card"><div class="stat-label">Avg rev / consignment</div><div class="stat-val orange">£'+ytdARC+'</div></div>'+
-        '<div class="stat-card"><div class="stat-label">Avg rev / pallet</div><div class="stat-val">£'+ytdARP+'</div></div>'+
+    '<div class="section-card-standalone"><div class="section-title">OTIF by day of week</div><div class="dow-grid">'+dowCards+'</div></div>'+
+    '<div class="section-card-standalone"><div class="section-title">Commercial summary</div>'+
+      '<div class="stats-grid">'+
+        '<div class="stat-card"><div class="stat-label">Avg rev / cons</div><div class="stat-val orange">\u00a3'+ytdARC+'</div></div>'+
+        '<div class="stat-card"><div class="stat-label">Avg rev / pallet</div><div class="stat-val">\u00a3'+ytdARP+'</div></div>'+
         '<div class="stat-card"><div class="stat-label">Avg pallets / cons</div><div class="stat-val">'+ytdAPC+'</div></div>'+
         '<div class="stat-card"><div class="stat-label">Total lates</div><div class="stat-val '+(tL>0?'red':'green')+'">'+tL+'</div></div>'+
-      '</div></div>'+
-    '</div>'+
-
-    '<div id="tab-lates" class="tab-panel">'+
-      '<div class="section-card"><div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div>'+
-        '<div class="alert alert-warn" style="margin-bottom:1rem">These consignments arrived after their delivery time window. Check against Qargo/Palletforce before sharing with the customer.</div>'+
-        '<div class="tracker-table-wrap"><table>'+
-          '<thead><tr><th>Order ID</th><th>Month</th><th>Destination</th><th>City</th><th>Postcode</th><th>Time window</th><th>Arrived</th><th>Mins late</th><th>Pallets</th><th>Type</th></tr></thead>'+
-          '<tbody>'+lateLogRows+'</tbody>'+
-        '</table></div>'+
       '</div>'+
     '</div>';
 
-  setTimeout(function(){renderCharts();},120);
+  // TAB 5: Late log (editable)
+  var lateTableRows=lateRows.map(function(r,idx){
+    return '<tr class="late-row" id="laterow-'+idx+'">'+
+      '<td style="font-size:11px;color:#aaa">'+r.id+'</td>'+
+      '<td>'+r.month+'</td>'+
+      '<td>'+r.dest+'</td>'+
+      '<td>'+r.city+'</td>'+
+      '<td>'+r.pc+'</td>'+
+      '<td>'+r.window+'</td>'+
+      '<td>'+r.arrival+'</td>'+
+      '<td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td>'+
+      '<td>'+r.pallets+'</td>'+
+      '<td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td>'+
+      '<td><input type="text" id="latenote-'+idx+'" value="'+(r.note||'')+'" placeholder="Add note..." style="width:140px;padding:4px 8px;border:1px solid #e0e0de;border-radius:4px;font-size:11px;color:#555" onchange="updateLateNote('+idx+',this.value)"></td>'+
+      '<td><button onclick="removeLate('+idx+')" style="background:#ffebee;border:none;color:#c62828;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:11px">Remove</button></td>'+
+    '</tr>';
+  }).join('');
+
+  document.getElementById('tab-lates').innerHTML=
+    '<div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div>'+
+    '<div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div>'+
+    (lateRows.length>0?
+      '<div class="tracker-table-wrap"><table>'+
+        '<thead><tr><th>Order ID</th><th>Month</th><th>Destination</th><th>City</th><th>Postcode</th><th>Time window</th><th>Arrived</th><th>Mins late</th><th>Pallets</th><th>Type</th><th>Note</th><th></th></tr></thead>'+
+        '<tbody id="late-tbody">'+lateTableRows+'</tbody>'+
+      '</table></div>':
+      '<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');  setTimeout(function(){renderCharts();},120);
 }
 
 function switchTab(name){
@@ -586,6 +601,22 @@ function exportCustomerReport(){
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
   a.download='Anand_KPI_Report_'+stamp+'.html';a.click();
   showAlert('success','Customer report downloaded — open in a browser and press Ctrl+P (or Cmd+P) to save as PDF.');
+}
+
+function updateLateNote(idx,val){
+  var comp=allCompleted();
+  var lateRows=comp.filter(function(r){return isLate(r);});
+  if(lateRows[idx])lateRows[idx]._note=val;
+}
+function removeLate(idx){
+  var rows=document.querySelectorAll('#late-tbody tr');
+  if(rows[idx])rows[idx].style.display='none';
+  // Mark as manually removed so it doesnt count
+  var row=rows[idx];if(row)row.setAttribute('data-removed','1');
+  // Recalculate lates count in title
+  var remaining=Array.from(rows).filter(function(r){return r.style.display!=='none';}).length;
+  var pill=document.querySelector('#tab-lates .pill-red');
+  if(pill)pill.textContent=remaining+' late';
 }
 
 function showAlert(type,msg){
