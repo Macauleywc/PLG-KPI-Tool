@@ -696,27 +696,39 @@ function drawUKMap(regMap){
   }
 
   var regionNameMap={
+    'North East':'North East',
+    'North West':'North West',
+    'Yorkshire and the Humber':'Yorkshire',
+    'Yorkshire and The Humber':'Yorkshire',
+    'East Midlands':'East Midlands',
+    'West Midlands':'West Midlands',
+    'East of England':'East of England',
+    'East':'East of England',
+    'London':'London',
+    'South East':'South East',
+    'South West':'South West',
+    'Wales':'Wales',
+    'Scotland':'Scotland',
+    'Northern Ireland':'Northern Ireland',
     'England - North East':'North East',
     'England - North West':'North West',
     'England - Yorkshire and the Humber':'Yorkshire',
     'England - East Midlands':'East Midlands',
     'England - West Midlands':'West Midlands',
-    'England - East':'East of England',
+    'England - East of England':'East of England',
     'England - London':'London',
     'England - South East':'South East',
-    'England - South West':'South West',
-    'Wales':'Wales',
-    'Scotland':'Scotland',
-    'Northern Ireland':'Northern Ireland'
+    'England - South West':'South West'
   };
 
   function renderHighchartsMap(){
-    fetch('https://code.highcharts.com/mapdata/countries/gb/gb-all.geo.json')
+    fetch('https://code.highcharts.com/mapdata/countries/gb/custom/gb-regions.geo.json')
       .then(function(r){return r.json();})
       .then(function(mapData){
         var data=mapData.features.map(function(f){
           var hcName=f.properties['name'];
           var ourName=regionNameMap[hcName]||hcName;
+          if(f===mapData.features[0])console.log('Sample HC names:',mapData.features.slice(0,5).map(function(x){return x.properties['name'];}));
           var d=regMap[ourName]||{pallets:0};
           return{
             'hc-key':f.properties['hc-key'],
