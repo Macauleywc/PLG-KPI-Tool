@@ -222,7 +222,7 @@ function calcMonth(rows){
   var comp=rows.filter(function(r){var s=(r['status']||'').toUpperCase();return s==='INVOICE_POSTED'||s==='COMPLETED';});
   var cons=comp.length,pallets=0,revenue=0,lates=0;
   comp.forEach(function(r){pallets+=parseFloat(r['goods pallet spaces'])||0;revenue+=parseFloat(r['revenue'])||0;if(isLate(r))lates++;});
-  return{cons:cons,pallets:pallets,cost:revenue,lates:lates,timeliness:cons>0?(cons-lates)/cons:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
+  return{cons:cons,pallets:pallets,revenue:revenue,lates:lates,timeliness:cons>0?(cons-lates)/cons:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
 }
 
 function handleRaw(input){
@@ -890,7 +890,7 @@ async function saveToGitHub(){
   var token=getToken();if(!token){showAlert('warn','No GitHub token. Go to the homepage and enter it.');return;}
   var btn=document.getElementById('btn-save');btn.textContent='Saving...';btn.disabled=true;
   var merged=Object.assign({},savedMonthData);
-  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,cost:+c.revenue.toFixed(2),lates:c.lates,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
+  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,revenue:+c.revenue.toFixed(2),lates:c.lates,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged};
   var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
