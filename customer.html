@@ -713,7 +713,7 @@ function drawUKMap(regMap){
     if(leafletMap){try{leafletMap.remove();}catch(e){}leafletMap=null;}
 
     leafletMap=L.map('leaflet-map',{
-      center:[54.5,-3.5],zoom:5.5,
+      center:[54.5,-3.5],zoom:5,
       zoomControl:true,attributionControl:false,scrollWheelZoom:false
     });
 
@@ -750,7 +750,8 @@ function drawUKMap(regMap){
       });
     }
 
-    L.geoJSON(UK_GEO,{style:styleRegion,onEachFeature:onEachFeature}).addTo(leafletMap);
+    var geoLayer=L.geoJSON(UK_GEO,{style:styleRegion,onEachFeature:onEachFeature}).addTo(leafletMap);
+    leafletMap.fitBounds(geoLayer.getBounds(),{padding:[20,20]});
 
   },150);
 }
