@@ -273,7 +273,7 @@ function render(){
     card.innerHTML=
       '<div class="card-head">'+
         '<div class="card-avatar">'+inits(name)+'</div>'+
-        '<button class="del-btn" onclick="event.stopPropagation();del(''+name.replace(/'/g,"\'")+'')">&#215;</button>'+
+        '<button class="del-btn" onclick="event.stopPropagation();removeCust(this)">&#215;</button>'+
       '</div>'+
       '<div class="card-name">'+name+'</div>'+
       (m.months>0?'<div class="card-meta">'+m.months+' month'+(m.months!==1?'s':'')+' of data</div>':'<div class="card-meta">No data yet</div>')+
@@ -295,8 +295,7 @@ async function loadMeta(){
       var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+ghFile(name),{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
       if(!r.ok)return;
       var j=await r.json();
-      var d=JSON.parse(atob(j.content.replace(/
-/g,'')));
+      var d=JSON.parse(atob(j.content.replace(/\n/g,'')));
       var months=Object.keys(d.months||{}).sort();
       var latest=months[months.length-1];
       var otif=null;
@@ -308,6 +307,12 @@ async function loadMeta(){
 }
 
 function toggleEdit(){editMode=!editMode;document.getElementById('edit-btn').textContent=editMode?'Done':'Manage';render();}
+function removeCust(btn){
+  var card=btn.closest('.card');
+  var name=card?card.querySelector('.card-name').textContent:'';
+  if(!name)return;
+  del(name);
+}
 function del(name){if(!confirm('Remove '+name+'?'))return;var l=getList().filter(function(c){return c!==name;});saveList(l);delete meta[name];render();}
 function showModal(){document.getElementById('overlay').style.display='flex';setTimeout(function(){document.getElementById('modal-input').focus();},50);}
 function hideModal(){document.getElementById('overlay').style.display='none';document.getElementById('modal-input').value='';}
