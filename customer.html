@@ -896,14 +896,29 @@ function exportCustomerReport(){
   function tryMapCapture(){
     try{
       var hcChart=null;
+      console.log('tryMapCapture: Highcharts available?',typeof Highcharts);
       if(window.Highcharts&&Highcharts.charts){
+        console.log('Highcharts.charts count:',Highcharts.charts.length);
         for(var ci=0;ci<Highcharts.charts.length;ci++){
-          if(Highcharts.charts[ci]&&Highcharts.charts[ci].renderTo&&Highcharts.charts[ci].renderTo.id==='hc-map'){
-            hcChart=Highcharts.charts[ci];break;
+          var ch=Highcharts.charts[ci];
+          if(ch){console.log('Chart',ci,'renderTo:',ch.renderTo?ch.renderTo.id:'none');}
+          if(ch&&ch.renderTo&&ch.renderTo.id==='hc-map'){
+            hcChart=ch;break;
           }
         }
       }
-      if(!hcChart){finalize();return;}
+      console.log('hcChart found:',!!hcChart);
+      if(!hcChart){
+        console.log('No hcChart - trying direct SVG capture');
+        var svgEl=document.querySelector('#hc-map svg');
+        console.log('SVG element:',!!svgEl);
+        if(svgEl){
+          captureViaSVG(svgEl);
+        } else {
+          finalize();
+        }
+        return;
+      }
       var svgStr=hcChart.getSVG({chart:{width:600,height:800,backgroundColor:'#ffffff'}});
       var blob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
       var url=URL.createObjectURL(blob);
@@ -939,13 +954,64 @@ function exportCustomerReport(){
           var mapAsp=cw/ch;
           var mH=132,mW=Math.min(88,mH*mapAsp);
           var mX=ML+(88-mW)/2;
-          try{doc.addImage(mapDataUrl,'PNG',mX,mapPlaceholderY+(132-mH)/2,mW,mH);}catch(e){}
+          insertMapIntoDoc(mapDataUrl,mapAsp);
+          return;
         }
         finalize();
       };
       img.onerror=function(){URL.revokeObjectURL(url);finalize();};
       img.src=url;
     }catch(e){finalize();}
+  }
+
+  function captureViaSVG(svgEl){
+    try{
+      var clone=svgEl.cloneNode(true);
+      clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      // Inline fill/stroke from computed styles
+      var allPaths=svgEl.querySelectorAll('path,rect,circle');
+      var clonePaths=clone.querySelectorAll('path,rect,circle');
+      allPaths.forEach(function(el,i){
+        if(clonePaths[i]){
+          var fill=el.getAttribute('fill');
+          var stroke=el.getAttribute('stroke');
+          if(fill)clonePaths[i].setAttribute('fill',fill);
+          if(stroke)clonePaths[i].setAttribute('stroke',stroke);
+        }
+      });
+      var vb=svgEl.viewBox.baseVal;
+      var W2=vb.width||800,H2=vb.height||900;
+      clone.setAttribute('viewBox','0 0 '+W2+' '+H2);
+      clone.setAttribute('width',String(W2));
+      clone.setAttribute('height',String(H2));
+      var svgStr=new XMLSerializer().serializeToString(clone);
+      console.log('SVG string length:',svgStr.length,'viewBox:',W2,H2);
+      var blob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
+      var url=URL.createObjectURL(blob);
+      var img=new Image();
+      img.onload=function(){
+        console.log('SVG image loaded, naturalSize:',img.naturalWidth,img.naturalHeight);
+        var canvas=document.createElement('canvas');
+        var sc=2;
+        canvas.width=W2*sc;canvas.height=H2*sc;
+        var ctx=canvas.getContext('2d');
+        ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.scale(sc,sc);ctx.drawImage(img,0,0,W2,H2);
+        URL.revokeObjectURL(url);
+        insertMapIntoDoc(canvas.toDataURL('image/png'),W2/H2);
+      };
+      img.onerror=function(e){console.log('SVG img error:',e);URL.revokeObjectURL(url);finalize();};
+      img.src=url;
+    }catch(e){console.log('captureViaSVG error:',e);finalize();}
+  }
+
+  function insertMapIntoDoc(mapDataUrl,mapAsp){
+    var mH=132,mW=Math.min(88,mH*mapAsp);
+    var mX=ML+(88-mW)/2;
+    console.log('Inserting map image, asp:',mapAsp,'mW:',mW,'mH:',mH);
+    try{doc.addImage(mapDataUrl,'PNG',mX,mapPlaceholderY+(132-mH)/2,mW,mH);}
+    catch(e){console.log('addImage error:',e);}
+    finalize();
   }
 
   function finalize(){
