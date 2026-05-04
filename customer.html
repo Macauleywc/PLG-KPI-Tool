@@ -999,47 +999,37 @@ function exportCustomerReport(){
     y=CT+2;
     y=secH('UK Delivery Heatmap - Pallet Volume by Region',y);
 
-    // Layout: region table LEFT (40%), map RIGHT (56%)
-    var regColW=CW*0.40,mapColW=CW*0.56,gapW=CW*0.04;
-    var regX=ML,mapX=ML+regColW+gapW;
-    var availH=CB-y;
+    // Map on LEFT (52%), region table on RIGHT (44%)
+    var mapColW=CW*0.52,regColW=CW*0.44,gapW=CW*0.04;
+    var mapStartX=ML,regStartX=ML+mapColW+gapW;
+    var mapAreaH=Math.min(CB-y-75,155);
 
-    // Draw region table on LEFT
+    // Draw map
+    if(mapImg&&mapAspect){
+      var mapW3=Math.min(mapColW,mapAreaH*mapAspect);
+      var mapH3=mapW3/mapAspect;
+      if(mapH3>mapAreaH){mapH3=mapAreaH;mapW3=mapH3*mapAspect;}
+      doc.addImage(mapImg,'PNG',mapStartX+(mapColW-mapW3)/2,y+(mapAreaH-mapH3)/2,mapW3,mapH3);
+    } else {
+      fill(C.faint);doc.rect(mapStartX,y,mapColW,mapAreaH,'F');
+      txt(C.muted);doc.setFontSize(8);doc.setFont('helvetica','normal');
+      doc.text('Map unavailable',mapStartX+mapColW/2,y+mapAreaH/2,{align:'center'});
+    }
+
+    // Draw region table on right
     var regCols=[{l:'Region'},{l:'Pallets',r:1},{l:'OTIF',r:1}];
     var regW=[regColW*0.54,regColW*0.24,regColW*0.22];
     var ry3=y;
-    ry3=th(regCols,regW,ry3,0);
-    topReg.forEach(function(e,idx){
-      if(ry3>CB-6)return;
+    var regOff=regStartX-ML;
+    ry3=th(regCols,regW,ry3,regOff);
+    topReg.forEach(function(e,idx2){
+      if(ry3>y+mapAreaH)return;
       var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
-      // OTIF color dot
-      var otifC=otifColor(parseFloat(otif));
-      ry3=tr([
-        {t:trunc(e[0],16)},
-        {t:String(d.pallets),r:1},
-        {t:otif+'%',r:1,c:otifC}
-      ],regW,ry3,{shade:idx%2!==0},0);
+      ry3=tr([{t:trunc(e[0],16)},{t:String(d.pallets),r:1},{t:otif+'%',r:1,c:otifColor(parseFloat(otif))}],regW,ry3,{shade:idx2%2!==0},regOff);
     });
+    y=y+mapAreaH+8;
 
-    // Draw map on RIGHT - fill full available height
-    if(mapImg&&mapAspect){
-      var mapH3=availH;
-      var mapW3=mapH3*mapAspect;
-      // If too wide, constrain by width
-      if(mapW3>mapColW){mapW3=mapColW;mapH3=mapW3/mapAspect;}
-      // Centre vertically in available space
-      var mapYoff=(availH-mapH3)/2;
-      // Centre horizontally in map column
-      var mapXoff=(mapColW-mapW3)/2;
-      doc.addImage(mapImg,'PNG',mapX+mapXoff,y+mapYoff,mapW3,mapH3);
-    } else {
-      // No map - extend region table to full width
-      fill(C.faint);doc.rect(mapX,y,mapColW,availH,'F');
-      txt(C.muted);doc.setFontSize(9);doc.setFont('helvetica','normal');
-      doc.text('Map unavailable',mapX+mapColW/2,y+availH/2,{align:'center'});
-    }
-
-    // Destinations below map on same page if space, otherwise new page
+        // Destinations below map on same page if space, otherwise new page
     y+=8;
     if(y>CB-40){doc.addPage();chrome(3,TOTAL);y=CT+2;}
     y=secH('Top Destinations by Volume',y);
