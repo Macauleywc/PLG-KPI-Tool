@@ -827,27 +827,33 @@ function exportCustomerReport(){
   y=secH('UK Delivery Heatmap - Pallet Volume by Region',y);
 
   // ── CAPTURE HIGHCHARTS MAP ────────────────────────────
-  // Region table right side - always drawn
-  var mapAreaH=132;
-  var rtX=ML+90+4,rtW=CW-90-4;
-  var regCols=[{l:'Region'},{l:'Pallets',r:1},{l:'OTIF',r:1}];
-  var regW=[rtW*0.54,rtW*0.24,rtW*0.22];
-  var ry2=y;
-  ry2=tH(regCols,regW,ry2,rtX-ML);
-  topReg.forEach(function(e,idx2){
-    if(ry2>y+mapAreaH)return;
-    var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
-    ry2=tR([{t:trunc(e[0],16)},{t:String(d.pallets),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))}],regW,ry2,{shade:idx2%2!==0},rtX-ML);
-  });
+  // Region table - 3 columns across full width, drawn AFTER map placeholder
 
-  // Map placeholder - will be filled async
+  // Map placeholder - full width, height = CW/2.5 (landscape aspect)
+  var mapAreaH=Math.round(CW/2.5); // ~73mm for landscape map
   var mapPlaceholderY=y;
-  fill('#F7F6F3');doc.rect(ML,mapPlaceholderY,88,mapAreaH,'F');
-  drw('#E5E3DE');doc.rect(ML,mapPlaceholderY,88,mapAreaH,'S');
+  fill('#F7F6F3');doc.rect(ML,mapPlaceholderY,CW,mapAreaH,'F');
+  drw('#E5E3DE');doc.rect(ML,mapPlaceholderY,CW,mapAreaH,'S');
   txt('#CCCCCC');doc.setFontSize(8);doc.setFont('helvetica','normal');
-  doc.text('Map loading...',ML+44,mapPlaceholderY+mapAreaH/2,{align:'center'});
-
+  doc.text('Map loading...',ML+CW/2,mapPlaceholderY+mapAreaH/2,{align:'center'});
   y=mapPlaceholderY+mapAreaH+6;
+
+  // Region table - 3 columns
+  var regPerCol=Math.ceil(topReg.length/3);
+  var colW3=(CW-8)/3;
+  [0,1,2].forEach(function(col){
+    var cx=ML+col*(colW3+4);
+    var regCols=[{l:'Region'},{l:'Plts',r:1},{l:'OTIF',r:1}];
+    var regW=[colW3*0.54,colW3*0.22,colW3*0.24];
+    var ry3=y;
+    ry3=tH(regCols,regW,ry3,col*(colW3+4));
+    topReg.slice(col*regPerCol,(col+1)*regPerCol).forEach(function(e,idx2){
+      var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
+      ry3=tR([{t:trunc(e[0],13)},{t:String(d.pallets),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))}],regW,ry3,{shade:idx2%2!==0},col*(colW3+4));
+    });
+    if(col===2)y=ry3+4;
+  });
+  y+=2;
 
   // Destinations on same page
   y=secH('Top Destinations by Volume',y);
@@ -1006,10 +1012,16 @@ function exportCustomerReport(){
   }
 
   function insertMapIntoDoc(mapDataUrl,mapAsp){
-    var mH=132,mW=Math.min(88,mH*mapAsp);
-    var mX=ML+(88-mW)/2;
+    // Map is landscape (wide) - use full page width, height = width/aspect
+    var mW=CW;
+    var mH=mW/mapAsp;
+    if(mH>100)mH=100; // cap height
+    mW=mH*mapAsp;
+    if(mW>CW)mW=CW;
+    mH=mW/mapAsp;
+    var mX=ML+(CW-mW)/2;
     console.log('Inserting map image, asp:',mapAsp,'mW:',mW,'mH:',mH);
-    try{doc.addImage(mapDataUrl,'PNG',mX,mapPlaceholderY+(132-mH)/2,mW,mH);}
+    try{doc.addImage(mapDataUrl,'PNG',mX,mapPlaceholderY,mW,mH);}
     catch(e){console.log('addImage error:',e);}
     finalize();
   }
