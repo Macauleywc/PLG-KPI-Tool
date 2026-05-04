@@ -619,7 +619,76 @@ function exportTracker(){
 }
 
 function exportCustomerReport(){
-  showAlert('info','Building PDF...');
+  showAlert('info','Preparing PDF — capturing map...');
+
+  // Capture map SVG first, then build PDF
+  function captureMap(cb){
+    try{
+      var svgEl=document.querySelector('#hc-map svg');
+      if(!svgEl){cb(null);return;}
+      var clone=svgEl.cloneNode(true);
+      clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      svgEl.querySelectorAll('path,rect,circle').forEach(function(el,i){
+        var cl=clone.querySelectorAll('path,rect,circle')[i];
+        if(!cl)return;
+        ['fill','stroke','stroke-width','opacity'].forEach(function(attr){
+          var v=el.getAttribute(attr);if(v)cl.setAttribute(attr,v);
+        });
+      });
+      var vb=svgEl.viewBox.baseVal;
+      var SW=vb.width||1740,SH=vb.height||700;
+      clone.setAttribute('viewBox','0 0 '+SW+' '+SH);
+      clone.setAttribute('width',String(SW));clone.setAttribute('height',String(SH));
+      var str=new XMLSerializer().serializeToString(clone);
+      var blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'});
+      var url=URL.createObjectURL(blob);
+      var img=new Image();
+      img.onload=function(){
+        var sc=1.5,canvas=document.createElement('canvas');
+        canvas.width=Math.round(SW*sc);canvas.height=Math.round(SH*sc);
+        var ctx=canvas.getContext('2d');
+        ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.scale(sc,sc);ctx.drawImage(img,0,0,SW,SH);
+        URL.revokeObjectURL(url);
+        // Crop whitespace
+        ctx.setTransform(1,0,0,1,0,0);
+        var d=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+        var x1=canvas.width,y1=canvas.height,x2=0,y2=0;
+        for(var iy=0;iy<canvas.height;iy++){for(var ix=0;ix<canvas.width;ix++){
+          var p=(iy*canvas.width+ix)*4;
+          if(d[p+3]>30&&!(d[p]>248&&d[p+1]>248&&d[p+2]>248)){
+            if(ix<x1)x1=ix;if(ix>x2)x2=ix;if(iy<y1)y1=iy;if(iy>y2)y2=iy;
+          }
+        }}
+        var pad=15;
+        x1=Math.max(0,x1-pad);y1=Math.max(0,y1-pad);
+        x2=Math.min(canvas.width,x2+pad);y2=Math.min(canvas.height,y2+pad);
+        var cw=x2-x1,ch=y2-y1;
+        if(cw>100&&ch>100){
+          var out=document.createElement('canvas');out.width=cw;out.height=ch;
+          out.getContext('2d').drawImage(canvas,x1,y1,cw,ch,0,0,cw,ch);
+          cb({url:out.toDataURL('image/png'),asp:cw/ch});
+        } else {
+          cb({url:canvas.toDataURL('image/png'),asp:SW/SH});
+        }
+      };
+      img.onerror=function(){URL.revokeObjectURL(url);cb(null);};
+      img.src=url;
+    }catch(e){cb(null);}
+  }
+
+  // Switch to destinations tab to ensure map rendered
+  var tabs=document.querySelectorAll('.tab-btn');
+  tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});
+
+  setTimeout(function(){
+    captureMap(function(mapImg){
+      buildReport(mapImg);
+    });
+  },600);
+}
+
+function buildReport(mapImg){
   var comp=allCompleted();
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getTotal('lates');
   var ytdOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2):'--';
@@ -629,6 +698,7 @@ function exportCustomerReport(){
   var avgRC=aC>0?(aR/aC).toFixed(2):'--';
   var avgRP=aP>0?(aR/aP).toFixed(2):'--';
   var avgPC=aC>0?(aP/aC).toFixed(1):'--';
+  var otifHex=otifNum>=98?'#166534':otifNum>=95?'#92400E':'#991B1B';
 
   var months=[];
   MONTH_KEYS.forEach(function(key,i){
@@ -659,29 +729,19 @@ function exportCustomerReport(){
   comp.forEach(function(r){var ex2=r['destination extras']||'';var t=ex2.includes('Economy Booked')?'Economy Booked':ex2.includes('Booked')?'Booked':'Standard';if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons++;if(isLate(r))typeMap2[t].lates++;});
 
   var periodLabel=months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026';
-  var otifHex=otifNum>=98?'#166534':otifNum>=95?'#92400E':'#991B1B';
 
   var {jsPDF}=window.jspdf;
   var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   var W=210,H=297,ML=14,CW=182,CT=16,CB=283;
+  var TOTAL=4;
 
-  // ── HELPERS ──────────────────────────────────────────
   function rgb(hex){return[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)];}
   function fill(hex){var r=rgb(hex);doc.setFillColor(r[0],r[1],r[2]);}
   function txt(hex){var r=rgb(hex);doc.setTextColor(r[0],r[1],r[2]);}
   function drw(hex){var r=rgb(hex);doc.setDrawColor(r[0],r[1],r[2]);}
   function otifC(v){return v>=98?'#166534':v>=95?'#92400E':'#991B1B';}
-  function heatC(t){
-    if(t===0)return'#F2F0ED';
-    if(t<0.2)return'#FDE8D0';
-    if(t<0.4)return'#FDC896';
-    if(t<0.6)return'#FC9D59';
-    if(t<0.8)return'#F47920';
-    return'#D4560A';
-  }
   function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'...':s||'';}
   function fmt(n){return n!=null&&!isNaN(n)?'£'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
-  var TOTAL=4;
 
   function chrome(pg){
     fill('#111111');doc.rect(0,0,W,11,'F');
@@ -723,8 +783,7 @@ function exportCustomerReport(){
 
   function tR(vals,widths,y,opts,ox){
     ox=ox||0;opts=opts||{};
-    var rh=6;
-    var tw=widths.reduce(function(a,b){return a+b;},0);
+    var rh=6,tw=widths.reduce(function(a,b){return a+b;},0);
     if(opts.total){fill('#F47920');doc.rect(ML+ox,y,tw,rh,'F');}
     else if(opts.shade){fill('#F7F6F3');doc.rect(ML+ox,y,tw,rh,'F');}
     drw('#E5E3DE');doc.line(ML+ox,y+rh,ML+ox+tw,y+rh);
@@ -740,7 +799,7 @@ function exportCustomerReport(){
     return y+rh;
   }
 
-  // ── PAGE 1: COVER ─────────────────────────────────────
+  // PAGE 1: COVER
   fill('#111111');doc.rect(0,0,W,H,'F');
   fill('#F47920');doc.rect(0,0,8,H,'F');
   fill('#FFFFFF');doc.rect(8,0,W-8,H,'F');
@@ -753,25 +812,21 @@ function exportCustomerReport(){
   txt('#1C1C1C');doc.setFontSize(14);doc.setFont('helvetica','normal');doc.text(currentCustomer,18,88);
   txt('#F47920');doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(periodLabel,18,97);
   var boxes=[{l:'CONSIGNMENTS',v:String(aC||0),c:'#F47920'},{l:'PALLETS',v:String(aP||0),c:'#111111'},{l:'OTIF',v:ytdOTIF+'%',c:otifHex},{l:'LATES',v:String(aL||0),c:'#111111'}];
-  var bW=84,bH=24,bGap=6,bY=112;
   boxes.forEach(function(b,i){
-    var bx=18+(i%2)*(bW+bGap),by=bY+Math.floor(i/2)*(bH+bGap);
-    fill('#F2F0ED');doc.rect(bx,by,bW,bH,'F');
-    fill('#F47920');doc.rect(bx,by,bW,1.5,'F');
+    var bx=18+(i%2)*(87+6),by=112+Math.floor(i/2)*(24+6);
+    fill('#F2F0ED');doc.rect(bx,by,87,24,'F');fill('#F47920');doc.rect(bx,by,87,1.5,'F');
     txt('#8A8780');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(b.l,bx+4,by+8);
     txt(b.c);doc.setFontSize(18);doc.setFont('helvetica','bold');doc.text(b.v,bx+4,by+20);
   });
-  fill('#111111');doc.rect(8,H-26,W-8,26,'F');
-  fill('#F47920');doc.rect(8,H-26,W-8,1,'F');
+  fill('#111111');doc.rect(8,H-26,W-8,26,'F');fill('#F47920');doc.rect(8,H-26,W-8,1,'F');
   txt('#FFFFFF');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('Prepared for',18,H-18);
   txt('#F47920');doc.setFontSize(10);doc.text(currentCustomer,18,H-10);
   txt('#555555');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(dateStr+' | Confidential',W-ML,H-10,{align:'right'});
 
-  // ── PAGE 2: SUMMARY + TRACKER ─────────────────────────
+  // PAGE 2: SUMMARY + TRACKER
   doc.addPage();chrome(2);
   var y=CT+2;
-  fill('#111111');doc.rect(ML,y,CW,28,'F');
-  fill('#F47920');doc.rect(ML,y,4,28,'F');
+  fill('#111111');doc.rect(ML,y,CW,28,'F');fill('#F47920');doc.rect(ML,y,4,28,'F');
   txt('#777777');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('YEAR-TO-DATE OTIF',ML+8,y+8);
   txt(otifHex);doc.setFontSize(28);doc.setFont('helvetica','bold');doc.text(ytdOTIF+'%',ML+8,y+22);
   txt('#666666');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text((aL||0)+' lates from '+(aC||0)+' consignments',ML+8,y+27);
@@ -782,14 +837,14 @@ function exportCustomerReport(){
   txt('#888888');doc.setFontSize(5.5);doc.text('0%',bx2,by2+8);doc.text('98%',bx2+bw2*0.98,by2+8,{align:'center'});doc.text('100%',bx2+bw2,by2+8,{align:'right'});
   y+=32;
   var kk=[['Consignments',String(aC||0)],['Pallets',String(aP||0)],['Total Cost',fmt(aR)],['Avg Cost/Con','£'+avgRC],['Avg Cost/Pallet','£'+avgRP],['Avg Pallets/Con',avgPC]];
-  var kW=(CW-10)/3,kH=17,kGap=5;
+  var kW=(CW-10)/3,kH=17;
   kk.forEach(function(k,i){
-    var kx=ML+(i%3)*(kW+kGap),ky=y+Math.floor(i/3)*(kH+kGap);
+    var kx=ML+(i%3)*(kW+5),ky=y+Math.floor(i/3)*(kH+5);
     fill('#F2F0ED');doc.rect(kx,ky,kW,kH,'F');fill('#F47920');doc.rect(kx,ky,kW,1,'F');
     txt('#8A8780');doc.setFontSize(5.8);doc.setFont('helvetica','normal');doc.text(k[0].toUpperCase(),kx+2,ky+6);
     txt('#1C1C1C');doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(k[1],kx+2,ky+14);
   });
-  y+=kH*2+kGap+6;
+  y+=kH*2+5+6;
   y=secH('Monthly Performance Summary',y);
   var mw=[28,14,14,32,26,20,14];
   y=tH([{l:'Month'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'Cost',r:1},{l:'Avg/Con',r:1},{l:'OTIF',r:1},{l:'Lates',r:1}],mw,y);
@@ -799,18 +854,18 @@ function exportCustomerReport(){
   });
   y=tR([{t:'TOTAL / YTD'},{t:String(aC||''),r:1},{t:String(aP||''),r:1},{t:fmt(aR),r:1},{t:'£'+avgRC,r:1},{t:ytdOTIF+'%',r:1},{t:String(aL||''),r:1}],mw,y,{total:true});
   if(months.some(function(m){return m.isNew;})){txt('#8A8780');doc.setFontSize(6);doc.setFont('helvetica','italic');doc.text('* Newly calculated from uploaded Qargo data',ML,y+4);y+=7;}
-  y+=5;
+  y+=4;
   if(y<CB-36){
     var lW=CW*0.44,rW=CW*0.52,gW=CW*0.04;
-    var ly=y,ry=y;
+    var ly=y;
     ly=secH('By Delivery Type',ly,lW);
-    var tw=[lW*0.55,lW*0.22,lW*0.23];
-    ly=tH([{l:'Type'},{l:'Cons',r:1},{l:'OTIF',r:1}],tw,ly);
+    var tw2=[lW*0.55,lW*0.22,lW*0.23];
+    ly=tH([{l:'Type'},{l:'Cons',r:1},{l:'OTIF',r:1}],tw2,ly);
     Object.entries(typeMap2).forEach(function(e,idx){
       var t=e[0],d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
-      ly=tR([t,{t:String(d.cons),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))}],tw,ly,{shade:idx%2!==0});
+      ly=tR([t,{t:String(d.cons),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))}],tw2,ly,{shade:idx%2!==0});
     });
-    var rx=ML+lW+gW;
+    var rx=ML+lW+gW,ry=y;
     ry=secH('Commercial',ry,rW);
     var sw=(rW-4)/2;
     [['Avg Cost/Con','£'+avgRC],['Avg Cost/Pallet','£'+avgRP],['Avg Pallets/Con',avgPC],['Total Lates YTD',String(aL||0)]].forEach(function(s,i){
@@ -821,41 +876,44 @@ function exportCustomerReport(){
     });
   }
 
-  // ── PAGE 3: MAP + REGIONS + DESTINATIONS ─────────────
+  // PAGE 3: MAP + REGIONS + DESTINATIONS
   doc.addPage();chrome(3);
   y=CT+2;
   y=secH('UK Delivery Heatmap - Pallet Volume by Region',y);
 
-  // ── CAPTURE HIGHCHARTS MAP ────────────────────────────
-  // Region table - 3 columns across full width, drawn AFTER map placeholder
-
-  // Map placeholder - full width, height = CW/2.5 (landscape aspect)
-  var mapAreaH=Math.round(CW/2.5); // ~73mm for landscape map
-  var mapPlaceholderY=y;
-  fill('#F7F6F3');doc.rect(ML,mapPlaceholderY,CW,mapAreaH,'F');
-  drw('#E5E3DE');doc.rect(ML,mapPlaceholderY,CW,mapAreaH,'S');
-  txt('#CCCCCC');doc.setFontSize(8);doc.setFont('helvetica','normal');
-  doc.text('Map loading...',ML+CW/2,mapPlaceholderY+mapAreaH/2,{align:'center'});
-  y=mapPlaceholderY+mapAreaH+6;
+  // Draw map image (captured before PDF build)
+  if(mapImg){
+    var asp=mapImg.asp||2.5;
+    var mW=CW,mH=mW/asp;
+    if(mH>85){mH=85;mW=mH*asp;}
+    if(mW>CW){mW=CW;mH=mW/asp;}
+    var mX=ML+(CW-mW)/2;
+    try{doc.addImage(mapImg.url,'PNG',mX,y,mW,mH);}catch(e){}
+    y+=mH+4;
+  } else {
+    fill('#F7F6F3');doc.rect(ML,y,CW,60,'F');
+    txt('#CCCCCC');doc.setFontSize(8);doc.text('Map unavailable - open Destinations tab before exporting',ML+CW/2,y+30,{align:'center'});
+    y+=64;
+  }
 
   // Region table - 3 columns
   var regPerCol=Math.ceil(topReg.length/3);
-  var colW3=(CW-8)/3;
+  var col3W=(CW-8)/3;
+  var maxRegY=y;
   [0,1,2].forEach(function(col){
-    var cx=ML+col*(colW3+4);
-    var regCols=[{l:'Region'},{l:'Plts',r:1},{l:'OTIF',r:1}];
-    var regW=[colW3*0.54,colW3*0.22,colW3*0.24];
-    var ry3=y;
-    ry3=tH(regCols,regW,ry3,col*(colW3+4));
-    topReg.slice(col*regPerCol,(col+1)*regPerCol).forEach(function(e,idx2){
+    var cx=col*(col3W+4);
+    var rw=[col3W*0.54,col3W*0.22,col3W*0.24];
+    var ry=y;
+    ry=tH([{l:'Region'},{l:'Plts',r:1},{l:'OTIF',r:1}],rw,ry,cx);
+    topReg.slice(col*regPerCol,(col+1)*regPerCol).forEach(function(e,idx){
       var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
-      ry3=tR([{t:trunc(e[0],13)},{t:String(d.pallets),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))}],regW,ry3,{shade:idx2%2!==0},col*(colW3+4));
+      ry=tR([{t:trunc(e[0],14)},{t:String(d.pallets),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))}],rw,ry,{shade:idx%2!==0},cx);
     });
-    if(col===2)y=ry3+4;
+    if(ry>maxRegY)maxRegY=ry;
   });
-  y+=2;
+  y=maxRegY+6;
 
-  // Destinations on same page
+  // Top destinations
   y=secH('Top Destinations by Volume',y);
   var dc=[{l:'Destination'},{l:'City'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'Cost',r:1},{l:'Lates',r:1},{l:'OTIF',r:1}];
   var dw=[46,24,13,13,30,12,20];
@@ -866,7 +924,7 @@ function exportCustomerReport(){
     y=tR([{t:trunc(d.name,28)},{t:trunc(d.city,14)},{t:String(d.cons),r:1},{t:String(d.pallets),r:1},{t:fmt(d.revenue),r:1},{t:String(d.lates),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))}],dw,y,{shade:idx%2!==0});
   });
 
-  // ── PAGE 4: LATE LOG + METHODOLOGY ───────────────────
+  // PAGE 4: LATE LOG + METHODOLOGY
   doc.addPage();chrome(4);
   y=CT+2;
   y=secH('Late Consignment Detail ('+lateList.length+' late)',y);
@@ -881,11 +939,11 @@ function exportCustomerReport(){
     if(y>CB-6){doc.addPage();chrome(4);y=CT+2;y=tH(lc,lw,y);}
     y=tR([{t:trunc(r.id,12)},{t:trunc(r.dest,26)},{t:trunc(r.city,11)},{t:r.window},{t:r.arrival},{t:'+'+r.mins+'m',r:1,c:'#991B1B'},{t:String(r.pallets),r:1},{t:r.dtype}],lw,y,{shade:idx%2!==0});
   });
-  if(lateList.length===0){txt('#8A8780');doc.setFontSize(9);doc.text('No late consignments in this period.',ML+CW/2,y+14,{align:'center'});y+=22;}
+  if(lateList.length===0){txt('#8A8780');doc.setFontSize(9);doc.text('No late consignments.',ML+CW/2,y+12,{align:'center'});y+=20;}
   y+=8;
-  if(y<CB-52){
+  if(y<CB-50){
     y=secH('Methodology & Definitions',y);
-    [['OTIF','(Consignments - Lates) / Total Consignments. Target: 98.00% or above.'],['Late','Recorded delivery arrival after the booked time window end in Qargo TMS.'],['Consignment','Order with status COMPLETED or INVOICE_POSTED in Qargo TMS only.'],['Data Source','Qargo TMS Orders export. Generated by PLG internal KPI tool.']].forEach(function(d,i){
+    [['OTIF','(Consignments - Lates) / Total Consignments. Target: 98.00% or above.'],['Late','Delivery arrival recorded after booked time window end in Qargo TMS.'],['Consignment','Order with status COMPLETED or INVOICE_POSTED in Qargo TMS only.'],['Data Source','Qargo TMS Orders export. Generated by PLG internal KPI tool.']].forEach(function(d,i){
       if(i%2===0){fill('#F2F0ED');doc.rect(ML,y,CW,8,'F');}
       txt('#F47920');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text(d[0].toUpperCase(),ML+2,y+5);
       txt('#8A8780');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(d[1],ML+38,y+5);
@@ -898,141 +956,9 @@ function exportCustomerReport(){
     txt('#555555');doc.setFontSize(6.5);doc.text('Confidential. Prepared exclusively for '+currentCustomer+'. '+dateStr,W-ML,y+17,{align:'right'});
   }
 
-  // Now try to get map image and re-insert it
-  function tryMapCapture(){
-    try{
-      var hcChart=null;
-      console.log('tryMapCapture: Highcharts available?',typeof Highcharts);
-      if(window.Highcharts&&Highcharts.charts){
-        console.log('Highcharts.charts count:',Highcharts.charts.length);
-        for(var ci=0;ci<Highcharts.charts.length;ci++){
-          var ch=Highcharts.charts[ci];
-          if(ch){console.log('Chart',ci,'renderTo:',ch.renderTo?ch.renderTo.id:'none');}
-          if(ch&&ch.renderTo&&ch.renderTo.id==='hc-map'){
-            hcChart=ch;break;
-          }
-        }
-      }
-      console.log('hcChart found:',!!hcChart);
-      if(!hcChart){
-        console.log('No hcChart - trying direct SVG capture');
-        var svgEl=document.querySelector('#hc-map svg');
-        console.log('SVG element:',!!svgEl);
-        if(svgEl){captureViaSVG(svgEl);} else {finalize();}
-        return;
-      }
-      console.log('Calling getSVG...');
-      var svgStr;
-      try{svgStr=hcChart.getSVG({chart:{width:600,height:800,backgroundColor:'#ffffff'}});}
-      catch(svgErr){console.log('getSVG error:',svgErr);captureViaSVG(document.querySelector('#hc-map svg'));return;}
-      console.log('getSVG result length:',svgStr?svgStr.length:0);
-      var blob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
-      var url=URL.createObjectURL(blob);
-      var img=new Image();
-      img.onload=function(){
-        var canvas=document.createElement('canvas');
-        canvas.width=600*2;canvas.height=800*2;
-        var ctx=canvas.getContext('2d');
-        ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.scale(2,2);ctx.drawImage(img,0,0,600,800);
-        URL.revokeObjectURL(url);
-        // Crop: find actual UK bounds by scanning non-white pixels
-        ctx.setTransform(1,0,0,1,0,0);
-        var data=ctx.getImageData(0,0,canvas.width,canvas.height);
-        var px2=data.data,minX=canvas.width,minY=canvas.height,maxX=0,maxY=0;
-        for(var py2=0;py2<canvas.height;py2++){
-          for(var px3=0;px3<canvas.width;px3++){
-            var pi=(py2*canvas.width+px3)*4;
-            if(px2[pi+3]>30&&!(px2[pi]>245&&px2[pi+1]>245&&px2[pi+2]>245)){
-              if(px3<minX)minX=px3;if(px3>maxX)maxX=px3;
-              if(py2<minY)minY=py2;if(py2>maxY)maxY=py2;
-            }
-          }
-        }
-        var pad=20;
-        minX=Math.max(0,minX-pad);minY=Math.max(0,minY-pad);
-        maxX=Math.min(canvas.width,maxX+pad);maxY=Math.min(canvas.height,maxY+pad);
-        var cw=maxX-minX,ch=maxY-minY;
-        if(cw>50&&ch>50){
-          var out=document.createElement('canvas');out.width=cw;out.height=ch;
-          out.getContext('2d').drawImage(canvas,minX,minY,cw,ch,0,0,cw,ch);
-          var mapDataUrl=out.toDataURL('image/png');
-          var mapAsp=cw/ch;
-          var mH=132,mW=Math.min(88,mH*mapAsp);
-          var mX=ML+(88-mW)/2;
-          insertMapIntoDoc(mapDataUrl,mapAsp);
-          return;
-        }
-        finalize();
-      };
-      img.onerror=function(){URL.revokeObjectURL(url);finalize();};
-      img.src=url;
-    }catch(e){finalize();}
-  }
-
-  function captureViaSVG(svgEl){
-    try{
-      var clone=svgEl.cloneNode(true);
-      clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
-      // Inline fill/stroke from computed styles
-      var allPaths=svgEl.querySelectorAll('path,rect,circle');
-      var clonePaths=clone.querySelectorAll('path,rect,circle');
-      allPaths.forEach(function(el,i){
-        if(clonePaths[i]){
-          var fill=el.getAttribute('fill');
-          var stroke=el.getAttribute('stroke');
-          if(fill)clonePaths[i].setAttribute('fill',fill);
-          if(stroke)clonePaths[i].setAttribute('stroke',stroke);
-        }
-      });
-      var vb=svgEl.viewBox.baseVal;
-      var W2=vb.width||800,H2=vb.height||900;
-      clone.setAttribute('viewBox','0 0 '+W2+' '+H2);
-      clone.setAttribute('width',String(W2));
-      clone.setAttribute('height',String(H2));
-      var svgStr=new XMLSerializer().serializeToString(clone);
-      console.log('SVG string length:',svgStr.length,'viewBox:',W2,H2);
-      var blob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
-      var url=URL.createObjectURL(blob);
-      var img=new Image();
-      img.onload=function(){
-        console.log('SVG image loaded, naturalSize:',img.naturalWidth,img.naturalHeight);
-        var canvas=document.createElement('canvas');
-        var sc=2;
-        canvas.width=W2*sc;canvas.height=H2*sc;
-        var ctx=canvas.getContext('2d');
-        ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.scale(sc,sc);ctx.drawImage(img,0,0,W2,H2);
-        URL.revokeObjectURL(url);
-        insertMapIntoDoc(canvas.toDataURL('image/png'),W2/H2);
-      };
-      img.onerror=function(e){console.log('getSVG img onerror:',e);URL.revokeObjectURL(url);captureViaSVG(document.querySelector('#hc-map svg'));};
-      img.src=url;
-    }catch(e){console.log('captureViaSVG error:',e);finalize();}
-  }
-
-  function insertMapIntoDoc(mapDataUrl,mapAsp){
-    // Map is landscape (wide) - use full page width, height = width/aspect
-    var mW=CW;
-    var mH=mW/mapAsp;
-    if(mH>100)mH=100; // cap height
-    mW=mH*mapAsp;
-    if(mW>CW)mW=CW;
-    mH=mW/mapAsp;
-    var mX=ML+(CW-mW)/2;
-    console.log('Inserting map image, asp:',mapAsp,'mW:',mW,'mH:',mH);
-    try{doc.addImage(mapDataUrl,'PNG',mX,mapPlaceholderY,mW,mH);}
-    catch(e){console.log('addImage error:',e);}
-    finalize();
-  }
-
-  function finalize(){
-    var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-    doc.save(slug(currentCustomer)+'_KPI_Report_'+stamp+'.pdf');
-    showAlert('success','PDF downloaded - '+TOTAL+' pages.');
-  }
-
-  tryMapCapture();
+  var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+  doc.save(slug(currentCustomer)+'_KPI_Report_'+stamp+'.pdf');
+  showAlert('success','PDF downloaded - '+TOTAL+' pages.');
 }
 
 
