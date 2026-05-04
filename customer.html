@@ -152,7 +152,7 @@ footer{text-align:center;padding:1.5rem;font-size:12px;color:#bbb;border-top:1px
 <div class="history-bar">
   <div class="hist-item"><div class="hist-label">YTD Consignments</div><div class="hist-val orange" id="h-cons">—</div></div>
   <div class="hist-item"><div class="hist-label">YTD Pallets</div><div class="hist-val" id="h-pallets">—</div></div>
-  <div class="hist-item"><div class="hist-label">YTD Revenue</div><div class="hist-val" id="h-rev">—</div></div>
+  <div class="hist-item"><div class="hist-label">YTD Cost</div><div class="hist-val" id="h-rev">—</div></div>
   <div class="hist-item"><div class="hist-label">YTD OTIF</div><div class="hist-val" id="h-otif">—</div></div>
   <div class="hist-item"><div class="hist-label">YTD Lates</div><div class="hist-val" id="h-lates">—</div></div>
 </div>
@@ -222,7 +222,7 @@ function calcMonth(rows){
   var comp=rows.filter(function(r){var s=(r['status']||'').toUpperCase();return s==='INVOICE_POSTED'||s==='COMPLETED';});
   var cons=comp.length,pallets=0,revenue=0,lates=0;
   comp.forEach(function(r){pallets+=parseFloat(r['goods pallet spaces'])||0;revenue+=parseFloat(r['revenue'])||0;if(isLate(r))lates++;});
-  return{cons:cons,pallets:pallets,revenue:revenue,lates:lates,timeliness:cons>0?(cons-lates)/cons:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
+  return{cons:cons,pallets:pallets,cost:revenue,lates:lates,timeliness:cons>0?(cons-lates)/cons:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
 }
 
 function handleRaw(input){
@@ -304,10 +304,10 @@ function renderPreview(){
 
   // Destinations
   var destMap={};
-  comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
+  comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,cost:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
   var byC=Object.values(destMap).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
   var byR=Object.values(destMap).sort(function(a,b){return b.revenue-a.revenue;}).slice(0,10);
-  var maxC=byC[0]?byC[0].cons:1,maxR=byR[0]?byR[0].revenue:1;
+  var maxC=byC[0]?byC[0].cons:1,maxR=byR[0]?byR[0].cost:1;
 
   // Delivery type
   var typeMap={};
@@ -319,7 +319,7 @@ function renderPreview(){
 
   // Regions
   var regMap={};
-  comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
+  comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,cost:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
   var topReg=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;});
 
   // Monthly table rows
@@ -351,7 +351,7 @@ function renderPreview(){
   if(ytdStripEl){ytdStripEl.innerHTML=
     '<div class="ytd-card"><div class="ytd-label">YTD Consignments</div><div class="ytd-val">'+tC.toLocaleString()+'</div></div>'+
     '<div class="ytd-card"><div class="ytd-label">YTD Pallets</div><div class="ytd-val">'+tP.toLocaleString()+'</div></div>'+
-    '<div class="ytd-card"><div class="ytd-label">YTD Revenue</div><div class="ytd-val">\u00a3'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
+    '<div class="ytd-card"><div class="ytd-label">YTD Cost</div><div class="ytd-val">\u00a3'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
     '<div class="ytd-card"><div class="ytd-label">YTD OTIF</div><div class="ytd-val" style="color:'+(parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828')+'">'+ytdOTIF+'%</div></div>'+
     '<div class="ytd-card"><div class="ytd-label">YTD Lates</div><div class="ytd-val">'+tL+'</div></div>';
   }
@@ -361,7 +361,7 @@ function renderPreview(){
     '<div class="section-title">Full year monthly tracker <span class="pill">OTIF = (cons \u2212 lates) / cons</span></div>'+
     '<div class="alert alert-info" style="margin-bottom:1rem">Lates auto-calculated by comparing actual delivery arrival vs time window end.</div>'+
     '<div class="tracker-table-wrap"><table>'+
-      '<thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Revenue</th><th>Avg Rev/Con</th><th>Avg Rev/Plt</th><th>Avg Plts/Con</th><th>OTIF</th><th>Lates</th></tr></thead>'+
+      '<thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Cost</th><th>Avg Cost/Con</th><th>Avg Cost/Plt</th><th>Avg Plts/Con</th><th>OTIF</th><th>Lates</th></tr></thead>'+
       '<tbody>'+tableRows+'</tbody>'+
       '<tfoot><tr class="total-row">'+
         '<td>Total / Avg</td>'+
@@ -381,7 +381,7 @@ function renderPreview(){
     '<div class="section-card-standalone"><div class="section-title">OTIF trend + 3-month rolling average</div><div class="chart-wrap-lg"><canvas id="chart-otif"></canvas></div></div>'+
     '<div class="stats-grid-2">'+
       '<div class="section-card-standalone" style="margin:0"><div class="section-title">Consignments by month</div><div class="chart-wrap"><canvas id="chart-cons"></canvas></div></div>'+
-      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Revenue by month</div><div class="chart-wrap"><canvas id="chart-rev"></canvas></div></div>'+
+      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Cost by month</div><div class="chart-wrap"><canvas id="chart-rev"></canvas></div></div>'+
     '</div>'+
     '<div class="section-card-standalone" style="margin-top:1rem"><div class="section-title">Avg revenue per consignment</div><div class="chart-wrap"><canvas id="chart-arc"></canvas></div></div>';
 
@@ -416,12 +416,12 @@ function renderPreview(){
       '<div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by consignments</div>'+
         byC.map(function(d,i){return'<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.cons/maxC*100).toFixed(0)+'%"></div></div></div><div class="rank-val">'+d.cons+'</div></div>';}).join('')+
       '</div>'+
-      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by revenue</div>'+
+      '<div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by cost</div>'+
         byR.map(function(d,i){return'<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.revenue/maxR*100).toFixed(0)+'%"></div></div></div><div class="rank-val">\u00a3'+d.revenue.toFixed(0)+'</div></div>';}).join('')+
       '</div>'+
     '</div>'+
     '<div class="section-card-standalone" style="margin-top:1rem"><div class="section-title">By UK region</div>'+
-      '<div class="tracker-table-wrap"><table><thead><tr><th>Region</th><th>Cons</th><th>Pallets</th><th>Revenue</th><th>Lates</th><th>OTIF</th></tr></thead><tbody>'+regRows+'</tbody></table></div>'+
+      '<div class="tracker-table-wrap"><table><thead><tr><th>Region</th><th>Cons</th><th>Pallets</th><th>Cost</th><th>Lates</th><th>OTIF</th></tr></thead><tbody>'+regRows+'</tbody></table></div>'+
     '</div>';
   
   // Draw UK map after DOM is ready
@@ -435,8 +435,8 @@ function renderPreview(){
     '<div class="section-card-standalone"><div class="section-title">OTIF by day of week</div><div class="dow-grid">'+dowCards+'</div></div>'+
     '<div class="section-card-standalone"><div class="section-title">Commercial summary</div>'+
       '<div class="stats-grid">'+
-        '<div class="stat-card"><div class="stat-label">Avg rev / cons</div><div class="stat-val orange">\u00a3'+ytdARC+'</div></div>'+
-        '<div class="stat-card"><div class="stat-label">Avg rev / pallet</div><div class="stat-val">\u00a3'+ytdARP+'</div></div>'+
+        '<div class="stat-card"><div class="stat-label">Avg cost / cons</div><div class="stat-val orange">\u00a3'+ytdARC+'</div></div>'+
+        '<div class="stat-card"><div class="stat-label">Avg cost / pallet</div><div class="stat-val">\u00a3'+ytdARP+'</div></div>'+
         '<div class="stat-card"><div class="stat-label">Avg pallets / cons</div><div class="stat-val">'+ytdAPC+'</div></div>'+
         '<div class="stat-card"><div class="stat-label">Total lates</div><div class="stat-val '+(tL>0?'red':'green')+'">'+tL+'</div></div>'+
       '</div>'+
@@ -498,7 +498,7 @@ function renderCharts(){
   if(cc)chartInst['chart-cons']=new Chart(cc,{type:'bar',data:{labels:labels,datasets:[{label:'Consignments',data:consData,backgroundColor:'#F47920',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
 
   var cr=document.getElementById('chart-rev');
-  if(cr)chartInst['chart-rev']=new Chart(cr,{type:'bar',data:{labels:labels,datasets:[{label:'Revenue',data:revData,backgroundColor:'#1a1a1a',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'£'+v.toLocaleString();},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  if(cr)chartInst['chart-rev']=new Chart(cr,{type:'bar',data:{labels:labels,datasets:[{label:'Cost',data:revData,backgroundColor:'#1a1a1a',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'£'+v.toLocaleString();},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
 
   var ca=document.getElementById('chart-arc');
   if(ca)chartInst['chart-arc']=new Chart(ca,{type:'line',data:{labels:labels,datasets:[{label:'Avg £/con',data:arcData,borderColor:'#F47920',backgroundColor:'rgba(244,121,32,0.07)',tension:0.3,fill:true,pointBackgroundColor:'#F47920',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'£'+v;},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
@@ -512,7 +512,7 @@ function exportTracker(){
   var comp=allCompleted();
 
   // Sheet 1: Monthly tracker
-  var h1=[['Month','Cons','Pallets','Revenue (£)','Avg Rev/Con (£)','Avg Rev/Plt (£)','Avg Plts/Con','OTIF %','Lates']];
+  var h1=[['Month','Cons','Pallets','Revenue (£)','Avg Cost/Con (£)','Avg Cost/Plt (£)','Avg Plts/Con','OTIF %','Lates']];
   var r1=MONTH_KEYS.map(function(key,i){
     var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);
     if(c)return[label,c.cons,c.pallets,+c.revenue.toFixed(2),+c.avgRC.toFixed(2),+c.avgRP.toFixed(2),+c.avgPC.toFixed(2),+(c.timeliness*100).toFixed(4),c.lates];
@@ -532,14 +532,14 @@ function exportTracker(){
   XLSX.utils.book_append_sheet(wb,ws2,'Late Log');
 
   // Sheet 3: Destinations
-  var destMap={};comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',pc:r['destination postal code']||'',cons:0,pallets:0,revenue:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
+  var destMap={};comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',pc:r['destination postal code']||'',cons:0,pallets:0,cost:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
   var destRows=Object.values(destMap).sort(function(a,b){return b.cons-a.cons;}).map(function(d){return[d.name,d.city,d.pc,d.cons,d.pallets,+d.revenue.toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
   var ws3=XLSX.utils.aoa_to_sheet([['Destination','City','Postcode','Cons','Pallets','Revenue (£)','Lates','OTIF %'],...destRows]);
   ws3['!cols']=[{wch:32},{wch:18},{wch:10},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];
   XLSX.utils.book_append_sheet(wb,ws3,'Destinations');
 
   // Sheet 4: Regional breakdown
-  var regMap={};comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
+  var regMap={};comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,cost:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
   var regRows=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;}).map(function(e){var d=e[1];return[e[0],d.cons,d.pallets,+d.revenue.toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
   var ws4=XLSX.utils.aoa_to_sheet([['Region','Cons','Pallets','Revenue (£)','Lates','OTIF %'],...regRows]);
   ws4['!cols']=[{wch:20},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];
@@ -560,10 +560,10 @@ function exportCustomerReport(){
   MONTH_KEYS.forEach(function(key,i){
     var c=calculatedMonths[key],ex=getExRow(i);
     var label=MONTHS[i];
-    if(c){months.push({label:label,cons:c.cons,pallets:c.pallets,revenue:c.revenue,lates:c.lates,otif:c.timeliness,isNew:true});}
+    if(c){months.push({label:label,cons:c.cons,pallets:c.pallets,cost:c.revenue,lates:c.lates,otif:c.timeliness,isNew:true});}
     else if(ex){
       var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
-      if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});
+      if(cons>0)months.push({label:label,cons:cons,pallets:plts,cost:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});
     }
   });
   var lateList=comp.filter(function(r){return isLate(r);}).map(function(r){
@@ -608,12 +608,12 @@ function exportCustomerReport(){
     '<div class="kpi-strip">'+
       '<div class="kpi-card"><div class="kpi-label">YTD Consignments</div><div class="kpi-val">'+(aC||0)+'</div></div>'+
       '<div class="kpi-card"><div class="kpi-label">YTD Pallets</div><div class="kpi-val">'+(aP||0)+'</div></div>'+
-      '<div class="kpi-card"><div class="kpi-label">YTD Revenue</div><div class="kpi-val">£'+(aR||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">YTD Cost</div><div class="kpi-val">£'+(aR||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
       '<div class="kpi-card"><div class="kpi-label">YTD OTIF</div><div class="kpi-val">'+ytdOTIF+'%</div></div>'+
       '<div class="kpi-card"><div class="kpi-label">YTD Lates</div><div class="kpi-val">'+(aL||0)+'</div></div>'+
     '</div>'+
     '<div class="section"><div class="section-title">Monthly performance summary</div>'+
-      '<table><thead><tr><th>Month</th><th class="r">Cons</th><th class="r">Pallets</th><th class="r">Revenue</th><th class="r">OTIF</th><th class="r">Lates</th></tr></thead>'+
+      '<table><thead><tr><th>Month</th><th class="r">Cons</th><th class="r">Pallets</th><th class="r">Cost</th><th class="r">OTIF</th><th class="r">Lates</th></tr></thead>'+
       '<tbody>'+monthRows+'</tbody>'+
       '<tfoot><tr class="total-row"><td>Total / YTD</td>'+
         '<td style="text-align:right">'+(aC||'—')+'</td>'+
@@ -683,20 +683,22 @@ function drawUKMap(regMap){
   // Accurate UK region paths in a 300x500 viewBox
   // Based on simplified ONS boundary data
   var regionPaths=[
-    {id:'Scotland',lx:138,ly:52,d:'M 98,8 L 118,5 L 148,8 L 170,15 L 182,28 L 190,45 L 185,62 L 198,72 L 202,85 L 192,95 L 178,88 L 165,96 L 152,102 L 138,96 L 122,100 L 108,92 L 95,80 L 88,65 L 82,50 L 88,35 L 95,22 Z M 72,52 L 88,48 L 90,58 L 80,62 L 68,58 Z M 60,30 L 75,28 L 78,38 L 65,42 L 58,36 Z'},
-    {id:'Northern Ireland',lx:76,ly:117,d:'M 55,108 L 78,102 L 95,105 L 98,118 L 88,128 L 68,130 L 55,122 Z'},
-    {id:'North East',lx:192,ly:118,d:'M 175,102 L 202,98 L 210,118 L 205,132 L 188,135 L 175,128 Z'},
-    {id:'North West',lx:155,ly:128,d:'M 138,102 L 175,102 L 175,128 L 168,148 L 155,155 L 138,148 L 132,132 L 135,118 Z'},
-    {id:'Yorkshire',lx:192,ly:150,d:'M 175,128 L 205,132 L 212,158 L 202,168 L 188,165 L 175,160 L 168,148 Z'},
-    {id:'East Midlands',lx:174,ly:178,d:'M 168,148 L 188,165 L 192,192 L 178,200 L 162,198 L 152,182 L 155,165 Z'},
-    {id:'West Midlands',lx:142,ly:178,d:'M 138,150 L 168,148 L 155,165 L 152,182 L 162,198 L 145,205 L 128,198 L 125,178 L 132,162 Z'},
-    {id:'Wales',lx:110,ly:182,d:'M 102,155 L 138,150 L 132,162 L 125,178 L 128,198 L 112,210 L 95,205 L 88,188 L 92,170 Z'},
-    {id:'East of England',lx:222,ly:218,d:'M 192,192 L 228,182 L 248,195 L 252,222 L 238,240 L 215,248 L 198,238 L 192,218 Z'},
-    {id:'London',lx:198,ly:243,d:'M 185,238 L 205,232 L 212,245 L 195,252 L 182,248 Z'},
-    {id:'South East',lx:198,ly:262,d:'M 148,245 L 185,238 L 182,248 L 195,252 L 212,245 L 205,232 L 238,240 L 248,258 L 228,275 L 195,278 L 165,272 L 148,258 Z'},
-    {id:'South',lx:125,ly:265,d:'M 105,248 L 148,245 L 148,258 L 165,272 L 148,285 L 118,285 L 98,272 L 100,258 Z'},
-    {id:'South West',lx:75,ly:258,d:'M 68,222 L 105,248 L 100,258 L 98,272 L 78,282 L 52,272 L 45,252 L 55,232 Z'},
-  ];
+    // Paths derived from ONS boundary data, simplified for SVG rendering
+    // ViewBox: 40 0 220 300
+    {id:'Scotland',lx:148,ly:52,d:'M 105,5 L 125,3 L 150,5 L 168,12 L 178,22 L 185,38 L 182,52 L 192,62 L 196,75 L 188,85 L 175,80 L 168,90 L 155,97 L 142,93 L 130,98 L 115,90 L 102,78 L 95,65 L 92,50 L 98,35 L 105,22 Z M 78,48 L 90,44 L 92,54 L 82,58 L 72,54 Z M 65,28 L 76,25 L 79,34 L 68,38 L 61,33 Z M 88,22 L 97,19 L 99,28 L 89,31 Z'},
+    {id:'Northern Ireland',lx:78,ly:115,d:'M 58,105 L 82,100 L 98,103 L 100,116 L 90,126 L 70,128 L 57,120 Z'},
+    {id:'North East',lx:196,ly:118,d:'M 178,100 L 205,97 L 210,112 L 208,128 L 192,132 L 178,126 L 175,112 Z'},
+    {id:'North West',lx:158,ly:130,d:'M 138,100 L 178,100 L 175,112 L 178,126 L 170,145 L 158,152 L 142,148 L 135,135 L 136,118 Z'},
+    {id:'Yorkshire',lx:198,ly:148,d:'M 178,126 L 208,128 L 212,145 L 215,162 L 202,168 L 188,165 L 178,158 L 170,145 Z'},
+    {id:'East Midlands',lx:192,ly:180,d:'M 170,145 L 188,165 L 178,158 L 202,168 L 208,185 L 205,202 L 188,208 L 172,205 L 162,190 L 165,172 Z'},
+    {id:'West Midlands',lx:148,ly:178,d:'M 135,148 L 170,145 L 165,172 L 162,190 L 172,205 L 155,210 L 138,205 L 128,192 L 130,170 Z'},
+    {id:'Wales',lx:108,ly:182,d:'M 100,152 L 135,148 L 130,170 L 128,192 L 138,205 L 120,215 L 100,208 L 90,192 L 92,172 Z'},
+    {id:'East of England',lx:228,ly:215,d:'M 208,185 L 240,178 L 256,192 L 260,218 L 248,238 L 228,245 L 210,238 L 205,218 Z'},
+    {id:'London',lx:200,ly:240,d:'M 192,232 L 210,228 L 215,240 L 205,248 L 190,245 Z'},
+    {id:'South East',lx:200,ly:265,d:'M 155,242 L 192,232 L 190,245 L 205,248 L 210,228 L 228,245 L 240,255 L 232,275 L 205,280 L 175,278 L 155,262 Z'},
+    {id:'South',lx:125,ly:262,d:'M 105,248 L 155,242 L 155,262 L 175,278 L 158,288 L 125,288 L 105,275 L 102,258 Z'},
+    {id:'South West',lx:78,ly:258,d:'M 70,218 L 105,248 L 102,258 L 105,275 L 85,285 L 58,275 L 50,255 L 58,235 Z'},
+];
 
   // Build region name -> data map with display name mapping
   function getData(regionId){
@@ -705,7 +707,7 @@ function drawUKMap(regMap){
       'East of England':'East of England',
       'Northern Ireland':'Northern Ireland',
     };
-    return regMap[aliases[regionId]||regionId]||{pallets:0,cons:0,revenue:0,lates:0};
+    return regMap[aliases[regionId]||regionId]||{pallets:0,cons:0,cost:0,lates:0};
   }
 
   // Build SVG
@@ -787,7 +789,7 @@ function drawUKMap(regMap){
       p.addEventListener('click',function(){
         var d=regMap_global[rid];
         if(d&&d.pallets>0){
-          alert(rid+'\n\nPallets: '+d.pallets+'\nConsignments: '+d.cons+'\nRevenue: \u00a3'+d.revenue.toFixed(2));
+          alert(rid+'\n\nPallets: '+d.pallets+'\nConsignments: '+d.cons+'\nCost: \u00a3'+d.revenue.toFixed(2));
         }
       });
     });
@@ -797,7 +799,7 @@ function drawUKMap(regMap){
 function ukMapHover(event,name){
   var tt=document.getElementById('uk-tt');
   if(!tt)return;
-  var d=regMap_global[name]||{pallets:0,cons:0,revenue:0};
+  var d=regMap_global[name]||{pallets:0,cons:0,cost:0};
   var html='<div style="font-weight:600;margin-bottom:6px;font-size:13px">'+name+'</div>';
   if(d.pallets>0){
     html+='<div style="color:#F47920;font-size:14px;font-weight:700;margin-bottom:4px">'+d.pallets+' pallets</div>';
@@ -888,7 +890,7 @@ async function saveToGitHub(){
   var token=getToken();if(!token){showAlert('warn','No GitHub token. Go to the homepage and enter it.');return;}
   var btn=document.getElementById('btn-save');btn.textContent='Saving...';btn.disabled=true;
   var merged=Object.assign({},savedMonthData);
-  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,revenue:+c.revenue.toFixed(2),lates:c.lates,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
+  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,cost:+c.revenue.toFixed(2),lates:c.lates,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged};
   var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
