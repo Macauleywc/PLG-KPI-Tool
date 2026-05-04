@@ -628,7 +628,7 @@ function exportCustomerReport(){
       '<tbody>'+lateRows2+'</tbody></table>'+
     '</div>'+
     '<div class="footer-note">OTIF calculated as (consignments − lates) / consignments. Lates determined by actual delivery arrival vs booked time window end. Data sourced from Qargo TMS. Report prepared by Premier Logistics Group.</div>'+
-    '</div><script>window.onload=function(){window.print();}<\/script></body></html>';
+    '</div><scr'+'ipt>window.onload=function(){window.print();}<'+'/script></body></html>';
   var blob=new Blob([html],{type:'text/html;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
@@ -719,8 +719,8 @@ function drawUKMap(regMap){
     var stroke=heatStroke(d.pallets);
     svgParts.push(
       '<path d="'+r.d+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.5"'+
-      ' onmouseover="ukMapHover(event,''+r.id+'')" onmouseout="ukMapOut()"'+
-      ' style="cursor:pointer;transition:opacity 0.15s" onmousedown="this.style.opacity=0.7" onmouseup="this.style.opacity=1"/>'
+      ' data-region="'+r.id+'" class="uk-region"'+
+      ' style="cursor:pointer;transition:opacity 0.15s"/>'
     );
     // Label for larger regions
     if(d.pallets>0){
@@ -777,6 +777,21 @@ function drawUKMap(regMap){
         '</div>'+
       '</div>'+
     '</div>'+tooltipHtml;
+  // Add event listeners to regions after DOM is set
+  setTimeout(function(){
+    var paths=wrap.querySelectorAll('.uk-region');
+    paths.forEach(function(p){
+      var rid=p.getAttribute('data-region');
+      p.addEventListener('mouseover',function(e){ukMapHover(e,rid);});
+      p.addEventListener('mouseout',ukMapOut);
+      p.addEventListener('click',function(){
+        var d=regMap_global[rid];
+        if(d&&d.pallets>0){
+          alert(rid+'\n\nPallets: '+d.pallets+'\nConsignments: '+d.cons+'\nRevenue: \u00a3'+d.revenue.toFixed(2));
+        }
+      });
+    });
+  },50);
 }
 
 function ukMapHover(event,name){
