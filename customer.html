@@ -828,7 +828,7 @@ function resetUpload(){
   el.addEventListener('drop',function(e){e.preventDefault();el.classList.remove('drag-over');});
 });
 
-function getToken(){return localStorage.getItem('plg_gh_token')||'';}
+function getToken(){return localStorage.getItem('plg_token')||localStorage.getItem('plg_gh_token')||'';}
 function slug(name){return name.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');}
 function ghFile(name){return'data/'+slug(name)+'.json';}
 function buildTrackerFromSaved(){
@@ -855,7 +855,7 @@ function renderHistory(){
 }
 async function loadFromGitHub(){
   var token=getToken();
-  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token — enter on homepage';gs.className='gh-status';}document.getElementById('history-area').innerHTML='<div style="font-size:13px;color:#e65100">Please enter your GitHub token on the <a href="index.html">homepage</a> to load saved data.</div>';savedMonthData={};renderHistory();return;}
+  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token — enter on homepage';gs.className='gh-status';}renderHistory();savedMonthData={};renderHistory();return;}
   var _gs2=document.getElementById('gh-status');if(_gs2){_gs2.textContent='Loading...';_gs2.className='gh-status';}
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
