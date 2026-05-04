@@ -725,18 +725,46 @@ function drawUKMap(regMap){
     fetch('https://code.highcharts.com/mapdata/countries/gb/gb-all.geo.json')
       .then(function(r){return r.json();})
       .then(function(mapData){
-        // Log all unique region names for debugging
-          var allNames=mapData.features.map(function(x){return x.properties['name']||x.properties['region']||'';});
-          console.log('All HC feature names (first 20):',allNames.slice(0,20));
-          console.log('Total features:',mapData.features.length);
-          console.log('Sample feature props:',JSON.stringify(mapData.features[0].properties));
-          var data=mapData.features.map(function(f){
+        // Map Highcharts 'region' property to our region names
+        var hcRegionMap={
+          'North East England':'North East',
+          'North West England':'North West',
+          'Yorkshire':'Yorkshire',
+          'East Midlands':'East Midlands',
+          'West Midlands':'West Midlands',
+          'East England':'East of England',
+          'Greater London':'London',
+          'South East England':'South East',
+          'South West England':'South West',
+          'North Wales':'Wales',
+          'Mid Wales':'Wales',
+          'South Wales':'Wales',
+          'West Wales':'Wales',
+          'East Wales':'Wales',
+          'Wales':'Wales',
+          'Highland':'Scotland',
+          'North East Scotland':'Scotland',
+          'East Scotland':'Scotland',
+          'West Scotland':'Scotland',
+          'South Scotland':'Scotland',
+          'Central Scotland':'Scotland',
+          'Scotland':'Scotland',
+          'Northern Ireland':'Northern Ireland'
+        };
+        // Log unique regions found
+        var uniqueRegions=[...new Set(mapData.features.map(function(f){return f.properties.region||'';}).filter(Boolean))];
+        console.log('Unique regions in map:',uniqueRegions);
+
+        var data=mapData.features.map(function(f){
+          var hcRegion=f.properties['region']||'';
+          var ourName=hcRegionMap[hcRegion]||null;
           var hcName=f.properties['name'];
-          var ourName=regionNameMap[hcName]||hcName;
-          var d=regMap[ourName]||{pallets:0};
+          var ourName2=regionNameMap[hcName]||ourName;
+          var finalName=ourName2||hcName;
+          var d=regMap[finalName]||{pallets:0};
           return{
             'hc-key':f.properties['hc-key'],
-            name:ourName,
+            name:finalName,
             value:d.pallets,
             pallets:d.pallets,
             cons:d.cons||0,
