@@ -557,85 +557,262 @@ function exportCustomerReport(){
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getTotal('lates');
   var ytdOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2):'—';
   var now=new Date();
+  var dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
   var months=[];
   MONTH_KEYS.forEach(function(key,i){
-    var c=calculatedMonths[key],ex=getExRow(i);
-    var label=MONTHS[i];
-    if(c){months.push({label:label,cons:c.cons,pallets:c.pallets,cost:c.revenue,lates:c.lates,otif:c.timeliness,isNew:true});}
+    var c2=calculatedMonths[key],ex=getExRow(i),label=MONTHS[i];
+    if(c2){months.push({label:label,cons:c2.cons,pallets:c2.pallets,revenue:c2.revenue,lates:c2.lates,otif:c2.timeliness,isNew:true});}
     else if(ex){
       var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
-      if(cons>0)months.push({label:label,cons:cons,pallets:plts,cost:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});
+      if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});
     }
   });
+
   var lateList=comp.filter(function(r){return isLate(r);}).map(function(r){
-    var arr=xlDT(r['destination arrival']);var ex2=r['destination extras']||'';
-    return {id:r['id']||'',dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'—',mins:minsLate(r),pallets:r['goods pallet spaces']||0};
+    var arr=xlDT(r['destination arrival']);
+    var ex2=r['destination extras']||'';
+    var dtype=ex2.includes('Economy Booked')?'Economy Booked':ex2.includes('Booked')?'Booked':'Standard';
+    return{id:r['id']||'',dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'—',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype};
   });
-  var monthRows=months.map(function(m){
-    var otifPct=m.otif!=null?(m.otif*100).toFixed(2)+'%':'—';
-    var col=m.otif!=null?(m.otif>=0.98?'#1b5e20':m.otif>=0.95?'#e65100':'#c62828'):'#999';
-    return '<tr style="border-bottom:0.5px solid #eee"><td style="padding:9px 14px;font-weight:'+(m.isNew?'600':'400')+'">'+m.label+'</td><td style="padding:9px 14px;text-align:right">'+m.cons+'</td><td style="padding:9px 14px;text-align:right">'+m.pallets+'</td><td style="padding:9px 14px;text-align:right">£'+m.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td style="padding:9px 14px;text-align:right;color:'+col+';font-weight:600">'+otifPct+'</td><td style="padding:9px 14px;text-align:right">'+m.lates+'</td></tr>';
-  }).join('');
-  var lateRows2=lateList.length>0?lateList.map(function(r){return '<tr style="border-bottom:0.5px solid #f5f5f5"><td style="padding:8px 12px;font-size:12px;color:#888">'+r.id+'</td><td style="padding:8px 12px">'+r.dest+'</td><td style="padding:8px 12px">'+r.city+'</td><td style="padding:8px 12px">'+r.pc+'</td><td style="padding:8px 12px">'+r.window+'</td><td style="padding:8px 12px">'+r.arrival+'</td><td style="padding:8px 12px;color:#c62828;font-weight:600">+'+r.mins+'m</td><td style="padding:8px 12px;text-align:right">'+r.pallets+'</td></tr>';}).join(''):'<tr><td colspan="8" style="padding:16px;text-align:center;color:#999;font-style:italic">No late consignments in this period</td></tr>';
-  var dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+  var destMap2={};
+  comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});
+  var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,20);
+
+  var regMap2={};
+  comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap2[reg])regMap2[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap2[reg].cons++;regMap2[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap2[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap2[reg].lates++;});
+  var topReg=Object.entries(regMap2).sort(function(a,b){return b[1].pallets-a[1].pallets;});
+
+  var typeMap2={};
+  comp.forEach(function(r){var ex2=r['destination extras']||'';var t=ex2.includes('Economy Booked')?'Economy Booked':ex2.includes('Booked')?'Booked':'Standard';if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons++;if(isLate(r))typeMap2[t].lates++;});
+
   var periodLabel=months.length>0?months[0].label+(months.length>1?' – '+months[months.length-1].label:''):'2026';
-  var html='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Anand International — KPI Report '+periodLabel+'</title>'+
-    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;color:#1a1a1a;background:#fff;padding:0;}'+
-    '@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}@page{margin:15mm 15mm 15mm 15mm;size:A4;}}'+
-    '.page{max-width:800px;margin:0 auto;padding:30px 40px;}'+
-    '.header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:20px;border-bottom:3px solid #F47920;margin-bottom:28px;}'+
-    '.header-left h1{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:4px;}'+
-    '.header-left p{font-size:13px;color:#666;}'+
-    '.header-right{text-align:right;}'+
-    '.header-right .plg{font-size:14px;font-weight:700;color:#F47920;letter-spacing:0.04em;}'+
-    '.header-right .date{font-size:12px;color:#999;margin-top:4px;}'+
-    '.kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px;}'+
-    '.kpi-card{background:#f8f8f6;border-radius:6px;padding:12px 14px;border-top:3px solid #F47920;}'+
-    '.kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:#888;margin-bottom:5px;}'+
-    '.kpi-val{font-size:19px;font-weight:700;color:#1a1a1a;}'+
-    '.section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#F47920;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #eee;}'+
-    '.section{margin-bottom:28px;}'+
-    'table{width:100%;border-collapse:collapse;font-size:13px;}'+
-    'th{background:#1a1a1a;color:#fff;padding:9px 14px;text-align:left;font-weight:600;font-size:11px;letter-spacing:0.04em;}'+
-    'th.r{text-align:right;}'+
-    '.total-row td{background:#f5f5f3;font-weight:700;padding:9px 14px;border-top:2px solid #1a1a1a;}'+
-    '.footer-note{font-size:11px;color:#aaa;text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:28px;}'+
-    '.otif-good{color:#1b5e20;}.otif-warn{color:#e65100;}.otif-bad{color:#c62828;}'+
-    '</style></head><body><div class="page">'+
-    '<div class="header">'+
-      '<div class="header-left"><h1>KPI Report — '+periodLabel+'</h1><p>Anand International Ltd · Delivered via Premier Logistics Group</p></div>'+
-      '<div class="header-right"><div class="plg">Premier Logistics Group</div><div class="date">Prepared: '+dateStr+'</div></div>'+
+  var otifCol=parseFloat(ytdOTIF)>=98?'#1b5e20':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828';
+  var avgRC=aC>0?(aR/aC).toFixed(2):'—';
+  var avgRP=aP>0?(aR/aP).toFixed(2):'—';
+  var avgPC=aC>0?(aP/aC).toFixed(1):'—';
+
+  var css=`
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;background:#fff;font-size:13px;line-height:1.5;}
+    @media print{
+      body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+      @page{margin:12mm 14mm;size:A4;}
+      .page{page-break-before:always;}
+      .no-break{page-break-inside:avoid;}
+    }
+    .cover{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:60px 50px;}
+    .cover-plg{font-size:13px;font-weight:700;color:#F47920;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:60px;}
+    .cover-rule{width:60px;height:4px;background:#F47920;margin-bottom:30px;}
+    .cover-title{font-size:42px;font-weight:700;line-height:1.15;margin-bottom:12px;}
+    .cover-sub{font-size:16px;color:#666;}
+    .cover-period{font-size:28px;font-weight:700;color:#F47920;margin-top:16px;}
+    .cover-bottom{border-top:1px solid #eee;padding-top:24px;display:flex;justify-content:space-between;}
+    .page-inner{padding:40px 50px;}
+    .page-hdr{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:3px solid #F47920;margin-bottom:28px;}
+    .page-hdr-left{font-size:11px;color:#aaa;letter-spacing:0.06em;text-transform:uppercase;}
+    .page-hdr-right{font-size:11px;color:#F47920;font-weight:700;letter-spacing:0.06em;}
+    .section-lbl{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F47920;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+    .section-lbl::after{content:'';flex:1;height:1px;background:#eee;}
+    .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px;}
+    .kpi-card{border:1px solid #eee;border-radius:8px;padding:18px 20px;border-top:4px solid #F47920;}
+    .kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#999;margin-bottom:8px;}
+    .kpi-val{font-size:26px;font-weight:700;line-height:1;}
+    .kpi-val.hl{color:#F47920;}
+    .otif-hero{background:#1a1a1a;border-radius:8px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+    .otif-hero-label{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:6px;}
+    .otif-hero-val{font-size:48px;font-weight:700;line-height:1;}
+    .otif-bar-bg{height:10px;background:#333;border-radius:5px;overflow:hidden;width:200px;}
+    .otif-bar-fill{height:100%;border-radius:5px;}
+    table{width:100%;border-collapse:collapse;font-size:12px;}
+    th{background:#1a1a1a;color:#fff;padding:9px 12px;text-align:left;font-weight:600;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;}
+    th.r{text-align:right;}
+    td{padding:8px 12px;border-bottom:0.5px solid #eee;vertical-align:middle;}
+    tr:nth-child(even) td{background:#fafafa;}
+    .total-row td{background:#1a1a1a!important;color:#fff;font-weight:700;padding:9px 12px;font-size:12px;border-top:2px solid #1a1a1a;}
+    .new-tag{font-size:9px;background:#F47920;color:#fff;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+    .footer-note{font-size:11px;color:#aaa;text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:28px;}
+    .pg-footer{border-top:1px solid #eee;padding-top:16px;margin-top:32px;display:flex;justify-content:space-between;font-size:10px;color:#bbb;}
+    .otif-good{color:#1b5e20;}.otif-warn{color:#e65100;}.otif-bad{color:#c62828;}
+    .bar-wrap{display:flex;align-items:center;gap:8px;}
+    .bar-bg{height:5px;flex:1;background:#eee;border-radius:3px;overflow:hidden;}
+    .bar-fill{height:100%;border-radius:3px;}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+    .stat-box{background:#f8f8f6;border-radius:8px;padding:16px 18px;border-top:3px solid #F47920;}
+    .stat-lbl{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
+    .stat-val{font-size:20px;font-weight:700;}
+  `;
+
+  function pgHdr(title,pg){
+    return '<div class="page-hdr"><div class="page-hdr-left">'+currentCustomer+' — KPI Report — '+periodLabel+'</div><div class="page-hdr-right">Premier Logistics Group</div></div>';
+  }
+  function pgFtr(pg){
+    return '<div class="pg-footer"><span>Premier Logistics Group — Confidential</span><span>Page '+pg+'</span></div>';
+  }
+
+  function otifClass(v){return v>=98?'otif-good':v>=95?'otif-warn':'otif-bad';}
+  function otifBarColor(v){return v>=98?'#1b5e20':v>=95?'#e65100':'#c62828';}
+
+  // PAGE 1: COVER
+  var p1='<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:60px 50px;background:#fff">'+
+    '<div><div class="cover-plg">Premier Logistics Group</div><div class="cover-rule"></div>'+
+    '<div class="cover-title">Customer KPI<br>Performance Report</div>'+
+    '<div class="cover-sub">'+currentCustomer+'</div>'+
+    '<div class="cover-period">'+periodLabel+'</div></div>'+
+    '<div class="cover-bottom"><div style="font-size:13px;color:#888">Prepared for<br><strong style="font-size:15px;color:#1a1a1a">'+currentCustomer+'</strong></div>'+
+    '<div style="text-align:right;font-size:12px;color:#aaa">Premier Logistics Group<br>'+dateStr+'<br>Confidential</div></div></div>';
+
+  // PAGE 2: EXECUTIVE SUMMARY
+  var p2='<div class="page page-inner">'+pgHdr()+
+    '<div class="section-lbl">Executive summary</div>'+
+    '<div class="otif-hero"><div>'+
+      '<div class="otif-hero-label">Year-to-date OTIF</div>'+
+      '<div class="otif-hero-val" style="color:'+otifCol+'">'+ytdOTIF+'%</div>'+
+      '<div style="color:#888;font-size:12px;margin-top:8px">'+(aL||0)+' late consignment'+(aL!==1?'s':'')+' from '+(aC||0)+' total</div>'+
+    '</div><div>'+
+      '<div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">OTIF performance</div>'+
+      '<div class="otif-bar-bg"><div class="otif-bar-fill" style="width:'+Math.min(parseFloat(ytdOTIF)||0,100)+'%;background:'+otifCol+'"></div></div>'+
+      '<div style="display:flex;justify-content:space-between;font-size:10px;color:#666;margin-top:4px;width:200px"><span>0%</span><span>Target 98%</span><span>100%</span></div>'+
+    '</div></div>'+
+    '<div class="kpi-grid">'+
+      '<div class="kpi-card"><div class="kpi-label">Total consignments</div><div class="kpi-val hl">'+(aC||0)+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">Total pallets</div><div class="kpi-val">'+(aP||0)+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">Total cost</div><div class="kpi-val">£'+(aR||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">Avg cost / consignment</div><div class="kpi-val">£'+avgRC+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">Avg cost / pallet</div><div class="kpi-val">£'+avgRP+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">Avg pallets / consignment</div><div class="kpi-val">'+avgPC+'</div></div>'+
+    '</div>'+pgFtr(2)+'</div>';
+
+  // PAGE 3: MONTHLY TRACKER
+  var monthRows3=months.map(function(m,idx){
+    var otifPct=m.otif!=null?(m.otif*100).toFixed(2)+'%':'—';
+    var col=m.otif!=null?otifBarColor(m.otif*100):'#999';
+    var bg=idx%2===0?'':'background:#fafafa;';
+    return'<tr><td style="'+bg+'font-weight:'+(m.isNew?700:400)+'">'+m.label+(m.isNew?'<span class="new-tag">NEW</span>':'')+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+m.cons+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+m.pallets+'</td>'+
+      '<td style="text-align:right;'+bg+'">£'+m.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td>'+
+      '<td style="text-align:right;'+bg+'">£'+(m.cons>0?(m.revenue/m.cons).toFixed(2):'—')+'</td>'+
+      '<td style="text-align:right;color:'+col+';font-weight:700;'+bg+'">'+otifPct+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+m.lates+'</td></tr>';
+  }).join('');
+
+  var p3='<div class="page page-inner">'+pgHdr()+
+    '<div class="section-lbl">Monthly performance summary</div>'+
+    '<table><thead><tr><th>Month</th><th class="r">Cons</th><th class="r">Pallets</th><th class="r">Cost</th><th class="r">Avg Cost/Con</th><th class="r">OTIF</th><th class="r">Lates</th></tr></thead>'+
+    '<tbody>'+monthRows3+'</tbody>'+
+    '<tfoot><tr class="total-row"><td>Total / YTD</td><td style="text-align:right">'+(aC||'—')+'</td><td style="text-align:right">'+(aP||'—')+'</td>'+
+    '<td style="text-align:right">'+(aR?'£'+aR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—')+'</td>'+
+    '<td style="text-align:right">'+(aC&&aR?'£'+(aR/aC).toFixed(2):'—')+'</td>'+
+    '<td style="text-align:right;color:'+otifCol+'">'+ytdOTIF+'%</td>'+
+    '<td style="text-align:right">'+(aL!=null?aL:'—')+'</td></tr></tfoot></table>'+
+    pgFtr(3)+'</div>';
+
+  // PAGE 4: DESTINATIONS & REGIONS
+  var destRows4=topDest.map(function(d,idx){
+    var bg=idx%2===0?'':'background:#fafafa;';
+    var otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'—';
+    var col=parseFloat(otif)>=98?'#1b5e20':parseFloat(otif)>=95?'#e65100':'#c62828';
+    return'<tr><td style="font-weight:500;'+bg+'">'+d.name+'</td><td style="'+bg+'">'+d.city+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+d.cons+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+d.pallets+'</td>'+
+      '<td style="text-align:right;'+bg+'">£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+d.lates+'</td>'+
+      '<td style="text-align:right;color:'+col+';font-weight:700;'+bg+'">'+otif+'%</td></tr>';
+  }).join('');
+
+  var regRows4=topReg.map(function(e,idx){
+    var bg=idx%2===0?'':'background:#fafafa;';
+    var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'—';
+    var col=parseFloat(otif)>=98?'#1b5e20':parseFloat(otif)>=95?'#e65100':'#c62828';
+    return'<tr><td style="font-weight:500;'+bg+'">'+e[0]+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+d.cons+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+d.pallets+'</td>'+
+      '<td style="text-align:right;'+bg+'">£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td>'+
+      '<td style="text-align:right;'+bg+'">'+d.lates+'</td>'+
+      '<td style="text-align:right;color:'+col+';font-weight:700;'+bg+'">'+otif+'%</td></tr>';
+  }).join('');
+
+  var p4='<div class="page page-inner">'+pgHdr()+
+    '<div class="section-lbl">Top destinations</div>'+
+    '<table style="margin-bottom:28px"><thead><tr><th>Destination</th><th>City</th><th class="r">Cons</th><th class="r">Pallets</th><th class="r">Cost</th><th class="r">Lates</th><th class="r">OTIF</th></tr></thead><tbody>'+destRows4+'</tbody></table>'+
+    '<div class="section-lbl">Performance by UK region</div>'+
+    '<table><thead><tr><th>Region</th><th class="r">Cons</th><th class="r">Pallets</th><th class="r">Cost</th><th class="r">Lates</th><th class="r">OTIF</th></tr></thead><tbody>'+regRows4+'</tbody></table>'+
+    pgFtr(4)+'</div>';
+
+  // PAGE 5: PERFORMANCE BREAKDOWN
+  var typeRows5=Object.entries(typeMap2).map(function(e,idx){
+    var t=e[0],d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(2):'—';
+    var col=parseFloat(otif)>=98?'#1b5e20':parseFloat(otif)>=95?'#e65100':'#c62828';
+    var bg=idx%2===0?'':'background:#fafafa;';
+    return'<tr><td style="'+bg+'">'+t+'</td><td style="text-align:right;'+bg+'">'+d.cons+'</td><td style="text-align:right;'+bg+'">'+d.lates+'</td><td style="text-align:right;color:'+col+';font-weight:700;'+bg+'">'+otif+'%</td></tr>';
+  }).join('');
+
+  var p5='<div class="page page-inner">'+pgHdr()+
+    '<div class="section-lbl">Performance by delivery type</div>'+
+    '<table style="margin-bottom:28px"><thead><tr><th>Delivery type</th><th class="r">Consignments</th><th class="r">Lates</th><th class="r">OTIF</th></tr></thead><tbody>'+typeRows5+'</tbody></table>'+
+    '<div class="section-lbl">Commercial summary</div>'+
+    '<div class="kpi-grid" style="margin-bottom:0">'+
+      '<div class="kpi-card"><div class="kpi-label">Avg cost / consignment</div><div class="kpi-val hl">£'+avgRC+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">Avg cost / pallet</div><div class="kpi-val">£'+avgRP+'</div></div>'+
+      '<div class="kpi-card"><div class="kpi-label">Avg pallets / consignment</div><div class="kpi-val">'+avgPC+'</div></div>'+
     '</div>'+
-    '<div class="kpi-strip">'+
-      '<div class="kpi-card"><div class="kpi-label">YTD Consignments</div><div class="kpi-val">'+(aC||0)+'</div></div>'+
-      '<div class="kpi-card"><div class="kpi-label">YTD Pallets</div><div class="kpi-val">'+(aP||0)+'</div></div>'+
-      '<div class="kpi-card"><div class="kpi-label">YTD Cost</div><div class="kpi-val">£'+(aR||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
-      '<div class="kpi-card"><div class="kpi-label">YTD OTIF</div><div class="kpi-val">'+ytdOTIF+'%</div></div>'+
-      '<div class="kpi-card"><div class="kpi-label">YTD Lates</div><div class="kpi-val">'+(aL||0)+'</div></div>'+
+    pgFtr(5)+'</div>';
+
+  // PAGE 6: LATE LOG
+  var lateRows6=lateList.length>0?lateList.map(function(r,idx){
+    var bg=idx%2===0?'':'background:#fff5f5;';
+    return'<tr><td style="font-size:11px;color:#888;'+bg+'">'+r.id+'</td>'+
+      '<td style="font-weight:500;'+bg+'">'+r.dest+'</td>'+
+      '<td style="'+bg+'">'+r.city+'</td>'+
+      '<td style="'+bg+'">'+r.pc+'</td>'+
+      '<td style="'+bg+'">'+r.window+'</td>'+
+      '<td style="'+bg+'">'+r.arrival+'</td>'+
+      '<td style="color:#c62828;font-weight:700;'+bg+'">+'+r.mins+'m</td>'+
+      '<td style="text-align:right;'+bg+'">'+r.pallets+'</td>'+
+      '<td style="'+bg+'"><span style="font-size:10px;background:#f0f0f0;padding:1px 5px;border-radius:3px">'+r.dtype+'</span></td></tr>';
+  }).join(''):'<tr><td colspan="9" style="text-align:center;color:#aaa;padding:20px">No late consignments in this period</td></tr>';
+
+  var p6='<div class="page page-inner">'+pgHdr()+
+    '<div class="section-lbl">Late consignment detail ('+lateList.length+' consignment'+(lateList.length!==1?'s':'')+' late)</div>'+
+    '<div style="background:#fff8f0;border-left:3px solid #F47920;padding:10px 14px;font-size:11px;color:#888;border-radius:0 6px 6px 0;margin-bottom:18px">'+
+      'Lates are calculated by comparing actual delivery arrival time against the end of the booked delivery time window. Contact your account manager to dispute any entry.'+
     '</div>'+
-    '<div class="section"><div class="section-title">Monthly performance summary</div>'+
-      '<table><thead><tr><th>Month</th><th class="r">Cons</th><th class="r">Pallets</th><th class="r">Cost</th><th class="r">OTIF</th><th class="r">Lates</th></tr></thead>'+
-      '<tbody>'+monthRows+'</tbody>'+
-      '<tfoot><tr class="total-row"><td>Total / YTD</td>'+
-        '<td style="text-align:right">'+(aC||'—')+'</td>'+
-        '<td style="text-align:right">'+(aP||'—')+'</td>'+
-        '<td style="text-align:right">'+(aR?'£'+aR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—')+'</td>'+
-        '<td style="text-align:right;color:'+(parseFloat(ytdOTIF)>=98?'#1b5e20':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828')+';font-weight:700">'+ytdOTIF+'%</td>'+
-        '<td style="text-align:right">'+(aL!=null?aL:'—')+'</td>'+
-      '</tr></tfoot></table>'+
+    '<table><thead><tr><th>Order ID</th><th>Destination</th><th>City</th><th>Postcode</th><th>Time window</th><th>Arrived</th><th class="r">Mins late</th><th class="r">Pallets</th><th>Type</th></tr></thead>'+
+    '<tbody>'+lateRows6+'</tbody></table>'+
+    pgFtr(6)+'</div>';
+
+  // PAGE 7: METHODOLOGY
+  var p7='<div class="page page-inner">'+pgHdr()+
+    '<div class="section-lbl">Methodology &amp; definitions</div>'+
+    '<table style="margin-bottom:32px"><thead><tr><th style="width:160px">Metric</th><th>Definition</th></tr></thead><tbody>'+
+      '<tr><td style="font-weight:600;vertical-align:top;padding:10px 12px">OTIF</td><td style="padding:10px 12px;color:#555">On Time In Full. Calculated as (consignments − lates) ÷ consignments, expressed as a percentage. Target: 98.00% or above.</td></tr>'+
+      '<tr style="background:#fafafa"><td style="font-weight:600;vertical-align:top;padding:10px 12px">Late consignment</td><td style="padding:10px 12px;color:#555">A consignment where the recorded delivery arrival time in Qargo TMS is after the end of the booked delivery time window on the destination date.</td></tr>'+
+      '<tr><td style="font-weight:600;vertical-align:top;padding:10px 12px">Consignment</td><td style="padding:10px 12px;color:#555">A single delivery order with status COMPLETED or INVOICE_POSTED in Qargo TMS. IN_TRANSIT orders are excluded from all calculations.</td></tr>'+
+      '<tr style="background:#fafafa"><td style="font-weight:600;vertical-align:top;padding:10px 12px">Cost</td><td style="padding:10px 12px;color:#555">Total cost value recorded against completed consignments in Qargo TMS for the reporting period.</td></tr>'+
+      '<tr><td style="font-weight:600;vertical-align:top;padding:10px 12px">Data source</td><td style="padding:10px 12px;color:#555">All data sourced from Qargo TMS Orders export. Report generated by Premier Logistics Group internal KPI tool.</td></tr>'+
+    '</tbody></table>'+
+    '<div style="background:#f8f8f6;border-radius:8px;padding:24px 28px;border-top:4px solid #F47920">'+
+      '<div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#aaa;margin-bottom:12px">Report prepared by</div>'+
+      '<div style="font-size:16px;font-weight:700;margin-bottom:4px">Premier Logistics Group</div>'+
+      '<div style="font-size:12px;color:#888;margin-bottom:16px">Bardon (HQ) &amp; Northampton &bull; premier-logistics.co.uk</div>'+
+      '<div style="font-size:11px;color:#aaa">This report is confidential and prepared exclusively for '+currentCustomer+'. Data sourced from Qargo TMS and reflects completed consignments only. Prepared: '+dateStr+'</div>'+
     '</div>'+
-    '<div class="section"><div class="section-title">Late consignment detail</div>'+
-      '<table><thead><tr><th>Order ID</th><th>Destination</th><th>City</th><th>Postcode</th><th>Time window</th><th>Arrived</th><th>Mins late</th><th class="r">Pallets</th></tr></thead>'+
-      '<tbody>'+lateRows2+'</tbody></table>'+
-    '</div>'+
-    '<div class="footer-note">OTIF calculated as (consignments − lates) / consignments. Lates determined by actual delivery arrival vs booked time window end. Data sourced from Qargo TMS. Report prepared by Premier Logistics Group.</div>'+
-    '</div><scr'+'ipt>window.onload=function(){window.print();}<'+'/script></body></html>';
+    pgFtr(7)+'</div>';
+
+  var html='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>KPI Report — '+periodLabel+' — '+currentCustomer+'</title><style>'+css+'</style></head><body>'+
+    p1+p2+p3+p4+p5+p6+p7+
+    '<scr'+'ipt>window.onload=function(){window.print();};<'+'/script></body></html>';
+
   var blob=new Blob([html],{type:'text/html;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-  a.download='Anand_KPI_Report_'+stamp+'.html';a.click();
-  showAlert('success','Customer report downloaded — open in a browser and press Ctrl+P (or Cmd+P) to save as PDF.');
+  a.download=slug(currentCustomer)+'_KPI_Report_'+stamp+'.html';
+  a.click();
+  showAlert('success','Report downloaded — open in browser and Ctrl+P → Save as PDF. Each section starts on a new page.');
 }
+
 
 function updateLateNote(idx,val){
   var comp=allCompleted();
