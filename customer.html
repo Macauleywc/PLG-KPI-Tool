@@ -304,7 +304,7 @@ function renderPreview(){
 
   // Destinations
   var destMap={};
-  comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,cost:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
+  comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
   var byC=Object.values(destMap).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
   var byR=Object.values(destMap).sort(function(a,b){return b.revenue-a.revenue;}).slice(0,10);
   var maxC=byC[0]?byC[0].cons:1,maxR=byR[0]?byR[0].cost:1;
@@ -319,7 +319,7 @@ function renderPreview(){
 
   // Regions
   var regMap={};
-  comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,cost:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
+  comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
   var topReg=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;});
 
   // Monthly table rows
@@ -539,7 +539,7 @@ function exportTracker(){
   XLSX.utils.book_append_sheet(wb,ws3,'Destinations');
 
   // Sheet 4: Regional breakdown
-  var regMap={};comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,cost:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
+  var regMap={};comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
   var regRows=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;}).map(function(e){var d=e[1];return[e[0],d.cons,d.pallets,+d.revenue.toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
   var ws4=XLSX.utils.aoa_to_sheet([['Region','Cons','Pallets','Revenue (£)','Lates','OTIF %'],...regRows]);
   ws4['!cols']=[{wch:20},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];
