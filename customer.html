@@ -719,7 +719,7 @@ function buildReport(mapImg){
 
   var destMap2={};
   comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});
-  var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,18);
+  var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
 
   var regMap2={};
   comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap2[reg])regMap2[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap2[reg].cons++;regMap2[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap2[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap2[reg].lates++;});
