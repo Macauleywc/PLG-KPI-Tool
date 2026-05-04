@@ -722,13 +722,17 @@ function drawUKMap(regMap){
   };
 
   function renderHighchartsMap(){
-    fetch('https://code.highcharts.com/mapdata/countries/gb/custom/gb-regions.geo.json')
+    fetch('https://code.highcharts.com/mapdata/countries/gb/gb-all.geo.json')
       .then(function(r){return r.json();})
       .then(function(mapData){
-        var data=mapData.features.map(function(f){
+        // Log all unique region names for debugging
+          var allNames=mapData.features.map(function(x){return x.properties['name']||x.properties['region']||'';});
+          console.log('All HC feature names (first 20):',allNames.slice(0,20));
+          console.log('Total features:',mapData.features.length);
+          console.log('Sample feature props:',JSON.stringify(mapData.features[0].properties));
+          var data=mapData.features.map(function(f){
           var hcName=f.properties['name'];
           var ourName=regionNameMap[hcName]||hcName;
-          if(f===mapData.features[0])console.log('Sample HC names:',mapData.features.slice(0,5).map(function(x){return x.properties['name'];}));
           var d=regMap[ourName]||{pallets:0};
           return{
             'hc-key':f.properties['hc-key'],
