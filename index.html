@@ -3,110 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premier Logistics Group — KPI Portal</title>
+<title>PLG — KPI Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#F7F6F3;
+  --surface:#FFFFFF;
+  --border:#E5E3DE;
+  --text:#1C1C1C;
+  --muted:#8A8780;
+  --orange:#F47920;
+  --orange-light:#FEF0E7;
+  --dark:#111111;
+  --green:#1A6B3C;
+  --amber:#B45309;
+  --red:#B91C1C;
+  --radius:10px;
+  --shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.04);
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#f2f2f0;color:#1a1a1a;min-height:100vh;}
-header{background:#1a1a1a;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;border-bottom:3px solid #F47920;}
-.hlogo{display:flex;align-items:center;gap:10px;}
-.hbox{background:#F47920;color:#fff;font-size:12px;font-weight:700;padding:4px 8px;border-radius:4px;}
-.hname{font-size:15px;font-weight:600;color:#fff;}
-.hdiv{width:1px;height:18px;background:#333;margin:0 4px;}
-.htool{font-size:13px;color:#888;}
-.hright{display:flex;align-items:center;gap:8px;}
-.hlabel{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.06em;}
-.hinput{background:#2a2a2a;border:1px solid #3a3a3a;color:#fff;padding:6px 10px;border-radius:6px;font-size:12px;width:220px;outline:none;}
-.hinput:focus{border-color:#F47920;}
-.hinput::placeholder{color:#555;}
-.pagetop{padding:2rem 2.5rem 1.5rem;border-bottom:1px solid #e0e0de;}
-.pagetop h1{font-size:22px;font-weight:700;margin-bottom:4px;}
-.pagetop p{font-size:13px;color:#888;}
-.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:1.25rem;}
-.statcard{background:#fff;border:0.5px solid #e0e0de;border-radius:8px;padding:14px 16px;border-top:3px solid #F47920;}
-.statlabel{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
-.statval{font-size:22px;font-weight:700;}
-.statsub{font-size:11px;color:#bbb;margin-top:3px;}
-.toolbar{padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
-.tleft{display:flex;align-items:center;gap:10px;}
-.searchbox{background:#fff;border:1px solid #e0e0de;border-radius:8px;padding:8px 12px;color:#1a1a1a;font-size:13px;width:220px;outline:none;}
-.searchbox:focus{border-color:#F47920;}
-.searchbox::placeholder{color:#ccc;}
-.countlabel{font-size:12px;color:#aaa;}
-.btn{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:500;}
-.btnghost{background:#fff;color:#666;border:1px solid #e0e0de;}
-.btnghost:hover{background:#f5f5f3;}
-.btnprimary{background:#F47920;color:#fff;}
-.btnprimary:hover{background:#e06818;}
-.grid{padding:0 2.5rem 3rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
-.card{background:#fff;border:0.5px solid #e0e0de;border-radius:10px;padding:1.25rem;cursor:pointer;position:relative;overflow:hidden;transition:box-shadow 0.2s,transform 0.15s;}
-.card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08);transform:translateY(-2px);}
-.card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#e0e0de;}
-.card.hasdata::after,.card:hover::after{background:#F47920;}
-.cardtop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;}
-.avatar{width:36px;height:36px;border-radius:8px;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#F47920;}
-.delbtn{width:22px;height:22px;border-radius:50%;background:#f5f5f3;border:none;color:#ccc;cursor:pointer;font-size:11px;display:none;align-items:center;justify-content:center;}
-.delbtn:hover{background:#ffebee;color:#f44336;}
-.editmode .delbtn{display:flex;}
-.editmode .card{cursor:default;}
-.editmode .card:hover{box-shadow:none;transform:none;}
-.cardname{font-size:14px;font-weight:700;margin-bottom:2px;}
-.cardmonths{font-size:11px;color:#bbb;margin-bottom:10px;}
-.cardkpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:10px;border-top:0.5px solid #f0f0ee;}
-.kpilabel{font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;}
-.kpival{font-size:16px;font-weight:700;}
-.kpival.good{color:#2e7d32;}
-.kpival.ok{color:#e65100;}
-.kpival.bad{color:#c62828;}
-.kpival.orange{color:#F47920;}
-.nodata{font-size:12px;color:#ccc;padding-top:10px;border-top:0.5px solid #f0f0ee;}
-.addcard{background:#fafaf8;border:1.5px dashed #e0e0de;border-radius:10px;padding:1.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:140px;cursor:pointer;}
-.addcard:hover{border-color:#F47920;background:#fff8f3;}
-.addicon{font-size:24px;color:#ddd;margin-bottom:6px;}
-.addcard:hover .addicon{color:#F47920;}
-.addlabel{font-size:12px;color:#ccc;}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;z-index:100;}
-.modal{background:#fff;border-radius:12px;padding:2rem;width:360px;box-shadow:0 20px 60px rgba(0,0,0,0.15);}
-.modal h2{font-size:17px;font-weight:700;margin-bottom:1.25rem;}
-.modalinput{width:100%;padding:10px 12px;border:1.5px solid #e0e0de;border-radius:8px;font-size:14px;margin-bottom:1rem;outline:none;}
-.modalinput:focus{border-color:#F47920;}
-.modalbtns{display:flex;gap:8px;justify-content:flex-end;}
-footer{padding:1.5rem 2.5rem;border-top:1px solid #e0e0de;display:flex;justify-content:space-between;font-size:12px;color:#bbb;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+.header{
+  background:var(--dark);
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  border-bottom:2px solid var(--orange);
+  position:sticky;top:0;z-index:100;
+}
+.header-logo img{height:28px;width:auto;display:block;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.token-field{
+  display:flex;align-items:center;gap:8px;
+  background:#1E1E1E;border:1px solid #333;
+  border-radius:6px;padding:0 10px;height:32px;
+}
+.token-field label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;font-weight:500;}
+.token-field input{background:none;border:none;color:#fff;font-size:11px;font-family:'DM Mono',monospace;width:160px;outline:none;}
+.token-field input::placeholder{color:#444;}
+.token-dot{width:6px;height:6px;border-radius:50%;background:#333;flex-shrink:0;transition:background 0.2s;}
+.token-dot.on{background:var(--orange);}
+
+/* HERO */
+.hero{padding:40px 24px 28px;max-width:1200px;margin:0 auto;}
+.hero-title{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;}
+.hero-sub{font-size:14px;color:var(--muted);}
+
+/* STATS STRIP */
+.stats-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border-radius:var(--radius);overflow:hidden;
+  margin:20px 0;border:1px solid var(--border);
+}
+.stat-item{
+  background:var(--surface);padding:16px 20px;
+}
+.stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px;}
+.stat-value{font-size:22px;font-weight:700;color:var(--text);}
+.stat-value.orange{color:var(--orange);}
+
+/* TOOLBAR */
+.toolbar{
+  max-width:1200px;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;
+}
+.toolbar-left{display:flex;align-items:center;gap:10px;}
+.search-box{
+  display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:0 12px;height:36px;
+  transition:border-color 0.15s;
+}
+.search-box:focus-within{border-color:var(--orange);}
+.search-box svg{color:var(--muted);flex-shrink:0;}
+.search-box input{border:none;background:none;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);width:200px;outline:none;}
+.search-box input::placeholder{color:var(--muted);}
+.count-pill{font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:20px;}
+.toolbar-right{display:flex;gap:8px;}
+.btn{
+  height:36px;padding:0 16px;border-radius:var(--radius);border:none;
+  cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;
+  display:flex;align-items:center;gap:6px;transition:all 0.15s;
+}
+.btn-ghost{background:var(--surface);color:var(--muted);border:1px solid var(--border);}
+.btn-ghost:hover{background:var(--bg);color:var(--text);}
+.btn-primary{background:var(--orange);color:#fff;}
+.btn-primary:hover{background:#E06818;}
+
+/* GRID */
+.grid{
+  max-width:1200px;margin:0 auto;
+  padding:0 24px 48px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:12px;
+}
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;
+  cursor:pointer;transition:all 0.18s;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--border);transition:background 0.2s;
+}
+.card:hover{box-shadow:var(--shadow);transform:translateY(-1px);}
+.card:hover::before,.card.live::before{background:var(--orange);}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.card-avatar{
+  width:38px;height:38px;border-radius:8px;
+  background:var(--orange-light);color:var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;letter-spacing:0.02em;
+}
+.del-btn{
+  width:24px;height:24px;border-radius:6px;background:var(--bg);
+  border:1px solid var(--border);color:var(--muted);cursor:pointer;
+  font-size:11px;display:none;align-items:center;justify-content:center;
+  transition:all 0.15s;
+}
+.del-btn:hover{background:#FEF2F2;border-color:#FCA5A5;color:var(--red);}
+.edit-mode .del-btn{display:flex;}
+.edit-mode .card{cursor:default;}
+.edit-mode .card:hover{transform:none;box-shadow:none;}
+.card-name{font-size:14px;font-weight:600;margin-bottom:2px;color:var(--text);}
+.card-meta{font-size:11px;color:var(--muted);margin-bottom:12px;}
+.card-kpis{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding-top:12px;border-top:1px solid var(--border);
+}
+.kpi-item .kpi-l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:2px;}
+.kpi-item .kpi-v{font-size:15px;font-weight:700;}
+.kpi-v.good{color:var(--green);}
+.kpi-v.warn{color:var(--amber);}
+.kpi-v.bad{color:var(--red);}
+.kpi-v.orange{color:var(--orange);}
+.no-data{font-size:12px;color:var(--muted);padding-top:12px;border-top:1px solid var(--border);}
+.add-card{
+  background:transparent;border:1.5px dashed var(--border);
+  border-radius:var(--radius);padding:20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:152px;cursor:pointer;transition:all 0.18s;
+}
+.add-card:hover{border-color:var(--orange);background:var(--orange-light);}
+.add-icon{font-size:20px;color:var(--border);margin-bottom:6px;transition:color 0.15s;}
+.add-card:hover .add-icon{color:var(--orange);}
+.add-label{font-size:12px;color:var(--muted);font-weight:500;}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:200;}
+.modal{background:var(--surface);border-radius:14px;padding:28px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.15);}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:16px;}
+.modal-input{
+  width:100%;padding:10px 12px;border:1.5px solid var(--border);
+  border-radius:var(--radius);font-size:14px;font-family:'DM Sans',sans-serif;
+  color:var(--text);background:var(--bg);outline:none;margin-bottom:14px;
+  transition:border-color 0.15s;
+}
+.modal-input:focus{border-color:var(--orange);}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;}
+
+footer{text-align:center;padding:24px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="hlogo">
-    <div class="hbox">PLG</div>
-    <div class="hname">Premier Logistics Group</div>
-    <div class="hdiv"></div>
-    <div class="htool">KPI Portal</div>
+<div class="header">
+  <div class="header-logo">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8IS0tIENyZWF0b3I6IENvcmVsRFJBVyBYNyAtLT4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMjEwbW0iIGhlaWdodD0iMjk3bW0iIHZlcnNpb249IjEuMSIgc3R5bGU9InNoYXBlLXJlbmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247IHRleHQtcmVuZGVyaW5nOmdlb21ldHJpY1ByZWNpc2lvbjsgaW1hZ2UtcmVuZGVyaW5nOm9wdGltaXplUXVhbGl0eTsgZmlsbC1ydWxlOmV2ZW5vZGQ7IGNsaXAtcnVsZTpldmVub2RkIg0Kdmlld0JveD0iMCAwIDIxMDAwIDI5NzAwIg0KIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiA8ZGVmcz4NCiAgPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCiAgIDwhW0NEQVRBWw0KICAgIC5maWwxMCB7ZmlsbDojNUI1QjVCO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw0IHtmaWxsOiNFRjdBNDQ7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDEge2ZpbGw6I0U5NTUyNDtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsOSB7ZmlsbDojQzY0QzIyO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw4IHtmaWxsOiNBMTQyMUY7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDAge2ZpbGw6I0JGRENCMjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsNSB7ZmlsbDojOTlDQTg5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw2IHtmaWxsOiM2OEI3NjA7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDcge2ZpbGw6IzI3QTg0MjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsMiB7ZmlsbDojMUY4QkI5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWwzIHtmaWxsOiMyNzc0OTI7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDExIHtmaWxsOiMyNjVCNzA7ZmlsbC1ydWxlOm5vbnplcm99DQogICBdXT4NCiAgPC9zdHlsZT4NCiA8L2RlZnM+DQogPGcgaWQ9IkxheWVyX3gwMDIwXzEiPg0KICA8bWV0YWRhdGEgaWQ9IkNvcmVsQ29ycElEXzBDb3JlbC1MYXllciIvPg0KICA8ZyBpZD0iXzczMjA3OTM5MiI+DQogICA8Zz4NCiAgICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTI5NTIgODY4MmMtNjksNTIgLTQsMTI2IDEzMywxNzMgMTM3LDQ3IDI5Niw1MSAzNjUsMiA3MCwtNDkgMjQsLTEzNiAtMTEzLC0xODYgLTEzOCwtNTAgLTMxNiwtNDIgLTM4NSwxMXoiLz4NCiAgICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTQyMDEgODU0N2MtNzIsNTEgMTM1LDE2OSA0MzAsMzAzIDI5NCwxMzQgNTY0LDIzMyA2MzgsMTg0IDczLC00OSAtNzcsLTIyOSAtMzc0LC0zNjYgLTI5NiwtMTM2IC02MjEsLTE3MyAtNjk0LC0xMjF6Ii8+DQogICA8L2c+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTM4MDkgMTA4MjRjMjEwLC0yMTEgNTUyLC0yMTEgNzYzLDAgMjExLDIxMCAyMTIsNTUyIDEsNzYzIC0yMTEsMjExIC01NTMsMjEyIC03NjQsMSAtMjExLC0yMTEgLTIxMSwtNTUzIDAsLTc2NHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwyIiBkPSJNMjkzNiAxMTY5M2MxNzUsLTE3NiA0ODEsLTEzOCA2OTMsNzUgMjEyLDIxMyAyNTAsNTE5IDc1LDY5NSAtMTc1LDE3NSAtNDk3LDE1MyAtNzA5LC02MCAtMjEyLC0yMTIgLTIzNCwtNTM1IC01OSwtNzEweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDMiIGQ9Ik0yMjY1IDEyMzUwYzEzMCwtMTMwIDM4NCwtMzUgNjAxLDE4MiAyMTcsMjE3IDMxMyw0NzEgMTgzLDYwMiAtMTMwLDEzMCAtNDM4LDg3IC02NTUsLTEyOSAtMjE3LC0yMTcgLTI2MCwtNTI0IC0xMjksLTY1NXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw0IiBkPSJNNDcyNCA5OTA1Yy0xNzYsMTc1IC0xMzgsNDgxIDc1LDY5MyAyMTMsMjEyIDUxOSwyNTAgNjk1LDc1IDE3NSwtMTc1IDE1MywtNDk3IC02MCwtNzA5IC0yMTIsLTIxMiAtNTM1LC0yMzQgLTcxMCwtNTl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNSIgZD0iTTIzODAgOTM5OWMxMzMsLTEzNSAzMTAsLTE3NSAzODcsLTk4IDc3LDc3IDI3LDI0MyAtMTA3LDM3NyAtMTM0LDEzNSAtMjk4LDE4NyAtMzc1LDExMCAtNzgsLTc3IC0zOSwtMjU0IDk1LC0zODl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNiIgZD0iTTE3OTMgMTAwNzNjNDcsLTYyIDExMiwtNCAxNTQsMTE4IDQyLDEyMiA0NiwyNjMgMiwzMjUgLTQzLDYyIC0xMjAsMjEgLTE2NSwtMTAxIC00NSwtMTIzIC0zOCwtMjgxIDksLTM0MnoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw1IiBkPSJNNTM4MSA5MjM0Yy0xMzAsMTMwIC0zNSwzODQgMTgyLDYwMSAyMTcsMjE3IDQ3MSwzMTMgNjAyLDE4MyAxMzAsLTEzMCA4OCwtNDM4IC0xMjksLTY1NSAtMjE3LC0yMTcgLTUyNCwtMjYwIC02NTUsLTEyOXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw2IiBkPSJNMjgxNSA5ODMyYzE3NiwtMTc3IDQ3MiwtMTY3IDY1MywxNCAxODIsMTgxIDE4MCw0NjUgNCw2NDIgLTE3NiwxNzcgLTQ1OSwxODAgLTY0MCwtMSAtMTgxLC0xODEgLTE5MywtNDc3IC0xNywtNjU1eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDciIGQ9Ik0yMDY3IDEwNjU1YzExNywtMTQ0IDMzOSwtODMgNTAwLDEyMiAxNjIsMjA2IDIwMyw0NzkgODcsNjI0IC0xMTUsMTQ2IC0zNDQsMTA4IC01MDcsLTk5IC0xNjMsLTIwNiAtMTk3LC01MDIgLTgwLC02NDd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMiIgZD0iTTE2NzMgMTExODRjNDYsLTY0IDE1MCwxMjAgMjcwLDM4MiAxMTksMjYyIDIwOCw1MDIgMTY0LDU2OCAtNDQsNjUgLTIwNCwtNjkgLTMyNiwtMzMyIC0xMjEsLTI2NCAtMTU0LC01NTQgLTEwOCwtNjE4eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDUiIGQ9Ik0zNjg2IDkwMzZjLTE0NCwxMTcgLTgzLDMzOSAxMjIsNTAwIDIwNiwxNjIgNDc5LDIwMyA2MjQsODcgMTQ2LC0xMTUgMTA4LC0zNDQgLTk5LC01MDcgLTIwNiwtMTYzIC01MDIsLTE5NyAtNjQ3LC04MHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw4IiBkPSJNNjA3MyAxMjk5MmMtMTMzLDEzNSAtMzEwLDE3NSAtMzg3LDk4IC03NywtNzcgLTI2LC0yNDIgMTA3LC0zNzcgMTM0LC0xMzUgMjk4LC0xODcgMzc1LC0xMTAgNzgsNzcgMzksMjU0IC05NSwzODl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsOSIgZD0iTTY2NjAgMTIzMThjLTQ3LDYyIC0xMTIsNCAtMTU0LC0xMTggLTQyLC0xMjIgLTQ2LC0yNjMgLTIsLTMyNSA0MywtNjIgMTIxLC0yMSAxNjUsMTAxIDQ1LDEyMyAzOCwyODEgLTksMzQyeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDkiIGQ9Ik01NjEyIDEyNTMzYy0xNzYsMTc3IC00NzIsMTY3IC02NTMsLTE0IC0xODEsLTE4MSAtMTc5LC00NjQgLTMsLTY0MSAxNzUsLTE3NyA0NTgsLTE4MSA2NDAsMCAxODEsMTgxIDE5Miw0NzggMTYsNjU1eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEiIGQ9Ik02MzYwIDExNzEwYy0xMTcsMTQ0IC0zMzgsODQgLTUwMCwtMTIyIC0xNjEsLTIwNSAtMjAyLC00NzggLTg3LC02MjQgMTE2LC0xNDUgMzQ1LC0xMDcgNTA4LDk5IDE2MywyMDcgMTk2LDUwMyA3OSw2NDd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNCIgZD0iTTY3NTUgMTExODFjLTQ2LDY0IC0xNTEsLTEyMCAtMjcwLC0zODIgLTEyMCwtMjYyIC0yMDgsLTUwMiAtMTY0LC01NjcgNDMsLTY2IDIwMyw2OCAzMjUsMzMyIDEyMiwyNjMgMTU0LDU1MyAxMDksNjE3eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDMiIGQ9Ik00NzQxIDEzMzI5YzE0NCwtMTE3IDg0LC0zMzggLTEyMiwtNTAwIC0yMDUsLTE2MSAtNDc4LC0yMDIgLTYyNCwtODcgLTE0NSwxMTYgLTEwNywzNDUgOTksNTA4IDIwNywxNjMgNTAzLDE5NiA2NDcsNzl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTg1OTggMTA0MjdjMCwtMTc3IC0xMzEsLTI3NyAtMzA5LC0yNzdsLTUzNSAwIDAgNTUxIDUzNSAwYzE3OCwwIDMwOSwtMTAxIDMwOSwtMjc0em0tMTUwNyAxNzE1bDAgLTI1NzEgMTI4NyAwYzU3OCwwIDg5NCwzOTAgODk0LDg1NiAwLDQ2MyAtMzE2LDg1MiAtODk0LDg1MmwtNjI0IDAgMCA4NjMgLTY2MyAweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEiIGQ9Ik05Mjg0IDEyMTQybDAgLTE4NjEgNTkzIDAgMCAyMjdjMTI0LC0xNTAgMzU5LC0yNzggNTgyLC0yNzhsMCA1NzFjLTM1LC04IC04NSwtMTYgLTE0NiwtMTYgLTE1NCwwIC0zNTksNjYgLTQzNiwxNzBsMCAxMTg3IC01OTMgMHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxIiBkPSJNMTE0MDMgMTA2OTNjLTI1OCwwIC0zNTgsMTg1IC0zODEsMzIwbDc2NyAwYy0xNiwtMTMxIC0xMTIsLTMyMCAtMzg2LC0zMjB6bS05OTAgNTE2YzAsLTUzOSA0MDgsLTk3NSA5OTAsLTk3NSA1NTIsMCA5NTIsNDA1IDk1MiwxMDM3bDAgMTI3IC0xMzI1IDBjMzQsMTc0IDE5NiwzMzIgNDY2LDMzMiAxMzEsMCAzNTgsLTU4IDQ2MiwtMTU4bDI1MSAzNzBjLTE4NSwxNjYgLTQ5MywyNDYgLTc3OSwyNDYgLTU3NCwwIC0xMDE3LC0zNzMgLTEwMTcsLTk3OXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxIiBkPSJNMTQ4MDMgMTIxNDJsMCAtMTEzM2MwLC0xNDMgLTcwLC0yNTEgLTI0NywtMjUxIC0xNjIsMCAtMjc3LDEwNSAtMzM1LDE4MmwwIDEyMDIgLTU5NCAwIDAgLTExMzNjMCwtMTQzIC02NSwtMjUxIC0yNDYsLTI1MSAtMTU4LDAgLTI3MCwxMDUgLTMzMiwxODJsMCAxMjAyIC01OTMgMCAwIC0xODYxIDU5MyAwIDAgMjI3YzgxLC0xMDggMzIwLC0yNzQgNjEzLC0yNzQgMjY2LDAgNDUxLDExMiA1MjgsMzMyIDEwOCwtMTYyIDM1MSwtMzMyIDY0NCwtMzMyIDM0MywwIDU1OCwxNzggNTU4LDU1OWwwIDEzNDkgLTU4OSAweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEiIGQ9Ik0xNTUyMCAxMDI4MWw1OTMgMCAwIDE4NjEgLTU5MyAwIDAgLTE4NjF6bS00MyAtNTA5YzAsLTE4OSAxNTAsLTMzOSAzMzksLTMzOSAxODksMCAzNDAsMTUwIDM0MCwzMzkgMCwxODkgLTE1MSwzNDMgLTM0MCwzNDMgLTE4OSwwIC0zMzksLTE1NCAtMzM5LC0zNDN6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTE3MjE5IDEwNjkzYy0yNTgsMCAtMzU4LDE4NSAtMzgxLDMyMGw3NjcgMGMtMTYsLTEzMSAtMTEyLC0zMjAgLTM4NiwtMzIwem0tOTkwIDUxNmMwLC01MzkgNDA4LC05NzUgOTkwLC05NzUgNTUxLDAgOTUyLDQwNSA5NTIsMTAzN2wwIDEyNyAtMTMyNiAwYzM1LDE3NCAxOTcsMzMyIDQ2NywzMzIgMTMxLDAgMzU4LC01OCA0NjIsLTE1OGwyNTEgMzcwYy0xODUsMTY2IC00OTQsMjQ2IC03NzksMjQ2IC01NzQsMCAtMTAxNywtMzczIC0xMDE3LC05Nzl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTE4MzEwIDEyMTQybDAgLTE4NjEgNTkzIDAgMCAyMjdjMTI0LC0xNTAgMzU5LC0yNzggNTgyLC0yNzhsMCA1NzFjLTM0LC04IC04NCwtMTYgLTE0NiwtMTYgLTE1NCwwIC0zNTksNjYgLTQzNiwxNzBsMCAxMTg3IC01OTMgMHoiLz4NCiAgIDxwb2x5Z29uIGNsYXNzPSJmaWwxMCIgcG9pbnRzPSI3MDg0LDEzMjc4IDcwODQsMTI1MjMgNzIxNywxMjUyMyA3MjE3LDEzMTYyIDc1NTAsMTMxNjIgNzU1MCwxMzI3OCAiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxMCIgZD0iTTgyMzggMTI5MDFjMCwtMTU2IC05OSwtMjczIC0yNTAsLTI3MyAtMTUzLDAgLTI1MCwxMTcgLTI1MCwyNzMgMCwxNTUgOTcsMjczIDI1MCwyNzMgMTUxLDAgMjUwLC0xMTggMjUwLC0yNzN6bS02MzYgMGMwLC0yMjUgMTU5LC0zOTAgMzg2LC0zOTAgMjI2LDAgMzg2LDE2NSAzODYsMzkwIDAsMjI2IC0xNjAsMzkxIC0zODYsMzkxIC0yMjcsMCAtMzg2LC0xNjUgLTM4NiwtMzkxeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNODQ2OCAxMjkwMWMwLC0yMzYgMTc3LC0zOTAgMzk2LC0zOTAgMTQ3LDAgMjQzLDcwIDMwNCwxNTdsLTEwOCA2MWMtNDAsLTU2IC0xMTEsLTEwMSAtMTk2LC0xMDEgLTE1MCwwIC0yNjEsMTE1IC0yNjEsMjczIDAsMTU5IDExMSwyNzQgMjYxLDI3NCA3NywwIDE0NSwtMzYgMTc5LC02OGwwIC0xMTcgLTIyNiAwIDAgLTExNyAzNTggMCAwIDI4M2MtNzUsODMgLTE4MCwxMzcgLTMxMSwxMzcgLTIxOSwwIC0zOTYsLTE1NSAtMzk2LC0zOTJ6Ii8+DQogICA8cG9seWdvbiBjbGFzcz0iZmlsMTAiIHBvaW50cz0iOTMxMywxMjUyMyA5NDQ2LDEyNTIzIDk0NDYsMTMyNzggOTMxMywxMzI3OCAiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxMCIgZD0iTTk1NTggMTMxNzJsNzMgLTEwMmM1Miw1NSAxMzQsMTA0IDIzOSwxMDQgMTA5LDAgMTUyLC01MyAxNTIsLTEwMyAwLC0xNTggLTQ0MSwtNjAgLTQ0MSwtMzM4IDAsLTEyNSAxMTAsLTIyMSAyNzUsLTIyMSAxMTgsMCAyMTMsMzcgMjgzLDEwNWwtNzUgOTljLTU5LC01OSAtMTQwLC04NiAtMjE5LC04NiAtNzgsMCAtMTI4LDM3IC0xMjgsOTQgMCwxNDAgNDM5LDUzIDQzOSwzMzUgMCwxMjUgLTg4LDIzMyAtMjkyLDIzMyAtMTM5LDAgLTI0MCwtNDkgLTMwNiwtMTIweiIvPg0KICAgPHBvbHlnb24gY2xhc3M9ImZpbDEwIiBwb2ludHM9IjEwNDQ3LDEzMjc4IDEwNDQ3LDEyNjQwIDEwMjE5LDEyNjQwIDEwMjE5LDEyNTIzIDEwODA4LDEyNTIzIDEwODA4LDEyNjQwIDEwNTgwLDEyNjQwIDEwNTgwLDEzMjc4ICIvPg0KICAgPHBvbHlnb24gY2xhc3M9ImZpbDEwIiBwb2ludHM9IjEwOTIwLDEyNTIzIDExMDUzLDEyNTIzIDExMDUzLDEzMjc4IDEwOTIwLDEzMjc4ICIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTExODAgMTI5MDFjMCwtMjMyIDE3MywtMzkwIDM5NiwtMzkwIDE1MywwIDI0Nyw3OSAzMDMsMTcwbC0xMTMgNTdjLTM2LC02MiAtMTA5LC0xMTAgLTE5MCwtMTEwIC0xNTAsMCAtMjYxLDExNSAtMjYxLDI3MyAwLDE1OSAxMTEsMjczIDI2MSwyNzMgODEsMCAxNTQsLTQ2IDE5MCwtMTEwbDExMyA1OGMtNTcsOTEgLTE1MCwxNzAgLTMwMywxNzAgLTIyMywwIC0zOTYsLTE1OSAtMzk2LC0zOTF6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTAiIGQ9Ik0xMTkzNyAxMzE3Mmw3MyAtMTAyYzUzLDU1IDEzNCwxMDQgMjM5LDEwNCAxMDksMCAxNTIsLTUzIDE1MiwtMTAzIDAsLTE1OCAtNDQwLC02MCAtNDQwLC0zMzggMCwtMTI1IDEwOSwtMjIxIDI3NSwtMjIxIDExNywwIDIxMywzNyAyODMsMTA1bC03NiA5OWMtNTksLTU5IC0xMzksLTg2IC0yMTksLTg2IC03OCwwIC0xMjcsMzcgLTEyNyw5NCAwLDE0MCA0MzksNTMgNDM5LDMzNSAwLDEyNSAtODksMjMzIC0yOTIsMjMzIC0xNDAsMCAtMjQwLC00OSAtMzA3LC0xMjB6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTAiIGQ9Ik0xMjkyNyAxMjkwMWMwLC0yMzQgMTczLC0zOTAgMzg5LC0zOTAgMTMzLDAgMjI2LDU5IDI5MywxNDFsLTc1IDQ3Yy00NywtNjEgLTEyOCwtMTA0IC0yMTgsLTEwNCAtMTY2LDAgLTI5MSwxMjYgLTI5MSwzMDYgMCwxNzkgMTI1LDMwOCAyOTEsMzA4IDkwLDAgMTY1LC00NCAyMDIsLTgxbDAgLTE1NCAtMjU5IDAgMCAtODQgMzUzIDAgMCAyNzNjLTcwLDc4IC0xNzMsMTMwIC0yOTYsMTMwIC0yMTYsMCAtMzg5LC0xNTcgLTM4OSwtMzkyeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTQyMDggMTI3NTFjMCwtODUgLTYyLC0xNDQgLTE1MSwtMTQ0bC0xOTggMCAwIDI4OSAxOTggMGM4OSwwIDE1MSwtNjAgMTUxLC0xNDV6bS02IDUyN2wtMTkzIC0zMDAgLTE1MCAwIDAgMzAwIC05NCAwIDAgLTc1NSAzMDMgMGMxMzgsMCAyMzcsODkgMjM3LDIyOCAwLDEzNiAtOTMsMjEwIC0xOTYsMjE5bDIwNCAzMDggLTExMSAweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTUwNzUgMTI5MDFjMCwtMTc2IC0xMDksLTMwNiAtMjc4LC0zMDYgLTE3MCwwIC0yNzcsMTMwIC0yNzcsMzA2IDAsMTc2IDEwNywzMDcgMjc3LDMwNyAxNjksMCAyNzgsLTEzMSAyNzgsLTMwN3ptLTY1MiAwYzAsLTIyMyAxNTAsLTM5MCAzNzQsLTM5MCAyMjMsMCAzNzUsMTY3IDM3NSwzOTAgMCwyMjMgLTE1MiwzOTEgLTM3NSwzOTEgLTIyNCwwIC0zNzQsLTE2OCAtMzc0LC0zOTF6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTAiIGQ9Ik0xNTMxOSAxMjk4NWwwIC00NjIgOTQgMCAwIDQ2MGMwLDEzOCA3NSwyMjUgMjE0LDIyNSAxMzksMCAyMTQsLTg3IDIxNCwtMjI1bDAgLTQ2MCA5NCAwIDAgNDYxYzAsMTg4IC0xMDMsMzA4IC0zMDgsMzA4IC0yMDUsMCAtMzA4LC0xMjEgLTMwOCwtMzA3eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTY1NTQgMTI3NTFjMCwtODUgLTYxLC0xNDQgLTE1MSwtMTQ0bC0xOTggMCAwIDI4OCAxOTggMGM5MCwwIDE1MSwtNTkgMTUxLC0xNDR6bS00NDMgNTI3bDAgLTc1NSAzMDQgMGMxNTEsMCAyMzYsMTA0IDIzNiwyMjggMCwxMjMgLTg3LDIyNyAtMjM2LDIyN2wtMjEwIDAgMCAzMDAgLTk0IDB6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTEiIGQ9Ik01MzQ5IDEzNjI5YzYyLC00NyA0LC0xMTIgLTExOCwtMTU0IC0xMjIsLTQyIC0yNjMsLTQ2IC0zMjUsLTIgLTYyLDQzIC0yMSwxMjEgMTAxLDE2NSAxMjMsNDUgMjgxLDM4IDM0MiwtOXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxMSIgZD0iTTQyMTIgMTM3MjRjNjQsLTQ2IC0xMjAsLTE1MSAtMzgyLC0yNzEgLTI2MiwtMTE5IC01MDIsLTIwNyAtNTY3LC0xNjMgLTY2LDQzIDY4LDIwMyAzMzIsMzI1IDI2MywxMjIgNTUzLDE1NCA2MTcsMTA5eiIvPg0KICA8L2c+DQogPC9nPg0KPC9zdmc+DQo=" alt="Premier Logistics Group">
   </div>
-  <div class="hright">
-    <span class="hlabel">GitHub Token</span>
-    <input type="password" class="hinput" id="gh-token" placeholder="ghp_..." oninput="saveToken()" autocomplete="off">
+  <div class="header-right">
+    <div class="token-field">
+      <div class="token-dot" id="tok-dot"></div>
+      <label>GitHub Token</label>
+      <input type="password" id="gh-token" placeholder="ghp_..." oninput="saveToken()" autocomplete="off">
+    </div>
   </div>
-</header>
+</div>
 
-<div class="pagetop">
-  <h1>Customer KPI Dashboard</h1>
-  <p>Select a customer to view and update their monthly KPI data</p>
-  <div class="statbar">
-    <div class="statcard"><div class="statlabel">Total customers</div><div class="statval" id="s-total">0</div><div class="statsub">Active accounts</div></div>
-    <div class="statcard"><div class="statlabel">With data</div><div class="statval" id="s-data">0</div><div class="statsub">Months tracked</div></div>
-    <div class="statcard"><div class="statlabel">Best OTIF</div><div class="statval" id="s-best">—</div><div class="statsub" id="s-bestname">—</div></div>
-    <div class="statcard"><div class="statlabel">Below 95% OTIF</div><div class="statval" id="s-attention">0</div><div class="statsub">Need attention</div></div>
+<div class="hero">
+  <div class="hero-title">Customer KPI Dashboard</div>
+  <div class="hero-sub">Select a customer to view and update their monthly KPI data</div>
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-label">Total customers</div><div class="stat-value orange" id="s-total">0</div></div>
+    <div class="stat-item"><div class="stat-label">With data</div><div class="stat-value" id="s-data">0</div></div>
+    <div class="stat-item"><div class="stat-label">Best OTIF</div><div class="stat-value orange" id="s-best">—</div><div class="stat-label" id="s-bestname" style="margin-top:2px">—</div></div>
+    <div class="stat-item"><div class="stat-label">Below 95% OTIF</div><div class="stat-value" id="s-att">0</div></div>
   </div>
 </div>
 
 <div class="toolbar">
-  <div class="tleft">
-    <input type="text" class="searchbox" id="search" placeholder="Search customers..." oninput="render()">
-    <span class="countlabel" id="countlabel"></span>
+  <div class="toolbar-left">
+    <div class="search-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search customers..." oninput="render()">
+    </div>
+    <div class="count-pill" id="count-pill">—</div>
   </div>
-  <div style="display:flex;gap:8px">
-    <button class="btn btnghost" id="editbtn" onclick="toggleEdit()">Manage</button>
-    <button class="btn btnprimary" onclick="showModal()">+ Add customer</button>
+  <div class="toolbar-right">
+    <button class="btn btn-ghost" id="edit-btn" onclick="toggleEdit()">Manage</button>
+    <button class="btn btn-primary" onclick="showModal()">+ Add customer</button>
   </div>
 </div>
 
@@ -114,168 +216,111 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid #e0e0de;display:flex;justify-c
 
 <div class="overlay" id="overlay" style="display:none" onclick="if(event.target===this)hideModal()">
   <div class="modal">
-    <h2>Add customer</h2>
-    <input type="text" class="modalinput" id="modalinput" placeholder="e.g. Anand International" onkeydown="if(event.key==='Enter')addCustomer()">
-    <div class="modalbtns">
-      <button class="btn btnghost" onclick="hideModal()">Cancel</button>
-      <button class="btn btnprimary" onclick="addCustomer()">Add</button>
+    <div class="modal-title">Add customer</div>
+    <input class="modal-input" id="modal-input" type="text" placeholder="e.g. Anand International" onkeydown="if(event.key==='Enter')addCustomer()">
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="hideModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="addCustomer()">Add</button>
     </div>
   </div>
 </div>
 
-<footer>
-  <span>Premier Logistics Group &middot; KPI Portal</span>
-  <span>Data stored on GitHub &middot; 2026</span>
-</footer>
+<footer>Premier Logistics Group &middot; KPI Portal &middot; Data stored on GitHub</footer>
 
 <script>
 var OWNER='Macauleywc',REPO='PLG-KPI-Tool',BRANCH='main';
 var DEFAULTS=['Anand International','Bonnington Plastics','BPW','Charles Bentley','Christmas Tree','Drivers Pickles','Geodis','Greiner Bio One','Mediq','Monro','Red Monkey','SAF Holland','SAM Mouldings','Sarstedt','Tom Chambers','VPK'];
 var editMode=false,meta={};
 
-function saveToken(){localStorage.setItem('plg_gh_token',document.getElementById('gh-token').value);}
+function saveToken(){
+  var t=document.getElementById('gh-token').value;
+  localStorage.setItem('plg_gh_token',t);
+  document.getElementById('tok-dot').classList.toggle('on',t.length>0);
+}
 function getToken(){return localStorage.getItem('plg_gh_token')||'';}
 function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
 function ghFile(n){return'data/'+slug(n)+'.json';}
 function inits(n){return n.split(' ').map(function(w){return w[0]||'';}).slice(0,2).join('').toUpperCase();}
-
-function getList(){
-  try{
-    var s=localStorage.getItem('plg_customers');
-    var a=JSON.parse(s);
-    if(Array.isArray(a)&&a.length>0)return a;
-  }catch(e){}
-  return DEFAULTS.slice();
-}
+function getList(){try{var a=JSON.parse(localStorage.getItem('plg_customers'));if(Array.isArray(a)&&a.length>0)return a;}catch(e){}return DEFAULTS.slice();}
 function saveList(a){localStorage.setItem('plg_customers',JSON.stringify(a));}
-
-function otifClass(v){
-  if(v==null)return'';
-  var n=parseFloat(v);
-  return n>=98?'good':n>=95?'ok':'bad';
-}
+function otifClass(v){if(v==null)return'';return parseFloat(v)>=98?'good':parseFloat(v)>=95?'warn':'bad';}
 
 function render(){
   var list=getList();
   var q=(document.getElementById('search').value||'').toLowerCase();
   var filtered=q?list.filter(function(n){return n.toLowerCase().indexOf(q)>=0;}):list.slice();
-
   document.getElementById('s-total').textContent=list.length;
-  document.getElementById('countlabel').textContent=filtered.length+' customer'+(filtered.length!==1?'s':'');
-
-  var withData=0,bestOTIF=null,bestName='',attention=0;
-  list.forEach(function(n){
-    var m=meta[n];
-    if(m&&m.months>0){
-      withData++;
-      if(m.otif!=null){
-        if(bestOTIF===null||parseFloat(m.otif)>parseFloat(bestOTIF)){bestOTIF=m.otif;bestName=n;}
-        if(parseFloat(m.otif)<95)attention++;
-      }
-    }
-  });
+  document.getElementById('count-pill').textContent=filtered.length+' customer'+(filtered.length!==1?'s':'');
+  var withData=0,bestOTIF=null,bestName='',att=0;
+  list.forEach(function(n){var m=meta[n];if(m&&m.months>0){withData++;if(m.otif!=null){if(bestOTIF===null||parseFloat(m.otif)>parseFloat(bestOTIF)){bestOTIF=m.otif;bestName=n;}if(parseFloat(m.otif)<95)att++;}}});
   document.getElementById('s-data').textContent=withData;
   document.getElementById('s-best').textContent=bestOTIF!=null?bestOTIF+'%':'—';
   document.getElementById('s-bestname').textContent=bestName||'No data yet';
-  document.getElementById('s-attention').textContent=attention;
-
+  document.getElementById('s-att').textContent=att;
   var grid=document.getElementById('grid');
   grid.innerHTML='';
-  if(editMode)grid.classList.add('editmode');
-  else grid.classList.remove('editmode');
-
+  grid.className='grid'+(editMode?' edit-mode':'');
   filtered.forEach(function(name){
     var m=meta[name]||{};
     var card=document.createElement('div');
-    card.className='card'+(m.months>0?' hasdata':'');
-
-    var otifPct=m.otif!=null?m.otif+'%':'—';
-    var kpiBlock=m.months>0?
-      '<div class="cardkpis">'+
-        '<div><div class="kpilabel">Latest OTIF</div><div class="kpival '+otifClass(m.otif)+'">'+otifPct+'</div></div>'+
-        '<div><div class="kpilabel">Months</div><div class="kpival orange">'+m.months+'</div></div>'+
+    card.className='card'+(m.months>0?' live':'');
+    var kpiHtml=m.months>0?
+      '<div class="card-kpis">'+
+        '<div class="kpi-item"><div class="kpi-l">OTIF</div><div class="kpi-v '+otifClass(m.otif)+'">'+(m.otif!=null?m.otif+'%':'—')+'</div></div>'+
+        '<div class="kpi-item"><div class="kpi-l">Months</div><div class="kpi-v orange">'+m.months+'</div></div>'+
       '</div>':
-      '<div class="nodata">No data yet — click to start</div>';
-
+      '<div class="no-data">No data yet</div>';
     card.innerHTML=
-      '<div class="cardtop">'+
-        '<div class="avatar">'+inits(name)+'</div>'+
-        '<button class="delbtn" onclick="event.stopPropagation();del(\''+name.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\')">&times;</button>'+
+      '<div class="card-head">'+
+        '<div class="card-avatar">'+inits(name)+'</div>'+
+        '<button class="del-btn" onclick="event.stopPropagation();del(''+name.replace(/'/g,"\'")+'')">&#215;</button>'+
       '</div>'+
-      '<div class="cardname">'+name+'</div>'+
-      (m.months>0?'<div class="cardmonths">'+m.months+' month'+(m.months!==1?'s':'')+' of data</div>':'')+
-      kpiBlock;
-
-    if(!editMode){
-      (function(n){card.onclick=function(){location.href='customer.html?c='+encodeURIComponent(n);};})(name);
-    }
+      '<div class="card-name">'+name+'</div>'+
+      (m.months>0?'<div class="card-meta">'+m.months+' month'+(m.months!==1?'s':'')+' of data</div>':'<div class="card-meta">No data yet</div>')+
+      kpiHtml;
+    if(!editMode)card.onclick=function(){location.href='customer.html?c='+encodeURIComponent(name);};
     grid.appendChild(card);
   });
-
   if(!editMode){
-    var add=document.createElement('div');
-    add.className='addcard';
-    add.onclick=showModal;
-    add.innerHTML='<div class="addicon">+</div><div class="addlabel">Add customer</div>';
+    var add=document.createElement('div');add.className='add-card';add.onclick=showModal;
+    add.innerHTML='<div class="add-icon">+</div><div class="add-label">Add customer</div>';
     grid.appendChild(add);
   }
 }
 
 async function loadMeta(){
-  var token=getToken();
-  if(!token)return;
-  var list=getList();
-  await Promise.all(list.map(async function(name){
+  var token=getToken();if(!token)return;
+  await Promise.all(getList().map(async function(name){
     try{
-      var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+ghFile(name),
-        {headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
+      var r=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+ghFile(name),{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
       if(!r.ok)return;
       var j=await r.json();
-      var d=JSON.parse(atob(j.content.replace(/\n/g,'')));
+      var d=JSON.parse(atob(j.content.replace(/
+/g,'')));
       var months=Object.keys(d.months||{}).sort();
       var latest=months[months.length-1];
       var otif=null;
-      if(latest&&d.months[latest]&&d.months[latest].timeliness!=null){
-        otif=(d.months[latest].timeliness*100).toFixed(1);
-      }
+      if(latest&&d.months[latest]&&d.months[latest].timeliness!=null)otif=(d.months[latest].timeliness*100).toFixed(1);
       meta[name]={months:months.length,otif:otif};
     }catch(e){}
   }));
   render();
 }
 
-function toggleEdit(){
-  editMode=!editMode;
-  document.getElementById('editbtn').textContent=editMode?'Done':'Manage';
-  render();
-}
-
-function del(name){
-  if(!confirm('Remove '+name+' from the portal?'))return;
-  var list=getList().filter(function(n){return n!==name;});
-  saveList(list);
-  delete meta[name];
-  render();
-}
-
-function showModal(){document.getElementById('overlay').style.display='flex';setTimeout(function(){document.getElementById('modalinput').focus();},50);}
-function hideModal(){document.getElementById('overlay').style.display='none';document.getElementById('modalinput').value='';}
-
+function toggleEdit(){editMode=!editMode;document.getElementById('edit-btn').textContent=editMode?'Done':'Manage';render();}
+function del(name){if(!confirm('Remove '+name+'?'))return;var l=getList().filter(function(c){return c!==name;});saveList(l);delete meta[name];render();}
+function showModal(){document.getElementById('overlay').style.display='flex';setTimeout(function(){document.getElementById('modal-input').focus();},50);}
+function hideModal(){document.getElementById('overlay').style.display='none';document.getElementById('modal-input').value='';}
 function addCustomer(){
-  var name=document.getElementById('modalinput').value.trim();
-  if(!name)return;
-  var list=getList();
-  if(list.indexOf(name)===-1){list.push(name);saveList(list);}
-  hideModal();
-  render();
-  if(getToken())loadMeta();
+  var name=document.getElementById('modal-input').value.trim();if(!name)return;
+  var l=getList();if(l.indexOf(name)===-1){l.push(name);saveList(l);}
+  hideModal();render();if(getToken())loadMeta();
 }
 
 window.addEventListener('load',function(){
   var t=localStorage.getItem('plg_gh_token');
-  if(t)document.getElementById('gh-token').value=t;
-  render();
-  if(t)loadMeta();
+  if(t){document.getElementById('gh-token').value=t;document.getElementById('tok-dot').classList.add('on');}
+  render();if(t)loadMeta();
 });
 </script>
 </body>
