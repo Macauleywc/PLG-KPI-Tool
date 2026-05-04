@@ -312,12 +312,18 @@ function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-
 function inits(n){return n.split(' ').map(function(w){return w[0]||'';}).slice(0,2).join('').toUpperCase();}
 function getList(){
   try{var a=JSON.parse(localStorage.getItem('plg_customers'));if(Array.isArray(a)&&a.length>0)return a;}catch(e){}
-  // Seed defaults into localStorage so they persist
   saveList(DEFAULTS.slice());
   return DEFAULTS.slice();
 }
 function saveList(a){localStorage.setItem('plg_customers',JSON.stringify(a));}
 function otifClass(v){if(v==null)return'';return parseFloat(v)>=98?'good':parseFloat(v)>=95?'warn':'bad';}
+
+// FIX: use data attributes instead of inline string interpolation for delete buttons
+function delCustomer(name){
+  if(!confirm('Remove '+name+' from the portal?'))return;
+  var l=getList().filter(function(c){return c!==name;});
+  saveList(l);delete meta[name];render();
+}
 
 function render(){
   var list=getList();
@@ -351,7 +357,7 @@ function render(){
     var empty=document.createElement('div');
     empty.className='empty-state';
     empty.style='grid-column:1/-1';
-    empty.innerHTML='<div class="empty-state-icon">🔍</div><div class="empty-state-title">No customers found</div><div class="empty-state-sub">Try a different search term</div>';
+    empty.innerHTML='<div class="empty-state-icon">&#128269;</div><div class="empty-state-title">No customers found</div><div class="empty-state-sub">Try a different search term</div>';
     grid.appendChild(empty);
     return;
   }
@@ -372,16 +378,45 @@ function render(){
       kpiHtml='<div class="card-divider"></div><div class="no-data">No data yet — click to start</div>';
     }
 
-    card.innerHTML=
-      '<div class="card-top">'+
-        '<div class="avatar">'+inits(name)+'</div>'+
-        '<button class="del-btn" onclick="event.stopPropagation();delCustomer(''+name.replace(/'/g,"\'")+'')" title="Remove">&#215;</button>'+
-      '</div>'+
-      '<div class="card-name">'+name+'</div>'+
-      '<div class="card-sub">'+(m.months>0?m.months+' month'+(m.months!==1?'s':'')+' of data':'No data yet')+'</div>'+
-      kpiHtml;
+    // FIX: Build delete button as a DOM element, not inline HTML string with escaped quotes
+    var delBtn=document.createElement('button');
+    delBtn.className='del-btn';
+    delBtn.title='Remove';
+    delBtn.innerHTML='&#215;';
+    delBtn.addEventListener('click',function(e){
+      e.stopPropagation();
+      delCustomer(name);
+    });
 
-    if(!editMode)card.onclick=function(){location.href='customer.html?c='+encodeURIComponent(name);};
+    var cardTop=document.createElement('div');
+    cardTop.className='card-top';
+
+    var avatar=document.createElement('div');
+    avatar.className='avatar';
+    avatar.textContent=inits(name);
+
+    cardTop.appendChild(avatar);
+    cardTop.appendChild(delBtn);
+
+    var cardName=document.createElement('div');
+    cardName.className='card-name';
+    cardName.textContent=name;
+
+    var cardSub=document.createElement('div');
+    cardSub.className='card-sub';
+    cardSub.textContent=m.months>0?m.months+' month'+(m.months!==1?'s':'')+' of data':'No data yet';
+
+    card.appendChild(cardTop);
+    card.appendChild(cardName);
+    card.appendChild(cardSub);
+
+    var kpiWrap=document.createElement('div');
+    kpiWrap.innerHTML=kpiHtml;
+    card.appendChild(kpiWrap);
+
+    if(!editMode){
+      card.onclick=function(){location.href='customer.html?c='+encodeURIComponent(name);};
+    }
     grid.appendChild(card);
   });
 
@@ -402,8 +437,9 @@ async function loadMeta(){
         {headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
       if(!r.ok)return;
       var j=await r.json();
-      var d=JSON.parse(atob(j.content.replace(/
-/g,'')));
+      // FIX: strip all whitespace/newlines from base64 before decoding
+      var raw=j.content.replace(/\s/g,'');
+      var d=JSON.parse(atob(raw));
       var months=Object.keys(d.months||{}).sort();
       var latest=months[months.length-1];
       var otif=null;
@@ -420,11 +456,6 @@ function toggleEdit(){
   document.getElementById('edit-btn').textContent=editMode?'Done':'Manage';
   render();
 }
-function delCustomer(name){
-  if(!confirm('Remove '+name+' from the portal?'))return;
-  var l=getList().filter(function(c){return c!==name;});
-  saveList(l);delete meta[name];render();
-}
 function showModal(){document.getElementById('overlay').style.display='flex';setTimeout(function(){document.getElementById('modal-input').focus();},50);}
 function hideModal(){document.getElementById('overlay').style.display='none';document.getElementById('modal-input').value='';}
 function addCustomer(){
@@ -434,21 +465,17 @@ function addCustomer(){
 }
 
 window.addEventListener('load',function(){
-  // Always ensure defaults are in localStorage
   var stored=null;
   try{stored=JSON.parse(localStorage.getItem('plg_customers'));}catch(e){}
   if(!Array.isArray(stored)||stored.length===0){
     localStorage.setItem('plg_customers',JSON.stringify(DEFAULTS));
   }
-  // Load token
   var t=localStorage.getItem('plg_gh_token');
   if(t){
     document.getElementById('gh-token').value=t;
     document.getElementById('tok-dot').classList.add('active');
   }
-  // Render immediately
   render();
-  // Load meta from GitHub
   if(t)loadMeta();
 });
 </script>
