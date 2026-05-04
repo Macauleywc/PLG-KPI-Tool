@@ -684,29 +684,18 @@ function drawUKMap(regMap){
     return'#7a1e00';
   }
 
-  // Sidebar sorted by pallets
   var sorted=Object.keys(regMap).filter(function(k){return regMap[k]&&regMap[k].pallets>0;}).sort(function(a,b){return regMap[b].pallets-regMap[a].pallets;});
   var barsHtml=sorted.map(function(name){
     var d=regMap[name];
     var pct=(d.pallets/maxPallets*100).toFixed(0);
     var t=d.pallets/maxPallets;
     var col=t>0.6?'#7a1e00':t>0.35?'#f47920':'#fdc896';
-    return'<div style="margin-bottom:8px">'+
-      '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">'+
-        '<span style="color:#555">'+name+'</span>'+
-        '<span style="color:#888;font-weight:500">'+d.pallets+' plts</span>'+
-      '</div>'+
-      '<div style="height:4px;background:#f0f0ee;border-radius:2px;overflow:hidden">'+
-        '<div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:2px"></div>'+
-      '</div>'+
-    '</div>';
+    return'<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="color:#555">'+name+'</span><span style="color:#888;font-weight:500">'+d.pallets+' plts</span></div><div style="height:4px;background:#f0f0ee;border-radius:2px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:2px"></div></div></div>';
   }).join('');
 
   wrap.innerHTML=
     '<div style="display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:start">'+
-      '<div>'+
-        '<div id="leaflet-map" style="height:500px;border-radius:10px;overflow:hidden;border:0.5px solid #e8e8e6"></div>'+
-      '</div>'+
+      '<div><div id="leaflet-map" style="height:520px;border-radius:10px;overflow:hidden;border:0.5px solid #e8e8e6;background:#e8f0e8"></div></div>'+
       '<div>'+
         '<div style="font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Pallets by region</div>'+
         barsHtml+
@@ -720,106 +709,103 @@ function drawUKMap(regMap){
     '</div>';
 
   setTimeout(function(){
-    // Destroy previous map instance if exists
-    if(leafletMap){leafletMap.remove();leafletMap=null;}
+    if(leafletMap){try{leafletMap.remove();}catch(e){}leafletMap=null;}
 
     leafletMap=L.map('leaflet-map',{
-      center:[54.5,-3.5],
-      zoom:5,
-      zoomControl:true,
-      attributionControl:false,
-      scrollWheelZoom:false
+      center:[54.5,-3.5],zoom:5.5,
+      zoomControl:true,attributionControl:false,scrollWheelZoom:false
     });
 
-    // Light minimal tile layer
+    // CartoDB Positron - clean light basemap
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
-      subdomains:'abcd',
-      maxZoom:8
+      subdomains:'abcd',maxZoom:10,opacity:0.5
     }).addTo(leafletMap);
 
-    // Load UK regions GeoJSON
-    fetch('https://raw.githubusercontent.com/rowanhogan/uk-regions/master/england-regions.geojson')
-      .then(function(r){if(!r.ok)throw new Error('Failed');return r.json();})
-      .then(function(geo){addGeoLayer(geo,regMap,maxPallets,heatColor);})
-      .catch(function(){
-        // Try alternative
-        fetch('https://cdn.jsdelivr.net/gh/martinjc/UK-GeoJSON@master/json/administrative/eng/topo_eer.json')
-          .then(function(r){return r.json();})
-          .catch(function(){showMapFallback(wrap,barsHtml,maxPallets);});
-      });
+    var nameMap={
+      'North East England':'North East','North West England':'North West',
+      'Yorkshire and The Humber':'Yorkshire','Yorkshire and the Humber':'Yorkshire',
+      'East Midlands':'East Midlands','West Midlands':'West Midlands',
+      'East of England':'East of England',
+      'London':'London','South East England':'South East','South East':'South East',
+      'South West England':'South West','South West':'South West',
+      'Wales':'Wales','Scotland':'Scotland','Northern Ireland':'Northern Ireland',
+      'North East':'North East','North West':'North West'
+    };
 
-    // Always add Scotland, Wales, NI as simple overlays
-    addNationLayers(regMap,maxPallets,heatColor);
-
-  },100);
-}
-
-function addGeoLayer(geo,regMap,maxPallets,heatColor){
-  var nameMap={
-    'North East':'North East','North West':'North West',
-    'Yorkshire and The Humber':'Yorkshire','Yorkshire and the Humber':'Yorkshire',
-    'East Midlands':'East Midlands','West Midlands':'West Midlands',
-    'East of England':'East of England','East':'East of England',
-    'London':'London','South East':'South East','South East (England)':'South East',
-    'South West':'South West','South West (England)':'South West',
-    'Wales':'Wales','Scotland':'Scotland','Northern Ireland':'Northern Ireland'
-  };
-
-  L.geoJSON(geo,{
-    style:function(feature){
-      var name=feature.properties.EER13NM||feature.properties.rgn19nm||feature.properties.name||'';
+    function styleRegion(feature){
+      var name=feature.properties.rgn19nm||feature.properties.EER13NM||feature.properties.NAME_1||feature.properties.name||'';
       var mapped=nameMap[name]||name;
       var d=regMap[mapped]||{pallets:0};
-      return{
-        fillColor:heatColor(d.pallets),
-        weight:1.5,
-        opacity:1,
-        color:'#fff',
-        fillOpacity:0.85
-      };
-    },
-    onEachFeature:function(feature,layer){
-      var name=feature.properties.EER13NM||feature.properties.rgn19nm||feature.properties.name||'';
+      return{fillColor:heatColor(d.pallets),weight:1.5,opacity:1,color:'#ffffff',fillOpacity:0.88};
+    }
+
+    function onEachFeature(feature,layer){
+      var name=feature.properties.rgn19nm||feature.properties.EER13NM||feature.properties.NAME_1||feature.properties.name||'';
       var mapped=nameMap[name]||name;
       var d=regMap[mapped]||{pallets:0,cons:0,revenue:0};
       layer.on({
         mouseover:function(e){
           layer.setStyle({weight:2.5,color:'#F47920',fillOpacity:0.95});
-          layer.bindTooltip(
-            '<strong style="font-size:13px">'+mapped+'</strong><br>'+
-            (d.pallets>0?
-              '<span style="color:#F47920;font-weight:700;font-size:15px">'+d.pallets+' pallets</span><br>'+
-              d.cons+' consignments<br>'+
-              '£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):
-              'No deliveries this period'),
-            {sticky:true,className:'uk-map-tooltip'}
-          ).openTooltip(e.latlng);
+          var tt='<b style="font-size:13px">'+mapped+'</b><br>'+(d.pallets>0?'<span style="color:#F47920;font-size:15px;font-weight:700">'+d.pallets+' pallets</span><br>'+d.cons+' consignments':'No deliveries');
+          layer.bindTooltip(tt,{sticky:true,className:'uk-map-tt'}).openTooltip(e.latlng);
         },
         mouseout:function(){
-          layer.setStyle({weight:1.5,color:'#fff',fillOpacity:0.85});
+          layer.setStyle({weight:1.5,color:'#ffffff',fillOpacity:0.88});
           layer.closeTooltip();
+        },
+        click:function(){
+          if(d.pallets>0){
+            var msg=mapped+'\n\nPallets: '+d.pallets+'\nConsignments: '+d.cons+'\nLates: '+d.lates+'\nOTIF: '+(d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'—')+'%';
+            alert(msg);
+          }
         }
       });
     }
-  }).addTo(leafletMap);
+
+    // Try multiple reliable GeoJSON sources
+    var sources=[
+      'https://cdn.jsdelivr.net/npm/uk-topojson@0.1.0/uk.json',
+      'https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Regions_December_2019_EN_BGC/FeatureServer/0/query?where=1%3D1&outFields=rgn19nm&outSR=4326&f=geojson',
+      'https://opendata.arcgis.com/api/v3/datasets/bafeb380d7e34f04a3fa631e34af8e59_0/downloads/data?format=geojson&spatialRefId=4326'
+    ];
+
+    function trySource(idx){
+      if(idx>=sources.length){showMapError();return;}
+      fetch(sources[idx])
+        .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+        .then(function(data){
+          var geo=data;
+          // Handle topojson
+          if(data.type==='Topology'){
+            var key=Object.keys(data.objects)[0];
+            geo=toGeoJSON(data,data.objects[key]);
+          }
+          L.geoJSON(geo,{style:styleRegion,onEachFeature:onEachFeature}).addTo(leafletMap);
+        })
+        .catch(function(){trySource(idx+1);});
+    }
+
+    trySource(0);
+
+  },150);
 }
 
-function addNationLayers(regMap,maxPallets,heatColor){
-  // Simple nation boundaries for Scotland, Wales, Northern Ireland
-  var nations=[
-    {id:'Scotland',bounds:[[54.6,-7.6],[60.9,-0.7]]},
-    {id:'Wales',bounds:[[51.3,-5.4],[53.4,-2.6]]},
-    {id:'Northern Ireland',bounds:[[54.0,-8.2],[55.4,-5.4]]}
-  ];
-  // These will be supplemented by the GeoJSON above for England
-  // For non-England nations, fetch from a reliable source
-  fetch('https://raw.githubusercontent.com/glynnbird/countriesgeojson/master/united kingdom.geojson')
-    .catch(function(){});
+function toGeoJSON(topo,obj){
+  var arcs=topo.arcs,scale=topo.transform?topo.transform.scale:[1,1],translate=topo.transform?topo.transform.translate:[0,0];
+  function decodeArc(arc){var x=0,y=0;return arc.map(function(pt){x+=pt[0];y+=pt[1];return[(x*scale[0]+translate[0]),(y*scale[1]+translate[1])];}); }
+  function resolveArc(i){var a=decodeArc(arcs[i<0?~i:i]);return i<0?a.reverse():a;}
+  function ring(al){var c=[];al.forEach(function(i){c=c.concat(resolveArc(i));});return c;}
+  function geom(g){
+    if(g.type==='Polygon')return{type:'Polygon',coordinates:g.arcs.map(ring)};
+    if(g.type==='MultiPolygon')return{type:'MultiPolygon',coordinates:g.arcs.map(function(p){return p.map(ring);})};
+    return{type:g.type,coordinates:[]};
+  }
+  return{type:'FeatureCollection',features:obj.geometries.map(function(g){return{type:'Feature',properties:g.properties||{},geometry:geom(g)};})};
 }
 
-function showMapFallback(wrap,barsHtml,maxPallets){
-  var mapDiv=document.getElementById('leaflet-map');
-  if(mapDiv)mapDiv.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#aaa;font-size:13px;flex-direction:column;gap:8px"><div style="font-size:24px">🗺️</div><div>Map unavailable — see region breakdown</div></div>';
+function showMapError(){
+  var m=document.getElementById('leaflet-map');
+  if(m)m.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:8px;color:#aaa"><div style="font-size:28px">&#128506;</div><div style="font-size:13px">Map data unavailable</div><div style="font-size:11px">See the region breakdown on the right</div></div>';
 }
 
 
