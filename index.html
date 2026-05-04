@@ -133,8 +133,8 @@ var OWNER='Macauleywc',REPO='PLG-KPI-Tool',BRANCH='main';
 var DEFAULTS=['Anand International','Bonnington Plastics','BPW','Charles Bentley','Christmas Tree','Drivers Pickles','Geodis','Greiner Bio One','Mediq','Monro','Red Monkey','SAF Holland','SAM Mouldings','Sarstedt','Tom Chambers','VPK'];
 var editMode=false,meta={};
 
-function saveToken(){localStorage.setItem('plg_token',document.getElementById('gh-token').value);}
-function getToken(){return localStorage.getItem('plg_token')||'';}
+function saveToken(){localStorage.setItem('plg_gh_token',document.getElementById('gh-token').value);}
+function getToken(){return localStorage.getItem('plg_gh_token')||'';}
 function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
 function ghFile(n){return'data/'+slug(n)+'.json';}
 function inits(n){return n.split(' ').map(function(w){return w[0]||'';}).slice(0,2).join('').toUpperCase();}
@@ -272,7 +272,7 @@ function addCustomer(){
 }
 
 window.addEventListener('load',function(){
-  var t=localStorage.getItem('plg_token');
+  var t=localStorage.getItem('plg_gh_token');
   if(t)document.getElementById('gh-token').value=t;
   render();
   if(t)loadMeta();
