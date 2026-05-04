@@ -661,53 +661,73 @@ function exportCustomerReport(){
 
   var periodLabel=months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026';
 
-  // Capture map SVG properly - get bounding box and crop whitespace
+  // Capture map - use html2canvas on just the map container for accuracy
   function captureMap(cb){
     try{
-      var svgEl=document.querySelector('#hc-map svg');
-      if(!svgEl){cb(null);return;}
-      // Get the actual drawn bounds from the SVG paths
-      var paths=svgEl.querySelectorAll('path[fill]:not([fill="none"])');
-      var minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
-      paths.forEach(function(p){
-        try{
-          var bb=p.getBBox();
-          if(bb.width>5&&bb.height>5){
-            minX=Math.min(minX,bb.x);minY=Math.min(minY,bb.y);
-            maxX=Math.max(maxX,bb.x+bb.width);maxY=Math.max(maxY,bb.y+bb.height);
+      var mapEl=document.getElementById('hc-map');
+      if(!mapEl){cb(null,null);return;}
+      // Use html2canvas to capture the rendered map
+      if(typeof html2canvas!=='undefined'){
+        html2canvas(mapEl,{
+          scale:2,
+          useCORS:true,
+          backgroundColor:'#ffffff',
+          logging:false,
+          ignoreElements:function(el){
+            // Ignore Leaflet zoom controls and attribution
+            return el.classList&&(el.classList.contains('highcharts-credits')||
+              el.classList.contains('highcharts-button'));
           }
-        }catch(e){}
-      });
-      var pad=20;
-      if(minX===Infinity){
-        // Fallback - use full SVG
+        }).then(function(canvas){
+          // Now crop whitespace: scan for non-white pixels
+          var ctx=canvas.getContext('2d');
+          var data=ctx.getImageData(0,0,canvas.width,canvas.height);
+          var px=data.data;
+          var minX=canvas.width,minY=canvas.height,maxX=0,maxY=0;
+          for(var y2=0;y2<canvas.height;y2++){
+            for(var x2=0;x2<canvas.width;x2++){
+              var i=(y2*canvas.width+x2)*4;
+              // Non-white and non-transparent pixel
+              if(px[i+3]>10&&!(px[i]>240&&px[i+1]>240&&px[i+2]>240)){
+                if(x2<minX)minX=x2;if(x2>maxX)maxX=x2;
+                if(y2<minY)minY=y2;if(y2>maxY)maxY=y2;
+              }
+            }
+          }
+          var pad=20;
+          minX=Math.max(0,minX-pad);minY=Math.max(0,minY-pad);
+          maxX=Math.min(canvas.width,maxX+pad);maxY=Math.min(canvas.height,maxY+pad);
+          var cropW=maxX-minX,cropH=maxY-minY;
+          if(cropW<50||cropH<50){cb(canvas.toDataURL('image/png'),canvas.width/canvas.height);return;}
+          var out=document.createElement('canvas');
+          out.width=cropW;out.height=cropH;
+          out.getContext('2d').drawImage(canvas,minX,minY,cropW,cropH,0,0,cropW,cropH);
+          cb(out.toDataURL('image/png'),cropW/cropH);
+        }).catch(function(){cb(null,null);});
+      } else {
+        // Fallback SVG method
+        var svgEl=mapEl.querySelector('svg');
+        if(!svgEl){cb(null,null);return;}
+        var clone=svgEl.cloneNode(true);
+        clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
         var vb=svgEl.viewBox.baseVal;
-        minX=vb.x||0;minY=vb.y||0;maxX=vb.width||600;maxY=vb.height||700;
+        var str=new XMLSerializer().serializeToString(clone);
+        var blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'});
+        var url=URL.createObjectURL(blob);
+        var img=new Image();
+        img.onload=function(){
+          var canvas=document.createElement('canvas');
+          canvas.width=vb.width||600;canvas.height=vb.height||700;
+          var ctx=canvas.getContext('2d');
+          ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+          ctx.drawImage(img,0,0);
+          URL.revokeObjectURL(url);
+          cb(canvas.toDataURL('image/png'),vb.width/vb.height);
+        };
+        img.onerror=function(){URL.revokeObjectURL(url);cb(null,null);};
+        img.src=url;
       }
-      var cropX=Math.max(0,minX-pad),cropY=Math.max(0,minY-pad);
-      var cropW=maxX-minX+pad*2,cropH=maxY-minY+pad*2;
-
-      var clone=svgEl.cloneNode(true);
-      clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
-      clone.setAttribute('viewBox',cropX+' '+cropY+' '+cropW+' '+cropH);
-      clone.removeAttribute('width');clone.removeAttribute('height');
-      var str=new XMLSerializer().serializeToString(clone);
-      var blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'});
-      var url=URL.createObjectURL(blob);
-      var img=new Image();
-      var scale=3;
-      img.onload=function(){
-        var canvas=document.createElement('canvas');
-        canvas.width=Math.round(cropW*scale);canvas.height=Math.round(cropH*scale);
-        var ctx=canvas.getContext('2d');
-        ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.scale(scale,scale);ctx.drawImage(img,0,0,cropW,cropH);
-        URL.revokeObjectURL(url);
-        cb(canvas.toDataURL('image/png'),cropW/cropH);
-      };
-      img.onerror=function(){URL.revokeObjectURL(url);cb(null);};
-      img.src=url;
-    }catch(e){console.log('Map error:',e);cb(null);}
+    }catch(e){console.log('Map capture error:',e);cb(null,null);}
   }
 
   captureMap(function(mapImg,mapAspect){
@@ -958,45 +978,50 @@ function exportCustomerReport(){
     }
 
     // ══════════════════════════════════════════════════════
-    // PAGE 3 — MAP (full page, properly cropped)
+    // PAGE 3 — MAP + REGIONS
     // ══════════════════════════════════════════════════════
     doc.addPage();chrome(3,TOTAL);
     y=CT+2;
     y=secH('UK Delivery Heatmap - Pallet Volume by Region',y);
 
-    if(mapImg&&mapAspect){
-      // Map takes left 55% of page, region table on right
-      var mapColW=CW*0.54,regColW=CW*0.42,regColX=ML+mapColW+CW*0.04;
-      var mapH3=(CB-y);
-      var mapW3=Math.min(mapColW,mapH3*mapAspect);
-      var mapH3f=mapW3/mapAspect;
-      // Centre vertically
-      var mapYoff=(mapH3-mapH3f)/2;
-      doc.addImage(mapImg,'PNG',ML,y+mapYoff,mapW3,mapH3f);
+    // Layout: region table LEFT (40%), map RIGHT (56%)
+    var regColW=CW*0.40,mapColW=CW*0.56,gapW=CW*0.04;
+    var regX=ML,mapX=ML+regColW+gapW;
+    var availH=CB-y;
 
-      // Region table
-      var regCols=[{l:'Region'},{l:'Plts',r:1},{l:'OTIF',r:1}];
-      var regW=[regColW*0.52,regColW*0.22,regColW*0.26];
-      var ry3=y;
-      ry3=th(regCols,regW,ry3,regColX-ML);
-      topReg.forEach(function(e,idx){
-        if(ry3>CB-6)return;
-        var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
-        ry3=tr([
-          {t:trunc(e[0],15)},
-          {t:String(d.pallets),r:1},
-          {t:otif+'%',r:1,c:otifColor(parseFloat(otif))}
-        ],regW,ry3,{shade:idx%2!==0},regColX-ML);
-      });
+    // Draw region table on LEFT
+    var regCols=[{l:'Region'},{l:'Pallets',r:1},{l:'OTIF',r:1}];
+    var regW=[regColW*0.54,regColW*0.24,regColW*0.22];
+    var ry3=y;
+    ry3=th(regCols,regW,ry3,0);
+    topReg.forEach(function(e,idx){
+      if(ry3>CB-6)return;
+      var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
+      // OTIF color dot
+      var otifC=otifColor(parseFloat(otif));
+      ry3=tr([
+        {t:trunc(e[0],16)},
+        {t:String(d.pallets),r:1},
+        {t:otif+'%',r:1,c:otifC}
+      ],regW,ry3,{shade:idx%2!==0},0);
+    });
+
+    // Draw map on RIGHT - fill full available height
+    if(mapImg&&mapAspect){
+      var mapH3=availH;
+      var mapW3=mapH3*mapAspect;
+      // If too wide, constrain by width
+      if(mapW3>mapColW){mapW3=mapColW;mapH3=mapW3/mapAspect;}
+      // Centre vertically in available space
+      var mapYoff=(availH-mapH3)/2;
+      // Centre horizontally in map column
+      var mapXoff=(mapColW-mapW3)/2;
+      doc.addImage(mapImg,'PNG',mapX+mapXoff,y+mapYoff,mapW3,mapH3);
     } else {
-      // No map - full width region table
-      var regCols2=[{l:'Region'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'Cost',r:1},{l:'Lates',r:1},{l:'OTIF',r:1}];
-      var regW2=[50,18,18,38,14,24];
-      y=th(regCols2,regW2,y);
-      topReg.forEach(function(e,idx){
-        var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';
-        y=tr([trunc(e[0],28),{t:String(d.cons),r:1},{t:String(d.pallets),r:1},{t:fmt(d.revenue),r:1},{t:String(d.lates),r:1},{t:otif+'%',r:1,c:otifColor(parseFloat(otif))}],regW2,y,{shade:idx%2!==0});
-      });
+      // No map - extend region table to full width
+      fill(C.faint);doc.rect(mapX,y,mapColW,availH,'F');
+      txt(C.muted);doc.setFontSize(9);doc.setFont('helvetica','normal');
+      doc.text('Map unavailable',mapX+mapColW/2,y+availH/2,{align:'center'});
     }
 
     // ══════════════════════════════════════════════════════
