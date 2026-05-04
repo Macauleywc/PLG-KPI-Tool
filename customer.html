@@ -662,6 +662,7 @@ function removeLate(idx){
 
 var regMap_global={};
 var leafletMap=null;
+var UK_GEO={"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Scotland"},"geometry":{"type":"MultiPolygon","coordinates":[[[[-2.05,55.81],[-1.97,55.91],[-2.43,56.06],[-2.92,56.34],[-3.42,56.02],[-3.74,55.96],[-4.22,55.84],[-4.82,55.76],[-5.08,55.93],[-5.6,56.02],[-5.47,56.31],[-5.5,56.61],[-5.12,56.85],[-5.56,57.22],[-5.83,57.6],[-5.51,58.05],[-4.85,58.29],[-4.04,58.34],[-3.54,58.49],[-3.07,58.71],[-2.56,58.69],[-1.93,58.53],[-1.75,58.09],[-2.11,57.72],[-2.48,57.47],[-2.23,57.09],[-2.03,56.74],[-2.14,56.49],[-2.05,55.81]]],[[[-6.15,57.01],[-6.47,57.02],[-6.83,57.17],[-6.94,57.39],[-6.75,57.51],[-6.41,57.52],[-6.05,57.37],[-5.85,57.14],[-6.15,57.01]]],[[[-5.21,55.8],[-5.64,55.85],[-5.81,55.97],[-5.84,56.11],[-5.57,56.26],[-5.12,56.22],[-4.97,56.05],[-5.04,55.89],[-5.21,55.8]]]]}},{"type":"Feature","properties":{"name":"Northern Ireland"},"geometry":{"type":"Polygon","coordinates":[[[-7.21,54.04],[-7.72,54.2],[-8.18,54.45],[-8.17,54.72],[-7.97,55.02],[-7.49,55.25],[-6.95,55.31],[-6.3,55.23],[-5.85,55.04],[-5.45,54.73],[-5.5,54.39],[-5.82,54.14],[-6.22,54.04],[-6.69,54.0],[-7.21,54.04]]]}},{"type":"Feature","properties":{"name":"North East"},"geometry":{"type":"Polygon","coordinates":[[[-2.19,54.48],[-1.58,54.46],[-1.07,54.56],[-0.57,54.68],[-0.04,54.89],[-0.6,55.33],[-1.1,55.56],[-1.65,55.74],[-2.15,55.79],[-2.1,55.51],[-2.26,55.1],[-2.19,54.48]]]}},{"type":"Feature","properties":{"name":"North West"},"geometry":{"type":"Polygon","coordinates":[[[-3.07,53.33],[-2.52,53.31],[-2.2,53.46],[-2.19,54.48],[-2.26,55.1],[-2.1,55.51],[-2.15,55.79],[-3.14,55.04],[-3.27,54.6],[-3.56,54.3],[-3.78,53.97],[-3.65,53.62],[-3.07,53.33]]]}},{"type":"Feature","properties":{"name":"Yorkshire"},"geometry":{"type":"Polygon","coordinates":[[[-2.2,53.46],[-1.72,53.38],[-0.97,53.44],[-0.18,53.63],[-0.02,53.96],[-0.48,54.41],[-1.07,54.56],[-1.58,54.46],[-2.19,54.48],[-2.2,53.46]]]}},{"type":"Feature","properties":{"name":"East Midlands"},"geometry":{"type":"Polygon","coordinates":[[[-1.88,52.32],[-1.1,52.21],[-0.42,52.41],[-0.02,52.73],[-0.02,53.96],[-0.18,53.63],[-0.97,53.44],[-1.72,53.38],[-2.2,53.46],[-2.09,52.91],[-1.95,52.54],[-1.88,52.32]]]}},{"type":"Feature","properties":{"name":"West Midlands"},"geometry":{"type":"Polygon","coordinates":[[[-3.06,52.05],[-2.25,51.96],[-1.88,52.05],[-1.88,52.32],[-1.95,52.54],[-2.09,52.91],[-2.2,53.46],[-2.52,53.31],[-3.07,53.33],[-3.19,52.95],[-3.17,52.58],[-3.06,52.05]]]}},{"type":"Feature","properties":{"name":"Wales"},"geometry":{"type":"Polygon","coordinates":[[[-4.99,51.58],[-4.51,51.42],[-3.85,51.5],[-3.21,51.89],[-3.06,52.05],[-3.17,52.58],[-3.19,52.95],[-3.07,53.33],[-3.65,53.62],[-3.78,53.97],[-4.56,53.53],[-4.86,53.07],[-5.18,52.61],[-5.0,52.13],[-4.51,51.81],[-4.99,51.58]]]}},{"type":"Feature","properties":{"name":"East of England"},"geometry":{"type":"Polygon","coordinates":[[[-0.42,51.79],[0.45,51.82],[1.05,51.92],[1.6,52.28],[1.78,52.62],[1.78,53.0],[1.45,53.38],[0.4,53.78],[-0.02,53.96],[-0.02,52.73],[-0.42,52.41],[-1.1,52.21],[-0.77,51.97],[-0.42,51.79]]]}},{"type":"Feature","properties":{"name":"London"},"geometry":{"type":"Polygon","coordinates":[[[-0.5,51.29],[0.32,51.3],[0.34,51.72],[-0.5,51.71],[-0.5,51.29]]]}},{"type":"Feature","properties":{"name":"South East"},"geometry":{"type":"Polygon","coordinates":[[[-1.82,50.87],[-0.8,50.71],[0.32,50.79],[1.42,51.07],[1.8,51.4],[1.6,51.8],[1.05,51.92],[0.45,51.82],[-0.42,51.79],[-0.77,51.97],[-1.1,52.21],[-1.88,52.05],[-2.25,51.96],[-2.26,51.57],[-1.82,51.15],[-1.82,50.87]]]}},{"type":"Feature","properties":{"name":"South"},"geometry":{"type":"Polygon","coordinates":[[[-2.68,51.06],[-1.82,50.87],[-1.82,51.15],[-2.26,51.57],[-2.25,51.96],[-3.06,52.05],[-3.17,51.8],[-3.0,51.42],[-2.68,51.06]]]}},{"type":"Feature","properties":{"name":"South West"},"geometry":{"type":"Polygon","coordinates":[[[-5.72,50.03],[-4.59,49.96],[-3.56,50.22],[-2.95,50.65],[-2.68,51.06],[-3.0,51.42],[-3.17,51.8],[-3.06,52.05],[-3.21,51.89],[-3.85,51.5],[-4.51,51.42],[-4.99,51.58],[-4.51,51.81],[-5.0,52.13],[-4.7,51.58],[-5.0,51.2],[-5.72,50.5],[-5.72,50.03]]]}}]};
 
 function drawUKMap(regMap){
   regMap_global=regMap;
@@ -695,7 +696,7 @@ function drawUKMap(regMap){
 
   wrap.innerHTML=
     '<div style="display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:start">'+
-      '<div><div id="leaflet-map" style="height:520px;border-radius:10px;overflow:hidden;border:0.5px solid #e8e8e6;background:#e8f0e8"></div></div>'+
+      '<div><div id="leaflet-map" style="height:520px;border-radius:10px;overflow:hidden;border:0.5px solid #e8e8e6"></div></div>'+
       '<div>'+
         '<div style="font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Pallets by region</div>'+
         barsHtml+
@@ -716,96 +717,42 @@ function drawUKMap(regMap){
       zoomControl:true,attributionControl:false,scrollWheelZoom:false
     });
 
-    // CartoDB Positron - clean light basemap
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
-      subdomains:'abcd',maxZoom:10,opacity:0.5
+      subdomains:'abcd',maxZoom:10,opacity:0.4
     }).addTo(leafletMap);
 
-    var nameMap={
-      'North East England':'North East','North West England':'North West',
-      'Yorkshire and The Humber':'Yorkshire','Yorkshire and the Humber':'Yorkshire',
-      'East Midlands':'East Midlands','West Midlands':'West Midlands',
-      'East of England':'East of England',
-      'London':'London','South East England':'South East','South East':'South East',
-      'South West England':'South West','South West':'South West',
-      'Wales':'Wales','Scotland':'Scotland','Northern Ireland':'Northern Ireland',
-      'North East':'North East','North West':'North West'
-    };
-
     function styleRegion(feature){
-      var name=feature.properties.rgn19nm||feature.properties.EER13NM||feature.properties.NAME_1||feature.properties.name||'';
-      var mapped=nameMap[name]||name;
-      var d=regMap[mapped]||{pallets:0};
+      var name=feature.properties.name;
+      var d=regMap[name]||{pallets:0};
       return{fillColor:heatColor(d.pallets),weight:1.5,opacity:1,color:'#ffffff',fillOpacity:0.88};
     }
 
     function onEachFeature(feature,layer){
-      var name=feature.properties.rgn19nm||feature.properties.EER13NM||feature.properties.NAME_1||feature.properties.name||'';
-      var mapped=nameMap[name]||name;
-      var d=regMap[mapped]||{pallets:0,cons:0,revenue:0};
+      var name=feature.properties.name;
+      var d=regMap[name]||{pallets:0,cons:0,revenue:0,lates:0};
       layer.on({
         mouseover:function(e){
           layer.setStyle({weight:2.5,color:'#F47920',fillOpacity:0.95});
-          var tt='<b style="font-size:13px">'+mapped+'</b><br>'+(d.pallets>0?'<span style="color:#F47920;font-size:15px;font-weight:700">'+d.pallets+' pallets</span><br>'+d.cons+' consignments':'No deliveries');
-          layer.bindTooltip(tt,{sticky:true,className:'uk-map-tt'}).openTooltip(e.latlng);
+          var otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1)+'%':'—';
+          layer.bindTooltip(
+            '<div style="font-size:13px;font-weight:700;margin-bottom:4px">'+name+'</div>'+
+            (d.pallets>0?
+              '<div style="color:#F47920;font-size:16px;font-weight:700">'+d.pallets+' pallets</div>'+
+              '<div style="color:#888;font-size:11px;margin-top:2px">'+d.cons+' consignments &nbsp;|&nbsp; OTIF: '+otif+'</div>':
+              '<div style="color:#aaa;font-size:12px">No deliveries this period</div>'),
+            {sticky:true,className:'uk-map-tt',opacity:1}
+          ).openTooltip(e.latlng);
         },
         mouseout:function(){
           layer.setStyle({weight:1.5,color:'#ffffff',fillOpacity:0.88});
           layer.closeTooltip();
-        },
-        click:function(){
-          if(d.pallets>0){
-            var msg=mapped+'\n\nPallets: '+d.pallets+'\nConsignments: '+d.cons+'\nLates: '+d.lates+'\nOTIF: '+(d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'—')+'%';
-            alert(msg);
-          }
         }
       });
     }
 
-    // Try multiple reliable GeoJSON sources
-    var sources=[
-      'https://cdn.jsdelivr.net/npm/uk-topojson@0.1.0/uk.json',
-      'https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Regions_December_2019_EN_BGC/FeatureServer/0/query?where=1%3D1&outFields=rgn19nm&outSR=4326&f=geojson',
-      'https://opendata.arcgis.com/api/v3/datasets/bafeb380d7e34f04a3fa631e34af8e59_0/downloads/data?format=geojson&spatialRefId=4326'
-    ];
-
-    function trySource(idx){
-      if(idx>=sources.length){showMapError();return;}
-      fetch(sources[idx])
-        .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-        .then(function(data){
-          var geo=data;
-          // Handle topojson
-          if(data.type==='Topology'){
-            var key=Object.keys(data.objects)[0];
-            geo=toGeoJSON(data,data.objects[key]);
-          }
-          L.geoJSON(geo,{style:styleRegion,onEachFeature:onEachFeature}).addTo(leafletMap);
-        })
-        .catch(function(){trySource(idx+1);});
-    }
-
-    trySource(0);
+    L.geoJSON(UK_GEO,{style:styleRegion,onEachFeature:onEachFeature}).addTo(leafletMap);
 
   },150);
-}
-
-function toGeoJSON(topo,obj){
-  var arcs=topo.arcs,scale=topo.transform?topo.transform.scale:[1,1],translate=topo.transform?topo.transform.translate:[0,0];
-  function decodeArc(arc){var x=0,y=0;return arc.map(function(pt){x+=pt[0];y+=pt[1];return[(x*scale[0]+translate[0]),(y*scale[1]+translate[1])];}); }
-  function resolveArc(i){var a=decodeArc(arcs[i<0?~i:i]);return i<0?a.reverse():a;}
-  function ring(al){var c=[];al.forEach(function(i){c=c.concat(resolveArc(i));});return c;}
-  function geom(g){
-    if(g.type==='Polygon')return{type:'Polygon',coordinates:g.arcs.map(ring)};
-    if(g.type==='MultiPolygon')return{type:'MultiPolygon',coordinates:g.arcs.map(function(p){return p.map(ring);})};
-    return{type:g.type,coordinates:[]};
-  }
-  return{type:'FeatureCollection',features:obj.geometries.map(function(g){return{type:'Feature',properties:g.properties||{},geometry:geom(g)};})};
-}
-
-function showMapError(){
-  var m=document.getElementById('leaflet-map');
-  if(m)m.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:8px;color:#aaa"><div style="font-size:28px">&#128506;</div><div style="font-size:13px">Map data unavailable</div><div style="font-size:11px">See the region breakdown on the right</div></div>';
 }
 
 
