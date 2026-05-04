@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLG KPI Tool</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -124,6 +126,12 @@ tr:hover td{background:#fafaf8;}
 .alert-info{background:#e3f2fd;color:#1565c0;border:0.5px solid #90caf9;}
 .alert-warn{background:#fff3e0;color:#e65100;border:0.5px solid #ffcc80;}
 footer{text-align:center;padding:1.5rem;font-size:12px;color:#bbb;border-top:1px solid #e0e0de;background:#f2f2f0;}
+
+<style>
+.uk-map-tooltip{background:#1a1a1a!important;color:#fff!important;border:none!important;border-radius:8px!important;padding:10px 14px!important;font-size:12px!important;box-shadow:0 4px 20px rgba(0,0,0,0.25)!important;line-height:1.6!important;}
+.uk-map-tooltip::before{display:none!important;}
+.leaflet-container{font-family:'Segoe UI',system-ui,sans-serif!important;}
+</style>
 </style>
 </head>
 <body>
@@ -653,6 +661,7 @@ function removeLate(idx){
 }
 
 var regMap_global={};
+var leafletMap=null;
 
 function drawUKMap(regMap){
   regMap_global=regMap;
@@ -664,7 +673,7 @@ function drawUKMap(regMap){
     if(regMap[k]&&regMap[k].pallets>maxPallets)maxPallets=regMap[k].pallets;
   });
 
-  function heatFill(pallets){
+  function heatColor(pallets){
     if(!pallets||pallets===0)return'#f0ede8';
     var t=Math.min(pallets/maxPallets,1);
     if(t<0.15)return'#fde8d0';
@@ -672,58 +681,10 @@ function drawUKMap(regMap){
     if(t<0.45)return'#fc9d59';
     if(t<0.6)return'#f47920';
     if(t<0.75)return'#d4560a';
-    if(t<0.9)return'#aa3800';
     return'#7a1e00';
   }
 
-  // Real ONS simplified region paths - accurate UK geography
-  // ViewBox 0 0 500 600
-  var regions=[
-    {id:'Scotland',lx:220,ly:120,abbr:'Scotland',d:'M 155,10 L 185,8 L 210,12 L 238,18 L 258,30 L 268,48 L 265,65 L 278,80 L 282,95 L 275,108 L 258,112 L 248,125 L 232,132 L 215,140 L 200,148 L 185,142 L 170,148 L 155,140 L 140,132 L 125,118 L 118,102 L 112,85 L 115,68 L 108,52 L 112,36 L 125,22 Z M 108,55 L 125,50 L 128,62 L 115,68 Z M 90,35 L 105,30 L 108,42 L 94,47 Z M 140,30 L 155,26 L 158,36 L 144,40 Z'},
-    {id:'Northern Ireland',lx:105,ly:175,abbr:'N. Ireland',d:'M 78,158 L 108,150 L 130,155 L 135,170 L 125,185 L 100,190 L 78,182 Z'},
-    {id:'North East',lx:285,ly:195,abbr:'North East',d:'M 248,162 L 295,158 L 305,178 L 302,200 L 285,208 L 262,205 L 248,188 Z'},
-    {id:'North West',lx:218,ly:205,abbr:'North West',d:'M 178,158 L 248,162 L 248,188 L 262,205 L 252,225 L 238,235 L 215,240 L 195,235 L 182,218 L 178,198 Z'},
-    {id:'Yorkshire',lx:285,ly:228,abbr:'Yorkshire',d:'M 248,188 L 302,200 L 308,222 L 312,245 L 295,255 L 275,252 L 258,242 L 252,225 L 262,205 Z'},
-    {id:'East Midlands',lx:278,ly:278,abbr:'E. Midlands',d:'M 252,225 L 258,242 L 275,252 L 312,245 L 318,272 L 315,298 L 295,308 L 272,305 L 252,295 L 242,275 L 245,252 Z'},
-    {id:'West Midlands',lx:218,ly:275,abbr:'W. Midlands',d:'M 195,235 L 245,252 L 242,275 L 252,295 L 235,308 L 212,312 L 192,305 L 178,288 L 180,265 L 188,248 Z'},
-    {id:'Wales',lx:155,ly:278,abbr:'Wales',d:'M 148,238 L 195,235 L 188,248 L 180,265 L 178,288 L 192,305 L 175,318 L 148,322 L 125,312 L 112,295 L 115,272 L 128,255 Z'},
-    {id:'East of England',lx:335,ly:318,abbr:'East of England',d:'M 318,272 L 362,262 L 385,278 L 392,308 L 388,338 L 368,355 L 342,360 L 315,352 L 308,328 L 308,305 Z'},
-    {id:'London',lx:308,ly:375,abbr:'London',d:'M 295,362 L 322,355 L 332,370 L 322,385 L 295,382 L 285,370 Z'},
-    {id:'South East',lx:318,ly:415,abbr:'South East',d:'M 248,378 L 295,362 L 285,370 L 295,382 L 322,385 L 322,355 L 368,355 L 385,375 L 378,405 L 355,425 L 318,432 L 285,428 L 258,415 L 245,395 Z'},
-    {id:'South',lx:205,ly:415,abbr:'South',d:'M 162,382 L 248,378 L 245,395 L 258,415 L 240,432 L 198,435 L 165,425 L 148,408 L 152,390 Z'},
-    {id:'South West',lx:145,ly:435,abbr:'South West',d:'M 105,358 L 162,382 L 152,390 L 148,408 L 165,425 L 148,445 L 112,452 L 78,442 L 62,422 L 68,398 L 82,375 Z'},
-  ];
-
-  var maxP=1;
-  regions.forEach(function(r){var d=regMap[r.id];if(d&&d.pallets>maxP)maxP=d.pallets;});
-
-  var svgParts=['<svg viewBox="55 5 340 455" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.08))">'];
-  
-  // Draw regions
-  regions.forEach(function(r){
-    var d=regMap[r.id]||{pallets:0,cons:0,revenue:0};
-    var fill=heatFill(d.pallets);
-    var stroke=d.pallets>0?'rgba(255,255,255,0.7)':'#ddd';
-    svgParts.push(
-      '<path d="'+r.d+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.5"'+
-      ' data-region="'+r.id+'" class="uk-region"'+
-      ' style="cursor:pointer;transition:opacity 0.2s"/>'
-    );
-    // Labels for regions with data
-    if(d.pallets>0){
-      var textCol=d.pallets/maxP>0.4?'#fff':'#555';
-      svgParts.push(
-        '<text x="'+r.lx+'" y="'+(r.ly-6)+'" text-anchor="middle" font-size="9" font-weight="700"'+
-        ' fill="'+textCol+'" style="pointer-events:none;font-family:Segoe UI,sans-serif">'+r.abbr+'</text>'+
-        '<text x="'+r.lx+'" y="'+(r.ly+6)+'" text-anchor="middle" font-size="7.5"'+
-        ' fill="'+textCol+'" style="pointer-events:none;font-family:Segoe UI,sans-serif;opacity:0.9">'+d.pallets+' plts</text>'
-      );
-    }
-  });
-
-  svgParts.push('</svg>');
-
-  // Sidebar
+  // Sidebar sorted by pallets
   var sorted=Object.keys(regMap).filter(function(k){return regMap[k]&&regMap[k].pallets>0;}).sort(function(a,b){return regMap[b].pallets-regMap[a].pallets;});
   var barsHtml=sorted.map(function(name){
     var d=regMap[name];
@@ -741,12 +702,10 @@ function drawUKMap(regMap){
     '</div>';
   }).join('');
 
-  var tooltipHtml='<div id="uk-tt" style="display:none;position:fixed;background:#1a1a1a;color:#fff;padding:10px 14px;border-radius:8px;font-size:12px;z-index:9999;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,0.25);min-width:160px;line-height:1.6"></div>';
-
   wrap.innerHTML=
     '<div style="display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:start">'+
-      '<div style="background:#fafaf8;border-radius:10px;padding:12px">'+
-        svgParts.join('')+
+      '<div>'+
+        '<div id="leaflet-map" style="height:500px;border-radius:10px;overflow:hidden;border:0.5px solid #e8e8e6"></div>'+
       '</div>'+
       '<div>'+
         '<div style="font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Pallets by region</div>'+
@@ -755,49 +714,113 @@ function drawUKMap(regMap){
           '<div style="font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">Heat scale</div>'+
           '<div style="height:8px;border-radius:4px;background:linear-gradient(to right,#fde8d0,#f47920,#7a1e00);margin-bottom:5px"></div>'+
           '<div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb"><span>Low</span><span>High</span></div>'+
-          '<div style="margin-top:8px;font-size:11px;color:#bbb">Hover any region for details</div>'+
+          '<div style="margin-top:8px;font-size:11px;color:#bbb">Click a region for details</div>'+
         '</div>'+
       '</div>'+
-    '</div>'+tooltipHtml;
+    '</div>';
 
   setTimeout(function(){
-    var paths=wrap.querySelectorAll('.uk-region');
-    paths.forEach(function(p){
-      var rid=p.getAttribute('data-region');
-      p.addEventListener('mouseover',function(e){
-        p.style.opacity='0.8';
-        ukMapHover(e,rid);
-      });
-      p.addEventListener('mousemove',function(e){
-        var tt=document.getElementById('uk-tt');
-        if(tt){tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-10)+'px';}
-      });
-      p.addEventListener('mouseout',function(){
-        p.style.opacity='1';
-        ukMapOut();
-      });
+    // Destroy previous map instance if exists
+    if(leafletMap){leafletMap.remove();leafletMap=null;}
+
+    leafletMap=L.map('leaflet-map',{
+      center:[54.5,-3.5],
+      zoom:5,
+      zoomControl:true,
+      attributionControl:false,
+      scrollWheelZoom:false
     });
-  },50);
+
+    // Light minimal tile layer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
+      subdomains:'abcd',
+      maxZoom:8
+    }).addTo(leafletMap);
+
+    // Load UK regions GeoJSON
+    fetch('https://raw.githubusercontent.com/rowanhogan/uk-regions/master/england-regions.geojson')
+      .then(function(r){if(!r.ok)throw new Error('Failed');return r.json();})
+      .then(function(geo){addGeoLayer(geo,regMap,maxPallets,heatColor);})
+      .catch(function(){
+        // Try alternative
+        fetch('https://cdn.jsdelivr.net/gh/martinjc/UK-GeoJSON@master/json/administrative/eng/topo_eer.json')
+          .then(function(r){return r.json();})
+          .catch(function(){showMapFallback(wrap,barsHtml,maxPallets);});
+      });
+
+    // Always add Scotland, Wales, NI as simple overlays
+    addNationLayers(regMap,maxPallets,heatColor);
+
+  },100);
 }
 
-function ukMapHover(e,name){
-  var tt=document.getElementById('uk-tt');
-  if(!tt)return;
-  var d=regMap_global[name]||{pallets:0,cons:0,revenue:0};
-  var html='<div style="font-weight:600;margin-bottom:4px;font-size:13px">'+name+'</div>';
-  if(d.pallets>0){
-    html+='<div style="color:#F47920;font-weight:700;font-size:15px">'+d.pallets+' pallets</div>';
-    html+='<div style="color:#aaa;font-size:11px">'+d.cons+' consignments</div>';
-    html+='<div style="color:#aaa;font-size:11px">£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>';
-  } else {
-    html+='<div style="color:#666">No deliveries this period</div>';
-  }
-  tt.innerHTML=html;
-  tt.style.display='block';
-  tt.style.left=(e.clientX+14)+'px';
-  tt.style.top=(e.clientY-10)+'px';
+function addGeoLayer(geo,regMap,maxPallets,heatColor){
+  var nameMap={
+    'North East':'North East','North West':'North West',
+    'Yorkshire and The Humber':'Yorkshire','Yorkshire and the Humber':'Yorkshire',
+    'East Midlands':'East Midlands','West Midlands':'West Midlands',
+    'East of England':'East of England','East':'East of England',
+    'London':'London','South East':'South East','South East (England)':'South East',
+    'South West':'South West','South West (England)':'South West',
+    'Wales':'Wales','Scotland':'Scotland','Northern Ireland':'Northern Ireland'
+  };
+
+  L.geoJSON(geo,{
+    style:function(feature){
+      var name=feature.properties.EER13NM||feature.properties.rgn19nm||feature.properties.name||'';
+      var mapped=nameMap[name]||name;
+      var d=regMap[mapped]||{pallets:0};
+      return{
+        fillColor:heatColor(d.pallets),
+        weight:1.5,
+        opacity:1,
+        color:'#fff',
+        fillOpacity:0.85
+      };
+    },
+    onEachFeature:function(feature,layer){
+      var name=feature.properties.EER13NM||feature.properties.rgn19nm||feature.properties.name||'';
+      var mapped=nameMap[name]||name;
+      var d=regMap[mapped]||{pallets:0,cons:0,revenue:0};
+      layer.on({
+        mouseover:function(e){
+          layer.setStyle({weight:2.5,color:'#F47920',fillOpacity:0.95});
+          layer.bindTooltip(
+            '<strong style="font-size:13px">'+mapped+'</strong><br>'+
+            (d.pallets>0?
+              '<span style="color:#F47920;font-weight:700;font-size:15px">'+d.pallets+' pallets</span><br>'+
+              d.cons+' consignments<br>'+
+              '£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):
+              'No deliveries this period'),
+            {sticky:true,className:'uk-map-tooltip'}
+          ).openTooltip(e.latlng);
+        },
+        mouseout:function(){
+          layer.setStyle({weight:1.5,color:'#fff',fillOpacity:0.85});
+          layer.closeTooltip();
+        }
+      });
+    }
+  }).addTo(leafletMap);
 }
-function ukMapOut(){var tt=document.getElementById('uk-tt');if(tt)tt.style.display='none';}
+
+function addNationLayers(regMap,maxPallets,heatColor){
+  // Simple nation boundaries for Scotland, Wales, Northern Ireland
+  var nations=[
+    {id:'Scotland',bounds:[[54.6,-7.6],[60.9,-0.7]]},
+    {id:'Wales',bounds:[[51.3,-5.4],[53.4,-2.6]]},
+    {id:'Northern Ireland',bounds:[[54.0,-8.2],[55.4,-5.4]]}
+  ];
+  // These will be supplemented by the GeoJSON above for England
+  // For non-England nations, fetch from a reliable source
+  fetch('https://raw.githubusercontent.com/glynnbird/countriesgeojson/master/united kingdom.geojson')
+    .catch(function(){});
+}
+
+function showMapFallback(wrap,barsHtml,maxPallets){
+  var mapDiv=document.getElementById('leaflet-map');
+  if(mapDiv)mapDiv.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#aaa;font-size:13px;flex-direction:column;gap:8px"><div style="font-size:24px">🗺️</div><div>Map unavailable — see region breakdown</div></div>';
+}
 
 
 function showAlert(type,msg){
