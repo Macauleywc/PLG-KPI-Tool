@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLG KPI Tool</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -127,11 +125,6 @@ tr:hover td{background:#fafaf8;}
 .alert-warn{background:#fff3e0;color:#e65100;border:0.5px solid #ffcc80;}
 footer{text-align:center;padding:1.5rem;font-size:12px;color:#bbb;border-top:1px solid #e0e0de;background:#f2f2f0;}
 
-<style>
-.uk-map-tooltip{background:#1a1a1a!important;color:#fff!important;border:none!important;border-radius:8px!important;padding:10px 14px!important;font-size:12px!important;box-shadow:0 4px 20px rgba(0,0,0,0.25)!important;line-height:1.6!important;}
-.uk-map-tooltip::before{display:none!important;}
-.leaflet-container{font-family:'Segoe UI',system-ui,sans-serif!important;}
-</style>
 </style>
 </head>
 <body>
@@ -661,8 +654,6 @@ function removeLate(idx){
 }
 
 var regMap_global={};
-var leafletMap=null;
-var UK_GEO={"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Scotland"},"geometry":{"type":"MultiPolygon","coordinates":[[[[-2.05,55.81],[-1.97,55.91],[-2.43,56.06],[-2.92,56.34],[-3.42,56.02],[-3.74,55.96],[-4.22,55.84],[-4.82,55.76],[-5.08,55.93],[-5.6,56.02],[-5.47,56.31],[-5.5,56.61],[-5.12,56.85],[-5.56,57.22],[-5.83,57.6],[-5.51,58.05],[-4.85,58.29],[-4.04,58.34],[-3.54,58.49],[-3.07,58.71],[-2.56,58.69],[-1.93,58.53],[-1.75,58.09],[-2.11,57.72],[-2.48,57.47],[-2.23,57.09],[-2.03,56.74],[-2.14,56.49],[-2.05,55.81]]],[[[-6.15,57.01],[-6.47,57.02],[-6.83,57.17],[-6.94,57.39],[-6.75,57.51],[-6.41,57.52],[-6.05,57.37],[-5.85,57.14],[-6.15,57.01]]],[[[-5.21,55.8],[-5.64,55.85],[-5.81,55.97],[-5.84,56.11],[-5.57,56.26],[-5.12,56.22],[-4.97,56.05],[-5.04,55.89],[-5.21,55.8]]]]}},{"type":"Feature","properties":{"name":"Northern Ireland"},"geometry":{"type":"Polygon","coordinates":[[[-7.21,54.04],[-7.72,54.2],[-8.18,54.45],[-8.17,54.72],[-7.97,55.02],[-7.49,55.25],[-6.95,55.31],[-6.3,55.23],[-5.85,55.04],[-5.45,54.73],[-5.5,54.39],[-5.82,54.14],[-6.22,54.04],[-6.69,54.0],[-7.21,54.04]]]}},{"type":"Feature","properties":{"name":"North East"},"geometry":{"type":"Polygon","coordinates":[[[-2.19,54.48],[-1.58,54.46],[-1.07,54.56],[-0.57,54.68],[-0.04,54.89],[-0.6,55.33],[-1.1,55.56],[-1.65,55.74],[-2.15,55.79],[-2.1,55.51],[-2.26,55.1],[-2.19,54.48]]]}},{"type":"Feature","properties":{"name":"North West"},"geometry":{"type":"Polygon","coordinates":[[[-3.07,53.33],[-2.52,53.31],[-2.2,53.46],[-2.19,54.48],[-2.26,55.1],[-2.1,55.51],[-2.15,55.79],[-3.14,55.04],[-3.27,54.6],[-3.56,54.3],[-3.78,53.97],[-3.65,53.62],[-3.07,53.33]]]}},{"type":"Feature","properties":{"name":"Yorkshire"},"geometry":{"type":"Polygon","coordinates":[[[-2.2,53.46],[-1.72,53.38],[-0.97,53.44],[-0.18,53.63],[-0.02,53.96],[-0.48,54.41],[-1.07,54.56],[-1.58,54.46],[-2.19,54.48],[-2.2,53.46]]]}},{"type":"Feature","properties":{"name":"East Midlands"},"geometry":{"type":"Polygon","coordinates":[[[-1.88,52.32],[-1.1,52.21],[-0.42,52.41],[-0.02,52.73],[-0.02,53.96],[-0.18,53.63],[-0.97,53.44],[-1.72,53.38],[-2.2,53.46],[-2.09,52.91],[-1.95,52.54],[-1.88,52.32]]]}},{"type":"Feature","properties":{"name":"West Midlands"},"geometry":{"type":"Polygon","coordinates":[[[-3.06,52.05],[-2.25,51.96],[-1.88,52.05],[-1.88,52.32],[-1.95,52.54],[-2.09,52.91],[-2.2,53.46],[-2.52,53.31],[-3.07,53.33],[-3.19,52.95],[-3.17,52.58],[-3.06,52.05]]]}},{"type":"Feature","properties":{"name":"Wales"},"geometry":{"type":"Polygon","coordinates":[[[-4.99,51.58],[-4.51,51.42],[-3.85,51.5],[-3.21,51.89],[-3.06,52.05],[-3.17,52.58],[-3.19,52.95],[-3.07,53.33],[-3.65,53.62],[-3.78,53.97],[-4.56,53.53],[-4.86,53.07],[-5.18,52.61],[-5.0,52.13],[-4.51,51.81],[-4.99,51.58]]]}},{"type":"Feature","properties":{"name":"East of England"},"geometry":{"type":"Polygon","coordinates":[[[-0.42,51.79],[0.45,51.82],[1.05,51.92],[1.6,52.28],[1.78,52.62],[1.78,53.0],[1.45,53.38],[0.4,53.78],[-0.02,53.96],[-0.02,52.73],[-0.42,52.41],[-1.1,52.21],[-0.77,51.97],[-0.42,51.79]]]}},{"type":"Feature","properties":{"name":"London"},"geometry":{"type":"Polygon","coordinates":[[[-0.5,51.29],[0.32,51.3],[0.34,51.72],[-0.5,51.71],[-0.5,51.29]]]}},{"type":"Feature","properties":{"name":"South East"},"geometry":{"type":"Polygon","coordinates":[[[-1.82,50.87],[-0.8,50.71],[0.32,50.79],[1.42,51.07],[1.8,51.4],[1.6,51.8],[1.05,51.92],[0.45,51.82],[-0.42,51.79],[-0.77,51.97],[-1.1,52.21],[-1.88,52.05],[-2.25,51.96],[-2.26,51.57],[-1.82,51.15],[-1.82,50.87]]]}},{"type":"Feature","properties":{"name":"South"},"geometry":{"type":"Polygon","coordinates":[[[-2.68,51.06],[-1.82,50.87],[-1.82,51.15],[-2.26,51.57],[-2.25,51.96],[-3.06,52.05],[-3.17,51.8],[-3.0,51.42],[-2.68,51.06]]]}},{"type":"Feature","properties":{"name":"South West"},"geometry":{"type":"Polygon","coordinates":[[[-5.72,50.03],[-4.59,49.96],[-3.56,50.22],[-2.95,50.65],[-2.68,51.06],[-3.0,51.42],[-3.17,51.8],[-3.06,52.05],[-3.21,51.89],[-3.85,51.5],[-4.51,51.42],[-4.99,51.58],[-4.51,51.81],[-5.0,52.13],[-4.7,51.58],[-5.0,51.2],[-5.72,50.5],[-5.72,50.03]]]}}]};
 
 function drawUKMap(regMap){
   regMap_global=regMap;
@@ -675,7 +666,7 @@ function drawUKMap(regMap){
   });
 
   function heatColor(pallets){
-    if(!pallets||pallets===0)return'#f0ede8';
+    if(!pallets||pallets===0)return'#eeece8';
     var t=Math.min(pallets/maxPallets,1);
     if(t<0.15)return'#fde8d0';
     if(t<0.3)return'#fdc896';
@@ -685,18 +676,95 @@ function drawUKMap(regMap){
     return'#7a1e00';
   }
 
+  // Project lat/lng to SVG coordinates
+  // UK bounds: lng -8.2 to 2.0, lat 49.8 to 60.9
+  var minLng=-8.5,maxLng=2.2,minLat=49.5,maxLat=61.2;
+  var svgW=420,svgH=540;
+
+  function project(lng,lat){
+    var x=(lng-minLng)/(maxLng-minLng)*svgW;
+    var y=(maxLat-lat)/(maxLat-minLat)*svgH;
+    return[x,y];
+  }
+
+  function coordsToPath(ring){
+    return ring.map(function(pt,i){
+      var proj=project(pt[0],pt[1]);
+      return(i===0?'M':'L')+proj[0].toFixed(1)+','+proj[1].toFixed(1);
+    }).join(' ')+'Z';
+  }
+
+  // Build SVG paths from embedded GeoJSON
+  var GEO={"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Scotland"},"geometry":{"type":"MultiPolygon","coordinates":[[[[-2.05,55.81],[-1.97,55.91],[-2.43,56.06],[-2.92,56.34],[-3.42,56.02],[-3.74,55.96],[-4.22,55.84],[-4.82,55.76],[-5.08,55.93],[-5.6,56.02],[-5.47,56.31],[-5.5,56.61],[-5.12,56.85],[-5.56,57.22],[-5.83,57.6],[-5.51,58.05],[-4.85,58.29],[-4.04,58.34],[-3.54,58.49],[-3.07,58.71],[-2.56,58.69],[-1.93,58.53],[-1.75,58.09],[-2.11,57.72],[-2.48,57.47],[-2.23,57.09],[-2.03,56.74],[-2.14,56.49],[-2.05,55.81]]],[[[-6.15,57.01],[-6.47,57.02],[-6.83,57.17],[-6.94,57.39],[-6.75,57.51],[-6.41,57.52],[-6.05,57.37],[-5.85,57.14],[-6.15,57.01]]],[[[-5.21,55.8],[-5.64,55.85],[-5.81,55.97],[-5.84,56.11],[-5.57,56.26],[-5.12,56.22],[-4.97,56.05],[-5.04,55.89],[-5.21,55.8]]]]}},{"type":"Feature","properties":{"name":"Northern Ireland"},"geometry":{"type":"Polygon","coordinates":[[[-7.21,54.04],[-7.72,54.2],[-8.18,54.45],[-8.17,54.72],[-7.97,55.02],[-7.49,55.25],[-6.95,55.31],[-6.3,55.23],[-5.85,55.04],[-5.45,54.73],[-5.5,54.39],[-5.82,54.14],[-6.22,54.04],[-6.69,54.0],[-7.21,54.04]]]}},{"type":"Feature","properties":{"name":"North East"},"geometry":{"type":"Polygon","coordinates":[[[-2.19,54.48],[-1.58,54.46],[-1.07,54.56],[-0.57,54.68],[-0.04,54.89],[-0.6,55.33],[-1.1,55.56],[-1.65,55.74],[-2.15,55.79],[-2.1,55.51],[-2.26,55.1],[-2.19,54.48]]]}},{"type":"Feature","properties":{"name":"North West"},"geometry":{"type":"Polygon","coordinates":[[[-3.07,53.33],[-2.52,53.31],[-2.2,53.46],[-2.19,54.48],[-2.26,55.1],[-2.1,55.51],[-2.15,55.79],[-3.14,55.04],[-3.27,54.6],[-3.56,54.3],[-3.78,53.97],[-3.65,53.62],[-3.07,53.33]]]}},{"type":"Feature","properties":{"name":"Yorkshire"},"geometry":{"type":"Polygon","coordinates":[[[-2.2,53.46],[-1.72,53.38],[-0.97,53.44],[-0.18,53.63],[-0.02,53.96],[-0.48,54.41],[-1.07,54.56],[-1.58,54.46],[-2.19,54.48],[-2.2,53.46]]]}},{"type":"Feature","properties":{"name":"East Midlands"},"geometry":{"type":"Polygon","coordinates":[[[-1.88,52.32],[-1.1,52.21],[-0.42,52.41],[-0.02,52.73],[-0.02,53.96],[-0.18,53.63],[-0.97,53.44],[-1.72,53.38],[-2.2,53.46],[-2.09,52.91],[-1.95,52.54],[-1.88,52.32]]]}},{"type":"Feature","properties":{"name":"West Midlands"},"geometry":{"type":"Polygon","coordinates":[[[-3.06,52.05],[-2.25,51.96],[-1.88,52.05],[-1.88,52.32],[-1.95,52.54],[-2.09,52.91],[-2.2,53.46],[-2.52,53.31],[-3.07,53.33],[-3.19,52.95],[-3.17,52.58],[-3.06,52.05]]]}},{"type":"Feature","properties":{"name":"Wales"},"geometry":{"type":"Polygon","coordinates":[[[-4.99,51.58],[-4.51,51.42],[-3.85,51.5],[-3.21,51.89],[-3.06,52.05],[-3.17,52.58],[-3.19,52.95],[-3.07,53.33],[-3.65,53.62],[-3.78,53.97],[-4.56,53.53],[-4.86,53.07],[-5.18,52.61],[-5.0,52.13],[-4.51,51.81],[-4.99,51.58]]]}},{"type":"Feature","properties":{"name":"East of England"},"geometry":{"type":"Polygon","coordinates":[[[-0.42,51.79],[0.45,51.82],[1.05,51.92],[1.6,52.28],[1.78,52.62],[1.78,53.0],[1.45,53.38],[0.4,53.78],[-0.02,53.96],[-0.02,52.73],[-0.42,52.41],[-1.1,52.21],[-0.77,51.97],[-0.42,51.79]]]}},{"type":"Feature","properties":{"name":"London"},"geometry":{"type":"Polygon","coordinates":[[[-0.5,51.29],[0.32,51.3],[0.34,51.72],[-0.5,51.71],[-0.5,51.29]]]}},{"type":"Feature","properties":{"name":"South East"},"geometry":{"type":"Polygon","coordinates":[[[-1.82,50.87],[-0.8,50.71],[0.32,50.79],[1.42,51.07],[1.8,51.4],[1.6,51.8],[1.05,51.92],[0.45,51.82],[-0.42,51.79],[-0.77,51.97],[-1.1,52.21],[-1.88,52.05],[-2.25,51.96],[-2.26,51.57],[-1.82,51.15],[-1.82,50.87]]]}},{"type":"Feature","properties":{"name":"South"},"geometry":{"type":"Polygon","coordinates":[[[-2.68,51.06],[-1.82,50.87],[-1.82,51.15],[-2.26,51.57],[-2.25,51.96],[-3.06,52.05],[-3.17,51.8],[-3.0,51.42],[-2.68,51.06]]]}},{"type":"Feature","properties":{"name":"South West"},"geometry":{"type":"Polygon","coordinates":[[[-5.72,50.03],[-4.59,49.96],[-3.56,50.22],[-2.95,50.65],[-2.68,51.06],[-3.0,51.42],[-3.17,51.8],[-3.06,52.05],[-3.21,51.89],[-3.85,51.5],[-4.51,51.42],[-4.99,51.58],[-4.51,51.81],[-5.0,52.13],[-4.7,51.58],[-5.0,51.2],[-5.72,50.5],[-5.72,50.03]]]}}]};
+
+  var svgParts=['<svg viewBox="0 0 '+svgW+' '+svgH+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-height:540px;display:block">'];
+  
+  // Background
+  svgParts.push('<rect width="'+svgW+'" height="'+svgH+'" fill="#f8f9f8" rx="8"/>');
+
+  GEO.features.forEach(function(feature){
+    var name=feature.properties.name;
+    var d=regMap[name]||{pallets:0,cons:0,revenue:0,lates:0};
+    var fill=heatColor(d.pallets);
+    var stroke=d.pallets>0?'rgba(255,255,255,0.8)':'#ddd';
+    var pathData='';
+
+    var geom=feature.geometry;
+    if(geom.type==='Polygon'){
+      pathData=geom.coordinates.map(function(ring){return coordsToPath(ring);}).join(' ');
+    } else if(geom.type==='MultiPolygon'){
+      geom.coordinates.forEach(function(poly){
+        pathData+=poly.map(function(ring){return coordsToPath(ring);}).join(' ')+' ';
+      });
+    }
+
+    var encodedName=name.replace(/'/g,'\'');
+    svgParts.push('<path d="'+pathData+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.2"'+
+      ' data-name="'+name+'" class="uk-reg"'+
+      ' onmouseover="ukHover(event,\''+encodedName+'\')" onmouseout="ukOut()"'+
+      ' style="cursor:pointer;transition:opacity 0.15s"/>');
+
+    // Label if has data
+    if(d.pallets>0){
+      var centroid=getCentroid(feature);
+      var proj=project(centroid[0],centroid[1]);
+      var textCol=d.pallets/maxPallets>0.45?'#fff':'#333';
+      var shortName=name.replace('East of England','E. England').replace('Northern Ireland','N. Ireland').replace('North East','NE').replace('North West','NW').replace('South East','SE').replace('South West','SW').replace('East Midlands','E. Mids').replace('West Midlands','W. Mids');
+      svgParts.push(
+        '<text x="'+proj[0].toFixed(1)+'" y="'+(proj[1]-5).toFixed(1)+'" text-anchor="middle" font-size="8" font-weight="700" fill="'+textCol+'" style="pointer-events:none;font-family:Segoe UI,sans-serif">'+shortName+'</text>'+
+        '<text x="'+proj[0].toFixed(1)+'" y="'+(proj[1]+6).toFixed(1)+'" text-anchor="middle" font-size="7" fill="'+textCol+'" style="pointer-events:none;font-family:Segoe UI,sans-serif;opacity:0.9">'+d.pallets+' plts</text>'
+      );
+    }
+  });
+
+  svgParts.push('</svg>');
+
+  // Tooltip
+  var ttHtml='<div id="uk-tt" style="display:none;position:fixed;background:#1a1a1a;color:#fff;padding:10px 14px;border-radius:8px;font-size:12px;z-index:9999;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,0.25);min-width:160px;line-height:1.7"></div>';
+
+  // Sidebar
   var sorted=Object.keys(regMap).filter(function(k){return regMap[k]&&regMap[k].pallets>0;}).sort(function(a,b){return regMap[b].pallets-regMap[a].pallets;});
   var barsHtml=sorted.map(function(name){
     var d=regMap[name];
     var pct=(d.pallets/maxPallets*100).toFixed(0);
     var t=d.pallets/maxPallets;
     var col=t>0.6?'#7a1e00':t>0.35?'#f47920':'#fdc896';
-    return'<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="color:#555">'+name+'</span><span style="color:#888;font-weight:500">'+d.pallets+' plts</span></div><div style="height:4px;background:#f0f0ee;border-radius:2px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:2px"></div></div></div>';
+    return'<div style="margin-bottom:9px">'+
+      '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">'+
+        '<span style="color:#555">'+name+'</span>'+
+        '<span style="color:#888;font-weight:500">'+d.pallets+' plts</span>'+
+      '</div>'+
+      '<div style="height:4px;background:#f0f0ee;border-radius:2px;overflow:hidden">'+
+        '<div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:2px"></div>'+
+      '</div>'+
+    '</div>';
   }).join('');
 
   wrap.innerHTML=
     '<div style="display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:start">'+
-      '<div><div id="leaflet-map" style="height:520px;border-radius:10px;overflow:hidden;border:0.5px solid #e8e8e6"></div></div>'+
+      '<div style="background:#f8f9f8;border-radius:10px;padding:8px;border:0.5px solid #e8e8e6">'+
+        svgParts.join('')+
+      '</div>'+
       '<div>'+
         '<div style="font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Pallets by region</div>'+
         barsHtml+
@@ -704,57 +772,46 @@ function drawUKMap(regMap){
           '<div style="font-size:10px;color:#bbb;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">Heat scale</div>'+
           '<div style="height:8px;border-radius:4px;background:linear-gradient(to right,#fde8d0,#f47920,#7a1e00);margin-bottom:5px"></div>'+
           '<div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb"><span>Low</span><span>High</span></div>'+
-          '<div style="margin-top:8px;font-size:11px;color:#bbb">Click a region for details</div>'+
+          '<div style="margin-top:8px;font-size:11px;color:#bbb">Hover region for details</div>'+
         '</div>'+
       '</div>'+
-    '</div>';
-
-  setTimeout(function(){
-    if(leafletMap){try{leafletMap.remove();}catch(e){}leafletMap=null;}
-
-    leafletMap=L.map('leaflet-map',{
-      center:[54.5,-3.5],zoom:5,
-      zoomControl:true,attributionControl:false,scrollWheelZoom:false
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
-      subdomains:'abcd',maxZoom:10,opacity:0.4
-    }).addTo(leafletMap);
-
-    function styleRegion(feature){
-      var name=feature.properties.name;
-      var d=regMap[name]||{pallets:0};
-      return{fillColor:heatColor(d.pallets),weight:1.5,opacity:1,color:'#ffffff',fillOpacity:0.88};
-    }
-
-    function onEachFeature(feature,layer){
-      var name=feature.properties.name;
-      var d=regMap[name]||{pallets:0,cons:0,revenue:0,lates:0};
-      layer.on({
-        mouseover:function(e){
-          layer.setStyle({weight:2.5,color:'#F47920',fillOpacity:0.95});
-          var otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1)+'%':'—';
-          layer.bindTooltip(
-            '<div style="font-size:13px;font-weight:700;margin-bottom:4px">'+name+'</div>'+
-            (d.pallets>0?
-              '<div style="color:#F47920;font-size:16px;font-weight:700">'+d.pallets+' pallets</div>'+
-              '<div style="color:#888;font-size:11px;margin-top:2px">'+d.cons+' consignments &nbsp;|&nbsp; OTIF: '+otif+'</div>':
-              '<div style="color:#aaa;font-size:12px">No deliveries this period</div>'),
-            {sticky:true,className:'uk-map-tt',opacity:1}
-          ).openTooltip(e.latlng);
-        },
-        mouseout:function(){
-          layer.setStyle({weight:1.5,color:'#ffffff',fillOpacity:0.88});
-          layer.closeTooltip();
-        }
-      });
-    }
-
-    var geoLayer=L.geoJSON(UK_GEO,{style:styleRegion,onEachFeature:onEachFeature}).addTo(leafletMap);
-    leafletMap.fitBounds(geoLayer.getBounds(),{padding:[20,20]});
-
-  },150);
+    '</div>'+ttHtml;
 }
+
+function getCentroid(feature){
+  var coords=[];
+  var geom=feature.geometry;
+  if(geom.type==='Polygon')coords=geom.coordinates[0];
+  else if(geom.type==='MultiPolygon'){
+    var biggest=geom.coordinates.reduce(function(a,b){return a[0].length>b[0].length?a:b;});
+    coords=biggest[0];
+  }
+  if(!coords.length)return[0,0];
+  var lng=0,lat=0;
+  coords.forEach(function(p){lng+=p[0];lat+=p[1];});
+  return[lng/coords.length,lat/coords.length];
+}
+
+function ukHover(e,name){
+  var tt=document.getElementById('uk-tt');
+  if(!tt)return;
+  var d=regMap_global[name]||{pallets:0,cons:0,revenue:0,lates:0};
+  var otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1)+'%':'—';
+  var html='<div style="font-weight:700;font-size:13px;margin-bottom:5px">'+name+'</div>';
+  if(d.pallets>0){
+    html+='<div style="color:#F47920;font-weight:700;font-size:15px">'+d.pallets+' pallets</div>';
+    html+='<div style="color:#aaa;font-size:11px;margin-top:2px">'+d.cons+' consignments</div>';
+    html+='<div style="color:#aaa;font-size:11px">OTIF: '+otif+'</div>';
+    html+='<div style="color:#aaa;font-size:11px">£'+d.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>';
+  } else {
+    html+='<div style="color:#888;font-size:12px">No deliveries this period</div>';
+  }
+  tt.innerHTML=html;
+  tt.style.display='block';
+  tt.style.left=(e.clientX+14)+'px';
+  tt.style.top=(e.clientY-10)+'px';
+}
+function ukOut(){var tt=document.getElementById('uk-tt');if(tt)tt.style.display='none';}
 
 
 function showAlert(type,msg){
