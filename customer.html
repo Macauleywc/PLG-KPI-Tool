@@ -597,26 +597,6 @@ function exportCustomerReport(){
 
   var periodLabel=months.length>0?months[0].label+(months.length>1?' – '+months[months.length-1].label:''):'2026';
 
-  // Capture map image from Highcharts SVG
-  var mapImgDataUrl=null;
-  try{
-    var hcMap=document.getElementById('hc-map');
-    if(hcMap){
-      var svg=hcMap.querySelector('svg');
-      if(svg){
-        var svgData=new XMLSerializer().serializeToString(svg);
-        var canvas=document.createElement('canvas');
-        canvas.width=svg.viewBox.baseVal.width||800;
-        canvas.height=svg.viewBox.baseVal.height||600;
-        var ctx=canvas.getContext('2d');
-        var img=new Image();
-        var svgBlob=new Blob([svgData],{type:'image/svg+xml;charset=utf-8'});
-        mapImgDataUrl=canvas.toDataURL('image/png');
-      }
-    }
-  }catch(e){console.log('Map capture error:',e);}
-
-  // Use html2canvas to capture the Highcharts map properly
   var hcMapEl=document.getElementById('hc-map');
   
   function buildPDF(mapDataUrl){
@@ -657,7 +637,7 @@ function exportCustomerReport(){
 
     function tableHeader(doc,cols,y,colWidths){
       doc.setFillColor(26,26,26);
-      doc.rect(ML,y,CW,6,'F');
+      doc.rect(ML,y,CW,7,'F');
       doc.setTextColor(255,255,255);
       doc.setFontSize(7);
       doc.setFont('helvetica','bold');
@@ -665,10 +645,10 @@ function exportCustomerReport(){
       cols.forEach(function(col,i){
         var align=col.r?'right':'left';
         var cx=col.r?x+colWidths[i]-1:x+1;
-        doc.text(col.label,cx,y+4.2,{align:align});
+        doc.text(col.label,cx,y+4.5,{align:align});
         x+=colWidths[i];
       });
-      return y+6;
+      return y+7;
     }
 
     function tableRow(doc,vals,y,colWidths,opts){
@@ -685,12 +665,12 @@ function exportCustomerReport(){
         var text=typeof val==='object'?val.text:String(val||'');
         var align=(typeof val==='object'&&val.r)||false?'right':'left';
         var cx=align?x+colWidths[i]-1:x+1;
-        doc.text(text,cx,y+(opts.total?4.2:3.8),{align:align});
+        doc.text(text,cx,y+(opts.total?4.5:4.2),{align:align});
         x+=colWidths[i];
       });
       doc.setDrawColor(238,238,238);
-      doc.line(ML,y+(opts.total?6:5.5),ML+CW,y+(opts.total?6:5.5));
-      return y+(opts.total?6:5.5);
+      doc.line(ML,y+(opts.total?7:6),ML+CW,y+(opts.total?7:6));
+      return y+(opts.total?7:6);
     }
 
     function hexToRgb(hex){
@@ -780,7 +760,7 @@ function exportCustomerReport(){
     y=addPageHeader(doc,'Monthly Tracker',3);
     y=sectionLabel(doc,'Monthly Performance Summary',y);
     var mcols=[{label:'Month'},{label:'Cons',r:true},{label:'Pallets',r:true},{label:'Cost',r:true},{label:'Avg Cost/Con',r:true},{label:'OTIF',r:true},{label:'Lates',r:true}];
-    var mwidths=[28,18,18,32,32,22,18];
+    var mwidths=[26,16,16,30,28,20,16];
     y=tableHeader(doc,mcols,y,mwidths);
     months.forEach(function(m,idx){
       var otifPct=m.otif!=null?(m.otif*100).toFixed(2)+'%':'—';
@@ -911,8 +891,8 @@ function exportCustomerReport(){
     doc.setFontSize(7);doc.setFont('helvetica','normal');doc.setTextColor(100,100,100);
     doc.text('Lates calculated by comparing actual delivery arrival against booked time window. Contact your account manager to dispute any entry.',ML+4,y+5);
     y+=11;
-    var lcols=[{label:'Order ID'},{label:'Destination'},{label:'City'},{label:'Postcode'},{label:'Window'},{label:'Arrived'},{label:'Mins',r:true},{label:'Plts',r:true},{label:'Type'}];
-    var lwidths=[22,38,22,16,18,14,12,10,20];
+    var lcols=[{label:'Order ID'},{label:'Destination'},{label:'City'},{label:'PC'},{label:'Window'},{label:'Arr.'},{label:'Mins',r:true},{label:'Plts',r:true},{label:'Type'}];
+    var lwidths=[20,36,18,14,16,12,11,9,18];
     y=tableHeader(doc,lcols,y,lwidths);
     lateList.forEach(function(r,idx){
       if(y>H-MB-12){doc.addPage();y=addPageHeader(doc,'Late Log (cont.)',6);y+=4;y=tableHeader(doc,lcols,y,lwidths);}
@@ -970,14 +950,35 @@ function exportCustomerReport(){
     showAlert('success','PDF downloaded successfully — '+7+' pages.');
   }
 
-  // Capture map then build PDF
-  if(typeof html2canvas!=='undefined'&&hcMapEl){
-    html2canvas(hcMapEl,{scale:1.5,useCORS:true,backgroundColor:'#f8f9f8',logging:false})
-      .then(function(canvas){buildPDF(canvas.toDataURL('image/png'));})
-      .catch(function(){buildPDF('error');});
-  } else {
-    buildPDF('error');
+  // Capture Highcharts map via SVG serialization
+  function captureMap(cb){
+    try{
+      var svgEl=hcMapEl?hcMapEl.querySelector('svg'):null;
+      if(!svgEl){cb(null);return;}
+      // Clone and inline styles
+      var svgClone=svgEl.cloneNode(true);
+      svgClone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      var svgStr=new XMLSerializer().serializeToString(svgClone);
+      var svgBlob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
+      var url=URL.createObjectURL(svgBlob);
+      var img=new Image();
+      img.onload=function(){
+        var canvas=document.createElement('canvas');
+        canvas.width=svgEl.viewBox.baseVal.width||700;
+        canvas.height=svgEl.viewBox.baseVal.height||800;
+        var ctx=canvas.getContext('2d');
+        ctx.fillStyle='#f8f9f8';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.drawImage(img,0,0);
+        URL.revokeObjectURL(url);
+        cb(canvas.toDataURL('image/png'));
+      };
+      img.onerror=function(){URL.revokeObjectURL(url);cb(null);};
+      img.src=url;
+    }catch(e){console.log('SVG capture error:',e);cb(null);}
   }
+
+  captureMap(function(mapDataUrl){buildPDF(mapDataUrl);});
 }
 
 
