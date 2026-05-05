@@ -519,7 +519,6 @@ function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
 
 function renderPreview(){
-  try{
   var _ks=document.getElementById('kpi-section');if(_ks)_ks.style.display='block';
   document.getElementById('actions-bar').style.display='flex';
   Object.values(chartInst).forEach(function(c){try{c.destroy();}catch(e){}});chartInst={};
