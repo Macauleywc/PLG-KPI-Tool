@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PLG KPI Portal — Sign In</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --o:#F47920;--dk:#111;--bg:#F0EEE9;--surface:#fff;
+  --border:#E2E0DB;--muted:#888;--font:'Segoe UI',Arial,sans-serif;
+}
+body{
+  font-family:var(--font);background:var(--dk);
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+
+/* Background texture */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:linear-gradient(135deg,#0d0d0d 0%,#1a1a1a 50%,#0d0d0d 100%);
+  z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(
+    45deg,transparent,transparent 40px,
+    rgba(244,121,32,0.02) 40px,rgba(244,121,32,0.02) 41px
+  );
+  z-index:0;
+}
+
+.login-wrap{
+  position:relative;z-index:1;
+  width:100%;max-width:420px;padding:24px;
+}
+
+/* Logo + brand */
+.brand{text-align:center;margin-bottom:36px;}
+.brand-logo{
+  width:72px;height:72px;border-radius:16px;
+  background:var(--o);display:inline-flex;
+  align-items:center;justify-content:center;margin-bottom:16px;
+  box-shadow:0 8px 32px rgba(244,121,32,0.4);
+}
+.brand-logo img{height:44px;width:auto;filter:brightness(0) invert(1);}
+.brand-name{
+  font-size:13px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:#888;margin-bottom:6px;
+}
+.brand-title{
+  font-size:24px;font-weight:800;color:#fff;letter-spacing:-.02em;
+}
+.brand-sub{font-size:13px;color:#555;margin-top:4px;}
+
+/* Card */
+.card{
+  background:#161616;border:1px solid #222;border-radius:16px;
+  padding:32px;box-shadow:0 24px 80px rgba(0,0,0,0.6);
+}
+.card-title{
+  font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;
+}
+.card-sub{font-size:13px;color:#666;margin-bottom:28px;}
+
+/* Form */
+.field{margin-bottom:18px;}
+.field label{
+  display:block;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:#666;margin-bottom:7px;
+}
+.field-wrap{position:relative;}
+.field input{
+  width:100%;background:#1e1e1e;border:1px solid #2a2a2a;
+  border-radius:8px;padding:12px 44px 12px 14px;
+  font-size:14px;color:#fff;font-family:var(--font);
+  transition:border-color .2s;outline:none;
+  -webkit-text-security:disc;
+}
+.field input[type=text]{-webkit-text-security:none;}
+.field input::placeholder{color:#444;}
+.field input:focus{border-color:var(--o);background:#222;}
+.field-icon{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  color:#444;font-size:16px;cursor:pointer;user-select:none;
+  transition:color .2s;
+}
+.field-icon:hover{color:#888;}
+
+/* Error */
+.error-msg{
+  display:none;background:#1a0808;border:1px solid #4a1010;
+  border-radius:8px;padding:10px 14px;margin-bottom:18px;
+  font-size:13px;color:#ef4444;
+}
+.error-msg.show{display:block;}
+
+/* Button */
+.btn-login{
+  width:100%;background:var(--o);color:#fff;border:none;
+  border-radius:8px;padding:13px;font-size:15px;font-weight:700;
+  font-family:var(--font);cursor:pointer;letter-spacing:.01em;
+  transition:all .2s;display:flex;align-items:center;
+  justify-content:center;gap:8px;
+}
+.btn-login:hover{background:#E06810;transform:translateY(-1px);
+  box-shadow:0 8px 24px rgba(244,121,32,0.35);}
+.btn-login:active{transform:translateY(0);}
+.btn-login.loading{background:#555;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* Footer */
+.footer{
+  text-align:center;margin-top:24px;
+  font-size:12px;color:#444;line-height:1.6;
+}
+.footer span{color:#333;}
+
+/* Orange accent line */
+.accent-bar{
+  height:3px;background:var(--o);border-radius:3px 3px 0 0;
+  margin:-32px -32px 28px;border-radius:16px 16px 0 0;
+}
+</style>
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="brand">
+    <div class="brand-logo">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8IS0tIENyZWF0b3I6IENvcmVsRFJBVyBYNyAtLT4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMjEwbW0iIGhlaWdodD0iMjk3bW0iIHZlcnNpb249IjEuMSIgc3R5bGU9InNoYXBlLXJlbmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247IHRleHQtcmVuZGVyaW5nOmdlb21ldHJpY1ByZWNpc2lvbjsgaW1hZ2UtcmVuZGVyaW5nOm9wdGltaXplUXVhbGl0eTsgZmlsbC1ydWxlOmV2ZW5vZGQ7IGNsaXAtcnVsZTpldmVub2RkIg0Kdmlld0JveD0iMCAwIDIxMDAwIDI5NzAwIg0KIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiA8ZGVmcz4NCiAgPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCiAgIDwhW0NEQVRBWw0KICAgIC5maWwxMCB7ZmlsbDojNUI1QjVCO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw0IHtmaWxsOiNFRjdBNDQ7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDEge2ZpbGw6I0U5NTUyNDtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsOSB7ZmlsbDojQzY0QzIyO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw4IHtmaWxsOiNBMTQyMUY7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDAge2ZpbGw6I0JGRENCMjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsNSB7ZmlsbDojOTlDQTg5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw2IHtmaWxsOiM2OEI3NjA7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDcge2ZpbGw6IzI3QTg0MjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsMiB7ZmlsbDojMUY4QkI5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWwzIHtmaWxsOiMyNzc0OTI7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDExIHtmaWxsOiMyNjVCNzA7ZmlsbC1ydWxlOm5vbnplcm99DQogICBdXT4NCiAgPC9zdHlsZT4NCiA8L2RlZnM+DQogPGcgaWQ9IkxheWVyX3gwMDIwXzEiPg0KICA8bWV0YWRhdGEgaWQ9IkNvcmVsQ29ycElEXzBDb3JlbC1MYXllciIvPg0KICA8ZyBpZD0iXzczMjA3OTM5MiI+DQogICA8Zz4NCiAgICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTI5NTIgODY4MmMtNjksNTIgLTQsMTI2IDEzMywxNzMgMTM3LDQ3IDI5Niw1MSAzNjUsMiA3MCwtNDkgMjQsLTEzNiAtMTEzLC0xODYgLTEzOCwtNTAgLTMxNiwtNDIgLTM4NSwxMXoiLz4NCiAgICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTQyMDEgODU0N2MtNzIsNTEgMTM1LDE2OSA0MzAsMzAzIDI5NCwxMzQgNTY0LDIzMyA2MzgsMTg0IDczLC00OSAtNzcsLTIyOSAtMzc0LC0zNjYgLTI5NiwtMTM2IC02MjEsLTE3MyAtNjk0LC0xMjF6Ii8+DQogICA8L2c+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTM4MDkgMTA4MjRjMjEwLC0yMTEgNTUyLC0yMTEgNzYzLDAgMjExLDIxMCAyMTIsNTUyIDEsNzYzIC0yMTEsMjExIC01NTMsMjEyIC03NjQsMSAtMjExLC0yMTEgLTIxMSwtNTUzIDAsLTc2NHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwyIiBkPSJNMjkzNiAxMTY5M2MxNzUsLTE3NiA0ODEsLTEzOCA2OTMsNzUgMjEyLDIxMyAyNTAsNTE5IDc1LDY5NSAtMTc1LDE3NSAtNDk3LDE1MyAtNzA5LC02MCAtMjEyLC0yMTIgLTIzNCwtNTM1IC01OSwtNzEweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDMiIGQ9Ik0yMjY1IDEyMzUwYzEzMCwtMTMwIDM4NCwtMzUgNjAxLDE4MiAyMTcsMjE3IDMxMyw0NzEgMTgzLDYwMiAtMTMwLDEzMCAtNDM4LDg3IC02NTUsLTEyOSAtMjE3LC0yMTcgLTI2MCwtNTI0IC0xMjksLTY1NXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw0IiBkPSJNNDcyNCA5OTA1Yy0xNzYsMTc1IC0xMzgsNDgxIDc1LDY5MyAyMTMsMjEyIDUxOSwyNTAgNjk1LDc1IDE3NSwtMTc1IDE1MywtNDk3IC02MCwtNzA5IC0yMTIsLTIxMiAtNTM1LC0yMzQgLTcxMCwtNTl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNSIgZD0iTTIzODAgOTM5OWMxMzMsLTEzNSAzMTAsLTE3NSAzODcsLTk4IDc3LDc3IDI3LDI0MyAtMTA3LDM3NyAtMTM0LDEzNSAtMjk4LDE4NyAtMzc1LDExMCAtNzgsLTc3IC0zOSwtMjU0IDk1LC0zODl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNiIgZD0iTTE3OTMgMTAwNzNjNDcsLTYyIDExMiwtNCAxNTQsMTE4IDQyLDEyMiA0NiwyNjMgMiwzMjUgLTQzLDYyIC0xMjAsMjEgLTE2NSwtMTAxIC00NSwtMTIzIC0zOCwtMjgxIDksLTM0MnoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw1IiBkPSJNNTM4MSA5MjM0Yy0xMzAsMTMwIC0zNSwzODQgMTgyLDYwMSAyMTcsMjE3IDQ3MSwzMTMgNjAyLDE4MyAxMzAsLTEzMCA4OCwtNDM4IC0xMjksLTY1NSAtMjE3LC0yMTcgLTUyNCwtMjYwIC02NTUsLTEyOXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw2IiBkPSJNMjgxNSA5ODMyYzE3NiwtMTc3IDQ3MiwtMTY3IDY1MywxNCAxODIsMTgxIDE4MCw0NjUgNCw2NDIgLTE3NiwxNzcgLTQ1OSwxODAgLTY0MCwtMSAtMTgxLC0xODEgLTE5MywtNDc3IC0xNywtNjU1eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDciIGQ9Ik0yMDY3IDEwNjU1YzExNywtMTQ0IDMzOSwtODMgNTAwLDEyMiAxNjIsMjA2IDIwMyw0NzkgODcsNjI0IC0xMTUsMTQ2IC0zNDQsMTA4IC01MDcsLTk5IC0xNjMsLTIwNiAtMTk3LC01MDIgLTgwLC02NDd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMiIgZD0iTTE2NzMgMTExODRjNDYsLTY0IDE1MCwxMjAgMjcwLDM4MiAxMTksMjYyIDIwOCw1MDIgMTY0LDU2OCAtNDQsNjUgLTIwNCwtNjkgLTMyNiwtMzMyIC0xMjEsLTI2NCAtMTU0LC01NTQgLTEwOCwtNjE4eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDUiIGQ9Ik0zNjg2IDkwMzZjLTE0NCwxMTcgLTgzLDMzOSAxMjIsNTAwIDIwNiwxNjIgNDc5LDIwMyA2MjQsODcgMTQ2LC0xMTUgMTA4LC0zNDQgLTk5LC01MDcgLTIwNiwtMTYzIC01MDIsLTE5NyAtNjQ3LC04MHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWw4IiBkPSJNNjA3MyAxMjk5MmMtMTMzLDEzNSAtMzEwLDE3NSAtMzg3LDk4IC03NywtNzcgLTI2LC0yNDIgMTA3LC0zNzcgMTM0LC0xMzUgMjk4LC0xODcgMzc1LC0xMTAgNzgsNzcgMzksMjU0IC05NSwzODl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsOSIgZD0iTTY2NjAgMTIzMThjLTQ3LDYyIC0xMTIsNCAtMTU0LC0xMTggLTQyLC0xMjIgLTQ2LC0yNjMgLTIsLTMyNSA0MywtNjIgMTIxLC0yMSAxNjUsMTAxIDQ1LDEyMyAzOCwyODEgLTksMzQyeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDkiIGQ9Ik01NjEyIDEyNTMzYy0xNzYsMTc3IC00NzIsMTY3IC02NTMsLTE0IC0xODEsLTE4MSAtMTc5LC00NjQgLTMsLTY0MSAxNzUsLTE3NyA0NTgsLTE4MSA2NDAsMCAxODEsMTgxIDE5Miw0NzggMTYsNjU1eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEiIGQ9Ik02MzYwIDExNzEwYy0xMTcsMTQ0IC0zMzgsODQgLTUwMCwtMTIyIC0xNjEsLTIwNSAtMjAyLC00NzggLTg3LC02MjQgMTE2LC0xNDUgMzQ1LC0xMDcgNTA4LDk5IDE2MywyMDcgMTk2LDUwMyA3OSw2NDd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNCIgZD0iTTY3NTUgMTExODFjLTQ2LDY0IC0xNTEsLTEyMCAtMjcwLC0zODIgLTEyMCwtMjYyIC0yMDgsLTUwMiAtMTY0LC01NjcgNDMsLTY2IDIwMyw2OCAzMjUsMzMyIDEyMiwyNjMgMTU0LDU1MyAxMDksNjE3eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDMiIGQ9Ik00NzQxIDEzMzI5YzE0NCwtMTE3IDg0LC0zMzggLTEyMiwtNTAwIC0yMDUsLTE2MSAtNDc4LC0yMDIgLTYyNCwtODcgLTE0NSwxMTYgLTEwNywzNDUgOTksNTA4IDIwNywxNjMgNTAzLDE5NiA2NDcsNzl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTg1OTggMTA0MjdjMCwtMTc3IC0xMzEsLTI3NyAtMzA5LC0yNzdsLTUzNSAwIDAgNTUxIDUzNSAwYzE3OCwwIDMwOSwtMTAxIDMwOSwtMjc0em0tMTUwNyAxNzE1bDAgLTI1NzEgMTI4NyAwYzU3OCwwIDg5NCwzOTAgODk0LDg1NiAwLDQ2MyAtMzE2LDg1MiAtODk0LDg1MmwtNjI0IDAgMCA4NjMgLTY2MyAweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEiIGQ9Ik05Mjg0IDEyMTQybDAgLTE4NjEgNTkzIDAgMCAyMjdjMTI0LC0xNTAgMzU5LC0yNzggNTgyLC0yNzhsMCA1NzFjLTM1LC04IC04NSwtMTYgLTE0NiwtMTYgLTE1NCwwIC0zNTksNjYgLTQzNiwxNzBsMCAxMTg3IC01OTMgMHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxIiBkPSJNMTE0MDMgMTA2OTNjLTI1OCwwIC0zNTgsMTg1IC0zODEsMzIwbDc2NyAwYy0xNiwtMTMxIC0xMTIsLTMyMCAtMzg2LC0zMjB6bS05OTAgNTE2YzAsLTUzOSA0MDgsLTk3NSA5OTAsLTk3NSA1NTIsMCA5NTIsNDA1IDk1MiwxMDM3bDAgMTI3IC0xMzI1IDBjMzQsMTc0IDE5NiwzMzIgNDY2LDMzMiAxMzEsMCAzNTgsLTU4IDQ2MiwtMTU4bDI1MSAzNzBjLTE4NSwxNjYgLTQ5MywyNDYgLTc3OSwyNDYgLTU3NCwwIC0xMDE3LC0zNzMgLTEwMTcsLTk3OXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxIiBkPSJNMTQ4MDMgMTIxNDJsMCAtMTEzM2MwLC0xNDMgLTcwLC0yNTEgLTI0NywtMjUxIC0xNjIsMCAtMjc3LDEwNSAtMzM1LDE4MmwwIDEyMDIgLTU5NCAwIDAgLTExMzNjMCwtMTQzIC02NSwtMjUxIC0yNDYsLTI1MSAtMTU4LDAgLTI3MCwxMDUgLTMzMiwxODJsMCAxMjAyIC01OTMgMCAwIC0xODYxIDU5MyAwIDAgMjI3YzgxLC0xMDggMzIwLC0yNzQgNjEzLC0yNzQgMjY2LDAgNDUxLDExMiA1MjgsMzMyIDEwOCwtMTYyIDM1MSwtMzMyIDY0NCwtMzMyIDM0MywwIDU1OCwxNzggNTU4LDU1OWwwIDEzNDkgLTU4OSAweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEiIGQ9Ik0xNTUyMCAxMDI4MWw1OTMgMCAwIDE4NjEgLTU5MyAwIDAgLTE4NjF6bS00MyAtNTA5YzAsLTE4OSAxNTAsLTMzOSAzMzksLTMzOSAxODksMCAzNDAsMTUwIDM0MCwzMzkgMCwxODkgLTE1MSwzNDMgLTM0MCwzNDMgLTE4OSwwIC0zMzksLTE1NCAtMzM5LC0zNDN6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTE3MjE5IDEwNjkzYy0yNTgsMCAtMzU4LDE4NSAtMzgxLDMyMGw3NjcgMGMtMTYsLTEzMSAtMTEyLC0zMjAgLTM4NiwtMzIwem0tOTkwIDUxNmMwLC01MzkgNDA4LC05NzUgOTkwLC05NzUgNTUxLDAgOTUyLDQwNSA5NTIsMTAzN2wwIDEyNyAtMTMyNiAwYzM1LDE3NCAxOTcsMzMyIDQ2NywzMzIgMTMxLDAgMzU4LC01OCA0NjIsLTE1OGwyNTEgMzcwYy0xODUsMTY2IC00OTQsMjQ2IC03NzksMjQ2IC01NzQsMCAtMTAxNywtMzczIC0xMDE3LC05Nzl6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMSIgZD0iTTE4MzEwIDEyMTQybDAgLTE4NjEgNTkzIDAgMCAyMjdjMTI0LC0xNTAgMzU5LC0yNzggNTgyLC0yNzhsMCA1NzFjLTM0LC04IC04NCwtMTYgLTE0NiwtMTYgLTE1NCwwIC0zNTksNjYgLTQzNiwxNzBsMCAxMTg3IC01OTMgMHoiLz4NCiAgIDxwb2x5Z29uIGNsYXNzPSJmaWwxMCIgcG9pbnRzPSI3MDg0LDEzMjc4IDcwODQsMTI1MjMgNzIxNywxMjUyMyA3MjE3LDEzMTYyIDc1NTAsMTMxNjIgNzU1MCwxMzI3OCAiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxMCIgZD0iTTgyMzggMTI5MDFjMCwtMTU2IC05OSwtMjczIC0yNTAsLTI3MyAtMTUzLDAgLTI1MCwxMTcgLTI1MCwyNzMgMCwxNTUgOTcsMjczIDI1MCwyNzMgMTUxLDAgMjUwLC0xMTggMjUwLC0yNzN6bS02MzYgMGMwLC0yMjUgMTU5LC0zOTAgMzg2LC0zOTAgMjI2LDAgMzg2LDE2NSAzODYsMzkwIDAsMjI2IC0xNjAsMzkxIC0zODYsMzkxIC0yMjcsMCAtMzg2LC0xNjUgLTM4NiwtMzkxeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNODQ2OCAxMjkwMWMwLC0yMzYgMTc3LC0zOTAgMzk2LC0zOTAgMTQ3LDAgMjQzLDcwIDMwNCwxNTdsLTEwOCA2MWMtNDAsLTU2IC0xMTEsLTEwMSAtMTk2LC0xMDEgLTE1MCwwIC0yNjEsMTE1IC0yNjEsMjczIDAsMTU5IDExMSwyNzQgMjYxLDI3NCA3NywwIDE0NSwtMzYgMTc5LC02OGwwIC0xMTcgLTIyNiAwIDAgLTExNyAzNTggMCAwIDI4M2MtNzUsODMgLTE4MCwxMzcgLTMxMSwxMzcgLTIxOSwwIC0zOTYsLTE1NSAtMzk2LC0zOTJ6Ii8+DQogICA8cG9seWdvbiBjbGFzcz0iZmlsMTAiIHBvaW50cz0iOTMxMywxMjUyMyA5NDQ2LDEyNTIzIDk0NDYsMTMyNzggOTMxMywxMzI3OCAiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxMCIgZD0iTTk1NTggMTMxNzJsNzMgLTEwMmM1Miw1NSAxMzQsMTA0IDIzOSwxMDQgMTA5LDAgMTUyLC01MyAxNTIsLTEwMyAwLC0xNTggLTQ0MSwtNjAgLTQ0MSwtMzM4IDAsLTEyNSAxMTAsLTIyMSAyNzUsLTIyMSAxMTgsMCAyMTMsMzcgMjgzLDEwNWwtNzUgOTljLTU5LC01OSAtMTQwLC04NiAtMjE5LC04NiAtNzgsMCAtMTI4LDM3IC0xMjgsOTQgMCwxNDAgNDM5LDUzIDQzOSwzMzUgMCwxMjUgLTg4LDIzMyAtMjkyLDIzMyAtMTM5LDAgLTI0MCwtNDkgLTMwNiwtMTIweiIvPg0KICAgPHBvbHlnb24gY2xhc3M9ImZpbDEwIiBwb2ludHM9IjEwNDQ3LDEzMjc4IDEwNDQ3LDEyNjQwIDEwMjE5LDEyNjQwIDEwMjE5LDEyNTIzIDEwODA4LDEyNTIzIDEwODA4LDEyNjQwIDEwNTgwLDEyNjQwIDEwNTgwLDEzMjc4ICIvPg0KICAgPHBvbHlnb24gY2xhc3M9ImZpbDEwIiBwb2ludHM9IjEwOTIwLDEyNTIzIDExMDUzLDEyNTIzIDExMDUzLDEzMjc4IDEwOTIwLDEzMjc4ICIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTExODAgMTI5MDFjMCwtMjMyIDE3MywtMzkwIDM5NiwtMzkwIDE1MywwIDI0Nyw3OSAzMDMsMTcwbC0xMTMgNTdjLTM2LC02MiAtMTA5LC0xMTAgLTE5MCwtMTEwIC0xNTAsMCAtMjYxLDExNSAtMjYxLDI3MyAwLDE1OSAxMTEsMjczIDI2MSwyNzMgODEsMCAxNTQsLTQ2IDE5MCwtMTEwbDExMyA1OGMtNTcsOTEgLTE1MCwxNzAgLTMwMywxNzAgLTIyMywwIC0zOTYsLTE1OSAtMzk2LC0zOTF6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTAiIGQ9Ik0xMTkzNyAxMzE3Mmw3MyAtMTAyYzUzLDU1IDEzNCwxMDQgMjM5LDEwNCAxMDksMCAxNTIsLTUzIDE1MiwtMTAzIDAsLTE1OCAtNDQwLC02MCAtNDQwLC0zMzggMCwtMTI1IDEwOSwtMjIxIDI3NSwtMjIxIDExNywwIDIxMywzNyAyODMsMTA1bC03NiA5OWMtNTksLTU5IC0xMzksLTg2IC0yMTksLTg2IC03OCwwIC0xMjcsMzcgLTEyNyw5NCAwLDE0MCA0MzksNTMgNDM5LDMzNSAwLDEyNSAtODksMjMzIC0yOTIsMjMzIC0xNDAsMCAtMjQwLC00OSAtMzA3LC0xMjB6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTAiIGQ9Ik0xMjkyNyAxMjkwMWMwLC0yMzQgMTczLC0zOTAgMzg5LC0zOTAgMTMzLDAgMjI2LDU5IDI5MywxNDFsLTc1IDQ3Yy00NywtNjEgLTEyOCwtMTA0IC0yMTgsLTEwNCAtMTY2LDAgLTI5MSwxMjYgLTI5MSwzMDYgMCwxNzkgMTI1LDMwOCAyOTEsMzA4IDkwLDAgMTY1LC00NCAyMDIsLTgxbDAgLTE1NCAtMjU5IDAgMCAtODQgMzUzIDAgMCAyNzNjLTcwLDc4IC0xNzMsMTMwIC0yOTYsMTMwIC0yMTYsMCAtMzg5LC0xNTcgLTM4OSwtMzkyeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTQyMDggMTI3NTFjMCwtODUgLTYyLC0xNDQgLTE1MSwtMTQ0bC0xOTggMCAwIDI4OSAxOTggMGM4OSwwIDE1MSwtNjAgMTUxLC0xNDV6bS02IDUyN2wtMTkzIC0zMDAgLTE1MCAwIDAgMzAwIC05NCAwIDAgLTc1NSAzMDMgMGMxMzgsMCAyMzcsODkgMjM3LDIyOCAwLDEzNiAtOTMsMjEwIC0xOTYsMjE5bDIwNCAzMDggLTExMSAweiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTUwNzUgMTI5MDFjMCwtMTc2IC0xMDksLTMwNiAtMjc4LC0zMDYgLTE3MCwwIC0yNzcsMTMwIC0yNzcsMzA2IDAsMTc2IDEwNywzMDcgMjc3LDMwNyAxNjksMCAyNzgsLTEzMSAyNzgsLTMwN3ptLTY1MiAwYzAsLTIyMyAxNTAsLTM5MCAzNzQsLTM5MCAyMjMsMCAzNzUsMTY3IDM3NSwzOTAgMCwyMjMgLTE1MiwzOTEgLTM3NSwzOTEgLTIyNCwwIC0zNzQsLTE2OCAtMzc0LC0zOTF6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTAiIGQ9Ik0xNTMxOSAxMjk4NWwwIC00NjIgOTQgMCAwIDQ2MGMwLDEzOCA3NSwyMjUgMjE0LDIyNSAxMzksMCAyMTQsLTg3IDIxNCwtMjI1bDAgLTQ2MCA5NCAwIDAgNDYxYzAsMTg4IC0xMDMsMzA4IC0zMDgsMzA4IC0yMDUsMCAtMzA4LC0xMjEgLTMwOCwtMzA3eiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDEwIiBkPSJNMTY1NTQgMTI3NTFjMCwtODUgLTYxLC0xNDQgLTE1MSwtMTQ0bC0xOTggMCAwIDI4OCAxOTggMGM5MCwwIDE1MSwtNTkgMTUxLC0xNDR6bS00NDMgNTI3bDAgLTc1NSAzMDQgMGMxNTEsMCAyMzYsMTA0IDIzNiwyMjggMCwxMjMgLTg3LDIyNyAtMjM2LDIyN2wtMjEwIDAgMCAzMDAgLTk0IDB6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMTEiIGQ9Ik01MzQ5IDEzNjI5YzYyLC00NyA0LC0xMTIgLTExOCwtMTU0IC0xMjIsLTQyIC0yNjMsLTQ2IC0zMjUsLTIgLTYyLDQzIC0yMSwxMjEgMTAxLDE2NSAxMjMsNDUgMjgxLDM4IDM0MiwtOXoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxMSIgZD0iTTQyMTIgMTM3MjRjNjQsLTQ2IC0xMjAsLTE1MSAtMzgyLC0yNzEgLTI2MiwtMTE5IC01MDIsLTIwNyAtNTY3LC0xNjMgLTY2LDQzIDY4LDIwMyAzMzIsMzI1IDI2MywxMjIgNTUzLDE1NCA2MTcsMTA5eiIvPg0KICA8L2c+DQogPC9nPg0KPC9zdmc+DQo=" alt="PLG">
+    </div>
+    <div class="brand-name">Premier Logistics Group</div>
+    <div class="brand-title">KPI Portal</div>
+    <div class="brand-sub">Internal reporting tool</div>
+  </div>
+
+  <div class="card">
+    <div class="accent-bar"></div>
+    <div class="card-title">Sign in to continue</div>
+    <div class="card-sub">Enter your credentials to access the portal</div>
+
+    <div class="error-msg" id="error-msg">
+      Incorrect password. Please try again.
+    </div>
+
+    <div class="field">
+      <label>Username</label>
+      <div class="field-wrap">
+        <input type="text" id="username" placeholder="e.g. macauley" autocomplete="username" autocapitalize="none">
+        <span class="field-icon">&#128100;</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <div class="field-wrap">
+        <input type="password" id="password" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        <span class="field-icon" id="toggle-pw" onclick="togglePw()" title="Show/hide">&#128065;</span>
+      </div>
+    </div>
+
+    <button class="btn-login" id="btn-login" onclick="doLogin()">
+      <span id="btn-text">Sign in &#8594;</span>
+    </button>
+  </div>
+
+  <div class="footer">
+    <span>Authorised PLG personnel only</span><br>
+    Contact your system administrator if you need access
+  </div>
+</div>
+
+<script>
+var HASH = '01cbda115999bf4b79526ef2f109a831a239ebadb360eef83a99a859355d789c';
+
+// Allowed users (username -> true, case-insensitive)
+// Add/remove names here as needed
+var USERS = ['macauley','admin','plg'];
+
+async function sha256(str){
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function showError(msg){
+  var el = document.getElementById('error-msg');
+  el.textContent = msg || 'Incorrect password. Please try again.';
+  el.classList.add('show');
+}
+
+function clearError(){
+  document.getElementById('error-msg').classList.remove('show');
+}
+
+function togglePw(){
+  var inp = document.getElementById('password');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+async function doLogin(){
+  clearError();
+  var username = document.getElementById('username').value.trim().toLowerCase();
+  var password = document.getElementById('password').value;
+  var btn = document.getElementById('btn-login');
+  var btnText = document.getElementById('btn-text');
+
+  if(!username){ showError('Please enter your username.'); document.getElementById('username').focus(); return; }
+  if(!password){ showError('Please enter your password.'); document.getElementById('password').focus(); return; }
+  if(!USERS.includes(username)){ showError('Username not recognised. Contact your administrator.'); return; }
+
+  btn.classList.add('loading');
+  btnText.textContent = 'Signing in...';
+
+  var hashed = await sha256(password);
+
+  // Small artificial delay for UX
+  await new Promise(r => setTimeout(r, 600));
+
+  if(hashed === HASH){
+    // Store session (tab-level — expires when browser closes)
+    sessionStorage.setItem('plg_auth', btoa(username + ':' + Date.now()));
+    btnText.textContent = 'Redirecting...';
+    setTimeout(function(){ window.location.href = 'index.html'; }, 300);
+  } else {
+    btn.classList.remove('loading');
+    btnText.textContent = 'Sign in →';
+    showError('Incorrect password. Please try again.');
+    document.getElementById('password').value = '';
+    document.getElementById('password').focus();
+  }
+}
+
+// If already authenticated, skip login
+if(sessionStorage.getItem('plg_auth')){
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
