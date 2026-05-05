@@ -1664,7 +1664,7 @@ window.buildMapSVG = function(regionData) {
     'East Midlands':'East Midlands','Greater London':'London',
     'Highlands and Islands':'Scotland','North East':'North East',
     'North Eastern':'North East','North West':'North West',
-    'Northern Ireland':'N Ireland','South East':'South East',
+    'Northern Ireland':'Northern Ireland','South East':'South East',
     'South West':'South West','South Western':'South West',
     'West Midlands':'West Midlands','East Wales':'Wales',
     'West Wales and the Valleys':'Wales','Yorkshire and the Humber':'Yorkshire'
@@ -1674,9 +1674,9 @@ window.buildMapSVG = function(regionData) {
   Object.values(regionData).forEach(function(d){ if(d.pallets>maxPallets)maxPallets=d.pallets; });
 
   function fillColor(pallets) {
-    if(!pallets||pallets===0) return '#EBEBEA';
+    if(!pallets||pallets===0) return 'none'; // transparent — no fill for no-data regions
     var t = pallets / maxPallets;
-    // cream #FAE8D4 -> PLG orange #F47920 -> dark #7A1E00
+    // cream -> PLG orange -> dark burnt orange
     var stops = [
       [0,    0xFA, 0xE8, 0xD4],
       [0.3,  0xFD, 0xC8, 0x96],
@@ -1723,22 +1723,28 @@ window.buildMapSVG = function(regionData) {
 
   if(!window._gbGeoJSON) return null;
 
-  var paths = [];
+  // Two passes: outline first (light grey border), then coloured fills on top
+  var outlines = [], fills = [];
   window._gbGeoJSON.features.forEach(function(feat){
     if(feat.geometry.type==='LineString') return;
     var hcRegion = feat.properties.region||'';
     var ourRegion = regionMap[hcRegion]||null;
     var rd = ourRegion ? regionData[ourRegion] : null;
-    var fill = rd ? fillColor(rd.pallets) : '#EBEBEA';
-    var stroke = rd ? 'rgba(255,255,255,0.9)' : '#DEDEDD';
-    var sw = rd ? '0.5' : '0.3';
+    var fill = rd ? fillColor(rd.pallets) : 'none';
     var d = featureToPath(feat.geometry);
-    if(d) paths.push('<path d="'+d+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'" stroke-linejoin="round"/>');
+    if(!d) return;
+    // Always draw outline (light grey shape of UK)
+    outlines.push('<path d="'+d+'" fill="#E8E5E0" stroke="#fff" stroke-width="0.4" stroke-linejoin="round"/>');
+    // Overlay coloured fill if this region has data
+    if(fill!=='none'){
+      fills.push('<path d="'+d+'" fill="'+fill+'" stroke="#fff" stroke-width="0.5" stroke-linejoin="round"/>');
+    }
   });
 
   var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+SW+' '+SH+'" width="'+SW+'" height="'+SH+'">'
-    + '<rect width="'+SW+'" height="'+SH+'" fill="#f8f9f8"/>'
-    + paths.join('')
+    + '<rect width="'+SW+'" height="'+SH+'" fill="#ffffff"/>'
+    + outlines.join('')
+    + fills.join('')
     + '</svg>';
 
   return svg;
