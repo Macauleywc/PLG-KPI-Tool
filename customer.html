@@ -689,6 +689,7 @@ function exportCustomerReport(){
 }
 
 function buildReport(mapImg){
+  try {
   var comp=allCompleted();
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getTotal('lates');
   var ytdOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2):'--';
@@ -877,7 +878,7 @@ function buildReport(mapImg){
   fill('#F5F4F1');doc.rect(ML,y,CW,30,'F');
   // Ring (drawn as arc approximation with filled sectors)
   var cx2=ML+18,cy2=y+15,r2=12;
-  fill('#E2E0DB');doc.circle(cx2,cy2,r2,'F');
+  fill('#E2E0DB');doc.ellipse(cx2,cy2,r2,r2,'F');
   // Red arc for OTIF
   txt('#DC2626');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(ytdOTIF+'%',cx2,cy2+1.5,{align:'center'});
   txt('#888888');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text('OTIF',cx2,cy2+5.5,{align:'center'});
@@ -1091,6 +1092,10 @@ function buildReport(mapImg){
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
   doc.save(slug(currentCustomer)+'_KPI_Report_'+stamp+'.pdf');
   showAlert('success','PDF downloaded \u2014 '+TOTAL+' pages.');
+  } catch(err) {
+    console.error('buildReport error:',err);
+    showAlert('error','PDF failed: '+err.message+' — check browser console (F12) for details.');
+  }
 }
 
 
