@@ -658,20 +658,39 @@ function exportTracker(){
 function exportCustomerReport(){
   showAlert('info','Preparing PDF — capturing map...');
 
-  // Capture map using html2canvas — most reliable for Highcharts
+  // Capture map using Highcharts getSVG — renders exact chart colours
   function captureMap(cb){
-    var mapEl=document.getElementById('hc-map');
-    if(!mapEl){cb(null);return;}
-    html2canvas(mapEl,{
-      scale:2,
-      useCORS:true,
-      allowTaint:true,
-      backgroundColor:'#f8f9f8',
-      logging:false
-    }).then(function(canvas){
-      var asp=canvas.width/canvas.height;
-      cb({url:canvas.toDataURL('image/png'),asp:asp});
-    }).catch(function(){cb(null);});
+    var chart=chartInst['hc-map'];
+    if(!chart||!chart.getSVG){
+      // Fallback: try html2canvas
+      var mapEl=document.getElementById('hc-map');
+      if(!mapEl){cb(null);return;}
+      html2canvas(mapEl,{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#f8f9f8',logging:false})
+        .then(function(canvas){cb({url:canvas.toDataURL('image/png'),asp:canvas.width/canvas.height});})
+        .catch(function(){cb(null);});
+      return;
+    }
+    try{
+      // Use Highcharts own SVG export — guaranteed correct colours
+      var svg=chart.getSVG({
+        chart:{width:900,height:600,backgroundColor:'#f8f9f8'},
+        mapView:{center:[-3.5,55.5],zoom:4.8}
+      });
+      var blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'});
+      var url=URL.createObjectURL(blob);
+      var img=new Image();
+      img.onload=function(){
+        var canvas=document.createElement('canvas');
+        canvas.width=1800;canvas.height=1200;
+        var ctx=canvas.getContext('2d');
+        ctx.fillStyle='#f8f9f8';ctx.fillRect(0,0,1800,1200);
+        ctx.drawImage(img,0,0,1800,1200);
+        URL.revokeObjectURL(url);
+        cb({url:canvas.toDataURL('image/png'),asp:1800/1200});
+      };
+      img.onerror=function(){URL.revokeObjectURL(url);cb(null);};
+      img.src=url;
+    }catch(e){console.error('getSVG error',e);cb(null);}
   }
 
   // Switch to destinations tab to ensure map is rendered
@@ -1265,7 +1284,7 @@ function drawUKMap(regMap){
           };
         });
 
-        Highcharts.mapChart('hc-map',{
+        chartInst['hc-map']=Highcharts.mapChart('hc-map',{
           chart:{backgroundColor:'#f8f9f8',style:{fontFamily:'Segoe UI,sans-serif'},height:700},
           title:{text:null},
           credits:{enabled:false},
