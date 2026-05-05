@@ -658,71 +658,42 @@ function exportTracker(){
 function exportCustomerReport(){
   showAlert('info','Preparing PDF — capturing map...');
 
-  // Capture map SVG first, then build PDF
+  // Capture map using html2canvas — most reliable for Highcharts
   function captureMap(cb){
-    try{
-      var svgEl=document.querySelector('#hc-map svg');
-      if(!svgEl){cb(null);return;}
-      var clone=svgEl.cloneNode(true);
-      clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
-      svgEl.querySelectorAll('path,rect,circle').forEach(function(el,i){
-        var cl=clone.querySelectorAll('path,rect,circle')[i];
-        if(!cl)return;
-        ['fill','stroke','stroke-width','opacity'].forEach(function(attr){
-          var v=el.getAttribute(attr);if(v)cl.setAttribute(attr,v);
-        });
-      });
-      var vb=svgEl.viewBox.baseVal;
-      var SW=vb.width||1740,SH=vb.height||700;
-      clone.setAttribute('viewBox','0 0 '+SW+' '+SH);
-      clone.setAttribute('width',String(SW));clone.setAttribute('height',String(SH));
-      var str=new XMLSerializer().serializeToString(clone);
-      var blob=new Blob([str],{type:'image/svg+xml;charset=utf-8'});
-      var url=URL.createObjectURL(blob);
-      var img=new Image();
-      img.onload=function(){
-        var sc=1.5,canvas=document.createElement('canvas');
-        canvas.width=Math.round(SW*sc);canvas.height=Math.round(SH*sc);
-        var ctx=canvas.getContext('2d');
-        ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.scale(sc,sc);ctx.drawImage(img,0,0,SW,SH);
-        URL.revokeObjectURL(url);
-        // Crop whitespace
-        ctx.setTransform(1,0,0,1,0,0);
-        var d=ctx.getImageData(0,0,canvas.width,canvas.height).data;
-        var x1=canvas.width,y1=canvas.height,x2=0,y2=0;
-        for(var iy=0;iy<canvas.height;iy++){for(var ix=0;ix<canvas.width;ix++){
-          var p=(iy*canvas.width+ix)*4;
-          if(d[p+3]>30&&!(d[p]>248&&d[p+1]>248&&d[p+2]>248)){
-            if(ix<x1)x1=ix;if(ix>x2)x2=ix;if(iy<y1)y1=iy;if(iy>y2)y2=iy;
-          }
-        }}
-        var pad=15;
-        x1=Math.max(0,x1-pad);y1=Math.max(0,y1-pad);
-        x2=Math.min(canvas.width,x2+pad);y2=Math.min(canvas.height,y2+pad);
-        var cw=x2-x1,ch=y2-y1;
-        if(cw>100&&ch>100){
-          var out=document.createElement('canvas');out.width=cw;out.height=ch;
-          out.getContext('2d').drawImage(canvas,x1,y1,cw,ch,0,0,cw,ch);
-          cb({url:out.toDataURL('image/png'),asp:cw/ch});
-        } else {
-          cb({url:canvas.toDataURL('image/png'),asp:SW/SH});
-        }
-      };
-      img.onerror=function(){URL.revokeObjectURL(url);cb(null);};
-      img.src=url;
-    }catch(e){cb(null);}
+    var mapEl=document.getElementById('hc-map');
+    if(!mapEl){cb(null);return;}
+    html2canvas(mapEl,{
+      scale:2,
+      useCORS:true,
+      allowTaint:true,
+      backgroundColor:'#f8f9f8',
+      logging:false
+    }).then(function(canvas){
+      var asp=canvas.width/canvas.height;
+      cb({url:canvas.toDataURL('image/png'),asp:asp});
+    }).catch(function(){cb(null);});
   }
 
-  // Switch to destinations tab to ensure map rendered
+  // Switch to destinations tab to ensure map is rendered
   var tabs=document.querySelectorAll('.tab-btn');
   tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});
 
-  setTimeout(function(){
-    captureMap(function(mapImg){
-      buildReport(mapImg);
-    });
-  },600);
+  // Poll until Highcharts SVG paths are present, then wait for paint
+  var attempts=0;
+  function waitForMap(){
+    attempts++;
+    var paths=document.querySelectorAll('#hc-map svg path');
+    if(paths.length>10||attempts>30){
+      setTimeout(function(){
+        captureMap(function(mapImg){
+          buildReport(mapImg);
+        });
+      },1200);
+    } else {
+      setTimeout(waitForMap,400);
+    }
+  }
+  setTimeout(waitForMap,600);
 }
 
 function buildReport(mapImg){
