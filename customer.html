@@ -930,7 +930,7 @@ function buildReport(mapImg){
     {l:'Consignments',v:String(aC||0),s:'Completed & invoiced'},
     {l:'Pallets moved',v:String(aP||0),s:avgPC+' avg per consignment'},
     {l:'Late deliveries',v:String(aL||0),s:latesPct+' of consignments',c:'#DC2626'},
-    {l:'Total revenue',v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'),s:periodLabel},
+    {l:'Total cost',v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'),s:periodLabel},
     {l:'Avg cost / con',v:'\u00A3'+avgRC,s:'Per consignment'},
     {l:'Avg cost / pallet',v:'\u00A3'+avgRP,s:'Per pallet space'}
   ];
