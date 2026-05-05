@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/maps/modules/map.js"></script>
 <style>
@@ -167,6 +168,39 @@ tbody tr:hover td{background:var(--faint);}
 
 footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);background:var(--bg);}
 
+
+/* ── CONTACTS / EMAIL ── */
+.contacts-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px;}
+.contacts-title{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.contact-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center;}
+.contact-row input{border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:13px;font-family:var(--font);color:var(--text);background:var(--bg);}
+.contact-row input:focus{outline:none;border-color:var(--orange);}
+.contact-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:4px;}
+.contact-del:hover{background:#FEE2E2;color:var(--red);}
+.btn-add-contact{background:none;border:1px dashed var(--border);border-radius:6px;padding:7px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:var(--font);width:100%;margin-top:4px;}
+.btn-add-contact:hover{border-color:var(--orange);color:var(--orange);}
+.email-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;}
+.email-modal.open{display:flex;}
+.email-modal-box{background:#fff;border-radius:12px;width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.email-modal-hdr{background:var(--dark);color:#fff;padding:18px 22px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between;}
+.email-modal-hdr h3{font-size:15px;font-weight:700;}
+.email-modal-close{background:none;border:none;color:#888;font-size:20px;cursor:pointer;}
+.email-modal-close:hover{color:#fff;}
+.email-modal-body{padding:22px;}
+.email-field{margin-bottom:14px;}
+.email-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:5px;}
+.email-field input,.email-field textarea,.email-field select{width:100%;border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13px;font-family:var(--font);color:var(--text);}
+.email-field textarea{min-height:90px;resize:vertical;}
+.email-field input:focus,.email-field textarea:focus{outline:none;border-color:var(--orange);}
+.email-preview{background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6;}
+.email-preview b{color:var(--text);}
+.email-footer-btns{display:flex;gap:10px;justify-content:flex-end;}
+.btn-send{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:11px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font);}
+.btn-send:hover{background:#E06818;}
+.btn-send:disabled{background:#ccc;cursor:not-allowed;}
+.emailjs-config{background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;padding:12px 16px;font-size:12px;color:#92400E;margin-bottom:14px;}
+.emailjs-config a{color:#D97706;font-weight:600;}
+
 /* ── MAP ── */
 #hc-map{height:520px;border-radius:8px;overflow:hidden;}
 .map-tooltip{background:#1a1a1a!important;color:#fff!important;border:none!important;border-radius:8px!important;padding:10px 14px!important;font-size:12px!important;box-shadow:0 4px 20px rgba(0,0,0,0.2)!important;}
@@ -239,6 +273,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
     <button class="tab-btn" onclick="switchTab('destinations',this)">Destinations</button>
     <button class="tab-btn" onclick="switchTab('performance',this)">Performance</button>
     <button class="tab-btn" onclick="switchTab('lates',this)">Late log</button>
+    <button class="tab-btn" onclick="switchTab('contacts',this)">&#9993; Contacts</button>
   </div>
   <div class="tab-body">
     <div id="tab-tracker" class="tab-pane active"></div>
@@ -246,13 +281,15 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
     <div id="tab-destinations" class="tab-pane"></div>
     <div id="tab-performance" class="tab-pane"></div>
     <div id="tab-lates" class="tab-pane"></div>
+    <div id="tab-contacts" class="tab-pane"></div>
   </div>
 </div>
 
 <div class="actions-bar" id="actions-bar" style="display:none">
   <button class="btn btn-primary" id="btn-save" onclick="saveToGitHub()">&#9650; Save to GitHub</button>
   <button class="btn btn-dark" onclick="exportTracker()">Download tracker (.xlsx)</button>
-  <button class="btn btn-dark" onclick="exportCustomerReport()">Download PDF report</button>
+  <button class="btn btn-dark" onclick="exportCustomerReport()">&#8595; Download PDF</button>
+  <button class="btn btn-primary" onclick="openEmailModal()" id="btn-email" style="background:#1a6bbf">&#9993; Send by Email</button>
   <button class="btn btn-ghost" onclick="resetUpload()">Clear</button>
   <span class="save-msg" id="save-status"></span>
 </div>
@@ -1241,6 +1278,10 @@ function drawUKMap(regMap){
           title:{text:null},
           credits:{enabled:false},
           legend:{enabled:false},
+          mapView:{
+            center:[-3.5, 55.5],
+            zoom:4.8
+          },
           mapNavigation:{enabled:true,buttonOptions:{verticalAlign:'top'}},
           colorAxis:{
             min:0,
@@ -1394,6 +1435,260 @@ window.addEventListener('load',function(){
 
 
 
+
+
+// ── EMAILJS CONFIG (persisted to localStorage) ────────────────────────────
+var EJS = {service:'', template:'', pubkey:''};
+function loadEjsConfig(){
+  try{
+    var s=localStorage.getItem('plg_ejs');
+    if(s){EJS=JSON.parse(s);}
+    document.getElementById('ejs-service').value=EJS.service||'';
+    document.getElementById('ejs-template').value=EJS.template||'';
+    document.getElementById('ejs-pubkey').value=EJS.pubkey||'';
+    if(EJS.service&&EJS.template&&EJS.pubkey){
+      document.getElementById('ejs-config-notice').style.display='none';
+    }
+  }catch(e){}
+}
+function saveEjsConfig(){
+  EJS.service=document.getElementById('ejs-service').value.trim();
+  EJS.template=document.getElementById('ejs-template').value.trim();
+  EJS.pubkey=document.getElementById('ejs-pubkey').value.trim();
+  localStorage.setItem('plg_ejs',JSON.stringify(EJS));
+  if(EJS.service&&EJS.template&&EJS.pubkey){
+    document.getElementById('ejs-config-notice').style.display='none';
+  }
+}
+
+// ── CONTACTS (persisted to localStorage) ─────────────────────────────────
+var contacts=[];
+function loadContacts(){
+  try{
+    var s=localStorage.getItem('plg_contacts_'+currentCustomer);
+    if(s)contacts=JSON.parse(s);
+  }catch(e){contacts=[];}
+}
+function saveContacts(){
+  localStorage.setItem('plg_contacts_'+currentCustomer,JSON.stringify(contacts));
+}
+function renderContactsTab(){
+  var pane=document.getElementById('tab-contacts');
+  var rows=contacts.map(function(c,i){
+    return '<div class="contact-row">'+
+      '<input placeholder="Contact name" value="'+escHtml(c.name||'')+'" oninput="contacts['+i+'].name=this.value;saveContacts()">'+
+      '<input placeholder="email@company.co.uk" type="email" value="'+escHtml(c.email||'')+'" oninput="contacts['+i+'].email=this.value;saveContacts()">'+
+      '<button class="contact-del" onclick="deleteContact('+i+')" title="Remove">&#215;</button>'+
+    '</div>';
+  }).join('');
+  pane.innerHTML='<div class="contacts-panel">'+
+    '<div class="contacts-title"><span>Customer contacts for '+escHtml(currentCustomer)+'</span></div>'+
+    rows+
+    '<button class="btn-add-contact" onclick="addContact()">+ Add contact</button>'+
+    '</div>'+
+    '<div style="background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;color:var(--muted)">'+
+    'Contacts are saved in your browser and used when sending PDF reports by email. They are not uploaded to GitHub.'+
+    '</div>';
+  // Populate email modal select
+  var sel=document.getElementById('email-to-select');
+  if(sel){
+    sel.innerHTML='<option value="">— Select contact or type below —</option>'+
+      contacts.filter(function(c){return c.email;}).map(function(c){
+        return '<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name||c.email))+'</option>';
+      }).join('');
+  }
+}
+function addContact(){contacts.push({name:'',email:''});saveContacts();renderContactsTab();}
+function deleteContact(i){contacts.splice(i,1);saveContacts();renderContactsTab();}
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+// ── EMAIL MODAL ────────────────────────────────────────────────────────────
+function openEmailModal(){
+  loadEjsConfig();
+  loadContacts();
+  renderContactsTab();
+  // Pre-fill subject
+  var now=new Date();
+  var period=now.toLocaleString('en-GB',{month:'long',year:'numeric'});
+  document.getElementById('email-subject').value='Premier Logistics Group — KPI Report | '+currentCustomer+' | '+period;
+  document.getElementById('email-message').value='Please find your KPI report for '+period+' attached.\n\nIf you have any questions regarding your performance data, please do not hesitate to get in touch.';
+  document.getElementById('email-to').value='';
+  document.getElementById('email-to-name').value='';
+  // Populate contact dropdown
+  var sel=document.getElementById('email-to-select');
+  sel.innerHTML='<option value="">— Select contact or type below —</option>'+
+    contacts.filter(function(c){return c.email;}).map(function(c){
+      return '<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name?c.name+' — ':'')+c.email)+'</option>';
+    }).join('');
+  document.getElementById('email-modal').classList.add('open');
+}
+function closeEmailModal(){document.getElementById('email-modal').classList.remove('open');}
+function fillEmailTo(){
+  var sel=document.getElementById('email-to-select');
+  var opt=sel.options[sel.selectedIndex];
+  if(opt&&opt.value){
+    document.getElementById('email-to').value=opt.value;
+    document.getElementById('email-to-name').value=opt.dataset.name||'';
+  }
+}
+
+function sendReportEmail(){
+  var to=document.getElementById('email-to').value.trim();
+  var toName=document.getElementById('email-to-name').value.trim();
+  var subject=document.getElementById('email-subject').value.trim();
+  var message=document.getElementById('email-message').value.trim();
+  var svcId=document.getElementById('ejs-service').value.trim();
+  var tplId=document.getElementById('ejs-template').value.trim();
+  var pubKey=document.getElementById('ejs-pubkey').value.trim();
+
+  if(!to){showAlert('error','Please enter a recipient email address.');return;}
+  if(!svcId||!tplId||!pubKey){showAlert('error','Please enter your EmailJS credentials first.');return;}
+
+  var btn=document.getElementById('btn-send-email');
+  btn.disabled=true;btn.textContent='Generating PDF…';
+
+  // Generate PDF blob then encode as base64
+  generatePdfForEmail(function(pdfBase64, filename){
+    btn.textContent='Sending…';
+
+    var templateParams={
+      to_email: to,
+      to_name: toName||to,
+      from_name: 'Premier Logistics Group',
+      customer_name: currentCustomer,
+      subject: subject,
+      message: message,
+      pdf_name: filename,
+      pdf_content: pdfBase64,
+      report_period: document.getElementById('email-subject').value.split('| ').pop()||'',
+    };
+
+    emailjs.init(pubKey);
+    emailjs.send(svcId, tplId, templateParams)
+      .then(function(){
+        btn.disabled=false;btn.textContent='Send Report →';
+        closeEmailModal();
+        showAlert('success','Report sent to '+to+' — check your Sent Items to confirm.');
+      })
+      .catch(function(err){
+        btn.disabled=false;btn.textContent='Send Report →';
+        showAlert('error','Email failed: '+(err.text||err.message||JSON.stringify(err)));
+        console.error('EmailJS error',err);
+      });
+  });
+}
+
+function generatePdfForEmail(callback){
+  // Trigger the same buildReport logic but return base64 instead of saving
+  var comp=allCompleted();
+  // Re-use the existing exportCustomerReport flow but intercept the save
+  // We do this by building the report, capturing output as base64
+  var tabs=document.querySelectorAll('.tab-btn');
+  tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});
+  setTimeout(function(){
+    var mapEl=document.getElementById('hc-map');
+    if(mapEl){
+      html2canvas(mapEl,{scale:1.5,useCORS:true,allowTaint:true}).then(function(canvas){
+        var url=canvas.toDataURL('image/png');
+        var asp=canvas.width/canvas.height;
+        buildReportBase64({url:url,asp:asp},callback);
+      }).catch(function(){buildReportBase64(null,callback);});
+    } else {
+      buildReportBase64(null,callback);
+    }
+  },800);
+}
+
+function buildReportBase64(mapImg, callback){
+  // Identical to buildReport but returns base64 string instead of saving
+  try{
+    var now=new Date();
+    var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+    var filename=slug(currentCustomer)+'_KPI_Report_'+stamp+'.pdf';
+    // Quick approach: call buildReport logic inline but use output('datauristring')
+    // We temporarily monkey-patch jsPDF save
+    var {jsPDF}=window.jspdf;
+    var origProto=jsPDF.prototype.save;
+    var captured=null;
+    jsPDF.prototype.save=function(name){
+      captured=this.output('datauristring');
+      jsPDF.prototype.save=origProto;
+    };
+    buildReport(mapImg);
+    // Extract base64 from data URI
+    if(captured){
+      var b64=captured.split(',')[1];
+      callback(b64, filename);
+    } else {
+      showAlert('error','Could not generate PDF for email.');
+    }
+  }catch(e){
+    console.error('generatePdfForEmail error',e);
+    showAlert('error','PDF generation failed: '+e.message);
+  }
+}
+
 </script>
+
+<!-- EMAIL MODAL -->
+<div class="email-modal" id="email-modal">
+  <div class="email-modal-box">
+    <div class="email-modal-hdr">
+      <h3>&#9993; Send KPI Report by Email</h3>
+      <button class="email-modal-close" onclick="closeEmailModal()">&#215;</button>
+    </div>
+    <div class="email-modal-body">
+      <div class="emailjs-config" id="ejs-config-notice">
+        <b>Setup required:</b> Add your EmailJS credentials below to enable sending.
+        <a href="https://www.emailjs.com" target="_blank">Get free credentials at emailjs.com</a> &mdash;
+        connect your PLG Outlook account, create a template, then paste the IDs below.
+      </div>
+      <div class="email-field">
+        <label>EmailJS Service ID</label>
+        <input id="ejs-service" placeholder="service_xxxxxxx" oninput="saveEjsConfig()">
+      </div>
+      <div class="email-field">
+        <label>EmailJS Template ID</label>
+        <input id="ejs-template" placeholder="template_xxxxxxx" oninput="saveEjsConfig()">
+      </div>
+      <div class="email-field">
+        <label>EmailJS Public Key</label>
+        <input id="ejs-pubkey" placeholder="xxxxxxxxxxxxxxxxxxxxxx" oninput="saveEjsConfig()">
+      </div>
+      <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+      <div class="email-field">
+        <label>Send to</label>
+        <select id="email-to-select" onchange="fillEmailTo()">
+          <option value="">— Select contact or type below —</option>
+        </select>
+      </div>
+      <div class="email-field">
+        <label>Recipient email address</label>
+        <input id="email-to" type="email" placeholder="contact@customer.co.uk">
+      </div>
+      <div class="email-field">
+        <label>Recipient name</label>
+        <input id="email-to-name" placeholder="e.g. John Smith">
+      </div>
+      <div class="email-field">
+        <label>Subject</label>
+        <input id="email-subject">
+      </div>
+      <div class="email-field">
+        <label>Message (personal note — added above the report details)</label>
+        <textarea id="email-message"></textarea>
+      </div>
+      <div class="email-preview" id="email-preview-box">
+        <b>Preview:</b> Email will be sent from your connected PLG Outlook account.<br>
+        The PDF report will be attached automatically.
+      </div>
+      <div class="email-footer-btns">
+        <button class="btn btn-ghost" onclick="closeEmailModal()" style="padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);">Cancel</button>
+        <button class="btn-send" id="btn-send-email" onclick="sendReportEmail()">Send Report &#8594;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
