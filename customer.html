@@ -2,6 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+// Auth guard — redirect to login if no session
+(function(){
+  if(!sessionStorage.getItem('plg_auth')){
+    window.location.href='login.html';
+  }
+})();
+</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PLG KPI Tool</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -215,6 +224,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
     <div class="hdr-div"></div>
     <div class="hdr-tool">KPI Tool</div>
   </div>
+  <button onclick="sessionStorage.removeItem('plg_auth');window.location.href='login.html'" style="background:none;border:1px solid #2a2a2a;border-radius:6px;color:#888;font-size:12px;padding:5px 12px;cursor:pointer;font-family:inherit;margin-right:8px">Sign out</button>
   <div class="gh-badge">
     <div class="gh-dot" id="gh-dot"></div>
     <span id="gh-status">Connecting...</span>
