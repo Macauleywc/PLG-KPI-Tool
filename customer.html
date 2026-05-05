@@ -696,9 +696,9 @@ function buildReport(mapImg){
   var otifNum=parseFloat(ytdOTIF)||0;
   var now=new Date();
   var dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  var avgRC=aC>0?(aR/aC).toFixed(2):'--';
-  var avgRP=aP>0?(aR/aP).toFixed(2):'--';
-  var avgPC=aC>0?(aP/aC).toFixed(1):'--';
+  var avgRC=aC>0?(aR/aC).toFixed(2):'0.00';
+  var avgRP=aP>0?(aR/aP).toFixed(2):'0.00';
+  var avgPC=aC>0?(aP/aC).toFixed(1):'0.0';
 
   var months=[];
   MONTH_KEYS.forEach(function(key,i){
@@ -757,7 +757,7 @@ function buildReport(mapImg){
   var worstLate=lateList.length?lateList.reduce(function(a,b){return b.mins>a.mins?b:a;},lateList[0]):null;
 
   var periodLabel=months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026';
-  var latesPct=aC>0?((aL/aC)*100).toFixed(1):'--';
+  var latesPct=aC>0?((aL/aC)*100).toFixed(1)+'%':'0.0%';
 
   var {jsPDF}=window.jspdf;
   var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
@@ -803,7 +803,7 @@ function buildReport(mapImg){
     txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');
     doc.text(label.toUpperCase(),x+3,y+6);
     txt(valueColor||'#111111');doc.setFontSize(16);doc.setFont('helvetica','bold');
-    doc.text(String(value),x+3,y+16);
+    doc.text(String(value||''),x+3,y+16);
     if(sub){txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+3,y+21);}
   }
 
@@ -830,6 +830,7 @@ function buildReport(mapImg){
     var x=ML+ox;
     vals.forEach(function(v,i){
       var text=typeof v==='object'?String(v.t===null||v.t===undefined?'':v.t):String(v===null||v===undefined?'':v);
+      if(!text)text='';
       var right=typeof v==='object'&&v.r;
       txt(opts.total?'#FFFFFF':typeof v==='object'&&v.c?v.c:'#1C1C1C');
       doc.text(text,right?x+widths[i]-2:x+2,y+4.8,{align:right?'right':'left'});
@@ -902,7 +903,7 @@ function buildReport(mapImg){
   var kpiCards=[
     {l:'Consignments',v:String(aC||0),s:'Completed & invoiced'},
     {l:'Pallets moved',v:String(aP||0),s:avgPC+' avg per consignment'},
-    {l:'Late deliveries',v:String(aL||0),s:latesPct+'% of consignments',c:'#DC2626'},
+    {l:'Late deliveries',v:String(aL||0),s:latesPct+' of consignments',c:'#DC2626'},
     {l:'Total revenue',v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'),s:periodLabel},
     {l:'Avg cost / con',v:'\u00A3'+avgRC,s:'Per consignment'},
     {l:'Avg cost / pallet',v:'\u00A3'+avgRP,s:'Per pallet space'}
