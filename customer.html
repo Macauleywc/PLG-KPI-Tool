@@ -909,29 +909,50 @@ function buildReport(mapImg){
   doc.addPage();chrome(2);
   var y=CT+4;
 
-  // OTIF hero
+  // OTIF section header
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('ON-TIME IN-FULL (OTIF)',ML,y);
   drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
 
-  fill('#F5F4F1');doc.rect(ML,y,CW,30,'F');
-  // Ring (drawn as arc approximation with filled sectors)
-  var cx2=ML+18,cy2=y+15,r2=12;
-  fill('#E2E0DB');doc.ellipse(cx2,cy2,r2,r2,'F');
-  // Red arc for OTIF
-  txt('#DC2626');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(ytdOTIF+'%',cx2,cy2+1.5,{align:'center'});
-  txt('#888888');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text('OTIF',cx2,cy2+5.5,{align:'center'});
-  // Text info
-  txt('#111111');doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(String(aL||0)+' late consignments from '+String(aC||0)+' total',ML+34,y+9);
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','normal');doc.text('Target: 98.0%  \u00B7  '+(98-otifNum).toFixed(1)+' percentage points below target',ML+34,y+15);
+  // OTIF hero box — clean horizontal layout
+  var heroH=42;
+  fill('#F5F4F1');doc.rect(ML,y,CW,heroH,'F');
+
+  // Left: red OTIF box
+  fill('#DC2626');doc.rect(ML,y,34,heroH,'F');
+  txt('#FFFFFF');doc.setFontSize(15);doc.setFont('helvetica','bold');
+  doc.text(ytdOTIF+'%',ML+17,y+16,{align:'center'});
+  txt('#FFCCCC');doc.setFontSize(6);doc.setFont('helvetica','bold');
+  doc.text('OTIF',ML+17,y+23,{align:'center'});
+  txt('#FFAAAA');doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+  doc.text('Target: 98%',ML+17,y+29,{align:'center'});
+
+  // Right: text + bar
+  var bx=ML+40, bw=CW-44;
+  txt('#111111');doc.setFontSize(11);doc.setFont('helvetica','bold');
+  doc.text(String(aL||0)+' late consignments from '+String(aC||0)+' total',bx,y+9);
+  txt('#666666');doc.setFontSize(7);doc.setFont('helvetica','normal');
+  doc.text('Target: 98.0%   |   '+(98-otifNum).toFixed(1)+' pts below target',bx,y+16);
+
   // Progress bar
-  fill('#DDDDDD');doc.rect(ML+34,y+18,CW-36,4,'F');
-  fill('#DC2626');doc.rect(ML+34,y+18,Math.min(otifNum/100,1)*(CW-36),4,'F');
-  txt('#DC2626');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(ytdOTIF+'% actual',ML+34+(otifNum/100*(CW-36)/2),y+26,{align:'center'});
-  txt('#16A34A');doc.text('98% target',ML+34+((CW-36)*0.98),y+26,{align:'center'});
-  // Below pill
-  fill('#FEE2E2');doc.rect(ML+34,y+20,52,6,'F');
-  txt('#991B1B');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('\u25BC Below target \u2014 performance review recommended',ML+36,y+24.5);
-  y+=34;
+  var barY=y+21;
+  fill('#DDDDDD');doc.rect(bx,barY,bw,5,'F');
+  fill('#DC2626');doc.rect(bx,barY,Math.min(otifNum/100,1)*bw,5,'F');
+  fill('#16A34A');doc.rect(bx+bw*0.98-0.5,barY-1,1.5,7,'F');
+
+  // Bar labels on a single row below bar
+  txt('#888888');doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+  doc.text('0%',bx,barY+9);
+  txt('#DC2626');doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+  doc.text(ytdOTIF+'% actual',bx+(bw*0.5),barY+9,{align:'center'});
+  txt('#16A34A');doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+  doc.text('98% target',bx+bw,barY+9,{align:'right'});
+
+  // Below target pill — last row of hero box
+  fill('#FEE2E2');doc.roundedRect(bx,barY+12,92,6,1,1,'F');
+  txt('#991B1B');doc.setFontSize(6);doc.setFont('helvetica','bold');
+  doc.text('Below target  -  performance review recommended',bx+3,barY+16.5);
+
+  y+=heroH+6;
 
   // KPI cards — 3 col, 2 rows
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PERIOD STATISTICS \u2014 '+periodLabel.toUpperCase(),ML,y);
