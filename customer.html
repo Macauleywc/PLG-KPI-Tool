@@ -268,6 +268,20 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
   <div id="raw-loaded" style="display:none"></div>
 </div>
 
+<div class="upload-zone" id="delivery-upload-zone" style="margin-top:12px">
+  <div class="zone-label">
+    <div class="step-badge" style="background:#1a6bbf">1b</div>
+    <div class="zone-title">Upload Delivery Date data <span style="font-size:12px;font-weight:400;color:var(--muted)">(optional — improves OTIF accuracy)</span></div>
+  </div>
+  <div class="drop-area" id="drop-area-v2" style="padding:14px 20px;min-height:70px">
+    <input type="file" accept=".xlsx,.xls" id="file-v2" onchange="handleDeliveryData(this)">
+    <div class="drop-icon" style="font-size:22px">&#128197;</div>
+    <div class="drop-h" style="font-size:13px">Drop Qargo delivery date export here</div>
+    <div class="drop-s">Contains Requested &amp; Actual Delivery Date columns</div>
+  </div>
+  <div id="v2-loaded" style="display:none"></div>
+</div>
+
 <div id="kpi-section" class="kpi-section" style="display:none">
   <div class="step2-label">
     <div class="step-badge">2</div>
@@ -323,16 +337,113 @@ var MONTH_KEYS=['2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','202
 function xlDate(v){if(v instanceof Date)return v;if(typeof v==='number'){var d=new Date((v-25569)*86400*1000);return new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()));}if(typeof v==='string')return new Date(v);return null;}
 function xlDT(v){if(v instanceof Date)return v;if(typeof v==='number')return new Date((v-25569)*86400*1000);if(typeof v==='string')return new Date(v);return null;}
 function twEnd(tw){if(!tw)return null;return tw.split(' - ').pop().trim();}
-function isLate(r){if(r._manuallyRemoved)return false;var rid=r['id']||r['order id']||'';if(rid&&removedLateIds.has(rid))return false;try{var e=twEnd(r['destination time window']);if(!e)return false;var dd=xlDate(r['destination date']);if(!dd)return false;var arr=xlDT(r['destination arrival']);if(!arr)return false;var dl=new Date(dd.toISOString().split('T')[0]+'T'+e+':00');return arr>dl;}catch(x){return false;}}
+function isLate(r){
+  if(r._manuallyRemoved)return false;
+  var rid=r['id']||r['order id']||'';
+  if(rid&&removedLateIds.has(rid))return false;
+
+  // Use delivery date map if available (more accurate)
+  var consRef=String(r['consignment reference']||'').replace(/\.0$/,'').replace(/\+$/,'').trim();
+  if(consRef&&deliveryDateMap[consRef]){
+    var dm=deliveryDateMap[consRef];
+    var actualDate=dm.actual?new Date(dm.actual):null;
+    var plannedDate=dm.planned?new Date(dm.planned):null;
+    if(actualDate&&plannedDate){
+      // Delivered on a later date = late
+      var ad=new Date(actualDate.getFullYear(),actualDate.getMonth(),actualDate.getDate());
+      var pd=new Date(plannedDate.getFullYear(),plannedDate.getMonth(),plannedDate.getDate());
+      if(ad>pd)return true;
+      if(ad<pd)return false; // delivered early = on time
+      // Same date — check time window
+      var window=r['destination time window']||'';
+      if(window&&window.indexOf(' - ')>-1){
+        try{
+          var endStr=window.split(' - ')[1].trim();
+          var ep=endStr.split(':');
+          var wh=parseInt(ep[0]),wm=parseInt(ep[1])||0;
+          var arrDT=new Date(actualDate);
+          return arrDT.getHours()>wh||(arrDT.getHours()===wh&&arrDT.getMinutes()>wm);
+        }catch(e){}
+      }
+      return false;
+    }
+  }
+
+  try{var e=twEnd(r['destination time window']);if(!e)return false;var dd=xlDate(r['destination date']);if(!dd)return false;var arr=xlDT(r['destination arrival']);if(!arr)return false;var dl=new Date(dd.toISOString().split('T')[0]+'T'+e+':00');return arr>dl;}catch(x){return false;}}
 function minsLate(r){try{var e=twEnd(r['destination time window']);if(!e)return 0;var dd=xlDate(r['destination date']);var arr=xlDT(r['destination arrival']);var dl=new Date(dd.toISOString().split('T')[0]+'T'+e+':00');return Math.max(0,Math.round((arr-dl)/60000));}catch(x){return 0;}}
 function region(pc){if(!pc)return'Unknown';var a=(pc+'').replace(/[^A-Za-z]/g,'').toUpperCase().slice(0,2);var m={E:'London',EC:'London',N:'London',NW:'London',SE:'London',SW:'London',W:'London',WC:'London',AL:'East of England',CB:'East of England',CM:'East of England',CO:'East of England',IP:'East of England',LU:'East Midlands',MK:'East Midlands',NR:'East of England',PE:'East of England',SG:'East of England',SS:'East of England',B:'West Midlands',CV:'West Midlands',DY:'West Midlands',ST:'West Midlands',WS:'West Midlands',WV:'West Midlands',DE:'East Midlands',LE:'East Midlands',LN:'East Midlands',NG:'East Midlands',NN:'East Midlands',BB:'North West',BL:'North West',CA:'North West',CH:'North West',CW:'North West',FY:'North West',L:'North West',LA:'North West',M:'North West',OL:'North West',PR:'North West',SK:'North West',WA:'North West',WN:'North West',BD:'Yorkshire',DN:'Yorkshire',HD:'Yorkshire',HG:'Yorkshire',HU:'Yorkshire',HX:'Yorkshire',LS:'Yorkshire',S:'Yorkshire',WF:'Yorkshire',YO:'Yorkshire',DH:'North East',DL:'North East',NE:'North East',SR:'North East',TS:'North East',BS:'South West',BA:'South West',EX:'South West',GL:'South West',PL:'South West',TA:'South West',TQ:'South West',BH:'South',GU:'South',PO:'South',RG:'South',RH:'South',SL:'South',SN:'South',SO:'South',SP:'South',BN:'South East',CT:'South East',DA:'South East',KT:'South East',ME:'South East',OX:'South East',TN:'South East',TW:'South East',CF:'Wales',LD:'Wales',LL:'Wales',NP:'Wales',SA:'Wales',SY:'Wales',AB:'Scotland',DD:'Scotland',DG:'Scotland',EH:'Scotland',FK:'Scotland',G:'Scotland',IV:'Scotland',KA:'Scotland',KY:'Scotland',ML:'Scotland',PA:'Scotland',PH:'Scotland',TD:'Scotland',BT:'Northern Ireland'};
 return m[a]||m[a.slice(0,1)]||'Other';}
 
+function classifySurchargeRate(window){
+  if(!window)return 0;
+  var w=String(window).trim();
+  if(w.indexOf(' - ')<0)return 0;
+  var parts=w.split(' - ');
+  var start=parts[0].trim(),end=parts[1].trim();
+  if(start==='09:00'&&end==='10:00')return 32;
+  if(start==='09:00'&&end==='12:00')return 12;
+  if(start===end)return 23;
+  return 0;
+}
+
 function calcMonth(rows){
   var comp=rows.filter(function(r){var s=(r['status']||'').toUpperCase();return s==='INVOICE_POSTED'||s==='COMPLETED';});
   var cons=comp.length,pallets=0,revenue=0,lates=0;
-  comp.forEach(function(r){pallets+=parseFloat(r['goods pallet spaces'])||0;revenue+=parseFloat(r['revenue'])||0;if(isLate(r))lates++;});
+  comp.forEach(function(r){
+    pallets+=parseFloat(r['goods pallet spaces'])||0;
+    // Use Customer Cost from delivery file if available, else fall back to Qargo revenue
+    var consRef=String(r['consignment reference']||'').replace(/\.0$/,'').replace(/\+$/,'').trim();
+    var dm=deliveryDateMap[consRef];
+    var totalCost=(dm&&dm.cost!=null)?parseFloat(dm.cost):parseFloat(r['revenue'])||0;
+    // Strip out surcharge so revenue = base freight only
+    var sc=classifySurchargeRate(r['destination time window']);
+    revenue+=Math.max(0,totalCost-sc);
+    if(isLate(r))lates++;
+  });
   return{cons:cons,pallets:pallets,revenue:revenue,lates:lates,timeliness:cons>0?(cons-lates)/cons:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
+}
+
+var deliveryDateMap = {}; // consignment ref -> {planned, actual}
+
+function handleDeliveryData(input){
+  var file=input.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var wb=XLSX.read(e.target.result,{type:'binary',cellDates:true});
+      var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:null});
+      deliveryDateMap={};
+      var count=0;
+      rows.forEach(function(r){
+        // Find consignment reference column
+        var ref=r['Consignments > Consignment reference number']||r['consignment reference']||r['Consignment reference']||r['ref']||'';
+        ref=String(ref).replace(/\.0$/,'').replace(/\+$/,'').trim();
+        // Support multiple export formats:
+        // v3: 'Requested Delivery Date' / 'Actual Delivery Date' (cleanest)
+        // v2: 'Consignments > Delivery stop > Date (by type) > Requested' / 'Delivery Date'
+        var planned = r['Requested Delivery Date']
+                   || r['Consignments > Delivery stop > Date (by type) > Requested']
+                   || r['Requested'] || null;
+        var actual  = r['Actual Delivery Date']
+                   || r['Delivery Date']
+                   || r['Actual date'] || null;
+        var cost    = r['Customer Cost'] || r['Cost'] || r['cost'] || null;
+        if(ref&&actual){
+          deliveryDateMap[ref]={planned:planned,actual:actual,cost:cost};
+          count++;
+        }
+      });
+      document.getElementById('v2-loaded').innerHTML=
+        '<div class="file-loaded"><div class="file-icon">&#9989;</div>'+
+        '<div style="flex:1"><div class="file-name">'+file.name+'</div>'+
+        '<div class="file-status">'+count+' delivery dates loaded · will be used to improve OTIF accuracy</div></div></div>';
+      document.getElementById('v2-loaded').style.display='block';
+      showAlert('success','Delivery data loaded — '+count+' consignments mapped. Re-processing OTIF...');
+      // Re-run OTIF calculation if raw data already loaded
+      if(Object.keys(calculatedMonths).length>0) tryRender();
+    }catch(err){showAlert('warn','Could not read delivery file: '+err.message);}
+  };
+  reader.readAsBinaryString(file);
 }
 
 function handleRaw(input){
@@ -466,7 +577,7 @@ function renderPreview(){
   if(ytdCardsEl){ytdCardsEl.innerHTML=
     '<div class="stat-card"><div class="lbl">YTD Consignments</div><div class="val" style="color:var(--orange)">'+tC.toLocaleString()+'</div></div>'+
     '<div class="stat-card"><div class="lbl">YTD Pallets</div><div class="val">'+tP.toLocaleString()+'</div></div>'+
-    '<div class="stat-card"><div class="lbl">YTD Cost</div><div class="val">£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
+    '<div class="stat-card"><div class="lbl">YTD Base Cost</div><div class="val">£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
     '<div class="stat-card"><div class="lbl">YTD OTIF</div><div class="val" style="color:'+(parseFloat(ytdOTIF)>=98?'var(--green)':parseFloat(ytdOTIF)>=95?'var(--amber)':'var(--red)')+'">'+ytdOTIF+'%</div></div>';}
   var ytdStripEl=null; // disabled - using cards instead
   if(ytdStripEl&&false){ytdStripEl.innerHTML=
@@ -948,7 +1059,7 @@ function buildReport(mapImg){
     {l:'Consignments',v:String(aC||0),s:'Completed & invoiced'},
     {l:'Pallets moved',v:String(aP||0),s:avgPC+' avg per consignment'},
     {l:'Late deliveries',v:String(aL||0),s:latesPct+' of consignments',c:'#DC2626'},
-    {l:'Total cost',v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'),s:periodLabel},
+    {l:'Base freight cost',v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'),s:periodLabel},
     {l:'Avg cost / con',v:'\u00A3'+avgRC,s:'Per consignment'},
     {l:'Avg cost / pallet',v:'\u00A3'+avgRP,s:'Per pallet space'}
   ];
@@ -979,7 +1090,7 @@ function buildReport(mapImg){
   });
   // Commercial cards
   var rx2=ML+lW2+gap2;
-  [['Total spend \u2014 '+periodLabel,fmt(aR),'All completed & invoiced'],
+  [['Base freight \u2014 '+periodLabel,fmt(aR),'Excl. surcharges'],
    ['Avg cost / consignment','\u00A3'+avgRC,''],
    ['Avg cost / pallet','\u00A3'+avgRP,'']].forEach(function(c,i){
     fill('#FFFFFF');doc.rect(rx2,y+i*17,rW2,15,'F');
