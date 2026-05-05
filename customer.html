@@ -658,61 +658,34 @@ function exportTracker(){
 function exportCustomerReport(){
   showAlert('info','Preparing PDF — capturing map...');
 
-  // Capture map using Highcharts getSVG — renders exact chart colours
+  // Use pre-captured map PNG (grabbed at render time via chart render event)
   function captureMap(cb){
-    var chart=chartInst['hc-map'];
-    if(!chart||!chart.getSVG){
-      // Fallback: try html2canvas
-      var mapEl=document.getElementById('hc-map');
-      if(!mapEl){cb(null);return;}
-      html2canvas(mapEl,{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#f8f9f8',logging:false})
-        .then(function(canvas){cb({url:canvas.toDataURL('image/png'),asp:canvas.width/canvas.height});})
-        .catch(function(){cb(null);});
-      return;
-    }
-    try{
-      // Use Highcharts own SVG export — guaranteed correct colours
-      var svg=chart.getSVG({
-        chart:{width:900,height:600,backgroundColor:'#f8f9f8'},
-        mapView:{center:[-3.5,55.5],zoom:4.8}
-      });
-      var blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'});
-      var url=URL.createObjectURL(blob);
-      var img=new Image();
-      img.onload=function(){
-        var canvas=document.createElement('canvas');
-        canvas.width=1800;canvas.height=1200;
-        var ctx=canvas.getContext('2d');
-        ctx.fillStyle='#f8f9f8';ctx.fillRect(0,0,1800,1200);
-        ctx.drawImage(img,0,0,1800,1200);
-        URL.revokeObjectURL(url);
-        cb({url:canvas.toDataURL('image/png'),asp:1800/1200});
-      };
-      img.onerror=function(){URL.revokeObjectURL(url);cb(null);};
-      img.src=url;
-    }catch(e){console.error('getSVG error',e);cb(null);}
-  }
-
-  // Switch to destinations tab to ensure map is rendered
-  var tabs=document.querySelectorAll('.tab-btn');
-  tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});
-
-  // Poll until Highcharts SVG paths are present, then wait for paint
-  var attempts=0;
-  function waitForMap(){
-    attempts++;
-    var paths=document.querySelectorAll('#hc-map svg path');
-    if(paths.length>10||attempts>30){
-      setTimeout(function(){
-        captureMap(function(mapImg){
-          buildReport(mapImg);
-        });
-      },1200);
+    if(window._mapPng){
+      cb(window._mapPng);
     } else {
-      setTimeout(waitForMap,400);
+      // Map not yet captured — switch to destinations tab and wait
+      cb(null);
     }
   }
-  setTimeout(waitForMap,600);
+
+  // Switch to Destinations tab to trigger map render if not already done
+  var tabs=document.querySelectorAll('.tab-btn');
+  var destRendered=!!window._mapPng;
+  if(!destRendered){
+    tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});
+  }
+
+  // Wait for the render-event PNG capture (fires 500ms after chart renders)
+  var waited=0;
+  function waitForPng(){
+    waited+=300;
+    if(window._mapPng||waited>8000){
+      buildReport(window._mapPng||null);
+    } else {
+      setTimeout(waitForPng,300);
+    }
+  }
+  setTimeout(waitForPng, destRendered?0:1500);
 }
 
 function buildReport(mapImg){
@@ -1285,7 +1258,40 @@ function drawUKMap(regMap){
         });
 
         chartInst['hc-map']=Highcharts.mapChart('hc-map',{
-          chart:{backgroundColor:'#f8f9f8',style:{fontFamily:'Segoe UI,sans-serif'},height:700},
+          chart:{
+            backgroundColor:'#f8f9f8',
+            style:{fontFamily:'Segoe UI,sans-serif'},
+            height:700,
+            events:{
+              render:function(){
+                // Capture map as PNG every time it renders — stored for PDF export
+                var chart=this;
+                setTimeout(function(){
+                  try{
+                    var svgEl=chart.container.querySelector('svg');
+                    if(!svgEl)return;
+                    // Inline all computed styles into the SVG so it renders correctly off-screen
+                    var svgStr=new XMLSerializer().serializeToString(svgEl);
+                    var blob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
+                    var url=URL.createObjectURL(blob);
+                    var img=new Image();
+                    img.onload=function(){
+                      var W=chart.chartWidth,H=chart.chartHeight;
+                      var canvas=document.createElement('canvas');
+                      canvas.width=W*2;canvas.height=H*2;
+                      var ctx=canvas.getContext('2d');
+                      ctx.fillStyle='#f8f9f8';ctx.fillRect(0,0,canvas.width,canvas.height);
+                      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+                      URL.revokeObjectURL(url);
+                      window._mapPng={url:canvas.toDataURL('image/png'),asp:W/H};
+                    };
+                    img.onerror=function(){URL.revokeObjectURL(url);};
+                    img.src=url;
+                  }catch(e){console.warn('Map capture error',e);}
+                },500);
+              }
+            }
+          },
           title:{text:null},
           credits:{enabled:false},
           legend:{enabled:false},
