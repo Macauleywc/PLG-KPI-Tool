@@ -658,34 +658,39 @@ function exportTracker(){
 function exportCustomerReport(){
   showAlert('info','Preparing PDF — capturing map...');
 
-  // Use pre-captured map PNG (grabbed at render time via chart render event)
+  // Build map PNG from GeoJSON + current data — no CORS issues
   function captureMap(cb){
-    if(window._mapPng){
-      cb(window._mapPng);
-    } else {
-      // Map not yet captured — switch to destinations tab and wait
-      cb(null);
+    // Build region data from current customer data
+    var comp=allCompleted();
+    var regData={};
+    comp.forEach(function(r){
+      var reg=region(r['destination postal code']||'');
+      if(!regData[reg])regData[reg]={pallets:0,cons:0,lates:0};
+      regData[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;
+      regData[reg].cons++;
+      if(isLate(r))regData[reg].lates++;
+    });
+
+    if(!window._gbGeoJSON){
+      // GeoJSON not loaded yet — try to fetch it
+      fetch('https://code.highcharts.com/mapdata/countries/gb/gb-all.geo.json')
+        .then(function(r){return r.json();})
+        .then(function(gj){
+          window._gbGeoJSON=gj;
+          var svg=window.buildMapSVG(regData);
+          if(svg){window.mapSVGtoPNG(svg,cb);}else{cb(null);}
+        }).catch(function(){cb(null);});
+      return;
     }
+
+    var svg=window.buildMapSVG(regData);
+    if(svg){window.mapSVGtoPNG(svg,cb);}else{cb(null);}
   }
 
-  // Switch to Destinations tab to trigger map render if not already done
-  var tabs=document.querySelectorAll('.tab-btn');
-  var destRendered=!!window._mapPng;
-  if(!destRendered){
-    tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});
-  }
-
-  // Wait for the render-event PNG capture (fires 500ms after chart renders)
-  var waited=0;
-  function waitForPng(){
-    waited+=300;
-    if(window._mapPng||waited>8000){
-      buildReport(window._mapPng||null);
-    } else {
-      setTimeout(waitForPng,300);
-    }
-  }
-  setTimeout(waitForPng, destRendered?0:1500);
+  // Build map from GeoJSON data then generate PDF
+  captureMap(function(mapImg){
+    buildReport(mapImg);
+  });
 }
 
 function buildReport(mapImg){
@@ -1209,6 +1214,7 @@ function drawUKMap(regMap){
     fetch('https://code.highcharts.com/mapdata/countries/gb/gb-all.geo.json')
       .then(function(r){return r.json();})
       .then(function(mapData){
+        window._gbGeoJSON=mapData; // store for PDF map builder
         // Map Highcharts 'region' property to our region names
         var hcRegionMap={
           'North East England':'North East',
@@ -1644,6 +1650,118 @@ function buildReportBase64(mapImg, callback){
     showAlert('error','PDF generation failed: '+e.message);
   }
 }
+
+
+// ── PURE JS SVG MAP GENERATOR ─────────────────────────────────────────────
+// Builds the UK map as an SVG string using GeoJSON + pallet data
+// No browser canvas/CORS issues — pure vector math
+
+window.buildMapSVG = function(regionData) {
+  // regionData: { 'North West': {pallets:49, otif:86.7}, ... }
+  
+  var regionMap = {
+    'East':'East of England','Eastern':'East of England',
+    'East Midlands':'East Midlands','Greater London':'London',
+    'Highlands and Islands':'Scotland','North East':'North East',
+    'North Eastern':'North East','North West':'North West',
+    'Northern Ireland':'N Ireland','South East':'South East',
+    'South West':'South West','South Western':'South West',
+    'West Midlands':'West Midlands','East Wales':'Wales',
+    'West Wales and the Valleys':'Wales','Yorkshire and the Humber':'Yorkshire'
+  };
+
+  var maxPallets = 1;
+  Object.values(regionData).forEach(function(d){ if(d.pallets>maxPallets)maxPallets=d.pallets; });
+
+  function fillColor(pallets) {
+    if(!pallets||pallets===0) return '#EBEBEA';
+    var t = pallets / maxPallets;
+    // cream #FAE8D4 -> PLG orange #F47920 -> dark #7A1E00
+    var stops = [
+      [0,    0xFA, 0xE8, 0xD4],
+      [0.3,  0xFD, 0xC8, 0x96],
+      [0.6,  0xF4, 0x79, 0x20],
+      [1.0,  0x7A, 0x1E, 0x00]
+    ];
+    var s0=stops[0],s1=stops[1],s2=stops[2],s3=stops[3];
+    var r,g,b;
+    if(t<0.3){var u=t/0.3;r=s0[1]+(s1[1]-s0[1])*u;g=s0[2]+(s1[2]-s0[2])*u;b=s0[3]+(s1[3]-s0[3])*u;}
+    else if(t<0.6){var u=(t-0.3)/0.3;r=s1[1]+(s2[1]-s1[1])*u;g=s1[2]+(s2[2]-s1[2])*u;b=s1[3]+(s2[3]-s1[3])*u;}
+    else{var u=(t-0.6)/0.4;r=s2[1]+(s3[1]-s2[1])*u;g=s2[2]+(s3[2]-s2[2])*u;b=s2[3]+(s3[3]-s2[3])*u;}
+    var hex=function(v){return Math.round(v).toString(16).padStart(2,'0');};
+    return '#'+hex(r)+hex(g)+hex(b);
+  }
+
+  // Coordinate bounds for gb-all GeoJSON (Highcharts internal coords)
+  var minx=-999,miny=-999,maxx=5827,maxy=9851;
+  var SW=800, SH=900, PAD=10;
+
+  function tx(x){ return PAD + (x-minx)/(maxx-minx)*(SW-2*PAD); }
+  function ty(y){ return PAD + (maxy-y)/(maxy-miny)*(SH-2*PAD); }
+
+  function ringToPath(coords) {
+    if(!coords||coords.length<3) return '';
+    var d='M'+tx(coords[0][0]).toFixed(1)+','+ty(coords[0][1]).toFixed(1);
+    for(var i=1;i<coords.length;i++){
+      d+='L'+tx(coords[i][0]).toFixed(1)+','+ty(coords[i][1]).toFixed(1);
+    }
+    return d+'Z';
+  }
+
+  function featureToPath(geom) {
+    if(!geom) return '';
+    var d='';
+    if(geom.type==='Polygon'){
+      geom.coordinates.forEach(function(ring){ d+=ringToPath(ring); });
+    } else if(geom.type==='MultiPolygon'){
+      geom.coordinates.forEach(function(poly){
+        poly.forEach(function(ring){ d+=ringToPath(ring); });
+      });
+    }
+    return d;
+  }
+
+  if(!window._gbGeoJSON) return null;
+
+  var paths = [];
+  window._gbGeoJSON.features.forEach(function(feat){
+    if(feat.geometry.type==='LineString') return;
+    var hcRegion = feat.properties.region||'';
+    var ourRegion = regionMap[hcRegion]||null;
+    var rd = ourRegion ? regionData[ourRegion] : null;
+    var fill = rd ? fillColor(rd.pallets) : '#EBEBEA';
+    var stroke = rd ? 'rgba(255,255,255,0.9)' : '#DEDEDD';
+    var sw = rd ? '0.5' : '0.3';
+    var d = featureToPath(feat.geometry);
+    if(d) paths.push('<path d="'+d+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'" stroke-linejoin="round"/>');
+  });
+
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+SW+' '+SH+'" width="'+SW+'" height="'+SH+'">'
+    + '<rect width="'+SW+'" height="'+SH+'" fill="#f8f9f8"/>'
+    + paths.join('')
+    + '</svg>';
+
+  return svg;
+};
+
+// Render map SVG to a PNG data URL
+window.mapSVGtoPNG = function(svgStr, callback) {
+  var blob = new Blob([svgStr], {type:'image/svg+xml;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var img = new Image();
+  img.onload = function(){
+    var canvas = document.createElement('canvas');
+    canvas.width = 1600; canvas.height = 1800;
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#f8f9f8';
+    ctx.fillRect(0,0,1600,1800);
+    ctx.drawImage(img,0,0,1600,1800);
+    URL.revokeObjectURL(url);
+    callback({url:canvas.toDataURL('image/png'), asp:1600/1800});
+  };
+  img.onerror = function(){ URL.revokeObjectURL(url); callback(null); };
+  img.src = url;
+};
 
 </script>
 
