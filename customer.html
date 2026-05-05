@@ -268,7 +268,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
   <div id="raw-loaded" style="display:none"></div>
 </div>
 
-<div class="upload-zone" id="delivery-upload-zone" style="margin-top:12px">
+<div class="upload-zone" id="delivery-upload-zone" style="margin-top:12px;display:none">
   <div class="zone-label">
     <div class="step-badge" style="background:#1a6bbf">1b</div>
     <div class="zone-title">Upload Delivery Date data <span style="font-size:12px;font-weight:400;color:var(--muted)">(optional — improves OTIF accuracy)</span></div>
@@ -416,7 +416,7 @@ function handleDeliveryData(input){
       var count=0;
       rows.forEach(function(r){
         // Find consignment reference column
-        var ref=r['Consignments > Consignment reference number']||r['consignment reference']||r['Consignment reference']||r['ref']||'';
+        var ref=r['Customer Consignment Ref']||r['Consignments > Consignment reference number']||r['consignment reference']||r['Consignment Ref']||r['Consignment reference']||r['ref']||'';
         ref=String(ref).replace(/\.0$/,'').replace(/\+$/,'').trim();
         // Support multiple export formats:
         // v3: 'Requested Delivery Date' / 'Actual Delivery Date' (cleanest)
@@ -461,6 +461,7 @@ function handleRaw(input){
       var months=Object.keys(calculatedMonths);
       var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return '<div class="file-loaded"><div class="file-icon">✅</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons · '+s.pallets+' pallets · £'+s.revenue.toFixed(2)+' · '+s.lates+' late(s)</div></div></div>';}).join('');
       document.getElementById('raw-loaded').innerHTML=html;document.getElementById('raw-loaded').style.display='block';
+      document.getElementById('delivery-upload-zone').style.display='block';
       showAlert('success','Raw data loaded — '+months.length+' month(s): '+months.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', '));
       tryRender();
     }catch(err){showAlert('warn','Could not read file: '+err.message);}
