@@ -471,7 +471,10 @@ function handleRaw(input){
       var byMonth={};
       rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
       calculatedMonths={};
-      Object.keys(byMonth).forEach(function(k){calculatedMonths[k]=calcMonth(byMonth[k]);});
+      Object.keys(byMonth).forEach(function(k){
+        try{calculatedMonths[k]=calcMonth(byMonth[k]);}
+        catch(calcErr){showAlert('warn','Error in calcMonth for '+k+': '+calcErr.message);console.error('calcMonth error',k,calcErr);}
+      });
       var months=Object.keys(calculatedMonths);
       var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return '<div class="file-loaded"><div class="file-icon">✅</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons · '+s.pallets+' pallets · £'+s.revenue.toFixed(2)+' · '+s.lates+' late(s)</div></div></div>';}).join('');
       document.getElementById('raw-loaded').innerHTML=html;document.getElementById('raw-loaded').style.display='block';
@@ -516,9 +519,10 @@ function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
 
 function renderPreview(){
+  try{
   var _ks=document.getElementById('kpi-section');if(_ks)_ks.style.display='block';
   document.getElementById('actions-bar').style.display='flex';
-  Object.values(chartInst).forEach(function(c){c.destroy();});chartInst={};
+  Object.values(chartInst).forEach(function(c){try{c.destroy();}catch(e){}});chartInst={};
 
   var comp=allCompleted();
   var tC=getTotal('cons')||0,tP=getTotal('pallets')||0,tR=getTotal('revenue')||0,tL=getLiveLates();
