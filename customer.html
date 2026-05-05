@@ -854,10 +854,10 @@ function buildReport(mapImg){
   var statW=W/4;
   [{l:'CONSIGNMENTS',v:String(aC||0)},{l:'PALLETS DELIVERED',v:String(aP||0)},{l:'OTIF',v:ytdOTIF+'%',dim:true},{l:'LATE DELIVERIES',v:String(aL||0)}].forEach(function(s,i){
     var sx=i*statW;
-    if(i>0){drw('rgba(255,255,255,0.3)');doc.line(sx,sbY+8,sx,sbY+40);}
+    if(i>0){drw('#E06810');doc.line(sx,sbY+8,sx,sbY+40);}
     txt(s.dim?'#FECACA':'#FFFFFF');doc.setFontSize(22);doc.setFont('helvetica','bold');
     doc.text(s.v,sx+statW/2,sbY+28,{align:'center'});
-    txt('rgba(255,255,255,0.65)');doc.setFontSize(6.5);doc.setFont('helvetica','bold');
+    txt('#F9C9A8');doc.setFontSize(6.5);doc.setFont('helvetica','bold');
     doc.text(s.l,sx+statW/2,sbY+38,{align:'center'});
   });
   // Footer
