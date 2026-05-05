@@ -382,6 +382,7 @@ function getTotal(field){
   });return has?total:null;
 }
 function allCompleted(){var a=[];Object.values(calculatedMonths).forEach(function(s){a=a.concat(s.completedRows);});return a;}
+function getLiveLates(){return allCompleted().filter(function(r){return isLate(r);}).length;}
 
 function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
@@ -392,7 +393,7 @@ function renderPreview(){
   Object.values(chartInst).forEach(function(c){c.destroy();});chartInst={};
 
   var comp=allCompleted();
-  var tC=getTotal('cons')||0,tP=getTotal('pallets')||0,tR=getTotal('revenue')||0,tL=getTotal('lates')||0;
+  var tC=getTotal('cons')||0,tP=getTotal('pallets')||0,tR=getTotal('revenue')||0,tL=getLiveLates();
   var ytdOTIF=tC>0?((tC-tL)/tC*100).toFixed(2):'—';
   var ytdARC=tC>0?(tR/tC).toFixed(2):'—';
   var ytdARP=tP>0?(tR/tP).toFixed(2):'—';
@@ -444,7 +445,7 @@ function renderPreview(){
     return '<tr class="empty-row"><td>'+label+'</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>';
   }).join('');
 
-  var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getTotal('lates');
+  var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   var totalOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2)+'%':'—';
 
   var lateLogRows=lateRows.length>0?lateRows.map(function(r){return '<tr class="late-row"><td style="font-size:11px;color:#aaa">'+r.id+'</td><td>'+r.month+'</td><td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+r.dest+'</td><td>'+r.city+'</td><td>'+r.pc+'</td><td>'+r.window+'</td><td>'+r.arrival+'</td><td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td><td>'+r.pallets+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td></tr>';}).join(''):'<tr><td colspan="10" style="text-align:center;color:#aaa;padding:1rem">No late consignments in this dataset</td></tr>';
@@ -633,7 +634,7 @@ function exportTracker(){
     else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||'')||null,plts=parseFloat(ex['Plts']||ex['plts']||'')||null,rev=parseFloat(ex['£']||'')||null,lates=parseFloat(ex['Lates']||ex['lates']||'')||null;if(cons)return[label,cons,plts,rev,cons&&rev?+(rev/cons).toFixed(2):null,plts&&rev?+(rev/plts).toFixed(2):null,cons&&plts?+(plts/cons).toFixed(2):null,cons&&lates!=null?+(((cons-lates)/cons)*100).toFixed(4):null,lates];return[label,null,null,null,null,null,null,null,null];}
     return[label,null,null,null,null,null,null,null,null];
   });
-  var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getTotal('lates');
+  var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   r1.push(['Total / Avg',aC||null,aP||null,aR?+aR.toFixed(2):null,aC&&aR?+(aR/aC).toFixed(2):null,aP&&aR?+(aR/aP).toFixed(2):null,aC&&aP?+(aP/aC).toFixed(2):null,aC&&aL!=null?+((aC-aL)/aC*100).toFixed(4):null,aL||null]);
   var ws1=XLSX.utils.aoa_to_sheet([...h1,...r1]);
   ws1['!cols']=[{wch:10},{wch:8},{wch:8},{wch:14},{wch:14},{wch:14},{wch:12},{wch:10},{wch:8}];
@@ -706,7 +707,7 @@ function exportCustomerReport(){
 function buildReport(mapImg){
   try {
   var comp=allCompleted();
-  var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getTotal('lates');
+  var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   var ytdOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2):'--';
   var otifNum=parseFloat(ytdOTIF)||0;
   var now=new Date();
