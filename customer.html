@@ -409,9 +409,10 @@ function classifySurchargeRate(window){
 
 function calcMonth(rows){
   var comp=rows.filter(function(r){var s=(r['status']||'').toUpperCase();return s==='INVOICE_POSTED'||s==='COMPLETED';});
-  var cons=comp.length,pallets=0,revenue=0,lates=0;
+  var cons=comp.length,pallets=0,revenue=0,lates=0,latePallets=0;
   comp.forEach(function(r){
-    pallets+=parseFloat(r['goods pallet spaces'])||0;
+    var p=parseFloat(r['goods pallet spaces'])||0;
+    pallets+=p;
     // Use Customer Cost from delivery file if available, else fall back to Qargo revenue
     var consRef=String(r['consignment reference']||'').replace(/\.0$/,'').replace(/\+$/,'').trim();
     var dm=deliveryDateMap[consRef];
@@ -419,9 +420,10 @@ function calcMonth(rows){
     // Strip out surcharge so revenue = base freight only
     var sc=classifySurchargeRate(r['destination time window']);
     revenue+=Math.max(0,totalCost-sc);
-    if(isLate(r))lates++;
+    if(isLate(r)){lates++;latePallets+=p;}
   });
-  return{cons:cons,pallets:pallets,revenue:revenue,lates:lates,timeliness:cons>0?(cons-lates)/cons:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
+  // OTIF is pallet-weighted: (pallets - late pallets) / pallets
+  return{cons:cons,pallets:pallets,revenue:revenue,lates:lates,latePallets:latePallets,timeliness:pallets>0?(pallets-latePallets)/pallets:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
 }
 
 
@@ -566,6 +568,7 @@ function getTotal(field){
 }
 function allCompleted(){var a=[];Object.values(calculatedMonths).forEach(function(s){a=a.concat(s.completedRows);});return a;}
 function getLiveLates(){return allCompleted().filter(function(r){return isLate(r);}).length;}
+function getLiveLatePallets(){var total=0;allCompleted().filter(function(r){return isLate(r);}).forEach(function(r){total+=parseFloat(r['goods pallet spaces'])||0;});return total;}
 
 function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
@@ -577,7 +580,8 @@ function renderPreview(){
 
   var comp=allCompleted();
   var tC=getTotal('cons')||0,tP=getTotal('pallets')||0,tR=getTotal('revenue')||0,tL=getLiveLates();
-  var ytdOTIF=tC>0?((tC-tL)/tC*100).toFixed(2):'—';
+  var tLP=getLiveLatePallets();
+  var ytdOTIF=tP>0?((tP-tLP)/tP*100).toFixed(2):'—';
   var ytdARC=tC>0?(tR/tC).toFixed(2):'—';
   var ytdARP=tP>0?(tR/tP).toFixed(2):'—';
   var ytdAPC=tC>0?(tP/tC).toFixed(2):'—';
@@ -632,7 +636,8 @@ function renderPreview(){
   }).join('');
 
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
-  var totalOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2)+'%':'—';
+  var aLP=getLiveLatePallets();
+  var totalOTIF=aP?((aP-aLP)/aP*100).toFixed(2)+'%':'—';
 
   var lateLogRows=lateRows.length>0?lateRows.map(function(r){return '<tr class="late-row"><td style="font-size:11px;color:#aaa">'+r.id+'</td><td>'+r.month+'</td><td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+r.dest+'</td><td>'+r.city+'</td><td>'+r.pc+'</td><td>'+r.window+'</td><td>'+r.arrival+'</td><td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td><td>'+r.pallets+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td></tr>';}).join(''):'<tr><td colspan="10" style="text-align:center;color:#aaa;padding:1rem">No late consignments in this dataset</td></tr>';
 
@@ -647,7 +652,7 @@ function renderPreview(){
     '<div class="stat-card"><div class="lbl">YTD Consignments</div><div class="val" style="color:var(--orange)">'+tC.toLocaleString()+'</div></div>'+
     '<div class="stat-card"><div class="lbl">YTD Pallets</div><div class="val">'+tP.toLocaleString()+'</div></div>'+
     '<div class="stat-card"><div class="lbl">YTD Base Cost</div><div class="val">£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+
-    '<div class="stat-card"><div class="lbl">YTD OTIF</div><div class="val" style="color:'+(parseFloat(ytdOTIF)>=98?'var(--green)':parseFloat(ytdOTIF)>=95?'var(--amber)':'var(--red)')+'">'+ytdOTIF+'%</div></div>';}
+    '<div class="stat-card"><div class="lbl">YTD Pallet OTIF</div><div class="val" style="color:'+(parseFloat(ytdOTIF)>=98?'var(--green)':parseFloat(ytdOTIF)>=95?'var(--amber)':'var(--red)')+'">'+ytdOTIF+'%</div></div>';}
   var ytdStripEl=null; // disabled - using cards instead
   if(ytdStripEl&&false){ytdStripEl.innerHTML=
     '<div class="ytd-card"><div class="ytd-label">YTD Consignments</div><div class="ytd-val">'+tC.toLocaleString()+'</div></div>'+
@@ -662,7 +667,7 @@ function renderPreview(){
     '<div class="section-title">Full year monthly tracker <span class="pill">OTIF = (cons \u2212 lates) / cons</span></div>'+
     '<div class="alert alert-info" style="margin-bottom:1rem">Lates auto-calculated by comparing actual delivery arrival vs time window end.</div>'+
     '<div class="tracker-table-wrap"><table>'+
-      '<thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Cost</th><th>Avg Cost/Con</th><th>Avg Cost/Plt</th><th>Avg Plts/Con</th><th>OTIF</th><th>Lates</th></tr></thead>'+
+      '<thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Cost</th><th>Avg Cost/Con</th><th>Avg Cost/Plt</th><th>Avg Plts/Con</th><th>Pallet OTIF</th><th>Lates</th></tr></thead>'+
       '<tbody>'+tableRows+'</tbody>'+
       '<tfoot><tr class="total-row">'+
         '<td>Total / Avg</td>'+
@@ -786,7 +791,7 @@ function renderCharts(){
   MONTH_KEYS.forEach(function(key,i){
     var c=calculatedMonths[key],ex=getExRow(i);
     if(c){labels.push(MONTHS[i]);otifData.push(+(c.timeliness*100).toFixed(2));consData.push(c.cons);revData.push(+c.revenue.toFixed(2));arcData.push(+c.avgRC.toFixed(2));arpData.push(+c.avgRP.toFixed(2));}
-    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||0),lates=parseFloat(ex['Lates']||ex['lates']||0),rev=parseFloat(ex['£']||0),plts=parseFloat(ex['Plts']||ex['plts']||0);if(cons>0){labels.push(MONTHS[i]);otifData.push(+((cons-lates)/cons*100).toFixed(2));consData.push(cons);revData.push(rev);arcData.push(cons>0?+(rev/cons).toFixed(2):0);arpData.push(plts>0?+(rev/plts).toFixed(2):0);}}
+    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||0),lates=parseFloat(ex['Lates']||ex['lates']||0),rev=parseFloat(ex['£']||0),plts=parseFloat(ex['Plts']||ex['plts']||0);if(cons>0){labels.push(MONTHS[i]);var exOTIF=cons>0?+((cons-lates)/cons*100).toFixed(2):0;otifData.push(exOTIF); // historical: cons-basedconsData.push(cons);revData.push(rev);arcData.push(cons>0?+(rev/cons).toFixed(2):0);arpData.push(plts>0?+(rev/plts).toFixed(2):0);}}
   });
   var roll3=otifData.map(function(v,i){return i<2?null:+((otifData[i]+otifData[i-1]+otifData[i-2])/3).toFixed(2);});
   var oc={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},boxWidth:12}}},scales:{y:{ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}};
@@ -818,7 +823,7 @@ function exportTracker(){
   var r1=MONTH_KEYS.map(function(key,i){
     var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);
     if(c)return[label,c.cons,c.pallets,+c.revenue.toFixed(2),+c.avgRC.toFixed(2),+c.avgRP.toFixed(2),+c.avgPC.toFixed(2),+(c.timeliness*100).toFixed(4),c.lates];
-    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||'')||null,plts=parseFloat(ex['Plts']||ex['plts']||'')||null,rev=parseFloat(ex['£']||'')||null,lates=parseFloat(ex['Lates']||ex['lates']||'')||null;if(cons)return[label,cons,plts,rev,cons&&rev?+(rev/cons).toFixed(2):null,plts&&rev?+(rev/plts).toFixed(2):null,cons&&plts?+(plts/cons).toFixed(2):null,cons&&lates!=null?+(((cons-lates)/cons)*100).toFixed(4):null,lates];return[label,null,null,null,null,null,null,null,null];}
+    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||'')||null,plts=parseFloat(ex['Plts']||ex['plts']||'')||null,rev=parseFloat(ex['£']||'')||null,lates=parseFloat(ex['Lates']||ex['lates']||'')||null;if(cons)return[label,cons,plts,rev,cons&&rev?+(rev/cons).toFixed(2):null,plts&&rev?+(rev/plts).toFixed(2):null,cons&&plts?+(plts/cons).toFixed(2):null,cons&&lates!=null?+(((cons-lates)/cons)*100).toFixed(4):null,lates]; // historical cons-basedreturn[label,null,null,null,null,null,null,null,null];}
     return[label,null,null,null,null,null,null,null,null];
   });
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
@@ -896,7 +901,8 @@ function buildReport(mapImg){
   var isV4=rawData&&rawData.length>0&&rawData[0]['_v4_late']!==undefined;
   var comp=allCompleted();
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
-  var ytdOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2):'--';
+  var aLP2=getLiveLatePallets();
+  var ytdOTIF=aP?((aP-aLP2)/aP*100).toFixed(2):'--';
   var otifNum=parseFloat(ytdOTIF)||0;
   var now=new Date();
   var dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
@@ -1114,6 +1120,8 @@ function buildReport(mapImg){
   doc.text('OTIF',ML+17,y+23,{align:'center'});
   txt('#FFAAAA');doc.setFontSize(5.5);doc.setFont('helvetica','normal');
   doc.text('Target: 98%',ML+17,y+29,{align:'center'});
+  txt('#FFAAAA');doc.setFontSize(4.5);doc.setFont('helvetica','normal');
+  doc.text('Pallet-weighted',ML+17,y+34,{align:'center'});
 
   // Right: text + bar
   var bx=ML+40, bw=CW-44;
