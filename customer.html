@@ -470,18 +470,22 @@ function handleRaw(input){
       var wb=XLSX.read(e.target.result,{type:'binary',cellDates:false});
       var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
 
-      // Detect format: v4 has 'Customer Consignment Ref', Qargo has 'id'/'status'
+      // Detect format: delivery report has 'Customer Consignment Ref', Qargo has 'id'/'status'
       var isV4Format = rows.length>0 && rows[0]['Customer Consignment Ref']!==undefined;
       if(isV4Format){
-        // Normalise v4 rows to Qargo-compatible format
         rows = rows.map(function(r){
           var reqDate = r['Requested Delivery Date'];
           var actDate = r['Actual Delivery Date'];
           var isLateRow = actDate && reqDate && new Date(actDate) > new Date(reqDate);
-          var surcharges = String(r['Surcharges']||'');
+          // New format has separate FOC Surcharges and Surcharges columns
+          var focSurcharges = String(r['FOC Surcharges']||'');
+          var chargeableSurcharges = String(r['Surcharges']||'');
+          var allSurcharges = [focSurcharges, chargeableSurcharges].filter(function(s){return s&&s!=='nan';}).join(', ');
           var serviceCode = String(r['Service Code']||'');
-          // Map service code to delivery type
-          var extras = surcharges.indexOf('EB')>-1 ? 'Economy Booked' : 'Next Day';
+          // Delivery type from FOC surcharges (EB = Economy Booked)
+          var extras = focSurcharges.indexOf('EB')>-1 ? 'Economy Booked' : 'Next Day';
+          // Pallets — use column if available, else 1
+          var pallets = parseFloat(r['Pallets'])||1;
           return {
             'id': String(r['Customer Consignment Ref']||''),
             'consignment reference': String(r['Customer Consignment Ref']||''),
@@ -495,16 +499,19 @@ function handleRaw(input){
             'destination arrival': actDate,
             'destination time window': '',
             'destination extras': extras,
-            'goods pallet spaces': 1,
+            'goods pallet spaces': pallets,
             'revenue': parseFloat(r['Customer Cost'])||0,
-            'v4_surcharges': surcharges,
+            'v4_surcharges': allSurcharges,
+            'v4_foc': focSurcharges,
+            'v4_chargeable': chargeableSurcharges,
             'v4_service': serviceCode,
             'v4_actual_date': actDate,
             'v4_requested_date': reqDate,
             '_v4_late': isLateRow
           };
         });
-        showAlert('success','Delivery data format detected — '+rows.length+' consignments loaded.');
+        showAlert('success','Delivery report loaded — '+rows.length+' consignments, '+
+          rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
       }
 
       rawData=rows;
@@ -881,6 +888,7 @@ function exportCustomerReport(){
 
 function buildReport(mapImg){
   try {
+  var isV4=rawData&&rawData.length>0&&rawData[0]['_v4_late']!==undefined;
   var comp=allCompleted();
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   var ytdOTIF=aC&&aL!=null?((aC-aL)/aC*100).toFixed(2):'--';
@@ -918,6 +926,28 @@ function buildReport(mapImg){
 
   var typeMap2={};
   comp.forEach(function(r){var ex2=r['destination extras']||'';var t=ex2.includes('Economy Booked')?'Economy Booked':'Next Day';if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons++;if(isLate(r))typeMap2[t].lates++;});
+
+  // V4 surcharge counts
+  // FOC (free): TL, EB, ETA
+  // Chargeable: TA=£32, TB=£23, AM=£12, BW=£12
+  var v4TL=0,v4EB=0,v4ETA=0,v4TA=0,v4TB=0,v4AM=0,v4BW=0;
+  if(isV4){
+    comp.forEach(function(r){
+      // Use split columns if available
+      var foc=String(r['v4_foc']||r['v4_surcharges']||'');
+      var chg=String(r['v4_chargeable']||'');
+      var focCodes=foc.split(',').map(function(x){return x.trim();});
+      var chgCodes=chg.split(',').map(function(x){return x.trim();});
+      if(focCodes.indexOf('TL')>-1)v4TL++;
+      if(focCodes.indexOf('EB')>-1)v4EB++;
+      if(focCodes.indexOf('ETA')>-1)v4ETA++;
+      if(chgCodes.indexOf('TA')>-1)v4TA++;
+      if(chgCodes.indexOf('TB')>-1)v4TB++;
+      if(chgCodes.indexOf('AM')>-1)v4AM++;
+      if(chgCodes.indexOf('BW')>-1)v4BW++;
+    });
+  }
+  var v4ChargeTotal = v4TA*32 + v4TB*23 + v4AM*12 + v4BW*12;
 
   // Surcharge classification
   function classifySurcharge(window){
@@ -1219,9 +1249,15 @@ function buildReport(mapImg){
 
   // Summary cards
   var sc3=(CW-8)/3;
-  kpiCard(ML,y,sc3,24,'AM Delivery (09:00\u201312:00)','\u00A3'+amTotal,amCons.length+' cons \u00D7 \u00A312',null);
-  kpiCard(ML+sc3+4,y,sc3,24,'Timed Booking','\u00A3'+timedTotal,timedCons.length+' cons \u00D7 \u00A323',null);
-  kpiCard(ML+sc3*2+8,y,sc3,24,'Total surcharges','\u00A3'+surchTotal,surchCons+' of '+(aC||0)+' consignments','#F47920');
+  if(isV4){
+    kpiCard(ML,y,sc3,24,'Chargeable surcharges','\u00A3'+v4ChargeTotal,(v4TA+v4TB+v4AM)+' consignments',v4ChargeTotal>0?'#F47920':'#888888');
+    kpiCard(ML+sc3+4,y,sc3,24,'TA (£32) / TB (£23) / AM (£12)',v4TA+'  /  '+v4TB+'  /  '+v4AM,'consignments each',null);
+    kpiCard(ML+sc3*2+8,y,sc3,24,'Free surcharges (TL/EB/ETA)','\u00A30',v4TL+' / '+v4EB+' / '+v4ETA+' consignments','#888888');
+  } else {
+    kpiCard(ML,y,sc3,24,'AM Delivery (09:00\u201312:00)','\u00A3'+amTotal,amCons.length+' cons \u00D7 \u00A312',null);
+    kpiCard(ML+sc3+4,y,sc3,24,'Timed Booking','\u00A3'+timedTotal,timedCons.length+' cons \u00D7 \u00A323',null);
+    kpiCard(ML+sc3*2+8,y,sc3,24,'Total surcharges','\u00A3'+surchTotal,surchCons+' of '+(aC||0)+' consignments','#F47920');
+  }
   y+=30;
 
   // Rate card table
@@ -1229,10 +1265,26 @@ function buildReport(mapImg){
   drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   var rw3=[60,70,22,14,16];
   y=tH([{l:'Surcharge type'},{l:'Trigger'},{l:'Rate',r:1},{l:'Cons',r:1},{l:'Total',r:1}],rw3,y);
-  y=tR(['AM Delivery','Delivery window 09:00\u201312:00',{t:'\u00A312 / con',r:1},{t:String(amCons.length),r:1},{t:'\u00A3'+amTotal,r:1}],rw3,y);
-  y=tR(['Pre-10am Delivery','Delivery window 09:00\u201310:00',{t:'\u00A332 / con',r:1},{t:String(pre10Cons.length),r:1},{t:'\u00A3'+pre10Total,r:1}],rw3,y,{shade:true});
-  y=tR(['Timed Booking','Same start & end time (e.g. 11:30\u201311:30)',{t:'\u00A323 / con',r:1},{t:String(timedCons.length),r:1},{t:'\u00A3'+timedTotal,r:1}],rw3,y);
-  y=tR([{t:'TOTAL'},{t:''},{t:'',r:1},{t:String(surchCons),r:1},{t:'\u00A3'+surchTotal,r:1}],rw3,y,{total:true});
+  if(isV4){
+    // Chargeable
+    y=tR(['Timed AM (TA)','Pre-10am timed delivery',{t:'\u00A332 / con',r:1},{t:String(v4TA),r:1},{t:'\u00A3'+(v4TA*32),r:1}],rw3,y);
+    y=tR(['Timed Booking (TB)','Specific timed slot',{t:'\u00A323 / con',r:1},{t:String(v4TB),r:1},{t:'\u00A3'+(v4TB*23),r:1}],rw3,y,{shade:true});
+    y=tR(['AM Delivery (AM)','Morning delivery window',{t:'\u00A312 / con',r:1},{t:String(v4AM),r:1},{t:'\u00A3'+(v4AM*12),r:1}],rw3,y);
+    y=tR(['Booked Window (BW)','Specific delivery window booked',{t:'\u00A312 / con',r:1},{t:String(v4BW),r:1},{t:'\u00A3'+(v4BW*12),r:1}],rw3,y,{shade:true});
+    y=tR([{t:'Chargeable total'},{t:''},{t:'',r:1},{t:String(v4TA+v4TB+v4AM+v4BW),r:1},{t:'\u00A3'+v4ChargeTotal,r:1}],rw3,y,{total:true});
+    y+=6;
+    // Free
+    txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('FREE SURCHARGES (INCLUDED IN BASE RATE)',ML,y);
+    drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
+    y=tR(['Tail-lift (TL)','Applied to consignments requiring tail-lift',{t:'\u00A30',r:1},{t:String(v4TL),r:1},{t:'\u00A30',r:1}],rw3,y);
+    y=tR(['Economy Booked (EB)','Economy delivery service',{t:'\u00A30',r:1},{t:String(v4EB),r:1},{t:'\u00A30',r:1}],rw3,y,{shade:true});
+    y=tR(['ETA Notification (ETA)','Estimated time of arrival alert',{t:'\u00A30',r:1},{t:String(v4ETA),r:1},{t:'\u00A30',r:1}],rw3,y);
+  } else {
+    y=tR(['AM Delivery','Delivery window 09:00\u201312:00',{t:'\u00A312 / con',r:1},{t:String(amCons.length),r:1},{t:'\u00A3'+amTotal,r:1}],rw3,y);
+    y=tR(['Pre-10am Delivery','Delivery window 09:00\u201310:00',{t:'\u00A332 / con',r:1},{t:String(pre10Cons.length),r:1},{t:'\u00A3'+pre10Total,r:1}],rw3,y,{shade:true});
+    y=tR(['Timed Booking','Same start & end time (e.g. 11:30\u201311:30)',{t:'\u00A323 / con',r:1},{t:String(timedCons.length),r:1},{t:'\u00A3'+timedTotal,r:1}],rw3,y);
+    y=tR([{t:'TOTAL'},{t:''},{t:'',r:1},{t:String(surchCons),r:1},{t:'\u00A3'+surchTotal,r:1}],rw3,y,{total:true});
+  }
   y+=8;
 
   // AM + Timed detail side by side
@@ -1260,8 +1312,13 @@ function buildReport(mapImg){
   fill('#FFF7ED');doc.rect(ML,y,CW,10,'F');
   drw('#FED7AA');doc.rect(ML,y,CW,10,'S');
   txt('#92400E');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('Note: ',ML+3,y+4.5);
-  doc.setFont('helvetica','normal');doc.text('Surcharges calculated from destination time window in Qargo TMS. Additional to base freight cost on page 2.',ML+12,y+4.5);
-  if(pre10Cons.length===0){doc.text('Pre-10am Delivery (\u00A332) \u2014 no consignments this period.',ML+3,y+8.5);}
+  doc.setFont('helvetica','normal');if(isV4){
+    doc.text('Chargeable surcharges (TA/TB/AM) are additional to base freight. Free surcharges (TL/EB/ETA) are included in the Customer Cost.',ML+3,y+4.5);
+    if(v4ChargeTotal===0){doc.text('No chargeable surcharges recorded for this period.',ML+3,y+8.5);}
+  } else {
+    doc.text('Surcharges calculated from destination time window in Qargo TMS. Additional to base freight cost on page 2.',ML+12,y+4.5);
+    if(pre10Cons.length===0){doc.text('Pre-10am Delivery (\u00A332) \u2014 no consignments this period.',ML+3,y+8.5);}
+  }
 
   // ── PAGE 6: LATE LOG + METHODOLOGY ────────────────────────────
   doc.addPage();chrome(6);
