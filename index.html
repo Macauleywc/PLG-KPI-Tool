@@ -381,6 +381,7 @@ function render() {
     card.appendChild(cardSub);
     card.appendChild(kpiWrap);
 
+    console.log('Card created:', name, 'href:', card.href || 'NO HREF (editMode='+editMode+')');
     grid.appendChild(card);
   });
 
