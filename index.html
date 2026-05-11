@@ -324,6 +324,7 @@ function render() {
     var m = meta[name] || {};
     var card = document.createElement('div');
     card.className = 'card' + (m.months > 0 ? ' has-data' : '');
+    card.dataset.name = name;
 
     var kpiHtml = '';
     if (m.months > 0) {
@@ -373,9 +374,10 @@ function render() {
     card.appendChild(kpiWrap);
 
     if (!editMode) {
-      (function(n) {
-        card.onclick = function() { location.href = 'customer.html?c=' + encodeURIComponent(n); };
-      })(name);
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function() {
+        window.location.href = 'customer.html?c=' + encodeURIComponent(card.dataset.name);
+      });
     }
 
     grid.appendChild(card);
