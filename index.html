@@ -104,6 +104,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 18px;
   cursor: pointer; transition: all 0.18s; position: relative; overflow: hidden;
+  text-decoration: none; color: inherit; display: block;
 }
 .card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
@@ -322,20 +323,28 @@ function render() {
 
   filtered.forEach(function(name) {
     var m = meta[name] || {};
-    var card = document.createElement('div');
-    card.className = 'card' + (m.months > 0 ? ' has-data' : '');
-    card.dataset.name = name;
+    var hasData = m.months > 0;
 
     var kpiHtml = '';
-    if (m.months > 0) {
-      var otifPct = m.otif != null ? m.otif + '%' : '—';
+    if (hasData) {
+      var otifPct = m.otif != null ? m.otif + '%' : '&mdash;';
       kpiHtml = '<div class="card-divider"></div>' +
         '<div class="card-kpis">' +
           '<div><div class="kpi-lbl">Pallet OTIF</div><div class="kpi-val ' + otifClass(m.otif) + '">' + otifPct + '</div></div>' +
           '<div><div class="kpi-lbl">Months</div><div class="kpi-val orange">' + m.months + '</div></div>' +
         '</div>';
     } else {
-      kpiHtml = '<div class="card-divider"></div><div class="no-data">No data yet — click to start</div>';
+      kpiHtml = '<div class="card-divider"></div><div class="no-data">No data yet &mdash; click to start</div>';
+    }
+
+    // Use <a> tag so navigation works natively with no JS click handler needed
+    var card = editMode ? document.createElement('div') : document.createElement('a');
+    card.className = 'card' + (hasData ? ' has-data' : '');
+    if (!editMode) {
+      card.href = 'customer.html?c=' + encodeURIComponent(name);
+      card.style.textDecoration = 'none';
+      card.style.color = 'inherit';
+      card.style.display = 'block';
     }
 
     var delBtn = document.createElement('button');
@@ -343,17 +352,16 @@ function render() {
     delBtn.title = 'Remove';
     delBtn.innerHTML = '&#215;';
     delBtn.addEventListener('click', function(e) {
+      e.preventDefault();
       e.stopPropagation();
       delCustomer(name);
     });
 
     var cardTop = document.createElement('div');
     cardTop.className = 'card-top';
-
     var avatar = document.createElement('div');
     avatar.className = 'avatar';
     avatar.textContent = inits(name);
-
     cardTop.appendChild(avatar);
     cardTop.appendChild(delBtn);
 
@@ -363,7 +371,7 @@ function render() {
 
     var cardSub = document.createElement('div');
     cardSub.className = 'card-sub';
-    cardSub.textContent = m.months > 0 ? m.months + ' month' + (m.months !== 1 ? 's' : '') + ' of data' : 'No data yet';
+    cardSub.textContent = hasData ? m.months + ' month' + (m.months !== 1 ? 's' : '') + ' of data' : 'No data yet';
 
     var kpiWrap = document.createElement('div');
     kpiWrap.innerHTML = kpiHtml;
@@ -372,13 +380,6 @@ function render() {
     card.appendChild(cardName);
     card.appendChild(cardSub);
     card.appendChild(kpiWrap);
-
-    if (!editMode) {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', function() {
-        window.location.href = 'customer.html?c=' + encodeURIComponent(card.dataset.name);
-      });
-    }
 
     grid.appendChild(card);
   });
