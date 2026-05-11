@@ -517,6 +517,25 @@ function handleRaw(input){
             '_v4_late': isLateRow
           };
         });
+        // Detect multiple account codes and show filter UI if needed
+        var acctCodes = {};
+        rows.forEach(function(r){ var a = r['customer']||''; if(a) acctCodes[a] = (acctCodes[a]||0)+1; });
+        var acctList = Object.keys(acctCodes).sort();
+        if(acctList.length > 1){
+          var filterHtml = '<div id="acct-filter" style="background:#fff8f0;border:1px solid #F47920;border-radius:8px;padding:14px 18px;margin-bottom:12px;">'
+            + '<div style="font-size:12px;font-weight:600;color:#F47920;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">Multiple accounts detected — select which to include:</div>'
+            + '<div style="display:flex;flex-wrap:wrap;gap:10px;">'
+            + acctList.map(function(a){ return '<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;">'
+                + '<input type="checkbox" class="acct-cb" value="'+a+'" checked style="accent-color:#F47920;width:15px;height:15px;">'
+                + '<span><b>'+a+'</b> <span style="color:#888">('+acctCodes[a]+' cons)</span></span></label>'; }).join('')
+            + '</div>'
+            + '<button onclick="applyAcctFilter()" style="margin-top:12px;background:#F47920;color:#fff;border:none;border-radius:6px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;">Apply filter</button>'
+            + '</div>';
+          document.getElementById('raw-loaded').innerHTML = filterHtml;
+          document.getElementById('raw-loaded').style.display = 'block';
+          window._pendingRows = rows;
+          return; // Wait for user to apply filter
+        }
         showAlert('success','Delivery report loaded — '+rows.length+' consignments, '+
           rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
       }
@@ -1542,6 +1561,32 @@ function showAlert(type,msg){
   var div=document.getElementById('alert-area');
   div.innerHTML='<div class="alert alert-'+(type==='success'?'success':type==='warn'?'warn':'info')+'">'+msg+'</div>';
   setTimeout(function(){div.innerHTML='';},7000);
+}
+
+function applyAcctFilter(){
+  var checked = Array.from(document.querySelectorAll('.acct-cb:checked')).map(function(cb){ return cb.value; });
+  if(!checked.length){ showAlert('warn','Select at least one account.'); return; }
+  var rows = (window._pendingRows || []).filter(function(r){ return checked.indexOf(r['customer']||'') > -1; });
+  window._pendingRows = null;
+  document.getElementById('acct-filter') && document.getElementById('acct-filter').remove();
+  showAlert('success', 'Filtered to ' + checked.join(', ') + ' — ' + rows.length + ' consignments, '
+    + rows.reduce(function(a,r){ return a+(parseFloat(r['goods pallet spaces'])||0); }, 0) + ' pallets.');
+  rawData = rows;
+  var byMonth = {};
+  rows.forEach(function(r){ var d = xlDate(r['date']); if(!d) return; var k = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); if(!byMonth[k]) byMonth[k]=[]; byMonth[k].push(r); });
+  calculatedMonths = {};
+  Object.keys(byMonth).forEach(function(k){
+    try{ calculatedMonths[k] = calcMonth(byMonth[k]); }
+    catch(e){ showAlert('warn','Error in '+k+': '+e.message); }
+  });
+  var months = Object.keys(calculatedMonths);
+  var html = months.map(function(k){ var s=calculatedMonths[k], label=MONTHS[MONTH_KEYS.indexOf(k)]||k;
+    return '<div class="file-loaded"><div class="file-icon">✅</div><div style="flex:1"><div class="file-name">Filtered: '+checked.join(', ')+'</div><div class="file-status">'+label+': '+s.cons+' cons · '+s.pallets+' pallets · £'+s.revenue.toFixed(2)+' · '+s.lates+' late(s)</div></div></div>';
+  }).join('');
+  document.getElementById('raw-loaded').innerHTML = html;
+  document.getElementById('raw-loaded').style.display = 'block';
+  document.getElementById('delivery-upload-zone').style.display = 'block';
+  if(Object.keys(calculatedMonths).length > 0) tryRender();
 }
 
 function resetUpload(){
