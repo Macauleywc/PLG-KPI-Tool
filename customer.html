@@ -1373,7 +1373,7 @@ function buildReport(mapImg){
   }
 
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-  doc.save(slug(currentCustomer)+'_KPI_Report_'+stamp+'.pdf');
+  doc.save(currentCustomer+' - '+periodLabel+'.pdf');
   showAlert('success','PDF downloaded \u2014 '+TOTAL+' pages.');
   } catch(err) {
     console.error('buildReport error:',err);
@@ -1791,7 +1791,7 @@ function buildReportBase64(mapImg, callback){
   try{
     var now=new Date();
     var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-    var filename=slug(currentCustomer)+'_KPI_Report_'+stamp+'.pdf';
+    var filename=currentCustomer+' - '+periodLabel+'.pdf';
     // Quick approach: call buildReport logic inline but use output('datauristring')
     // We temporarily monkey-patch jsPDF save
     var {jsPDF}=window.jspdf;
