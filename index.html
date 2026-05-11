@@ -393,57 +393,6 @@ function render() {
   }
 }
 
-function updateCard(name) {
-  var m = meta[name] || {};
-  if (!m.months) return;
-  // Find the card for this customer and update its KPI section
-  var cards = document.querySelectorAll('.card, a.card');
-  cards.forEach(function(card) {
-    var nameEl = card.querySelector('.card-name');
-    if (!nameEl || nameEl.textContent !== name) return;
-    // Update subtitle
-    var subEl = card.querySelector('.card-sub');
-    if (subEl) subEl.textContent = m.months + ' month' + (m.months !== 1 ? 's' : '') + ' of data';
-    // Add has-data class
-    card.classList.add('has-data');
-    // Update or add KPI section
-    var existing = card.querySelector('.card-kpis, .no-data');
-    var divider = card.querySelector('.card-divider');
-    var otifPct = m.otif != null ? m.otif + '%' : '&mdash;';
-    var cls = m.otif != null ? (parseFloat(m.otif) >= 98 ? 'good' : parseFloat(m.otif) >= 95 ? 'warn' : 'bad') : '';
-    var kpiHtml = '<div class="card-kpis">' +
-      '<div><div class="kpi-lbl">Pallet OTIF</div><div class="kpi-val ' + cls + '">' + otifPct + '</div></div>' +
-      '<div><div class="kpi-lbl">Months</div><div class="kpi-val orange">' + m.months + '</div></div>' +
-      '</div>';
-    if (existing) {
-      existing.outerHTML = kpiHtml;
-    } else if (divider) {
-      divider.insertAdjacentHTML('afterend', kpiHtml);
-    }
-    // Also update stats strip
-    updateStats();
-  });
-}
-
-function updateStats() {
-  var list = getList();
-  var withData = 0, bestOTIF = null, bestName = '', att = 0;
-  list.forEach(function(n) {
-    var m = meta[n];
-    if (m && m.months > 0) {
-      withData++;
-      if (m.otif != null) {
-        if (bestOTIF === null || parseFloat(m.otif) > parseFloat(bestOTIF)) { bestOTIF = m.otif; bestName = n; }
-        if (parseFloat(m.otif) < 95) att++;
-      }
-    }
-  });
-  document.getElementById('s-data').textContent = withData;
-  document.getElementById('s-best').textContent = bestOTIF != null ? bestOTIF + '%' : '—';
-  document.getElementById('s-bestname').textContent = bestName || 'No data yet';
-  document.getElementById('s-att').textContent = att;
-}
-
 async function loadMeta() {
   var token = getToken();
   if (!token) return;
@@ -472,10 +421,25 @@ async function loadMeta() {
       });
       if (hasPlt && totPlt > 0) otif = ((totPlt - totLatePlt) / totPlt * 100).toFixed(1);
       meta[name] = { months: months.length, otif: otif };
-      // Update this card's display in-place without rebuilding the whole grid
-      updateCard(name);
     } catch(e) {}
   }));
+  // Update stats strip only — don't rebuild the grid
+  var list = getList();
+  var withData = 0, bestOTIF = null, bestName = '', att = 0;
+  list.forEach(function(n) {
+    var m = meta[n];
+    if (m && m.months > 0) {
+      withData++;
+      if (m.otif != null) {
+        if (bestOTIF === null || parseFloat(m.otif) > parseFloat(bestOTIF)) { bestOTIF = m.otif; bestName = n; }
+        if (parseFloat(m.otif) < 95) att++;
+      }
+    }
+  });
+  document.getElementById('s-data').textContent = withData;
+  document.getElementById('s-best').textContent = bestOTIF != null ? bestOTIF + '%' : '—';
+  document.getElementById('s-bestname').textContent = bestName || 'No data yet';
+  document.getElementById('s-att').textContent = att;
 }
 
 function toggleEdit() {
