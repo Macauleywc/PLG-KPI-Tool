@@ -354,6 +354,8 @@ function xlDT(v){if(v instanceof Date)return v;if(typeof v==='number')return new
 function twEnd(tw){if(!tw)return null;return tw.split(' - ').pop().trim();}
 function isLate(r){
   if(r._manuallyRemoved)return false;
+  // v4 format has pre-calculated late flag
+  if(r._v4_late!==undefined) return r._v4_late;
   var rid=r['id']||r['order id']||'';
   if(rid&&removedLateIds.has(rid))return false;
 
@@ -423,7 +425,6 @@ function handleDeliveryData(input){
   var file=input.files[0]; if(!file)return;
   var reader=new FileReader();
   reader.onload=function(e){
-    console.log('File loaded, size:', e.target.result.length);
     try{
       var wb=XLSX.read(e.target.result,{type:'binary',cellDates:true});
       var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:null});
@@ -462,16 +463,50 @@ function handleDeliveryData(input){
 }
 
 function handleRaw(input){
-  console.log('handleRaw fired, file:', input.files[0]?input.files[0].name:'none');
   var file=input.files[0];if(!file)return;
-  console.log('Starting file read...');
   var reader=new FileReader();
   reader.onload=function(e){
-    console.log('File loaded, size:', e.target.result.length);
     try{
       var wb=XLSX.read(e.target.result,{type:'binary',cellDates:false});
       var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
-      console.log('Rows parsed:', rows.length, 'Sample:', JSON.stringify(rows[0]).substring(0,100));
+
+      // Detect format: v4 has 'Customer Consignment Ref', Qargo has 'id'/'status'
+      var isV4Format = rows.length>0 && rows[0]['Customer Consignment Ref']!==undefined;
+      if(isV4Format){
+        // Normalise v4 rows to Qargo-compatible format
+        rows = rows.map(function(r){
+          var reqDate = r['Requested Delivery Date'];
+          var actDate = r['Actual Delivery Date'];
+          var isLateRow = actDate && reqDate && new Date(actDate) > new Date(reqDate);
+          var surcharges = String(r['Surcharges']||'');
+          var serviceCode = String(r['Service Code']||'');
+          // Map service code to delivery type
+          var extras = surcharges.indexOf('EB')>-1 ? 'Economy Booked' : 'Next Day';
+          return {
+            'id': String(r['Customer Consignment Ref']||''),
+            'consignment reference': String(r['Customer Consignment Ref']||''),
+            'status': 'INVOICE_POSTED',
+            'date': reqDate,
+            'customer': r['Account Code']||currentCustomer,
+            'destination name': r['Delivery Name']||'',
+            'destination city': r['Delivery Name']||'',
+            'destination postal code': String(r['Delivery PC']||''),
+            'destination date': reqDate,
+            'destination arrival': actDate,
+            'destination time window': '',
+            'destination extras': extras,
+            'goods pallet spaces': 1,
+            'revenue': parseFloat(r['Customer Cost'])||0,
+            'v4_surcharges': surcharges,
+            'v4_service': serviceCode,
+            'v4_actual_date': actDate,
+            'v4_requested_date': reqDate,
+            '_v4_late': isLateRow
+          };
+        });
+        showAlert('success','Delivery data format detected — '+rows.length+' consignments loaded.');
+      }
+
       rawData=rows;
       var byMonth={};
       rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
@@ -495,7 +530,6 @@ function handleTracker(input){
   var file=input.files[0];if(!file)return;
   var reader=new FileReader();
   reader.onload=function(e){
-    console.log('File loaded, size:', e.target.result.length);
     try{
       var wb=XLSX.read(e.target.result,{type:'binary',cellDates:true});
       trackerData=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:null});
