@@ -1588,6 +1588,29 @@ async function loadFromGitHub(){
     var mCount=Object.keys(savedMonthData).length;var _gse=document.getElementById('gh-status');if(_gse){_gse.textContent=mCount+' month'+(mCount!==1?'s':'')+' saved';_gse.className='gh-badge';var _dot=document.getElementById('gh-dot');if(_dot)_dot.classList.add('ok');}
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     buildTrackerFromSaved();renderHistory();
+    // Auto-render KPI view from saved data if months exist
+    if(Object.keys(savedMonthData).length>0){
+      calculatedMonths={};
+      Object.keys(savedMonthData).forEach(function(key){
+        var d=savedMonthData[key];
+        if(!d)return;
+        // Reconstruct a minimal completedRows so renderPreview doesn't crash
+        calculatedMonths[key]={
+          cons:d.cons||0,
+          pallets:d.pallets||0,
+          revenue:d.revenue||0,
+          lates:d.lates||0,
+          latePallets:d.latePallets||0,
+          timeliness:d.timeliness||0,
+          avgRC:d.avgRC||0,
+          avgRP:d.avgRP||0,
+          avgPC:d.avgPC||0,
+          completedRows:[]
+        };
+      });
+      rawData=[];
+      renderPreview();
+    }
   }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;_gs5.className='gh-status';}}
 }
 async function saveToGitHub(){
