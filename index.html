@@ -184,7 +184,7 @@ function render(){
     }
   });
   document.getElementById('s-data').textContent=withData;
-  document.getElementById('s-best').textContent=bestOTIF!=null?bestOTIF+'%':'\u2014';
+  document.getElementById('s-best').textContent=bestOTIF!=null?bestOTIF+'%':'--';
   document.getElementById('s-bestname').textContent=bestName||'No data yet';
   document.getElementById('s-att').textContent=att;
   var grid=document.getElementById('grid');
@@ -202,10 +202,10 @@ function render(){
     card.className='card'+(m.months>0?' has-data':'');
     var kpiHtml='';
     if(m.months>0){
-      var otifPct=m.otif!=null?m.otif+'%':'\u2014';
+      var otifPct=m.otif!=null?m.otif+'%':'--';
       kpiHtml='<div class="card-divider"></div><div class="card-kpis"><div><div class="kpi-lbl">Pallet OTIF</div><div class="kpi-val '+otifClass(m.otif)+'">'+otifPct+'</div></div><div><div class="kpi-lbl">Months</div><div class="kpi-val orange">'+m.months+'</div></div></div>';
     } else {
-      kpiHtml='<div class="card-divider"></div><div class="no-data">No data yet \u2014 click to start</div>';
+      kpiHtml='<div class="card-divider"></div><div class="no-data">No data yet — click to start</div>';
     }
     var delBtn=document.createElement('button');
     delBtn.className='del-btn';delBtn.title='Remove';delBtn.innerHTML='&#215;';
