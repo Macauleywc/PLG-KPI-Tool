@@ -1,7 +1,45 @@
 <!DOCTYPE html>
-<html>
-<head><title>TEST FILE - DELETE ME</title></head>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLG Test</title>
+<style>
+body { font-family: sans-serif; padding: 20px; background: #F5F4F1; }
+.grid { display: grid; grid-template-columns: repeat(3, 200px); gap: 12px; }
+a.card {
+  display: block;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+a.card:hover { background: #ffe0c0; }
+div.card {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+}
+div.card:hover { background: #c0e0ff; }
+</style>
+</head>
 <body>
-<h1>If you can see this, the upload worked</h1>
+<h2>Click test - which ones work?</h2>
+<div class="grid">
+  <a class="card" href="customer.html?c=Anand%20International">
+    <b>Anand (a tag)</b><br>Click me
+  </a>
+  <a class="card" href="customer.html?c=Bonnington%20Plastics">
+    <b>Bonnington (a tag)</b><br>Click me
+  </a>
+  <div class="card" onclick="location.href='customer.html?c=BPW'">
+    <b>BPW (div onclick)</b><br>Click me
+  </div>
+</div>
 </body>
 </html>
