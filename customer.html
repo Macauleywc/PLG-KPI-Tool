@@ -486,11 +486,12 @@ function handleRaw(input){
           var extras = focSurcharges.indexOf('EB')>-1 ? 'Economy Booked' : 'Next Day';
           // Pallets — use column if available, else 1
           var pallets = parseFloat(r['Pallets'])||1;
+          var collDate = r['Collection Date'] || reqDate;
           return {
             'id': String(r['Customer Consignment Ref']||''),
             'consignment reference': String(r['Customer Consignment Ref']||''),
             'status': 'INVOICE_POSTED',
-            'date': reqDate,
+            'date': collDate,
             'customer': r['Account Code']||currentCustomer,
             'destination name': r['Delivery Name']||'',
             'destination city': r['Delivery Name']||'',
@@ -1591,9 +1592,9 @@ function drawUKMap(regMap){
       });
   }
 
-  // Load Highcharts if not already loaded
+  // Load Highcharts if not already loaded — delay so hc-map div is in DOM
   if(typeof Highcharts!=='undefined'&&Highcharts.mapChart){
-    renderHighchartsMap();
+    setTimeout(function(){renderHighchartsMap();},100);
   } else {
     loadScript('https://code.highcharts.com/highcharts.js',function(){
       loadScript('https://code.highcharts.com/maps/modules/map.js',function(){
