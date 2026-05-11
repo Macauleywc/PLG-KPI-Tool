@@ -461,8 +461,8 @@ function handleDeliveryData(input){
         '<div class="file-status">'+count+' delivery dates loaded · will be used to improve OTIF accuracy</div></div></div>';
       document.getElementById('v2-loaded').style.display='block';
       showAlert('success','Delivery data loaded — '+count+' consignments mapped. Re-processing OTIF...');
-      // Re-run OTIF calculation if raw data already loaded
-      if(Object.keys(calculatedMonths).length>0) tryRender();
+      // Re-run OTIF calculation if raw data already loaded from a real upload (not saved data)
+      if(!window._loadedFromSaved && Object.keys(calculatedMonths).length>0) tryRender();
     }catch(err){showAlert('warn','Could not read delivery file: '+err.message);}
   };
   reader.readAsBinaryString(file);
@@ -546,6 +546,7 @@ function handleRaw(input){
       rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
       calculatedMonths={};
       Object.keys(byMonth).forEach(function(k){
+        if(k.indexOf('NaN')>-1)return; // skip rows with unparseable dates
         try{calculatedMonths[k]=calcMonth(byMonth[k]);}
         catch(calcErr){showAlert('warn','Error in calcMonth for '+k+': '+calcErr.message);console.error('calcMonth error',k,calcErr);}
       });
@@ -1578,6 +1579,7 @@ function applyAcctFilter(){
   rows.forEach(function(r){ var d = xlDate(r['date']); if(!d) return; var k = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); if(!byMonth[k]) byMonth[k]=[]; byMonth[k].push(r); });
   calculatedMonths = {};
   Object.keys(byMonth).forEach(function(k){
+    if(k.indexOf('NaN')>-1)return; // skip invalid dates
     try{ calculatedMonths[k] = calcMonth(byMonth[k]); }
     catch(e){ showAlert('warn','Error in '+k+': '+e.message); }
   });
