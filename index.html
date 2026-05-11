@@ -218,7 +218,10 @@ function render(){
     cardSub.textContent=m.months>0?m.months+' month'+(m.months!==1?'s':'')+' of data':'No data yet';
     card.appendChild(cardTop);card.appendChild(cardName);card.appendChild(cardSub);
     var kpiWrap=document.createElement('div');kpiWrap.innerHTML=kpiHtml;card.appendChild(kpiWrap);
-    if(!editMode){card.onclick=function(){location.href='customer.html?c='+encodeURIComponent(name);};}
+    if(!editMode){
+      card.setAttribute('data-cust',name);
+      card.onclick=function(){window.location.href='customer.html?c='+encodeURIComponent(this.getAttribute('data-cust'));};
+    }
     grid.appendChild(card);
   });
   if(!editMode){
