@@ -803,15 +803,66 @@ function renderPreview(){
     '</tr>';
   }).join('');
 
+  // Build unique month and type lists for filters
+  var lateMonths=[...new Set(lateRows.map(function(r){return r.month;}))];
+  var lateTypes=[...new Set(lateRows.map(function(r){return r.dtype;}))];
+
+  var filterBar = lateRows.length>0 ? '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;">'
+    + '<span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span>'
+    + '<input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;">'
+    + '<select id="late-month" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;">'
+    + '<option value="">All months</option>'
+    + lateMonths.map(function(m){return '<option value="'+m+'">'+m+'</option>';}).join('')
+    + '</select>'
+    + '<select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;">'
+    + '<option value="">All types</option>'
+    + lateTypes.map(function(t){return '<option value="'+t+'">'+t+'</option>';}).join('')
+    + '</select>'
+    + '<button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button>'
+    + '<span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+lateRows.length+' entries</span>'
+    + '</div>' : '';
+
   document.getElementById('tab-lates').innerHTML=
     '<div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div>'+
     '<div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div>'+
+    filterBar+
     (lateRows.length>0?
       '<div class="tracker-table-wrap"><table>'+
         '<thead><tr><th>Order ID</th><th>Month</th><th>Destination</th><th>City</th><th>Postcode</th><th>Commit Date</th><th>Time Window</th><th>Actual Delivery</th><th>Mins late</th><th>Pallets</th><th>Type</th><th>Note</th><th></th></tr></thead>'+
         '<tbody id="late-tbody">'+lateTableRows+'</tbody>'+
       '</table></div>':
       '<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');  setTimeout(function(){renderCharts();},120);
+}
+
+function filterLateLog(){
+  var search=(document.getElementById('late-search').value||'').toLowerCase();
+  var month=document.getElementById('late-month').value;
+  var type=document.getElementById('late-type').value;
+  var rows=document.querySelectorAll('#late-tbody tr.late-row');
+  var visible=0;
+  rows.forEach(function(row){
+    var cells=row.querySelectorAll('td');
+    var dest=(cells[2]?cells[2].textContent:'').toLowerCase();
+    var city=(cells[3]?cells[3].textContent:'').toLowerCase();
+    var pc=(cells[4]?cells[4].textContent:'').toLowerCase();
+    var rowMonth=(cells[1]?cells[1].textContent:'');
+    var rowType=(cells[10]?cells[10].textContent:'');
+    var matchSearch=!search||(dest+city+pc).indexOf(search)>-1;
+    var matchMonth=!month||rowMonth===month;
+    var matchType=!type||rowType.indexOf(type)>-1;
+    var show=matchSearch&&matchMonth&&matchType;
+    row.style.display=show?'':'none';
+    if(show)visible++;
+  });
+  var countEl=document.getElementById('late-count');
+  if(countEl)countEl.textContent=visible+' entries';
+}
+
+function clearLateFilters(){
+  var s=document.getElementById('late-search');if(s)s.value='';
+  var m=document.getElementById('late-month');if(m)m.value='';
+  var t=document.getElementById('late-type');if(t)t.value='';
+  filterLateLog();
 }
 
 function switchTab(name,btn){
