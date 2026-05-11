@@ -791,7 +791,7 @@ function renderCharts(){
   MONTH_KEYS.forEach(function(key,i){
     var c=calculatedMonths[key],ex=getExRow(i);
     if(c){labels.push(MONTHS[i]);otifData.push(+(c.timeliness*100).toFixed(2));consData.push(c.cons);revData.push(+c.revenue.toFixed(2));arcData.push(+c.avgRC.toFixed(2));arpData.push(+c.avgRP.toFixed(2));}
-    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||0),lates=parseFloat(ex['Lates']||ex['lates']||0),rev=parseFloat(ex['£']||0),plts=parseFloat(ex['Plts']||ex['plts']||0);if(cons>0){labels.push(MONTHS[i]);var exOTIF=cons>0?+((cons-lates)/cons*100).toFixed(2):0;otifData.push(exOTIF); // historical: cons-basedconsData.push(cons);revData.push(rev);arcData.push(cons>0?+(rev/cons).toFixed(2):0);arpData.push(plts>0?+(rev/plts).toFixed(2):0);}}
+    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||0),lates=parseFloat(ex['Lates']||ex['lates']||0),rev=parseFloat(ex['£']||0),plts=parseFloat(ex['Plts']||ex['plts']||0);if(cons>0){labels.push(MONTHS[i]);var exOTIF=cons>0?+((cons-lates)/cons*100).toFixed(2):0;otifData.push(exOTIF);consData.push(cons);revData.push(rev);arcData.push(cons>0?+(rev/cons).toFixed(2):0);arpData.push(plts>0?+(rev/plts).toFixed(2):0);}}
   });
   var roll3=otifData.map(function(v,i){return i<2?null:+((otifData[i]+otifData[i-1]+otifData[i-2])/3).toFixed(2);});
   var oc={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},boxWidth:12}}},scales:{y:{ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}};
@@ -823,7 +823,7 @@ function exportTracker(){
   var r1=MONTH_KEYS.map(function(key,i){
     var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);
     if(c)return[label,c.cons,c.pallets,+c.revenue.toFixed(2),+c.avgRC.toFixed(2),+c.avgRP.toFixed(2),+c.avgPC.toFixed(2),+(c.timeliness*100).toFixed(4),c.lates];
-    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||'')||null,plts=parseFloat(ex['Plts']||ex['plts']||'')||null,rev=parseFloat(ex['£']||'')||null,lates=parseFloat(ex['Lates']||ex['lates']||'')||null;if(cons)return[label,cons,plts,rev,cons&&rev?+(rev/cons).toFixed(2):null,plts&&rev?+(rev/plts).toFixed(2):null,cons&&plts?+(plts/cons).toFixed(2):null,cons&&lates!=null?+(((cons-lates)/cons)*100).toFixed(4):null,lates]; // historical cons-basedreturn[label,null,null,null,null,null,null,null,null];}
+    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||'')||null,plts=parseFloat(ex['Plts']||ex['plts']||'')||null,rev=parseFloat(ex['£']||'')||null,lates=parseFloat(ex['Lates']||ex['lates']||'')||null;if(cons)return[label,cons,plts,rev,cons&&rev?+(rev/cons).toFixed(2):null,plts&&rev?+(rev/plts).toFixed(2):null,cons&&plts?+(plts/cons).toFixed(2):null,cons&&lates!=null?+(((cons-lates)/cons)*100).toFixed(4):null,lates];return[label,null,null,null,null,null,null,null,null];}
     return[label,null,null,null,null,null,null,null,null];
   });
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
