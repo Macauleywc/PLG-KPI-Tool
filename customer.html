@@ -469,6 +469,7 @@ function handleDeliveryData(input){
 }
 
 function handleRaw(input){
+  window._loadedFromSaved=false;
   var file=input.files[0];if(!file)return;
   var reader=new FileReader();
   reader.onload=function(e){
@@ -574,7 +575,7 @@ function handleTracker(input){
   reader.readAsBinaryString(file);
 }
 
-function tryRender(){if(!rawData||Object.keys(calculatedMonths).length===0)return;renderPreview();}
+function tryRender(){if(!rawData||Object.keys(calculatedMonths).length===0||window._loadedFromSaved)return;renderPreview();}
 
 function getExRow(i){return trackerData?trackerData[i]:null;}
 function getTotal(field){
@@ -1564,6 +1565,7 @@ function showAlert(type,msg){
 }
 
 function applyAcctFilter(){
+  window._loadedFromSaved=false;
   var checked = Array.from(document.querySelectorAll('.acct-cb:checked')).map(function(cb){ return cb.value; });
   if(!checked.length){ showAlert('warn','Select at least one account.'); return; }
   var rows = (window._pendingRows || []).filter(function(r){ return checked.indexOf(r['customer']||'') > -1; });
@@ -1669,6 +1671,7 @@ async function loadFromGitHub(){
         };
       });
       rawData=[];
+      window._loadedFromSaved=true;
       renderPreview();
     }
   }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;_gs5.className='gh-status';}}
