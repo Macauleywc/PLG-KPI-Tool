@@ -261,7 +261,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
   <div class="ytd-cell"><div class="ytd-label">YTD Consignments</div><div class="ytd-value orange" id="h-cons">—</div></div>
   <div class="ytd-cell"><div class="ytd-label">YTD Pallets</div><div class="ytd-value" id="h-pallets">—</div></div>
   <div class="ytd-cell"><div class="ytd-label">YTD Cost</div><div class="ytd-value" id="h-rev">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD OTIF</div><div class="ytd-value" id="h-otif">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">—</div></div>
   <div class="ytd-cell"><div class="ytd-label">YTD Lates</div><div class="ytd-value" id="h-lates">—</div></div>
 </div>
 
@@ -664,7 +664,7 @@ function renderPreview(){
 
   // TAB 1: Monthly tracker
   document.getElementById('tab-tracker').innerHTML=
-    '<div class="section-title">Full year monthly tracker <span class="pill">OTIF = (cons \u2212 lates) / cons</span></div>'+
+    '<div class="section-title">Full year monthly tracker <span class="pill">Pallet OTIF = (pallets \u2212 late pallets) / pallets</span></div>'+
     '<div class="alert alert-info" style="margin-bottom:1rem">Lates auto-calculated by comparing actual delivery arrival vs time window end.</div>'+
     '<div class="tracker-table-wrap"><table>'+
       '<thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Cost</th><th>Avg Cost/Con</th><th>Avg Cost/Plt</th><th>Avg Plts/Con</th><th>Pallet OTIF</th><th>Lates</th></tr></thead>'+
@@ -1556,14 +1556,14 @@ function buildTrackerFromSaved(){
   trackerData=MONTH_KEYS.map(function(key){
     var d=savedMonthData[key];
     if(!d)return{Cons:null,Plts:null,'£':null,Timeliness:null,Lates:null};
-    return{Cons:d.cons,Plts:d.pallets,'£':d.revenue,Timeliness:d.timeliness,Lates:d.lates};
+    return{Cons:d.cons,Plts:d.pallets,'£':d.revenue,Timeliness:d.timeliness,Lates:d.lates,LatePallets:d.latePallets||0};
   });
 }
 function renderHistory(){
   var keys=Object.keys(savedMonthData).sort();
-  var totCons=0,totPallets=0,totRev=0,totLates=0;
-  keys.forEach(function(k){var d=savedMonthData[k];if(d){totCons+=d.cons||0;totPallets+=d.pallets||0;totRev+=d.revenue||0;totLates+=d.lates||0;}});
-  var ytdOTIF=totCons>0?((totCons-totLates)/totCons*100).toFixed(2):'—';
+  var totCons=0,totPallets=0,totRev=0,totLates=0,totLatePallets=0;
+  keys.forEach(function(k){var d=savedMonthData[k];if(d){totCons+=d.cons||0;totPallets+=d.pallets||0;totRev+=d.revenue||0;totLates+=d.lates||0;totLatePallets+=d.latePallets||0;}});
+  var ytdOTIF=totPallets>0?((totPallets-totLatePallets)/totPallets*100).toFixed(2):'—';
   var col=parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828';
   function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
   set('h-cons',totCons||'—');
@@ -1571,7 +1571,7 @@ function renderHistory(){
   set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—');
   set('h-lates',totLates||'—');
   var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='—'?ytdOTIF+'%':'—';ho.style.color=col;}
-  var chips=MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var otif=d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'';return'<div class="month-chip'+(has?' has-data':'')+'" title="'+(has?'Cons: '+d.cons+' | OTIF: '+otif:'No data')+'">'+label+(has&&otif?' '+otif:'')+'</div>';}).join('');
+  var chips=MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');return'<div class="month-chip'+(has?' has-data':'')+' " title="'+(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'+label+(has&&palletOtif?' '+palletOtif:'')+'</div>';}).join('');
   var strip=document.getElementById('months-strip');if(strip)strip.innerHTML=chips||'<span style="font-size:12px;color:#ccc">No months saved yet</span>';
 }
 async function loadFromGitHub(){
@@ -1594,7 +1594,7 @@ async function saveToGitHub(){
   var token=getToken();if(!token){showAlert('warn','No GitHub token. Go to the homepage and enter it.');return;}
   var btn=document.getElementById('btn-save');btn.textContent='Saving...';btn.disabled=true;
   var merged=Object.assign({},savedMonthData);
-  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,revenue:+c.revenue.toFixed(2),lates:c.lates,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
+  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,revenue:+c.revenue.toFixed(2),lates:c.lates,latePallets:c.latePallets||0,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged};
   var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
