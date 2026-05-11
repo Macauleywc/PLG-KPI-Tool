@@ -567,8 +567,23 @@ function getTotal(field){
   });return has?total:null;
 }
 function allCompleted(){var a=[];Object.values(calculatedMonths).forEach(function(s){a=a.concat(s.completedRows);});return a;}
-function getLiveLates(){return allCompleted().filter(function(r){return isLate(r);}).length;}
-function getLiveLatePallets(){var total=0;allCompleted().filter(function(r){return isLate(r);}).forEach(function(r){total+=parseFloat(r['goods pallet spaces'])||0;});return total;}
+function getLiveLates(){
+  var fromRows=allCompleted().filter(function(r){return isLate(r);}).length;
+  if(fromRows>0)return fromRows;
+  var fromSaved=0;
+  Object.values(calculatedMonths).forEach(function(m){fromSaved+=m.lates||0;});
+  return fromSaved;
+}
+function getLiveLatePallets(){
+  // If we have raw rows, count from them directly
+  var fromRows=0;
+  allCompleted().filter(function(r){return isLate(r);}).forEach(function(r){fromRows+=parseFloat(r['goods pallet spaces'])||0;});
+  if(fromRows>0)return fromRows;
+  // Fall back to saved latePallets from calculatedMonths (when loaded from GitHub with no raw data)
+  var fromSaved=0;
+  Object.values(calculatedMonths).forEach(function(m){fromSaved+=m.latePallets||0;});
+  return fromSaved;
+}
 
 function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
