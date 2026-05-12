@@ -827,8 +827,21 @@ function renderPreview(){
     '<div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div>'+
     filterBar+
     (lateRows.length>0?
-      '<div class="tracker-table-wrap"><table>'+
-        '<thead><tr><th>Order ID</th><th>Month</th><th>Destination</th><th>City</th><th>Postcode</th><th>Commit Date</th><th>Time Window</th><th>Actual Delivery</th><th>Mins late</th><th>Pallets</th><th>Type</th><th>Note</th><th></th></tr></thead>'+
+      '<div class="tracker-table-wrap"><table id="late-table">'+
+        '<thead><tr>'+
+          '<th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th>'+
+          '<th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Month <span id="lsort-1">↕</span></th>'+
+          '<th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Destination <span id="lsort-2">↕</span></th>'+
+          '<th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">City <span id="lsort-3">↕</span></th>'+
+          '<th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-4">↕</span></th>'+
+          '<th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-5">↕</span></th>'+
+          '<th>Time Window</th>'+
+          '<th onclick="sortLateLog(7)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-7">↕</span></th>'+
+          '<th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-8">↕</span></th>'+
+          '<th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-9">↕</span></th>'+
+          '<th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Type <span id="lsort-10">↕</span></th>'+
+          '<th>Note</th><th></th>'+
+        '</tr></thead>'+
         '<tbody id="late-tbody">'+lateTableRows+'</tbody>'+
       '</table></div>':
       '<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');  setTimeout(function(){renderCharts();},120);
@@ -856,6 +869,31 @@ function filterLateLog(){
   });
   var countEl=document.getElementById('late-count');
   if(countEl)countEl.textContent=visible+' entries';
+}
+
+var _lateSortCol=-1, _lateSortAsc=true;
+function sortLateLog(col){
+  if(_lateSortCol===col){ _lateSortAsc=!_lateSortAsc; }
+  else { _lateSortCol=col; _lateSortAsc=true; }
+  // Update header indicators
+  document.querySelectorAll('[id^="lsort-"]').forEach(function(el){ el.textContent='↕'; el.style.color='#ccc'; });
+  var ind=document.getElementById('lsort-'+col);
+  if(ind){ ind.textContent=_lateSortAsc?'↑':'↓'; ind.style.color='#F47920'; }
+  var tbody=document.getElementById('late-tbody');
+  if(!tbody)return;
+  var rows=Array.from(tbody.querySelectorAll('tr.late-row'));
+  rows.sort(function(a,b){
+    var ac=(a.querySelectorAll('td')[col]||{}).textContent||'';
+    var bc=(b.querySelectorAll('td')[col]||{}).textContent||'';
+    // Numeric sort for mins late and pallets cols
+    if(col===8||col===9){
+      var an=parseFloat(ac.replace(/[^0-9.-]/g,''))||0;
+      var bn=parseFloat(bc.replace(/[^0-9.-]/g,''))||0;
+      return _lateSortAsc?an-bn:bn-an;
+    }
+    return _lateSortAsc?ac.localeCompare(bc):bc.localeCompare(ac);
+  });
+  rows.forEach(function(r){ tbody.appendChild(r); });
 }
 
 function clearLateFilters(){
