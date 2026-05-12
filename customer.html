@@ -493,7 +493,7 @@ function handleRaw(input){
           var extras = focSurcharges.indexOf('EB')>-1 ? 'Economy Booked' : 'Next Day';
           // Pallets — use column if available, else 1
           var pallets = parseFloat(r['Pallets'])||1;
-          var collDate = r['Collection Date'] || reqDate;
+          var collDate = r['Collection Date'] || actDate || reqDate;
           return {
             'id': String(r['Customer Consignment Ref']||r['Customer reference number']||''),
             'consignment reference': String(r['Customer Consignment Ref']||r['Customer reference number']||''),
@@ -1516,16 +1516,26 @@ function updateLateNote(idx,val){
 }
 function removeLate(orderId,rowIdx){
   // Mark the actual raw data row as removed so isLate() returns false permanently
-  // We need to find the row in rawData itself (not a filtered copy) so the mutation sticks
   var lateRowsInRaw=rawData?rawData.filter(function(r){return isLate(r);}):[];
   if(rowIdx!==undefined&&lateRowsInRaw[rowIdx]){
-    // Set _manuallyRemoved on the actual rawData object — persists across re-renders
     lateRowsInRaw[rowIdx]._manuallyRemoved=true;
-    // Also clear any v4 late flag so isLate short-circuit doesn't override
     lateRowsInRaw[rowIdx]._v4_late=false;
   }
   var key=String(orderId||'').trim();
   if(key)removedLateIds.add(key);
+  // Recalculate calculatedMonths from rawData so saved lates/latePallets are correct
+  if(rawData&&rawData.length>0){
+    var byMonth={};
+    rawData.forEach(function(r){
+      var d=xlDate(r['date']);if(!d)return;
+      var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+      if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);
+    });
+    Object.keys(byMonth).forEach(function(k){
+      if(k.indexOf('NaN')>-1)return;
+      try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(e){}
+    });
+  }
   renderPreview();
   setTimeout(function(){
     document.querySelectorAll('.tab-btn').forEach(function(b){
