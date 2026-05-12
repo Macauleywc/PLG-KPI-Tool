@@ -495,8 +495,8 @@ function handleRaw(input){
           var pallets = parseFloat(r['Pallets'])||1;
           var collDate = r['Collection Date'] || reqDate;
           return {
-            'id': String(r['Customer Consignment Ref']||''),
-            'consignment reference': String(r['Customer Consignment Ref']||''),
+            'id': String(r['Customer Consignment Ref']||r['Customer reference number']||''),
+            'consignment reference': String(r['Customer Consignment Ref']||r['Customer reference number']||''),
             'status': 'INVOICE_POSTED',
             'date': collDate,
             'customer': r['Account Code']||currentCustomer,
