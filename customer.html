@@ -874,9 +874,11 @@ function filterLateLog(){
 }
 
 var _lateSortCol=-1, _lateSortAsc=true;
-function sortLateLog(col){
-  if(_lateSortCol===col){ _lateSortAsc=!_lateSortAsc; }
-  else { _lateSortCol=col; _lateSortAsc=true; }
+function sortLateLog(col,keepDir){
+  if(!keepDir){
+    if(_lateSortCol===col){ _lateSortAsc=!_lateSortAsc; }
+    else { _lateSortCol=col; _lateSortAsc=true; }
+  }
   // Update header indicators
   document.querySelectorAll('[id^="lsort-"]').forEach(function(el){ el.textContent='↕'; el.style.color='#ccc'; });
   var ind=document.getElementById('lsort-'+col);
@@ -1541,6 +1543,9 @@ function removeLate(orderId,rowIdx){
     document.querySelectorAll('.tab-btn').forEach(function(b){
       if(b.textContent.trim()==='Late log')b.click();
     });
+    // Reapply sort and filters after re-render
+    if(_lateSortCol>=0) sortLateLog(_lateSortCol,true);
+    filterLateLog();
   },80);
 }
 
