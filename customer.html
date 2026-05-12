@@ -1755,6 +1755,7 @@ async function loadFromGitHub(){
     var json=await resp.json();ghFileSha=json.sha;
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
     savedMonthData=decoded.months||{};
+    window._savedLateRows=decoded.lateRows||[];
     var mCount=Object.keys(savedMonthData).length;var _gse=document.getElementById('gh-status');if(_gse){_gse.textContent=mCount+' month'+(mCount!==1?'s':'')+' saved';_gse.className='gh-badge';var _dot=document.getElementById('gh-dot');if(_dot)_dot.classList.add('ok');}
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     buildTrackerFromSaved();renderHistory();
@@ -1781,6 +1782,66 @@ async function loadFromGitHub(){
       rawData=[];
       window._loadedFromSaved=true;
       renderPreview();
+      // Restore saved late rows into the late log tab
+      if(window._savedLateRows&&window._savedLateRows.length>0){
+        var saved=window._savedLateRows;
+        var lateMonths=[...new Set(saved.map(function(r){return r.month;}))];
+        var lateTypes=[...new Set(saved.map(function(r){return r.dtype;}))];
+        var filterBar='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;">'
+          +'<span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span>'
+          +'<input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;">'
+          +'<select id="late-month" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;">'
+          +'<option value="">All months</option>'
+          +lateMonths.map(function(m){return '<option value="'+m+'">'+m+'</option>';}).join('')
+          +'</select>'
+          +'<select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;">'
+          +'<option value="">All types</option>'
+          +lateTypes.map(function(t){return '<option value="'+t+'">'+t+'</option>';}).join('')
+          +'</select>'
+          +'<button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button>'
+          +'<span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+saved.length+' entries</span>'
+          +'</div>';
+        var tableRows=saved.map(function(r,idx){
+          return '<tr class="late-row" id="laterow-'+idx+'">'
+            +'<td style="font-size:11px;color:#aaa">'+r.id+'</td>'
+            +'<td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:monospace">'+r.acct+'</span></td>'
+            +'<td>'+r.month+'</td>'
+            +'<td>'+r.dest+'</td>'
+            +'<td>'+r.city+'</td>'
+            +'<td>'+r.pc+'</td>'
+            +'<td>'+r.commitDate+'</td>'
+            +'<td>'+r.window+'</td>'
+            +'<td>'+r.arrDate+' '+r.arrival+'</td>'
+            +'<td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td>'
+            +'<td>'+r.pallets+'</td>'
+            +'<td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td>'
+            +'<td>'+(r.note?'<span style="font-size:11px;color:#555">'+r.note+'</span>':'<span style="color:#bbb;font-size:11px">—</span>')+'</td>'
+            +'<td></td>'
+            +'</tr>';
+        }).join('');
+        document.getElementById('tab-lates').innerHTML=
+          '<div class="section-title">Late consignment log <span class="pill-red">'+saved.length+' late</span></div>'
+          +'<div class="alert alert-warn" style="margin-bottom:1rem">Showing saved late entries. Upload a new export to edit or remove entries.</div>'
+          +filterBar
+          +'<div class="tracker-table-wrap"><table id="late-table">'
+          +'<thead><tr>'
+          +'<th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th>'
+          +'<th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">↕</span></th>'
+          +'<th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">↕</span></th>'
+          +'<th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">↕</span></th>'
+          +'<th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">↕</span></th>'
+          +'<th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">↕</span></th>'
+          +'<th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">↕</span></th>'
+          +'<th>Time Window</th>'
+          +'<th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">↕</span></th>'
+          +'<th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">↕</span></th>'
+          +'<th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">↕</span></th>'
+          +'<th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">↕</span></th>'
+          +'<th>Note</th><th></th>'
+          +'</tr></thead>'
+          +'<tbody id="late-tbody">'+tableRows+'</tbody>'
+          +'</table></div>';
+      }
     }
   }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;_gs5.className='gh-status';}}
 }
@@ -1789,7 +1850,35 @@ async function saveToGitHub(){
   var btn=document.getElementById('btn-save');btn.textContent='Saving...';btn.disabled=true;
   var merged=Object.assign({},savedMonthData);
   Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,revenue:+c.revenue.toFixed(2),lates:c.lates,latePallets:c.latePallets||0,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
-  var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged};
+  // Save the late rows so they can be restored on return visits
+  var lateRowsToSave=[];
+  try{
+    Object.entries(calculatedMonths).forEach(function(e){
+      var key=e[0],s=e[1];
+      (s.completedRows||[]).filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){
+        var arr=xlDT(r['destination arrival']);
+        var ex=r['destination extras']||'';
+        var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';
+        lateRowsToSave.push({
+          id:r['id']||'',
+          acct:r['customer']||'',
+          month:MONTHS[MONTH_KEYS.indexOf(key)]||key,
+          dest:r['destination name']||'',
+          city:r['destination city']||'',
+          pc:r['destination postal code']||'',
+          window:r['destination time window']||'',
+          commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',
+          arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',
+          arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',
+          mins:minsLate(r),
+          pallets:r['goods pallet spaces']||0,
+          dtype:dtype,
+          note:r._note||''
+        });
+      });
+    });
+  }catch(e){}
+  var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave};
   var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
   try{
