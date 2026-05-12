@@ -1,0 +1,28 @@
+{
+  "customer": "Bonnington Plastics",
+  "lastUpdated": "2026-05-12T08:15:55.863Z",
+  "months": {
+    "2026-04": {
+      "cons": 643,
+      "pallets": 2142,
+      "revenue": 69653.55,
+      "lates": 55,
+      "latePallets": 122,
+      "timeliness": 0.943044,
+      "avgRC": 108.33,
+      "avgRP": 32.52,
+      "avgPC": 3.33
+    },
+    "2026-05": {
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 20,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 20,
+      "avgRP": 20,
+      "avgPC": 1
+    }
+  }
+}
