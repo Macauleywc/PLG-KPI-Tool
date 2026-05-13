@@ -501,14 +501,14 @@ function handleRaw(input){
             var svc = String(serviceCode||'').toUpperCase();
             var daysBack = svc==='C' ? 3 : svc==='B' ? 2 : 1;
             var rd = new Date(reqDate);
-            var est = new Date(rd);
+            var est = new Date(rd.getUTCFullYear(), rd.getUTCMonth(), rd.getUTCDate());
             var backed = 0;
             while(backed < daysBack){
               est.setDate(est.getDate()-1);
               var dow = est.getDay();
-              if(dow!==0&&dow!==6) backed++; // skip weekends
+              if(dow!==0&&dow!==6) backed++;
             }
-            collDate = est.toISOString().slice(0,10);
+            collDate = est.getFullYear()+'-'+String(est.getMonth()+1).padStart(2,'0')+'-'+String(est.getDate()).padStart(2,'0');
           }
           if(!collDate) collDate = actDate;
           return {
