@@ -1922,6 +1922,9 @@ async function loadFromGitHub(){
       rawData=[];
       window._loadedFromSaved=true;
       renderPreview();
+      // Always show actions bar when saved data is present
+      var _ab=document.getElementById('actions-bar');if(_ab)_ab.style.display='flex';
+      var _ks=document.getElementById('kpi-section');if(_ks)_ks.style.display='block';
       // Restore saved late rows into the late log tab
       if(window._savedLateRows&&window._savedLateRows.length>0){
         var saved=window._savedLateRows;
