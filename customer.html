@@ -475,7 +475,6 @@ function handleRaw(input){
   var reader=new FileReader();
   reader.onload=function(e){
     window._loadedFromSaved=false;
-    console.log('handleRaw onload fired, file:', file.name);
     try{
       var wb=XLSX.read(e.target.result,{type:'binary',cellDates:false});
       var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
@@ -613,7 +612,6 @@ function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
 
 function renderPreview(){
-  console.log('renderPreview called, calculatedMonths keys:', Object.keys(calculatedMonths));
   var _ks=document.getElementById('kpi-section');if(_ks)_ks.style.display='block';
   document.getElementById('actions-bar').style.display='flex';
   Object.values(chartInst).forEach(function(c){try{c.destroy();}catch(e){}});chartInst={};
@@ -813,8 +811,8 @@ function renderPreview(){
   }).join('');
 
   // Build unique month and type lists for filters
-  var lateMonths=[...new Set(lateRows.map(function(r){return r.month;}))];
-  var lateTypes=[...new Set(lateRows.map(function(r){return r.dtype;}))];
+  var lateMonths=Array.from(new Set(lateRows.map(function(r){return r.month;})));
+  var lateTypes=Array.from(new Set(lateRows.map(function(r){return r.dtype;})));
 
   var filterBar = lateRows.length>0 ? '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;">'
     + '<span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span>'
@@ -965,27 +963,27 @@ function exportTracker(){
   });
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   r1.push(['Total / Avg',aC||null,aP||null,aR?+aR.toFixed(2):null,aC&&aR?+(aR/aC).toFixed(2):null,aP&&aR?+(aR/aP).toFixed(2):null,aC&&aP?+(aP/aC).toFixed(2):null,aC&&aL!=null?+((aC-aL)/aC*100).toFixed(4):null,aL||null]);
-  var ws1=XLSX.utils.aoa_to_sheet([...h1,...r1]);
+  var ws1=XLSX.utils.aoa_to_sheet(h1.concat(r1));
   ws1['!cols']=[{wch:10},{wch:8},{wch:8},{wch:14},{wch:14},{wch:14},{wch:12},{wch:10},{wch:8}];
   XLSX.utils.book_append_sheet(wb,ws1,'Monthly Tracker');
 
   // Sheet 2: Late log
   var lateLog=comp.filter(function(r){return isLate(r);}).map(function(r){var arr=xlDT(r['destination arrival']);var ex=r['destination extras']||'';var dt=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';return[r['id']||'',r['destination name']||'',r['destination city']||'',r['destination postal code']||'',r['destination time window']||'',arr?arr.toLocaleString('en-GB'):'',minsLate(r),r['goods pallet spaces']||0,dt];});
-  var ws2=XLSX.utils.aoa_to_sheet([['Order ID','Destination','City','Postcode','Time Window','Actual Arrival','Mins Late','Pallets','Delivery Type'],...lateLog]);
+  var ws2=XLSX.utils.aoa_to_sheet([['Order ID','Destination','City','Postcode','Time Window','Actual Arrival','Mins Late','Pallets','Delivery Type']].concat(lateLog));
   ws2['!cols']=[{wch:14},{wch:30},{wch:18},{wch:10},{wch:16},{wch:20},{wch:10},{wch:8},{wch:18}];
   XLSX.utils.book_append_sheet(wb,ws2,'Late Log');
 
   // Sheet 3: Destinations
   var destMap={};comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',pc:r['destination postal code']||'',cons:0,pallets:0,cost:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
   var destRows=Object.values(destMap).sort(function(a,b){return b.cons-a.cons;}).map(function(d){return[d.name,d.city,d.pc,d.cons,d.pallets,+d.revenue.toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
-  var ws3=XLSX.utils.aoa_to_sheet([['Destination','City','Postcode','Cons','Pallets','Revenue (£)','Lates','OTIF %'],...destRows]);
+  var ws3=XLSX.utils.aoa_to_sheet([['Destination','City','Postcode','Cons','Pallets','Revenue (£)','Lates','OTIF %']].concat(destRows));
   ws3['!cols']=[{wch:32},{wch:18},{wch:10},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];
   XLSX.utils.book_append_sheet(wb,ws3,'Destinations');
 
   // Sheet 4: Regional breakdown
   var regMap={};comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
   var regRows=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;}).map(function(e){var d=e[1];return[e[0],d.cons,d.pallets,+d.revenue.toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
-  var ws4=XLSX.utils.aoa_to_sheet([['Region','Cons','Pallets','Revenue (£)','Lates','OTIF %'],...regRows]);
+  var ws4=XLSX.utils.aoa_to_sheet([['Region','Cons','Pallets','Revenue (£)','Lates','OTIF %']].concat(regRows));
   ws4['!cols']=[{wch:20},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];
   XLSX.utils.book_append_sheet(wb,ws4,'Regional Breakdown');
 
@@ -1761,12 +1759,12 @@ function renderHistory(){
   set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—');
   set('h-lates',totLates||'—');
   var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='—'?ytdOTIF+'%':'—';ho.style.color=col;}
-  var chips='<div class="month-chip has-data" id="chip-all" onclick="selectMonth('all')" style="background:#333;border-color:#555;cursor:pointer">All</div>'
+  var chips='<div class="month-chip has-data" id="chip-all" onclick="selectMonth(&apos;all&apos;)" style="background:#333;border-color:#555;cursor:pointer">All</div>'
     +MONTH_KEYS.map(function(key,i){
       var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];
       var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');
       return '<div class="month-chip'+(has?' has-data':'')+'" id="chip-'+key+'"'
-        +(has?' onclick="selectMonth(''+key+'')" style="cursor:pointer"':'')+' title="'
+        +(has?' onclick="selectMonth(&apos;'+key+'&apos;)" style="cursor:pointer"':'')+' title="'
         +(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'
         +label+(has&&palletOtif?' '+palletOtif:'')+'</div>';
     }).join('');
@@ -1818,8 +1816,8 @@ function selectMonth(key){
   // Re-render late log section with filtered lates
   var lateTab=document.getElementById('tab-lates');
   if(lateTab&&lates.length>=0){
-    var lateMonths=[...new Set(lates.map(function(r){return r.month;}))];
-    var lateTypes=[...new Set(lates.map(function(r){return r.dtype;}))];
+    var lateMonths=Array.from(new Set(lates.map(function(r){return r.month;})));
+    var lateTypes=Array.from(new Set(lates.map(function(r){return r.dtype;})));
     var filterBar=lates.length>0?'<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;">'
       +'<span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span>'
       +'<input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;">'
@@ -1908,8 +1906,8 @@ async function loadFromGitHub(){
       // Restore saved late rows into the late log tab
       if(window._savedLateRows&&window._savedLateRows.length>0){
         var saved=window._savedLateRows;
-        var lateMonths=[...new Set(saved.map(function(r){return r.month;}))];
-        var lateTypes=[...new Set(saved.map(function(r){return r.dtype;}))];
+        var lateMonths=Array.from(new Set(saved.map(function(r){return r.month;})));
+        var lateTypes=Array.from(new Set(saved.map(function(r){return r.dtype;})));
         var filterBar='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;">'
           +'<span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span>'
           +'<input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;">'
