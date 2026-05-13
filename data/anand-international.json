@@ -1,17 +1,83 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-05-11T16:39:19.578Z",
+  "lastUpdated": "2026-05-13T19:55:13.235Z",
   "months": {
     "2026-04": {
       "cons": 109,
       "pallets": 164,
       "revenue": 7349.05,
-      "lates": 6,
-      "latePallets": 8,
-      "timeliness": 0.95122,
+      "lates": 4,
+      "latePallets": 4,
+      "timeliness": 0.97561,
       "avgRC": 67.42,
       "avgRP": 44.81,
       "avgPC": 1.5
     }
-  }
+  },
+  "lateRows": [
+    {
+      "id": "263001",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "Dhamecha Cash & Carry ",
+      "city": "Dhamecha Cash & Carry ",
+      "pc": "CR0 3AF",
+      "window": "",
+      "commitDate": "21/04/26",
+      "arrDate": "22/04/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": ""
+    },
+    {
+      "id": "262759",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "UNITED WHOLESALE GROCERS LTD",
+      "city": "UNITED WHOLESALE GROCERS LTD",
+      "pc": "NE11 0RQ",
+      "window": "",
+      "commitDate": "10/04/26",
+      "arrDate": "11/04/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": ""
+    },
+    {
+      "id": "262464",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "Perkins Group Services Ltd",
+      "city": "Perkins Group Services Ltd",
+      "pc": "SA5 4HW",
+      "window": "",
+      "commitDate": "09/04/26",
+      "arrDate": "13/04/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": ""
+    },
+    {
+      "id": "263345",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "LIGHTER LTD",
+      "city": "LIGHTER LTD",
+      "pc": "CM18 7QR",
+      "window": "",
+      "commitDate": "05/05/26",
+      "arrDate": "06/05/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": ""
+    }
+  ]
 }
