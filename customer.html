@@ -475,6 +475,7 @@ function handleRaw(input){
   var reader=new FileReader();
   reader.onload=function(e){
     window._loadedFromSaved=false;
+    console.log('handleRaw onload fired, file:', file.name);
     try{
       var wb=XLSX.read(e.target.result,{type:'binary',cellDates:false});
       var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
@@ -612,6 +613,7 @@ function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return '<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
 
 function renderPreview(){
+  console.log('renderPreview called, calculatedMonths keys:', Object.keys(calculatedMonths));
   var _ks=document.getElementById('kpi-section');if(_ks)_ks.style.display='block';
   document.getElementById('actions-bar').style.display='flex';
   Object.values(chartInst).forEach(function(c){try{c.destroy();}catch(e){}});chartInst={};
