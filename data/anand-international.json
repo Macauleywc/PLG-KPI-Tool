@@ -1,20 +1,52 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-05-13T19:59:00.592Z",
+  "lastUpdated": "2026-05-13T20:10:33.972Z",
   "months": {
     "2026-04": {
       "cons": 109,
       "pallets": 164,
       "revenue": 7349.05,
-      "lates": 4,
-      "latePallets": 4,
-      "timeliness": 0.97561,
+      "lates": 6,
+      "latePallets": 8,
+      "timeliness": 0.95122,
       "avgRC": 67.42,
       "avgRP": 44.81,
       "avgPC": 1.5
     }
   },
   "lateRows": [
+    {
+      "id": "262983",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "Alpha Cash & Carry Ltd",
+      "city": "Alpha Cash & Carry Ltd",
+      "pc": "BD19 5LY",
+      "window": "",
+      "commitDate": "21/04/26",
+      "arrDate": "22/04/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": ""
+    },
+    {
+      "id": "262735",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "Marks And Spencer PLC",
+      "city": "Marks And Spencer PLC",
+      "pc": "BD5 8LZ",
+      "window": "",
+      "commitDate": "13/04/26",
+      "arrDate": "14/04/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 2,
+      "dtype": "Economy Booked",
+      "note": ""
+    },
     {
       "id": "263001",
       "acct": "ANAND",
@@ -79,5 +111,77 @@
       "dtype": "Economy Booked",
       "note": ""
     }
-  ]
+  ],
+  "regionData": {
+    "Other": {
+      "pallets": 11,
+      "cons": 5,
+      "lates": 1
+    },
+    "North East": {
+      "pallets": 7,
+      "cons": 6,
+      "lates": 1
+    },
+    "West Midlands": {
+      "pallets": 12,
+      "cons": 11,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 7,
+      "cons": 6,
+      "lates": 0
+    },
+    "North West": {
+      "pallets": 52,
+      "cons": 31,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 5,
+      "cons": 5,
+      "lates": 0
+    },
+    "Yorkshire": {
+      "pallets": 17,
+      "cons": 13,
+      "lates": 2
+    },
+    "East of England": {
+      "pallets": 15,
+      "cons": 10,
+      "lates": 1
+    },
+    "Wales": {
+      "pallets": 11,
+      "cons": 7,
+      "lates": 1
+    },
+    "South East": {
+      "pallets": 2,
+      "cons": 1,
+      "lates": 0
+    },
+    "East Midlands": {
+      "pallets": 13,
+      "cons": 6,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 10,
+      "cons": 6,
+      "lates": 0
+    },
+    "Northern Ireland": {
+      "pallets": 1,
+      "cons": 1,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 1,
+      "cons": 1,
+      "lates": 0
+    }
+  }
 }
