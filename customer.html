@@ -495,7 +495,22 @@ function handleRaw(input){
           var extras = focSurcharges.indexOf('EB')>-1 ? 'Economy Booked' : 'Next Day';
           // Pallets — use column if available, else 1
           var pallets = parseFloat(r['Pallets'])||1;
-          var collDate = r['Collection Date'] || actDate || reqDate;
+          var collDate = r['Collection Date'];
+          if(!collDate && reqDate){
+            // Estimate collection date by working backwards from requested delivery date
+            var svc = String(r['v4_service']||'').toUpperCase();
+            var daysBack = svc==='C' ? 3 : svc==='B' ? 2 : 1;
+            var rd = new Date(reqDate);
+            var est = new Date(rd);
+            var backed = 0;
+            while(backed < daysBack){
+              est.setDate(est.getDate()-1);
+              var dow = est.getDay();
+              if(dow!==0&&dow!==6) backed++; // skip weekends
+            }
+            collDate = est.toISOString().slice(0,10);
+          }
+          if(!collDate) collDate = actDate;
           return {
             'id': String(r['Customer Consignment Ref']||r['Customer reference number']||''),
             'consignment reference': String(r['Customer Consignment Ref']||r['Customer reference number']||''),
@@ -666,7 +681,7 @@ function renderPreview(){
   // Monthly table rows
   var tableRows=MONTH_KEYS.map(function(key,i){
     var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);
-    if(c){return '<tr class="new-row tracker-month-row" data-month-key="'+key+'"><td>'+label+' <span class="pill">NEW</span></td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>£'+c.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>£'+c.avgRC.toFixed(2)+'</td><td>£'+c.avgRP.toFixed(2)+'</td><td>'+c.avgPC.toFixed(1)+'</td><td>'+otifBar(c.timeliness,70)+'</td><td>'+c.lates+'</td></tr>';}
+    if(c){return '<tr class="new-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>£'+c.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>£'+c.avgRC.toFixed(2)+'</td><td>£'+c.avgRP.toFixed(2)+'</td><td>'+c.avgPC.toFixed(1)+'</td><td>'+otifBar(c.timeliness,70)+'</td><td>'+c.lates+'</td></tr>';}
     else if(ex){
       var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
       var revS=rev!=null?'£'+rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'';
