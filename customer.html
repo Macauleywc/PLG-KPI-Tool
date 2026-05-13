@@ -560,7 +560,7 @@ function handleRaw(input){
 
       rawData=rows;
       var byMonth={};
-      rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
+      rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(r['destination name']==='MARK COLLINS')console.log('MARK COLLINS date:',r['date'],'->',k);if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
       calculatedMonths={};
       Object.keys(byMonth).forEach(function(k){
         if(k.indexOf('NaN')>-1)return; // skip rows with unparseable dates
