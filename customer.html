@@ -72,8 +72,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 /* ── MONTHS CHIPS ── */
 .months-bar{background:var(--dk);border-bottom:2px solid var(--orange);padding:7px 24px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .months-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#555;flex-shrink:0;margin-right:4px;}
-.month-chip{font-size:11px;font-weight:600;color:#666;padding:3px 10px;border-radius:4px;background:#1a1a1a;border:1px solid #2a2a2a;white-space:nowrap;}
+.month-chip{font-size:11px;font-weight:600;color:#666;padding:3px 10px;border-radius:4px;background:#1a1a1a;border:1px solid #2a2a2a;white-space:nowrap;transition:all 0.15s;}
 .month-chip.has-data{color:#fff;background:#F47920;border-color:#F47920;}
+.month-chip.has-data:hover{background:#e06a10;cursor:pointer;}
+.month-chip.active{outline:2px solid #fff;box-shadow:0 0 0 3px #F47920;}
 .chip{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:var(--surface);border:1px solid var(--border);color:var(--muted);}
 .chip.live{border-color:var(--orange);color:var(--orange);background:var(--orange-lt);}
 
@@ -654,21 +656,25 @@ function renderPreview(){
 
   // Regions
   var regMap={};
-  comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
+  if(comp.length>0){
+    comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
+  } else if(window._savedRegionData){
+    regMap=window._savedRegionData;
+  }
   var topReg=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;});
 
   // Monthly table rows
   var tableRows=MONTH_KEYS.map(function(key,i){
     var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);
-    if(c){return '<tr class="new-row"><td>'+label+' <span class="pill">NEW</span></td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>£'+c.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>£'+c.avgRC.toFixed(2)+'</td><td>£'+c.avgRP.toFixed(2)+'</td><td>'+c.avgPC.toFixed(1)+'</td><td>'+otifBar(c.timeliness,70)+'</td><td>'+c.lates+'</td></tr>';}
+    if(c){return '<tr class="new-row tracker-month-row" data-month-key="'+key+'"><td>'+label+' <span class="pill">NEW</span></td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>£'+c.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>£'+c.avgRC.toFixed(2)+'</td><td>£'+c.avgRP.toFixed(2)+'</td><td>'+c.avgPC.toFixed(1)+'</td><td>'+otifBar(c.timeliness,70)+'</td><td>'+c.lates+'</td></tr>';}
     else if(ex){
       var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
       var revS=rev!=null?'£'+rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'';
       var aRC=cons&&rev?'£'+(rev/cons).toFixed(2):'—',aRP=plts&&rev?'£'+(rev/plts).toFixed(2):'—',aPC=cons&&plts?(plts/cons).toFixed(1):'—';
       var timS=cons&&lates!==null?((cons-lates)/cons*100).toFixed(2)+'%':'—';
-      return '<tr class="'+(cons?'':'empty-row')+'"><td class="existing">'+label+'</td><td class="existing">'+(cons||'—')+'</td><td class="existing">'+(plts||'—')+'</td><td class="existing">'+(revS||'—')+'</td><td class="existing">'+aRC+'</td><td class="existing">'+aRP+'</td><td class="existing">'+aPC+'</td><td class="existing">'+timS+'</td><td class="existing">'+(lates||'—')+'</td></tr>';
+      return '<tr class="'+(cons?'':'empty-row')+' tracker-month-row" data-month-key="'+key+'"><td class="existing">'+label+'</td><td class="existing">'+(cons||'—')+'</td><td class="existing">'+(plts||'—')+'</td><td class="existing">'+(revS||'—')+'</td><td class="existing">'+aRC+'</td><td class="existing">'+aRP+'</td><td class="existing">'+aPC+'</td><td class="existing">'+timS+'</td><td class="existing">'+(lates||'—')+'</td></tr>';
     }
-    return '<tr class="empty-row"><td>'+label+'</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>';
+    return '<tr class="empty-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>';
   }).join('');
 
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
@@ -992,16 +998,20 @@ function exportCustomerReport(){
 
   // Build map PNG from GeoJSON + current data — no CORS issues
   function captureMap(cb){
-    // Build region data from current customer data
+    // Build region data from current customer data, or use saved data if no raw rows
     var comp=allCompleted();
     var regData={};
-    comp.forEach(function(r){
-      var reg=region(r['destination postal code']||'');
-      if(!regData[reg])regData[reg]={pallets:0,cons:0,lates:0};
-      regData[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;
-      regData[reg].cons++;
-      if(isLate(r))regData[reg].lates++;
-    });
+    if(comp.length>0){
+      comp.forEach(function(r){
+        var reg=region(r['destination postal code']||'');
+        if(!regData[reg])regData[reg]={pallets:0,cons:0,lates:0};
+        regData[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;
+        regData[reg].cons++;
+        if(isLate(r))regData[reg].lates++;
+      });
+    } else if(window._savedRegionData){
+      regData=window._savedRegionData;
+    }
 
     if(!window._gbGeoJSON){
       // GeoJSON not loaded yet — try to fetch it
@@ -1741,9 +1751,111 @@ function renderHistory(){
   set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—');
   set('h-lates',totLates||'—');
   var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='—'?ytdOTIF+'%':'—';ho.style.color=col;}
-  var chips=MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');return'<div class="month-chip'+(has?' has-data':'')+' " title="'+(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'+label+(has&&palletOtif?' '+palletOtif:'')+'</div>';}).join('');
+  var chips='<div class="month-chip has-data" id="chip-all" onclick="selectMonth('all')" style="background:#333;border-color:#555;cursor:pointer">All</div>'
+    +MONTH_KEYS.map(function(key,i){
+      var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];
+      var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');
+      return '<div class="month-chip'+(has?' has-data':'')+'" id="chip-'+key+'"'
+        +(has?' onclick="selectMonth(''+key+'')" style="cursor:pointer"':'')+' title="'
+        +(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'
+        +label+(has&&palletOtif?' '+palletOtif:'')+'</div>';
+    }).join('');
   var strip=document.getElementById('months-strip');if(strip)strip.innerHTML=chips||'<span style="font-size:12px;color:#ccc">No months saved yet</span>';
 }
+var _activeMonth='all';
+
+function selectMonth(key){
+  _activeMonth=key;
+  // Update chip highlight
+  document.querySelectorAll('.month-chip').forEach(function(el){
+    el.style.outline='none';
+    el.style.boxShadow='none';
+  });
+  var active=document.getElementById('chip-'+(key==='all'?'all':key));
+  if(active){active.style.outline='2px solid #fff';active.style.boxShadow='0 0 0 3px #F47920';}
+
+  // Build filtered view
+  var months=key==='all'?Object.keys(savedMonthData):savedMonthData[key]?[key]:[];
+  if(months.length===0)return;
+
+  // Update KPI strip
+  var totC=0,totP=0,totR=0,totL=0,totLP=0;
+  months.forEach(function(k){
+    var d=savedMonthData[k];if(!d)return;
+    totC+=d.cons||0;totP+=d.pallets||0;totR+=d.revenue||0;totL+=d.lates||0;totLP+=d.latePallets||0;
+  });
+  var otif=totP>0?((totP-totLP)/totP*100).toFixed(2)+'%':'--';
+  var otifCol=parseFloat(otif)>=98?'#2e7d32':parseFloat(otif)>=95?'#e65100':'#c62828';
+  var s=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
+  s('h-cons',totC||'--');s('h-pallets',totP||'--');
+  s('h-lates',totL||'--');
+  var hr=document.getElementById('h-rev');if(hr)hr.textContent=totR>0?'£'+totR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';
+  var ho=document.getElementById('h-otif');if(ho){ho.textContent=otif;ho.style.color=otifCol;}
+
+  // Update monthly tracker table — highlight selected month rows
+  document.querySelectorAll('.tracker-month-row').forEach(function(row){
+    var rk=row.getAttribute('data-month-key');
+    if(key==='all'){row.style.background='';row.style.fontWeight='';}
+    else{row.style.background=rk===key?'#fff8f0':'';row.style.fontWeight=rk===key?'600':'';}
+  });
+
+  // Show month-specific late log from savedLateRows
+  var lates=key==='all'?(window._savedLateRows||[]):(window._savedLateRows||[]).filter(function(r){
+    // Match by month label e.g. "Apr-26"
+    var chipLabel=MONTHS[MONTH_KEYS.indexOf(key)];
+    return r.month===chipLabel;
+  });
+  // Re-render late log section with filtered lates
+  var lateTab=document.getElementById('tab-lates');
+  if(lateTab&&lates.length>=0){
+    var lateMonths=[...new Set(lates.map(function(r){return r.month;}))];
+    var lateTypes=[...new Set(lates.map(function(r){return r.dtype;}))];
+    var filterBar=lates.length>0?'<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;">'
+      +'<span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span>'
+      +'<input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;">'
+      +'<select id="late-month" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;">'
+      +'<option value="">All months</option>'+lateMonths.map(function(m){return'<option value="'+m+'">'+m+'</option>';}).join('')+'</select>'
+      +'<select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;">'
+      +'<option value="">All types</option>'+lateTypes.map(function(t){return'<option value="'+t+'">'+t+'</option>';}).join('')+'</select>'
+      +'<button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button>'
+      +'<span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+lates.length+' entries</span>'
+      +'</div>':'';
+    var tableRows=lates.map(function(r,idx){
+      return '<tr class="late-row" id="laterow-'+idx+'">'
+        +'<td style="font-size:11px;color:#aaa">'+r.id+'</td>'
+        +'<td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:monospace">'+r.acct+'</span></td>'
+        +'<td>'+r.month+'</td><td>'+r.dest+'</td><td>'+r.city+'</td><td>'+r.pc+'</td>'
+        +'<td>'+r.commitDate+'</td><td>'+r.window+'</td>'
+        +'<td>'+r.arrDate+' '+r.arrival+'</td>'
+        +'<td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td>'
+        +'<td>'+r.pallets+'</td>'
+        +'<td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td>'
+        +'<td>'+(r.note?'<span style="font-size:11px;color:#555">'+r.note+'</span>':'<span style="color:#bbb;font-size:11px">—</span>')+'</td>'
+        +'<td></td></tr>';
+    }).join('');
+    lateTab.innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+lates.length+' late</span></div>'
+      +'<div class="alert alert-warn" style="margin-bottom:1rem">Showing saved late entries. Upload a new export to edit or remove entries.</div>'
+      +filterBar
+      +(lates.length>0
+        ?'<div class="tracker-table-wrap"><table id="late-table"><thead><tr>'
+          +'<th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th>'
+          +'<th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">↕</span></th>'
+          +'<th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">↕</span></th>'
+          +'<th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">↕</span></th>'
+          +'<th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">↕</span></th>'
+          +'<th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">↕</span></th>'
+          +'<th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">↕</span></th>'
+          +'<th>Time Window</th>'
+          +'<th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">↕</span></th>'
+          +'<th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">↕</span></th>'
+          +'<th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">↕</span></th>'
+          +'<th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">↕</span></th>'
+          +'<th>Note</th><th></th></tr></thead>'
+          +'<tbody id="late-tbody">'+tableRows+'</tbody></table></div>'
+        :'<div style="text-align:center;padding:2rem;color:#bbb">No late consignments for this period</div>');
+  }
+}
+
 async function loadFromGitHub(){
   var token=getToken();
   if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token — enter on homepage';gs.className='gh-status';}renderHistory();savedMonthData={};renderHistory();return;}
@@ -1756,6 +1868,7 @@ async function loadFromGitHub(){
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
     savedMonthData=decoded.months||{};
     window._savedLateRows=decoded.lateRows||[];
+    window._savedRegionData=decoded.regionData||null;
     var mCount=Object.keys(savedMonthData).length;var _gse=document.getElementById('gh-status');if(_gse){_gse.textContent=mCount+' month'+(mCount!==1?'s':'')+' saved';_gse.className='gh-badge';var _dot=document.getElementById('gh-dot');if(_dot)_dot.classList.add('ok');}
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     buildTrackerFromSaved();renderHistory();
@@ -1878,7 +1991,18 @@ async function saveToGitHub(){
       });
     });
   }catch(e){}
-  var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave};
+  // Build region data for map
+  var regDataToSave={};
+  try{
+    allCompleted().forEach(function(r){
+      var reg=region(r['destination postal code']||'');
+      if(!regDataToSave[reg])regDataToSave[reg]={pallets:0,cons:0,lates:0};
+      regDataToSave[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;
+      regDataToSave[reg].cons++;
+      if(isLate(r))regDataToSave[reg].lates++;
+    });
+  }catch(e){}
+  var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave,regionData:regDataToSave};
   var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
   try{
