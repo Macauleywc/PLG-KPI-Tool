@@ -1989,7 +1989,7 @@ async function saveToGitHub(){
   var token=getToken();if(!token){showAlert('warn','No GitHub token. Go to the homepage and enter it.');return;}
   var btn=document.getElementById('btn-save');btn.textContent='Saving...';btn.disabled=true;
   var merged=Object.assign({},savedMonthData);
-  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons,pallets:c.pallets,revenue:+c.revenue.toFixed(2),lates:c.lates,latePallets:c.latePallets||0,timeliness:+c.timeliness.toFixed(6),avgRC:+c.avgRC.toFixed(2),avgRP:+c.avgRP.toFixed(2),avgPC:+c.avgPC.toFixed(2)};});
+  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons||0,pallets:c.pallets||0,revenue:parseFloat((c.revenue||0).toFixed(2)),lates:c.lates||0,latePallets:c.latePallets||0,timeliness:parseFloat((c.timeliness||0).toFixed(6)),avgRC:parseFloat((c.avgRC||0).toFixed(2)),avgRP:parseFloat((c.avgRP||0).toFixed(2)),avgPC:parseFloat((c.avgPC||0).toFixed(2))};});
   // Save the late rows so they can be restored on return visits
   var lateRowsToSave=[];
   try{
