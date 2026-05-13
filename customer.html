@@ -471,10 +471,10 @@ function handleDeliveryData(input){
 }
 
 function handleRaw(input){
-  window._loadedFromSaved=false;
   var file=input.files[0];if(!file)return;
   var reader=new FileReader();
   reader.onload=function(e){
+    window._loadedFromSaved=false;
     try{
       var wb=XLSX.read(e.target.result,{type:'binary',cellDates:false});
       var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
@@ -557,7 +557,7 @@ function handleRaw(input){
       document.getElementById('raw-loaded').innerHTML=html;document.getElementById('raw-loaded').style.display='block';
       document.getElementById('delivery-upload-zone').style.display='block';
       showAlert('success','Raw data loaded — '+months.length+' month(s): '+months.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', '));
-      tryRender();
+      if(Object.keys(calculatedMonths).length>0)renderPreview();
     }catch(err){showAlert('warn','Could not read file: '+err.message);}
   };
   reader.readAsBinaryString(file);
