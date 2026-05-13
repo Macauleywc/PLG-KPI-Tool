@@ -1,20 +1,36 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-05-13T20:27:02.496Z",
+  "lastUpdated": "2026-05-13T20:28:32.514Z",
   "months": {
     "2026-04": {
       "cons": 109,
       "pallets": 164,
       "revenue": 7349.05,
-      "lates": 5,
-      "latePallets": 6,
-      "timeliness": 0.963415,
+      "lates": 6,
+      "latePallets": 8,
+      "timeliness": 0.95122,
       "avgRC": 67.42,
       "avgRP": 44.81,
       "avgPC": 1.5
     }
   },
   "lateRows": [
+    {
+      "id": "262983",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "Alpha Cash & Carry Ltd",
+      "city": "Alpha Cash & Carry Ltd",
+      "pc": "BD19 5LY",
+      "window": "",
+      "commitDate": "21/04/26",
+      "arrDate": "22/04/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": ""
+    },
     {
       "id": "262735",
       "acct": "ANAND",
@@ -130,7 +146,7 @@
     "Yorkshire": {
       "pallets": 17,
       "cons": 13,
-      "lates": 1
+      "lates": 2
     },
     "East of England": {
       "pallets": 15,
