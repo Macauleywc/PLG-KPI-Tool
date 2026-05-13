@@ -681,7 +681,7 @@ function renderPreview(){
   // Monthly table rows
   var tableRows=MONTH_KEYS.map(function(key,i){
     var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);
-    if(c){return '<tr class="new-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>£'+c.revenue.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>£'+c.avgRC.toFixed(2)+'</td><td>£'+c.avgRP.toFixed(2)+'</td><td>'+c.avgPC.toFixed(1)+'</td><td>'+otifBar(c.timeliness,70)+'</td><td>'+c.lates+'</td></tr>';}
+    if(c){var _rev=c.revenue||0,_arc=c.avgRC||0,_arp=c.avgRP||0,_apc=c.avgPC||0,_tim=c.timeliness||0;return '<tr class="new-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>£'+_rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>£'+_arc.toFixed(2)+'</td><td>£'+_arp.toFixed(2)+'</td><td>'+_apc.toFixed(1)+'</td><td>'+otifBar(_tim,70)+'</td><td>'+c.lates+'</td></tr>';}
     else if(ex){
       var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
       var revS=rev!=null?'£'+rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'';
@@ -1907,15 +1907,15 @@ async function loadFromGitHub(){
         if(!d)return;
         // Reconstruct a minimal completedRows so renderPreview doesn't crash
         calculatedMonths[key]={
-          cons:d.cons||0,
-          pallets:d.pallets||0,
-          revenue:d.revenue||0,
-          lates:d.lates||0,
-          latePallets:d.latePallets||0,
-          timeliness:d.timeliness||0,
-          avgRC:d.avgRC||0,
-          avgRP:d.avgRP||0,
-          avgPC:d.avgPC||0,
+          cons:parseFloat(d.cons)||0,
+          pallets:parseFloat(d.pallets)||0,
+          revenue:parseFloat(d.revenue)||0,
+          lates:parseFloat(d.lates)||0,
+          latePallets:parseFloat(d.latePallets)||0,
+          timeliness:parseFloat(d.timeliness)||0,
+          avgRC:parseFloat(d.avgRC)||0,
+          avgRP:parseFloat(d.avgRP)||0,
+          avgPC:parseFloat(d.avgPC)||0,
           completedRows:[]
         };
       });
