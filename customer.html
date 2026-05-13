@@ -498,7 +498,7 @@ function handleRaw(input){
           var collDate = r['Collection Date'];
           if(!collDate && reqDate){
             // Estimate collection date by working backwards from requested delivery date
-            var svc = String(r['v4_service']||'').toUpperCase();
+            var svc = String(serviceCode||'').toUpperCase();
             var daysBack = svc==='C' ? 3 : svc==='B' ? 2 : 1;
             var rd = new Date(reqDate);
             var est = new Date(rd);
