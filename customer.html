@@ -560,7 +560,7 @@ function handleRaw(input){
 
       rawData=rows;
       var byMonth={};
-      rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(r['destination name']==='MARK COLLINS')console.log('MARK COLLINS date:',r['date'],'->',k);if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
+      rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
       calculatedMonths={};
       Object.keys(byMonth).forEach(function(k){
         if(k.indexOf('NaN')>-1)return; // skip rows with unparseable dates
@@ -1707,10 +1707,15 @@ function applyAcctFilter(){
     + rows.reduce(function(a,r){ return a+(parseFloat(r['goods pallet spaces'])||0); }, 0) + ' pallets.');
   rawData = rows;
   var byMonth = {};
-  rows.forEach(function(r){ var d = xlDate(r['date']); if(!d) return; var k = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); if(k==='2026-05')console.log('MAY ROW:',r['destination name'],r['date'],r['customer']); if(!byMonth[k]) byMonth[k]=[]; byMonth[k].push(r); });
+  rows.forEach(function(r){ var d = xlDate(r['date']); if(!d) return; var k = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); if(!byMonth[k]) byMonth[k]=[]; byMonth[k].push(r); });
   calculatedMonths = {};
+  // Find the dominant month (most rows) to filter outliers
+  var maxRows = 0;
+  Object.keys(byMonth).forEach(function(k){ if(byMonth[k].length > maxRows) maxRows = byMonth[k].length; });
   Object.keys(byMonth).forEach(function(k){
-    if(k.indexOf('NaN')>-1)return; // skip invalid dates
+    if(k.indexOf('NaN')>-1)return;
+    // Skip months with very few rows if they look like outliers (< 1% of dominant month)
+    if(byMonth[k].length < Math.max(2, maxRows * 0.01))return;
     try{ calculatedMonths[k] = calcMonth(byMonth[k]); }
     catch(e){ showAlert('warn','Error in '+k+': '+e.message); }
   });
