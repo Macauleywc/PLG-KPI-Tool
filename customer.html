@@ -1763,8 +1763,7 @@ function renderHistory(){
     +MONTH_KEYS.map(function(key,i){
       var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];
       var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');
-      return '<div class="month-chip'+(has?' has-data chip-clickable':'')+'" id="chip-'+key+'" data-mkey="'+key+'"'
-        +(has?' style="cursor:pointer"':'')+' title="'
+      return '<div class="month-chip'+(has?' has-data':'')+' chip-clickable" id="chip-'+key+'" data-mkey="'+key+'" style="cursor:pointer" title="'
         +(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'
         +label+(has&&palletOtif?' '+palletOtif:'')+'</div>';
     }).join('');
@@ -1790,7 +1789,6 @@ function selectMonth(key){
 
   // Build filtered view
   var months=key==='all'?Object.keys(savedMonthData):savedMonthData[key]?[key]:[];
-  if(months.length===0)return;
 
   // Update KPI strip
   var totC=0,totP=0,totR=0,totL=0,totLP=0;
