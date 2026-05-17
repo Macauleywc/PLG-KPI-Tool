@@ -650,6 +650,12 @@ async function writeSnapshot(payload){
 
 // ── PATCHED exportCustomerReport (checks snapshot first) ─────────────────
 function exportCustomerReport(){
+  if(!window._loadedFromSaved){
+    showAlert('info','Preparing PDF — capturing map...');
+    window._pendingSnapshot=true;
+    captureMapAndBuild(null);
+    return;
+  }
   showAlert('info','Checking for saved snapshot...');
   checkSnapshot().then(function(snap){
     if(snap){
