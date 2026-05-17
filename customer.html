@@ -637,12 +637,13 @@ async function checkSnapshot(){
   }catch(e){return null;}
 }
 async function writeSnapshot(payload){
-  var token=getToken();if(!token)return;
-  var key=snapshotKey();if(!key)return;
+  var token=getToken();if(!token){console.warn('writeSnapshot: no token');return;}
+  var key=snapshotKey();if(!key){console.warn('writeSnapshot: no key');return;}
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/snapshots/'+key+'.json';
+    console.log('writeSnapshot: checking',url);
     var chk=await fetch(url,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
-    if(chk.ok)return; // already exists — never overwrite
+    if(chk.ok){console.log('writeSnapshot: already exists, skipping');return;} // already exists — never overwrite
     var body={message:'Snapshot: '+currentCustomer+' '+key,content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
     await fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
   }catch(e){console.warn('Snapshot write failed:',e);}
@@ -887,7 +888,11 @@ function buildReport(mapImg,onComplete){
     snapPayload.lateRows=snapLates;
     var snapReg={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!snapReg[reg])snapReg[reg]={pallets:0,cons:0,lates:0};snapReg[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;snapReg[reg].cons++;if(isLate(r))snapReg[reg].lates++;});}catch(e){}
     snapPayload.regionData=snapReg;
-    writeSnapshot(snapPayload).then(function(){console.log('Snapshot written: '+snapshotKey());});
+    console.log('Writing snapshot for key:', snapshotKey());
+    writeSnapshot(snapPayload).then(function(){
+      console.log('Snapshot written successfully: '+snapshotKey());
+      showAlert('success','Snapshot saved — PDF will be consistent on future downloads.');
+    }).catch(function(e){console.error('Snapshot write error:',e);});
   }
   if(onComplete)onComplete();
 
