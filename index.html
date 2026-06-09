@@ -10,7 +10,7 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLG — KPI Portal</title>
+<title>PLG â KPI Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -242,7 +242,7 @@ var OWNER = 'Macauleywc', REPO = 'PLG-KPI-Tool';
 var DEFAULTS = ['Anand International','Bonnington Plastics','BPW','Charles Bentley','Christmas Tree','Drivers Pickles','Geodis','Greiner Bio One','Mediq','Monro','Red Monkey','SAF Holland','SAM Mouldings','Sarstedt','Tom Chambers','VPK'];
 var editMode = false, meta = {};
 
-// Global navigation function — called from inline onclick on cards
+// Global navigation function â called from inline onclick on cards
 window.goTo = function(name) {
   window.location.href = 'customer.html?c=' + encodeURIComponent(name);
 };
@@ -272,6 +272,7 @@ function render() {
   var list = getList();
   var q = (document.getElementById('search').value || '').toLowerCase();
   var filtered = q ? list.filter(function(n) { return n.toLowerCase().indexOf(q) >= 0; }) : list.slice();
+  filtered.sort(function(a,b){ return a.localeCompare(b); });
 
   document.getElementById('s-total').textContent = list.length;
   document.getElementById('count-badge').textContent = filtered.length + ' customer' + (filtered.length !== 1 ? 's' : '');
@@ -359,7 +360,8 @@ function hideModal() { document.getElementById('overlay').style.display = 'none'
 function addCustomer() {
   var name = document.getElementById('modal-input').value.trim(); if (!name) return;
   var l = getList(); if (l.indexOf(name) === -1) { l.push(name); saveList(l); }
-  hideModal(); render(); if (getToken()) loadMeta();
+  var l2=getList();l2.sort(function(a,b){return a.localeCompare(b);});saveList(l2);
+    hideModal(); render(); if (getToken()) loadMeta();
 }
 
 window.addEventListener('load', function() {
