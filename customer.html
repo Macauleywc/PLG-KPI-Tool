@@ -781,7 +781,13 @@ function buildReport(mapImg,onComplete){
   if(lateList.length===0&&window._savedLateRows&&window._savedLateRows.length>0){
     lateList=(window._savedLateRows||[]).map(function(r){return{id:r.id||'',dest:r.dest||'',city:r.city||'',window:r.window||'',arrival:r.arrival||'--',mins:parseInt(r.mins)||0,pallets:r.pallets||0,dtype:r.dtype||'Standard'};});
   }
-  var destMap2={};comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});
+  var destMap2={};
+  if(comp.length>0){
+    comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});
+  } else if(window._savedLateRows&&window._savedLateRows.length>0){
+    // Build destination summary from saved late rows (partial — lates only, but better than nothing)
+    window._savedLateRows.forEach(function(r){var k=r.dest||'?';if(!destMap2[k])destMap2[k]={name:k,city:r.city||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r.pallets)||0;destMap2[k].lates++;});
+  }
   var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
   var regMap2={};
   if(comp.length>0){comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap2[reg])regMap2[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap2[reg].cons++;regMap2[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap2[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap2[reg].lates++;});}
@@ -799,7 +805,7 @@ function buildReport(mapImg,onComplete){
   var surchCons=amCons.length+timedCons.length+pre10Cons.length;
   var lateDelays=lateList.map(function(r){return parseInt(r.mins)||0;}).filter(function(m){return m>0;});
   var avgDelay=lateDelays.length?Math.round(lateDelays.reduce(function(a,b){return a+b;},0)/lateDelays.length):0;
-  var worstLate=lateList.length?lateList.reduce(function(a,b){return (parseInt(b.mins)||0)>(parseInt(a.mins)||0)?b:a;},lateList[0]):null;
+  var worstLate=lateList.length>0?lateList.reduce(function(a,b){return (parseInt(b.mins)||0)>=(parseInt(a.mins)||0)?b:a;},lateList[0]):null;
   var periodLabel=months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026';
   var latesPct=aC>0?((aL/aC)*100).toFixed(1)+'%':'0.0%';
   var {jsPDF}=window.jspdf;
@@ -1107,6 +1113,16 @@ async function saveToGitHub(){
     renderHistory();showAlert('success','Saved to GitHub for '+currentCustomer+'.');
   }catch(err){btn.textContent='Save to GitHub';btn.disabled=false;showAlert('warn','Save failed: '+err.message);}
 }
+
+// Pre-load GeoJSON for PDF map on page load
+(function(){
+  if(!window._gbGeoJSON){
+    fetch('https://code.highcharts.com/mapdata/countries/gb/gb-all.geo.json')
+      .then(function(r){return r.json();})
+      .then(function(gj){window._gbGeoJSON=gj;})
+      .catch(function(){});
+  }
+})();
 
 window.addEventListener('load',function(){
   var params=new URLSearchParams(window.location.search);
