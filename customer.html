@@ -199,7 +199,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 </div>
 
 <div class="cust-banner">
-  <div class="cust-avatar" id="cust-av">â</div>
+  <div class="cust-avatar" id="cust-av">—</div>
   <div>
     <div class="cust-name" id="cust-name">Loading...</div>
     <div class="cust-sub">Monthly KPI tracking &middot; 2026</div>
@@ -207,11 +207,11 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 </div>
 
 <div class="ytd-strip">
-  <div class="ytd-cell"><div class="ytd-label">YTD Consignments</div><div class="ytd-value orange" id="h-cons">â</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Pallets</div><div class="ytd-value" id="h-pallets">â</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Cost</div><div class="ytd-value" id="h-rev">â</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">â</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Lates</div><div class="ytd-value" id="h-lates">â</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Consignments</div><div class="ytd-value orange" id="h-cons">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Pallets</div><div class="ytd-value" id="h-pallets">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Cost</div><div class="ytd-value" id="h-rev">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Lates</div><div class="ytd-value" id="h-lates">—</div></div>
 </div>
 
 <div class="months-bar">
@@ -236,7 +236,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 <div class="upload-zone" id="delivery-upload-zone" style="margin-top:12px">
   <div class="zone-label">
     <div class="step-badge" style="background:#1a6bbf">1b</div>
-    <div class="zone-title">Upload Delivery Date data <span style="font-size:12px;font-weight:400;color:var(--muted)">(optional â improves OTIF accuracy)</span></div>
+    <div class="zone-title">Upload Delivery Date data <span style="font-size:12px;font-weight:400;color:var(--muted)">(optional — improves OTIF accuracy)</span></div>
   </div>
   <div class="drop-area" id="drop-area-v2" style="padding:14px 20px;min-height:70px">
     <input type="file" accept=".xlsx,.xls" id="file-v2" onchange="handleDeliveryData(this)">
@@ -286,7 +286,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 <script>
 // NOTE: This file contains the snapshot system patch (v2).
 // On first PDF download, data is frozen to snapshots/{customer}-{month}.json in GitHub.
-// All future downloads use that frozen snapshot â PDF is always consistent.
+// All future downloads use that frozen snapshot — PDF is always consistent.
 
 var deliveryDateMap={};
 var removedLateIds=new Set();
@@ -361,7 +361,7 @@ function handleDeliveryData(input){
       });
       document.getElementById('v2-loaded').innerHTML='<div class="file-loaded"><div class="file-icon">&#9989;</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+count+' delivery dates loaded</div></div></div>';
       document.getElementById('v2-loaded').style.display='block';
-      showAlert('success','Delivery data loaded â '+count+' consignments mapped.');
+      showAlert('success','Delivery data loaded — '+count+' consignments mapped.');
       if(!window._loadedFromSaved&&Object.keys(calculatedMonths).length>0)tryRender();
     }catch(err){showAlert('warn','Could not read delivery file: '+err.message);}
   };
@@ -405,12 +405,12 @@ function handleRaw(input){
         rows.forEach(function(r){var a=r['customer']||'';if(a)acctCodes[a]=(acctCodes[a]||0)+1;});
         var acctList=Object.keys(acctCodes).sort();
         if(acctList.length>1){
-          var filterHtml='<div id="acct-filter" style="background:#fff8f0;border:1px solid #F47920;border-radius:8px;padding:14px 18px;margin-bottom:12px;"><div style="font-size:12px;font-weight:600;color:#F47920;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">Multiple accounts detected â select which to include:</div><div style="display:flex;flex-wrap:wrap;gap:10px;">'+acctList.map(function(a){return'<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="acct-cb" value="'+a+'" checked style="accent-color:#F47920;width:15px;height:15px;"><span><b>'+a+'</b> <span style="color:#888">('+acctCodes[a]+' cons)</span></span></label>';}).join('')+'</div><button onclick="applyAcctFilter()" style="margin-top:12px;background:#F47920;color:#fff;border:none;border-radius:6px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;">Apply filter</button></div>';
+          var filterHtml='<div id="acct-filter" style="background:#fff8f0;border:1px solid #F47920;border-radius:8px;padding:14px 18px;margin-bottom:12px;"><div style="font-size:12px;font-weight:600;color:#F47920;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">Multiple accounts detected — select which to include:</div><div style="display:flex;flex-wrap:wrap;gap:10px;">'+acctList.map(function(a){return'<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="acct-cb" value="'+a+'" checked style="accent-color:#F47920;width:15px;height:15px;"><span><b>'+a+'</b> <span style="color:#888">('+acctCodes[a]+' cons)</span></span></label>';}).join('')+'</div><button onclick="applyAcctFilter()" style="margin-top:12px;background:#F47920;color:#fff;border:none;border-radius:6px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;">Apply filter</button></div>';
           document.getElementById('raw-loaded').innerHTML=filterHtml;
           document.getElementById('raw-loaded').style.display='block';
           window._pendingRows=rows;return;
         }
-        showAlert('success','Delivery report loaded â '+rows.length+' consignments, '+rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
+        showAlert('success','Delivery report loaded — '+rows.length+' consignments, '+rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
       }
       rawData=rows;
       var byMonth={};
@@ -418,10 +418,10 @@ function handleRaw(input){
       calculatedMonths={};
       Object.keys(byMonth).forEach(function(k){if(k.indexOf('NaN')>-1)return;try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(calcErr){showAlert('warn','Error in calcMonth for '+k+': '+calcErr.message);}});
       var months=Object.keys(calculatedMonths);
-      var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">â</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons Â· '+s.pallets+' pallets Â· £'+s.revenue.toFixed(2)+' Â· '+s.lates+' late(s)</div></div></div>';}).join('');
+      var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">✅</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons · '+s.pallets+' pallets · £'+s.revenue.toFixed(2)+' · '+s.lates+' late(s)</div></div></div>';}).join('');
       document.getElementById('raw-loaded').innerHTML=html;document.getElementById('raw-loaded').style.display='block';
       document.getElementById('delivery-upload-zone').style.display='block';
-      showAlert('success','Raw data loaded â '+months.length+' month(s): '+months.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', '));
+      showAlert('success','Raw data loaded — '+months.length+' month(s): '+months.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', '));
       if(Object.keys(calculatedMonths).length>0)renderPreview();
     }catch(err){showAlert('warn','Could not read file: '+err.message);}
   };
@@ -460,10 +460,10 @@ function renderPreview(){
   var comp=allCompleted();
   var tC=getTotal('cons')||0,tP=getTotal('pallets')||0,tR=getTotal('revenue')||0,tL=getLiveLates();
   var tLP=getLiveLatePallets();
-  var ytdOTIF=tP>0?((tP-tLP)/tP*100).toFixed(2):'â';
-  var ytdARC=tC>0?(tR/tC).toFixed(2):'â';
-  var ytdARP=tP>0?(tR/tP).toFixed(2):'â';
-  var ytdAPC=tC>0?(tP/tC).toFixed(2):'â';
+  var ytdOTIF=tP>0?((tP-tLP)/tP*100).toFixed(2):'—';
+  var ytdARC=tC>0?(tR/tC).toFixed(2):'—';
+  var ytdARP=tP>0?(tR/tP).toFixed(2):'—';
+  var ytdAPC=tC>0?(tP/tC).toFixed(2):'—';
   var lateRows=[];
   Object.entries(calculatedMonths).forEach(function(e){
     var key=e[0],s=e[1];
@@ -471,10 +471,10 @@ function renderPreview(){
       var arr=xlDT(r['destination arrival']);
       var extras=(r['destination extras']||'');
       var dtype=extras.includes('Economy Booked')?'Economy Booked':extras.includes('Booked')?'Booked':'Standard';
-      var arrDate=arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'â';
+      var arrDate=arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'—';
       var commitDate=xlDate(r['destination date']);
-      var commitStr=commitDate?commitDate.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'â';
-      lateRows.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'â',arrDate:arrDate,commitDate:commitStr,mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype});
+      var commitStr=commitDate?commitDate.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'—';
+      lateRows.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'—',arrDate:arrDate,commitDate:commitStr,mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype});
     });
   });
   var destMap={};
@@ -496,17 +496,17 @@ function renderPreview(){
     else if(ex){
       var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
       var revS=rev!=null?'£'+rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'';
-      var aRC=cons&&rev?'£'+(rev/cons).toFixed(2):'â',aRP=plts&&rev?'£'+(rev/plts).toFixed(2):'â',aPC=cons&&plts?(plts/cons).toFixed(1):'â';
-      var timS=cons&&lates!==null?((cons-lates)/cons*100).toFixed(2)+'%':'â';
-      return'<tr class="'+(cons?'':'empty-row')+' tracker-month-row" data-month-key="'+key+'"><td class="existing">'+label+'</td><td class="existing">'+(cons||'â')+'</td><td class="existing">'+(plts||'â')+'</td><td class="existing">'+(revS||'â')+'</td><td class="existing">'+aRC+'</td><td class="existing">'+aRP+'</td><td class="existing">'+aPC+'</td><td class="existing">'+timS+'</td><td class="existing">'+(lates||'â')+'</td></tr>';
+      var aRC=cons&&rev?'£'+(rev/cons).toFixed(2):'—',aRP=plts&&rev?'£'+(rev/plts).toFixed(2):'—',aPC=cons&&plts?(plts/cons).toFixed(1):'—';
+      var timS=cons&&lates!==null?((cons-lates)/cons*100).toFixed(2)+'%':'—';
+      return'<tr class="'+(cons?'':'empty-row')+' tracker-month-row" data-month-key="'+key+'"><td class="existing">'+label+'</td><td class="existing">'+(cons||'—')+'</td><td class="existing">'+(plts||'—')+'</td><td class="existing">'+(revS||'—')+'</td><td class="existing">'+aRC+'</td><td class="existing">'+aRP+'</td><td class="existing">'+aPC+'</td><td class="existing">'+timS+'</td><td class="existing">'+(lates||'—')+'</td></tr>';
     }
-    return'<tr class="empty-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td></tr>';
+    return'<tr class="empty-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>';
   }).join('');
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   var aLP=getLiveLatePallets();
-  var totalOTIF=aP?((aP-aLP)/aP*100).toFixed(2)+'%':'â';
+  var totalOTIF=aP?((aP-aLP)/aP*100).toFixed(2)+'%':'—';
   var typeRows=Object.entries(typeMap).map(function(e){var t=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+t+'</td><td>'+d.cons+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,80)+'</td></tr>';}).join('');
-  var dowCards=[1,2,3,4,5].map(function(d){var dd=dow[d],otif=dd.cons>0?(dd.cons-dd.lates)/dd.cons:null;var col=otif===null?'#ccc':otif>=0.98?'#2e7d32':otif>=0.95?'#e65100':'#c62828';var pct=otif!==null?(otif*100).toFixed(1)+'%':'â';return'<div class="dow-card"><div class="dow-label">'+dd.l+'</div><div class="dow-val" style="color:'+col+'">'+pct+'</div><div class="dow-sub">'+dd.cons+' cons Â· '+dd.lates+' late</div></div>';}).join('');
+  var dowCards=[1,2,3,4,5].map(function(d){var dd=dow[d],otif=dd.cons>0?(dd.cons-dd.lates)/dd.cons:null;var col=otif===null?'#ccc':otif>=0.98?'#2e7d32':otif>=0.95?'#e65100':'#c62828';var pct=otif!==null?(otif*100).toFixed(1)+'%':'—';return'<div class="dow-card"><div class="dow-label">'+dd.l+'</div><div class="dow-val" style="color:'+col+'">'+pct+'</div><div class="dow-sub">'+dd.cons+' cons · '+dd.lates+' late</div></div>';}).join('');
   var regRows=topReg.map(function(e){var reg=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+reg+'</td><td>'+d.cons+'</td><td>'+d.pallets+'</td><td>£'+(d.revenue||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,60)+'</td></tr>';}).join('');
   var ytdCardsEl=document.getElementById('ytd-cards');
   if(ytdCardsEl){ytdCardsEl.innerHTML='<div class="stat-card"><div class="lbl">YTD Consignments</div><div class="val" style="color:var(--orange)">'+tC.toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Pallets</div><div class="val">'+tP.toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Base Cost</div><div class="val">£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Pallet OTIF</div><div class="val" style="color:'+(parseFloat(ytdOTIF)>=98?'var(--green)':parseFloat(ytdOTIF)>=95?'var(--amber)':'var(--red)')+'">'+ytdOTIF+'%</div></div>';}
@@ -519,7 +519,7 @@ function renderPreview(){
   var lateMonths=Array.from(new Set(lateRows.map(function(r){return r.month;})));
   var lateTypes=Array.from(new Set(lateRows.map(function(r){return r.dtype;})));
   var filterBar=lateRows.length>0?'<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;"><span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span><input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;"><select id="late-month" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All months</option>'+lateMonths.map(function(m){return'<option value="'+m+'">'+m+'</option>';}).join('')+'</select><select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All types</option>'+lateTypes.map(function(t){return'<option value="'+t+'">'+t+'</option>';}).join('')+'</select><button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button><span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+lateRows.length+' entries</span></div>':'';
-  document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div>'+filterBar+(lateRows.length>0?'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">â</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">â</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">â</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">â</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">â</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">â</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">â</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">â</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">â</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">â</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">â</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+lateTableRows+'</tbody></table></div>':'<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');
+  document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div>'+filterBar+(lateRows.length>0?'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">↕</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">↕</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">↕</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">↕</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">↕</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">↕</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">↕</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">↕</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">↕</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">↕</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+lateTableRows+'</tbody></table></div>':'<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');
   setTimeout(function(){renderCharts();},120);
 }
 
@@ -550,9 +550,9 @@ function filterLateLog(){
 var _lateSortCol=-1,_lateSortAsc=true;
 function sortLateLog(col,keepDir){
   if(!keepDir){if(_lateSortCol===col){_lateSortAsc=!_lateSortAsc;}else{_lateSortCol=col;_lateSortAsc=true;}}
-  document.querySelectorAll('[id^="lsort-"]').forEach(function(el){el.textContent='â';el.style.color='#ccc';});
+  document.querySelectorAll('[id^="lsort-"]').forEach(function(el){el.textContent='↕';el.style.color='#ccc';});
   var ind=document.getElementById('lsort-'+col);
-  if(ind){ind.textContent=_lateSortAsc?'â':'â';ind.style.color='#F47920';}
+  if(ind){ind.textContent=_lateSortAsc?'↑':'↓';ind.style.color='#F47920';}
   var tbody=document.getElementById('late-tbody');if(!tbody)return;
   var rows=Array.from(tbody.querySelectorAll('tr.late-row'));
   rows.sort(function(a,b){
@@ -616,7 +616,7 @@ function exportTracker(){
   var regRows=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;}).map(function(e){var d=e[1];return[e[0],d.cons,d.pallets,+(d.revenue||0).toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
   var ws4=XLSX.utils.aoa_to_sheet([['Region','Cons','Pallets','Revenue (£)','Lates','OTIF %']].concat(regRows));ws4['!cols']=[{wch:20},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];XLSX.utils.book_append_sheet(wb,ws4,'Regional Breakdown');
   var now=new Date();var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-  XLSX.writeFile(wb,'PLG_KPI_Tracker_'+stamp+'.xlsx');showAlert('success','Downloaded â 4 tabs.');
+  XLSX.writeFile(wb,'PLG_KPI_Tracker_'+stamp+'.xlsx');showAlert('success','Downloaded — 4 tabs.');
 }
 
 // ââ SNAPSHOT SYSTEM âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
@@ -643,16 +643,32 @@ async function writeSnapshot(payload){
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/snapshots/'+key+'.json';
     console.log('writeSnapshot: checking',url);
     var chk=await fetch(url,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
-    if(chk.ok){console.log('writeSnapshot: already exists, skipping');return;} // already exists â never overwrite
+    if(chk.ok){console.log('writeSnapshot: already exists, skipping');return;} // already exists — never overwrite
     var body={message:'Snapshot: '+currentCustomer+' '+key,content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
     await fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
   }catch(e){console.warn('Snapshot write failed:',e);}
 }
 
 // ââ PATCHED exportCustomerReport (checks snapshot first) âââââââââââââââââ
+
+function exportCustomerReportForMonths(selectedKeys){
+  if(!selectedKeys||selectedKeys.length===0){showAlert('warn','Select at least one month.');return;}
+  var origCalc=Object.assign({},calculatedMonths);
+  var origSaved=Object.assign({},savedMonthData);
+  var origLateRows=window._savedLateRows?window._savedLateRows.slice():[];
+  calculatedMonths={};
+  selectedKeys.forEach(function(k){if(origCalc[k])calculatedMonths[k]=origCalc[k];});
+  savedMonthData={};
+  selectedKeys.forEach(function(k){if(origSaved[k])savedMonthData[k]=origSaved[k];});
+  window._savedLateRows=origLateRows.filter(function(r){
+    return selectedKeys.some(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]===r.month;});
+  });
+  exportCustomerReport();
+  setTimeout(function(){calculatedMonths=origCalc;savedMonthData=origSaved;window._savedLateRows=origLateRows;},5000);
+}
 function exportCustomerReport(){
   if(!window._loadedFromSaved){
-    showAlert('info','Preparing PDF â capturing map...');
+    showAlert('info','Preparing PDF — capturing map...');
     window._pendingSnapshot=true;
     captureMapAndBuild(null);
     return;
@@ -660,7 +676,7 @@ function exportCustomerReport(){
   showAlert('info','Checking for saved snapshot...');
   checkSnapshot().then(function(snap){
     if(snap){
-      showAlert('info','Using saved snapshot â PDF will match original download.');
+      showAlert('info','Using saved snapshot — PDF will match original download.');
       var _orig=calculatedMonths;
       calculatedMonths={};
       Object.keys(snap.months||{}).forEach(function(key){
@@ -679,7 +695,7 @@ function exportCustomerReport(){
         window._snapshotLateRows=null;
       });
     } else {
-      showAlert('info','Preparing PDF â capturing map...');
+      showAlert('info','Preparing PDF — capturing map...');
       window._pendingSnapshot=true;
       captureMapAndBuild(null);
     }
@@ -897,7 +913,7 @@ function buildReport(mapImg,onComplete){
     console.log('Writing snapshot for key:', snapshotKey());
     writeSnapshot(snapPayload).then(function(){
       console.log('Snapshot written successfully: '+snapshotKey());
-      showAlert('success','Snapshot saved â PDF will be consistent on future downloads.');
+      showAlert('success','Snapshot saved — PDF will be consistent on future downloads.');
     }).catch(function(e){console.error('Snapshot write error:',e);});
   }
   if(onComplete)onComplete();
@@ -944,13 +960,13 @@ function applyAcctFilter(){
   var rows=(window._pendingRows||[]).filter(function(r){return checked.indexOf(r['customer']||'')>-1;});
   window._pendingRows=null;
   document.getElementById('acct-filter')&&document.getElementById('acct-filter').remove();
-  showAlert('success','Filtered to '+checked.join(', ')+' â '+rows.length+' consignments.');
+  showAlert('success','Filtered to '+checked.join(', ')+' — '+rows.length+' consignments.');
   rawData=rows;var byMonth={};
   rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
   calculatedMonths={};var maxRows=0;Object.keys(byMonth).forEach(function(k){if(byMonth[k].length>maxRows)maxRows=byMonth[k].length;});
   Object.keys(byMonth).forEach(function(k){if(k.indexOf('NaN')>-1)return;if(byMonth[k].length<Math.max(2,maxRows*0.01))return;try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(e){showAlert('warn','Error in '+k+': '+e.message);}});
   var months=Object.keys(calculatedMonths);
-  document.getElementById('raw-loaded').innerHTML=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">â</div><div style="flex:1"><div class="file-name">Filtered: '+checked.join(', ')+'</div><div class="file-status">'+label+': '+s.cons+' cons Â· '+s.pallets+' pallets Â· £'+s.revenue.toFixed(2)+' Â· '+s.lates+' late(s)</div></div></div>';}).join('');
+  document.getElementById('raw-loaded').innerHTML=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">✅</div><div style="flex:1"><div class="file-name">Filtered: '+checked.join(', ')+'</div><div class="file-status">'+label+': '+s.cons+' cons · '+s.pallets+' pallets · £'+s.revenue.toFixed(2)+' · '+s.lates+' late(s)</div></div></div>';}).join('');
   document.getElementById('raw-loaded').style.display='block';document.getElementById('delivery-upload-zone').style.display='block';
   if(Object.keys(calculatedMonths).length>0)tryRender();
 }
@@ -984,11 +1000,11 @@ function renderHistory(){
   var keys=Object.keys(savedMonthData).sort();
   var totCons=0,totPallets=0,totRev=0,totLates=0,totLatePallets=0;
   keys.forEach(function(k){var d=savedMonthData[k];if(d){totCons+=d.cons||0;totPallets+=d.pallets||0;totRev+=d.revenue||0;totLates+=d.lates||0;totLatePallets+=d.latePallets||0;}});
-  var ytdOTIF=totPallets>0?((totPallets-totLatePallets)/totPallets*100).toFixed(2):'â';
+  var ytdOTIF=totPallets>0?((totPallets-totLatePallets)/totPallets*100).toFixed(2):'—';
   var col=parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828';
   function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
-  set('h-cons',totCons||'â');set('h-pallets',totPallets||'â');set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'â');set('h-lates',totLates||'â');
-  var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='â'?ytdOTIF+'%':'â';ho.style.color=col;}
+  set('h-cons',totCons||'—');set('h-pallets',totPallets||'—');set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—');set('h-lates',totLates||'—');
+  var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='—'?ytdOTIF+'%':'—';ho.style.color=col;}
   var chips='<div class="month-chip has-data chip-clickable" id="chip-all" data-mkey="all" style="background:#333;border-color:#555;cursor:pointer">All</div>'+MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');return'<div class="month-chip'+(has?' has-data':'')+' chip-clickable" id="chip-'+key+'" data-mkey="'+key+'" style="cursor:pointer" title="'+(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'+label+(has&&palletOtif?' '+palletOtif:'')+'</div>';}).join('');
   var strip=document.getElementById('months-strip');if(strip){strip.innerHTML=chips||'<span style="font-size:12px;color:#ccc">No months saved yet</span>';strip.onclick=function(e){var chip=e.target.closest('.chip-clickable');if(chip){selectMonth(chip.getAttribute('data-mkey'));}};}
 }
@@ -1012,7 +1028,7 @@ function selectMonth(key){
 
 async function loadFromGitHub(){
   var token=getToken();
-  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token â enter on homepage';gs.className='gh-status';}savedMonthData={};renderHistory();return;}
+  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token — enter on homepage';gs.className='gh-status';}savedMonthData={};renderHistory();return;}
   var _gs2=document.getElementById('gh-status');if(_gs2){_gs2.textContent='Loading...';_gs2.className='gh-status';}
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
@@ -1036,8 +1052,8 @@ async function loadFromGitHub(){
         var lateMonths=Array.from(new Set(saved.map(function(r){return r.month;})));
         var lateTypes=Array.from(new Set(saved.map(function(r){return r.dtype;})));
         var filterBar='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;"><span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span><input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;"><select id="late-month" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All months</option>'+lateMonths.map(function(m){return'<option value="'+m+'">'+m+'</option>';}).join('')+'</select><select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All types</option>'+lateTypes.map(function(t){return'<option value="'+t+'">'+t+'</option>';}).join('')+'</select><button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button><span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+saved.length+' entries</span></div>';
-        var tableRows=saved.map(function(r,idx){return'<tr class="late-row" id="laterow-'+idx+'"><td style="font-size:11px;color:#aaa">'+r.id+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:monospace">'+r.acct+'</span></td><td>'+r.month+'</td><td>'+r.dest+'</td><td>'+r.city+'</td><td>'+r.pc+'</td><td>'+r.commitDate+'</td><td>'+r.window+'</td><td>'+r.arrDate+' '+r.arrival+'</td><td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td><td>'+r.pallets+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td><td>'+(r.note?'<span style="font-size:11px;color:#555">'+r.note+'</span>':'<span style="color:#bbb;font-size:11px">â</span>')+'</td><td></td></tr>';}).join('');
-        document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+saved.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">Showing saved late entries. Upload a new export to edit or remove entries.</div>'+filterBar+'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">â</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">â</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">â</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">â</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">â</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">â</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">â</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">â</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">â</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">â</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">â</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+tableRows+'</tbody></table></div>';
+        var tableRows=saved.map(function(r,idx){return'<tr class="late-row" id="laterow-'+idx+'"><td style="font-size:11px;color:#aaa">'+r.id+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:monospace">'+r.acct+'</span></td><td>'+r.month+'</td><td>'+r.dest+'</td><td>'+r.city+'</td><td>'+r.pc+'</td><td>'+r.commitDate+'</td><td>'+r.window+'</td><td>'+r.arrDate+' '+r.arrival+'</td><td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td><td>'+r.pallets+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td><td>'+(r.note?'<span style="font-size:11px;color:#555">'+r.note+'</span>':'<span style="color:#bbb;font-size:11px">—</span>')+'</td><td></td></tr>';}).join('');
+        document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+saved.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">Showing saved late entries. Upload a new export to edit or remove entries.</div>'+filterBar+'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">↕</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">↕</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">↕</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">↕</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">↕</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">↕</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">↕</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">↕</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">↕</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">↕</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+tableRows+'</tbody></table></div>';
       }
     }
   }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;}}
@@ -1052,7 +1068,7 @@ async function saveToGitHub(){
   try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];(s.completedRows||[]).filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex=r['destination extras']||'';var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';lateRowsToSave.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||''});});});}catch(e){}
   var regDataToSave={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!regDataToSave[reg])regDataToSave[reg]={pallets:0,cons:0,lates:0};regDataToSave[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regDataToSave[reg].cons++;if(isLate(r))regDataToSave[reg].lates++;});}catch(e){}
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave,regionData:regDataToSave};
-  var body={message:'KPI update: '+currentCustomer+' â '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
+  var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
@@ -1071,7 +1087,7 @@ window.addEventListener('load',function(){
   var params=new URLSearchParams(window.location.search);
   currentCustomer=decodeURIComponent(params.get('c')||'Customer');
   document.getElementById('cust-name').textContent=currentCustomer;
-  document.title=currentCustomer+' â PLG KPI Tool';
+  document.title=currentCustomer+' — PLG KPI Tool';
   var _av=document.getElementById('cust-av');if(_av)_av.textContent=currentCustomer.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
   loadFromGitHub();
 });
@@ -1084,10 +1100,10 @@ var contacts=[];
 function loadContacts(){try{var s=localStorage.getItem('plg_contacts_'+currentCustomer);if(s)contacts=JSON.parse(s);}catch(e){contacts=[];}}
 function saveContacts(){localStorage.setItem('plg_contacts_'+currentCustomer,JSON.stringify(contacts));}
 function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function renderContactsTab(){var pane=document.getElementById('tab-contacts');var rows=contacts.map(function(c,i){return'<div class="contact-row"><input placeholder="Contact name" value="'+escHtml(c.name||'')+'" oninput="contacts['+i+'].name=this.value;saveContacts()"><input placeholder="email@company.co.uk" type="email" value="'+escHtml(c.email||'')+'" oninput="contacts['+i+'].email=this.value;saveContacts()"><button class="contact-del" onclick="deleteContact('+i+')" title="Remove">&#215;</button></div>';}).join('');pane.innerHTML='<div class="contacts-panel"><div class="contacts-title"><span>Customer contacts for '+escHtml(currentCustomer)+'</span></div>'+rows+'<button class="btn-add-contact" onclick="addContact()">+ Add contact</button></div><div style="background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;color:var(--muted)">Contacts saved in your browser. Not uploaded to GitHub.</div>';var sel=document.getElementById('email-to-select');if(sel){sel.innerHTML='<option value="">â Select contact or type below â</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name||c.email))+'</option>';}).join('');}}
+function renderContactsTab(){var pane=document.getElementById('tab-contacts');var rows=contacts.map(function(c,i){return'<div class="contact-row"><input placeholder="Contact name" value="'+escHtml(c.name||'')+'" oninput="contacts['+i+'].name=this.value;saveContacts()"><input placeholder="email@company.co.uk" type="email" value="'+escHtml(c.email||'')+'" oninput="contacts['+i+'].email=this.value;saveContacts()"><button class="contact-del" onclick="deleteContact('+i+')" title="Remove">&#215;</button></div>';}).join('');pane.innerHTML='<div class="contacts-panel"><div class="contacts-title"><span>Customer contacts for '+escHtml(currentCustomer)+'</span></div>'+rows+'<button class="btn-add-contact" onclick="addContact()">+ Add contact</button></div><div style="background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;color:var(--muted)">Contacts saved in your browser. Not uploaded to GitHub.</div>';var sel=document.getElementById('email-to-select');if(sel){sel.innerHTML='<option value="">— Select contact or type below —</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name||c.email))+'</option>';}).join('');}}
 function addContact(){contacts.push({name:'',email:''});saveContacts();renderContactsTab();}
 function deleteContact(i){contacts.splice(i,1);saveContacts();renderContactsTab();}
-function openEmailModal(){loadEjsConfig();loadContacts();renderContactsTab();var now=new Date();var period=now.toLocaleString('en-GB',{month:'long',year:'numeric'});document.getElementById('email-subject').value='Premier Logistics Group â KPI Report | '+currentCustomer+' | '+period;document.getElementById('email-message').value='Please find your KPI report for '+period+' attached.\n\nIf you have any questions, please do not hesitate to get in touch.';document.getElementById('email-to').value='';document.getElementById('email-to-name').value='';var sel=document.getElementById('email-to-select');sel.innerHTML='<option value="">â Select contact or type below â</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name?c.name+' â ':'')+c.email)+'</option>';}).join('');document.getElementById('email-modal').classList.add('open');}
+function openEmailModal(){loadEjsConfig();loadContacts();renderContactsTab();var now=new Date();var period=now.toLocaleString('en-GB',{month:'long',year:'numeric'});document.getElementById('email-subject').value='Premier Logistics Group — KPI Report | '+currentCustomer+' | '+period;document.getElementById('email-message').value='Please find your KPI report for '+period+' attached.\n\nIf you have any questions, please do not hesitate to get in touch.';document.getElementById('email-to').value='';document.getElementById('email-to-name').value='';var sel=document.getElementById('email-to-select');sel.innerHTML='<option value="">— Select contact or type below —</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name?c.name+' — ':'')+c.email)+'</option>';}).join('');document.getElementById('email-modal').classList.add('open');}
 function closeEmailModal(){document.getElementById('email-modal').classList.remove('open');}
 function fillEmailTo(){var sel=document.getElementById('email-to-select');var opt=sel.options[sel.selectedIndex];if(opt&&opt.value){document.getElementById('email-to').value=opt.value;document.getElementById('email-to-name').value=opt.dataset.name||'';}}
 function sendReportEmail(){var to=document.getElementById('email-to').value.trim();var toName=document.getElementById('email-to-name').value.trim();var subject=document.getElementById('email-subject').value.trim();var message=document.getElementById('email-message').value.trim();var svcId=document.getElementById('ejs-service').value.trim();var tplId=document.getElementById('ejs-template').value.trim();var pubKey=document.getElementById('ejs-pubkey').value.trim();if(!to){showAlert('error','Please enter a recipient email address.');return;}if(!svcId||!tplId||!pubKey){showAlert('error','Please enter your EmailJS credentials first.');return;}var btn=document.getElementById('btn-send-email');btn.disabled=true;btn.textContent='Generating PDFâ¦';generatePdfForEmail(function(pdfBase64,filename){btn.textContent='Sendingâ¦';var templateParams={to_email:to,to_name:toName||to,from_name:'Premier Logistics Group',customer_name:currentCustomer,subject:subject,message:message,pdf_name:filename,pdf_content:pdfBase64,report_period:document.getElementById('email-subject').value.split('| ').pop()||''};emailjs.init(pubKey);emailjs.send(svcId,tplId,templateParams).then(function(){btn.disabled=false;btn.textContent='Send Report â';closeEmailModal();showAlert('success','Report sent to '+to);}).catch(function(err){btn.disabled=false;btn.textContent='Send Report â';showAlert('error','Email failed: '+(err.text||err.message||JSON.stringify(err)));console.error('EmailJS error',err);});});}
@@ -1127,7 +1143,7 @@ window.mapSVGtoPNG=function(svgStr,callback){var blob=new Blob([svgStr],{type:'i
       <div class="email-field"><label>EmailJS Template ID</label><input id="ejs-template" placeholder="template_xxxxxxx" oninput="saveEjsConfig()"></div>
       <div class="email-field"><label>EmailJS Public Key</label><input id="ejs-pubkey" placeholder="xxxxxxxxxxxxxxxxxxxxxx" oninput="saveEjsConfig()"></div>
       <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
-      <div class="email-field"><label>Send to</label><select id="email-to-select" onchange="fillEmailTo()"><option value="">â Select contact or type below â</option></select></div>
+      <div class="email-field"><label>Send to</label><select id="email-to-select" onchange="fillEmailTo()"><option value="">— Select contact or type below —</option></select></div>
       <div class="email-field"><label>Recipient email address</label><input id="email-to" type="email" placeholder="contact@customer.co.uk"></div>
       <div class="email-field"><label>Recipient name</label><input id="email-to-name" placeholder="e.g. John Smith"></div>
       <div class="email-field"><label>Subject</label><input id="email-subject"></div>
