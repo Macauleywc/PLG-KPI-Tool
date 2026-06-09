@@ -651,6 +651,31 @@ async function writeSnapshot(payload){
 
 // ââ PATCHED exportCustomerReport (checks snapshot first) âââââââââââââââââ
 
+function showPdfMonthSelector(){
+  var allMonths=[];
+  MONTH_KEYS.forEach(function(key,i){
+    if(savedMonthData[key]||calculatedMonths[key])allMonths.push({key:key,label:MONTHS[i]});
+  });
+  if(allMonths.length<=1){exportCustomerReport();return;}
+  var overlay=document.createElement('div');
+  overlay.className='pdf-overlay';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center';
+  var box=document.createElement('div');
+  box.style.cssText='background:#fff;border-radius:12px;padding:24px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,0.3);font-family:inherit';
+  var checkboxes=allMonths.map(function(m){
+    return '<label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;cursor:pointer"><input type="checkbox" class="pdf-month-cb" value="'+m.key+'" checked style="accent-color:#F47920;width:15px;height:15px"><span>'+m.label+'</span></label>';
+  }).join('');
+  box.innerHTML='<div style="font-size:15px;font-weight:700;margin-bottom:4px">Select months for PDF</div>'
+    +'<div style="font-size:12px;color:#888;margin-bottom:14px">Choose which months to include</div>'
+    +'<div style="margin-bottom:16px">'+checkboxes+'</div>'
+    +'<div style="display:flex;gap:8px;justify-content:flex-end">'
+    +'<button onclick="document.querySelector(\'.pdf-overlay\').remove()" style="padding:9px 16px;border:1px solid #e0e0de;border-radius:8px;background:#fff;cursor:pointer;font-size:13px;font-family:inherit">Cancel</button>'
+    +'<button onclick="var sel=Array.from(document.querySelectorAll(\'.pdf-month-cb:checked\')).map(function(cb){return cb.value;});document.querySelector(\'.pdf-overlay\').remove();exportCustomerReportForMonths(sel)" style="padding:9px 16px;background:#F47920;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit">Download PDF</button>'
+    +'</div>';
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
 function exportCustomerReportForMonths(selectedKeys){
   if(!selectedKeys||selectedKeys.length===0){showAlert('warn','Select at least one month.');return;}
   var origCalc=Object.assign({},calculatedMonths);
