@@ -619,7 +619,7 @@ function exportTracker(){
   XLSX.writeFile(wb,'PLG_KPI_Tracker_'+stamp+'.xlsx');showAlert('success','Downloaded — 4 tabs.');
 }
 
-// ââ SNAPSHOT SYSTEM âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── SNAPSHOT SYSTEM ───────────────────────────────────────────────────────
 function snapshotKey(){
   var months=Object.keys(calculatedMonths).sort();
   if(!months.length)return null;
@@ -649,7 +649,7 @@ async function writeSnapshot(payload){
   }catch(e){console.warn('Snapshot write failed:',e);}
 }
 
-// ââ PATCHED exportCustomerReport (checks snapshot first) âââââââââââââââââ
+// ── PATCHED exportCustomerReport (checks snapshot first) ─────────────────
 
 function showPdfMonthSelector(){
   var allMonths=[];
@@ -1070,7 +1070,7 @@ async function loadFromGitHub(){
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
     savedMonthData=decoded.months||{};window._savedLateRows=decoded.lateRows||[];window._savedRegionData=decoded.regionData||null;window._savedDestData=decoded.destData||[];
     var mCount=Object.keys(savedMonthData).length;
-    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">â '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
+    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     var _dot=document.getElementById('gh-dot');if(_dot)_dot.classList.add('ok');
     buildTrackerFromSaved();renderHistory();
     if(Object.keys(savedMonthData).length>0){
@@ -1120,9 +1120,9 @@ async function saveToGitHub(){
     var resp=await fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
     var json=await resp.json();if(!resp.ok)throw new Error(json.message||'GitHub error');
     ghFileSha=json.content.sha;savedMonthData=merged;
-    btn.textContent='Saved â';btn.disabled=false;
-    var _sse=document.getElementById('save-status');if(_sse){_sse.textContent='â Saved at '+new Date().toLocaleTimeString('en-GB');_sse.className='save-ok';}
-    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">â '+Object.keys(savedMonthData).length+' months saved</span>';
+    btn.textContent='Saved ✓';btn.disabled=false;
+    var _sse=document.getElementById('save-status');if(_sse){_sse.textContent='✓ Saved at '+new Date().toLocaleTimeString('en-GB');_sse.className='save-ok';}
+    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+Object.keys(savedMonthData).length+' months saved</span>';
     var _dot2=document.getElementById('gh-dot');if(_dot2)_dot2.classList.add('ok');
     renderHistory();showAlert('success','Saved to GitHub for '+currentCustomer+'.');
   }catch(err){btn.textContent='Save to GitHub';btn.disabled=false;showAlert('warn','Save failed: '+err.message);}
@@ -1147,7 +1147,7 @@ window.addEventListener('load',function(){
   loadFromGitHub();
 });
 
-// ââ EMAILJS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── EMAILJS ──────────────────────────────────────────────────────────────
 var EJS={service:'',template:'',pubkey:''};
 function loadEjsConfig(){try{var s=localStorage.getItem('plg_ejs');if(s){EJS=JSON.parse(s);}document.getElementById('ejs-service').value=EJS.service||'';document.getElementById('ejs-template').value=EJS.template||'';document.getElementById('ejs-pubkey').value=EJS.pubkey||'';if(EJS.service&&EJS.template&&EJS.pubkey){document.getElementById('ejs-config-notice').style.display='none';}}catch(e){}}
 function saveEjsConfig(){EJS.service=document.getElementById('ejs-service').value.trim();EJS.template=document.getElementById('ejs-template').value.trim();EJS.pubkey=document.getElementById('ejs-pubkey').value.trim();localStorage.setItem('plg_ejs',JSON.stringify(EJS));if(EJS.service&&EJS.template&&EJS.pubkey){document.getElementById('ejs-config-notice').style.display='none';}}
@@ -1161,11 +1161,11 @@ function deleteContact(i){contacts.splice(i,1);saveContacts();renderContactsTab(
 function openEmailModal(){loadEjsConfig();loadContacts();renderContactsTab();var now=new Date();var period=now.toLocaleString('en-GB',{month:'long',year:'numeric'});document.getElementById('email-subject').value='Premier Logistics Group — KPI Report | '+currentCustomer+' | '+period;document.getElementById('email-message').value='Please find your KPI report for '+period+' attached.\n\nIf you have any questions, please do not hesitate to get in touch.';document.getElementById('email-to').value='';document.getElementById('email-to-name').value='';var sel=document.getElementById('email-to-select');sel.innerHTML='<option value="">— Select contact or type below —</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name?c.name+' — ':'')+c.email)+'</option>';}).join('');document.getElementById('email-modal').classList.add('open');}
 function closeEmailModal(){document.getElementById('email-modal').classList.remove('open');}
 function fillEmailTo(){var sel=document.getElementById('email-to-select');var opt=sel.options[sel.selectedIndex];if(opt&&opt.value){document.getElementById('email-to').value=opt.value;document.getElementById('email-to-name').value=opt.dataset.name||'';}}
-function sendReportEmail(){var to=document.getElementById('email-to').value.trim();var toName=document.getElementById('email-to-name').value.trim();var subject=document.getElementById('email-subject').value.trim();var message=document.getElementById('email-message').value.trim();var svcId=document.getElementById('ejs-service').value.trim();var tplId=document.getElementById('ejs-template').value.trim();var pubKey=document.getElementById('ejs-pubkey').value.trim();if(!to){showAlert('error','Please enter a recipient email address.');return;}if(!svcId||!tplId||!pubKey){showAlert('error','Please enter your EmailJS credentials first.');return;}var btn=document.getElementById('btn-send-email');btn.disabled=true;btn.textContent='Generating PDFâ¦';generatePdfForEmail(function(pdfBase64,filename){btn.textContent='Sendingâ¦';var templateParams={to_email:to,to_name:toName||to,from_name:'Premier Logistics Group',customer_name:currentCustomer,subject:subject,message:message,pdf_name:filename,pdf_content:pdfBase64,report_period:document.getElementById('email-subject').value.split('| ').pop()||''};emailjs.init(pubKey);emailjs.send(svcId,tplId,templateParams).then(function(){btn.disabled=false;btn.textContent='Send Report â';closeEmailModal();showAlert('success','Report sent to '+to);}).catch(function(err){btn.disabled=false;btn.textContent='Send Report â';showAlert('error','Email failed: '+(err.text||err.message||JSON.stringify(err)));console.error('EmailJS error',err);});});}
+function sendReportEmail(){var to=document.getElementById('email-to').value.trim();var toName=document.getElementById('email-to-name').value.trim();var subject=document.getElementById('email-subject').value.trim();var message=document.getElementById('email-message').value.trim();var svcId=document.getElementById('ejs-service').value.trim();var tplId=document.getElementById('ejs-template').value.trim();var pubKey=document.getElementById('ejs-pubkey').value.trim();if(!to){showAlert('error','Please enter a recipient email address.');return;}if(!svcId||!tplId||!pubKey){showAlert('error','Please enter your EmailJS credentials first.');return;}var btn=document.getElementById('btn-send-email');btn.disabled=true;btn.textContent='Generating PDF…';generatePdfForEmail(function(pdfBase64,filename){btn.textContent='Sending…';var templateParams={to_email:to,to_name:toName||to,from_name:'Premier Logistics Group',customer_name:currentCustomer,subject:subject,message:message,pdf_name:filename,pdf_content:pdfBase64,report_period:document.getElementById('email-subject').value.split('| ').pop()||''};emailjs.init(pubKey);emailjs.send(svcId,tplId,templateParams).then(function(){btn.disabled=false;btn.textContent='Send Report →';closeEmailModal();showAlert('success','Report sent to '+to);}).catch(function(err){btn.disabled=false;btn.textContent='Send Report →';showAlert('error','Email failed: '+(err.text||err.message||JSON.stringify(err)));console.error('EmailJS error',err);});});}
 function generatePdfForEmail(callback){var tabs=document.querySelectorAll('.tab-btn');tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});setTimeout(function(){var mapEl=document.getElementById('hc-map');if(mapEl){html2canvas(mapEl,{scale:1.5,useCORS:true,allowTaint:true}).then(function(canvas){var url=canvas.toDataURL('image/png');var asp=canvas.width/canvas.height;buildReportBase64({url:url,asp:asp},callback);}).catch(function(){buildReportBase64(null,callback);});}else{buildReportBase64(null,callback);}},800);}
 function buildReportBase64(mapImg,callback){try{var now=new Date();var months2=Object.keys(calculatedMonths).sort();var periodLabel2=months2.length>0?MONTHS[MONTH_KEYS.indexOf(months2[0])]||months2[0]:'2026';var filename=currentCustomer+' - '+periodLabel2+'.pdf';var {jsPDF}=window.jspdf;var origProto=jsPDF.prototype.save;var captured=null;jsPDF.prototype.save=function(name){captured=this.output('datauristring');jsPDF.prototype.save=origProto;};buildReport(mapImg,null);if(captured){var b64=captured.split(',')[1];callback(b64,filename);}else{showAlert('error','Could not generate PDF for email.');}}catch(e){console.error('generatePdfForEmail error',e);showAlert('error','PDF generation failed: '+e.message);}}
 
-// ââ SVG MAP ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── SVG MAP ──────────────────────────────────────────────────────────────
 window.buildMapSVG=function(regionData){
   var regionMap={'East':'East of England','Eastern':'East of England','East Midlands':'East Midlands','Greater London':'London','Highlands and Islands':'Scotland','North East':'North East','North Eastern':'North East','North West':'North West','Northern Ireland':'Northern Ireland','South East':'South East','South West':'South West','South Western':'South West','West Midlands':'West Midlands','East Wales':'Wales','West Wales and the Valleys':'Wales','Yorkshire and the Humber':'Yorkshire'};
   var maxPallets=1;Object.values(regionData).forEach(function(d){if(d.pallets>maxPallets)maxPallets=d.pallets;});
