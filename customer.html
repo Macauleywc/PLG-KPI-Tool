@@ -199,7 +199,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 </div>
 
 <div class="cust-banner">
-  <div class="cust-avatar" id="cust-av">—</div>
+  <div class="cust-avatar" id="cust-av">â</div>
   <div>
     <div class="cust-name" id="cust-name">Loading...</div>
     <div class="cust-sub">Monthly KPI tracking &middot; 2026</div>
@@ -207,11 +207,11 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 </div>
 
 <div class="ytd-strip">
-  <div class="ytd-cell"><div class="ytd-label">YTD Consignments</div><div class="ytd-value orange" id="h-cons">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Pallets</div><div class="ytd-value" id="h-pallets">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Cost</div><div class="ytd-value" id="h-rev">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Lates</div><div class="ytd-value" id="h-lates">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Consignments</div><div class="ytd-value orange" id="h-cons">â</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Pallets</div><div class="ytd-value" id="h-pallets">â</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Cost</div><div class="ytd-value" id="h-rev">â</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">â</div></div>
+  <div class="ytd-cell"><div class="ytd-label">YTD Lates</div><div class="ytd-value" id="h-lates">â</div></div>
 </div>
 
 <div class="months-bar">
@@ -236,7 +236,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 <div class="upload-zone" id="delivery-upload-zone" style="margin-top:12px">
   <div class="zone-label">
     <div class="step-badge" style="background:#1a6bbf">1b</div>
-    <div class="zone-title">Upload Delivery Date data <span style="font-size:12px;font-weight:400;color:var(--muted)">(optional — improves OTIF accuracy)</span></div>
+    <div class="zone-title">Upload Delivery Date data <span style="font-size:12px;font-weight:400;color:var(--muted)">(optional â improves OTIF accuracy)</span></div>
   </div>
   <div class="drop-area" id="drop-area-v2" style="padding:14px 20px;min-height:70px">
     <input type="file" accept=".xlsx,.xls" id="file-v2" onchange="handleDeliveryData(this)">
@@ -275,7 +275,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 <div class="actions-bar" id="actions-bar" style="display:none">
   <button class="btn btn-primary" id="btn-save" onclick="saveToGitHub()">&#9650; Save to GitHub</button>
   <button class="btn btn-dark" onclick="exportTracker()">Download tracker (.xlsx)</button>
-  <button class="btn btn-dark" onclick="exportCustomerReport()">&#8595; Download PDF</button>
+  <button class="btn btn-dark" onclick="showPdfMonthSelector()">&#8595; Download PDF</button>
   <button class="btn btn-primary" onclick="openEmailModal()" id="btn-email" style="background:#1a6bbf">&#9993; Send by Email</button>
   <button class="btn btn-ghost" onclick="resetUpload()">Clear</button>
   <span class="save-msg" id="save-status"></span>
@@ -286,7 +286,7 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 <script>
 // NOTE: This file contains the snapshot system patch (v2).
 // On first PDF download, data is frozen to snapshots/{customer}-{month}.json in GitHub.
-// All future downloads use that frozen snapshot — PDF is always consistent.
+// All future downloads use that frozen snapshot â PDF is always consistent.
 
 var deliveryDateMap={};
 var removedLateIds=new Set();
@@ -361,7 +361,7 @@ function handleDeliveryData(input){
       });
       document.getElementById('v2-loaded').innerHTML='<div class="file-loaded"><div class="file-icon">&#9989;</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+count+' delivery dates loaded</div></div></div>';
       document.getElementById('v2-loaded').style.display='block';
-      showAlert('success','Delivery data loaded — '+count+' consignments mapped.');
+      showAlert('success','Delivery data loaded â '+count+' consignments mapped.');
       if(!window._loadedFromSaved&&Object.keys(calculatedMonths).length>0)tryRender();
     }catch(err){showAlert('warn','Could not read delivery file: '+err.message);}
   };
@@ -405,12 +405,12 @@ function handleRaw(input){
         rows.forEach(function(r){var a=r['customer']||'';if(a)acctCodes[a]=(acctCodes[a]||0)+1;});
         var acctList=Object.keys(acctCodes).sort();
         if(acctList.length>1){
-          var filterHtml='<div id="acct-filter" style="background:#fff8f0;border:1px solid #F47920;border-radius:8px;padding:14px 18px;margin-bottom:12px;"><div style="font-size:12px;font-weight:600;color:#F47920;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">Multiple accounts detected — select which to include:</div><div style="display:flex;flex-wrap:wrap;gap:10px;">'+acctList.map(function(a){return'<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="acct-cb" value="'+a+'" checked style="accent-color:#F47920;width:15px;height:15px;"><span><b>'+a+'</b> <span style="color:#888">('+acctCodes[a]+' cons)</span></span></label>';}).join('')+'</div><button onclick="applyAcctFilter()" style="margin-top:12px;background:#F47920;color:#fff;border:none;border-radius:6px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;">Apply filter</button></div>';
+          var filterHtml='<div id="acct-filter" style="background:#fff8f0;border:1px solid #F47920;border-radius:8px;padding:14px 18px;margin-bottom:12px;"><div style="font-size:12px;font-weight:600;color:#F47920;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">Multiple accounts detected â select which to include:</div><div style="display:flex;flex-wrap:wrap;gap:10px;">'+acctList.map(function(a){return'<label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="checkbox" class="acct-cb" value="'+a+'" checked style="accent-color:#F47920;width:15px;height:15px;"><span><b>'+a+'</b> <span style="color:#888">('+acctCodes[a]+' cons)</span></span></label>';}).join('')+'</div><button onclick="applyAcctFilter()" style="margin-top:12px;background:#F47920;color:#fff;border:none;border-radius:6px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;">Apply filter</button></div>';
           document.getElementById('raw-loaded').innerHTML=filterHtml;
           document.getElementById('raw-loaded').style.display='block';
           window._pendingRows=rows;return;
         }
-        showAlert('success','Delivery report loaded — '+rows.length+' consignments, '+rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
+        showAlert('success','Delivery report loaded â '+rows.length+' consignments, '+rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
       }
       rawData=rows;
       var byMonth={};
@@ -418,10 +418,10 @@ function handleRaw(input){
       calculatedMonths={};
       Object.keys(byMonth).forEach(function(k){if(k.indexOf('NaN')>-1)return;try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(calcErr){showAlert('warn','Error in calcMonth for '+k+': '+calcErr.message);}});
       var months=Object.keys(calculatedMonths);
-      var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">✅</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons · '+s.pallets+' pallets · £'+s.revenue.toFixed(2)+' · '+s.lates+' late(s)</div></div></div>';}).join('');
+      var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">â</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons Â· '+s.pallets+' pallets Â· Â£'+s.revenue.toFixed(2)+' Â· '+s.lates+' late(s)</div></div></div>';}).join('');
       document.getElementById('raw-loaded').innerHTML=html;document.getElementById('raw-loaded').style.display='block';
       document.getElementById('delivery-upload-zone').style.display='block';
-      showAlert('success','Raw data loaded — '+months.length+' month(s): '+months.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', '));
+      showAlert('success','Raw data loaded â '+months.length+' month(s): '+months.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', '));
       if(Object.keys(calculatedMonths).length>0)renderPreview();
     }catch(err){showAlert('warn','Could not read file: '+err.message);}
   };
@@ -435,7 +435,7 @@ function getTotal(field){
   MONTH_KEYS.forEach(function(key,i){
     var c=calculatedMonths[key],ex=getExRow(i);
     if(c){total+=c[field]||0;has=true;}
-    else if(ex){var v=0;if(field==='cons')v=parseFloat(ex['Cons']||ex['cons']||0);else if(field==='pallets')v=parseFloat(ex['Plts']||ex['plts']||0);else if(field==='revenue')v=parseFloat(ex['£']||0);else if(field==='lates')v=parseFloat(ex['Lates']||ex['lates']||0);if(!isNaN(v)&&v>0){total+=v;has=true;}}
+    else if(ex){var v=0;if(field==='cons')v=parseFloat(ex['Cons']||ex['cons']||0);else if(field==='pallets')v=parseFloat(ex['Plts']||ex['plts']||0);else if(field==='revenue')v=parseFloat(ex['Â£']||0);else if(field==='lates')v=parseFloat(ex['Lates']||ex['lates']||0);if(!isNaN(v)&&v>0){total+=v;has=true;}}
   });return has?total:null;
 }
 function allCompleted(){var a=[];Object.values(calculatedMonths).forEach(function(s){a=a.concat(s.completedRows);});return a;}
@@ -460,10 +460,10 @@ function renderPreview(){
   var comp=allCompleted();
   var tC=getTotal('cons')||0,tP=getTotal('pallets')||0,tR=getTotal('revenue')||0,tL=getLiveLates();
   var tLP=getLiveLatePallets();
-  var ytdOTIF=tP>0?((tP-tLP)/tP*100).toFixed(2):'—';
-  var ytdARC=tC>0?(tR/tC).toFixed(2):'—';
-  var ytdARP=tP>0?(tR/tP).toFixed(2):'—';
-  var ytdAPC=tC>0?(tP/tC).toFixed(2):'—';
+  var ytdOTIF=tP>0?((tP-tLP)/tP*100).toFixed(2):'â';
+  var ytdARC=tC>0?(tR/tC).toFixed(2):'â';
+  var ytdARP=tP>0?(tR/tP).toFixed(2):'â';
+  var ytdAPC=tC>0?(tP/tC).toFixed(2):'â';
   var lateRows=[];
   Object.entries(calculatedMonths).forEach(function(e){
     var key=e[0],s=e[1];
@@ -471,10 +471,10 @@ function renderPreview(){
       var arr=xlDT(r['destination arrival']);
       var extras=(r['destination extras']||'');
       var dtype=extras.includes('Economy Booked')?'Economy Booked':extras.includes('Booked')?'Booked':'Standard';
-      var arrDate=arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'—';
+      var arrDate=arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'â';
       var commitDate=xlDate(r['destination date']);
-      var commitStr=commitDate?commitDate.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'—';
-      lateRows.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'—',arrDate:arrDate,commitDate:commitStr,mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype});
+      var commitStr=commitDate?commitDate.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'â';
+      lateRows.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'â',arrDate:arrDate,commitDate:commitStr,mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype});
     });
   });
   var destMap={};
@@ -492,24 +492,24 @@ function renderPreview(){
   var topReg=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;});
   var tableRows=MONTH_KEYS.map(function(key,i){
     var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);
-    if(c){var _rev=c.revenue||0,_arc=c.avgRC||0,_arp=c.avgRP||0,_apc=c.avgPC||0,_tim=c.timeliness||0;return'<tr class="new-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>£'+_rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>£'+_arc.toFixed(2)+'</td><td>£'+_arp.toFixed(2)+'</td><td>'+_apc.toFixed(1)+'</td><td>'+otifBar(_tim,70)+'</td><td>'+c.lates+'</td></tr>';}
+    if(c){var _rev=c.revenue||0,_arc=c.avgRC||0,_arp=c.avgRP||0,_apc=c.avgPC||0,_tim=c.timeliness||0;return'<tr class="new-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>'+c.cons+'</td><td>'+c.pallets+'</td><td>Â£'+_rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>Â£'+_arc.toFixed(2)+'</td><td>Â£'+_arp.toFixed(2)+'</td><td>'+_apc.toFixed(1)+'</td><td>'+otifBar(_tim,70)+'</td><td>'+c.lates+'</td></tr>';}
     else if(ex){
-      var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
-      var revS=rev!=null?'£'+rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'';
-      var aRC=cons&&rev?'£'+(rev/cons).toFixed(2):'—',aRP=plts&&rev?'£'+(rev/plts).toFixed(2):'—',aPC=cons&&plts?(plts/cons).toFixed(1):'—';
-      var timS=cons&&lates!==null?((cons-lates)/cons*100).toFixed(2)+'%':'—';
-      return'<tr class="'+(cons?'':'empty-row')+' tracker-month-row" data-month-key="'+key+'"><td class="existing">'+label+'</td><td class="existing">'+(cons||'—')+'</td><td class="existing">'+(plts||'—')+'</td><td class="existing">'+(revS||'—')+'</td><td class="existing">'+aRC+'</td><td class="existing">'+aRP+'</td><td class="existing">'+aPC+'</td><td class="existing">'+timS+'</td><td class="existing">'+(lates||'—')+'</td></tr>';
+      var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['Â£']!=null?parseFloat(ex['Â£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
+      var revS=rev!=null?'Â£'+rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'';
+      var aRC=cons&&rev?'Â£'+(rev/cons).toFixed(2):'â',aRP=plts&&rev?'Â£'+(rev/plts).toFixed(2):'â',aPC=cons&&plts?(plts/cons).toFixed(1):'â';
+      var timS=cons&&lates!==null?((cons-lates)/cons*100).toFixed(2)+'%':'â';
+      return'<tr class="'+(cons?'':'empty-row')+' tracker-month-row" data-month-key="'+key+'"><td class="existing">'+label+'</td><td class="existing">'+(cons||'â')+'</td><td class="existing">'+(plts||'â')+'</td><td class="existing">'+(revS||'â')+'</td><td class="existing">'+aRC+'</td><td class="existing">'+aRP+'</td><td class="existing">'+aPC+'</td><td class="existing">'+timS+'</td><td class="existing">'+(lates||'â')+'</td></tr>';
     }
-    return'<tr class="empty-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>';
+    return'<tr class="empty-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td><td>â</td></tr>';
   }).join('');
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   var aLP=getLiveLatePallets();
-  var totalOTIF=aP?((aP-aLP)/aP*100).toFixed(2)+'%':'—';
+  var totalOTIF=aP?((aP-aLP)/aP*100).toFixed(2)+'%':'â';
   var typeRows=Object.entries(typeMap).map(function(e){var t=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+t+'</td><td>'+d.cons+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,80)+'</td></tr>';}).join('');
-  var dowCards=[1,2,3,4,5].map(function(d){var dd=dow[d],otif=dd.cons>0?(dd.cons-dd.lates)/dd.cons:null;var col=otif===null?'#ccc':otif>=0.98?'#2e7d32':otif>=0.95?'#e65100':'#c62828';var pct=otif!==null?(otif*100).toFixed(1)+'%':'—';return'<div class="dow-card"><div class="dow-label">'+dd.l+'</div><div class="dow-val" style="color:'+col+'">'+pct+'</div><div class="dow-sub">'+dd.cons+' cons · '+dd.lates+' late</div></div>';}).join('');
-  var regRows=topReg.map(function(e){var reg=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+reg+'</td><td>'+d.cons+'</td><td>'+d.pallets+'</td><td>£'+(d.revenue||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,60)+'</td></tr>';}).join('');
+  var dowCards=[1,2,3,4,5].map(function(d){var dd=dow[d],otif=dd.cons>0?(dd.cons-dd.lates)/dd.cons:null;var col=otif===null?'#ccc':otif>=0.98?'#2e7d32':otif>=0.95?'#e65100':'#c62828';var pct=otif!==null?(otif*100).toFixed(1)+'%':'â';return'<div class="dow-card"><div class="dow-label">'+dd.l+'</div><div class="dow-val" style="color:'+col+'">'+pct+'</div><div class="dow-sub">'+dd.cons+' cons Â· '+dd.lates+' late</div></div>';}).join('');
+  var regRows=topReg.map(function(e){var reg=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+reg+'</td><td>'+d.cons+'</td><td>'+d.pallets+'</td><td>Â£'+(d.revenue||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,60)+'</td></tr>';}).join('');
   var ytdCardsEl=document.getElementById('ytd-cards');
-  if(ytdCardsEl){ytdCardsEl.innerHTML='<div class="stat-card"><div class="lbl">YTD Consignments</div><div class="val" style="color:var(--orange)">'+tC.toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Pallets</div><div class="val">'+tP.toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Base Cost</div><div class="val">£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Pallet OTIF</div><div class="val" style="color:'+(parseFloat(ytdOTIF)>=98?'var(--green)':parseFloat(ytdOTIF)>=95?'var(--amber)':'var(--red)')+'">'+ytdOTIF+'%</div></div>';}
+  if(ytdCardsEl){ytdCardsEl.innerHTML='<div class="stat-card"><div class="lbl">YTD Consignments</div><div class="val" style="color:var(--orange)">'+tC.toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Pallets</div><div class="val">'+tP.toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Base Cost</div><div class="val">Â£'+tR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+'<div class="stat-card"><div class="lbl">YTD Pallet OTIF</div><div class="val" style="color:'+(parseFloat(ytdOTIF)>=98?'var(--green)':parseFloat(ytdOTIF)>=95?'var(--amber)':'var(--red)')+'">'+ytdOTIF+'%</div></div>';}
   document.getElementById('tab-tracker').innerHTML='<div class="section-title">Full year monthly tracker <span class="pill">Pallet OTIF = (pallets \u2212 late pallets) / pallets</span></div><div class="alert alert-info" style="margin-bottom:1rem">Lates auto-calculated by comparing actual delivery arrival vs time window end.</div><div class="tracker-table-wrap"><table><thead><tr><th>Month</th><th>Cons</th><th>Pallets</th><th>Cost</th><th>Avg Cost/Con</th><th>Avg Cost/Plt</th><th>Avg Plts/Con</th><th>Pallet OTIF</th><th>Lates</th></tr></thead><tbody>'+tableRows+'</tbody><tfoot><tr class="total-row"><td>Total / Avg</td><td>'+(aC||'\u2014')+'</td><td>'+(aP||'\u2014')+'</td><td>'+(aR?'\u00a3'+aR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'\u2014')+'</td><td>'+(aC&&aR?'\u00a3'+(aR/aC).toFixed(2):'\u2014')+'</td><td>'+(aP&&aR?'\u00a3'+(aR/aP).toFixed(2):'\u2014')+'</td><td>'+(aC&&aP?(aP/aC).toFixed(1):'\u2014')+'</td><td>'+totalOTIF+'</td><td>'+(aL!=null?aL:'\u2014')+'</td></tr></tfoot></table></div>';
   document.getElementById('tab-trends').innerHTML='<div class="section-card-standalone"><div class="section-title">OTIF trend + 3-month rolling average</div><div class="chart-wrap-lg"><canvas id="chart-otif"></canvas></div></div><div class="stats-grid-2"><div class="section-card-standalone" style="margin:0"><div class="section-title">Consignments by month</div><div class="chart-wrap"><canvas id="chart-cons"></canvas></div></div><div class="section-card-standalone" style="margin:0"><div class="section-title">Cost by month</div><div class="chart-wrap"><canvas id="chart-rev"></canvas></div></div></div><div class="section-card-standalone" style="margin-top:1rem"><div class="section-title">Avg revenue per consignment</div><div class="chart-wrap"><canvas id="chart-arc"></canvas></div></div>';
   document.getElementById('tab-destinations').innerHTML='<div class="section-card-standalone"><div class="section-title">UK delivery map</div><div id="uk-map-wrap" style="display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start"><div><canvas id="uk-map" style="width:100%;cursor:pointer"></canvas></div><div id="map-legend"><div style="font-size:12px;font-weight:600;color:#555;margin-bottom:10px">Region breakdown</div><div id="region-list"></div></div></div></div><div class="stats-grid-2" style="margin-top:1rem"><div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by consignments</div>'+byC.map(function(d,i){return'<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.cons/maxC*100).toFixed(0)+'%"></div></div></div><div class="rank-val">'+d.cons+'</div></div>';}).join('')+'</div><div class="section-card-standalone" style="margin:0"><div class="section-title">Top 10 by cost</div>'+byR.map(function(d,i){return'<div class="rank-row"><div class="rank-num">'+(i+1)+'</div><div class="rank-name">'+d.name+'</div><div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:'+(d.revenue/maxR*100).toFixed(0)+'%"></div></div></div><div class="rank-val">\u00a3'+(d.revenue||0).toFixed(0)+'</div></div>';}).join('')+'</div></div><div class="section-card-standalone" style="margin-top:1rem"><div class="section-title">By UK region</div><div class="tracker-table-wrap"><table><thead><tr><th>Region</th><th>Cons</th><th>Pallets</th><th>Cost</th><th>Lates</th><th>OTIF</th></tr></thead><tbody>'+regRows+'</tbody></table></div></div>';
@@ -519,7 +519,7 @@ function renderPreview(){
   var lateMonths=Array.from(new Set(lateRows.map(function(r){return r.month;})));
   var lateTypes=Array.from(new Set(lateRows.map(function(r){return r.dtype;})));
   var filterBar=lateRows.length>0?'<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;"><span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span><input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;"><select id="late-month" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All months</option>'+lateMonths.map(function(m){return'<option value="'+m+'">'+m+'</option>';}).join('')+'</select><select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All types</option>'+lateTypes.map(function(t){return'<option value="'+t+'">'+t+'</option>';}).join('')+'</select><button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button><span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+lateRows.length+' entries</span></div>':'';
-  document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div>'+filterBar+(lateRows.length>0?'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">↕</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">↕</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">↕</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">↕</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">↕</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">↕</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">↕</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">↕</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">↕</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">↕</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+lateTableRows+'</tbody></table></div>':'<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');
+  document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div>'+filterBar+(lateRows.length>0?'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">â</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">â</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">â</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">â</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">â</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">â</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">â</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">â</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">â</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">â</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">â</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+lateTableRows+'</tbody></table></div>':'<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');
   setTimeout(function(){renderCharts();},120);
 }
 
@@ -550,9 +550,9 @@ function filterLateLog(){
 var _lateSortCol=-1,_lateSortAsc=true;
 function sortLateLog(col,keepDir){
   if(!keepDir){if(_lateSortCol===col){_lateSortAsc=!_lateSortAsc;}else{_lateSortCol=col;_lateSortAsc=true;}}
-  document.querySelectorAll('[id^="lsort-"]').forEach(function(el){el.textContent='↕';el.style.color='#ccc';});
+  document.querySelectorAll('[id^="lsort-"]').forEach(function(el){el.textContent='â';el.style.color='#ccc';});
   var ind=document.getElementById('lsort-'+col);
-  if(ind){ind.textContent=_lateSortAsc?'↑':'↓';ind.style.color='#F47920';}
+  if(ind){ind.textContent=_lateSortAsc?'â':'â';ind.style.color='#F47920';}
   var tbody=document.getElementById('late-tbody');if(!tbody)return;
   var rows=Array.from(tbody.querySelectorAll('tr.late-row'));
   rows.sort(function(a,b){
@@ -584,7 +584,7 @@ function renderCharts(){
   MONTH_KEYS.forEach(function(key,i){
     var c=calculatedMonths[key],ex=getExRow(i);
     if(c){labels.push(MONTHS[i]);otifData.push(+((c.timeliness||0)*100).toFixed(2));consData.push(c.cons);revData.push(+(c.revenue||0).toFixed(2));arcData.push(+(c.avgRC||0).toFixed(2));arpData.push(+(c.avgRP||0).toFixed(2));}
-    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||0),lates=parseFloat(ex['Lates']||ex['lates']||0),rev=parseFloat(ex['£']||0),plts=parseFloat(ex['Plts']||ex['plts']||0);if(cons>0){labels.push(MONTHS[i]);otifData.push(cons>0?+((cons-lates)/cons*100).toFixed(2):0);consData.push(cons);revData.push(rev);arcData.push(cons>0?+(rev/cons).toFixed(2):0);arpData.push(plts>0?+(rev/plts).toFixed(2):0);}}
+    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||0),lates=parseFloat(ex['Lates']||ex['lates']||0),rev=parseFloat(ex['Â£']||0),plts=parseFloat(ex['Plts']||ex['plts']||0);if(cons>0){labels.push(MONTHS[i]);otifData.push(cons>0?+((cons-lates)/cons*100).toFixed(2):0);consData.push(cons);revData.push(rev);arcData.push(cons>0?+(rev/cons).toFixed(2):0);arpData.push(plts>0?+(rev/plts).toFixed(2):0);}}
   });
   var roll3=otifData.map(function(v,i){return i<2?null:+((otifData[i]+otifData[i-1]+otifData[i-2])/3).toFixed(2);});
   var oc={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},boxWidth:12}}},scales:{y:{ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}};
@@ -594,16 +594,16 @@ function renderCharts(){
   var cc=document.getElementById('chart-cons');
   if(cc)chartInst['chart-cons']=new Chart(cc,{type:'bar',data:{labels:labels,datasets:[{label:'Consignments',data:consData,backgroundColor:'#F47920',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
   var cr=document.getElementById('chart-rev');
-  if(cr)chartInst['chart-rev']=new Chart(cr,{type:'bar',data:{labels:labels,datasets:[{label:'Cost',data:revData,backgroundColor:'#1a1a1a',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'£'+v.toLocaleString();},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  if(cr)chartInst['chart-rev']=new Chart(cr,{type:'bar',data:{labels:labels,datasets:[{label:'Cost',data:revData,backgroundColor:'#1a1a1a',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'Â£'+v.toLocaleString();},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
   var ca=document.getElementById('chart-arc');
-  if(ca)chartInst['chart-arc']=new Chart(ca,{type:'line',data:{labels:labels,datasets:[{label:'Avg £/con',data:arcData,borderColor:'#F47920',backgroundColor:'rgba(244,121,32,0.07)',tension:0.3,fill:true,pointBackgroundColor:'#F47920',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'£'+v;},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  if(ca)chartInst['chart-arc']=new Chart(ca,{type:'line',data:{labels:labels,datasets:[{label:'Avg Â£/con',data:arcData,borderColor:'#F47920',backgroundColor:'rgba(244,121,32,0.07)',tension:0.3,fill:true,pointBackgroundColor:'#F47920',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'Â£'+v;},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
 }
 
 function exportTracker(){
   var wb=XLSX.utils.book_new();
   var comp=allCompleted();
-  var h1=[['Month','Cons','Pallets','Revenue (£)','Avg Cost/Con (£)','Avg Cost/Plt (£)','Avg Plts/Con','OTIF %','Lates']];
-  var r1=MONTH_KEYS.map(function(key,i){var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);if(c)return[label,c.cons,c.pallets,+(c.revenue||0).toFixed(2),+(c.avgRC||0).toFixed(2),+(c.avgRP||0).toFixed(2),+(c.avgPC||0).toFixed(2),+((c.timeliness||0)*100).toFixed(4),c.lates];else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||'')||null,plts=parseFloat(ex['Plts']||ex['plts']||'')||null,rev=parseFloat(ex['£']||'')||null,lates=parseFloat(ex['Lates']||ex['lates']||'')||null;if(cons)return[label,cons,plts,rev,cons&&rev?+(rev/cons).toFixed(2):null,plts&&rev?+(rev/plts).toFixed(2):null,cons&&plts?+(plts/cons).toFixed(2):null,cons&&lates!=null?+(((cons-lates)/cons)*100).toFixed(4):null,lates];return[label,null,null,null,null,null,null,null,null];}return[label,null,null,null,null,null,null,null,null];});
+  var h1=[['Month','Cons','Pallets','Revenue (Â£)','Avg Cost/Con (Â£)','Avg Cost/Plt (Â£)','Avg Plts/Con','OTIF %','Lates']];
+  var r1=MONTH_KEYS.map(function(key,i){var label=MONTHS[i],c=calculatedMonths[key],ex=getExRow(i);if(c)return[label,c.cons,c.pallets,+(c.revenue||0).toFixed(2),+(c.avgRC||0).toFixed(2),+(c.avgRP||0).toFixed(2),+(c.avgPC||0).toFixed(2),+((c.timeliness||0)*100).toFixed(4),c.lates];else if(ex){var cons=parseFloat(ex['Cons']||ex['cons']||'')||null,plts=parseFloat(ex['Plts']||ex['plts']||'')||null,rev=parseFloat(ex['Â£']||'')||null,lates=parseFloat(ex['Lates']||ex['lates']||'')||null;if(cons)return[label,cons,plts,rev,cons&&rev?+(rev/cons).toFixed(2):null,plts&&rev?+(rev/plts).toFixed(2):null,cons&&plts?+(plts/cons).toFixed(2):null,cons&&lates!=null?+(((cons-lates)/cons)*100).toFixed(4):null,lates];return[label,null,null,null,null,null,null,null,null];}return[label,null,null,null,null,null,null,null,null];});
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   r1.push(['Total / Avg',aC||null,aP||null,aR?+aR.toFixed(2):null,aC&&aR?+(aR/aC).toFixed(2):null,aP&&aR?+(aR/aP).toFixed(2):null,aC&&aP?+(aP/aC).toFixed(2):null,aC&&aL!=null?+((aC-aL)/aC*100).toFixed(4):null,aL||null]);
   var ws1=XLSX.utils.aoa_to_sheet(h1.concat(r1));ws1['!cols']=[{wch:10},{wch:8},{wch:8},{wch:14},{wch:14},{wch:14},{wch:12},{wch:10},{wch:8}];XLSX.utils.book_append_sheet(wb,ws1,'Monthly Tracker');
@@ -611,15 +611,15 @@ function exportTracker(){
   var ws2=XLSX.utils.aoa_to_sheet([['Order ID','Destination','City','Postcode','Time Window','Actual Arrival','Mins Late','Pallets','Delivery Type']].concat(lateLog));ws2['!cols']=[{wch:14},{wch:30},{wch:18},{wch:10},{wch:16},{wch:20},{wch:10},{wch:8},{wch:18}];XLSX.utils.book_append_sheet(wb,ws2,'Late Log');
   var destMap={};comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',pc:r['destination postal code']||'',cons:0,pallets:0,revenue:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
   var destRows=Object.values(destMap).sort(function(a,b){return b.cons-a.cons;}).map(function(d){return[d.name,d.city,d.pc,d.cons,d.pallets,+(d.revenue||0).toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
-  var ws3=XLSX.utils.aoa_to_sheet([['Destination','City','Postcode','Cons','Pallets','Revenue (£)','Lates','OTIF %']].concat(destRows));ws3['!cols']=[{wch:32},{wch:18},{wch:10},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];XLSX.utils.book_append_sheet(wb,ws3,'Destinations');
+  var ws3=XLSX.utils.aoa_to_sheet([['Destination','City','Postcode','Cons','Pallets','Revenue (Â£)','Lates','OTIF %']].concat(destRows));ws3['!cols']=[{wch:32},{wch:18},{wch:10},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];XLSX.utils.book_append_sheet(wb,ws3,'Destinations');
   var regMap={};comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap[reg])regMap[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap[reg].cons++;regMap[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap[reg].lates++;});
   var regRows=Object.entries(regMap).sort(function(a,b){return b[1].cons-a[1].cons;}).map(function(e){var d=e[1];return[e[0],d.cons,d.pallets,+(d.revenue||0).toFixed(2),d.lates,d.cons>0?+((d.cons-d.lates)/d.cons*100).toFixed(2):null];});
-  var ws4=XLSX.utils.aoa_to_sheet([['Region','Cons','Pallets','Revenue (£)','Lates','OTIF %']].concat(regRows));ws4['!cols']=[{wch:20},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];XLSX.utils.book_append_sheet(wb,ws4,'Regional Breakdown');
+  var ws4=XLSX.utils.aoa_to_sheet([['Region','Cons','Pallets','Revenue (Â£)','Lates','OTIF %']].concat(regRows));ws4['!cols']=[{wch:20},{wch:8},{wch:8},{wch:14},{wch:8},{wch:10}];XLSX.utils.book_append_sheet(wb,ws4,'Regional Breakdown');
   var now=new Date();var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-  XLSX.writeFile(wb,'PLG_KPI_Tracker_'+stamp+'.xlsx');showAlert('success','Downloaded — 4 tabs.');
+  XLSX.writeFile(wb,'PLG_KPI_Tracker_'+stamp+'.xlsx');showAlert('success','Downloaded â 4 tabs.');
 }
 
-// ── SNAPSHOT SYSTEM ───────────────────────────────────────────────────────
+// ââ SNAPSHOT SYSTEM âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function snapshotKey(){
   var months=Object.keys(calculatedMonths).sort();
   if(!months.length)return null;
@@ -643,16 +643,16 @@ async function writeSnapshot(payload){
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/snapshots/'+key+'.json';
     console.log('writeSnapshot: checking',url);
     var chk=await fetch(url,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
-    if(chk.ok){console.log('writeSnapshot: already exists, skipping');return;} // already exists — never overwrite
+    if(chk.ok){console.log('writeSnapshot: already exists, skipping');return;} // already exists â never overwrite
     var body={message:'Snapshot: '+currentCustomer+' '+key,content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
     await fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
   }catch(e){console.warn('Snapshot write failed:',e);}
 }
 
-// ── PATCHED exportCustomerReport (checks snapshot first) ─────────────────
+// ââ PATCHED exportCustomerReport (checks snapshot first) âââââââââââââââââ
 function exportCustomerReport(){
   if(!window._loadedFromSaved){
-    showAlert('info','Preparing PDF — capturing map...');
+    showAlert('info','Preparing PDF â capturing map...');
     window._pendingSnapshot=true;
     captureMapAndBuild(null);
     return;
@@ -660,7 +660,7 @@ function exportCustomerReport(){
   showAlert('info','Checking for saved snapshot...');
   checkSnapshot().then(function(snap){
     if(snap){
-      showAlert('info','Using saved snapshot — PDF will match original download.');
+      showAlert('info','Using saved snapshot â PDF will match original download.');
       var _orig=calculatedMonths;
       calculatedMonths={};
       Object.keys(snap.months||{}).forEach(function(key){
@@ -679,7 +679,7 @@ function exportCustomerReport(){
         window._snapshotLateRows=null;
       });
     } else {
-      showAlert('info','Preparing PDF — capturing map...');
+      showAlert('info','Preparing PDF â capturing map...');
       window._pendingSnapshot=true;
       captureMapAndBuild(null);
     }
@@ -733,12 +733,18 @@ function buildReport(mapImg,onComplete){
   MONTH_KEYS.forEach(function(key,i){
     var c2=calculatedMonths[key],ex=getExRow(i),label=MONTHS[i];
     if(c2){months.push({label:label,cons:c2.cons,pallets:c2.pallets,revenue:c2.revenue,lates:c2.lates,otif:c2.timeliness,isNew:true});}
-    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});}
+    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['Â£']!=null?parseFloat(ex['Â£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});}
   });
   var lateList=comp.filter(function(r){return isLate(r);}).map(function(r){var arr=xlDT(r['destination arrival']);var ex2=r['destination extras']||'';var dtype=ex2.includes('Economy Booked')?'Eco Booked':ex2.includes('Booked')?'Booked':'Next Day';return{id:r['id']||'',dest:r['destination name']||'',city:r['destination city']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'--',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype};});
+  // Fall back to savedLateRows when no raw data available
+  if(lateList.length===0&&window._savedLateRows&&window._savedLateRows.length>0){
+    lateList=(window._savedLateRows||[]).map(function(r){return{id:r.id||'',dest:r.dest||'',city:r.city||'',window:r.window||'',arrival:r.arrival||'--',mins:parseInt(r.mins)||0,pallets:r.pallets||0,dtype:r.dtype||'Standard'};});
+  }
   var destMap2={};comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});
   var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
-  var regMap2={};comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap2[reg])regMap2[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap2[reg].cons++;regMap2[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap2[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap2[reg].lates++;});
+  var regMap2={};
+  if(comp.length>0){comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap2[reg])regMap2[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap2[reg].cons++;regMap2[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap2[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap2[reg].lates++;});}
+  else if(window._savedRegionData){regMap2=window._savedRegionData;}
   var topReg=Object.entries(regMap2).sort(function(a,b){return b[1].pallets-a[1].pallets;});
   var typeMap2={};comp.forEach(function(r){var ex2=r['destination extras']||'';var t=ex2.includes('Economy Booked')?'Economy Booked':'Next Day';if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons++;if(isLate(r))typeMap2[t].lates++;});
   var v4TL=0,v4EB=0,v4ETA=0,v4TA=0,v4TB=0,v4AM=0,v4BW=0;
@@ -750,9 +756,9 @@ function buildReport(mapImg,onComplete){
   var amTotal=amCons.length*12,timedTotal=timedCons.length*23,pre10Total=pre10Cons.length*32;
   var surchTotal=amTotal+timedTotal+pre10Total;
   var surchCons=amCons.length+timedCons.length+pre10Cons.length;
-  var lateDelays=lateList.map(function(r){return r.mins;}).filter(function(m){return m>0;});
+  var lateDelays=lateList.map(function(r){return parseInt(r.mins)||0;}).filter(function(m){return m>0;});
   var avgDelay=lateDelays.length?Math.round(lateDelays.reduce(function(a,b){return a+b;},0)/lateDelays.length):0;
-  var worstLate=lateList.length?lateList.reduce(function(a,b){return b.mins>a.mins?b:a;},lateList[0]):null;
+  var worstLate=lateList.length?lateList.reduce(function(a,b){return (parseInt(b.mins)||0)>(parseInt(a.mins)||0)?b:a;},lateList[0]):null;
   var periodLabel=months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026';
   var latesPct=aC>0?((aL/aC)*100).toFixed(1)+'%':'0.0%';
   var {jsPDF}=window.jspdf;
@@ -764,7 +770,7 @@ function buildReport(mapImg,onComplete){
   function drw(hex){var r=rgb(hex);doc.setDrawColor(r[0],r[1],r[2]);}
   function otifC(v){return v>=98?'#166534':v>=85?'#D97706':'#991B1B';}
   function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'...':s||'';}
-  function fmt(n){return n!=null&&!isNaN(n)?'£'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
+  function fmt(n){return n!=null&&!isNaN(n)?'Â£'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
   function chrome(pg){fill('#111111');doc.rect(0,0,W,12,'F');fill('#F47920');doc.rect(0,12,W,1.2,'F');try{doc.addImage(PLG_LOGO_URL,'SVG',ML,1.5,32,9);}catch(e){txt('#F47920');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',ML,7);}txt('#FFFFFF');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(currentCustomer,W/2,7,{align:'center'});txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(periodLabel,W/2,10.5,{align:'center'});txt('#777777');doc.setFontSize(6.5);doc.text('Page '+pg+' / '+TOTAL,W-ML,7,{align:'right'});fill('#111111');doc.rect(0,H-10,W,10,'F');fill('#F47920');doc.rect(0,H-10,W,0.8,'F');txt('#555555');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text('CONFIDENTIAL \u00B7 PREMIER LOGISTICS GROUP',ML,H-4);doc.text('premier-logistics.co.uk',W-ML,H-4,{align:'right'});}
   function kpiCard(x,y,w,h,label,value,sub,valueColor){fill('#FFFFFF');doc.rect(x,y,w,h,'F');drw('#E5E3DE');doc.rect(x,y,w,h,'S');fill('#F47920');doc.rect(x,y,w,1,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(label.toUpperCase(),x+3,y+6);txt(valueColor||'#111111');doc.setFontSize(16);doc.setFont('helvetica','bold');doc.text(String(value||''),x+3,y+16);if(sub){txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+3,y+21);}}
   function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
@@ -891,7 +897,7 @@ function buildReport(mapImg,onComplete){
     console.log('Writing snapshot for key:', snapshotKey());
     writeSnapshot(snapPayload).then(function(){
       console.log('Snapshot written successfully: '+snapshotKey());
-      showAlert('success','Snapshot saved — PDF will be consistent on future downloads.');
+      showAlert('success','Snapshot saved â PDF will be consistent on future downloads.');
     }).catch(function(e){console.error('Snapshot write error:',e);});
   }
   if(onComplete)onComplete();
@@ -938,13 +944,13 @@ function applyAcctFilter(){
   var rows=(window._pendingRows||[]).filter(function(r){return checked.indexOf(r['customer']||'')>-1;});
   window._pendingRows=null;
   document.getElementById('acct-filter')&&document.getElementById('acct-filter').remove();
-  showAlert('success','Filtered to '+checked.join(', ')+' — '+rows.length+' consignments.');
+  showAlert('success','Filtered to '+checked.join(', ')+' â '+rows.length+' consignments.');
   rawData=rows;var byMonth={};
   rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
   calculatedMonths={};var maxRows=0;Object.keys(byMonth).forEach(function(k){if(byMonth[k].length>maxRows)maxRows=byMonth[k].length;});
   Object.keys(byMonth).forEach(function(k){if(k.indexOf('NaN')>-1)return;if(byMonth[k].length<Math.max(2,maxRows*0.01))return;try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(e){showAlert('warn','Error in '+k+': '+e.message);}});
   var months=Object.keys(calculatedMonths);
-  document.getElementById('raw-loaded').innerHTML=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">✅</div><div style="flex:1"><div class="file-name">Filtered: '+checked.join(', ')+'</div><div class="file-status">'+label+': '+s.cons+' cons · '+s.pallets+' pallets · £'+s.revenue.toFixed(2)+' · '+s.lates+' late(s)</div></div></div>';}).join('');
+  document.getElementById('raw-loaded').innerHTML=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">â</div><div style="flex:1"><div class="file-name">Filtered: '+checked.join(', ')+'</div><div class="file-status">'+label+': '+s.cons+' cons Â· '+s.pallets+' pallets Â· Â£'+s.revenue.toFixed(2)+' Â· '+s.lates+' late(s)</div></div></div>';}).join('');
   document.getElementById('raw-loaded').style.display='block';document.getElementById('delivery-upload-zone').style.display='block';
   if(Object.keys(calculatedMonths).length>0)tryRender();
 }
@@ -972,17 +978,17 @@ function resetUpload(){
 function getToken(){return localStorage.getItem('plg_gh_token')||localStorage.getItem('plg_token')||'';}
 function slug(name){return name.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');}
 function ghFile(name){return'data/'+slug(name)+'.json';}
-function buildTrackerFromSaved(){trackerData=MONTH_KEYS.map(function(key){var d=savedMonthData[key];if(!d)return{Cons:null,Plts:null,'£':null,Timeliness:null,Lates:null};return{Cons:d.cons,Plts:d.pallets,'£':d.revenue,Timeliness:d.timeliness,Lates:d.lates,LatePallets:d.latePallets||0};});}
+function buildTrackerFromSaved(){trackerData=MONTH_KEYS.map(function(key){var d=savedMonthData[key];if(!d)return{Cons:null,Plts:null,'Â£':null,Timeliness:null,Lates:null};return{Cons:d.cons,Plts:d.pallets,'Â£':d.revenue,Timeliness:d.timeliness,Lates:d.lates,LatePallets:d.latePallets||0};});}
 
 function renderHistory(){
   var keys=Object.keys(savedMonthData).sort();
   var totCons=0,totPallets=0,totRev=0,totLates=0,totLatePallets=0;
   keys.forEach(function(k){var d=savedMonthData[k];if(d){totCons+=d.cons||0;totPallets+=d.pallets||0;totRev+=d.revenue||0;totLates+=d.lates||0;totLatePallets+=d.latePallets||0;}});
-  var ytdOTIF=totPallets>0?((totPallets-totLatePallets)/totPallets*100).toFixed(2):'—';
+  var ytdOTIF=totPallets>0?((totPallets-totLatePallets)/totPallets*100).toFixed(2):'â';
   var col=parseFloat(ytdOTIF)>=98?'#2e7d32':parseFloat(ytdOTIF)>=95?'#e65100':'#c62828';
   function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
-  set('h-cons',totCons||'—');set('h-pallets',totPallets||'—');set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—');set('h-lates',totLates||'—');
-  var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='—'?ytdOTIF+'%':'—';ho.style.color=col;}
+  set('h-cons',totCons||'â');set('h-pallets',totPallets||'â');set('h-rev',totRev>0?'Â£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'â');set('h-lates',totLates||'â');
+  var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='â'?ytdOTIF+'%':'â';ho.style.color=col;}
   var chips='<div class="month-chip has-data chip-clickable" id="chip-all" data-mkey="all" style="background:#333;border-color:#555;cursor:pointer">All</div>'+MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');return'<div class="month-chip'+(has?' has-data':'')+' chip-clickable" id="chip-'+key+'" data-mkey="'+key+'" style="cursor:pointer" title="'+(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'+label+(has&&palletOtif?' '+palletOtif:'')+'</div>';}).join('');
   var strip=document.getElementById('months-strip');if(strip){strip.innerHTML=chips||'<span style="font-size:12px;color:#ccc">No months saved yet</span>';strip.onclick=function(e){var chip=e.target.closest('.chip-clickable');if(chip){selectMonth(chip.getAttribute('data-mkey'));}};}
 }
@@ -999,14 +1005,14 @@ function selectMonth(key){
   var otifCol=parseFloat(otif)>=98?'#2e7d32':parseFloat(otif)>=95?'#e65100':'#c62828';
   var s=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
   s('h-cons',totC||'--');s('h-pallets',totP||'--');s('h-lates',totL||'--');
-  var hr=document.getElementById('h-rev');if(hr)hr.textContent=totR>0?'£'+totR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';
+  var hr=document.getElementById('h-rev');if(hr)hr.textContent=totR>0?'Â£'+totR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';
   var ho=document.getElementById('h-otif');if(ho){ho.textContent=otif;ho.style.color=otifCol;}
   document.querySelectorAll('.tracker-month-row').forEach(function(row){var rk=row.getAttribute('data-month-key');if(key==='all'){row.style.background='';row.style.fontWeight='';}else{row.style.background=rk===key?'#fff8f0':'';row.style.fontWeight=rk===key?'600':'';}});
 }
 
 async function loadFromGitHub(){
   var token=getToken();
-  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token — enter on homepage';gs.className='gh-status';}savedMonthData={};renderHistory();return;}
+  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token â enter on homepage';gs.className='gh-status';}savedMonthData={};renderHistory();return;}
   var _gs2=document.getElementById('gh-status');if(_gs2){_gs2.textContent='Loading...';_gs2.className='gh-status';}
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
@@ -1016,7 +1022,7 @@ async function loadFromGitHub(){
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
     savedMonthData=decoded.months||{};window._savedLateRows=decoded.lateRows||[];window._savedRegionData=decoded.regionData||null;
     var mCount=Object.keys(savedMonthData).length;
-    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
+    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">â '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     var _dot=document.getElementById('gh-dot');if(_dot)_dot.classList.add('ok');
     buildTrackerFromSaved();renderHistory();
     if(Object.keys(savedMonthData).length>0){
@@ -1030,8 +1036,8 @@ async function loadFromGitHub(){
         var lateMonths=Array.from(new Set(saved.map(function(r){return r.month;})));
         var lateTypes=Array.from(new Set(saved.map(function(r){return r.dtype;})));
         var filterBar='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;"><span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span><input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;"><select id="late-month" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All months</option>'+lateMonths.map(function(m){return'<option value="'+m+'">'+m+'</option>';}).join('')+'</select><select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All types</option>'+lateTypes.map(function(t){return'<option value="'+t+'">'+t+'</option>';}).join('')+'</select><button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button><span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+saved.length+' entries</span></div>';
-        var tableRows=saved.map(function(r,idx){return'<tr class="late-row" id="laterow-'+idx+'"><td style="font-size:11px;color:#aaa">'+r.id+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:monospace">'+r.acct+'</span></td><td>'+r.month+'</td><td>'+r.dest+'</td><td>'+r.city+'</td><td>'+r.pc+'</td><td>'+r.commitDate+'</td><td>'+r.window+'</td><td>'+r.arrDate+' '+r.arrival+'</td><td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td><td>'+r.pallets+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td><td>'+(r.note?'<span style="font-size:11px;color:#555">'+r.note+'</span>':'<span style="color:#bbb;font-size:11px">—</span>')+'</td><td></td></tr>';}).join('');
-        document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+saved.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">Showing saved late entries. Upload a new export to edit or remove entries.</div>'+filterBar+'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">↕</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">↕</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">↕</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">↕</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">↕</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">↕</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">↕</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">↕</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">↕</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">↕</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+tableRows+'</tbody></table></div>';
+        var tableRows=saved.map(function(r,idx){return'<tr class="late-row" id="laterow-'+idx+'"><td style="font-size:11px;color:#aaa">'+r.id+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px;font-family:monospace">'+r.acct+'</span></td><td>'+r.month+'</td><td>'+r.dest+'</td><td>'+r.city+'</td><td>'+r.pc+'</td><td>'+r.commitDate+'</td><td>'+r.window+'</td><td>'+r.arrDate+' '+r.arrival+'</td><td><span style="color:#c62828;font-weight:600">+'+r.mins+'m</span></td><td>'+r.pallets+'</td><td><span style="font-size:11px;background:#f0f0f0;padding:1px 6px;border-radius:3px">'+r.dtype+'</span></td><td>'+(r.note?'<span style="font-size:11px;color:#555">'+r.note+'</span>':'<span style="color:#bbb;font-size:11px">â</span>')+'</td><td></td></tr>';}).join('');
+        document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+saved.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">Showing saved late entries. Upload a new export to edit or remove entries.</div>'+filterBar+'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">â</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Account <span id="lsort-1">â</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Month <span id="lsort-2">â</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Destination <span id="lsort-3">â</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">City <span id="lsort-4">â</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-5">â</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-6">â</span></th><th>Time Window</th><th onclick="sortLateLog(8)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-8">â</span></th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-9">â</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-10">â</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Type <span id="lsort-11">â</span></th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+tableRows+'</tbody></table></div>';
       }
     }
   }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;}}
@@ -1046,16 +1052,16 @@ async function saveToGitHub(){
   try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];(s.completedRows||[]).filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex=r['destination extras']||'';var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';lateRowsToSave.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||''});});});}catch(e){}
   var regDataToSave={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!regDataToSave[reg])regDataToSave[reg]={pallets:0,cons:0,lates:0};regDataToSave[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regDataToSave[reg].cons++;if(isLate(r))regDataToSave[reg].lates++;});}catch(e){}
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave,regionData:regDataToSave};
-  var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
+  var body={message:'KPI update: '+currentCustomer+' â '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
     var resp=await fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
     var json=await resp.json();if(!resp.ok)throw new Error(json.message||'GitHub error');
     ghFileSha=json.content.sha;savedMonthData=merged;
-    btn.textContent='Saved ✓';btn.disabled=false;
-    var _sse=document.getElementById('save-status');if(_sse){_sse.textContent='✓ Saved at '+new Date().toLocaleTimeString('en-GB');_sse.className='save-ok';}
-    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+Object.keys(savedMonthData).length+' months saved</span>';
+    btn.textContent='Saved â';btn.disabled=false;
+    var _sse=document.getElementById('save-status');if(_sse){_sse.textContent='â Saved at '+new Date().toLocaleTimeString('en-GB');_sse.className='save-ok';}
+    document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">â '+Object.keys(savedMonthData).length+' months saved</span>';
     var _dot2=document.getElementById('gh-dot');if(_dot2)_dot2.classList.add('ok');
     renderHistory();showAlert('success','Saved to GitHub for '+currentCustomer+'.');
   }catch(err){btn.textContent='Save to GitHub';btn.disabled=false;showAlert('warn','Save failed: '+err.message);}
@@ -1065,12 +1071,12 @@ window.addEventListener('load',function(){
   var params=new URLSearchParams(window.location.search);
   currentCustomer=decodeURIComponent(params.get('c')||'Customer');
   document.getElementById('cust-name').textContent=currentCustomer;
-  document.title=currentCustomer+' — PLG KPI Tool';
+  document.title=currentCustomer+' â PLG KPI Tool';
   var _av=document.getElementById('cust-av');if(_av)_av.textContent=currentCustomer.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
   loadFromGitHub();
 });
 
-// ── EMAILJS ──────────────────────────────────────────────────────────────
+// ââ EMAILJS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 var EJS={service:'',template:'',pubkey:''};
 function loadEjsConfig(){try{var s=localStorage.getItem('plg_ejs');if(s){EJS=JSON.parse(s);}document.getElementById('ejs-service').value=EJS.service||'';document.getElementById('ejs-template').value=EJS.template||'';document.getElementById('ejs-pubkey').value=EJS.pubkey||'';if(EJS.service&&EJS.template&&EJS.pubkey){document.getElementById('ejs-config-notice').style.display='none';}}catch(e){}}
 function saveEjsConfig(){EJS.service=document.getElementById('ejs-service').value.trim();EJS.template=document.getElementById('ejs-template').value.trim();EJS.pubkey=document.getElementById('ejs-pubkey').value.trim();localStorage.setItem('plg_ejs',JSON.stringify(EJS));if(EJS.service&&EJS.template&&EJS.pubkey){document.getElementById('ejs-config-notice').style.display='none';}}
@@ -1078,17 +1084,17 @@ var contacts=[];
 function loadContacts(){try{var s=localStorage.getItem('plg_contacts_'+currentCustomer);if(s)contacts=JSON.parse(s);}catch(e){contacts=[];}}
 function saveContacts(){localStorage.setItem('plg_contacts_'+currentCustomer,JSON.stringify(contacts));}
 function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function renderContactsTab(){var pane=document.getElementById('tab-contacts');var rows=contacts.map(function(c,i){return'<div class="contact-row"><input placeholder="Contact name" value="'+escHtml(c.name||'')+'" oninput="contacts['+i+'].name=this.value;saveContacts()"><input placeholder="email@company.co.uk" type="email" value="'+escHtml(c.email||'')+'" oninput="contacts['+i+'].email=this.value;saveContacts()"><button class="contact-del" onclick="deleteContact('+i+')" title="Remove">&#215;</button></div>';}).join('');pane.innerHTML='<div class="contacts-panel"><div class="contacts-title"><span>Customer contacts for '+escHtml(currentCustomer)+'</span></div>'+rows+'<button class="btn-add-contact" onclick="addContact()">+ Add contact</button></div><div style="background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;color:var(--muted)">Contacts saved in your browser. Not uploaded to GitHub.</div>';var sel=document.getElementById('email-to-select');if(sel){sel.innerHTML='<option value="">— Select contact or type below —</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name||c.email))+'</option>';}).join('');}}
+function renderContactsTab(){var pane=document.getElementById('tab-contacts');var rows=contacts.map(function(c,i){return'<div class="contact-row"><input placeholder="Contact name" value="'+escHtml(c.name||'')+'" oninput="contacts['+i+'].name=this.value;saveContacts()"><input placeholder="email@company.co.uk" type="email" value="'+escHtml(c.email||'')+'" oninput="contacts['+i+'].email=this.value;saveContacts()"><button class="contact-del" onclick="deleteContact('+i+')" title="Remove">&#215;</button></div>';}).join('');pane.innerHTML='<div class="contacts-panel"><div class="contacts-title"><span>Customer contacts for '+escHtml(currentCustomer)+'</span></div>'+rows+'<button class="btn-add-contact" onclick="addContact()">+ Add contact</button></div><div style="background:var(--faint);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:12px;color:var(--muted)">Contacts saved in your browser. Not uploaded to GitHub.</div>';var sel=document.getElementById('email-to-select');if(sel){sel.innerHTML='<option value="">â Select contact or type below â</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name||c.email))+'</option>';}).join('');}}
 function addContact(){contacts.push({name:'',email:''});saveContacts();renderContactsTab();}
 function deleteContact(i){contacts.splice(i,1);saveContacts();renderContactsTab();}
-function openEmailModal(){loadEjsConfig();loadContacts();renderContactsTab();var now=new Date();var period=now.toLocaleString('en-GB',{month:'long',year:'numeric'});document.getElementById('email-subject').value='Premier Logistics Group — KPI Report | '+currentCustomer+' | '+period;document.getElementById('email-message').value='Please find your KPI report for '+period+' attached.\n\nIf you have any questions, please do not hesitate to get in touch.';document.getElementById('email-to').value='';document.getElementById('email-to-name').value='';var sel=document.getElementById('email-to-select');sel.innerHTML='<option value="">— Select contact or type below —</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name?c.name+' — ':'')+c.email)+'</option>';}).join('');document.getElementById('email-modal').classList.add('open');}
+function openEmailModal(){loadEjsConfig();loadContacts();renderContactsTab();var now=new Date();var period=now.toLocaleString('en-GB',{month:'long',year:'numeric'});document.getElementById('email-subject').value='Premier Logistics Group â KPI Report | '+currentCustomer+' | '+period;document.getElementById('email-message').value='Please find your KPI report for '+period+' attached.\n\nIf you have any questions, please do not hesitate to get in touch.';document.getElementById('email-to').value='';document.getElementById('email-to-name').value='';var sel=document.getElementById('email-to-select');sel.innerHTML='<option value="">â Select contact or type below â</option>'+contacts.filter(function(c){return c.email;}).map(function(c){return'<option value="'+escHtml(c.email)+'" data-name="'+escHtml(c.name||'')+'">'+escHtml((c.name?c.name+' â ':'')+c.email)+'</option>';}).join('');document.getElementById('email-modal').classList.add('open');}
 function closeEmailModal(){document.getElementById('email-modal').classList.remove('open');}
 function fillEmailTo(){var sel=document.getElementById('email-to-select');var opt=sel.options[sel.selectedIndex];if(opt&&opt.value){document.getElementById('email-to').value=opt.value;document.getElementById('email-to-name').value=opt.dataset.name||'';}}
-function sendReportEmail(){var to=document.getElementById('email-to').value.trim();var toName=document.getElementById('email-to-name').value.trim();var subject=document.getElementById('email-subject').value.trim();var message=document.getElementById('email-message').value.trim();var svcId=document.getElementById('ejs-service').value.trim();var tplId=document.getElementById('ejs-template').value.trim();var pubKey=document.getElementById('ejs-pubkey').value.trim();if(!to){showAlert('error','Please enter a recipient email address.');return;}if(!svcId||!tplId||!pubKey){showAlert('error','Please enter your EmailJS credentials first.');return;}var btn=document.getElementById('btn-send-email');btn.disabled=true;btn.textContent='Generating PDF…';generatePdfForEmail(function(pdfBase64,filename){btn.textContent='Sending…';var templateParams={to_email:to,to_name:toName||to,from_name:'Premier Logistics Group',customer_name:currentCustomer,subject:subject,message:message,pdf_name:filename,pdf_content:pdfBase64,report_period:document.getElementById('email-subject').value.split('| ').pop()||''};emailjs.init(pubKey);emailjs.send(svcId,tplId,templateParams).then(function(){btn.disabled=false;btn.textContent='Send Report →';closeEmailModal();showAlert('success','Report sent to '+to);}).catch(function(err){btn.disabled=false;btn.textContent='Send Report →';showAlert('error','Email failed: '+(err.text||err.message||JSON.stringify(err)));console.error('EmailJS error',err);});});}
+function sendReportEmail(){var to=document.getElementById('email-to').value.trim();var toName=document.getElementById('email-to-name').value.trim();var subject=document.getElementById('email-subject').value.trim();var message=document.getElementById('email-message').value.trim();var svcId=document.getElementById('ejs-service').value.trim();var tplId=document.getElementById('ejs-template').value.trim();var pubKey=document.getElementById('ejs-pubkey').value.trim();if(!to){showAlert('error','Please enter a recipient email address.');return;}if(!svcId||!tplId||!pubKey){showAlert('error','Please enter your EmailJS credentials first.');return;}var btn=document.getElementById('btn-send-email');btn.disabled=true;btn.textContent='Generating PDFâ¦';generatePdfForEmail(function(pdfBase64,filename){btn.textContent='Sendingâ¦';var templateParams={to_email:to,to_name:toName||to,from_name:'Premier Logistics Group',customer_name:currentCustomer,subject:subject,message:message,pdf_name:filename,pdf_content:pdfBase64,report_period:document.getElementById('email-subject').value.split('| ').pop()||''};emailjs.init(pubKey);emailjs.send(svcId,tplId,templateParams).then(function(){btn.disabled=false;btn.textContent='Send Report â';closeEmailModal();showAlert('success','Report sent to '+to);}).catch(function(err){btn.disabled=false;btn.textContent='Send Report â';showAlert('error','Email failed: '+(err.text||err.message||JSON.stringify(err)));console.error('EmailJS error',err);});});}
 function generatePdfForEmail(callback){var tabs=document.querySelectorAll('.tab-btn');tabs.forEach(function(t){if(t.textContent.trim()==='Destinations')t.click();});setTimeout(function(){var mapEl=document.getElementById('hc-map');if(mapEl){html2canvas(mapEl,{scale:1.5,useCORS:true,allowTaint:true}).then(function(canvas){var url=canvas.toDataURL('image/png');var asp=canvas.width/canvas.height;buildReportBase64({url:url,asp:asp},callback);}).catch(function(){buildReportBase64(null,callback);});}else{buildReportBase64(null,callback);}},800);}
 function buildReportBase64(mapImg,callback){try{var now=new Date();var months2=Object.keys(calculatedMonths).sort();var periodLabel2=months2.length>0?MONTHS[MONTH_KEYS.indexOf(months2[0])]||months2[0]:'2026';var filename=currentCustomer+' - '+periodLabel2+'.pdf';var {jsPDF}=window.jspdf;var origProto=jsPDF.prototype.save;var captured=null;jsPDF.prototype.save=function(name){captured=this.output('datauristring');jsPDF.prototype.save=origProto;};buildReport(mapImg,null);if(captured){var b64=captured.split(',')[1];callback(b64,filename);}else{showAlert('error','Could not generate PDF for email.');}}catch(e){console.error('generatePdfForEmail error',e);showAlert('error','PDF generation failed: '+e.message);}}
 
-// ── SVG MAP ──────────────────────────────────────────────────────────────
+// ââ SVG MAP ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 window.buildMapSVG=function(regionData){
   var regionMap={'East':'East of England','Eastern':'East of England','East Midlands':'East Midlands','Greater London':'London','Highlands and Islands':'Scotland','North East':'North East','North Eastern':'North East','North West':'North West','Northern Ireland':'Northern Ireland','South East':'South East','South West':'South West','South Western':'South West','West Midlands':'West Midlands','East Wales':'Wales','West Wales and the Valleys':'Wales','Yorkshire and the Humber':'Yorkshire'};
   var maxPallets=1;Object.values(regionData).forEach(function(d){if(d.pallets>maxPallets)maxPallets=d.pallets;});
@@ -1121,7 +1127,7 @@ window.mapSVGtoPNG=function(svgStr,callback){var blob=new Blob([svgStr],{type:'i
       <div class="email-field"><label>EmailJS Template ID</label><input id="ejs-template" placeholder="template_xxxxxxx" oninput="saveEjsConfig()"></div>
       <div class="email-field"><label>EmailJS Public Key</label><input id="ejs-pubkey" placeholder="xxxxxxxxxxxxxxxxxxxxxx" oninput="saveEjsConfig()"></div>
       <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
-      <div class="email-field"><label>Send to</label><select id="email-to-select" onchange="fillEmailTo()"><option value="">— Select contact or type below —</option></select></div>
+      <div class="email-field"><label>Send to</label><select id="email-to-select" onchange="fillEmailTo()"><option value="">â Select contact or type below â</option></select></div>
       <div class="email-field"><label>Recipient email address</label><input id="email-to" type="email" placeholder="contact@customer.co.uk"></div>
       <div class="email-field"><label>Recipient name</label><input id="email-to-name" placeholder="e.g. John Smith"></div>
       <div class="email-field"><label>Subject</label><input id="email-subject"></div>
