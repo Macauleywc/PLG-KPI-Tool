@@ -1,0 +1,19 @@
+{
+  "customer": "Anand International",
+  "createdAt": "2026-06-09T13:26:02.035Z",
+  "months": {
+    "2026-04": {
+      "cons": 109,
+      "pallets": 164,
+      "revenue": 7349.05,
+      "lates": 4,
+      "latePallets": 4,
+      "timeliness": 0.97561,
+      "avgRC": 67.42,
+      "avgRP": 44.81,
+      "avgPC": 1.5
+    }
+  },
+  "lateRows": [],
+  "regionData": {}
+}
