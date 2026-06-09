@@ -784,8 +784,9 @@ function buildReport(mapImg,onComplete){
   var destMap2={};
   if(comp.length>0){
     comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});
+  } else if(window._savedDestData&&window._savedDestData.length>0){
+    window._savedDestData.forEach(function(d){destMap2[d.name]={name:d.name,city:d.city||'',cons:d.cons||0,pallets:d.pallets||0,revenue:d.revenue||0,lates:d.lates||0};});
   } else if(window._savedLateRows&&window._savedLateRows.length>0){
-    // Build destination summary from saved late rows (partial — lates only, but better than nothing)
     window._savedLateRows.forEach(function(r){var k=r.dest||'?';if(!destMap2[k])destMap2[k]={name:k,city:r.city||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r.pallets)||0;destMap2[k].lates++;});
   }
   var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
@@ -1067,7 +1068,7 @@ async function loadFromGitHub(){
     if(resp.status===404){var _gs3=document.getElementById('gh-status');if(_gs3){_gs3.textContent='No saved data yet';}savedMonthData={};ghFileSha=null;buildTrackerFromSaved();renderHistory();return;}
     var json=await resp.json();ghFileSha=json.sha;
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
-    savedMonthData=decoded.months||{};window._savedLateRows=decoded.lateRows||[];window._savedRegionData=decoded.regionData||null;
+    savedMonthData=decoded.months||{};window._savedLateRows=decoded.lateRows||[];window._savedRegionData=decoded.regionData||null;window._savedDestData=decoded.destData||[];
     var mCount=Object.keys(savedMonthData).length;
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">â '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     var _dot=document.getElementById('gh-dot');if(_dot)_dot.classList.add('ok');
@@ -1098,7 +1099,20 @@ async function saveToGitHub(){
   var lateRowsToSave=[];
   try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];(s.completedRows||[]).filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex=r['destination extras']||'';var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';lateRowsToSave.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||''});});});}catch(e){}
   var regDataToSave={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!regDataToSave[reg])regDataToSave[reg]={pallets:0,cons:0,lates:0};regDataToSave[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regDataToSave[reg].cons++;if(isLate(r))regDataToSave[reg].lates++;});}catch(e){}
-  var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave,regionData:regDataToSave};
+  // Save destination data for PDF
+  var destDataToSave=[];
+  try{
+    var _dm={};
+    allCompleted().forEach(function(r){
+      var k=r['destination name']||'?';
+      if(!_dm[k])_dm[k]={name:k,city:r['destination city']||'',pc:r['destination postal code']||'',cons:0,pallets:0,revenue:0,lates:0};
+      _dm[k].cons++;_dm[k].pallets+=parseFloat(r['goods pallet spaces'])||0;
+      _dm[k].revenue+=parseFloat(r['revenue'])||0;
+      if(isLate(r))_dm[k].lates++;
+    });
+    destDataToSave=Object.values(_dm).sort(function(a,b){return b.cons-a.cons;}).slice(0,20);
+  }catch(e){}
+  var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave,regionData:regDataToSave,destData:destDataToSave};
   var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
   try{
