@@ -109,6 +109,24 @@ tbody tr:hover td{background:#FAFAF8;}
 .tr-late td:first-child{border-left:2px solid var(--red);}
 .tr-total td{background:var(--dark)!important;color:#eee!important;font-weight:700;}
 .tag-new{font-size:9px;background:var(--orange);color:#fff;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+/* ── Tracker row classes (JS uses these names) ─────── */
+tr.new-row td{background:#fffcf8!important;}
+tr.new-row td:first-child{border-left:2px solid var(--orange);}
+tr.total-row td{background:var(--dark)!important;color:#eee!important;font-weight:700;}
+/* Empty rows — dimmer and more compact */
+tr.empty-row td{color:var(--muted);opacity:0.55;padding-top:7px!important;padding-bottom:7px!important;}
+/* OTIF mini-bar inside tracker cells */
+.timeliness-bar{display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.bar-bg{height:4px;background:var(--faint);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.bar-fill{height:100%;background:var(--green);border-radius:2px;}
+.bar-fill.warn{background:var(--amber);}
+.bar-fill.bad{background:var(--red);}
+/* Section titles and pills inside tab panes */
+.section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:14px;}
+.pill{font-size:11px;font-weight:500;background:var(--faint);border:1px solid var(--border);padding:2px 9px;border-radius:10px;letter-spacing:0;text-transform:none;color:var(--muted);margin-left:8px;vertical-align:middle;}
+.pill-red{font-size:11px;font-weight:600;background:#fff5f5;border:1px solid #fca5a5;padding:2px 9px;border-radius:10px;letter-spacing:0;text-transform:none;color:var(--red);margin-left:8px;vertical-align:middle;}
+.section-card-standalone{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:16px;}
+.tracker-table-wrap{overflow-x:auto;}
 /* ── Stat cards ───────────────────────────────────── */
 .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:0;border:1px solid var(--border);border-bottom:none;border-radius:12px 12px 0 0;overflow:hidden;}
 .stat-card{background:var(--surface);border-radius:0;padding:20px 24px;border:none;border-right:1px solid var(--border);border-top:3px solid var(--orange);box-shadow:none;}
@@ -531,14 +549,14 @@ function renderPreview(){
       var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;
       var revS=rev!=null?'£'+rev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'';
       var aRC=cons&&rev?'£'+(rev/cons).toFixed(2):'—',aRP=plts&&rev?'£'+(rev/plts).toFixed(2):'—',aPC=cons&&plts?(plts/cons).toFixed(1):'—';
-      var timS=cons&&lates!==null?((cons-lates)/cons*100).toFixed(2)+'%':'—';
+      var timVal=cons&&lates!==null?(cons-lates)/cons:null;var timS=timVal!==null?'<span style="font-weight:700;color:'+(timVal>=0.98?'var(--green)':timVal>=0.95?'var(--amber)':'var(--red)')+'">'+(timVal*100).toFixed(2)+'%</span>':'—';
       return'<tr class="'+(cons?'':'empty-row')+' tracker-month-row" data-month-key="'+key+'"><td class="existing">'+label+'</td><td class="existing">'+(cons||'—')+'</td><td class="existing">'+(plts||'—')+'</td><td class="existing">'+(revS||'—')+'</td><td class="existing">'+aRC+'</td><td class="existing">'+aRP+'</td><td class="existing">'+aPC+'</td><td class="existing">'+timS+'</td><td class="existing">'+(lates||'—')+'</td></tr>';
     }
     return'<tr class="empty-row tracker-month-row" data-month-key="'+key+'"><td>'+label+'</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>';
   }).join('');
   var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
   var aLP=getLiveLatePallets();
-  var totalOTIF=aP?((aP-aLP)/aP*100).toFixed(2)+'%':'—';
+  var _tOTIFv=aP?(aP-aLP)/aP:null;var totalOTIF=_tOTIFv!==null?'<span style="font-weight:700;color:'+(_tOTIFv>=0.98?'var(--green)':_tOTIFv>=0.95?'var(--amber)':'var(--red)')+'">'+(_tOTIFv*100).toFixed(2)+'%</span>':'—';
   var typeRows=Object.entries(typeMap).map(function(e){var t=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+t+'</td><td>'+d.cons+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,80)+'</td></tr>';}).join('');
   var dowCards=[1,2,3,4,5].map(function(d){var dd=dow[d],otif=dd.cons>0?(dd.cons-dd.lates)/dd.cons:null;var col=otif===null?'#ccc':otif>=0.98?'#2e7d32':otif>=0.95?'#e65100':'#c62828';var pct=otif!==null?(otif*100).toFixed(1)+'%':'—';return'<div class="dow-card"><div class="dow-label">'+dd.l+'</div><div class="dow-val" style="color:'+col+'">'+pct+'</div><div class="dow-sub">'+dd.cons+' cons &#183; '+dd.lates+' late</div></div>';}).join('');
   var regRows=topReg.map(function(e){var reg=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+reg+'</td><td>'+d.cons+'</td><td>'+d.pallets+'</td><td>£'+(d.revenue||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,60)+'</td></tr>';}).join('');
