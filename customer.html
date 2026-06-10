@@ -444,15 +444,22 @@ function getTotal(field){
 }
 function allCompleted(){var a=[];Object.values(calculatedMonths).forEach(function(s){a=a.concat(s.completedRows);});return a;}
 function getLiveLates(){
-  var fromRows=allCompleted().filter(function(r){return isLate(r);}).length;
-  if(fromRows>0)return fromRows;
-  var fromSaved=0;Object.values(calculatedMonths).forEach(function(m){fromSaved+=m.lates||0;});return fromSaved;
+  // Per-month: count from rows if available, else use saved aggregate. Handles mixed fresh+saved months.
+  var total=0;
+  Object.values(calculatedMonths).forEach(function(m){
+    if(m.completedRows&&m.completedRows.length>0){total+=m.completedRows.filter(function(r){return isLate(r);}).length;}
+    else{total+=m.lates||0;}
+  });
+  return total;
 }
 function getLiveLatePallets(){
-  var fromRows=0;
-  allCompleted().filter(function(r){return isLate(r);}).forEach(function(r){fromRows+=parseFloat(r['goods pallet spaces'])||0;});
-  if(fromRows>0)return fromRows;
-  var fromSaved=0;Object.values(calculatedMonths).forEach(function(m){fromSaved+=m.latePallets||0;});return fromSaved;
+  // Per-month: pallets from rows if available, else saved aggregate. Handles mixed fresh+saved months.
+  var total=0;
+  Object.values(calculatedMonths).forEach(function(m){
+    if(m.completedRows&&m.completedRows.length>0){m.completedRows.filter(function(r){return isLate(r);}).forEach(function(r){total+=parseFloat(r['goods pallet spaces'])||0;});}
+    else{total+=m.latePallets||0;}
+  });
+  return total;
 }
 function barClass(v){return v>=0.98?'':v>=0.95?'warn':'bad';}
 function otifBar(v,w){var pct=(v*100).toFixed(2);return'<div class="timeliness-bar"><span style="font-size:12px;font-weight:600">'+pct+'%</span><div class="bar-bg" style="width:'+(w||60)+'px"><div class="bar-fill '+barClass(v)+'" style="width:'+pct+'%"></div></div></div>';}
@@ -1135,7 +1142,14 @@ async function saveToGitHub(){
   var merged=Object.assign({},savedMonthData);
   Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];merged[key]={cons:c.cons||0,pallets:c.pallets||0,revenue:parseFloat((c.revenue||0).toFixed(2)),lates:c.lates||0,latePallets:c.latePallets||0,timeliness:parseFloat((c.timeliness||0).toFixed(6)),avgRC:parseFloat((c.avgRC||0).toFixed(2)),avgRP:parseFloat((c.avgRP||0).toFixed(2)),avgPC:parseFloat((c.avgPC||0).toFixed(2))};});
   var lateRowsToSave=[];
-  try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];(s.completedRows||[]).filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex=r['destination extras']||'';var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';lateRowsToSave.push({id:r['id']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||''});});});}catch(e){}
+  try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];var monLabel=MONTHS[MONTH_KEYS.indexOf(key)]||key;
+    if(s.completedRows&&s.completedRows.length>0){
+      s.completedRows.filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex=r['destination extras']||'';var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';lateRowsToSave.push({id:r['id']||'',acct:r['customer']||'',month:monLabel,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||''});});
+    } else {
+      // Saved-only month (no fresh rows) — preserve its existing saved late rows
+      (window._savedLateRows||[]).filter(function(r){return r.month===monLabel;}).forEach(function(r){lateRowsToSave.push(r);});
+    }
+  });}catch(e){}
   var regDataToSave={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!regDataToSave[reg])regDataToSave[reg]={pallets:0,cons:0,lates:0};regDataToSave[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regDataToSave[reg].cons++;if(isLate(r))regDataToSave[reg].lates++;});}catch(e){}
   // Save destination data for PDF
   var destDataToSave=[];
