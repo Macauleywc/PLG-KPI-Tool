@@ -17,16 +17,18 @@
   --bg: #F5F4F0; --surface: #FFFFFF; --border: #E4E2DD;
   --text: #18181A; --muted: #6B6865; --faint: #EFEDE8;
   --orange: #F47920; --orange-dim: #FFF0E6; --orange-dk: #E06810;
-  --dark: #121212; --dark2: #0e0e0e;
-  --green: #15803D; --amber: #B45309; --red: #DC2626;
+  --dark: #121212;
+  --green: #15803D; --green-lt: #dcfce7;
+  --amber: #B45309; --amber-lt: #fef3c7;
+  --red: #DC2626; --red-lt: #fee2e2;
   --radius: 8px;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow: 0 3px 12px rgba(0,0,0,0.09), 0 1px 3px rgba(0,0,0,0.05);
+  --shadow: 0 4px 14px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-/* ── Header ────────────────────────────────────────── */
+/* ── Header ───────────────────────────────────────── */
 .hdr {
   background: var(--dark); height: 52px;
   display: flex; align-items: center; justify-content: space-between;
@@ -35,80 +37,84 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 }
 .hdr-left { display: flex; align-items: center; gap: 12px; }
 .hdr-logo { height: 22px; width: auto; opacity: 0.88; }
-.hdr-name { font-size: 12px; font-weight: 600; color: #5e5e5e; letter-spacing: 0.02em; }
+.hdr-name { font-size: 12px; font-weight: 600; color: #5a5a5a; letter-spacing: 0.02em; }
 .hdr-right { display: flex; align-items: center; gap: 8px; }
 .token-wrap {
   display: flex; align-items: center; gap: 8px;
   background: #1c1c1c; border: 1px solid #262626;
-  border-radius: 7px; padding: 0 12px; height: 32px;
-  transition: border-color 0.2s;
+  border-radius: 7px; padding: 0 12px; height: 32px; transition: border-color 0.2s;
 }
 .token-wrap:focus-within { border-color: var(--orange); }
 .token-dot { width: 7px; height: 7px; border-radius: 50%; background: #2a2a2a; flex-shrink: 0; transition: background 0.2s; }
 .token-dot.active { background: #22C55E; }
-.token-label { font-size: 10px; font-weight: 700; color: #404040; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
-.token-input { background: none; border: none; color: #ccc; font-size: 12px; font-family: monospace; width: 160px; outline: none; }
-.token-input::placeholder { color: #333; }
+.token-label { font-size: 10px; font-weight: 700; color: #3e3e3e; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+.token-input { background: none; border: none; color: #bbb; font-size: 12px; font-family: monospace; width: 155px; outline: none; }
+.token-input::placeholder { color: #2e2e2e; }
 .signout-btn {
   background: none; border: 1px solid #262626; border-radius: 6px;
-  color: #5e5e5e; font-size: 12px; font-family: 'Inter', sans-serif;
+  color: #5a5a5a; font-size: 12px; font-family: 'Inter', sans-serif;
   padding: 5px 12px; cursor: pointer; transition: all 0.15s;
 }
 .signout-btn:hover { border-color: #333; color: #aaa; }
 
 /* ── Portal banner ─────────────────────────────────── */
-.portal-banner {
-  background: var(--dark);
-  border-bottom: 1px solid #1a1a1a;
+.portal-banner { background: var(--dark); }
+
+.banner-top {
+  padding: 36px 28px 28px;
+  border-bottom: 1px solid #1c1c1c;
 }
-.banner-inner {
-  max-width: 1280px; margin: 0 auto; padding: 32px 28px;
-  display: flex; align-items: stretch; justify-content: space-between; gap: 40px;
-}
-.banner-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .banner-eyebrow {
   font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.16em; color: var(--orange); margin-bottom: 10px;
+  letter-spacing: 0.18em; color: var(--orange); margin-bottom: 12px;
 }
 .banner-title {
-  font-size: 30px; font-weight: 700; color: #ececec;
+  font-size: 32px; font-weight: 700; color: #e8e8e8;
   letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 8px;
 }
-.banner-sub { font-size: 13px; color: #383838; line-height: 1.55; max-width: 380px; }
+.banner-sub {
+  font-size: 13px; color: #363636; line-height: 1.55; max-width: 500px;
+}
+
 .banner-stats {
-  display: flex; align-items: stretch;
-  background: var(--dark2); border: 1px solid #1c1c1c;
-  border-radius: var(--radius); overflow: hidden; flex-shrink: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-bottom: 2.5px solid var(--orange);
 }
 .bstat {
-  padding: 20px 26px; border-right: 1px solid #1c1c1c;
-  display: flex; flex-direction: column; justify-content: center; min-width: 120px;
+  padding: 22px 28px;
+  border-right: 1px solid #1c1c1c;
 }
 .bstat:last-child { border-right: none; }
 .bstat-val {
-  font-size: 28px; font-weight: 700; color: #d8d8d8;
-  letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px;
+  font-size: 36px; font-weight: 700; color: #d0d0d0;
+  letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px;
   font-variant-numeric: tabular-nums;
 }
 .bstat-val.orange { color: var(--orange); }
 .bstat-val.red { color: #f87171; }
-.bstat-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #3a3a3a; }
-.bstat-sub { font-size: 11px; color: #2e2e2e; margin-top: 3px; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bstat-lbl {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: #383838;
+}
+.bstat-sub {
+  font-size: 11px; color: #282828; margin-top: 3px;
+  max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
-/* ── Toolbar ───────────────────────────────────────── */
+/* ── Toolbar ──────────────────────────────────────── */
+.toolbar-wrap { background: var(--surface); border-bottom: 1px solid var(--border); }
 .toolbar {
-  max-width: 1280px; margin: 0 auto; padding: 16px 28px;
+  max-width: 1280px; margin: 0 auto; padding: 12px 28px;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  border-bottom: 1px solid var(--border);
 }
 .toolbar-left { display: flex; align-items: center; gap: 10px; }
 .search-wrap {
   display: flex; align-items: center; gap: 8px;
-  background: var(--surface); border: 1px solid var(--border);
+  background: var(--bg); border: 1px solid var(--border);
   border-radius: 7px; padding: 0 12px; height: 36px;
-  transition: border-color 0.15s; box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s;
 }
-.search-wrap:focus-within { border-color: var(--orange); }
+.search-wrap:focus-within { border-color: var(--orange); background: var(--surface); }
 .search-wrap svg { color: var(--muted); flex-shrink: 0; }
 .search-input { border: none; background: none; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--text); width: 220px; outline: none; }
 .search-input::placeholder { color: var(--muted); }
@@ -119,7 +125,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 }
 .toolbar-right { display: flex; gap: 8px; }
 .btn {
-  height: 36px; padding: 0 16px; border-radius: 7px; border: none;
+  height: 36px; padding: 0 18px; border-radius: 7px; border: none;
   cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif;
   font-weight: 600; transition: all 0.12s; display: flex; align-items: center; gap: 6px;
   letter-spacing: 0.01em;
@@ -130,89 +136,104 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 .btn-primary { background: var(--orange); color: #fff; }
 .btn-primary:hover { background: var(--orange-dk); }
 
-/* ── Customer grid ─────────────────────────────────── */
-.grid-wrap { max-width: 1280px; margin: 0 auto 56px; padding: 20px 28px; }
+/* ── Grid ─────────────────────────────────────────── */
+.grid-wrap { max-width: 1280px; margin: 0 auto 60px; padding: 20px 28px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
 
-/* ── Customer cards ────────────────────────────────── */
+/* ── Customer cards ───────────────────────────────── */
 .card {
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 16px 18px;
-  cursor: pointer; transition: all 0.15s;
+  border-radius: var(--radius); padding: 18px;
+  cursor: pointer; transition: box-shadow 0.15s, transform 0.15s;
   position: relative; overflow: hidden;
   box-shadow: var(--shadow-sm);
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: column; min-height: 165px;
 }
+/* Top colour strip — default grey */
 .card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
   height: 3px; background: var(--border); transition: background 0.18s;
 }
+/* OTIF status colours — always visible */
+.card.card--good::before  { background: var(--green); }
+.card.card--warn::before  { background: var(--amber); }
+.card.card--bad::before   { background: var(--red); }
+/* No-data cards show orange on hover */
+.card:not(.has-data):hover::before { background: var(--orange); }
+/* Status cards darken on hover */
+.card.card--good:hover::before { background: #166534; }
+.card.card--warn:hover::before { background: #92400E; }
+.card.card--bad:hover::before  { background: #B91C1C; }
+
 .card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
-.card:hover::before, .card.has-data::before { background: var(--orange); }
-.card-top {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  margin-bottom: 10px;
+.edit-mode .card { cursor: default; }
+.edit-mode .card:hover { transform: none; box-shadow: var(--shadow-sm); }
+
+/* Card header row: avatar + name + del btn */
+.card-head {
+  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;
 }
 .avatar {
-  width: 36px; height: 36px; border-radius: 9px;
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
   background: var(--orange-dim); color: var(--orange);
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.02em; flex-shrink: 0;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
+  margin-top: 1px;
+}
+.card-name {
+  flex: 1; font-size: 13px; font-weight: 600; color: var(--text);
+  line-height: 1.4; word-break: break-word;
 }
 .del-btn {
-  width: 26px; height: 26px; border-radius: 6px;
+  width: 26px; height: 26px; flex-shrink: 0; border-radius: 6px;
   background: var(--faint); border: 1px solid var(--border);
   color: var(--muted); cursor: pointer; font-size: 13px;
   display: none; align-items: center; justify-content: center; transition: all 0.15s;
 }
 .del-btn:hover { background: #FEF2F2; border-color: #FCA5A5; color: var(--red); }
 .edit-mode .del-btn { display: flex; }
-.edit-mode .card { cursor: default; }
-.edit-mode .card:hover { transform: none; box-shadow: var(--shadow-sm); }
-.card-name {
-  font-size: 13px; font-weight: 600; color: var(--text);
-  line-height: 1.35; margin-bottom: 14px; flex: 1;
-}
-/* KPI area */
+
+/* KPI section */
 .card-kpi { margin-top: auto; }
 .kpi-big {
-  font-size: 30px; font-weight: 700; letter-spacing: -0.03em;
-  line-height: 1; margin-bottom: 3px; font-variant-numeric: tabular-nums;
+  font-size: 34px; font-weight: 700; letter-spacing: -0.03em;
+  line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums;
 }
 .kpi-big.good { color: var(--green); }
 .kpi-big.warn { color: var(--amber); }
-.kpi-big.bad { color: var(--red); }
+.kpi-big.bad  { color: var(--red); }
 .kpi-big-lbl {
   font-size: 9px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px;
+  letter-spacing: 0.1em; color: var(--muted); margin-bottom: 9px;
 }
 .otif-track {
-  height: 3px; background: var(--faint); border-radius: 2px;
-  overflow: hidden; margin-bottom: 10px;
+  height: 4px; background: var(--faint); border-radius: 2px;
+  overflow: hidden; margin-bottom: 9px;
 }
 .otif-fill { height: 100%; border-radius: 2px; }
-.kpi-sub-row { display: flex; align-items: center; }
 .kpi-months { font-size: 11px; color: var(--muted); font-weight: 500; }
 .card-no-data {
-  font-size: 12px; color: var(--muted); padding-top: 6px;
-  margin-top: auto;
+  font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 8px;
 }
+
 /* Add card */
 .add-card {
   background: transparent; border: 1.5px dashed var(--border);
   border-radius: var(--radius); display: flex; flex-direction: column;
-  align-items: center; justify-content: center; min-height: 160px;
+  align-items: center; justify-content: center; min-height: 165px;
   cursor: pointer; transition: all 0.15s;
 }
 .add-card:hover { border-color: var(--orange); background: var(--orange-dim); }
-.add-icon { font-size: 24px; color: var(--border); margin-bottom: 6px; transition: color 0.15s; }
+.add-icon { font-size: 24px; color: #d0cec9; margin-bottom: 7px; transition: color 0.15s; }
 .add-card:hover .add-icon { color: var(--orange); }
 .add-lbl { font-size: 12px; font-weight: 500; color: var(--muted); }
+
 /* Empty state */
 .empty-state { text-align: center; padding: 60px 0; }
 .empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
-.empty-state-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.empty-state-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 .empty-state-sub { font-size: 13px; color: var(--muted); }
+
 /* Modal */
 .overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.35);
@@ -253,45 +274,45 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
 </div>
 
 <div class="portal-banner">
-  <div class="banner-inner">
-    <div class="banner-text">
-      <div class="banner-eyebrow">Premier Logistics Group</div>
-      <div class="banner-title">Customer KPI Portal</div>
-      <div class="banner-sub">Monthly delivery performance tracking across your full customer portfolio</div>
+  <div class="banner-top">
+    <div class="banner-eyebrow">Premier Logistics Group</div>
+    <div class="banner-title">Customer KPI Portal</div>
+    <div class="banner-sub">Monthly delivery performance tracking across your full customer portfolio</div>
+  </div>
+  <div class="banner-stats">
+    <div class="bstat">
+      <div class="bstat-val" id="s-total">--</div>
+      <div class="bstat-lbl">Customers</div>
     </div>
-    <div class="banner-stats">
-      <div class="bstat">
-        <div class="bstat-val" id="s-total">--</div>
-        <div class="bstat-lbl">Customers</div>
-      </div>
-      <div class="bstat">
-        <div class="bstat-val" id="s-data">--</div>
-        <div class="bstat-lbl">With Data</div>
-      </div>
-      <div class="bstat">
-        <div class="bstat-val orange" id="s-best">--</div>
-        <div class="bstat-lbl">Best OTIF</div>
-        <div class="bstat-sub" id="s-bestname">No data yet</div>
-      </div>
-      <div class="bstat">
-        <div class="bstat-val red" id="s-att">--</div>
-        <div class="bstat-lbl">Below 95%</div>
-      </div>
+    <div class="bstat">
+      <div class="bstat-val" id="s-data">--</div>
+      <div class="bstat-lbl">With Data</div>
+    </div>
+    <div class="bstat">
+      <div class="bstat-val orange" id="s-best">--</div>
+      <div class="bstat-lbl">Best Pallet OTIF</div>
+      <div class="bstat-sub" id="s-bestname">No data yet</div>
+    </div>
+    <div class="bstat">
+      <div class="bstat-val red" id="s-att">--</div>
+      <div class="bstat-lbl">Below 95% OTIF</div>
     </div>
   </div>
 </div>
 
-<div class="toolbar">
-  <div class="toolbar-left">
-    <div class="search-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" class="search-input" id="search" placeholder="Search customers..." oninput="render()">
+<div class="toolbar-wrap">
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <div class="search-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="search" placeholder="Search customers..." oninput="render()">
+      </div>
+      <div class="count-badge" id="count-badge">--</div>
     </div>
-    <div class="count-badge" id="count-badge">--</div>
-  </div>
-  <div class="toolbar-right">
-    <button class="btn btn-outline" id="edit-btn" onclick="toggleEdit()">Manage</button>
-    <button class="btn btn-primary" onclick="showModal()">+ Add customer</button>
+    <div class="toolbar-right">
+      <button class="btn btn-outline" id="edit-btn" onclick="toggleEdit()">Manage</button>
+      <button class="btn btn-primary" onclick="showModal()">+ Add customer</button>
+    </div>
   </div>
 </div>
 
@@ -384,21 +405,26 @@ function render() {
     var otifV = m.otif != null ? parseFloat(m.otif) : null;
     var barW = otifV != null ? Math.min(otifV, 100).toFixed(1) : 0;
     var barC = otifV != null ? (otifV >= 98 ? '#15803D' : otifV >= 95 ? '#B45309' : '#DC2626') : '#ccc';
+    var statusClass = hasData && otifV != null ? (otifV >= 98 ? ' card--good' : otifV >= 95 ? ' card--warn' : ' card--bad') : '';
+
     var kpiHtml = hasData
       ? '<div class="card-kpi">'
           + '<div class="kpi-big ' + otifClass(m.otif) + '">' + (otifV != null ? otifV.toFixed(1) + '%' : '\u2014') + '</div>'
           + '<div class="kpi-big-lbl">Pallet OTIF</div>'
           + '<div class="otif-track"><div class="otif-fill" style="width:' + barW + '%;background:' + barC + '"></div></div>'
-          + '<div class="kpi-sub-row"><span class="kpi-months">' + m.months + ' month' + (m.months !== 1 ? 's' : '') + ' of data</span></div>'
+          + '<div class="kpi-months">' + m.months + ' month' + (m.months !== 1 ? 's' : '') + ' of data</div>'
           + '</div>'
       : '<div class="card-no-data">No data saved yet</div>';
 
     var onclickAttr = editMode ? '' : ' onclick="goTo(\'' + safeName + '\')"';
     var delBtnHtml = editMode ? '<button class="del-btn" onclick="event.stopPropagation();delCustomer(\'' + safeName + '\')">&#215;</button>' : '';
 
-    var html = '<div class="card' + (hasData ? ' has-data' : '') + '"' + onclickAttr + '>'
-      + '<div class="card-top"><div class="avatar">' + inits(name) + '</div>' + delBtnHtml + '</div>'
+    var html = '<div class="card' + (hasData ? ' has-data' : '') + statusClass + '"' + onclickAttr + '>'
+      + '<div class="card-head">'
+      + '<div class="avatar">' + inits(name) + '</div>'
       + '<div class="card-name">' + name + '</div>'
+      + delBtnHtml
+      + '</div>'
       + kpiHtml
       + '</div>';
 
