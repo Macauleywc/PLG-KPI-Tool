@@ -1086,6 +1086,14 @@ function selectMonth(key){
   var hr=document.getElementById('h-rev');if(hr)hr.textContent=totR>0?'£'+totR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';
   var ho=document.getElementById('h-otif');if(ho){ho.textContent=otif;ho.style.color=otifCol;}
   document.querySelectorAll('.tracker-month-row').forEach(function(row){var rk=row.getAttribute('data-month-key');if(key==='all'){row.style.background='';row.style.fontWeight='';}else{row.style.background=rk===key?'#fff8f0':'';row.style.fontWeight=rk===key?'600':'';}});
+  // Update KPI Review cards to match selection
+  var monLabel=key==='all'?'YTD':(MONTHS[MONTH_KEYS.indexOf(key)]||key);
+  var avgPC=totC>0?(totP/totC).toFixed(1):'0.0';
+  var cards=document.getElementById('ytd-cards');
+  if(cards){cards.innerHTML='<div class="stat-card"><div class="lbl">'+monLabel+' Consignments</div><div class="val" style="color:var(--orange)">'+(totC||0).toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">'+monLabel+' Pallets</div><div class="val">'+(totP||0).toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">'+monLabel+' Base Cost</div><div class="val">£'+(totR||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+'<div class="stat-card"><div class="lbl">'+monLabel+' Pallet OTIF</div><div class="val" style="color:'+otifCol+'">'+otif+'</div></div>';}
+  // Filter the late log to the selected month
+  var lm=document.getElementById('late-month');
+  if(lm){lm.value=key==='all'?'':monLabel;if(typeof filterLateLog==='function')filterLateLog();}
 }
 
 async function loadFromGitHub(){
