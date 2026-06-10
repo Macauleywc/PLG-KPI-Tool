@@ -4,125 +4,116 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PLG KPI Portal — Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --o:#F47920;--dk:#111;--bg:#F0EEE9;--surface:#fff;
-  --border:#E2E0DB;--muted:#888;--font:'Segoe UI',Arial,sans-serif;
+  --o:#F47920;--o-dk:#E06810;--dk:#121212;
+  --border:#1f1f1f;--font:'Inter',sans-serif;
 }
 body{
   font-family:var(--font);background:var(--dk);
   min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
+  -webkit-font-smoothing:antialiased;
 }
-
-/* Background texture */
 body::before{
   content:'';position:fixed;inset:0;
-  background:linear-gradient(135deg,#0d0d0d 0%,#1a1a1a 50%,#0d0d0d 100%);
+  background:linear-gradient(135deg,#0c0c0c 0%,#181818 50%,#0c0c0c 100%);
   z-index:0;
 }
 body::after{
   content:'';position:fixed;inset:0;
   background:repeating-linear-gradient(
     45deg,transparent,transparent 40px,
-    rgba(244,121,32,0.02) 40px,rgba(244,121,32,0.02) 41px
+    rgba(244,121,32,0.015) 40px,rgba(244,121,32,0.015) 41px
   );
   z-index:0;
 }
-
 .login-wrap{
   position:relative;z-index:1;
-  width:100%;max-width:420px;padding:24px;
+  width:100%;max-width:400px;padding:24px;
 }
-
-/* Logo + brand */
-.brand{text-align:center;margin-bottom:36px;}
+/* Brand */
+.brand{text-align:center;margin-bottom:32px;}
 .brand-logo{
-  width:220px;height:220px;border-radius:36px;
+  width:180px;height:180px;border-radius:24px;
   background:#ffffff;display:inline-flex;
-  align-items:center;justify-content:center;margin-bottom:24px;
-  box-shadow:0 14px 56px rgba(0,0,0,0.45);
-  border:1px solid rgba(255,255,255,0.08);
+  align-items:center;justify-content:center;margin-bottom:20px;
+  box-shadow:0 16px 56px rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.06);
 }
-.brand-logo img{height:150px;width:auto;}
+.brand-logo img{height:120px;width:auto;}
 .brand-name{
-  font-size:13px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:#888;margin-bottom:6px;
+  font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:#444;margin-bottom:6px;
 }
 .brand-title{
-  font-size:24px;font-weight:800;color:#fff;letter-spacing:-.02em;
+  font-size:22px;font-weight:700;color:#fff;letter-spacing:-.02em;
 }
-.brand-sub{font-size:13px;color:#555;margin-top:4px;}
-
+.brand-sub{font-size:12px;color:#3e3e3e;margin-top:5px;}
 /* Card */
 .card{
-  background:#161616;border:1px solid #222;border-radius:16px;
-  padding:32px;box-shadow:0 24px 80px rgba(0,0,0,0.6);
+  background:#161616;border:1px solid #1f1f1f;border-radius:12px;
+  padding:28px;box-shadow:0 24px 80px rgba(0,0,0,0.6);
+}
+.accent-bar{
+  height:2px;background:var(--o);border-radius:2px 2px 0 0;
+  margin:-28px -28px 24px;
 }
 .card-title{
-  font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;
+  font-size:15px;font-weight:700;color:#e8e8e8;margin-bottom:5px;
 }
-.card-sub{font-size:13px;color:#666;margin-bottom:28px;}
-
+.card-sub{font-size:12px;color:#444;margin-bottom:22px;}
 /* Form */
-.field{margin-bottom:18px;}
+.field{margin-bottom:16px;}
 .field label{
-  display:block;font-size:11px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.08em;
-  color:#666;margin-bottom:7px;
+  display:block;font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:#484848;margin-bottom:7px;
 }
 .field-wrap{position:relative;}
 .field input{
-  width:100%;background:#1e1e1e;border:1px solid #2a2a2a;
-  border-radius:8px;padding:12px 44px 12px 14px;
-  font-size:14px;color:#fff;font-family:var(--font);
+  width:100%;background:#1e1e1e;border:1px solid #262626;
+  border-radius:7px;padding:11px 44px 11px 14px;
+  font-size:14px;color:#e0e0e0;font-family:var(--font);
   transition:border-color .2s;outline:none;
   -webkit-text-security:disc;
 }
 .field input[type=text]{-webkit-text-security:none;}
-.field input::placeholder{color:#444;}
+.field input::placeholder{color:#383838;}
 .field input:focus{border-color:var(--o);background:#222;}
 .field-icon{
   position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  color:#444;font-size:16px;cursor:pointer;user-select:none;
+  color:#383838;font-size:16px;cursor:pointer;user-select:none;
   transition:color .2s;
 }
-.field-icon:hover{color:#888;}
-
+.field-icon:hover{color:#777;}
 /* Error */
 .error-msg{
-  display:none;background:#1a0808;border:1px solid #4a1010;
-  border-radius:8px;padding:10px 14px;margin-bottom:18px;
-  font-size:13px;color:#ef4444;
+  display:none;background:#1a0a0a;border:1px solid #3d1212;
+  border-radius:7px;padding:10px 14px;margin-bottom:16px;
+  font-size:12px;color:#f87171;line-height:1.5;
 }
 .error-msg.show{display:block;}
-
 /* Button */
 .btn-login{
   width:100%;background:var(--o);color:#fff;border:none;
-  border-radius:8px;padding:13px;font-size:15px;font-weight:700;
+  border-radius:7px;padding:12px;font-size:14px;font-weight:700;
   font-family:var(--font);cursor:pointer;letter-spacing:.01em;
   transition:all .2s;display:flex;align-items:center;
   justify-content:center;gap:8px;
 }
-.btn-login:hover{background:#E06810;transform:translateY(-1px);
-  box-shadow:0 8px 24px rgba(244,121,32,0.35);}
+.btn-login:hover{background:var(--o-dk);transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(244,121,32,0.3);}
 .btn-login:active{transform:translateY(0);}
-.btn-login.loading{background:#555;cursor:not-allowed;transform:none;box-shadow:none;}
-
+.btn-login.loading{opacity:.7;pointer-events:none;}
 /* Footer */
 .footer{
-  text-align:center;margin-top:24px;
-  font-size:12px;color:#444;line-height:1.6;
+  text-align:center;margin-top:22px;
+  font-size:11px;color:#333;line-height:1.6;
 }
-.footer span{color:#333;}
-
-/* Orange accent line */
-.accent-bar{
-  height:3px;background:var(--o);border-radius:3px 3px 0 0;
-  margin:-32px -32px 28px;border-radius:16px 16px 0 0;
-}
+.footer span{color:#2e2e2e;}
 </style>
 </head>
 <body>
