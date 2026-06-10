@@ -248,11 +248,11 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 </div>
 
 <div class="ytd-strip">
-  <div class="ytd-cell"><div class="ytd-label">YTD Consignments</div><div class="ytd-value orange" id="h-cons">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Pallets</div><div class="ytd-value" id="h-pallets">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Cost</div><div class="ytd-value" id="h-rev">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label">YTD Lates</div><div class="ytd-value" id="h-lates">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label" id="lbl-cons">YTD Consignments</div><div class="ytd-value orange" id="h-cons">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label" id="lbl-pallets">YTD Pallets</div><div class="ytd-value" id="h-pallets">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label" id="lbl-rev">YTD Base Cost</div><div class="ytd-value" id="h-rev">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label" id="lbl-otif">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">—</div></div>
+  <div class="ytd-cell"><div class="ytd-label" id="lbl-lates">YTD Lates</div><div class="ytd-value" id="h-lates">—</div></div>
 </div>
 
 <div class="months-bar">
@@ -1126,19 +1126,29 @@ function selectMonth(key){
   _activeMonth=key;
   document.querySelectorAll('.month-chip').forEach(function(el){el.style.outline='none';el.style.boxShadow='none';});
   var active=document.getElementById('chip-'+(key==='all'?'all':key));if(active){active.style.outline='2px solid #fff';active.style.boxShadow='0 0 0 3px #F47920';}
-  var months=key==='all'?Object.keys(savedMonthData):savedMonthData[key]?[key]:[];
+  // Build totals — prefer savedMonthData, fall back to calculatedMonths
+  function getMonthData(k){
+    if(savedMonthData[k])return savedMonthData[k];
+    if(calculatedMonths[k]){var c=calculatedMonths[k];return{cons:c.cons,pallets:c.pallets,revenue:c.revenue,lates:c.lates,latePallets:c.latePallets||0};}
+    return null;
+  }
+  var allKeys=Array.from(new Set(Object.keys(savedMonthData).concat(Object.keys(calculatedMonths))));
+  var months=key==='all'?allKeys:getMonthData(key)?[key]:[];
   var totC=0,totP=0,totR=0,totL=0,totLP=0;
-  months.forEach(function(k){var d=savedMonthData[k];if(!d)return;totC+=d.cons||0;totP+=d.pallets||0;totR+=d.revenue||0;totL+=d.lates||0;totLP+=d.latePallets||0;});
+  months.forEach(function(k){var d=getMonthData(k);if(!d)return;totC+=d.cons||0;totP+=d.pallets||0;totR+=d.revenue||0;totL+=d.lates||0;totLP+=d.latePallets||0;});
   var otif=totP>0?((totP-totLP)/totP*100).toFixed(2)+'%':'--';
   var otifCol=parseFloat(otif)>=98?'#2e7d32':parseFloat(otif)>=95?'#e65100':'#c62828';
+  var monLabel=key==='all'?'YTD':(MONTHS[MONTH_KEYS.indexOf(key)]||key);
+  var prefix=key==='all'?'YTD':monLabel;
+  // Update dark strip values AND labels
   var s=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
   s('h-cons',totC||'--');s('h-pallets',totP||'--');s('h-lates',totL||'--');
+  s('lbl-cons',prefix+' Consignments');s('lbl-pallets',prefix+' Pallets');
+  s('lbl-rev',prefix+' Base Cost');s('lbl-otif',prefix+' Pallet OTIF');s('lbl-lates',prefix+' Lates');
   var hr=document.getElementById('h-rev');if(hr)hr.textContent=totR>0?'£'+totR.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';
   var ho=document.getElementById('h-otif');if(ho){ho.textContent=otif;ho.style.color=otifCol;}
   document.querySelectorAll('.tracker-month-row').forEach(function(row){var rk=row.getAttribute('data-month-key');if(key==='all'){row.style.background='';row.style.fontWeight='';}else{row.style.background=rk===key?'#fff8f0':'';row.style.fontWeight=rk===key?'600':'';}});
-  // Update KPI Review cards to match selection
-  var monLabel=key==='all'?'YTD':(MONTHS[MONTH_KEYS.indexOf(key)]||key);
-  var avgPC=totC>0?(totP/totC).toFixed(1):'0.0';
+  // Update KPI Review stat cards
   var cards=document.getElementById('ytd-cards');
   if(cards){cards.innerHTML='<div class="stat-card"><div class="lbl">'+monLabel+' Consignments</div><div class="val" style="color:var(--orange)">'+(totC||0).toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">'+monLabel+' Pallets</div><div class="val">'+(totP||0).toLocaleString()+'</div></div>'+'<div class="stat-card"><div class="lbl">'+monLabel+' Base Cost</div><div class="val">£'+(totR||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div></div>'+'<div class="stat-card"><div class="lbl">'+monLabel+' Pallet OTIF</div><div class="val" style="color:'+otifCol+'">'+otif+'</div></div>';}
   // Filter the late log to the selected month
