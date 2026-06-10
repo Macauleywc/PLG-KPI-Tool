@@ -1,6 +1,6 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-06-10T16:16:02.340Z",
+  "lastUpdated": "2026-06-10T16:17:31.278Z",
   "months": {
     "2026-04": {
       "cons": 109,
@@ -12,19 +12,78 @@
       "avgRC": 67.42,
       "avgRP": 44.81,
       "avgPC": 1.5
+    },
+    "2026-05": {
+      "cons": 104,
+      "pallets": 158,
+      "revenue": 7751.84,
+      "lates": 5,
+      "latePallets": 6,
+      "timeliness": 0.962025,
+      "avgRC": 74.54,
+      "avgRP": 49.06,
+      "avgPC": 1.52
     }
   },
   "lateRows": [
     {
-      "id": "263001",
+      "id": "263665",
       "acct": "ANAND",
-      "month": "Apr-26",
+      "month": "May-26",
+      "dest": "Ocean Trading International Ltd",
+      "city": "Ocean Trading International Ltd",
+      "pc": "M8 9SN",
+      "window": "",
+      "commitDate": "14/05/26",
+      "arrDate": "15/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": ""
+    },
+    {
+      "id": "264061",
+      "acct": "ANAND",
+      "month": "May-26",
+      "dest": "H-SQUARED ELECTRONICS LTD",
+      "city": "H-SQUARED ELECTRONICS LTD",
+      "pc": "SG17 5HQ",
+      "window": "",
+      "commitDate": "01/06/26",
+      "arrDate": "02/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": ""
+    },
+    {
+      "id": "263589",
+      "acct": "ANAND",
+      "month": "May-26",
+      "dest": "Kapadia Superstore",
+      "city": "Kapadia Superstore",
+      "pc": "E5 0PD",
+      "window": "",
+      "commitDate": "12/05/26",
+      "arrDate": "13/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": ""
+    },
+    {
+      "id": "263517",
+      "acct": "ANAND",
+      "month": "May-26",
       "dest": "Dhamecha Cash & Carry ",
       "city": "Dhamecha Cash & Carry ",
       "pc": "CR0 3AF",
       "window": "",
-      "commitDate": "21/04/26",
-      "arrDate": "22/04/26",
+      "commitDate": "12/05/26",
+      "arrDate": "13/05/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
@@ -32,111 +91,69 @@
       "note": ""
     },
     {
-      "id": "262759",
+      "id": "263406",
       "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "UNITED WHOLESALE GROCERS LTD",
-      "city": "UNITED WHOLESALE GROCERS LTD",
-      "pc": "NE11 0RQ",
+      "month": "May-26",
+      "dest": "Legacy Vape Hub UK Ltd",
+      "city": "Legacy Vape Hub UK Ltd",
+      "pc": "M8 8FN",
       "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "11/04/26",
+      "commitDate": "06/05/26",
+      "arrDate": "07/05/26",
       "arrival": "01:00",
       "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": ""
-    },
-    {
-      "id": "262464",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "Perkins Group Services Ltd",
-      "city": "Perkins Group Services Ltd",
-      "pc": "SA5 4HW",
-      "window": "",
-      "commitDate": "09/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": ""
-    },
-    {
-      "id": "263345",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "LIGHTER LTD",
-      "city": "LIGHTER LTD",
-      "pc": "CM18 7QR",
-      "window": "",
-      "commitDate": "05/05/26",
-      "arrDate": "06/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
+      "pallets": 2,
+      "dtype": "Standard",
       "note": ""
     }
   ],
   "regionData": {
-    "Other": {
-      "pallets": 11,
-      "cons": 5,
+    "London": {
+      "pallets": 12,
+      "cons": 9,
       "lates": 1
     },
-    "North East": {
-      "pallets": 7,
-      "cons": 6,
-      "lates": 1
+    "North West": {
+      "pallets": 44,
+      "cons": 29,
+      "lates": 2
     },
     "West Midlands": {
-      "pallets": 12,
-      "cons": 11,
+      "pallets": 11,
+      "cons": 8,
+      "lates": 0
+    },
+    "North East": {
+      "pallets": 10,
+      "cons": 7,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 14,
+      "cons": 5,
+      "lates": 0
+    },
+    "East of England": {
+      "pallets": 7,
+      "cons": 7,
+      "lates": 1
+    },
+    "Wales": {
+      "pallets": 3,
+      "cons": 3,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 3,
+      "cons": 3,
       "lates": 0
     },
     "Scotland": {
       "pallets": 7,
-      "cons": 6,
-      "lates": 0
-    },
-    "North West": {
-      "pallets": 52,
-      "cons": 31,
-      "lates": 0
-    },
-    "London": {
-      "pallets": 5,
-      "cons": 5,
-      "lates": 0
-    },
-    "Yorkshire": {
-      "pallets": 17,
-      "cons": 13,
-      "lates": 0
-    },
-    "East of England": {
-      "pallets": 15,
-      "cons": 10,
-      "lates": 1
-    },
-    "Wales": {
-      "pallets": 11,
       "cons": 7,
-      "lates": 1
-    },
-    "South East": {
-      "pallets": 2,
-      "cons": 1,
       "lates": 0
     },
     "East Midlands": {
-      "pallets": 13,
-      "cons": 6,
-      "lates": 0
-    },
-    "South West": {
       "pallets": 10,
       "cons": 6,
       "lates": 0
@@ -146,47 +163,30 @@
       "cons": 1,
       "lates": 0
     },
-    "South": {
-      "pallets": 1,
-      "cons": 1,
+    "Other": {
+      "pallets": 21,
+      "cons": 7,
+      "lates": 1
+    },
+    "Yorkshire": {
+      "pallets": 11,
+      "cons": 8,
+      "lates": 0
+    },
+    "South East": {
+      "pallets": 4,
+      "cons": 4,
       "lates": 0
     }
   },
   "destData": [
     {
-      "name": "TS Distribution/Trades Store",
-      "city": "TS Distribution/Trades Store",
-      "pc": "BB1 5BY",
-      "cons": 6,
-      "pallets": 6,
-      "revenue": 258.40000000000003,
-      "lates": 0
-    },
-    {
-      "name": "GO GREEN BATTERIES LTD",
-      "city": "GO GREEN BATTERIES LTD",
-      "pc": "S81 8AD",
+      "name": "Savers Health & Beauty Ltd",
+      "city": "Savers Health & Beauty Ltd",
+      "pc": "DL3 0PS",
       "cons": 5,
-      "pallets": 5,
-      "revenue": 210.14999999999998,
-      "lates": 0
-    },
-    {
-      "name": "GAP Convenience Distribution Ltd",
-      "city": "GAP Convenience Distribution Ltd",
-      "pc": "PR2 5PZ",
-      "cons": 5,
-      "pallets": 5,
-      "revenue": 264.95,
-      "lates": 0
-    },
-    {
-      "name": "FIZZA ELECTRONICS LTD",
-      "city": "FIZZA ELECTRONICS LTD",
-      "pc": "M8 8LG",
-      "cons": 4,
-      "pallets": 5,
-      "revenue": 208.45,
+      "pallets": 8,
+      "revenue": 434.40000000000003,
       "lates": 0
     },
     {
@@ -194,17 +194,26 @@
       "city": "H-SQUARED ELECTRONICS LTD",
       "pc": "SG17 5HQ",
       "cons": 4,
+      "pallets": 4,
+      "revenue": 163.2,
+      "lates": 1
+    },
+    {
+      "name": "GAP Convenience Distribution Ltd",
+      "city": "GAP Convenience Distribution Ltd",
+      "pc": "PR2 5PZ",
+      "cons": 4,
       "pallets": 5,
-      "revenue": 203.25,
+      "revenue": 243.25,
       "lates": 0
     },
     {
-      "name": "GENUINE CENTRE LTD",
-      "city": "GENUINE CENTRE LTD",
-      "pc": "PR1 5DL",
+      "name": "TS Distribution/Trades Store",
+      "city": "TS Distribution/Trades Store",
+      "pc": "BB1 5BY",
       "cons": 4,
-      "pallets": 8,
-      "revenue": 354.2,
+      "pallets": 5,
+      "revenue": 223.09999999999997,
       "lates": 0
     },
     {
@@ -213,97 +222,43 @@
       "pc": "NW10 7XR",
       "cons": 3,
       "pallets": 3,
-      "revenue": 196.10000000000002,
+      "revenue": 185.44,
       "lates": 0
     },
     {
-      "name": "Savers Health & Beauty Ltd",
-      "city": "Savers Health & Beauty Ltd",
-      "pc": "LU5 4RZ",
+      "name": "FIZZA ELECTRONICS LTD",
+      "city": "FIZZA ELECTRONICS LTD",
+      "pc": "M8 8LG",
       "cons": 3,
-      "pallets": 8,
-      "revenue": 381.1,
-      "lates": 0
-    },
-    {
-      "name": "V-TULIP LIMITED",
-      "city": "V-TULIP LIMITED",
-      "pc": "UB6 8AA",
-      "cons": 2,
-      "pallets": 5,
-      "revenue": 281.9,
-      "lates": 0
-    },
-    {
-      "name": "FUTURE DEVELOPMENTS",
-      "city": "FUTURE DEVELOPMENTS",
-      "pc": "ST6 4HS",
-      "cons": 2,
-      "pallets": 2,
-      "revenue": 74.5,
-      "lates": 0
-    },
-    {
-      "name": "B & M BARGAINS",
-      "city": "B & M BARGAINS",
-      "pc": "L24 8RJ",
-      "cons": 2,
-      "pallets": 5,
-      "revenue": 220.15,
-      "lates": 0
-    },
-    {
-      "name": "UNITED WHOLESALE GROCERS LTD",
-      "city": "UNITED WHOLESALE GROCERS LTD",
-      "pc": "NE11 0RQ",
-      "cons": 2,
-      "pallets": 2,
-      "revenue": 93.5,
-      "lates": 1
-    },
-    {
-      "name": "Nuvo Trading Solutions Ltd",
-      "city": "Nuvo Trading Solutions Ltd",
-      "pc": "B69 2RD",
-      "cons": 2,
       "pallets": 3,
-      "revenue": 128.95,
+      "revenue": 111.85,
       "lates": 0
     },
     {
-      "name": "Alpha Cash & Carry Ltd",
-      "city": "Alpha Cash & Carry Ltd",
-      "pc": "BD19 5LY",
+      "name": "Fastcar Direct T/A Optiproducts Ltd",
+      "city": "Fastcar Direct T/A Optiproducts Ltd",
+      "pc": "WS3 2DG",
       "cons": 2,
       "pallets": 4,
-      "revenue": 151.4,
+      "revenue": 146.05,
       "lates": 0
     },
     {
-      "name": "Marks And Spencer PLC",
-      "city": "Marks And Spencer PLC",
-      "pc": "BD5 8LZ",
-      "cons": 2,
-      "pallets": 3,
-      "revenue": 111.1,
-      "lates": 0
-    },
-    {
-      "name": "PROPER JOB SUPERSTORES LTD",
-      "city": "PROPER JOB SUPERSTORES LTD",
-      "pc": "BS48 4RZ",
-      "cons": 2,
-      "pallets": 6,
-      "revenue": 254.8,
-      "lates": 0
-    },
-    {
-      "name": "J W FILSHILL LTD",
-      "city": "J W FILSHILL LTD",
-      "pc": "PA4 8DJ",
+      "name": "SHINING STAR (UK) LTD",
+      "city": "SHINING STAR (UK) LTD",
+      "pc": "M7 1SL",
       "cons": 2,
       "pallets": 2,
-      "revenue": 116,
+      "revenue": 79.05,
+      "lates": 0
+    },
+    {
+      "name": "HOMEWARE ESSENTIALS LTD",
+      "city": "HOMEWARE ESSENTIALS LTD",
+      "pc": "TS12 2LQ",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 80.2,
       "lates": 0
     },
     {
@@ -311,26 +266,98 @@
       "city": "Hovemint Ltd",
       "pc": "M7 1SS",
       "cons": 2,
+      "pallets": 2,
+      "revenue": 81.5,
+      "lates": 0
+    },
+    {
+      "name": "Nuvo Trading Solutions Ltd",
+      "city": "Nuvo Trading Solutions Ltd",
+      "pc": "B69 2RD",
+      "cons": 2,
       "pallets": 3,
-      "revenue": 128.95,
+      "revenue": 125.25,
       "lates": 0
     },
     {
-      "name": "LONDON SOHO LTD",
-      "city": "LONDON SOHO LTD",
-      "pc": "UB2 4EX",
+      "name": "YOUTHSTAR (W) LTD",
+      "city": "YOUTHSTAR (W) LTD",
+      "pc": "BL9 0FU",
       "cons": 2,
-      "pallets": 5,
-      "revenue": 285.15,
+      "pallets": 2,
+      "revenue": 88.5,
       "lates": 0
     },
     {
-      "name": "B & M Retail Ltd",
-      "city": "B & M Retail Ltd",
-      "pc": "MK42 6EY",
+      "name": "GO GREEN BATTERIES LTD",
+      "city": "GO GREEN BATTERIES LTD",
+      "pc": "S81 8AD",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 81,
+      "lates": 0
+    },
+    {
+      "name": "Vape Supplier Ltd",
+      "city": "Vape Supplier Ltd",
+      "pc": "B6 7AR",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 88.5,
+      "lates": 0
+    },
+    {
+      "name": "ARROW WHOLESALE LTD",
+      "city": "ARROW WHOLESALE LTD",
+      "pc": "SO15 0JU",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 115.1,
+      "lates": 0
+    },
+    {
+      "name": "V-TULIP LIMITED",
+      "city": "V-TULIP LIMITED",
+      "pc": "UB6 8AA",
+      "cons": 2,
+      "pallets": 6,
+      "revenue": 332.2,
+      "lates": 0
+    },
+    {
+      "name": "Good Deals 4 U Ltd",
+      "city": "Good Deals 4 U Ltd",
+      "pc": "M8 8AT",
       "cons": 2,
       "pallets": 5,
-      "revenue": 218.3,
+      "revenue": 189.6,
+      "lates": 0
+    },
+    {
+      "name": "Legacy Vape Hub UK Ltd",
+      "city": "Legacy Vape Hub UK Ltd",
+      "pc": "M8 8FN",
+      "cons": 2,
+      "pallets": 4,
+      "revenue": 160.4,
+      "lates": 1
+    },
+    {
+      "name": "Sian Wholesale Ltd",
+      "city": "Sian Wholesale Ltd",
+      "pc": "MK41 0HR",
+      "cons": 2,
+      "pallets": 4,
+      "revenue": 163.65,
+      "lates": 0
+    },
+    {
+      "name": "A-ONE DISTRIBUTOR LTD",
+      "city": "A-ONE DISTRIBUTOR LTD",
+      "pc": "M8 8EG",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 77.3,
       "lates": 0
     }
   ]
