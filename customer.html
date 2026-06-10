@@ -692,6 +692,7 @@ function exportCustomerReportForMonths(selectedKeys){
   var origCalc=Object.assign({},calculatedMonths);
   var origSaved=Object.assign({},savedMonthData);
   var origLateRows=window._savedLateRows?window._savedLateRows.slice():[];
+  var origTrackerData=trackerData?trackerData.slice():null;
   calculatedMonths={};
   selectedKeys.forEach(function(k){if(origCalc[k])calculatedMonths[k]=origCalc[k];});
   savedMonthData={};
@@ -699,8 +700,9 @@ function exportCustomerReportForMonths(selectedKeys){
   window._savedLateRows=origLateRows.filter(function(r){
     return selectedKeys.some(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]===r.month;});
   });
+  buildTrackerFromSaved();
   exportCustomerReport();
-  setTimeout(function(){calculatedMonths=origCalc;savedMonthData=origSaved;window._savedLateRows=origLateRows;},5000);
+  setTimeout(function(){calculatedMonths=origCalc;savedMonthData=origSaved;window._savedLateRows=origLateRows;trackerData=origTrackerData;},5000);
 }
 function exportCustomerReport(){
   if(!window._loadedFromSaved){
