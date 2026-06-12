@@ -462,7 +462,7 @@ function handleRaw(input){
       rawData.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
       calculatedMonths={};
       Object.keys(byMonth).forEach(function(k){if(k.indexOf('NaN')>-1)return;try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(calcErr){showAlert('warn','Error in calcMonth for '+k+': '+calcErr.message);}});
-      var months=Object.keys(byMonth);
+      var months=Object.keys(byMonth).filter(function(k){return k.indexOf('NaN')<0;});
       var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">&#9989;</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons &#183; '+s.pallets+' pallets &#183; £'+s.revenue.toFixed(2)+' &#183; '+s.lates+' late(s)</div></div></div>';}).join('');
       document.getElementById('raw-loaded').innerHTML=html;document.getElementById('raw-loaded').style.display='block';
       document.getElementById('delivery-upload-zone').style.display='block';
