@@ -457,16 +457,17 @@ function handleRaw(input){
         }
         showAlert('success','Delivery report loaded — '+rows.length+' consignments, '+rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
       }
-      rawData=rows;
+      rawData=(rawData||[]).concat(rows);
       var byMonth={};
-      rows.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
+      rawData.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
       calculatedMonths={};
       Object.keys(byMonth).forEach(function(k){if(k.indexOf('NaN')>-1)return;try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(calcErr){showAlert('warn','Error in calcMonth for '+k+': '+calcErr.message);}});
-      var months=Object.keys(calculatedMonths);
+      var months=Object.keys(byMonth);
       var html=months.map(function(k){var s=calculatedMonths[k],label=MONTHS[MONTH_KEYS.indexOf(k)]||k;return'<div class="file-loaded"><div class="file-icon">&#9989;</div><div style="flex:1"><div class="file-name">'+file.name+'</div><div class="file-status">'+label+': '+s.cons+' cons &#183; '+s.pallets+' pallets &#183; £'+s.revenue.toFixed(2)+' &#183; '+s.lates+' late(s)</div></div></div>';}).join('');
       document.getElementById('raw-loaded').innerHTML=html;document.getElementById('raw-loaded').style.display='block';
       document.getElementById('delivery-upload-zone').style.display='block';
       showAlert('success','Raw data loaded — '+months.length+' month(s): '+months.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', '));
+      renderHistory();
       if(Object.keys(calculatedMonths).length>0)renderPreview();
     }catch(err){showAlert('warn','Could not read file: '+err.message);}
   };
@@ -1126,7 +1127,7 @@ function renderHistory(){
   function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
   set('h-cons',totCons||'—');set('h-pallets',totPallets||'—');set('h-rev',totRev>0?'£'+totRev.toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'—');set('h-lates',totLates||'—');
   var ho=document.getElementById('h-otif');if(ho){ho.textContent=ytdOTIF!=='—'?ytdOTIF+'%':'—';ho.style.color=col;}
-  var chips='<div class="month-chip has-data chip-clickable" id="chip-all" data-mkey="all" style="background:#333;border-color:#555;cursor:pointer">All</div>'+MONTH_KEYS.map(function(key,i){var has=savedMonthData[key];var label=MONTHS[i];var d=savedMonthData[key];var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');return'<div class="month-chip'+(has?' has-data':'')+' chip-clickable" id="chip-'+key+'" data-mkey="'+key+'" style="cursor:pointer" title="'+(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'+label+(has&&palletOtif?' '+palletOtif:'')+'</div>';}).join('');
+  var chips='<div class="month-chip has-data chip-clickable" id="chip-all" data-mkey="all" style="background:#333;border-color:#555;cursor:pointer">All</div>'+MONTH_KEYS.map(function(key,i){var has=savedMonthData[key]||calculatedMonths[key];var label=MONTHS[i];var d=savedMonthData[key]||calculatedMonths[key];var palletOtif=d&&d.latePallets!=null&&d.pallets?((d.pallets-(d.latePallets||0))/d.pallets*100).toFixed(1)+'%':(d&&d.timeliness!=null?(d.timeliness*100).toFixed(1)+'%':'');return'<div class="month-chip'+(has?' has-data':'')+' chip-clickable" id="chip-'+key+'" data-mkey="'+key+'" style="cursor:pointer" title="'+(has?'Cons: '+d.cons+' | Pallet OTIF: '+palletOtif:'No data')+'">'+label+(has&&palletOtif?' '+palletOtif:'')+'</div>';}).join('');
   var strip=document.getElementById('months-strip');if(strip){strip.innerHTML=chips||'<span style="font-size:12px;color:#ccc">No months saved yet</span>';strip.onclick=function(e){var chip=e.target.closest('.chip-clickable');if(chip){selectMonth(chip.getAttribute('data-mkey'));}};}
 }
 
