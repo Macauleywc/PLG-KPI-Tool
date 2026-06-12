@@ -1035,9 +1035,18 @@ function removeSavedLate(idx){
   persistSavedData().then(function(){showAlert('success','Late entry removed and saved.');loadFromGitHub();}).catch(function(e){showAlert('warn','Remove failed: '+e.message);});
 }
 function removeLate(orderId,rowIdx){
-  var lateRowsInRaw=rawData?rawData.filter(function(r){return isLate(r);}):[];
-  if(rowIdx!==undefined&&lateRowsInRaw[rowIdx]){lateRowsInRaw[rowIdx]._manuallyRemoved=true;lateRowsInRaw[rowIdx]._v4_late=false;}
-  var key=String(orderId||'').trim();if(key)removedLateIds.add(key);
+  var key=String(orderId||'').trim();
+  if(key)removedLateIds.add(key);
+  // Match by order ID (robust to sorting / month-grouping order), not by positional index
+  var matched=false;
+  if(rawData&&rawData.length>0){
+    rawData.forEach(function(r){var rid=String(r['id']||r['order id']||'').trim();if(key&&rid===key){r._manuallyRemoved=true;r._v4_late=false;matched=true;}});
+  }
+  // Fallback: if no id match (blank id), use positional index against the display ordering
+  if(!matched&&rowIdx!==undefined){
+    var disp=[];Object.values(calculatedMonths).forEach(function(s){(s.completedRows||[]).filter(function(r){return isLate(r);}).forEach(function(r){disp.push(r);});});
+    if(disp[rowIdx]){disp[rowIdx]._manuallyRemoved=true;disp[rowIdx]._v4_late=false;}
+  }
   if(rawData&&rawData.length>0){var byMonth={};rawData.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});Object.keys(byMonth).forEach(function(k){if(k.indexOf('NaN')>-1)return;try{calculatedMonths[k]=calcMonth(byMonth[k]);}catch(e){}});}
   renderPreview();
   setTimeout(function(){document.querySelectorAll('.tab-btn').forEach(function(b){if(b.textContent.trim()==='Late log')b.click();});if(_lateSortCol>=0)sortLateLog(_lateSortCol,true);filterLateLog();},80);
