@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-13T17:06:29.813Z",
+  "lastUpdated": "2026-06-13T17:06:32.205Z",
   "months": {
     "2026-04": {
       "cons": 36,
@@ -29,9 +29,9 @@
       "cons": 219,
       "pallets": 1037,
       "revenue": 41357.07,
-      "lates": 42,
-      "latePallets": 102,
-      "timeliness": 0.9016393442622951,
+      "lates": 41,
+      "latePallets": 101,
+      "timeliness": 0.9026036644165863,
       "avgRC": 188.85,
       "avgRP": 39.88,
       "avgPC": 4.74,
@@ -80,24 +80,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "91194",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - EMA4",
-      "city": "Amazon - EMA4",
-      "pc": "B76 9AH",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "22/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "91232",
       "acct": "IRON",
@@ -1170,7 +1152,7 @@
     "South West": {
       "pallets": 15,
       "cons": 8,
-      "lates": 2
+      "lates": 1
     },
     "Yorkshire": {
       "pallets": 66,
