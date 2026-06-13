@@ -1,14 +1,14 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-13T16:38:13.770Z",
+  "lastUpdated": "2026-06-13T16:42:51.169Z",
   "months": {
     "2026-04": {
       "cons": 36,
       "pallets": 218,
       "revenue": 8874.54,
-      "lates": 3,
-      "latePallets": 5,
-      "timeliness": 0.977064,
+      "lates": 2,
+      "latePallets": 4,
+      "timeliness": 0.981651,
       "avgRC": 246.51,
       "avgRP": 40.71,
       "avgPC": 6.06
@@ -17,9 +17,9 @@
       "cons": 219,
       "pallets": 1037,
       "revenue": 41357.07,
-      "lates": 4,
-      "latePallets": 12,
-      "timeliness": 0.988428,
+      "lates": 5,
+      "latePallets": 16,
+      "timeliness": 0.984571,
       "avgRC": 188.85,
       "avgRP": 39.88,
       "avgPC": 4.74
@@ -28,15 +28,33 @@
       "cons": 136,
       "pallets": 811,
       "revenue": 29178.9,
-      "lates": 1,
-      "latePallets": 6,
-      "timeliness": 0.992602,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
       "avgRC": 214.55,
       "avgRP": 35.98,
       "avgPC": 5.96
     }
   },
   "lateRows": [
+    {
+      "id": "90934",
+      "acct": "IRON",
+      "month": "May-26",
+      "dest": "THE WORKS STORES LTD",
+      "city": "THE WORKS STORES LTD",
+      "pc": "B46 1AL",
+      "window": "",
+      "commitDate": "06/05/26",
+      "arrDate": "06/05/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 6,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "Admin Error",
+      "failed": true
+    },
     {
       "id": "91105",
       "acct": "IRON",
@@ -52,7 +70,7 @@
       "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
-      "reason": "",
+      "reason": "Delayed at previous location",
       "failed": false
     },
     {
@@ -70,62 +88,44 @@
       "pallets": 2,
       "dtype": "Standard",
       "note": "",
-      "reason": "",
+      "reason": "Traffic Delays",
       "failed": false
     },
     {
-      "id": "91219",
+      "id": "91110R",
       "acct": "IRON",
       "month": "May-26",
-      "dest": "JUST TO SAY LONDON LTD",
-      "city": "JUST TO SAY LONDON LTD",
-      "pc": "L24 9BD",
+      "dest": "TG JONES HIGH STREET LIMITED",
+      "city": "TG JONES HIGH STREET LIMITED",
+      "pc": "SN3 3RX",
       "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "28/05/26",
+      "commitDate": "29/05/26",
+      "arrDate": "29/05/26",
       "arrival": "01:00",
-      "mins": 1440,
+      "mins": 0,
       "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
-      "reason": "",
-      "failed": false
+      "reason": "Split Delivery",
+      "failed": true
     },
     {
-      "id": "90828",
+      "id": "91099",
       "acct": "IRON",
       "month": "May-26",
       "dest": "TJ MORRIS - WILTSHIRE",
       "city": "TJ MORRIS - WILTSHIRE",
       "pc": "SP4 7GQ",
       "window": "",
-      "commitDate": "06/05/26",
-      "arrDate": "07/05/26",
+      "commitDate": "27/05/26",
+      "arrDate": "27/05/26",
       "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 8,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91407",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "MUDDLEIT",
-      "city": "MUDDLEIT",
-      "pc": "BB9 6RT",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
+      "mins": 0,
       "pallets": 6,
       "dtype": "Economy Booked",
       "note": "",
-      "reason": "",
-      "failed": false
+      "reason": "Split Delivery",
+      "failed": true
     },
     {
       "id": "DGB326",
@@ -142,7 +142,7 @@
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
-      "reason": "",
+      "reason": "Traffic Delays",
       "failed": false
     },
     {
@@ -160,25 +160,7 @@
       "pallets": 3,
       "dtype": "Standard",
       "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "29239",
-      "acct": "IRON",
-      "month": "Apr-26",
-      "dest": "SMYTHS-S",
-      "city": "SMYTHS-S",
-      "pc": "ST5 9QD",
-      "window": "",
-      "commitDate": "15/04/26",
-      "arrDate": "17/04/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
+      "reason": "Miss Connection",
       "failed": false
     }
   ],
@@ -186,12 +168,12 @@
     "West Midlands": {
       "pallets": 293,
       "cons": 42,
-      "lates": 1
+      "lates": 0
     },
     "South West": {
       "pallets": 15,
       "cons": 8,
-      "lates": 0
+      "lates": 1
     },
     "Yorkshire": {
       "pallets": 66,
@@ -201,7 +183,7 @@
     "North West": {
       "pallets": 462,
       "cons": 73,
-      "lates": 3
+      "lates": 1
     },
     "South East": {
       "pallets": 300,
@@ -241,7 +223,7 @@
     "South": {
       "pallets": 71,
       "cons": 27,
-      "lates": 2
+      "lates": 3
     },
     "Scotland": {
       "pallets": 1,
@@ -347,7 +329,7 @@
       "cons": 7,
       "pallets": 31,
       "revenue": 1403.56,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "TEMPTATION (GIFTS) LIMITED",
