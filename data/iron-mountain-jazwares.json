@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-13T17:06:34.025Z",
+  "lastUpdated": "2026-06-13T17:06:35.045Z",
   "months": {
     "2026-04": {
       "cons": 36,
@@ -29,9 +29,9 @@
       "cons": 219,
       "pallets": 1037,
       "revenue": 41357.07,
-      "lates": 40,
-      "latePallets": 98,
-      "timeliness": 0.90549662487946,
+      "lates": 36,
+      "latePallets": 92,
+      "timeliness": 0.9112825458052073,
       "avgRC": 188.85,
       "avgRP": 39.88,
       "avgPC": 4.74,
@@ -111,78 +111,6 @@
       "arrival": "01:00",
       "mins": 7200,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "30254",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "TOYMASTER",
-      "city": "TOYMASTER",
-      "pc": "CF11 8AB",
-      "window": "",
-      "commitDate": "10/05/26",
-      "arrDate": "12/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91105",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "FORBIDDEN PLANET (SCOTLAND) LT",
-      "city": "FORBIDDEN PLANET (SCOTLAND) LT",
-      "pc": "CM9 4LJ",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91182",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon EU SARL (UK)",
-      "city": "Amazon EU SARL (UK)",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91236",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon EU SARL (UK), BHX4",
-      "city": "Amazon EU SARL (UK), BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "28/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 3,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
@@ -1129,7 +1057,7 @@
     "West Midlands": {
       "pallets": 293,
       "cons": 42,
-      "lates": 7
+      "lates": 5
     },
     "South West": {
       "pallets": 15,
@@ -1154,12 +1082,12 @@
     "East of England": {
       "pallets": 15,
       "cons": 8,
-      "lates": 1
+      "lates": 0
     },
     "Wales": {
       "pallets": 3,
       "cons": 3,
-      "lates": 1
+      "lates": 0
     },
     "Other": {
       "pallets": 56,
