@@ -1051,7 +1051,7 @@ function buildReport(mapImg,onComplete){
   }catch(err){console.error('buildReport error:',err);showAlert('error','PDF failed: '+err.message);}
 }
 
-var LATE_REASONS=['','Traffic Delays','Vehicle Breakdown','Delayed at previous location','Late Collection','Hub Held','Admin Error','Miss Connection','Arrived location closed','Driver Sickness','Other'];
+var LATE_REASONS=['','Traffic Delays','Vehicle Breakdown','Delayed at previous location','Late Collection','Hub Held','Admin Error','Miss Connection','Arrived location closed','Driver Sickness','Split Delivery','Other'];
 function reasonSelectHTML(id,current,onchange){return'<select id="'+id+'" style="font-size:11px;padding:4px 6px;border:1px solid #e0e0de;border-radius:4px;color:#555;max-width:150px" onchange="'+onchange+'">'+LATE_REASONS.map(function(o){return'<option value="'+o+'"'+(o===current?' selected':'')+'>'+(o||'Select reason...')+'</option>';}).join('')+'</select>';}
 function updateLateReason(idx,val){var comp=allCompleted();var lateRows=comp.filter(function(r){return isLate(r);});if(lateRows[idx])lateRows[idx]._reason=val;}
 function updateSavedReason(idx,val){
