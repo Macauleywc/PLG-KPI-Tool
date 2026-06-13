@@ -1,0 +1,94 @@
+{
+  "customer": "Iron Mountain (Jazwares)",
+  "createdAt": "2026-06-13T17:11:48.023Z",
+  "months": {
+    "2026-04": {
+      "cons": 36,
+      "pallets": 218,
+      "revenue": 8874.54,
+      "lates": 2,
+      "latePallets": 4,
+      "timeliness": 0.981651,
+      "avgRC": 246.51,
+      "avgRP": 40.71,
+      "avgPC": 6.06
+    }
+  },
+  "lateRows": [
+    {
+      "id": "DGB326",
+      "custref": "DGB326",
+      "acct": "IRON",
+      "month": "Apr-26",
+      "dest": "TEMPTATION (GIFTS) LIMITED",
+      "city": "TEMPTATION (GIFTS) LIMITED",
+      "pc": "HP5 3NJ",
+      "window": "",
+      "commitDate": "16/04/26",
+      "arrDate": "20/04/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "Vehicle Breakdown",
+      "failed": false
+    },
+    {
+      "id": "90801",
+      "custref": "",
+      "acct": "IRON",
+      "month": "Apr-26",
+      "dest": "TJ MORRIS - WILTSHIRE",
+      "city": "TJ MORRIS - WILTSHIRE",
+      "pc": "SP4 7GQ",
+      "window": "",
+      "commitDate": "01/05/26",
+      "arrDate": "07/05/26",
+      "arrival": "01:00",
+      "mins": 8640,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
+  "regionData": {
+    "Yorkshire": {
+      "pallets": 1,
+      "cons": 1,
+      "lates": 0
+    },
+    "North West": {
+      "pallets": 2,
+      "cons": 2,
+      "lates": 0
+    },
+    "East Midlands": {
+      "pallets": 99,
+      "cons": 17,
+      "lates": 0
+    },
+    "Other": {
+      "pallets": 11,
+      "cons": 3,
+      "lates": 1
+    },
+    "South East": {
+      "pallets": 34,
+      "cons": 4,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 8,
+      "cons": 3,
+      "lates": 1
+    },
+    "West Midlands": {
+      "pallets": 63,
+      "cons": 6,
+      "lates": 0
+    }
+  }
+}
