@@ -465,7 +465,9 @@ function handleRaw(input){
         }
         showAlert('success','Delivery report loaded — '+rows.length+' consignments, '+rows.reduce(function(a,r){return a+(parseFloat(r['goods pallet spaces'])||0);},0)+' pallets.');
       }
-      rawData=(rawData||[]).concat(rows);
+      var merged=(rawData||[]).concat(rows);
+      var seen={};rawData=[];
+      for(var mi=merged.length-1;mi>=0;mi--){var mid=merged[mi]['id']||('_r'+mi);if(seen[mid])continue;seen[mid]=true;rawData.unshift(merged[mi]);}
       var byMonth={};
       rawData.forEach(function(r){var d=xlDate(r['date']);if(!d)return;var k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(!byMonth[k])byMonth[k]=[];byMonth[k].push(r);});
       calculatedMonths={};
