@@ -1072,7 +1072,6 @@ function updateSavedNote(idx,val){
 }
 function removeSavedLate(idx){
   var rows=window._savedLateRows||[];var r=rows[idx];if(!r)return;
-  if(!confirm('Remove this late entry? This updates the saved record and recalculates OTIF.'))return;
   var key=MONTH_KEYS[MONTHS.indexOf(r.month)];
   if(key&&savedMonthData[key]){var m=savedMonthData[key];m.lates=Math.max(0,(m.lates||0)-1);m.latePallets=Math.max(0,(m.latePallets||0)-(parseFloat(r.pallets)||0));m.timeliness=m.pallets>0?(m.pallets-m.latePallets)/m.pallets:0;}
   if(window._savedRegionData){var reg=region(r.pc||'');if(window._savedRegionData[reg]&&window._savedRegionData[reg].lates>0)window._savedRegionData[reg].lates--;}
