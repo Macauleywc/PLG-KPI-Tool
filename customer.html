@@ -1010,12 +1010,13 @@ function buildReport(mapImg,onComplete){
   else{doc.text('Surcharges from destination time window in Qargo TMS. Additional to base freight.',ML+12,y+4.5);if(pre10Cons.length===0){doc.text('Pre-10am Delivery (\u00A332) \u2014 no consignments this period.',ML+3,y+8.5);}}
 
   // PAGE 6
+  var curPageNum=6;
   doc.addPage();chrome(6);y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('LATE CONSIGNMENTS \u2014 '+String(aL||0)+' OF '+String(aC||0),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   fill('#FFF7ED');doc.rect(ML,y,CW,7,'F');drw('#FED7AA');doc.rect(ML,y,CW,7,'S');txt('#92400E');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Late = delivery arrival after booked time window end. Contact your account manager to dispute.',ML+3,y+4.5);y+=9;
   var lc=[{l:'Order ID'},{l:'Destination'},{l:'City'},{l:'Window'},{l:'Arrived'},{l:'Delay',r:1},{l:'Plts',r:1},{l:'Type'}],lw=[20,42,18,18,13,13,10,18];
   y=tH(lc,lw,y);
-  lateList.forEach(function(r,idx){if(y>CB-6){doc.addPage();chrome(6);y=CT+2;y=tH(lc,lw,y);}y=tR([{t:trunc(r.id,12)},{t:trunc(r.dest,26)},{t:trunc(r.city,11)},{t:r.window},{t:r.arrival},{t:'+'+fmtDelay(r.mins),r:1,c:'#991B1B'},{t:String(r.pallets),r:1},{t:r.dtype}],lw,y,{shade:idx%2!==0});});
+  lateList.forEach(function(r,idx){if(y>CB-6){doc.addPage();curPageNum++;chrome(curPageNum);y=CT+2;y=tH(lc,lw,y);}y=tR([{t:trunc(r.id,12)},{t:trunc(r.dest,26)},{t:trunc(r.city,11)},{t:r.window},{t:r.arrival},{t:'+'+fmtDelay(r.mins),r:1,c:'#991B1B'},{t:String(r.pallets),r:1},{t:r.dtype}],lw,y,{shade:idx%2!==0});});
   if(lateList.length===0){txt('#888888');doc.setFontSize(9);doc.text('No late consignments this period.',ML+CW/2,y+12,{align:'center'});y+=20;}y+=8;
   if(y<CB-50){fill('#111111');doc.rect(ML,y,CW,22,'F');fill('#F47920');doc.rect(ML,y,3,22,'F');
     try{doc.addImage(PLG_LOGO_URL,'SVG',ML+6,y+3,36,14);}catch(e){txt('#FFFFFF');doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('Premier Logistics Group',ML+6,y+11);}
@@ -1024,8 +1025,10 @@ function buildReport(mapImg,onComplete){
   }
 
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+  var FINAL_TOTAL=doc.internal.getNumberOfPages();
+  for(var pgi=1;pgi<=FINAL_TOTAL;pgi++){doc.setPage(pgi);fill('#111111');doc.rect(W-ML-26,1.5,26,9,'F');txt('#777777');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,7,{align:'right'});}
   doc.save(currentCustomer+' - '+periodLabel+'.pdf');
-  showAlert('success','PDF downloaded \u2014 '+TOTAL+' pages.');
+  showAlert('success','PDF downloaded \u2014 '+FINAL_TOTAL+' pages.');
 
   // Write snapshot if this is a fresh (unsnapshotted) download
   if(window._pendingSnapshot){
