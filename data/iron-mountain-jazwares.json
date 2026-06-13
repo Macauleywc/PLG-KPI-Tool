@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-12T11:17:19.296Z",
+  "lastUpdated": "2026-06-13T14:14:12.245Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -17,9 +17,9 @@
       "cons": 226,
       "pallets": 1145,
       "revenue": 44743.85,
-      "lates": 41,
-      "latePallets": 100,
-      "timeliness": 0.912664,
+      "lates": 40,
+      "latePallets": 99,
+      "timeliness": 0.9135371179039301,
       "avgRC": 197.98,
       "avgRP": 39.08,
       "avgPC": 5.07
@@ -71,22 +71,6 @@
       "arrival": "01:00",
       "mins": 8640,
       "pallets": 3,
-      "dtype": "Standard",
-      "note": ""
-    },
-    {
-      "id": "91377",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "SN3 4DB",
-      "window": "",
-      "commitDate": "28/05/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 1,
       "dtype": "Standard",
       "note": ""
     },
@@ -760,7 +744,7 @@
     "South": {
       "pallets": 59,
       "cons": 22,
-      "lates": 9
+      "lates": 8
     },
     "Yorkshire": {
       "pallets": 56,
