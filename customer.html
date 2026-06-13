@@ -340,6 +340,9 @@ var MONTHS=['Jan-26','Feb-26','Mar-26','Apr-26','May-26','Jun-26','Jul-26','Aug-
 var MONTH_KEYS=['2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07','2026-08','2026-09','2026-10','2026-11','2026-12'];
 
 function xlDate(v){if(v instanceof Date)return v;if(typeof v==='number'){var d=new Date((v-25569)*86400*1000);return new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()));}if(typeof v==='string')return new Date(v);return null;}
+function weekStart(d){var dt=new Date(d);var day=(dt.getDay()+6)%7;dt.setDate(dt.getDate()-day);dt.setHours(0,0,0,0);return dt;}
+function weekKeyOf(d){var ws=weekStart(d);return isNaN(ws.getTime())?null:ws.toISOString().slice(0,10);}
+function weekLabelOf(key){var s=new Date(key+'T00:00:00Z');var e=new Date(s);e.setUTCDate(e.getUTCDate()+6);return 'W/C '+s.toLocaleDateString('en-GB',{day:'2-digit',month:'short',timeZone:'UTC'})+' \u2013 '+e.toLocaleDateString('en-GB',{day:'2-digit',month:'short',timeZone:'UTC'});}
 function xlDT(v){if(v instanceof Date)return v;if(typeof v==='number')return new Date((v-25569)*86400*1000);if(typeof v==='string')return new Date(v);return null;}
 function twEnd(tw){if(!tw)return null;return tw.split(' - ').pop().trim();}
 function isLate(r){
@@ -744,26 +747,68 @@ function showPdfMonthSelector(){
     if(savedMonthData[key]||calculatedMonths[key])allMonths.push({key:key,label:MONTHS[i]});
   });
   if(allMonths.length===0){exportCustomerReport();return;}
+  var comp=allCompleted();
+  var weekMapSel={};
+  comp.forEach(function(r){var d=xlDate(r['destination date']);if(!d||isNaN(d.getTime()))return;var k=weekKeyOf(d);if(!k)return;weekMapSel[k]=true;});
+  var allWeeks=Object.keys(weekMapSel).sort().map(function(k){return{key:k,label:weekLabelOf(k)};});
   var overlay=document.createElement('div');
   overlay.className='pdf-overlay';
   overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center';
   var box=document.createElement('div');
-  box.style.cssText='background:#fff;border-radius:12px;padding:24px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,0.3);font-family:inherit';
-  var checkboxes=allMonths.map(function(m){
+  box.style.cssText='background:#fff;border-radius:12px;padding:24px;width:360px;max-height:80vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);font-family:inherit';
+  var monthCheckboxes=allMonths.map(function(m){
     return '<label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;cursor:pointer"><input type="checkbox" class="pdf-month-cb" value="'+m.key+'" checked style="accent-color:#F47920;width:15px;height:15px"><span>'+m.label+'</span></label>';
   }).join('');
-  box.innerHTML='<div style="font-size:15px;font-weight:700;margin-bottom:4px">Select months for PDF</div>'
-    +'<div style="font-size:12px;color:#888;margin-bottom:14px">Choose which months to include</div>'
-    +'<div style="margin-bottom:16px">'+checkboxes+'</div>'
+  var weekCheckboxes=allWeeks.map(function(w,i){
+    return '<label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;cursor:pointer"><input type="checkbox" class="pdf-week-cb" value="'+w.key+'"'+(i>=allWeeks.length-4?' checked':'')+' style="accent-color:#F47920;width:15px;height:15px"><span>'+w.label+'</span></label>';
+  }).join('');
+  box.innerHTML='<div style="font-size:15px;font-weight:700;margin-bottom:4px">Select period for PDF</div>'
+    +'<div style="font-size:12px;color:#888;margin-bottom:10px">Choose months or weeks to include</div>'
+    +'<div style="display:flex;gap:6px;margin-bottom:12px"><button id="pdf-mode-months" onclick="setPdfModalMode(this,\'months\')" style="flex:1;padding:7px;border:1px solid #F47920;border-radius:6px;background:#F47920;color:#fff;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit">Months</button><button id="pdf-mode-weeks" onclick="setPdfModalMode(this,\'weeks\')" style="flex:1;padding:7px;border:1px solid #e0e0de;border-radius:6px;background:#fff;color:#555;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit">Weeks</button></div>'
+    +'<div id="pdf-months-list" style="margin-bottom:16px">'+monthCheckboxes+'</div>'
+    +'<div id="pdf-weeks-list" style="display:none;margin-bottom:16px">'+(weekCheckboxes||'<div style="font-size:12px;color:#aaa">No weekly data available</div>')+'</div>'
     +'<div style="display:flex;gap:8px;justify-content:flex-end">'
     +'<button onclick="document.querySelector(\'.pdf-overlay\').remove()" style="padding:9px 16px;border:1px solid #e0e0de;border-radius:8px;background:#fff;cursor:pointer;font-size:13px;font-family:inherit">Cancel</button>'
-    +'<button onclick="var sel=Array.from(document.querySelectorAll(\'.pdf-month-cb:checked\')).map(function(cb){return cb.value;});document.querySelector(\'.pdf-overlay\').remove();exportCustomerReportForMonths(sel)" style="padding:9px 16px;background:#F47920;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit">Download PDF</button>'
+    +'<button onclick="var mode=document.getElementById(\'pdf-mode-weeks\').dataset.active===\'1\'?\'weeks\':\'months\';if(mode===\'months\'){var sel=Array.from(document.querySelectorAll(\'.pdf-month-cb:checked\')).map(function(cb){return cb.value;});document.querySelector(\'.pdf-overlay\').remove();exportCustomerReportForMonths(sel);}else{var sel=Array.from(document.querySelectorAll(\'.pdf-week-cb:checked\')).map(function(cb){return cb.value;});document.querySelector(\'.pdf-overlay\').remove();exportCustomerReportForWeeks(sel);}" style="padding:9px 16px;background:#F47920;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit">Download PDF</button>'
     +'</div>';
   overlay.appendChild(box);
   document.body.appendChild(overlay);
+  document.getElementById('pdf-mode-months').dataset.active='1';
+  document.getElementById('pdf-mode-weeks').dataset.active='0';
+}
+function setPdfModalMode(btn,mode){
+  var monthsBtn=document.getElementById('pdf-mode-months'),weeksBtn=document.getElementById('pdf-mode-weeks');
+  var on='border:1px solid #F47920;background:#F47920;color:#fff;',off='border:1px solid #e0e0de;background:#fff;color:#555;';
+  var base='flex:1;padding:7px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;';
+  if(mode==='months'){monthsBtn.style.cssText=base+on;weeksBtn.style.cssText=base+off;monthsBtn.dataset.active='1';weeksBtn.dataset.active='0';document.getElementById('pdf-months-list').style.display='';document.getElementById('pdf-weeks-list').style.display='none';}
+  else{monthsBtn.style.cssText=base+off;weeksBtn.style.cssText=base+on;monthsBtn.dataset.active='0';weeksBtn.dataset.active='1';document.getElementById('pdf-months-list').style.display='none';document.getElementById('pdf-weeks-list').style.display='';}
 }
 
+function exportCustomerReportForWeeks(selectedWeekKeys){
+  if(!selectedWeekKeys||selectedWeekKeys.length===0){showAlert('warn','Select at least one week.');return;}
+  var wkSet={};selectedWeekKeys.forEach(function(k){wkSet[k]=true;});
+  var origCalc=Object.assign({},calculatedMonths);
+  var origSaved=Object.assign({},savedMonthData);
+  var origLateRows=window._savedLateRows?window._savedLateRows.slice():[];
+  var origTrackerData=trackerData?trackerData.slice():null;
+  calculatedMonths={};
+  Object.keys(origCalc).forEach(function(key){
+    var rows=(origCalc[key].completedRows||[]).filter(function(r){var d=xlDate(r['destination date']);if(!d||isNaN(d.getTime()))return false;return wkSet[weekKeyOf(d)];});
+    if(rows.length>0)calculatedMonths[key]=calcMonth(rows);
+  });
+  savedMonthData={};
+  window._savedLateRows=origLateRows.filter(function(r){
+    var d=pdMY(r.commitDate);if(!d)return false;return wkSet[weekKeyOf(d)];
+  });
+  buildTrackerFromSaved();
+  var sortedKeys=selectedWeekKeys.slice().sort();
+  if(sortedKeys.length===1){window._pdfPeriodLabelOverride=weekLabelOf(sortedKeys[0]);}
+  else{var first=weekLabelOf(sortedKeys[0]).replace('W/C ',''),last=weekLabelOf(sortedKeys[sortedKeys.length-1]).replace('W/C ','');window._pdfPeriodLabelOverride=sortedKeys.length+' weeks ('+first.split(' \u2013 ')[0]+' \u2013 '+last.split(' \u2013 ')[1]+')';}
+  exportCustomerReport();
+  setTimeout(function(){calculatedMonths=origCalc;savedMonthData=origSaved;window._savedLateRows=origLateRows;trackerData=origTrackerData;window._pdfPeriodLabelOverride=null;},5000);
+}
 function exportCustomerReportForMonths(selectedKeys){
+  window._pdfPeriodLabelOverride=null;
   if(!selectedKeys||selectedKeys.length===0){showAlert('warn','Select at least one month.');return;}
   var origCalc=Object.assign({},calculatedMonths);
   var origSaved=Object.assign({},savedMonthData);
@@ -904,7 +949,7 @@ function buildReport(mapImg,onComplete){
   var lateDelays=lateList.map(function(r){return parseInt(r.mins)||0;}).filter(function(m){return m>0;});
   var avgDelay=lateDelays.length?Math.round(lateDelays.reduce(function(a,b){return a+b;},0)/lateDelays.length):0;
   var worstLate=lateList.length>0?lateList.reduce(function(a,b){return (parseInt(b.mins)||0)>=(parseInt(a.mins)||0)?b:a;},lateList[0]):null;
-  var periodLabel=months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026';
+  var periodLabel=window._pdfPeriodLabelOverride||(months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026');
   var latesPct=aC>0?((aL/aC)*100).toFixed(1)+'%':'0.0%';
   var {jsPDF}=window.jspdf;
   var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
