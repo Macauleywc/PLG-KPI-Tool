@@ -1,0 +1,161 @@
+{
+  "customer": "Iron Mountain (Jazwares)",
+  "createdAt": "2026-06-13T15:33:01.421Z",
+  "months": {
+    "2026-06": {
+      "cons": 51,
+      "pallets": 197,
+      "revenue": 7638.6,
+      "lates": 5,
+      "latePallets": 5,
+      "timeliness": 0.974619,
+      "avgRC": 149.78,
+      "avgRP": 38.77,
+      "avgPC": 3.86
+    }
+  },
+  "lateRows": [
+    {
+      "id": "91483",
+      "custref": "21966576643",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "AMAZON EU SARL - UK - BHX4",
+      "city": "AMAZON EU SARL - UK - BHX4",
+      "pc": "CV5 9PF",
+      "window": "",
+      "commitDate": "08/06/26",
+      "arrDate": "09/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": ""
+    },
+    {
+      "id": "004806",
+      "custref": "SOR004806",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "HOME SWEET HOME CARE LTD",
+      "city": "HOME SWEET HOME CARE LTD",
+      "pc": "RM7 0YL",
+      "window": "",
+      "commitDate": "09/06/26",
+      "arrDate": "10/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": ""
+    },
+    {
+      "id": "91419",
+      "custref": "21970682053",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "AMAZON EU SARL - UK - LPX2",
+      "city": "AMAZON EU SARL - UK - LPX2",
+      "pc": "L33 7TJ",
+      "window": "",
+      "commitDate": "08/06/26",
+      "arrDate": "09/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": ""
+    },
+    {
+      "id": "004815",
+      "custref": "SOR004815",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Car Colour Services Ltd",
+      "city": "Car Colour Services Ltd",
+      "pc": "RM7 7JB",
+      "window": "",
+      "commitDate": "09/06/26",
+      "arrDate": "10/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": ""
+    },
+    {
+      "id": "91421",
+      "custref": "21966333443",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "AMAZON EU SARL - UK - BHX4",
+      "city": "AMAZON EU SARL - UK - BHX4",
+      "pc": "CV5 9PF",
+      "window": "",
+      "commitDate": "08/06/26",
+      "arrDate": "09/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": ""
+    }
+  ],
+  "regionData": {
+    "South East": {
+      "pallets": 8,
+      "cons": 6,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 11,
+      "cons": 5,
+      "lates": 0
+    },
+    "North West": {
+      "pallets": 27,
+      "cons": 12,
+      "lates": 1
+    },
+    "East Midlands": {
+      "pallets": 72,
+      "cons": 9,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 61,
+      "cons": 7,
+      "lates": 2
+    },
+    "Other": {
+      "pallets": 12,
+      "cons": 6,
+      "lates": 2
+    },
+    "South West": {
+      "pallets": 2,
+      "cons": 2,
+      "lates": 0
+    },
+    "Yorkshire": {
+      "pallets": 2,
+      "cons": 2,
+      "lates": 0
+    },
+    "Northern Ireland": {
+      "pallets": 1,
+      "cons": 1,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 1,
+      "cons": 1,
+      "lates": 0
+    }
+  }
+}
