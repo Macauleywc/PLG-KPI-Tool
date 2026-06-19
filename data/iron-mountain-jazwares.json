@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-19T07:41:29.577Z",
+  "lastUpdated": "2026-06-19T07:44:28.955Z",
   "months": {
     "2026-04": {
       "cons": 36,
@@ -56,9 +56,9 @@
       "cons": 63,
       "pallets": 470,
       "revenue": 13291.38,
-      "lates": 4,
-      "latePallets": 7,
-      "timeliness": 0.985106,
+      "lates": 1,
+      "latePallets": 3,
+      "timeliness": 0.993617,
       "avgRC": 210.97,
       "avgRP": 28.28,
       "avgPC": 7.46,
@@ -69,52 +69,16 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 36,
-          "lates": 2
+          "lates": 0
         },
         "Economy Booked": {
           "cons": 27,
-          "lates": 2
+          "lates": 1
         }
       }
     }
   },
   "lateRows": [
-    {
-      "id": "DGB0091542, HELEN2.6",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: TOYS N TRENDS",
-      "city": "TOYMASTER LTD: TOYS N TRENDS",
-      "pc": "CT5 1AY",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "PJUNE26",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "Cube n Space",
-      "city": "Cube n Space",
-      "pc": "L19 8JA",
-      "window": "",
-      "commitDate": "16/06/26",
-      "arrDate": "17/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "C2842 ",
       "acct": "IRON",
@@ -130,25 +94,7 @@
       "pallets": 3,
       "dtype": "Economy Booked",
       "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "DGB0091573, JPFI00012",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "ZAPPIES LTD C/O ZAPFILMENT",
-      "city": "ZAPPIES LTD C/O ZAPFILMENT",
-      "pc": "BN17 7GA",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
+      "reason": "Miss Connection",
       "failed": false
     }
   ],
@@ -156,7 +102,7 @@
     "North West": {
       "pallets": 166,
       "cons": 13,
-      "lates": 1
+      "lates": 0
     },
     "West Midlands": {
       "pallets": 66,
@@ -171,7 +117,7 @@
     "South East": {
       "pallets": 30,
       "cons": 7,
-      "lates": 2
+      "lates": 0
     },
     "East of England": {
       "pallets": 1,
@@ -298,7 +244,7 @@
       "cons": 2,
       "pallets": 2,
       "revenue": 205.79,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "ZAPPIES LTD C/O ZAPFILMENT",
@@ -307,7 +253,7 @@
       "cons": 2,
       "pallets": 2,
       "revenue": 205.79,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "AMAZON EU SARL - UK - DSA6",
@@ -370,7 +316,7 @@
       "cons": 1,
       "pallets": 2,
       "revenue": 201.32,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "TOYMASTER LTD: JAC STORES",
