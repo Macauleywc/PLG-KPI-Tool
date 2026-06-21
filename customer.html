@@ -616,11 +616,11 @@ function filterLateLog(){
   var visible=0;
   rows.forEach(function(row){
     var cells=row.querySelectorAll('td');
-    var dest=(cells[3]?cells[3].textContent:'').toLowerCase();
-    var city=(cells[4]?cells[4].textContent:'').toLowerCase();
-    var pc=(cells[5]?cells[5].textContent:'').toLowerCase();
-    var rowMonth=(cells[2]?cells[2].textContent:'');
-    var rowType=(cells[11]?cells[11].textContent:'');
+    var rowMonth=(cells[3]?cells[3].textContent:'').trim();
+    var dest=(cells[4]?cells[4].textContent:'').toLowerCase();
+    var city=(cells[5]?cells[5].textContent:'').toLowerCase();
+    var pc=(cells[6]?cells[6].textContent:'').toLowerCase();
+    var rowType=(cells[12]?cells[12].textContent:'');
     var matchSearch=!search||(dest+city+pc).indexOf(search)>-1;
     var matchMonth=!month||rowMonth===month;
     var matchType=!type||rowType.indexOf(type)>-1;
@@ -801,7 +801,7 @@ function exportCustomerReportForWeeks(selectedWeekKeys){
   });
   savedMonthData={};
   window._savedLateRows=origLateRows.filter(function(r){
-    var d=pdMY(r.commitDate);if(!d)return false;return wkSet[weekKeyOf(d)];
+    var d=pdMY(r.arrDate)||pdMY(r.commitDate);if(!d)return false;return wkSet[weekKeyOf(d)];
   });
   buildTrackerFromSaved();
   var sortedKeys=selectedWeekKeys.slice().sort();
