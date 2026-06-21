@@ -1377,15 +1377,17 @@ async function saveToGitHub(){
     }catch(e){}
   });
   var lateRowsToSave=[];
-  try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];var monLabel=MONTHS[MONTH_KEYS.indexOf(key)]||key;
-    if(s.completedRows&&s.completedRows.length>0){
+  try{var _allLateKeys=Array.from(new Set(Object.keys(calculatedMonths).concat(Object.keys(savedMonthData))));_allLateKeys.forEach(function(key){var s=calculatedMonths[key];var monLabel=MONTHS[MONTH_KEYS.indexOf(key)]||key;
+    if(s&&s.completedRows&&s.completedRows.length>0){
       s.completedRows.filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex=r['destination extras']||'';var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';lateRowsToSave.push({id:r['id']||'',acct:r['customer']||'',month:monLabel,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||'',reason:r._reason||'',failed:!!r._failed});});
     } else {
       // Saved-only month (no fresh rows) — preserve its existing saved late rows
       (window._savedLateRows||[]).filter(function(r){return r.month===monLabel;}).forEach(function(r){lateRowsToSave.push(r);});
     }
   });}catch(e){}
+  var _coversAll=allCompleted().length>0&&Object.keys(savedMonthData).every(function(k){var c=calculatedMonths[k];return c&&c.completedRows&&c.completedRows.length>0;});
   var regDataToSave={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!regDataToSave[reg])regDataToSave[reg]={pallets:0,cons:0,lates:0};regDataToSave[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regDataToSave[reg].cons++;if(isLate(r))regDataToSave[reg].lates++;});}catch(e){}
+  if(!_coversAll&&window._savedRegionData&&Object.keys(window._savedRegionData).length){regDataToSave=window._savedRegionData;}
   // Save destination data for PDF
   var destDataToSave=[];
   try{
@@ -1399,6 +1401,7 @@ async function saveToGitHub(){
     });
     destDataToSave=Object.values(_dm).sort(function(a,b){return b.cons-a.cons;}).slice(0,20);
   }catch(e){}
+  if(!_coversAll&&window._savedDestData&&window._savedDestData.length){destDataToSave=window._savedDestData;}
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave,regionData:regDataToSave,destData:destDataToSave};
   var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
