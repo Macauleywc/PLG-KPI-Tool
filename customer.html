@@ -610,10 +610,11 @@ function renderPreview(){
 
 var _lateMonthOverride=null;
 function filterLateLog(){
-  var search=(document.getElementById('late-search').value||'').toLowerCase();
-  var month=document.getElementById('late-month').value;
+  var _se=document.getElementById('late-search'),_me=document.getElementById('late-month'),_te=document.getElementById('late-type');
+  var search=((_se&&_se.value)||'').toLowerCase();
+  var month=(_me&&_me.value)||'';
   if(_lateMonthOverride!==null)month=_lateMonthOverride;
-  var type=document.getElementById('late-type').value;
+  var type=(_te&&_te.value)||'';
   var rows=document.querySelectorAll('#late-tbody tr.late-row');
   var visible=0;
   rows.forEach(function(row){
@@ -1398,7 +1399,7 @@ function selectMonth(key){
   _lateMonthOverride=monthFilter;
   var lm=document.getElementById('late-month');
   if(lm){var hasOpt=Array.prototype.some.call(lm.options,function(o){return o.value===monthFilter;});lm.value=hasOpt?monthFilter:'';}
-  if(typeof filterLateLog==='function')filterLateLog();
+  try{if(typeof filterLateLog==='function')filterLateLog();}catch(e){}
   try{renderPerformanceForMonth(key);}catch(e){}
   try{renderDestinationsForMonth(key);}catch(e){}
 }
