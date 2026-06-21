@@ -605,6 +605,7 @@ function renderPreview(){
   var lateTypes=Array.from(new Set(lateRows.map(function(r){return r.dtype;})));
   var filterBar=lateRows.length>0?'<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;"><span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span><input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;"><select id="late-month" onchange="lateMonthChanged()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All months</option>'+lateMonths.map(function(m){return'<option value="'+m+'">'+m+'</option>';}).join('')+'</select><select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All types</option>'+lateTypes.map(function(t){return'<option value="'+t+'">'+t+'</option>';}).join('')+'</select><button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button><span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+lateRows.length+' entries</span></div>':'';
   document.getElementById('tab-lates').innerHTML='<div class="section-title">Late consignment log <span class="pill-red">'+lateRows.length+' late</span></div><div class="alert alert-warn" style="margin-bottom:1rem">You can add notes or remove incorrectly flagged entries before saving.</div><div style="margin-bottom:14px"><button onclick="toggleAddFailedPanel()" style="border:1px solid #e0deda;border-radius:6px;padding:7px 14px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#c62828;font-weight:600">+ Mark a consignment as failed</button><div id="add-failed-panel" style="display:none;margin-top:8px;padding:12px;background:#fff7f7;border:1px solid #fde2e2;border-radius:8px"><div style="font-size:11px;color:#888;margin-bottom:6px">Search by Order ID or destination to flag a consignment that wasn\'t auto-detected as late/failed.</div><input id="add-failed-search" oninput="renderAddFailedResults()" type="text" placeholder="Search Order ID or destination..." style="border:1px solid #e0deda;border-radius:6px;padding:6px 10px;font-size:12px;font-family:inherit;width:260px;outline:none"><div id="add-failed-results" style="margin-top:8px;max-height:200px;overflow:auto"></div></div></div>'+filterBar+(lateRows.length>0?'<div class="tracker-table-wrap"><table id="late-table"><thead><tr><th onclick="sortLateLog(0)" style="cursor:pointer;user-select:none">Order ID <span id="lsort-0">↕</span></th><th onclick="sortLateLog(1)" style="cursor:pointer;user-select:none">Cust Ref <span id="lsort-1">↕</span></th><th onclick="sortLateLog(2)" style="cursor:pointer;user-select:none">Account <span id="lsort-2">↕</span></th><th onclick="sortLateLog(3)" style="cursor:pointer;user-select:none">Month <span id="lsort-3">↕</span></th><th onclick="sortLateLog(4)" style="cursor:pointer;user-select:none">Destination <span id="lsort-4">↕</span></th><th onclick="sortLateLog(5)" style="cursor:pointer;user-select:none">City <span id="lsort-5">↕</span></th><th onclick="sortLateLog(6)" style="cursor:pointer;user-select:none">Postcode <span id="lsort-6">↕</span></th><th onclick="sortLateLog(7)" style="cursor:pointer;user-select:none">Commit Date <span id="lsort-7">↕</span></th><th>Time Window</th><th onclick="sortLateLog(9)" style="cursor:pointer;user-select:none">Actual Delivery <span id="lsort-9">↕</span></th><th onclick="sortLateLog(10)" style="cursor:pointer;user-select:none">Mins Late <span id="lsort-10">↕</span></th><th onclick="sortLateLog(11)" style="cursor:pointer;user-select:none">Pallets <span id="lsort-11">↕</span></th><th onclick="sortLateLog(12)" style="cursor:pointer;user-select:none">Type <span id="lsort-12">↕</span></th><th>Reason</th><th>Failed</th><th>Note</th><th></th></tr></thead><tbody id="late-tbody">'+lateTableRows+'</tbody></table></div>':'<div style="text-align:center;padding:2rem;color:#bbb">No late consignments in this dataset</div>');
+  try{renderPerformanceForMonth(_activeMonth||'all');}catch(e){}
   setTimeout(function(){renderCharts();},120);
 }
 
@@ -1287,6 +1288,42 @@ function renderHistory(){
   var strip=document.getElementById('months-strip');if(strip){strip.innerHTML=chips||'<span style="font-size:12px;color:#ccc">No months saved yet</span>';strip.onclick=function(e){var chip=e.target.closest('.chip-clickable');if(chip){selectMonth(chip.getAttribute('data-mkey'));}};}
 }
 
+function renderPerformanceForMonth(key){
+  var pane=document.getElementById('tab-performance');if(!pane)return;
+  var keys=key==='all'?Array.from(new Set(Object.keys(savedMonthData).concat(Object.keys(calculatedMonths)))):[key];
+  // Delivery type — from rows if loaded, else saved typeBreakdown
+  var typeMap={};
+  keys.forEach(function(k){
+    var c=calculatedMonths[k];
+    if(c&&c.completedRows&&c.completedRows.length>0){
+      c.completedRows.forEach(function(r){var ex=r['destination extras']||'';var t=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Booked')?'Booked':'Standard';if(!typeMap[t])typeMap[t]={cons:0,lates:0};typeMap[t].cons++;if(isLate(r))typeMap[t].lates++;});
+    }else{
+      var tb=(savedMonthData[k]||{}).typeBreakdown;
+      if(tb)Object.keys(tb).forEach(function(t){if(!typeMap[t])typeMap[t]={cons:0,lates:0};typeMap[t].cons+=tb[t].cons||0;typeMap[t].lates+=tb[t].lates||0;});
+    }
+  });
+  var typeRows=Object.entries(typeMap).map(function(e){var t=e[0],d=e[1],otif=d.cons>0?(d.cons-d.lates)/d.cons:0;return'<tr><td>'+t+'</td><td>'+d.cons+'</td><td>'+d.lates+'</td><td>'+otifBar(otif,80)+'</td></tr>';}).join('');
+  if(!typeRows)typeRows='<tr><td colspan="4" style="text-align:center;color:#bbb">No delivery-type data for this period</td></tr>';
+  // Day of week — rows only
+  var dow={1:{l:'Mon',cons:0,lates:0},2:{l:'Tue',cons:0,lates:0},3:{l:'Wed',cons:0,lates:0},4:{l:'Thu',cons:0,lates:0},5:{l:'Fri',cons:0,lates:0}};
+  var haveRows=false;
+  keys.forEach(function(k){var c=calculatedMonths[k];if(c&&c.completedRows&&c.completedRows.length>0){haveRows=true;c.completedRows.forEach(function(r){var d=xlDate(r['destination date']);if(!d)return;var wd=d.getDay();if(wd<1||wd>5)return;dow[wd].cons++;if(isLate(r))dow[wd].lates++;});}});
+  var dowCards=[1,2,3,4,5].map(function(dn){var dd=dow[dn],otif=dd.cons>0?(dd.cons-dd.lates)/dd.cons:null;var col=otif===null?'#ccc':otif>=0.97?'#2e7d32':otif>=0.95?'#e65100':'#c62828';var pct=otif!==null?(otif*100).toFixed(1)+'%':'\u2014';return'<div class="dow-card"><div class="dow-label">'+dd.l+'</div><div class="dow-val" style="color:'+col+'">'+pct+'</div><div class="dow-sub">'+dd.cons+' cons \u00b7 '+dd.lates+' late</div></div>';}).join('');
+  var dowNote=haveRows?'':'<div style="font-size:12px;color:#999;margin-top:8px">Upload this month\u2019s Qargo export to populate the day-of-week breakdown \u2014 it isn\u2019t stored in saved data.</div>';
+  // Pallet size — rows if loaded, else saved palletSizes
+  var psMap={};
+  keys.forEach(function(k){var c=calculatedMonths[k];if(c&&c.completedRows&&c.completedRows.length>0){c.completedRows.forEach(function(r){var pb=r['palletBreakdown'];if(pb)Object.keys(pb).forEach(function(nm){psMap[nm]=(psMap[nm]||0)+pb[nm];});});}else{var ps=(savedMonthData[k]||{}).palletSizes;if(ps)Object.keys(ps).forEach(function(nm){psMap[nm]=(psMap[nm]||0)+ps[nm];});}});
+  var psTotal=Object.values(psMap).reduce(function(a,b){return a+b;},0);
+  var psOrder=['Full','Half','Quarter','Oversize'];
+  var psRows=psOrder.filter(function(nm){return psMap[nm];}).concat(Object.keys(psMap).filter(function(nm){return psOrder.indexOf(nm)<0;})).map(function(nm){var n=psMap[nm];var pct=psTotal?(n/psTotal*100).toFixed(1):'0.0';return'<tr><td>'+nm+'</td><td>'+n+'</td><td>'+pct+'%</td></tr>';}).join('');
+  var psCard=psTotal>0?'<div class="section-card-standalone"><div class="section-title">Pallet size split</div><div class="tracker-table-wrap"><table><thead><tr><th>Size</th><th>Pallet spaces</th><th>% of total</th></tr></thead><tbody>'+psRows+'<tr class="total-row"><td>Total</td><td>'+psTotal+'</td><td>100.0%</td></tr></tbody></table></div></div>':'';
+  // Commercial summary — aggregates
+  var tC=0,tP=0,tR=0,tL=0;
+  keys.forEach(function(k){var d=savedMonthData[k]||calculatedMonths[k];if(!d)return;tC+=d.cons||0;tP+=d.pallets||0;tR+=d.revenue||0;tL+=d.lates||0;});
+  var aRC=tC>0?(tR/tC).toFixed(2):'\u2014',aRP=tP>0?(tR/tP).toFixed(2):'\u2014',aPC=tC>0?(tP/tC).toFixed(2):'\u2014';
+  var monLabel=key==='all'?'YTD':(MONTHS[MONTH_KEYS.indexOf(key)]||key);
+  pane.innerHTML='<div class="section-card-standalone"><div class="section-title">OTIF by delivery type \u2014 '+monLabel+'</div><div class="tracker-table-wrap"><table><thead><tr><th>Delivery type</th><th>Consignments</th><th>Lates</th><th>OTIF</th></tr></thead><tbody>'+typeRows+'</tbody></table></div></div><div class="section-card-standalone"><div class="section-title">OTIF by day of week \u2014 '+monLabel+'</div><div class="dow-grid">'+dowCards+'</div>'+dowNote+'</div>'+psCard+'<div class="section-card-standalone"><div class="section-title">Commercial summary \u2014 '+monLabel+'</div><div class="stats-grid"><div class="stat-card"><div class="stat-label">Avg cost / cons</div><div class="stat-val orange">\u00a3'+aRC+'</div></div><div class="stat-card"><div class="stat-label">Avg cost / pallet</div><div class="stat-val">\u00a3'+aRP+'</div></div><div class="stat-card"><div class="stat-label">Avg pallets / cons</div><div class="stat-val">'+aPC+'</div></div><div class="stat-card"><div class="stat-label">Total lates</div><div class="stat-val '+(tL>0?'red':'green')+'">'+tL+'</div></div></div></div>';
+}
 var _activeMonth='all';
 function selectMonth(key){
   _activeMonth=key;
@@ -1323,6 +1360,7 @@ function selectMonth(key){
   var lm=document.getElementById('late-month');
   if(lm){var hasOpt=Array.prototype.some.call(lm.options,function(o){return o.value===monthFilter;});lm.value=hasOpt?monthFilter:'';}
   if(typeof filterLateLog==='function')filterLateLog();
+  try{renderPerformanceForMonth(key);}catch(e){}
 }
 
 async function loadFromGitHub(){
