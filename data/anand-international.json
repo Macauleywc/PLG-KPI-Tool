@@ -1,6 +1,6 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-06-22T14:01:41.214Z",
+  "lastUpdated": "2026-06-22T14:02:39.163Z",
   "months": {
     "2026-04": {
       "cons": 109,
@@ -954,9 +954,9 @@
       "cons": 154,
       "pallets": 244,
       "revenue": 10872.16,
-      "lates": 13,
-      "latePallets": 34,
-      "timeliness": 0.860656,
+      "lates": 3,
+      "latePallets": 3,
+      "timeliness": 0.987705,
       "avgRC": 70.6,
       "avgRP": 44.56,
       "avgPC": 1.58,
@@ -968,11 +968,11 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 112,
-          "lates": 10
+          "lates": 1
         },
         "Economy Booked": {
           "cons": 42,
-          "lates": 3
+          "lates": 2
         }
       },
       "regionData": {
@@ -980,7 +980,7 @@
           "cons": 22,
           "pallets": 33,
           "revenue": 1447.53,
-          "lates": 1
+          "lates": 0
         },
         "Scotland": {
           "cons": 9,
@@ -998,7 +998,7 @@
           "cons": 11,
           "pallets": 16,
           "revenue": 754.4,
-          "lates": 1
+          "lates": 0
         },
         "South West": {
           "cons": 10,
@@ -1016,25 +1016,25 @@
           "cons": 13,
           "pallets": 17,
           "revenue": 733.5999999999999,
-          "lates": 2
+          "lates": 1
         },
         "Yorkshire": {
           "cons": 13,
           "pallets": 17,
           "revenue": 741.3,
-          "lates": 1
+          "lates": 0
         },
         "Wales": {
           "cons": 11,
           "pallets": 12,
           "revenue": 503.68000000000006,
-          "lates": 2
+          "lates": 0
         },
         "North West": {
           "cons": 30,
           "pallets": 61,
           "revenue": 2405.35,
-          "lates": 3
+          "lates": 1
         },
         "London": {
           "cons": 8,
@@ -1058,7 +1058,7 @@
           "cons": 6,
           "pallets": 18,
           "revenue": 719.8,
-          "lates": 2
+          "lates": 0
         }
       },
       "dowBreakdown": {
@@ -1068,11 +1068,11 @@
         },
         "Tue": {
           "cons": 37,
-          "lates": 2
+          "lates": 1
         },
         "Wed": {
           "cons": 37,
-          "lates": 5
+          "lates": 2
         },
         "Thu": {
           "cons": 33,
@@ -1080,7 +1080,7 @@
         },
         "Fri": {
           "cons": 29,
-          "lates": 6
+          "lates": 0
         }
       },
       "destData": [
@@ -1091,7 +1091,7 @@
           "cons": 9,
           "pallets": 9,
           "revenue": 373.93,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Nuvo Trading Solutions Ltd",
@@ -1100,7 +1100,7 @@
           "cons": 8,
           "pallets": 10,
           "revenue": 417.98,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "FIZZA ELECTRONICS LTD",
@@ -1118,7 +1118,7 @@
           "cons": 6,
           "pallets": 25,
           "revenue": 904.1000000000001,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Savers Health & Beauty Ltd",
@@ -1127,7 +1127,7 @@
           "cons": 6,
           "pallets": 18,
           "revenue": 787.75,
-          "lates": 3
+          "lates": 0
         },
         {
           "name": "TS Distribution/Trades Store",
@@ -1163,7 +1163,7 @@
           "cons": 3,
           "pallets": 4,
           "revenue": 164.2,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "GENUINE CENTRE LTD",
@@ -1669,60 +1669,6 @@
       "failed": false
     },
     {
-      "id": "260465+",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "Legacy Vape Hub UK Ltd",
-      "city": "Legacy Vape Hub UK Ltd",
-      "pc": "M8 8FN",
-      "window": "",
-      "commitDate": "07/01/26",
-      "arrDate": "08/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 9,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260577",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "Nuvo Trading Solutions Ltd",
-      "city": "Nuvo Trading Solutions Ltd",
-      "pc": "B69 2RD",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "12/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260344",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "Savers Health & Beauty Ltd",
-      "city": "Savers Health & Beauty Ltd",
-      "pc": "LU5 4RZ",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "13/01/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "260439",
       "acct": "ANAND",
       "month": "Jan-26",
@@ -1736,42 +1682,6 @@
       "mins": 1440,
       "pallets": 1,
       "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260429",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "MICO LIGHTING LTD",
-      "city": "MICO LIGHTING LTD",
-      "pc": "LS12 1HE",
-      "window": "",
-      "commitDate": "07/01/26",
-      "arrDate": "08/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260343",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "Savers Health & Beauty Ltd",
-      "city": "Savers Health & Beauty Ltd",
-      "pc": "DL3 0PS",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "13/01/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 5,
-      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
@@ -1795,42 +1705,6 @@
       "failed": false
     },
     {
-      "id": "260545",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "Badori Trading Ltd ",
-      "city": "Badori Trading Ltd ",
-      "pc": "S9 2AL",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "12/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260556",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "GO GREEN BATTERIES LTD",
-      "city": "GO GREEN BATTERIES LTD",
-      "pc": "S81 8AD",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "12/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "260436",
       "acct": "ANAND",
       "month": "Jan-26",
@@ -1844,60 +1718,6 @@
       "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260553",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "SHINING STAR (UK) LTD",
-      "city": "SHINING STAR (UK) LTD",
-      "pc": "M7 1SL",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "12/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260552+",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "Savers Health & Beauty Ltd",
-      "city": "Savers Health & Beauty Ltd",
-      "pc": "DL3 0PS",
-      "window": "",
-      "commitDate": "13/01/26",
-      "arrDate": "16/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 7,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "260395",
-      "acct": "ANAND",
-      "month": "Jan-26",
-      "dest": "Lacey Wholesale Ltd (SG & FT LACEY)",
-      "city": "Lacey Wholesale Ltd (SG & FT LACEY)",
-      "pc": "NR10 4BG",
-      "window": "",
-      "commitDate": "07/01/26",
-      "arrDate": "08/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
       "note": "",
       "reason": "",
       "failed": false
@@ -2200,12 +2020,12 @@
     "East of England": {
       "pallets": 68,
       "cons": 55,
-      "lates": 6
+      "lates": 5
     },
     "Wales": {
       "pallets": 44,
       "cons": 33,
-      "lates": 3
+      "lates": 1
     },
     "South East": {
       "pallets": 23,
@@ -2215,7 +2035,7 @@
     "North West": {
       "pallets": 234,
       "cons": 143,
-      "lates": 6
+      "lates": 4
     },
     "South": {
       "pallets": 21,
@@ -2235,12 +2055,12 @@
     "Yorkshire": {
       "pallets": 76,
       "cons": 54,
-      "lates": 5
+      "lates": 4
     },
     "West Midlands": {
       "pallets": 84,
       "cons": 57,
-      "lates": 3
+      "lates": 2
     },
     "Northern Ireland": {
       "pallets": 4,
@@ -2255,12 +2075,12 @@
     "East Midlands": {
       "pallets": 60,
       "cons": 36,
-      "lates": 1
+      "lates": 0
     },
     "North East": {
       "pallets": 57,
       "cons": 32,
-      "lates": 3
+      "lates": 1
     }
   },
   "destData": [
@@ -2280,7 +2100,7 @@
       "cons": 26,
       "pallets": 52,
       "revenue": 2602.2999999999997,
-      "lates": 3
+      "lates": 0
     },
     {
       "name": "GO GREEN BATTERIES LTD",
@@ -2289,7 +2109,7 @@
       "cons": 22,
       "pallets": 22,
       "revenue": 915.7799999999997,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "H-SQUARED ELECTRONICS LTD",
@@ -2316,7 +2136,7 @@
       "cons": 16,
       "pallets": 23,
       "revenue": 970.5300000000001,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "PREMIER LIFE LTD",
@@ -2334,7 +2154,7 @@
       "cons": 13,
       "pallets": 42,
       "revenue": 1568.85,
-      "lates": 2
+      "lates": 1
     },
     {
       "name": "GENUINE CENTRE LTD",
@@ -2442,7 +2262,7 @@
       "cons": 8,
       "pallets": 12,
       "revenue": 497.34999999999997,
-      "lates": 1
+      "lates": 0
     }
   ]
 }
