@@ -1024,14 +1024,12 @@ function buildReport(mapImg,onComplete){
   var cw3=(CW-8)/3;
   var kpiCards=[{l:'Consignments',v:String(aC||0),s:'Completed & invoiced'},{l:'Pallets moved',v:String(aP||0),s:avgPC+' avg per consignment'},{l:'Late deliveries',v:String(aL||0),s:latesPct+' of consignments',c:'#DC2626'},{l:'Base freight cost',v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'),s:periodLabel},{l:'Avg cost / con',v:'\u00A3'+avgRC,s:'Per consignment'},{l:'Avg cost / pallet',v:'\u00A3'+avgRP,s:'Per pallet space'}];
   kpiCards.forEach(function(k,i){var col=i%3,row=Math.floor(i/3);kpiCard(ML+col*(cw3+4),y+row*28,cw3,25,k.l,k.v,k.s,k.c);});y+=60;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('BY DELIVERY TYPE',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var lW2=CW*0.46,rW2=CW*0.50,gap2=CW*0.04;
+  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('DELIVERY TYPE & PALLET SIZE',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
+  var lW2=CW*0.46,rW2=CW*0.50,gap2=CW*0.04,rx2=ML+lW2+gap2;
   fill('#111111');doc.rect(ML,y,lW2,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('DELIVERY TYPE BREAKDOWN',ML+3,y+5);
   var ty2=y+7;
   Object.entries(typeMap2).forEach(function(e,i){var t=e[0],d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';if(i%2===0){fill('#F7F6F3');doc.rect(ML,ty2,lW2,10,'F');}drw('#E5E3DE');doc.line(ML,ty2+10,ML+lW2,ty2+10);txt('#111111');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text(t,ML+3,ty2+5);txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(String(d.cons)+' consignments',ML+3,ty2+9);var oc=parseFloat(otif);txt(oc>=90?'#D97706':'#DC2626');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(otif+'%',ML+lW2-3,ty2+7,{align:'right'});ty2+=10;});
-  if(pdfPalletTotal>0){ty2+=4;fill('#111111');doc.rect(ML,ty2,lW2,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('PALLET SIZE SPLIT',ML+3,ty2+5);ty2+=7;pdfPalletKeys.forEach(function(k,i){var n=pdfPalletMap[k],pct=(n/pdfPalletTotal*100).toFixed(1);if(i%2===0){fill('#F7F6F3');doc.rect(ML,ty2,lW2,8,'F');}drw('#E5E3DE');doc.line(ML,ty2+8,ML+lW2,ty2+8);txt('#111111');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(k,ML+3,ty2+5.5);txt('#888888');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(String(n)+' ('+pct+'%)',ML+lW2-3,ty2+5.5,{align:'right'});ty2+=8;});}
-  var rx2=ML+lW2+gap2;
-  [['Base freight \u2014 '+periodLabel,fmt(aR),'Excl. surcharges'],['Avg cost / consignment','\u00A3'+avgRC,''],['Avg cost / pallet','\u00A3'+avgRP,'']].forEach(function(c,i){fill('#FFFFFF');doc.rect(rx2,y+i*17,rW2,15,'F');drw('#E5E3DE');doc.rect(rx2,y+i*17,rW2,15,'S');fill('#F47920');doc.rect(rx2,y+i*17,rW2,0.8,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(c[0].toUpperCase(),rx2+3,y+i*17+6);txt('#111111');doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(c[1],rx2+3,y+i*17+13);});
+  if(pdfPalletTotal>0){var py2=y;fill('#111111');doc.rect(rx2,py2,rW2,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('PALLET SIZE SPLIT',rx2+3,py2+5);py2+=7;pdfPalletKeys.forEach(function(k,i){var n=pdfPalletMap[k],pct=(n/pdfPalletTotal*100).toFixed(1);if(i%2===0){fill('#F7F6F3');doc.rect(rx2,py2,rW2,8,'F');}drw('#E5E3DE');doc.line(rx2,py2+8,rx2+rW2,py2+8);txt('#111111');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(k,rx2+3,py2+5.5);txt('#888888');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(String(n)+' ('+pct+'%)',rx2+rW2-3,py2+5.5,{align:'right'});py2+=8;});}
 
   // ===== MONTH OVERVIEW + CHARTS (Anand-style; page numbers re-stamped at end) =====
   function chartSection(y,title,vals,labels,opts){
@@ -1119,14 +1117,10 @@ function buildReport(mapImg,onComplete){
     var ldw=[55,28,24,75];y=tH([{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Reason'}],ldw,y);
     lateShow.forEach(function(d,idx){y=tR([{t:trunc(d.dest,30)},{t:trunc(d.city,16)},{t:fmtDelay(d.mins),r:1,c:'#DC2626'},{t:d.reason||'\u2014'}],ldw,y,{shade:idx%2!==0});});
   }
-  if(pdfPalletTotal>0){
-    txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PALLET SIZE SPLIT',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-    var psw=[60,40,40,42];y=tH([{l:'Size'},{l:'Pallet spaces',r:1},{l:'% of total',r:1},{l:''}],psw,y);
-    pdfPalletKeys.forEach(function(k,idx){var n=pdfPalletMap[k],pct=(n/pdfPalletTotal*100).toFixed(1);y=tR([{t:k},{t:String(n),r:1},{t:pct+'%',r:1},{t:''}],psw,y,{shade:idx%2!==0});});
-    y=tR([{t:'Total'},{t:String(pdfPalletTotal),r:1},{t:'100.0%',r:1},{t:''}],psw,y,{total:true});
-  }
 
-  // PAGE 5
+  // PAGE 5 (surcharges) \u2014 only rendered when there are surcharges
+  var hasSurcharge=(isV4?((v4TA+v4TB+v4AM+v4BW+v4AZ)>0):(surchCons>0));
+  if(hasSurcharge){
   doc.addPage();chrome(5);y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('SURCHARGE SUMMARY \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   var sc3=(CW-8)/3;
@@ -1153,6 +1147,7 @@ function buildReport(mapImg,onComplete){
   if(isV4){doc.text('Chargeable surcharges (TA/TB/AM) additional to base freight. Free surcharges (TL/EB/ETA) included in Customer Cost.',ML+12,y+4.5);if(v4ChargeTotal===0){doc.text('No chargeable surcharges recorded this period.',ML+3,y+8.5);}}
   else{doc.text('Surcharges from destination time window in Qargo TMS. Additional to base freight.',ML+12,y+4.5);if(pre10Cons.length===0){doc.text('Pre-10am Delivery (\u00A332) \u2014 no consignments this period.',ML+3,y+8.5);}}
 
+  }
   // PAGE 6
   var curPageNum=6;
   doc.addPage();chrome(6);y=CT+4;
