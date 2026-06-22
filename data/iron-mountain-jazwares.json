@@ -1,14 +1,14 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-22T07:12:14.164Z",
+  "lastUpdated": "2026-06-22T07:13:19.744Z",
   "months": {
     "2026-04": {
       "cons": 37,
       "pallets": 221,
       "revenue": 9149.35,
-      "lates": 3,
-      "latePallets": 5,
-      "timeliness": 0.977376,
+      "lates": 2,
+      "latePallets": 4,
+      "timeliness": 0.9819,
       "avgRC": 247.28,
       "avgRP": 41.4,
       "avgPC": 5.97,
@@ -21,7 +21,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 37,
-          "lates": 3
+          "lates": 2
         }
       },
       "regionData": {
@@ -65,7 +65,7 @@
           "cons": 6,
           "pallets": 63,
           "revenue": 2223.98,
-          "lates": 1
+          "lates": 0
         }
       },
       "destData": [
@@ -112,7 +112,7 @@
           "cons": 2,
           "pallets": 10,
           "revenue": 431.66999999999996,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "SMYTHS TOYS:ALTO WAREHOUSE",
@@ -2359,31 +2359,13 @@
       "note": "",
       "reason": "",
       "failed": false
-    },
-    {
-      "id": "29239",
-      "acct": "IRON",
-      "month": "Apr-26",
-      "dest": "SMYTHS-S",
-      "city": "SMYTHS-S",
-      "pc": "ST5 9QD",
-      "window": "",
-      "commitDate": "15/04/26",
-      "arrDate": "17/04/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
     }
   ],
   "regionData": {
     "West Midlands": {
       "pallets": 319,
       "cons": 52,
-      "lates": 12
+      "lates": 11
     },
     "South West": {
       "pallets": 20,
@@ -2571,7 +2553,7 @@
       "cons": 7,
       "pallets": 31,
       "revenue": 1403.56,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "TJ MORRIS - OMEGA",
