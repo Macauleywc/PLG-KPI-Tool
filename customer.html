@@ -136,8 +136,9 @@ tr.empty-row td{color:var(--muted);opacity:0.55;padding-top:7px!important;paddin
 .stat-card .val.g{color:var(--green);}
 .stat-card .val.r{color:var(--red);}
 /* ── Charts ───────────────────────────────────────── */
-.chart-wrap{height:200px;position:relative;}
-.chart-wrap.lg{height:240px;}
+.chart-wrap{height:320px;position:relative;}
+.chart-wrap.lg{height:300px;}
+.chart-wrap-lg{height:300px;position:relative;}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
 .sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -679,14 +680,15 @@ function renderCharts(){
   var roll3=otifData.map(function(v,i){return i<2?null:+((otifData[i]+otifData[i-1]+otifData[i-2])/3).toFixed(2);});
   var oc={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},boxWidth:12}}},scales:{y:{ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}};
   ['chart-otif','chart-cons','chart-rev','chart-arc','chart-arp'].forEach(function(id){if(chartInst[id]){chartInst[id].destroy();delete chartInst[id];}});
+  function VL(fmt){return {afterDatasetsDraw:function(chart){var ctx=chart.ctx;chart.data.datasets.forEach(function(ds,di){var meta=chart.getDatasetMeta(di);if(meta.hidden)return;meta.data.forEach(function(el,i){var v=ds.data[i];if(v==null)return;ctx.save();ctx.font='700 10px Inter, sans-serif';ctx.fillStyle='#333';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(fmt(v),el.x,el.y-4);ctx.restore();});});}};}
   var co=document.getElementById('chart-otif');
   if(co)chartInst['chart-otif']=new Chart(co,{type:'line',data:{labels:labels,datasets:[{label:'Monthly OTIF %',data:otifData,borderColor:'#F47920',backgroundColor:'rgba(244,121,32,0.08)',tension:0.3,pointBackgroundColor:'#F47920',pointRadius:4},{label:'3-month rolling avg',data:roll3,borderColor:'#1a1a1a',borderDash:[5,4],tension:0.3,pointRadius:3,pointBackgroundColor:'#1a1a1a',spanGaps:true}]},options:Object.assign({},oc,{scales:{y:Object.assign({},oc.scales.y,{min:85,max:100,ticks:{callback:function(v){return v+'%';},font:{size:11}}}),x:oc.scales.x}})});
   var cc=document.getElementById('chart-cons');
-  if(cc)chartInst['chart-cons']=new Chart(cc,{type:'bar',data:{labels:labels,datasets:[{label:'Consignments',data:consData,backgroundColor:'#F47920',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  if(cc)chartInst['chart-cons']=new Chart(cc,{type:'bar',data:{labels:labels,datasets:[{label:'Consignments',data:consData,backgroundColor:'#F47920',borderRadius:3}]},plugins:[VL(function(v){return String(v);})],options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:18}},plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grace:'12%',ticks:{font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
   var cr=document.getElementById('chart-rev');
-  if(cr)chartInst['chart-rev']=new Chart(cr,{type:'bar',data:{labels:labels,datasets:[{label:'Cost',data:revData,backgroundColor:'#1a1a1a',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'£'+v.toLocaleString();},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  if(cr)chartInst['chart-rev']=new Chart(cr,{type:'bar',data:{labels:labels,datasets:[{label:'Cost',data:revData,backgroundColor:'#1a1a1a',borderRadius:3}]},plugins:[VL(function(v){return '£'+Math.round(v).toLocaleString();})],options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:18}},plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grace:'12%',ticks:{callback:function(v){return'£'+v.toLocaleString();},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
   var ca=document.getElementById('chart-arc');
-  if(ca)chartInst['chart-arc']=new Chart(ca,{type:'line',data:{labels:labels,datasets:[{label:'Avg £/con',data:arcData,borderColor:'#F47920',backgroundColor:'rgba(244,121,32,0.07)',tension:0.3,fill:true,pointBackgroundColor:'#F47920',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return'£'+v;},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  if(ca)chartInst['chart-arc']=new Chart(ca,{type:'line',data:{labels:labels,datasets:[{label:'Avg £/con',data:arcData,borderColor:'#F47920',backgroundColor:'rgba(244,121,32,0.07)',tension:0.3,fill:true,pointBackgroundColor:'#F47920',pointRadius:4}]},plugins:[VL(function(v){return '£'+(Math.round(v*100)/100).toFixed(2);})],options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:20}},plugins:{legend:{display:false}},scales:{y:{grace:'18%',ticks:{callback:function(v){return'£'+v;},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
 }
 
 function exportTracker(){
