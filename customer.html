@@ -1034,20 +1034,19 @@ function buildReport(mapImg,onComplete){
   [['Base freight \u2014 '+periodLabel,fmt(aR),'Excl. surcharges'],['Avg cost / consignment','\u00A3'+avgRC,''],['Avg cost / pallet','\u00A3'+avgRP,'']].forEach(function(c,i){fill('#FFFFFF');doc.rect(rx2,y+i*17,rW2,15,'F');drw('#E5E3DE');doc.rect(rx2,y+i*17,rW2,15,'S');fill('#F47920');doc.rect(rx2,y+i*17,rW2,0.8,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(c[0].toUpperCase(),rx2+3,y+i*17+6);txt('#111111');doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(c[1],rx2+3,y+i*17+13);});
 
   // ===== MONTH OVERVIEW + CHARTS (Anand-style; page numbers re-stamped at end) =====
-  function chartCard(x,y,w,h,title,vals,labels,opts){
+  function chartSection(y,title,vals,labels,opts){
     opts=opts||{};
-    fill('#FFFFFF');doc.rect(x,y,w,h,'F');drw('#E5E3DE');doc.rect(x,y,w,h,'S');
-    fill(opts.color||'#F47920');doc.rect(x,y,w,1.1,'F');
-    txt('#333333');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text(title,x+4,y+8);
-    var pad=7,plotX=x+pad,plotW=w-pad*2,plotTop=y+15,plotBot=y+h-9,plotH=plotBot-plotTop;
+    txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(title,ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);
+    var plotTop=y+7,plotH=(opts.h||34),plotBot=plotTop+plotH,plotX=ML+8,plotW=CW-10;
     var n=vals.length,valid=vals.filter(function(v){return v!=null;});
     var maxV=opts.max!=null?opts.max:(valid.length?Math.max.apply(null,valid):1);
     var minV=opts.min!=null?opts.min:0;if(maxV<=minV)maxV=minV+1;
     var fV=opts.fmt||function(v){return String(Math.round(v));};
-    if(opts.target!=null&&opts.target<=maxV&&opts.target>=minV){var ty=plotBot-((opts.target-minV)/(maxV-minV))*plotH;drw('#CBD5E1');if(doc.setLineDashPattern)doc.setLineDashPattern([0.8,0.8],0);doc.line(plotX,ty,plotX+plotW,ty);if(doc.setLineDashPattern)doc.setLineDashPattern([],0);txt('#94A3B8');doc.setFontSize(4.5);doc.setFont('helvetica','normal');doc.text(opts.targetLabel||'',plotX+plotW,ty-1,{align:'right'});}
+    if(opts.target!=null&&opts.target<=maxV&&opts.target>=minV){var ty=plotBot-((opts.target-minV)/(maxV-minV))*plotH;drw('#C8CED6');if(doc.setLineDashPattern)doc.setLineDashPattern([1,1],0);doc.line(plotX,ty,plotX+plotW,ty);if(doc.setLineDashPattern)doc.setLineDashPattern([],0);txt('#94A3B8');doc.setFontSize(5);doc.setFont('helvetica','normal');doc.text(opts.targetLabel||'',plotX+plotW,ty-1,{align:'right'});}
     drw('#E5E3DE');doc.line(plotX,plotBot,plotX+plotW,plotBot);
-    var slot=plotW/n,bw=Math.min(slot*0.62,13);
-    vals.forEach(function(v,i){var cx=plotX+i*slot+slot/2;if(v!=null){var frac=(v-minV)/(maxV-minV);if(frac<0)frac=0;if(frac>1)frac=1;var bh=Math.max(frac*plotH,0.8);fill(opts.color||'#F47920');doc.rect(cx-bw/2,plotBot-bh,bw,bh,'F');txt('#444444');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(fV(v),cx,plotBot-bh-1.6,{align:'center'});}txt('#999999');doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text(String(labels[i]).replace('-26',''),cx,plotBot+5,{align:'center'});});
+    var slot=plotW/n,bw=Math.min(slot*0.5,11);
+    vals.forEach(function(v,i){var cx=plotX+i*slot+slot/2;if(v!=null){var frac=(v-minV)/(maxV-minV);if(frac<0)frac=0;if(frac>1)frac=1;var bh=Math.max(frac*plotH,0.8);fill('#F47920');doc.rect(cx-bw/2,plotBot-bh,bw,bh,'F');txt('#555555');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(fV(v),cx,plotBot-bh-1.5,{align:'center'});}txt('#999999');doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text(String(labels[i]).replace('-26',''),cx,plotBot+4,{align:'center'});});
+    return plotBot+11;
   }
   doc.addPage();chrome(3);y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('MONTH-BY-MONTH OVERVIEW \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
@@ -1075,7 +1074,7 @@ function buildReport(mapImg,onComplete){
   });
   y=tR([{t:'TOTAL / PERIOD'},{t:String(_tC),r:1},{t:String(_tP),r:1},{t:fmt(_tR2),r:1},{t:(_tP>0&&ytdOTIF!=='--')?ytdOTIF+'%':'\u2014',r:1},{t:String(_tL),r:1}],moW,y,{total:true});
   doc.addPage();chrome(3);y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PERFORMANCE CHARTS BY MONTH \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=8;
+  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PERFORMANCE CHARTS BY MONTH \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=9;
   var _labs=months.map(function(m){return m.label;});
   var _act=function(m){return (m.cons||0)>0||(m.pallets||0)>0;};
   var _consV=months.map(function(m){return _act(m)?(m.cons||0):null;});
@@ -1085,12 +1084,10 @@ function buildReport(mapImg,onComplete){
   var _timValid=_timV.filter(function(v){return v!=null;});
   var _timMin=_timValid.length?Math.max(0,Math.floor(Math.min.apply(null,_timValid)-3)):90;
   var _gbpL=function(v){return v>=1000?'\u00A3'+(v/1000).toFixed(1)+'k':'\u00A3'+Math.round(v);};
-  var cwc=(CW-8)/2,chh=112,rgap=10;
-  chartCard(ML,y,cwc,chh,'Consignments',_consV,_labs,{color:'#F47920'});
-  chartCard(ML+cwc+8,y,cwc,chh,'Pallets',_pltV,_labs,{color:'#1a1a1a'});
-  y+=chh+rgap;
-  chartCard(ML,y,cwc,chh,'Cost (\u00A3)',_revV,_labs,{color:'#F47920',fmt:_gbpL});
-  chartCard(ML+cwc+8,y,cwc,chh,'Timeliness (OTIF %)',_timV,_labs,{color:'#16A34A',min:_timMin,max:100,fmt:function(v){return v.toFixed(1)+'%';},target:97,targetLabel:'Target 97%'});
+  y=chartSection(y,'CONSIGNMENTS BY MONTH',_consV,_labs,{h:36});
+  y=chartSection(y,'PALLETS DELIVERED BY MONTH',_pltV,_labs,{h:36});
+  y=chartSection(y,'BASE FREIGHT COST BY MONTH',_revV,_labs,{h:36,fmt:_gbpL});
+  y=chartSection(y,'TIMELINESS (OTIF %) BY MONTH',_timV,_labs,{h:36,min:_timMin,max:100,fmt:function(v){return v.toFixed(1)+'%';},target:97,targetLabel:'Target 97%'});
 
   // PAGE 3
   doc.addPage();chrome(3);y=CT+4;
