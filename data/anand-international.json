@@ -1,6 +1,6 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-06-22T14:02:39.163Z",
+  "lastUpdated": "2026-06-22T14:03:05.541Z",
   "months": {
     "2026-04": {
       "cons": 109,
@@ -1270,9 +1270,9 @@
       "cons": 105,
       "pallets": 151,
       "revenue": 7311.53,
-      "lates": 3,
-      "latePallets": 3,
-      "timeliness": 0.980132,
+      "lates": 2,
+      "latePallets": 2,
+      "timeliness": 0.986755,
       "avgRC": 69.63,
       "avgRP": 48.42,
       "avgPC": 1.44,
@@ -1284,7 +1284,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 63,
-          "lates": 3
+          "lates": 2
         },
         "Economy Booked": {
           "cons": 42,
@@ -1296,7 +1296,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 230.25,
-          "lates": 1
+          "lates": 0
         },
         "Other": {
           "cons": 6,
@@ -1382,7 +1382,7 @@
         },
         "Wed": {
           "cons": 15,
-          "lates": 1
+          "lates": 0
         },
         "Thu": {
           "cons": 23,
@@ -1554,7 +1554,7 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 37.25,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Royal Institute Of Blind (RNIB)",
@@ -1957,24 +1957,6 @@
       "failed": false
     },
     {
-      "id": "261463",
-      "acct": "ANAND",
-      "month": "Feb-26",
-      "dest": "FIZZA ELECTRONICS LTD",
-      "city": "FIZZA ELECTRONICS LTD",
-      "pc": "M8 8LG",
-      "window": "",
-      "commitDate": "11/02/26",
-      "arrDate": "12/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "261340",
       "acct": "ANAND",
       "month": "Feb-26",
@@ -2015,7 +1997,7 @@
     "Scotland": {
       "pallets": 34,
       "cons": 33,
-      "lates": 3
+      "lates": 2
     },
     "East of England": {
       "pallets": 68,
@@ -2127,7 +2109,7 @@
       "cons": 17,
       "pallets": 18,
       "revenue": 741.0000000000001,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "Nuvo Trading Solutions Ltd",
