@@ -1036,8 +1036,11 @@ function buildReport(mapImg,onComplete){
   // ===== MONTH OVERVIEW + CHARTS (Anand-style; page numbers re-stamped at end) =====
   function chartSection(y,title,vals,labels,opts){
     opts=opts||{};
-    txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(title,ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);
-    var plotTop=y+7,plotH=(opts.h||34),plotBot=plotTop+plotH,plotX=ML+8,plotW=CW-10;
+    var boxH=opts.boxH||50;
+    fill('#FCFBF9');doc.rect(ML,y,CW,boxH,'F');drw('#E5E3DE');doc.rect(ML,y,CW,boxH,'S');
+    fill('#F47920');doc.rect(ML,y,1.4,boxH,'F');
+    txt('#666666');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(title,ML+5,y+6);
+    var plotTop=y+12,plotH=(opts.h||30),plotBot=plotTop+plotH,plotX=ML+10,plotW=CW-16;
     var n=vals.length,valid=vals.filter(function(v){return v!=null;});
     var maxV=opts.max!=null?opts.max:(valid.length?Math.max.apply(null,valid):1);
     var minV=opts.min!=null?opts.min:0;if(maxV<=minV)maxV=minV+1;
@@ -1046,7 +1049,7 @@ function buildReport(mapImg,onComplete){
     drw('#E5E3DE');doc.line(plotX,plotBot,plotX+plotW,plotBot);
     var slot=plotW/n,bw=Math.min(slot*0.5,11);
     vals.forEach(function(v,i){var cx=plotX+i*slot+slot/2;if(v!=null){var frac=(v-minV)/(maxV-minV);if(frac<0)frac=0;if(frac>1)frac=1;var bh=Math.max(frac*plotH,0.8);fill('#F47920');doc.rect(cx-bw/2,plotBot-bh,bw,bh,'F');txt('#555555');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(fV(v),cx,plotBot-bh-1.5,{align:'center'});}txt('#999999');doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text(String(labels[i]).replace('-26',''),cx,plotBot+4,{align:'center'});});
-    return plotBot+11;
+    return y+boxH+5;
   }
   doc.addPage();chrome(3);y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('MONTH-BY-MONTH OVERVIEW \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
@@ -1084,10 +1087,10 @@ function buildReport(mapImg,onComplete){
   var _timValid=_timV.filter(function(v){return v!=null;});
   var _timMin=_timValid.length?Math.max(0,Math.floor(Math.min.apply(null,_timValid)-3)):90;
   var _gbpL=function(v){return v>=1000?'\u00A3'+(v/1000).toFixed(1)+'k':'\u00A3'+Math.round(v);};
-  y=chartSection(y,'CONSIGNMENTS BY MONTH',_consV,_labs,{h:36});
-  y=chartSection(y,'PALLETS DELIVERED BY MONTH',_pltV,_labs,{h:36});
-  y=chartSection(y,'BASE FREIGHT COST BY MONTH',_revV,_labs,{h:36,fmt:_gbpL});
-  y=chartSection(y,'TIMELINESS (OTIF %) BY MONTH',_timV,_labs,{h:36,min:_timMin,max:100,fmt:function(v){return v.toFixed(1)+'%';},target:97,targetLabel:'Target 97%'});
+  y=chartSection(y,'CONSIGNMENTS BY MONTH',_consV,_labs,{});
+  y=chartSection(y,'PALLETS DELIVERED BY MONTH',_pltV,_labs,{});
+  y=chartSection(y,'BASE FREIGHT COST BY MONTH',_revV,_labs,{fmt:_gbpL});
+  y=chartSection(y,'TIMELINESS (OTIF %) BY MONTH',_timV,_labs,{min:_timMin,max:100,fmt:function(v){return v.toFixed(1)+'%';},target:97,targetLabel:'Target 97%'});
 
   // PAGE 3
   doc.addPage();chrome(3);y=CT+4;
