@@ -1,6 +1,6 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-06-22T14:04:27.958Z",
+  "lastUpdated": "2026-06-22T14:45:11.496Z",
   "months": {
     "2026-04": {
       "cons": 109,
@@ -322,9 +322,9 @@
       "cons": 104,
       "pallets": 158,
       "revenue": 7751.84,
-      "lates": 5,
-      "latePallets": 6,
-      "timeliness": 0.962025,
+      "lates": 4,
+      "latePallets": 4,
+      "timeliness": 0.9746835443037974,
       "avgRC": 74.54,
       "avgRP": 49.06,
       "avgPC": 1.52,
@@ -1741,24 +1741,6 @@
       "failed": false
     },
     {
-      "id": "263406",
-      "acct": "ANAND",
-      "month": "May-26",
-      "dest": "Legacy Vape Hub UK Ltd",
-      "city": "Legacy Vape Hub UK Ltd",
-      "pc": "M8 8FN",
-      "window": "",
-      "commitDate": "06/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "263001",
       "acct": "ANAND",
       "month": "Apr-26",
@@ -1891,7 +1873,7 @@
     "North West": {
       "pallets": 234,
       "cons": 143,
-      "lates": 3
+      "lates": 2
     },
     "South": {
       "pallets": 21,
