@@ -1347,7 +1347,7 @@ function renderPerformanceForMonth(key){
   // Day of week — rows only
   var dow={1:{l:'Mon',cons:0,lates:0},2:{l:'Tue',cons:0,lates:0},3:{l:'Wed',cons:0,lates:0},4:{l:'Thu',cons:0,lates:0},5:{l:'Fri',cons:0,lates:0}};
   var haveRows=false;
-  keys.forEach(function(k){var c=calculatedMonths[k];if(c&&c.completedRows&&c.completedRows.length>0){haveRows=true;c.completedRows.forEach(function(r){var d=xlDate(r['destination date']);if(!d)return;var wd=d.getDay();if(wd<1||wd>5)return;dow[wd].cons++;if(isLate(r))dow[wd].lates++;});}});
+  keys.forEach(function(k){var c=calculatedMonths[k];if(c&&c.completedRows&&c.completedRows.length>0){haveRows=true;c.completedRows.forEach(function(r){var d=xlDate(r['destination date']);if(!d)return;var wd=d.getDay();if(wd<1||wd>5)return;dow[wd].cons++;if(isLate(r))dow[wd].lates++;});}else{var db=(savedMonthData[k]||{}).dowBreakdown;if(db){haveRows=true;[1,2,3,4,5].forEach(function(wd){var dd=db[dow[wd].l];if(dd){dow[wd].cons+=dd.cons||0;dow[wd].lates+=dd.lates||0;}});}}});
   var dowCards=[1,2,3,4,5].map(function(dn){var dd=dow[dn],otif=dd.cons>0?(dd.cons-dd.lates)/dd.cons:null;var col=otif===null?'#ccc':otif>=0.97?'#2e7d32':otif>=0.95?'#e65100':'#c62828';var pct=otif!==null?(otif*100).toFixed(1)+'%':'\u2014';return'<div class="dow-card"><div class="dow-label">'+dd.l+'</div><div class="dow-val" style="color:'+col+'">'+pct+'</div><div class="dow-sub">'+dd.cons+' cons \u00b7 '+dd.lates+' late</div></div>';}).join('');
   var dowNote=haveRows?'':'<div style="font-size:12px;color:#999;margin-top:8px">Upload this month\u2019s Qargo export to populate the day-of-week breakdown \u2014 it isn\u2019t stored in saved data.</div>';
   // Pallet size — rows if loaded, else saved palletSizes
@@ -1460,6 +1460,12 @@ async function saveToGitHub(){
         // Per-month region data
         var mReg={};rows.forEach(function(r){var reg=region(r['destination postal code']||'');if(!mReg[reg])mReg[reg]={cons:0,pallets:0,revenue:0,lates:0};mReg[reg].cons++;mReg[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;mReg[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))mReg[reg].lates++;});
         if(Object.keys(mReg).length>0)base.regionData=mReg;
+        // Per-month day-of-week breakdown
+        var dowNm={1:'Mon',2:'Tue',3:'Wed',4:'Thu',5:'Fri'};
+        var dowB={Mon:{cons:0,lates:0},Tue:{cons:0,lates:0},Wed:{cons:0,lates:0},Thu:{cons:0,lates:0},Fri:{cons:0,lates:0}};
+        var dowAny=false;
+        rows.forEach(function(r){var d=xlDate(r['destination date']);if(!d)return;var nm=dowNm[d.getDay()];if(!nm)return;dowAny=true;dowB[nm].cons++;if(isLate(r))dowB[nm].lates++;});
+        if(dowAny)base.dowBreakdown=dowB;
         // Per-month destination data (top 20)
         var mDest={};rows.forEach(function(r){var nm=r['destination name']||'?';if(!mDest[nm])mDest[nm]={name:nm,city:r['destination city']||'',pc:r['destination postal code']||'',cons:0,pallets:0,revenue:0,lates:0};mDest[nm].cons++;mDest[nm].pallets+=parseFloat(r['goods pallet spaces'])||0;mDest[nm].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))mDest[nm].lates++;});
         var mDestArr=Object.values(mDest).sort(function(a,b){return b.cons-a.cons;}).slice(0,20);
