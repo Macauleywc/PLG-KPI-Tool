@@ -1033,6 +1033,63 @@ function buildReport(mapImg,onComplete){
   var rx2=ML+lW2+gap2;
   [['Base freight \u2014 '+periodLabel,fmt(aR),'Excl. surcharges'],['Avg cost / consignment','\u00A3'+avgRC,''],['Avg cost / pallet','\u00A3'+avgRP,'']].forEach(function(c,i){fill('#FFFFFF');doc.rect(rx2,y+i*17,rW2,15,'F');drw('#E5E3DE');doc.rect(rx2,y+i*17,rW2,15,'S');fill('#F47920');doc.rect(rx2,y+i*17,rW2,0.8,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(c[0].toUpperCase(),rx2+3,y+i*17+6);txt('#111111');doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(c[1],rx2+3,y+i*17+13);});
 
+  // ===== MONTH OVERVIEW + CHARTS (Anand-style; page numbers re-stamped at end) =====
+  function miniBar(x,y,w,h,title,vals,labels,opts){
+    opts=opts||{};
+    txt('#666666');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text(title,x,y-2);
+    var padL=12,plotX=x+padL,plotW=w-padL-2,plotH=h-9,plotY=y;
+    var n=vals.length,valid=vals.filter(function(v){return v!=null;});
+    var maxV=opts.max!=null?opts.max:(valid.length?Math.max.apply(null,valid):1);
+    var minV=opts.min!=null?opts.min:0;if(maxV<=minV)maxV=minV+1;
+    var fY=opts.fmtY||function(v){return String(Math.round(v));};
+    [0,0.5,1].forEach(function(t){var gv=minV+(maxV-minV)*t;var gy=plotY+plotH-t*plotH;drw('#EEEEEE');doc.line(plotX,gy,plotX+plotW,gy);txt('#AAAAAA');doc.setFontSize(4.5);doc.setFont('helvetica','normal');doc.text(fY(gv),plotX-1.5,gy+1.2,{align:'right'});});
+    var slot=plotW/n,bw=Math.min(slot*0.55,9);
+    vals.forEach(function(v,i){var cx=plotX+i*slot+slot/2;if(v!=null){var frac=(v-minV)/(maxV-minV);if(frac<0)frac=0;if(frac>1)frac=1;var bh=frac*plotH;fill(opts.color||'#F47920');doc.rect(cx-bw/2,plotY+plotH-bh,bw,Math.max(bh,0.4),'F');}txt('#999999');doc.setFontSize(4);doc.setFont('helvetica','normal');doc.text(String(labels[i]).replace('-26',''),cx,plotY+h-1.5,{align:'center'});});
+    drw('#DDDDDD');doc.line(plotX,plotY+plotH,plotX+plotW,plotY+plotH);
+  }
+  doc.addPage();chrome(3);y=CT+4;
+  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('MONTH-BY-MONTH OVERVIEW \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
+  var _spO=function(m){var v=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):0;return v.toFixed(1)+'%';};
+  var moActive=months.filter(function(m){return (m.cons||0)>0||(m.pallets||0)>0;});
+  if(moActive.length>0){
+    var _busy=moActive.reduce(function(a,b){return (b.cons||0)>(a.cons||0)?b:a;});
+    var _best=moActive.reduce(function(a,b){return ((b.otif||0))>((a.otif||0))?b:a;});
+    var _worst=moActive.reduce(function(a,b){return (b.lates||0)>(a.lates||0)?b:a;});
+    var cw3=(CW-8)/3;
+    kpiCard(ML,y,cw3,24,'Busiest month',_busy.label,String(_busy.cons||0)+' consignments',null);
+    kpiCard(ML+cw3+4,y,cw3,24,'Best timeliness',_best.label,_spO(_best),'#166534');
+    kpiCard(ML+cw3*2+8,y,cw3,24,'Most late deliveries',_worst.label,String(_worst.lates||0)+' late'+((_worst.lates||0)===1?'':'s'),(_worst.lates||0)>0?'#991B1B':'#166534');
+    y+=30;
+  }
+  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('MONTHLY BREAKDOWN',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
+  var moW=[34,26,30,40,30,22];
+  y=tH([{l:'Month'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'\u00A3',r:1},{l:'Timeliness',r:1},{l:'Lates',r:1}],moW,y);
+  var _tC=0,_tP=0,_tR2=0,_tL=0;
+  months.forEach(function(m,i){
+    var hd=(m.cons||0)>0||(m.pallets||0)>0||(m.revenue!=null&&m.revenue>0)||(m.lates||0)>0;
+    var op=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):null;
+    if(hd){_tC+=m.cons||0;_tP+=m.pallets||0;_tR2+=m.revenue||0;_tL+=m.lates||0;}
+    y=tR([{t:m.label},{t:hd?String(m.cons||0):'\u2014',r:1},{t:hd?String(m.pallets||0):'\u2014',r:1},{t:(hd&&m.revenue!=null)?fmt(m.revenue):'\u2014',r:1},{t:op!=null?op.toFixed(1)+'%':'\u2014',r:1,c:op!=null?otifC(op):'#BBBBBB'},{t:hd?String(m.lates||0):'\u2014',r:1,c:(m.lates||0)>0?'#991B1B':'#111111'}],moW,y,{shade:i%2!==0});
+  });
+  y=tR([{t:'TOTAL / PERIOD'},{t:String(_tC),r:1},{t:String(_tP),r:1},{t:fmt(_tR2),r:1},{t:(_tP>0&&ytdOTIF!=='--')?ytdOTIF+'%':'\u2014',r:1},{t:String(_tL),r:1}],moW,y,{total:true});
+  doc.addPage();chrome(3);y=CT+4;
+  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PERFORMANCE CHARTS BY MONTH \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=9;
+  var _labs=months.map(function(m){return m.label;});
+  var _act=function(m){return (m.cons||0)>0||(m.pallets||0)>0;};
+  var _consV=months.map(function(m){return _act(m)?(m.cons||0):null;});
+  var _pltV=months.map(function(m){return _act(m)?(m.pallets||0):null;});
+  var _revV=months.map(function(m){return _act(m)?(m.revenue||0):null;});
+  var _timV=months.map(function(m){var op=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):null;return _act(m)?op:null;});
+  var _timValid=_timV.filter(function(v){return v!=null;});
+  var _timMin=_timValid.length?Math.max(0,Math.floor(Math.min.apply(null,_timValid)-3)):90;
+  var _gbp=function(v){return v>=1000?'\u00A3'+(v/1000).toFixed(0)+'k':'\u00A3'+Math.round(v);};
+  var cwc=(CW-10)/2,chh=98,rgap=20;
+  miniBar(ML,y,cwc,chh,'Consignments',_consV,_labs,{color:'#F47920'});
+  miniBar(ML+cwc+10,y,cwc,chh,'Pallets',_pltV,_labs,{color:'#111111'});
+  y+=chh+rgap;
+  miniBar(ML,y,cwc,chh,'Cost',_revV,_labs,{color:'#F47920',fmtY:_gbp});
+  miniBar(ML+cwc+10,y,cwc,chh,'Timeliness (OTIF %)',_timV,_labs,{color:'#16A34A',min:_timMin,max:100,fmtY:function(v){return Math.round(v)+'%';}});
+
   // PAGE 3
   doc.addPage();chrome(3);y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('UK DELIVERY HEATMAP \u2014 PALLET VOLUME BY REGION',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
