@@ -1,14 +1,14 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-06-22T14:03:15.739Z",
+  "lastUpdated": "2026-06-22T14:04:27.958Z",
   "months": {
     "2026-04": {
       "cons": 109,
       "pallets": 164,
       "revenue": 7349.05,
-      "lates": 6,
-      "latePallets": 8,
-      "timeliness": 0.95122,
+      "lates": 4,
+      "latePallets": 4,
+      "timeliness": 0.97561,
       "avgRC": 67.42,
       "avgRP": 44.81,
       "avgPC": 1.5,
@@ -20,11 +20,11 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 67,
-          "lates": 1
+          "lates": 0
         },
         "Economy Booked": {
           "cons": 42,
-          "lates": 5
+          "lates": 4
         }
       },
       "regionData": {
@@ -68,7 +68,7 @@
           "cons": 13,
           "pallets": 17,
           "revenue": 667.3000000000001,
-          "lates": 2
+          "lates": 0
         },
         "East of England": {
           "cons": 10,
@@ -116,11 +116,11 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 11,
-          "lates": 1
+          "lates": 0
         },
         "Tue": {
           "cons": 31,
-          "lates": 3
+          "lates": 2
         },
         "Wed": {
           "cons": 21,
@@ -260,7 +260,7 @@
           "cons": 2,
           "pallets": 4,
           "revenue": 151.4,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Marks And Spencer PLC",
@@ -269,7 +269,7 @@
           "cons": 2,
           "pallets": 3,
           "revenue": 111.1,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "PROPER JOB SUPERSTORES LTD",
@@ -322,9 +322,9 @@
       "cons": 104,
       "pallets": 158,
       "revenue": 7751.84,
-      "lates": 7,
-      "latePallets": 8,
-      "timeliness": 0.949367,
+      "lates": 5,
+      "latePallets": 6,
+      "timeliness": 0.962025,
       "avgRC": 74.54,
       "avgRP": 49.06,
       "avgPC": 1.52,
@@ -336,7 +336,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 69,
-          "lates": 4
+          "lates": 2
         },
         "Economy Booked": {
           "cons": 35,
@@ -354,7 +354,7 @@
           "cons": 29,
           "pallets": 44,
           "revenue": 1846.1499999999996,
-          "lates": 2
+          "lates": 1
         },
         "West Midlands": {
           "cons": 8,
@@ -420,7 +420,7 @@
           "cons": 8,
           "pallets": 11,
           "revenue": 508.75,
-          "lates": 1
+          "lates": 0
         },
         "South East": {
           "cons": 4,
@@ -444,11 +444,11 @@
         },
         "Thu": {
           "cons": 21,
-          "lates": 1
+          "lates": 0
         },
         "Fri": {
           "cons": 22,
-          "lates": 2
+          "lates": 1
         }
       },
       "destData": [
@@ -1669,24 +1669,6 @@
       "failed": false
     },
     {
-      "id": "263665",
-      "acct": "ANAND",
-      "month": "May-26",
-      "dest": "Ocean Trading International Ltd",
-      "city": "Ocean Trading International Ltd",
-      "pc": "M8 9SN",
-      "window": "",
-      "commitDate": "14/05/26",
-      "arrDate": "15/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "264061",
       "acct": "ANAND",
       "month": "May-26",
@@ -1716,24 +1698,6 @@
       "arrDate": "13/05/26",
       "arrival": "01:00",
       "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "263687",
-      "acct": "ANAND",
-      "month": "May-26",
-      "dest": "TIGER FEET LTD",
-      "city": "TIGER FEET LTD",
-      "pc": "BD4 6SE",
-      "window": "",
-      "commitDate": "15/05/26",
-      "arrDate": "18/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -1790,42 +1754,6 @@
       "mins": 1440,
       "pallets": 2,
       "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "262983",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "Alpha Cash & Carry Ltd",
-      "city": "Alpha Cash & Carry Ltd",
-      "pc": "BD19 5LY",
-      "window": "",
-      "commitDate": "21/04/26",
-      "arrDate": "22/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "262735",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "Marks And Spencer PLC",
-      "city": "Marks And Spencer PLC",
-      "pc": "BD5 8LZ",
-      "window": "",
-      "commitDate": "13/04/26",
-      "arrDate": "14/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Economy Booked",
       "note": "",
       "reason": "",
       "failed": false
@@ -1963,7 +1891,7 @@
     "North West": {
       "pallets": 234,
       "cons": 143,
-      "lates": 4
+      "lates": 3
     },
     "South": {
       "pallets": 21,
@@ -1983,7 +1911,7 @@
     "Yorkshire": {
       "pallets": 76,
       "cons": 54,
-      "lates": 3
+      "lates": 0
     },
     "West Midlands": {
       "pallets": 84,
@@ -2136,7 +2064,7 @@
       "cons": 9,
       "pallets": 12,
       "revenue": 609.1999999999999,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "B & M Retail Ltd",
