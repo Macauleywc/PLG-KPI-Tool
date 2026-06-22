@@ -1,6 +1,6 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-06-22T14:03:05.541Z",
+  "lastUpdated": "2026-06-22T14:03:15.739Z",
   "months": {
     "2026-04": {
       "cons": 109,
@@ -638,9 +638,9 @@
       "cons": 108,
       "pallets": 162,
       "revenue": 7887.3,
-      "lates": 5,
-      "latePallets": 6,
-      "timeliness": 0.962963,
+      "lates": 2,
+      "latePallets": 2,
+      "timeliness": 0.987654,
       "avgRC": 73.03,
       "avgRP": 48.69,
       "avgPC": 1.5,
@@ -652,7 +652,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 75,
-          "lates": 4
+          "lates": 1
         },
         "Economy Booked": {
           "cons": 33,
@@ -664,13 +664,13 @@
           "cons": 7,
           "pallets": 7,
           "revenue": 409.85,
-          "lates": 1
+          "lates": 0
         },
         "East of England": {
           "cons": 12,
           "pallets": 13,
           "revenue": 580.9499999999999,
-          "lates": 2
+          "lates": 1
         },
         "Wales": {
           "cons": 6,
@@ -712,7 +712,7 @@
           "cons": 9,
           "pallets": 15,
           "revenue": 640.15,
-          "lates": 1
+          "lates": 0
         },
         "West Midlands": {
           "cons": 7,
@@ -760,11 +760,11 @@
         },
         "Thu": {
           "cons": 26,
-          "lates": 2
+          "lates": 0
         },
         "Fri": {
           "cons": 18,
-          "lates": 2
+          "lates": 1
         }
       },
       "destData": [
@@ -937,7 +937,7 @@
           "cons": 2,
           "pallets": 3,
           "revenue": 117.75,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "DUNELM (SOFT FURNISHINGS) LTD",
@@ -1579,42 +1579,6 @@
   },
   "lateRows": [
     {
-      "id": "262467",
-      "acct": "ANAND",
-      "month": "Mar-26",
-      "dest": "Heartland Storage & Distribution Ltd",
-      "city": "Heartland Storage & Distribution Ltd",
-      "pc": "ML7 5QW",
-      "window": "",
-      "commitDate": "27/03/26",
-      "arrDate": "28/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "262622",
-      "acct": "ANAND",
-      "month": "Mar-26",
-      "dest": "FULL MONTY",
-      "city": "FULL MONTY",
-      "pc": "PE25 1LX",
-      "window": "",
-      "commitDate": "02/04/26",
-      "arrDate": "07/04/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "262035",
       "acct": "ANAND",
       "month": "Mar-26",
@@ -1645,24 +1609,6 @@
       "arrival": "00:00",
       "mins": 7200,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "262250",
-      "acct": "ANAND",
-      "month": "Mar-26",
-      "dest": "CID TRADING LTD",
-      "city": "CID TRADING LTD",
-      "pc": "LS9 0NP",
-      "window": "",
-      "commitDate": "26/03/26",
-      "arrDate": "27/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -1997,12 +1943,12 @@
     "Scotland": {
       "pallets": 34,
       "cons": 33,
-      "lates": 2
+      "lates": 1
     },
     "East of England": {
       "pallets": 68,
       "cons": 55,
-      "lates": 5
+      "lates": 4
     },
     "Wales": {
       "pallets": 44,
@@ -2037,7 +1983,7 @@
     "Yorkshire": {
       "pallets": 76,
       "cons": 54,
-      "lates": 4
+      "lates": 3
     },
     "West Midlands": {
       "pallets": 84,
