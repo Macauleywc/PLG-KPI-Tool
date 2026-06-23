@@ -1569,6 +1569,22 @@ async function loadFromGitHub(){
     var mCount=Object.keys(savedMonthData).length;
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';
     var _dot=document.getElementById('gh-dot');if(_dot)_dot.classList.add('ok');
+    // Reconcile latePallets/lates from saved late rows — corrects stale aggregates
+    if(window._savedLateRows&&window._savedLateRows.length>0){
+      var _lrByMonth={};
+      window._savedLateRows.forEach(function(r){
+        var k=MONTH_KEYS[MONTHS.indexOf(r.month)];if(!k)return;
+        if(!_lrByMonth[k])_lrByMonth[k]={lates:0,latePallets:0};
+        _lrByMonth[k].lates++;_lrByMonth[k].latePallets+=parseFloat(r.pallets)||0;
+      });
+      Object.keys(_lrByMonth).forEach(function(k){
+        if(!savedMonthData[k])return;
+        var rec=_lrByMonth[k];
+        savedMonthData[k].lates=rec.lates;savedMonthData[k].latePallets=rec.latePallets;
+        var p=savedMonthData[k].pallets||0;
+        savedMonthData[k].timeliness=p>0?(p-rec.latePallets)/p:0;
+      });
+    }
     buildTrackerFromSaved();renderHistory();
     if(Object.keys(savedMonthData).length>0){
       calculatedMonths={};
