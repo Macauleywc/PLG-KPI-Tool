@@ -1,14 +1,14 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-22T08:05:30.211Z",
+  "lastUpdated": "2026-06-23T18:36:38.501Z",
   "months": {
     "2026-04": {
       "cons": 37,
       "pallets": 221,
       "revenue": 9149.35,
-      "lates": 3,
-      "latePallets": 5,
-      "timeliness": 0.977376,
+      "lates": 2,
+      "latePallets": 4,
+      "timeliness": 0.9819004524886877,
       "avgRC": 247.28,
       "avgRP": 41.4,
       "avgPC": 5.97,
@@ -2425,31 +2425,13 @@
       "note": "",
       "reason": "",
       "failed": false
-    },
-    {
-      "id": "29239",
-      "acct": "IRON",
-      "month": "Apr-26",
-      "dest": "SMYTHS-S",
-      "city": "SMYTHS-S",
-      "pc": "ST5 9QD",
-      "window": "",
-      "commitDate": "15/04/26",
-      "arrDate": "17/04/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
     }
   ],
   "regionData": {
     "West Midlands": {
       "pallets": 319,
       "cons": 52,
-      "lates": 12
+      "lates": 11
     },
     "South West": {
       "pallets": 20,
