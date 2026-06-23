@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:09:37.038Z",
+  "lastUpdated": "2026-06-23T19:09:38.622Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 41,
-      "latePallets": 101,
-      "timeliness": 0.9074243813015582,
+      "lates": 38,
+      "latePallets": 97,
+      "timeliness": 0.9110907424381302,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -1455,42 +1455,6 @@
       "failed": false
     },
     {
-      "id": "91303",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "S43 4PZ",
-      "window": "",
-      "commitDate": "28/05/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91257",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "S43 4PZ",
-      "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91228",
       "acct": "IRON",
       "month": "May-26",
@@ -1504,24 +1468,6 @@
       "mins": 8640,
       "pallets": 1,
       "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91377",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "SN3 4DB",
-      "window": "",
-      "commitDate": "28/05/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 1,
-      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
@@ -2414,7 +2360,7 @@
     "South": {
       "pallets": 130,
       "cons": 32,
-      "lates": 10
+      "lates": 7
     },
     "Scotland": {
       "pallets": 1,
