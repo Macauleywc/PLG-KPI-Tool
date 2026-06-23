@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:09:35.704Z",
+  "lastUpdated": "2026-06-23T19:09:37.038Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 44,
-      "latePallets": 104,
-      "timeliness": 0.9046746104491292,
+      "lates": 41,
+      "latePallets": 101,
+      "timeliness": 0.9074243813015582,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -1023,24 +1023,6 @@
       "failed": false
     },
     {
-      "id": "91299",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "DA1 5XU",
-      "window": "",
-      "commitDate": "26/05/26",
-      "arrDate": "03/06/26",
-      "arrival": "01:00",
-      "mins": 11520,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91190",
       "acct": "IRON",
       "month": "May-26",
@@ -1329,24 +1311,6 @@
       "failed": false
     },
     {
-      "id": "91272",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "LS9 0PS",
-      "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91184",
       "acct": "IRON",
       "month": "May-26",
@@ -1377,24 +1341,6 @@
       "arrival": "01:00",
       "mins": 2880,
       "pallets": 25,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91273",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "NE10 8YA",
-      "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -2423,7 +2369,7 @@
     "Yorkshire": {
       "pallets": 78,
       "cons": 38,
-      "lates": 14
+      "lates": 13
     },
     "North West": {
       "pallets": 494,
@@ -2433,7 +2379,7 @@
     "South East": {
       "pallets": 311,
       "cons": 43,
-      "lates": 4
+      "lates": 3
     },
     "East of England": {
       "pallets": 27,
@@ -2458,7 +2404,7 @@
     "North East": {
       "pallets": 10,
       "cons": 10,
-      "lates": 6
+      "lates": 5
     },
     "London": {
       "pallets": 54,
