@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T18:57:17.243Z",
+  "lastUpdated": "2026-06-23T18:57:18.232Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 7,
-      "latePallets": 39,
-      "timeliness": 0.9642529789184234,
+      "lates": 6,
+      "latePallets": 38,
+      "timeliness": 0.9651695692025665,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -1000,24 +1000,6 @@
       "mins": 2880,
       "pallets": 25,
       "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91225",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "BRS2",
-      "city": "BRS2",
-      "pc": "SN3 4DB",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 1,
-      "dtype": "Economy Booked",
       "note": "",
       "reason": "",
       "failed": false
@@ -1802,7 +1784,7 @@
     "South": {
       "pallets": 130,
       "cons": 32,
-      "lates": 4
+      "lates": 3
     },
     "Scotland": {
       "pallets": 1,
