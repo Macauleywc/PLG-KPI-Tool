@@ -1322,21 +1322,36 @@ function renderMfResults(){
   var el=document.getElementById('mf-results');if(!el)return;
   var q=(document.getElementById('mf-search').value||'').trim().toLowerCase();
   if(q.length<2){el.innerHTML='';return;}
-  var comp=allCompleted();
-  var pool=comp.length>0?comp:(window._savedLateRows||[]).map(function(r){return{_fromSaved:true,id:r.id,dest:r.dest,acct:r.acct,month:r.month,pc:r.pc,pallets:r.pallets,dtype:r.dtype,commitDate:r.commitDate,arrDate:r.arrDate};});
-  if(pool.length===0){el.innerHTML='<div style="font-size:11px;color:#aaa;padding:6px">No consignment data loaded — upload a Qargo export first.</div>';return;}
+  // Priority 1: raw uploaded data (has full fields)
+  var pool=[];
+  if(rawData&&rawData.length>0){
+    pool=rawData.filter(function(r){var s=(r['status']||'').toUpperCase();return s==='INVOICE_POSTED'||s==='COMPLETED'||r['_v4_late']!==undefined;});
+  }
+  // Priority 2: completedRows from calculatedMonths
+  if(pool.length===0){pool=allCompleted();}
+  // Priority 3: saved dest data (name/city/pc only — no dates)
+  if(pool.length===0){
+    var seen={};
+    Object.values(savedMonthData).forEach(function(m){(m.destData||[]).forEach(function(d){if(!seen[d.name]){seen[d.name]=true;pool.push({_destOnly:true,'id':'','destination name':d.name,'destination city':d.city||'','destination postal code':d.pc||'','goods pallet spaces':''});}});});
+    (window._savedDestData||[]).forEach(function(d){if(!seen[d.name]){seen[d.name]=true;pool.push({_destOnly:true,'id':'','destination name':d.name,'destination city':d.city||'','destination postal code':d.pc||'','goods pallet spaces':''});}});
+  }
+  if(pool.length===0){el.innerHTML='<div style="font-size:11px;color:#aaa;padding:6px 10px">No consignment data available — upload a Qargo export to enable search.</div>';return;}
   var matches=pool.filter(function(r){
-    return String(r['id']||r.id||'').toLowerCase().indexOf(q)>-1||String(r['destination name']||r.dest||'').toLowerCase().indexOf(q)>-1;
+    return String(r['id']||'').toLowerCase().indexOf(q)>-1||String(r['destination name']||'').toLowerCase().indexOf(q)>-1;
   }).slice(0,12);
-  if(matches.length===0){el.innerHTML='<div style="font-size:11px;color:#aaa;padding:6px">No matches found.</div>';return;}
+  if(matches.length===0){el.innerHTML='<div style="font-size:11px;color:#aaa;padding:6px 10px">No matches found for "'+q+'".</div>';return;}
   el.innerHTML=matches.map(function(r,i){
-    var nm=r['destination name']||r.dest||'—';
-    var id=r['id']||r.id||'';
+    var nm=r['destination name']||'—';
+    var id=r['id']||'';
     var arr=r['destination arrival']?xlDT(r['destination arrival']):null;
-    var arrS=arr?arr.toLocaleDateString('en-GB'):(r.arrDate||'—');
     var commit=r['destination date']?xlDate(r['destination date']):null;
-    var commitS=commit?commit.toLocaleDateString('en-GB'):(r.commitDate||'—');
-    return'<div onclick="fillManualFromConsignment('+i+')" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid #fde2e2;font-size:12px;cursor:pointer;background:#fff;border-radius:4px;margin-bottom:2px" onmouseover="this.style.background=\'#fff5f5\'" onmouseout="this.style.background=\'#fff\'" data-idx="'+i+'"><span><b>'+(id||'—')+'</b> · '+nm+' · <span style="color:#888">commit '+commitS+' → actual '+arrS+'</span></span><span style="color:#F47920;font-weight:600;white-space:nowrap">Use ↗</span></div>';
+    var arrS=arr?arr.toLocaleDateString('en-GB'):'—';
+    var commitS=commit?commit.toLocaleDateString('en-GB'):'—';
+    var pc=r['destination postal code']||'';
+    var plts=r['goods pallet spaces']||'';
+    var meta=r._destOnly?'<span style="color:#aaa">(name/postcode only — no date data)</span>'
+      :'commit <b>'+commitS+'</b> → actual <b>'+arrS+'</b>'+(plts?' · '+plts+' plts':'');
+    return'<div onclick="fillManualFromConsignment('+i+')" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid #fde2e2;font-size:12px;cursor:pointer;background:#fff;border-radius:4px;margin-bottom:2px" onmouseover="this.style.background=\'#fff5f5\'" onmouseout="this.style.background=\'#fff\'"><span><b>'+(id||'—')+'</b>'+(id?' · ':'')+nm+(pc?' · <span style="color:#aaa">'+pc+'</span>':'')+' · '+meta+'</span><span style="color:#F47920;font-weight:600;white-space:nowrap">Use ↗</span></div>';
   }).join('');
   el._matches=matches;
 }
@@ -1347,28 +1362,31 @@ function clearMfSearch(){
 function fillManualFromConsignment(i){
   var el=document.getElementById('mf-results');if(!el||!el._matches)return;
   var r=el._matches[i];if(!r)return;
-  function sv(id,val){var e=document.getElementById(id);if(e)e.value=val||'';}
+  function sv(id,val){var e=document.getElementById(id);if(e&&val!=null&&val!=='')e.value=val;}
   function isoDate(d){if(!d||isNaN(d.getTime()))return'';return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-  sv('mf-id',r['id']||r.id||'');
-  sv('mf-acct',r['customer']||r.acct||currentCustomer);
-  sv('mf-dest',r['destination name']||r.dest||'');
-  sv('mf-pc',r['destination postal code']||r.pc||'');
-  sv('mf-pallets',r['goods pallet spaces']||r.pallets||'');
+  sv('mf-id',r['id']||'');
+  sv('mf-acct',r['customer']||currentCustomer);
+  sv('mf-dest',r['destination name']||'');
+  sv('mf-pc',r['destination postal code']||'');
+  sv('mf-pallets',r['goods pallet spaces']||'');
   var commit=r['destination date']?xlDate(r['destination date']):null;
   var arr=r['destination arrival']?xlDT(r['destination arrival']):null;
-  if(commit)sv('mf-commit',isoDate(commit));
-  if(arr)sv('mf-actual',isoDate(arr));
-  // Month
+  if(commit&&!isNaN(commit.getTime()))sv('mf-commit',isoDate(commit));
+  if(arr&&!isNaN(arr.getTime()))sv('mf-actual',isoDate(arr));
+  // Month from commit date
   var dateForMonth=commit||arr;
-  if(dateForMonth){var mk=dateForMonth.getFullYear()+'-'+String(dateForMonth.getMonth()+1).padStart(2,'0');var lbl=MONTHS[MONTH_KEYS.indexOf(mk)];if(lbl)sv('mf-month',lbl);}
-  else if(r.month){sv('mf-month',r.month);}
+  if(dateForMonth&&!isNaN(dateForMonth.getTime())){
+    var mk=dateForMonth.getFullYear()+'-'+String(dateForMonth.getMonth()+1).padStart(2,'0');
+    var lbl=MONTHS[MONTH_KEYS.indexOf(mk)];if(lbl)sv('mf-month',lbl);
+  }
   // Delivery type
-  var ex=r['destination extras']||r.dtype||'';
+  var ex=r['destination extras']||'';
   var dtype=ex.includes('Economy Booked')?'Economy Booked':ex.includes('Next Day')?'Next Day':'Standard';
   sv('mf-type',dtype);
-  // Clear search results
+  // Clear search
   var s=document.getElementById('mf-search');if(s)s.value='';
-  el.innerHTML='<div style="font-size:11px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;padding:6px 10px">✓ Fields filled from consignment '+(r['id']||r.id||'')+'  — review and click Add to late log.</div>';
+  var filled=r['id']?'consignment '+(r['id']):'destination '+r['destination name'];
+  el.innerHTML='<div style="font-size:11px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;padding:6px 10px">✓ Fields filled from '+filled+(r._destOnly?' — no date data available, please enter manually':'')+'. Review and click Add to late log.</div>';
 }
 function toggleManualFailed(){var p=document.getElementById('manual-failed-panel');if(p)p.style.display=(p.style.display==='none'||!p.style.display)?'block':'none';}
 function addManualSavedFailed(){
