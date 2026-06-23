@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T18:57:08.082Z",
+  "lastUpdated": "2026-06-23T18:57:09.070Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 25,
-      "latePallets": 78,
-      "timeliness": 0.928505957836847,
+      "lates": 23,
+      "latePallets": 73,
+      "timeliness": 0.9330889092575618,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -1107,42 +1107,6 @@
       "arrival": "01:00",
       "mins": 15840,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91193",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - DSA6,DSA6",
-      "city": "Amazon - DSA6,DSA6",
-      "pc": "LS26 9DN",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91184",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - LBA5",
-      "city": "Amazon - LBA5",
-      "pc": "LS9 0PS",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "22/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
@@ -2081,7 +2045,7 @@
     "Yorkshire": {
       "pallets": 78,
       "cons": 38,
-      "lates": 10
+      "lates": 8
     },
     "North West": {
       "pallets": 494,
