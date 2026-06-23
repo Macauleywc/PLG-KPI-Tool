@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T18:57:09.070Z",
+  "lastUpdated": "2026-06-23T18:57:10.130Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 23,
-      "latePallets": 73,
-      "timeliness": 0.9330889092575618,
+      "lates": 20,
+      "latePallets": 62,
+      "timeliness": 0.9431714023831348,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -987,42 +987,6 @@
       "failed": false
     },
     {
-      "id": "91231",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - LPL2",
-      "city": "Amazon - LPL2",
-      "pc": "L33 7AP",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "28/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 2,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91176",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon EU SarL",
-      "city": "Amazon EU SarL",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91196",
       "acct": "IRON",
       "month": "May-26",
@@ -1215,24 +1179,6 @@
       "arrival": "01:00",
       "mins": 10080,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91187",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - XEM4 - AFTX 3P IXD(Corby, UK)",
-      "city": "Amazon - XEM4 - AFTX 3P IXD(Corby, UK)",
-      "pc": "NN17 3JG",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 6,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
@@ -2050,7 +1996,7 @@
     "North West": {
       "pallets": 494,
       "cons": 85,
-      "lates": 18
+      "lates": 16
     },
     "South East": {
       "pallets": 311,
@@ -2075,7 +2021,7 @@
     "East Midlands": {
       "pallets": 880,
       "cons": 144,
-      "lates": 10
+      "lates": 9
     },
     "North East": {
       "pallets": 10,
