@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T18:55:18.493Z",
+  "lastUpdated": "2026-06-23T18:55:20.158Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 37,
-      "latePallets": 95,
-      "timeliness": 0.9129239230064161,
+      "lates": 36,
+      "latePallets": 94,
+      "timeliness": 0.9138405132905592,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -885,24 +885,6 @@
       "dest": "FORBIDDEN PLANET (SCOTLAND) LT",
       "city": "FORBIDDEN PLANET (SCOTLAND) LT",
       "pc": "CM9 4LJ",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91182",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon EU SARL (UK)",
-      "city": "Amazon EU SARL (UK)",
-      "pc": "CV5 9PF",
       "window": "",
       "commitDate": "21/05/26",
       "arrDate": "26/05/26",
@@ -2287,7 +2269,7 @@
     "West Midlands": {
       "pallets": 319,
       "cons": 52,
-      "lates": 11
+      "lates": 10
     },
     "South West": {
       "pallets": 20,
