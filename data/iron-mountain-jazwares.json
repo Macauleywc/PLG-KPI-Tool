@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:09:40.141Z",
+  "lastUpdated": "2026-06-23T19:09:41.533Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 35,
-      "latePallets": 93,
-      "timeliness": 0.9147571035747021,
+      "lates": 32,
+      "latePallets": 87,
+      "timeliness": 0.9202566452795601,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -879,42 +879,6 @@
   },
   "lateRows": [
     {
-      "id": "91194",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - EMA4",
-      "city": "Amazon - EMA4",
-      "pc": "B76 9AH",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "22/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91232",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - EMA4",
-      "city": "Amazon - EMA4",
-      "pc": "B76 9AH",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "28/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91188",
       "acct": "IRON",
       "month": "May-26",
@@ -1269,24 +1233,6 @@
       "arrival": "01:00",
       "mins": 15840,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91184",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - LBA5",
-      "city": "Amazon - LBA5",
-      "pc": "LS9 0PS",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "22/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
@@ -2256,12 +2202,12 @@
     "South West": {
       "pallets": 20,
       "cons": 9,
-      "lates": 2
+      "lates": 0
     },
     "Yorkshire": {
       "pallets": 78,
       "cons": 38,
-      "lates": 11
+      "lates": 10
     },
     "North West": {
       "pallets": 494,
