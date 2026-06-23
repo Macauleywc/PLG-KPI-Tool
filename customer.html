@@ -1315,6 +1315,7 @@ function removeSavedLate(idx){
   if(window._savedRegionData){var reg=region(r.pc||'');if(window._savedRegionData[reg]&&window._savedRegionData[reg].lates>0)window._savedRegionData[reg].lates--;}
   rows.splice(idx,1);window._savedLateRows=rows;
   renderSavedLateLog();renderHistory();
+  setTimeout(function(){if(_lateSortCol>=0)sortLateLog(_lateSortCol,true);filterLateLog();},40);
   persistSavedData().then(function(){showAlert('success','Late entry removed and saved.');}).catch(function(e){showAlert('warn','Remove failed: '+e.message);});
 }
 function toggleManualFailed(){var p=document.getElementById('manual-failed-panel');if(p)p.style.display=(p.style.display==='none'||!p.style.display)?'block':'none';}
