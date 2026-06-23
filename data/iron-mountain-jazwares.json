@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:09:49.505Z",
+  "lastUpdated": "2026-06-23T19:09:50.872Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 15,
-      "latePallets": 53,
-      "timeliness": 0.9514207149404217,
+      "lates": 12,
+      "latePallets": 48,
+      "timeliness": 0.9560036663611365,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -915,24 +915,6 @@
       "failed": false
     },
     {
-      "id": "91240",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon UK Services Limited,MME1",
-      "city": "Amazon UK Services Limited,MME1",
-      "pc": "DL1 4BF",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91230",
       "acct": "IRON",
       "month": "May-26",
@@ -1005,24 +987,6 @@
       "failed": false
     },
     {
-      "id": "91235",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon UK Services Ltd - BHX7",
-      "city": "Amazon UK Services Ltd - BHX7",
-      "pc": "LE10 3FF",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91191",
       "acct": "IRON",
       "month": "May-26",
@@ -1054,24 +1018,6 @@
       "mins": 2880,
       "pallets": 25,
       "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91228",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon UK Services Limited,MAN4",
-      "city": "Amazon UK Services Limited,MAN4",
-      "pc": "S43 4PZ",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 1,
-      "dtype": "Economy Booked",
       "note": "",
       "reason": "",
       "failed": false
@@ -1931,12 +1877,12 @@
     "East Midlands": {
       "pallets": 880,
       "cons": 144,
-      "lates": 6
+      "lates": 5
     },
     "North East": {
       "pallets": 10,
       "cons": 10,
-      "lates": 2
+      "lates": 1
     },
     "London": {
       "pallets": 54,
@@ -1946,7 +1892,7 @@
     "South": {
       "pallets": 130,
       "cons": 32,
-      "lates": 7
+      "lates": 6
     },
     "Scotland": {
       "pallets": 1,
