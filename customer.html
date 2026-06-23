@@ -388,6 +388,7 @@ var CARBON={vf:1.05,cap:26,uc:0.85,us:0.50,circ:1.3,trip:1,diesel:2.57082};
 function haversineKm(a,b){var R=6371,t=function(d){return d*Math.PI/180;};var dLat=t(b.lat-a.lat),dLng=t(b.lng-a.lng);var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dLng/2)*Math.sin(dLng/2);return R*2*Math.atan2(Math.sqrt(s),Math.sqrt(1-s));}
 function computeCarbon(regionMap){var k=CARBON;var tCons=0,tStand=0,tSave=0,tKm=0,tPalletKm=0,tPallets=0,rows=[];Object.keys(regionMap||{}).forEach(function(rg){var d=regionMap[rg];var plt=(d&&d.pallets)||0;if(plt<=0)return;var c=REGION_CENTROIDS[rg]||REGION_CENTROIDS['Other'];var dist=haversineKm(DEPOT_C,c)*k.circ*k.trip;if(!isFinite(dist)||dist<2)dist=2;var pkm=plt*dist;var consol=k.vf*dist*plt/(k.cap*k.uc);var stand=k.vf*dist*plt/(k.cap*k.us);tCons+=consol;tStand+=stand;tSave+=(stand-consol);tKm+=dist;tPalletKm+=pkm;tPallets+=plt;rows.push({region:rg,pallets:plt,dist:dist,co2:consol,save:(stand-consol)});});rows.sort(function(a,b){return b.co2-a.co2;});return{tCons:tCons,tStand:tStand,tSave:tSave,tKm:tKm,tPalletKm:tPalletKm,tPallets:tPallets,rows:rows};}
 function carbonRegionSource(){if(window._savedRegionData&&Object.keys(window._savedRegionData).length>0)return window._savedRegionData;return {};}
+function carbonRegionForMonth(key){if(!key||key==='all')return carbonRegionSource();try{if(typeof calculatedMonths!=='undefined'&&calculatedMonths[key]&&calculatedMonths[key].completedRows&&calculatedMonths[key].completedRows.length>0){var rm={};calculatedMonths[key].completedRows.forEach(function(r){var reg=region(r['destination postal code']||'');if(!rm[reg])rm[reg]={cons:0,pallets:0,lates:0};rm[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;rm[reg].cons++;});return rm;}}catch(e){}if(typeof savedMonthData!=='undefined'&&savedMonthData[key]&&savedMonthData[key].regionData)return savedMonthData[key].regionData;return {};}
 function classifySurchargeRate(window){if(!window)return 0;var w=String(window).trim();if(w.indexOf(' - ')<0)return 0;var parts=w.split(' - ');var start=parts[0].trim(),end=parts[1].trim();if(start==='09:00'&&end==='10:00')return 32;if(start==='09:00'&&end==='12:00')return 12;if(start===end)return 23;return 0;}
 function calcMonth(rows){
   var comp=rows.filter(function(r){var s=(r['status']||'').toUpperCase();return s==='INVOICE_POSTED'||s==='COMPLETED';});
@@ -682,10 +683,12 @@ function switchTab(name,btn){
   if(name==='carbon')renderCarbon();
 }
 
-function renderCarbon(){
+function renderCarbon(key){
   var el=document.getElementById('tab-carbon');if(!el)return;
-  var c=computeCarbon(carbonRegionSource());
-  if(!c.tPallets){el.innerHTML='<div class="section-card-standalone"><div class="section-title">Carbon &amp; Net Zero</div><p style="color:#999;font-size:13px;margin:8px 0">No saved regional pallet data yet. Import a Qargo export and Save to populate the carbon estimate.</p></div>';return;}
+  key=(key===undefined?(typeof _activeMonth!=='undefined'?_activeMonth:'all'):key)||'all';
+  var _clbl=(key==='all')?'YTD':((typeof MONTH_KEYS!=='undefined'&&MONTHS[MONTH_KEYS.indexOf(key)])||key);
+  var c=computeCarbon(carbonRegionForMonth(key));
+  if(!c.tPallets){var _em=(key==='all')?'No saved regional pallet data yet. Import a Qargo export and Save to populate the carbon estimate.':('No regional pallet data saved for '+_clbl+'. Re-import that month and Save, or view YTD (All).');el.innerHTML='<div class="section-card-standalone"><div class="section-title">Carbon &amp; Net Zero \u2014 '+_clbl+'</div><p style="color:#999;font-size:13px;margin:8px 0">'+_em+'</p></div>';return;}
   var perPallet=c.tCons/c.tPallets, gPalletKm=c.tPalletKm>0?c.tCons/c.tPalletKm*1000:0, savePct=c.tStand>0?c.tSave/c.tStand*100:0;
   function K(l,v,s,g){return '<div style="background:#fff;border:1px solid #E5E3DE;border-radius:10px;padding:14px 16px;border-top:3px solid '+(g?'#166534':'#F47920')+'"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#888;font-weight:700">'+l+'</div><div style="font-size:24px;font-weight:800;margin-top:4px;color:'+(g?'#166534':'#1a1a1a')+'">'+v+'</div><div style="font-size:11px;color:#888;margin-top:3px">'+(s||'')+'</div></div>';}
   function T(kg){return (kg/1000).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2})+' t';}
@@ -698,7 +701,7 @@ function renderCarbon(){
   var rowsH=c.rows.map(function(r){var gpk=(r.pallets>0&&r.dist>0)?(r.co2/(r.pallets*r.dist))*1000:0;return '<tr><td style="padding:7px 10px;border-bottom:1px solid #eee">'+r.region+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right">'+N(r.pallets)+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right">'+N(r.dist)+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right">'+T(r.co2)+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right;color:#166534">'+T(r.save)+'</td></tr>';}).join('');
   var tbl='<div class="section-card-standalone" style="margin-top:6px"><div class="section-title">CO\u2082 by region</div><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="background:#111;color:#fff"><th style="padding:8px 10px;text-align:left;font-size:11px">REGION</th><th style="padding:8px 10px;text-align:right;font-size:11px">PALLETS</th><th style="padding:8px 10px;text-align:right;font-size:11px">EST KM</th><th style="padding:8px 10px;text-align:right;font-size:11px">CO\u2082e</th><th style="padding:8px 10px;text-align:right;font-size:11px">SAVING</th></tr></thead><tbody>'+rowsH+'</tbody></table></div>';
   var note='<div class="section-card-standalone" style="margin-top:6px"><div style="font-size:11px;color:#999;line-height:1.6"><b>How this is calculated.</b> Distance estimated from Bardon to each UK region centroid (haversine \u00d7 '+CARBON.circ+' circuity, one-way). Each region\u2019s pallets are allocated their share of a vehicle\u2019s emissions at '+CARBON.vf+' kgCO\u2082e/km (well-to-wheel, derived from DEFRA/DESNZ 2025 diesel '+CARBON.diesel+' kgCO\u2082e/litre), '+CARBON.cap+'-pallet capacity, '+(CARBON.uc*100)+'% consolidated load factor. Consolidation saving compares this with a '+(CARBON.us*100)+'% standalone load factor (shipping alone). CO\u2082e covers CO\u2082, CH\u2084, N\u2082O at AR5 GWP. Region-level estimate; the standalone calculator gives postcode-level detail.</div></div>';
-  el.innerHTML='<div class="section-card-standalone"><div class="section-title">Carbon &amp; Net Zero \u2014 estimated footprint</div>'+cards+'</div>'+tbl+note;
+  el.innerHTML='<div class="section-card-standalone"><div class="section-title">Carbon &amp; Net Zero \u2014 '+_clbl+'</div>'+cards+'</div>'+tbl+note;
 }
 function renderCharts(){
   var labels=[],otifData=[],consData=[],revData=[],arcData=[],arpData=[];
@@ -1549,6 +1552,7 @@ function selectMonth(key){
   try{if(typeof filterLateLog==='function')filterLateLog();}catch(e){}
   try{renderPerformanceForMonth(key);}catch(e){}
   try{renderDestinationsForMonth(key);}catch(e){}
+  try{renderCarbon(key);}catch(e){}
 }
 
 async function loadFromGitHub(){
