@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:19:47.797Z",
+  "lastUpdated": "2026-06-23T19:20:50.165Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 4,
-      "latePallets": 9,
-      "timeliness": 0.991751,
+      "lates": 5,
+      "latePallets": 15,
+      "timeliness": 0.986251,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -582,9 +582,9 @@
       "cons": 205,
       "pallets": 1074,
       "revenue": 42109.86,
-      "lates": 39,
-      "latePallets": 54,
-      "timeliness": 0.949721,
+      "lates": 3,
+      "latePallets": 4,
+      "timeliness": 0.996276,
       "avgRC": 205.41,
       "avgRP": 39.21,
       "avgPC": 5.24,
@@ -596,11 +596,11 @@
       "typeBreakdown": {
         "Economy Booked": {
           "cons": 117,
-          "lates": 6
+          "lates": 1
         },
         "Next Day": {
           "cons": 88,
-          "lates": 33
+          "lates": 2
         }
       },
       "regionData": {
@@ -608,25 +608,25 @@
           "cons": 30,
           "pallets": 180,
           "revenue": 6778.450000000001,
-          "lates": 9
+          "lates": 0
         },
         "Yorkshire": {
           "cons": 18,
           "pallets": 22,
           "revenue": 1372.2699999999995,
-          "lates": 8
+          "lates": 0
         },
         "North West": {
           "cons": 42,
           "pallets": 265,
           "revenue": 9515.29,
-          "lates": 11
+          "lates": 1
         },
         "South East": {
           "cons": 17,
           "pallets": 89,
           "revenue": 3380.39,
-          "lates": 3
+          "lates": 2
         },
         "South West": {
           "cons": 4,
@@ -644,31 +644,31 @@
           "cons": 12,
           "pallets": 24,
           "revenue": 2258.71,
-          "lates": 2
+          "lates": 0
         },
         "East Midlands": {
           "cons": 65,
           "pallets": 441,
           "revenue": 15673.910000000005,
-          "lates": 3
+          "lates": 0
         },
         "North East": {
           "cons": 3,
           "pallets": 3,
           "revenue": 194.5,
-          "lates": 1
+          "lates": 0
         },
         "Scotland": {
           "cons": 1,
           "pallets": 1,
           "revenue": 139.08,
-          "lates": 1
+          "lates": 0
         },
         "South": {
           "cons": 8,
           "pallets": 19,
           "revenue": 1172.83,
-          "lates": 1
+          "lates": 0
         }
       },
       "destData": [
@@ -679,7 +679,7 @@
           "cons": 12,
           "pallets": 20,
           "revenue": 1109.9499999999998,
-          "lates": 8
+          "lates": 0
         },
         {
           "name": "AMAZON EU SARL - UK - LPX2",
@@ -688,7 +688,7 @@
           "cons": 11,
           "pallets": 18,
           "revenue": 1003.0699999999999,
-          "lates": 5
+          "lates": 0
         },
         {
           "name": "SMYTHS TOYS:ALTO WAREHOUSE",
@@ -715,7 +715,7 @@
           "cons": 9,
           "pallets": 61,
           "revenue": 2196.83,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "B & M RETAIL LIMITED - FORT -",
@@ -778,7 +778,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 249.14,
-          "lates": 3
+          "lates": 0
         },
         {
           "name": "THE ENTERTAINER - BANBURY",
@@ -814,7 +814,7 @@
           "cons": 3,
           "pallets": 18,
           "revenue": 885.59,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "CREATIVE DISTRIBUTION LTD",
@@ -841,7 +841,7 @@
           "cons": 3,
           "pallets": 4,
           "revenue": 764.54,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "B & M RETAIL LIMITED - QUBE -",
@@ -856,23 +856,23 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 40,
-          "lates": 7
+          "lates": 1
         },
         "Tue": {
           "cons": 39,
-          "lates": 4
+          "lates": 1
         },
         "Wed": {
           "cons": 31,
-          "lates": 5
+          "lates": 0
         },
         "Thu": {
           "cons": 35,
-          "lates": 8
+          "lates": 0
         },
         "Fri": {
           "cons": 59,
-          "lates": 15
+          "lates": 1
         }
       }
     }
@@ -969,60 +969,6 @@
       "failed": true
     },
     {
-      "id": "91407",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "MUDDLEIT",
-      "city": "MUDDLEIT",
-      "pc": "BB9 6RT",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 6,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91556",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - MAN3",
-      "city": "AMAZON EU SARL - UK - MAN3",
-      "pc": "BL5 1EE",
-      "window": "",
-      "commitDate": "16/06/26",
-      "arrDate": "20/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91563",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - MAN3",
-      "city": "AMAZON EU SARL - UK - MAN3",
-      "pc": "BL5 1EE",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "13/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "DGB0091573, JPFI00012",
       "acct": "IRON",
       "month": "Jun-26",
@@ -1059,276 +1005,6 @@
       "failed": false
     },
     {
-      "id": "91421",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "09/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91483",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "09/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91693",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "16/06/26",
-      "arrDate": "17/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91738",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "18/06/26",
-      "arrDate": "19/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91409",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "06/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91486",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4, Plot 1 Lyons Park",
-      "city": "AMAZON EU SARL - UK - BHX4, Plot 1 Lyons Park",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91600",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91603",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "17/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91605",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "12/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91602",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LCY3",
-      "city": "AMAZON EU SARL - UK - LCY3",
-      "pc": "DA1 5XU",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "20/06/26",
-      "arrival": "01:00",
-      "mins": 11520,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91482",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LBA2",
-      "city": "AMAZON EU SARL - UK - LBA2",
-      "pc": "DN11 0BG",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "11/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91410",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LBA4",
-      "city": "AMAZON EU SARL - UK - LBA4",
-      "pc": "DN11 0GU",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "11/06/26",
-      "arrival": "01:00",
-      "mins": 11520,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91569",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: ALADDINS CAVE",
-      "city": "TOYMASTER LTD: ALADDINS CAVE",
-      "pc": "GY2 4UJ",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91172",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: GROOVES",
-      "city": "TOYMASTER LTD: GROOVES",
-      "pc": "KW15 1HP",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91378",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: GROOVES",
-      "city": "TOYMASTER LTD: GROOVES",
-      "pc": "KW15 1HP",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "PJUNE26",
       "acct": "IRON",
       "month": "Jun-26",
@@ -1342,330 +1018,6 @@
       "mins": 1440,
       "pallets": 2,
       "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91423",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LPL2",
-      "city": "AMAZON EU SARL - UK - LPL2",
-      "pc": "L33 7AP",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91485",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LPX2",
-      "city": "AMAZON EU SARL - UK - LPX2",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91419",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LPX2",
-      "city": "AMAZON EU SARL - UK - LPX2",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "09/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91561",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LPX2",
-      "city": "AMAZON EU SARL - UK - LPX2",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91590",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LPX2",
-      "city": "AMAZON EU SARL - UK - LPX2",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91481",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - LPX2",
-      "city": "AMAZON EU SARL - UK - LPX2",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91559",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX7",
-      "city": "AMAZON EU SARL - UK - BHX7",
-      "pc": "LE10 3FF",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91591",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - BHX7",
-      "city": "AMAZON EU SARL - UK - BHX7",
-      "pc": "LE10 3FF",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91593",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - DSA6",
-      "city": "AMAZON EU SARL - UK - DSA6",
-      "pc": "LS26 9DN",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91560",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - DSA6",
-      "city": "AMAZON EU SARL - UK - DSA6",
-      "pc": "LS26 9DN",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91745",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - DSA6",
-      "city": "AMAZON EU SARL - UK - DSA6",
-      "pc": "LS26 9DN",
-      "window": "",
-      "commitDate": "19/06/26",
-      "arrDate": "20/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91418",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK -LBA5",
-      "city": "AMAZON EU SARL - UK -LBA5",
-      "pc": "LS9 0PS",
-      "window": "",
-      "commitDate": "02/06/26",
-      "arrDate": "12/06/26",
-      "arrival": "01:00",
-      "mins": 14400,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91372",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK -LBA5",
-      "city": "AMAZON EU SARL - UK -LBA5",
-      "pc": "LS9 0PS",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "19/06/26",
-      "arrival": "01:00",
-      "mins": 20160,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91424",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK -LBA5",
-      "city": "AMAZON EU SARL - UK -LBA5",
-      "pc": "LS9 0PS",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "12/06/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91599",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - NCL1",
-      "city": "AMAZON EU SARL - UK - NCL1",
-      "pc": "NE10 8YA",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "19/06/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C2842 ",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "SMYTHS TOYS:CORBY WAREHOUSE",
-      "city": "SMYTHS TOYS:CORBY WAREHOUSE",
-      "pc": "NN17 1NN",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91558",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - MAN4",
-      "city": "AMAZON EU SARL - UK - MAN4",
-      "pc": "S43 4PZ",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91412",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "AMAZON EU SARL - UK - MAN2",
-      "city": "AMAZON EU SARL - UK - MAN2",
-      "pc": "WA5 3XA",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
@@ -1711,7 +1063,7 @@
     "West Midlands": {
       "pallets": 319,
       "cons": 52,
-      "lates": 9
+      "lates": 0
     },
     "South West": {
       "pallets": 20,
@@ -1721,17 +1073,17 @@
     "Yorkshire": {
       "pallets": 78,
       "cons": 38,
-      "lates": 8
+      "lates": 0
     },
     "North West": {
       "pallets": 494,
       "cons": 85,
-      "lates": 11
+      "lates": 1
     },
     "South East": {
       "pallets": 311,
       "cons": 43,
-      "lates": 3
+      "lates": 2
     },
     "East of England": {
       "pallets": 27,
@@ -1746,17 +1098,17 @@
     "Other": {
       "pallets": 59,
       "cons": 28,
-      "lates": 3
+      "lates": 1
     },
     "East Midlands": {
       "pallets": 880,
       "cons": 144,
-      "lates": 3
+      "lates": 0
     },
     "North East": {
       "pallets": 10,
       "cons": 10,
-      "lates": 1
+      "lates": 0
     },
     "London": {
       "pallets": 54,
@@ -1766,12 +1118,12 @@
     "South": {
       "pallets": 130,
       "cons": 32,
-      "lates": 4
+      "lates": 3
     },
     "Scotland": {
       "pallets": 1,
       "cons": 1,
-      "lates": 1
+      "lates": 0
     }
   },
   "destData": [
@@ -1809,7 +1161,7 @@
       "cons": 14,
       "pallets": 110,
       "revenue": 3874.1200000000003,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "THE ENTERTAINER - BANBURY",
@@ -1827,7 +1179,7 @@
       "cons": 12,
       "pallets": 20,
       "revenue": 1115.4799999999998,
-      "lates": 5
+      "lates": 0
     },
     {
       "name": "AMAZON EU SARL - UK - BHX4",
@@ -1836,7 +1188,7 @@
       "cons": 12,
       "pallets": 20,
       "revenue": 1109.9499999999998,
-      "lates": 8
+      "lates": 0
     },
     {
       "name": "B & M RETAIL LIMITED - FORT -",
@@ -1917,7 +1269,7 @@
       "cons": 6,
       "pallets": 31,
       "revenue": 1551.8600000000001,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "ZAPPIES LTD C/O ZAPFILMENT",
