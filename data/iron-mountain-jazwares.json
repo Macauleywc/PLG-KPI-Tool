@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T18:55:20.158Z",
+  "lastUpdated": "2026-06-23T18:55:21.325Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 36,
-      "latePallets": 94,
-      "timeliness": 0.9138405132905592,
+      "lates": 34,
+      "latePallets": 89,
+      "timeliness": 0.918423464711274,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -891,42 +891,6 @@
       "arrival": "01:00",
       "mins": 7200,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91236",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon EU SARL (UK), BHX4",
-      "city": "Amazon EU SARL (UK), BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "28/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91190",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon UK Services Limited,EMA1",
-      "city": "Amazon UK Services Limited,EMA1",
-      "pc": "DE74 2BB",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 2,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
@@ -2269,7 +2233,7 @@
     "West Midlands": {
       "pallets": 319,
       "cons": 52,
-      "lates": 10
+      "lates": 9
     },
     "South West": {
       "pallets": 20,
@@ -2309,7 +2273,7 @@
     "East Midlands": {
       "pallets": 880,
       "cons": 144,
-      "lates": 11
+      "lates": 10
     },
     "North East": {
       "pallets": 10,
