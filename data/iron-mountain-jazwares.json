@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:10:14.679Z",
+  "lastUpdated": "2026-06-23T19:10:19.751Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 3,
-      "latePallets": 3,
-      "timeliness": 0.997250229147571,
+      "lates": 2,
+      "latePallets": 2,
+      "timeliness": 0.998166819431714,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -908,24 +908,6 @@
       "arrDate": "26/05/26",
       "arrival": "01:00",
       "mins": 7200,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91154",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "TOYMASTER LTD: BAMBOLA TOYMAST",
-      "city": "TOYMASTER LTD: BAMBOLA TOYMAST",
-      "pc": "JE2 4TQ",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 8640,
       "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
@@ -1710,7 +1692,7 @@
     "Other": {
       "pallets": 59,
       "cons": 28,
-      "lates": 4
+      "lates": 3
     },
     "East Midlands": {
       "pallets": 880,
