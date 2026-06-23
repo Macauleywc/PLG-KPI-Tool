@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:09:12.394Z",
+  "lastUpdated": "2026-06-23T19:09:35.704Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -8,7 +8,7 @@
       "revenue": 9149.35,
       "lates": 2,
       "latePallets": 4,
-      "timeliness": 0.9819,
+      "timeliness": 0.9819004524886877,
       "avgRC": 247.28,
       "avgRP": 41.4,
       "avgPC": 5.97,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 45,
-      "latePallets": 105,
-      "timeliness": 0.903758,
+      "lates": 44,
+      "latePallets": 104,
+      "timeliness": 0.9046746104491292,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -584,7 +584,7 @@
       "revenue": 42109.86,
       "lates": 39,
       "latePallets": 54,
-      "timeliness": 0.949721,
+      "timeliness": 0.9497206703910615,
       "avgRC": 205.41,
       "avgRP": 39.21,
       "avgPC": 5.24,
@@ -1018,24 +1018,6 @@
       "mins": 7200,
       "pallets": 3,
       "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91302",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "DA1 5XU",
-      "window": "",
-      "commitDate": "28/05/26",
-      "arrDate": "20/06/26",
-      "arrival": "01:00",
-      "mins": 33120,
-      "pallets": 1,
-      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
@@ -2451,7 +2433,7 @@
     "South East": {
       "pallets": 311,
       "cons": 43,
-      "lates": 5
+      "lates": 4
     },
     "East of England": {
       "pallets": 27,
