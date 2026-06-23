@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:10:05.768Z",
+  "lastUpdated": "2026-06-23T19:10:08.894Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 218,
       "pallets": 1091,
       "revenue": 42624.4,
-      "lates": 5,
-      "latePallets": 12,
-      "timeliness": 0.9890009165902841,
+      "lates": 4,
+      "latePallets": 11,
+      "timeliness": 0.9899175068744271,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -926,24 +926,6 @@
       "arrDate": "27/05/26",
       "arrival": "01:00",
       "mins": 8640,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91219",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "JUST TO SAY LONDON LTD",
-      "city": "JUST TO SAY LONDON LTD",
-      "pc": "L24 9BD",
-      "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "28/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
@@ -1726,7 +1708,7 @@
     "North West": {
       "pallets": 494,
       "cons": 85,
-      "lates": 12
+      "lates": 11
     },
     "South East": {
       "pallets": 311,
