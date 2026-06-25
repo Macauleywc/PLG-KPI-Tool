@@ -1039,18 +1039,41 @@ function buildReport(mapImg,onComplete){
   function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
   function tR(vals,widths,y,opts,ox){ox=ox||0;opts=opts||{};var rh=6.5,tw=widths.reduce(function(a,b){return a+b;},0);if(opts.total){fill('#F47920');doc.rect(ML+ox,y,tw,rh,'F');}else if(opts.shade){fill('#F7F6F3');doc.rect(ML+ox,y,tw,rh,'F');}drw('#E5E3DE');doc.line(ML+ox,y+rh,ML+ox+tw,y+rh);doc.setFontSize(7);doc.setFont('helvetica',opts.total?'bold':'normal');var x=ML+ox;vals.forEach(function(v,i){var text=typeof v==='object'?String(v.t===null||v.t===undefined?'':v.t):String(v===null||v===undefined?'':v);if(!text)text='';var right=typeof v==='object'&&v.r;txt(opts.total?'#FFFFFF':typeof v==='object'&&v.c?v.c:'#1C1C1C');doc.text(text,right?x+widths[i]-2:x+2,y+4.8,{align:right?'right':'left'});x+=widths[i];});return y+rh;}
 
-  // PAGE 1
-  fill('#111111');doc.rect(0,0,W,H,'F');fill('#F47920');doc.rect(0,0,7,H,'F');
-  try{doc.addImage(PLG_LOGO_URL,'SVG',18,14,55,18);}catch(e){txt('#F47920');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',18,22);}
-  txt('#F47920');doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('CUSTOMER KPI REPORT',18,90);
-  txt('#FFFFFF');doc.setFontSize(38);doc.setFont('helvetica','bold');doc.text(currentCustomer,18,108,{maxWidth:180});
-  txt('#777777');doc.setFontSize(16);doc.setFont('helvetica','normal');doc.text(periodLabel,18,120);
-  var sbY=H-70;fill('#F47920');doc.rect(0,sbY,W,46,'F');var statW=W/4;
-  [{l:'CONSIGNMENTS',v:String(aC||0)},{l:'PALLETS DELIVERED',v:String(aP||0)},{l:'OTIF',v:ytdOTIF+'%',dim:true},{l:'LATE DELIVERIES',v:String(aL||0)}].forEach(function(s,i){var sx=i*statW;if(i>0){drw('#E06810');doc.line(sx,sbY+8,sx,sbY+40);}txt(s.dim?'#FECACA':'#FFFFFF');doc.setFontSize(22);doc.setFont('helvetica','bold');doc.text(s.v,sx+statW/2,sbY+28,{align:'center'});txt('#F9C9A8');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text(s.l,sx+statW/2,sbY+38,{align:'center'});});
-  fill('#111111');doc.rect(0,H-24,W,24,'F');fill('#1E1E1E');doc.rect(0,H-24,W,0.5,'F');
-  txt('#555555');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Prepared exclusively for '+currentCustomer,18,H-14);
-  txt('#333333');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text('CONFIDENTIAL',18,H-7);
-  txt('#555555');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(dateStr,W-ML,H-10,{align:'right'});
+  // PAGE 1 — white cover matching PDF 9 design
+  // White background (jsPDF default), orange rules top and bottom
+  fill('#F47920');doc.rect(0,0,W,2,'F');
+  fill('#F47920');doc.rect(0,H-2,W,2,'F');
+  // Top header bar — white with PLG left, CUSTOMER KPI REPORT right
+  fill('#FFFFFF');doc.rect(0,2,W,14,'F');
+  try{doc.addImage(PLG_LOGO_URL,'SVG',ML,3,32,10);}catch(e){txt('#F47920');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',ML,10);}
+  txt('#CCCCCC');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('CUSTOMER KPI REPORT',W-ML,10,{align:'right'});
+  // Thin grey separator
+  drw('#E5E3DE');doc.line(0,16,W,16);
+  // Customer name large, black
+  txt('#111111');doc.setFontSize(32);doc.setFont('helvetica','bold');doc.text(currentCustomer,ML,60,{maxWidth:CW});
+  // Grey rule below name
+  drw('#CCCCCC');doc.line(ML,65,ML+CW,65);
+  // Period label
+  txt('#555555');doc.setFontSize(12);doc.setFont('helvetica','normal');doc.text(periodLabel,ML,75);
+  // Confidential + date
+  txt('#AAAAAA');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Confidential',ML,83);
+  txt('#AAAAAA');doc.text('Prepared '+dateStr,ML+22,83);
+  // 4 KPI boxes at bottom
+  var boxY=H-90,boxW=(CW)/4,boxGap=2,bx2=ML;
+  var kpiItems=[{l:'CONSIGNMENTS',v:String(aC||0),s:'Completed & invoiced'},{l:'PALLETS DELIVERED',v:String(aP||0),s:'This period'},{l:'PALLET OTIF',v:ytdOTIF+'%',s:'Target: 97%',col:otifNum>=97?'#166534':'#DC2626'},{l:'LATE DELIVERIES',v:String(aL||0),s:(aC>0?(aL/aC*100).toFixed(1):0)+'% of consignments',col:aL>0?'#DC2626':undefined}];
+  kpiItems.forEach(function(k,i){
+    var bx3=ML+i*(boxW+boxGap);
+    fill('#FFFFFF');doc.rect(bx3,boxY,boxW,70,'F');
+    drw('#E5E3DE');doc.rect(bx3,boxY,boxW,70,'S');
+    fill('#F47920');doc.rect(bx3,boxY,boxW,1.5,'F');
+    txt('#888888');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(k.l,bx3+4,boxY+9);
+    txt(k.col||'#111111');doc.setFontSize(20);doc.setFont('helvetica','bold');doc.text(k.v,bx3+4,boxY+30);
+    txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text(k.s||'',bx3+4,boxY+40);
+  });
+  // Footer
+  txt('#AAAAAA');doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text('premier-logistics.co.uk  ·  Bardon (HQ) & Northampton',ML,H-6);
+  txt('#AAAAAA');doc.text('Page 1 / '+FINAL_TOTAL,W-ML,H-6,{align:'right'});
 
   // PAGE 2
   doc.addPage();chrome();var y=CT+4;
@@ -1245,13 +1268,17 @@ function buildReport(mapImg,onComplete){
 
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
   var FINAL_TOTAL=doc.internal.getNumberOfPages();
+  // Stamp page 1 footer with correct total
+  doc.setPage(1);
+  fill('#FFFFFF');doc.rect(W-40,H-9,40,7,'F');
+  txt('#AAAAAA');doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text('Page 1 / '+FINAL_TOTAL,W-ML,H-6,{align:'right'});
+  // Stamp pages 2+ header and footer
   for(var pgi=2;pgi<=FINAL_TOTAL;pgi++){
     doc.setPage(pgi);
-    // Stamp page number into dark header (starts at y=1)
     fill('#111111');doc.rect(W-50,1,50,12,'F');
     txt('#777777');doc.setFontSize(6.5);doc.setFont('helvetica','normal');
     doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,7.5,{align:'right'});
-    // Stamp page number into plain white footer
     fill('#FFFFFF');doc.rect(W-40,H-8,40,8,'F');
     txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','normal');
     doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,H-4,{align:'right'});
