@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-23T19:20:50.165Z",
+  "lastUpdated": "2026-06-25T15:48:10.537Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -8,7 +8,7 @@
       "revenue": 9149.35,
       "lates": 2,
       "latePallets": 4,
-      "timeliness": 0.9819,
+      "timeliness": 0.9819004524886877,
       "avgRC": 247.28,
       "avgRP": 41.4,
       "avgPC": 5.97,
@@ -279,7 +279,7 @@
       "revenue": 42624.4,
       "lates": 5,
       "latePallets": 15,
-      "timeliness": 0.986251,
+      "timeliness": 0.9862511457378552,
       "avgRC": 195.52,
       "avgRP": 39.07,
       "avgPC": 5,
@@ -579,59 +579,64 @@
       }
     },
     "2026-06": {
-      "cons": 205,
-      "pallets": 1074,
-      "revenue": 42109.86,
-      "lates": 3,
-      "latePallets": 4,
-      "timeliness": 0.996276,
-      "avgRC": 205.41,
-      "avgRP": 39.21,
-      "avgPC": 5.24,
+      "cons": 203,
+      "pallets": 1115,
+      "revenue": 42693.65,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 210.31,
+      "avgRP": 38.29,
+      "avgPC": 5.49,
       "palletSizes": {
         "Full": 745,
-        "Half": 3,
-        "Quarter": 2
+        "Half": 2
       },
       "typeBreakdown": {
         "Economy Booked": {
-          "cons": 117,
-          "lates": 1
+          "cons": 116,
+          "lates": 0
         },
         "Next Day": {
-          "cons": 88,
-          "lates": 2
+          "cons": 87,
+          "lates": 0
         }
       },
       "regionData": {
+        "North West": {
+          "cons": 39,
+          "pallets": 258,
+          "revenue": 9078.5,
+          "lates": 0
+        },
         "West Midlands": {
-          "cons": 30,
-          "pallets": 180,
-          "revenue": 6778.450000000001,
+          "cons": 29,
+          "pallets": 179,
+          "revenue": 6697.249999999998,
           "lates": 0
         },
         "Yorkshire": {
           "cons": 18,
           "pallets": 22,
-          "revenue": 1372.2699999999995,
+          "revenue": 1372.2699999999998,
           "lates": 0
         },
-        "North West": {
-          "cons": 42,
-          "pallets": 265,
-          "revenue": 9515.29,
-          "lates": 1
+        "South": {
+          "cons": 8,
+          "pallets": 19,
+          "revenue": 1172.8300000000002,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 67,
+          "pallets": 490,
+          "revenue": 16775.69000000001,
+          "lates": 0
         },
         "South East": {
           "cons": 17,
           "pallets": 89,
-          "revenue": 3380.39,
-          "lates": 2
-        },
-        "South West": {
-          "cons": 4,
-          "pallets": 10,
-          "revenue": 562.23,
+          "revenue": 3380.3899999999994,
           "lates": 0
         },
         "East of England": {
@@ -646,28 +651,22 @@
           "revenue": 2258.71,
           "lates": 0
         },
-        "East Midlands": {
-          "cons": 65,
-          "pallets": 441,
-          "revenue": 15673.910000000005,
+        "South West": {
+          "cons": 4,
+          "pallets": 10,
+          "revenue": 562.23,
           "lates": 0
         },
         "North East": {
           "cons": 3,
           "pallets": 3,
-          "revenue": 194.5,
+          "revenue": 194.50000000000003,
           "lates": 0
         },
         "Scotland": {
           "cons": 1,
           "pallets": 1,
           "revenue": 139.08,
-          "lates": 0
-        },
-        "South": {
-          "cons": 8,
-          "pallets": 19,
-          "revenue": 1172.83,
           "lates": 0
         }
       },
@@ -678,7 +677,7 @@
           "pc": "CV5 9PF",
           "cons": 12,
           "pallets": 20,
-          "revenue": 1109.9499999999998,
+          "revenue": 1109.95,
           "lates": 0
         },
         {
@@ -723,7 +722,7 @@
           "pc": "MK42 6EY",
           "cons": 8,
           "pallets": 77,
-          "revenue": 3429.31,
+          "revenue": 3694.98,
           "lates": 0
         },
         {
@@ -732,7 +731,7 @@
           "pc": "MK42 6EY",
           "cons": 6,
           "pallets": 157,
-          "revenue": 3296.19,
+          "revenue": 3296.1899999999996,
           "lates": 0
         },
         {
@@ -741,7 +740,7 @@
           "pc": "L24 8RJ",
           "cons": 5,
           "pallets": 140,
-          "revenue": 2729.31,
+          "revenue": 2729.3100000000004,
           "lates": 0
         },
         {
@@ -754,30 +753,21 @@
           "lates": 0
         },
         {
-          "name": "ZAPPIES LTD C/O ZAPFILMENT",
-          "city": "ZAPPIES LTD C/O ZAPFILMENT",
-          "pc": "BN17 7GA",
-          "cons": 4,
-          "pallets": 9,
-          "revenue": 663.85,
-          "lates": 1
-        },
-        {
-          "name": "TOYMASTER LTD: MIDCO TOYS LTD",
-          "city": "TOYMASTER LTD: MIDCO TOYS LTD",
-          "pc": "DE14 3TN",
-          "cons": 4,
-          "pallets": 4,
-          "revenue": 260.39,
-          "lates": 0
-        },
-        {
           "name": "AMAZON EU SARL - UK - DSA6",
           "city": "AMAZON EU SARL - UK - DSA6",
           "pc": "LS26 9DN",
           "cons": 4,
           "pallets": 4,
           "revenue": 249.14,
+          "lates": 0
+        },
+        {
+          "name": "ZAPPIES LTD C/O ZAPFILMENT",
+          "city": "ZAPPIES LTD C/O ZAPFILMENT",
+          "pc": "BN17 7GA",
+          "cons": 4,
+          "pallets": 9,
+          "revenue": 663.8499999999999,
           "lates": 0
         },
         {
@@ -790,21 +780,21 @@
           "lates": 0
         },
         {
-          "name": "BOOGHE TOYS",
-          "city": "BOOGHE TOYS",
-          "pc": "B24 9QR",
-          "cons": 3,
-          "pallets": 5,
-          "revenue": 290.66,
+          "name": "TOYMASTER LTD: MIDCO TOYS LTD",
+          "city": "TOYMASTER LTD: MIDCO TOYS LTD",
+          "pc": "DE14 3TN",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 260.39,
           "lates": 0
         },
         {
-          "name": "SELFRIDGES & CO - HAM HALL",
-          "city": "SELFRIDGES & CO - HAM HALL",
-          "pc": "B46 1DA",
+          "name": "B & M RETAIL LIMITED - QUBE -",
+          "city": "B & M RETAIL LIMITED - QUBE -",
+          "pc": "L24 8RJ",
           "cons": 3,
-          "pallets": 4,
-          "revenue": 268.52,
+          "pallets": 28,
+          "revenue": 1150.3,
           "lates": 0
         },
         {
@@ -817,67 +807,112 @@
           "lates": 0
         },
         {
-          "name": "CREATIVE DISTRIBUTION LTD",
-          "city": "CREATIVE DISTRIBUTION LTD",
-          "pc": "CR0 4TD",
+          "name": "BOOGHE TOYS",
+          "city": "BOOGHE TOYS",
+          "pc": "B24 9QR",
           "cons": 3,
-          "pallets": 7,
-          "revenue": 395.44,
+          "pallets": 5,
+          "revenue": 290.65999999999997,
           "lates": 0
         },
         {
-          "name": "SAINSBURY'S DAVENTRY 9102",
-          "city": "SAINSBURY'S DAVENTRY 9102",
-          "pc": "CV23 8BQ",
+          "name": "TJ MORRIS - OMEGA",
+          "city": "TJ MORRIS - OMEGA",
+          "pc": "WA5 3UY",
           "cons": 3,
-          "pallets": 15,
-          "revenue": 680.6600000000001,
+          "pallets": 18,
+          "revenue": 854.25,
           "lates": 0
         },
         {
-          "name": "TOYMASTER LTD: GROOVES",
-          "city": "TOYMASTER LTD: GROOVES",
-          "pc": "KW15 1HP",
+          "name": "AMAZON EU SARL - UK - BHX7",
+          "city": "AMAZON EU SARL - UK - BHX7",
+          "pc": "LE10 3FF",
+          "cons": 3,
+          "pallets": 5,
+          "revenue": 264.26,
+          "lates": 0
+        },
+        {
+          "name": "B & M RETAIL LIMITED - FORT ",
+          "city": "B & M RETAIL LIMITED - FORT ",
+          "pc": "MK42 6EY",
+          "cons": 3,
+          "pallets": 24,
+          "revenue": 1086.69,
+          "lates": 0
+        },
+        {
+          "name": "SELFRIDGES & CO - HAM HALL",
+          "city": "SELFRIDGES & CO - HAM HALL",
+          "pc": "B46 1DA",
           "cons": 3,
           "pallets": 4,
-          "revenue": 764.54,
-          "lates": 0
-        },
-        {
-          "name": "B & M RETAIL LIMITED - QUBE -",
-          "city": "B & M RETAIL LIMITED - QUBE -",
-          "pc": "L24 8RJ",
-          "cons": 3,
-          "pallets": 28,
-          "revenue": 1150.3,
+          "revenue": 268.52,
           "lates": 0
         }
       ],
       "dowBreakdown": {
         "Mon": {
           "cons": 40,
-          "lates": 1
+          "lates": 0
         },
         "Tue": {
           "cons": 39,
-          "lates": 1
+          "lates": 0
         },
         "Wed": {
-          "cons": 31,
+          "cons": 29,
           "lates": 0
         },
         "Thu": {
-          "cons": 35,
+          "cons": 34,
           "lates": 0
         },
         "Fri": {
-          "cons": 59,
-          "lates": 1
+          "cons": 61,
+          "lates": 0
         }
       }
     }
   },
   "lateRows": [
+    {
+      "id": "DGB326",
+      "acct": "IRON",
+      "month": "Apr-26",
+      "dest": "TEMPTATION (GIFTS) LIMITED",
+      "city": "TEMPTATION (GIFTS) LIMITED",
+      "pc": "HP5 3NJ",
+      "window": "",
+      "commitDate": "16/04/26",
+      "arrDate": "20/04/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "90801",
+      "acct": "IRON",
+      "month": "Apr-26",
+      "dest": "TJ MORRIS - WILTSHIRE",
+      "city": "TJ MORRIS - WILTSHIRE",
+      "pc": "SP4 7GQ",
+      "window": "",
+      "commitDate": "01/05/26",
+      "arrDate": "07/05/26",
+      "arrival": "01:00",
+      "mins": 8640,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
     {
       "id": "90934",
       "acct": "IRON",
@@ -967,96 +1002,6 @@
       "note": "",
       "reason": "Other",
       "failed": true
-    },
-    {
-      "id": "DGB0091573, JPFI00012",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "ZAPPIES LTD C/O ZAPFILMENT",
-      "city": "ZAPPIES LTD C/O ZAPFILMENT",
-      "pc": "BN17 7GA",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "DGB0091542, HELEN2.6",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: TOYS N TRENDS",
-      "city": "TOYMASTER LTD: TOYS N TRENDS",
-      "pc": "CT5 1AY",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "PJUNE26",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "Cube n Space",
-      "city": "Cube n Space",
-      "pc": "L19 8JA",
-      "window": "",
-      "commitDate": "16/06/26",
-      "arrDate": "17/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "DGB326",
-      "acct": "IRON",
-      "month": "Apr-26",
-      "dest": "TEMPTATION (GIFTS) LIMITED",
-      "city": "TEMPTATION (GIFTS) LIMITED",
-      "pc": "HP5 3NJ",
-      "window": "",
-      "commitDate": "16/04/26",
-      "arrDate": "20/04/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "90801",
-      "acct": "IRON",
-      "month": "Apr-26",
-      "dest": "TJ MORRIS - WILTSHIRE",
-      "city": "TJ MORRIS - WILTSHIRE",
-      "pc": "SP4 7GQ",
-      "window": "",
-      "commitDate": "01/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
     }
   ],
   "regionData": {
