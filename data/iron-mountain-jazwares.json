@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-25T16:05:59.081Z",
+  "lastUpdated": "2026-06-25T16:07:02.138Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -579,94 +579,106 @@
       }
     },
     "2026-06": {
-      "cons": 205,
-      "pallets": 1117,
-      "revenue": 43343.78,
+      "cons": 258,
+      "pallets": 1332,
+      "revenue": 52924.59,
       "lates": 0,
       "latePallets": 0,
       "timeliness": 1,
-      "avgRC": 211.43,
-      "avgRP": 38.8,
-      "avgPC": 5.45,
+      "avgRC": 205.13,
+      "avgRP": 39.73,
+      "avgPC": 5.16,
       "palletSizes": {
-        "Full": 746,
+        "Full": 960,
         "Half": 2
       },
       "typeBreakdown": {
         "Economy Booked": {
-          "cons": 117,
+          "cons": 145,
           "lates": 0
         },
         "Next Day": {
-          "cons": 88,
+          "cons": 113,
           "lates": 0
         }
       },
       "regionData": {
         "East Midlands": {
-          "cons": 68,
-          "pallets": 491,
-          "revenue": 16856.89000000001,
+          "cons": 85,
+          "pallets": 595,
+          "revenue": 20904.31,
           "lates": 0
         },
         "North West": {
-          "cons": 40,
-          "pallets": 259,
-          "revenue": 9624.43,
-          "lates": 0
-        },
-        "West Midlands": {
-          "cons": 29,
-          "pallets": 179,
-          "revenue": 6697.249999999998,
-          "lates": 0
-        },
-        "Yorkshire": {
-          "cons": 18,
-          "pallets": 22,
-          "revenue": 1372.2699999999998,
+          "cons": 47,
+          "pallets": 284,
+          "revenue": 11136.190000000002,
           "lates": 0
         },
         "South": {
-          "cons": 8,
-          "pallets": 19,
-          "revenue": 1172.8300000000002,
+          "cons": 13,
+          "pallets": 28,
+          "revenue": 1788.15,
           "lates": 0
         },
-        "South East": {
-          "cons": 17,
-          "pallets": 89,
-          "revenue": 3380.3899999999994,
+        "West Midlands": {
+          "cons": 35,
+          "pallets": 220,
+          "revenue": 8008.659999999999,
           "lates": 0
         },
-        "East of England": {
-          "cons": 5,
-          "pallets": 20,
-          "revenue": 1062.2,
-          "lates": 0
-        },
-        "Other": {
-          "cons": 12,
-          "pallets": 24,
-          "revenue": 2258.71,
-          "lates": 0
-        },
-        "South West": {
-          "cons": 4,
-          "pallets": 10,
-          "revenue": 562.23,
+        "Yorkshire": {
+          "cons": 23,
+          "pallets": 33,
+          "revenue": 1960.3499999999997,
           "lates": 0
         },
         "North East": {
-          "cons": 3,
-          "pallets": 3,
-          "revenue": 194.50000000000003,
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 322.26,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 19,
+          "pallets": 96,
+          "revenue": 3836.6699999999996,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 7,
+          "pallets": 26,
+          "revenue": 1394.5500000000002,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 15,
+          "pallets": 30,
+          "revenue": 2530.0200000000004,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 6,
+          "pallets": 12,
+          "revenue": 701.77,
+          "lates": 0
+        },
+        "London": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 104.04,
           "lates": 0
         },
         "Scotland": {
           "cons": 1,
           "pallets": 1,
           "revenue": 139.08,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 75.54,
           "lates": 0
         }
       },
@@ -675,45 +687,45 @@
           "name": "AMAZON EU SARL - UK - BHX4",
           "city": "AMAZON EU SARL - UK - BHX4",
           "pc": "CV5 9PF",
-          "cons": 12,
-          "pallets": 20,
-          "revenue": 1109.95,
+          "cons": 15,
+          "pallets": 23,
+          "revenue": 1294.57,
           "lates": 0
         },
         {
           "name": "AMAZON EU SARL - UK - LPX2",
           "city": "AMAZON EU SARL - UK - LPX2",
           "pc": "L33 7TJ",
-          "cons": 11,
-          "pallets": 18,
-          "revenue": 1003.0699999999999,
+          "cons": 14,
+          "pallets": 23,
+          "revenue": 1284.05,
           "lates": 0
         },
         {
           "name": "SMYTHS TOYS:ALTO WAREHOUSE",
           "city": "SMYTHS TOYS:ALTO WAREHOUSE",
           "pc": "ST5 9QD",
-          "cons": 11,
-          "pallets": 139,
-          "revenue": 4634.65,
-          "lates": 0
-        },
-        {
-          "name": "A.B. GEE OF RIPLEY LIMITED",
-          "city": "A.B. GEE OF RIPLEY LIMITED",
-          "pc": "DE5 3SW",
-          "cons": 10,
-          "pallets": 24,
-          "revenue": 1262.21,
+          "cons": 13,
+          "pallets": 176,
+          "revenue": 5688.9,
           "lates": 0
         },
         {
           "name": "SMYTHS TOYS:CORBY WAREHOUSE",
           "city": "SMYTHS TOYS:CORBY WAREHOUSE",
           "pc": "NN17 1NN",
-          "cons": 9,
-          "pallets": 61,
-          "revenue": 2196.83,
+          "cons": 11,
+          "pallets": 82,
+          "revenue": 2722.0499999999997,
+          "lates": 0
+        },
+        {
+          "name": "A.B. GEE OF RIPLEY LIMITED",
+          "city": "A.B. GEE OF RIPLEY LIMITED",
+          "pc": "DE5 3SW",
+          "cons": 11,
+          "pallets": 26,
+          "revenue": 1382.9299999999998,
           "lates": 0
         },
         {
@@ -735,12 +747,39 @@
           "lates": 0
         },
         {
+          "name": "ARGOS LIMITED - KT DC",
+          "city": "ARGOS LIMITED - KT DC",
+          "pc": "NN14 1UB",
+          "cons": 6,
+          "pallets": 71,
+          "revenue": 2525.78,
+          "lates": 0
+        },
+        {
           "name": "B & M Bargains",
           "city": "B & M Bargains",
           "pc": "L24 8RJ",
           "cons": 5,
           "pallets": 140,
           "revenue": 2729.3100000000004,
+          "lates": 0
+        },
+        {
+          "name": "AMAZON EU SARL - UK - DSA6",
+          "city": "AMAZON EU SARL - UK - DSA6",
+          "pc": "LS26 9DN",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 310.67999999999995,
+          "lates": 0
+        },
+        {
+          "name": "ZAPPIES LTD C/O ZAPFILMENT",
+          "city": "ZAPPIES LTD C/O ZAPFILMENT",
+          "pc": "BN17 7GA",
+          "cons": 5,
+          "pallets": 15,
+          "revenue": 1033.8,
           "lates": 0
         },
         {
@@ -753,124 +792,97 @@
           "lates": 0
         },
         {
-          "name": "AMAZON EU SARL - UK - DSA6",
-          "city": "AMAZON EU SARL - UK - DSA6",
-          "pc": "LS26 9DN",
-          "cons": 4,
-          "pallets": 4,
-          "revenue": 249.14,
-          "lates": 0
-        },
-        {
-          "name": "ZAPPIES LTD C/O ZAPFILMENT",
-          "city": "ZAPPIES LTD C/O ZAPFILMENT",
-          "pc": "BN17 7GA",
-          "cons": 4,
-          "pallets": 9,
-          "revenue": 663.8499999999999,
-          "lates": 0
-        },
-        {
-          "name": "THE ENTERTAINER - BANBURY",
-          "city": "THE ENTERTAINER - BANBURY",
-          "pc": "OX16 2AA",
-          "cons": 4,
-          "pallets": 45,
-          "revenue": 1234.8,
-          "lates": 0
-        },
-        {
           "name": "TOYMASTER LTD: MIDCO TOYS LTD",
           "city": "TOYMASTER LTD: MIDCO TOYS LTD",
           "pc": "DE14 3TN",
-          "cons": 4,
-          "pallets": 4,
-          "revenue": 260.39,
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 321.92999999999995,
           "lates": 0
         },
         {
           "name": "B & M RETAIL LIMITED - QUBE -",
           "city": "B & M RETAIL LIMITED - QUBE -",
           "pc": "L24 8RJ",
-          "cons": 3,
-          "pallets": 28,
-          "revenue": 1150.3,
+          "cons": 4,
+          "pallets": 45,
+          "revenue": 1663.8,
           "lates": 0
         },
         {
           "name": "MUDDLEIT",
           "city": "MUDDLEIT",
           "pc": "BB9 6RT",
-          "cons": 3,
-          "pallets": 18,
-          "revenue": 885.59,
+          "cons": 4,
+          "pallets": 19,
+          "revenue": 995.4,
           "lates": 0
         },
         {
-          "name": "BOOGHE TOYS",
-          "city": "BOOGHE TOYS",
-          "pc": "B24 9QR",
-          "cons": 3,
-          "pallets": 5,
-          "revenue": 290.65999999999997,
-          "lates": 0
-        },
-        {
-          "name": "TJ MORRIS - OMEGA",
-          "city": "TJ MORRIS - OMEGA",
-          "pc": "WA5 3UY",
-          "cons": 3,
-          "pallets": 18,
-          "revenue": 854.25,
-          "lates": 0
-        },
-        {
-          "name": "AMAZON EU SARL - UK - BHX7",
-          "city": "AMAZON EU SARL - UK - BHX7",
-          "pc": "LE10 3FF",
-          "cons": 3,
-          "pallets": 5,
-          "revenue": 264.26,
-          "lates": 0
-        },
-        {
-          "name": "B & M RETAIL LIMITED - FORT ",
-          "city": "B & M RETAIL LIMITED - FORT ",
-          "pc": "MK42 6EY",
-          "cons": 3,
-          "pallets": 24,
-          "revenue": 1086.69,
+          "name": "THE ENTERTAINER -LUTTERWORTH D",
+          "city": "THE ENTERTAINER -LUTTERWORTH D",
+          "pc": "LE17 4XR",
+          "cons": 4,
+          "pallets": 14,
+          "revenue": 723.88,
           "lates": 0
         },
         {
           "name": "SELFRIDGES & CO - HAM HALL",
           "city": "SELFRIDGES & CO - HAM HALL",
           "pc": "B46 1DA",
-          "cons": 3,
-          "pallets": 4,
-          "revenue": 268.52,
+          "cons": 4,
+          "pallets": 9,
+          "revenue": 508.70000000000005,
+          "lates": 0
+        },
+        {
+          "name": "JOHN LEWIS PLC MP2 051",
+          "city": "JOHN LEWIS PLC MP2 051",
+          "pc": "MK17 8EW",
+          "cons": 4,
+          "pallets": 6,
+          "revenue": 426.46000000000004,
+          "lates": 0
+        },
+        {
+          "name": "AMAZON EU SARL - UK - MAN4",
+          "city": "AMAZON EU SARL - UK - MAN4",
+          "pc": "S43 4PZ",
+          "cons": 4,
+          "pallets": 8,
+          "revenue": 428.79999999999995,
+          "lates": 0
+        },
+        {
+          "name": "CREATIVE DISTRIBUTION LTD",
+          "city": "CREATIVE DISTRIBUTION LTD",
+          "pc": "CR0 4TD",
+          "cons": 4,
+          "pallets": 9,
+          "revenue": 418.44,
           "lates": 0
         }
       ],
       "dowBreakdown": {
         "Mon": {
-          "cons": 40,
+          "cons": 41,
           "lates": 0
         },
         "Tue": {
-          "cons": 39,
+          "cons": 43,
           "lates": 0
         },
         "Wed": {
-          "cons": 29,
+          "cons": 46,
           "lates": 0
         },
         "Thu": {
-          "cons": 34,
+          "cons": 53,
           "lates": 0
         },
         "Fri": {
-          "cons": 63,
+          "cons": 75,
           "lates": 0
         }
       }
