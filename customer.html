@@ -1022,27 +1022,19 @@ function buildReport(mapImg,onComplete){
   function otifC(v){return v>=97?'#166534':v>=85?'#D97706':'#991B1B';}
   function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'...':s||'';}
   function fmt(n){return n!=null&&!isNaN(n)?'£'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
-  function chrome(pg){
-    var pgNum=pg||doc.internal.getCurrentPageInfo().pageNumber;
-    // White header with orange top rule
+  function chrome(){
+    // White header with orange top rule — page numbers stamped by final pass
     fill('#FFFFFF');doc.rect(0,0,W,13,'F');
     fill('#F47920');doc.rect(0,0,W,0.8,'F');
-    // Logo / brand name top-left
     try{doc.addImage(PLG_LOGO_URL,'SVG',ML,2,28,8);}catch(e){txt('#F47920');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('PLG',ML,8);}
-    // Customer name centred
     txt('#111111');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(currentCustomer,W/2,6,{align:'center'});
-    // Period label below
     txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text(periodLabel,W/2,10,{align:'center'});
-    // Page number right — placeholder, overwritten by final pass
-    txt('#999999');doc.setFontSize(6.5);doc.text('Page '+pgNum+' / ?',W-ML,8,{align:'right'});
-    // Thin separator line
     drw('#E5E3DE');doc.line(0,13,W,13);
-    // White footer with light text only
+    // White footer — page numbers stamped by final pass
     fill('#FFFFFF');doc.rect(0,H-10,W,10,'F');
     drw('#E5E3DE');doc.line(0,H-10,W,H-10);
     txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','normal');
     doc.text('Confidential \u00B7 Premier Logistics Group \u00B7 premier-logistics.co.uk',ML,H-4);
-    txt('#BBBBBB');doc.text('Page '+pgNum,W-ML,H-4,{align:'right'});
   }
   function kpiCard(x,y,w,h,label,value,sub,valueColor){fill('#FFFFFF');doc.rect(x,y,w,h,'F');drw('#E5E3DE');doc.rect(x,y,w,h,'S');fill('#F47920');doc.rect(x,y,w,1,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(label.toUpperCase(),x+3,y+6);txt(valueColor||'#111111');doc.setFontSize(16);doc.setFont('helvetica','bold');doc.text(String(value||''),x+3,y+16);if(sub){txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+3,y+21);}}
   function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
@@ -1062,7 +1054,7 @@ function buildReport(mapImg,onComplete){
   txt('#555555');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(dateStr,W-ML,H-10,{align:'right'});
 
   // PAGE 2
-  doc.addPage();chrome(2);var y=CT+4;
+  doc.addPage();chrome();var y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('ON-TIME IN-FULL (OTIF)',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   var heroH=42;fill('#F5F4F1');doc.rect(ML,y,CW,heroH,'F');
   var otifMet=otifNum>=97;
@@ -1110,7 +1102,7 @@ function buildReport(mapImg,onComplete){
     vals.forEach(function(v,i){var cx=plotX+i*slot+slot/2;if(v!=null){var frac=(v-minV)/(maxV-minV);if(frac<0)frac=0;if(frac>1)frac=1;var bh=Math.max(frac*plotH,0.8);fill('#F47920');doc.rect(cx-bw/2,plotBot-bh,bw,bh,'F');txt('#555555');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(fV(v),cx,plotBot-bh-1.5,{align:'center'});}txt('#999999');doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text(String(labels[i]).replace('-26',''),cx,plotBot+4,{align:'center'});});
     return y+boxH+5;
   }
-  doc.addPage();chrome(3);y=CT+4;
+  doc.addPage();chrome();y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('MONTH-BY-MONTH OVERVIEW \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   var _spO=function(m){var v=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):0;return v.toFixed(1)+'%';};
   var moActive=months.filter(function(m){return (m.cons||0)>0||(m.pallets||0)>0;});
@@ -1135,7 +1127,7 @@ function buildReport(mapImg,onComplete){
     y=tR([{t:m.label},{t:hd?String(m.cons||0):'\u2014',r:1},{t:hd?String(m.pallets||0):'\u2014',r:1},{t:(hd&&m.revenue!=null)?fmt(m.revenue):'\u2014',r:1},{t:op!=null?op.toFixed(1)+'%':'\u2014',r:1,c:op!=null?otifC(op):'#BBBBBB'},{t:hd?String(m.lates||0):'\u2014',r:1,c:(m.lates||0)>0?'#991B1B':'#111111'}],moW,y,{shade:i%2!==0});
   });
   y=tR([{t:'TOTAL / PERIOD'},{t:String(_tC),r:1},{t:String(_tP),r:1},{t:fmt(_tR2),r:1},{t:(_tP>0&&ytdOTIF!=='--')?ytdOTIF+'%':'\u2014',r:1},{t:String(_tL),r:1}],moW,y,{total:true});
-  doc.addPage();chrome(3);y=CT+4;
+  doc.addPage();chrome();y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PERFORMANCE CHARTS BY MONTH \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=9;
   var _labs=months.map(function(m){return m.label;});
   var _act=function(m){return (m.cons||0)>0||(m.pallets||0)>0;};
@@ -1152,7 +1144,7 @@ function buildReport(mapImg,onComplete){
   y=chartSection(y,'TIMELINESS (OTIF %) BY MONTH',_timV,_labs,{min:_timMin,max:100,fmt:function(v){return v.toFixed(1)+'%';},target:97,targetLabel:'Target 97%'});
 
   // PAGE 3
-  doc.addPage();chrome(3);y=CT+4;
+  doc.addPage();chrome();y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('UK DELIVERY HEATMAP \u2014 PALLET VOLUME BY REGION',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   if(mapImg){var asp=mapImg.asp||2.5,mW=CW,mH=mW/asp;if(mH>100){mH=100;mW=mH*asp;}if(mW>CW){mW=CW;mH=mW/asp;}drw('#E5E3DE');doc.rect(ML+(CW-mW)/2,y,mW,mH,'S');try{doc.addImage(mapImg.url,'PNG',ML+(CW-mW)/2,y,mW,mH);}catch(e){}y+=mH+6;}
   else{fill('#F7F6F3');doc.rect(ML,y,CW,70,'F');txt('#CCCCCC');doc.setFontSize(8);doc.text('Map unavailable',ML+CW/2,y+35,{align:'center'});y+=74;}
@@ -1163,7 +1155,7 @@ function buildReport(mapImg,onComplete){
   // ===== PAGE: CARBON / NET ZERO (uses regMap2; only if pallet data) =====
   var _carb=computeCarbon(regMap2);
   if(_carb.tPallets>0){
-    doc.addPage();chrome(6);y=CT+4;
+    doc.addPage();chrome();y=CT+4;
     txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('CARBON & NET ZERO \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
     var _pp=_carb.tCons/_carb.tPallets,_gpk=_carb.tPalletKm>0?_carb.tCons/_carb.tPalletKm*1000:0,_sp=_carb.tStand>0?_carb.tSave/_carb.tStand*100:0;
     var ccw=(CW-9)/4;
@@ -1189,7 +1181,7 @@ function buildReport(mapImg,onComplete){
     doc.text(doc.splitTextToSize(_cm,CW),ML,y);
   }
   // PAGE 4
-  doc.addPage();chrome(4);y=CT+4;
+  doc.addPage();chrome();y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('TOP 10 DESTINATIONS BY VOLUME',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   var dc=[{l:'Destination'},{l:'City'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'Lates',r:1},{l:'OTIF',r:1},{l:'Cost',r:1}],dw=[48,24,13,14,13,18,30];
   y=tH(dc,dw,y);topDest.forEach(function(d,idx){var otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';y=tR([{t:trunc(d.name,30)},{t:trunc(d.city,14)},{t:String(d.cons),r:1},{t:String(d.pallets),r:1},{t:String(d.lates),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))},{t:fmt(d.revenue),r:1}],dw,y,{shade:idx%2!==0});});y+=8;
@@ -1210,7 +1202,7 @@ function buildReport(mapImg,onComplete){
   // PAGE 5 (surcharges) \u2014 only rendered when there are surcharges
   var hasSurcharge=(isV4?((v4TA+v4TB+v4AM+v4BW+v4AZ)>0):(surchCons>0));
   if(hasSurcharge){
-  doc.addPage();chrome(5);y=CT+4;
+  doc.addPage();chrome();y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('SURCHARGE SUMMARY \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   var sc3=(CW-8)/3;
   if(isV4){kpiCard(ML,y,sc3,24,'Chargeable surcharges','\u00A3'+v4ChargeTotal,(v4TA+v4TB+v4AM+v4BW+v4AZ)+' consignments',v4ChargeTotal>0?'#F47920':'#888888');kpiCard(ML+sc3+4,y,sc3,24,'TA / TB / AM',v4TA+'  /  '+v4TB+'  /  '+v4AM,'consignments each',null);kpiCard(ML+sc3*2+8,y,sc3,24,'Free surcharges (TL/EB/ETA)','\u00A30',v4TL+' / '+v4EB+' / '+v4ETA,'#888888');}
@@ -1238,13 +1230,13 @@ function buildReport(mapImg,onComplete){
 
   }
   // PAGE 6
-  var curPageNum=6;
-  doc.addPage();chrome(6);y=CT+4;
+  var curPageNum=doc.internal.getNumberOfPages();
+  doc.addPage();chrome();y=CT+4;
   txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('LATE CONSIGNMENTS \u2014 '+String(aL||0)+' OF '+String(aC||0),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
   fill('#FFF7ED');doc.rect(ML,y,CW,7,'F');drw('#FED7AA');doc.rect(ML,y,CW,7,'S');txt('#92400E');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Late = delivery arrival after booked time window end. Contact your account manager to dispute.',ML+3,y+4.5);y+=9;
   var lc=[{l:'Order ID'},{l:'Destination'},{l:'City'},{l:'Window'},{l:'Arrived'},{l:'Delay',r:1},{l:'Plts',r:1},{l:'Type'}],lw=[20,42,18,18,13,13,10,18];
   y=tH(lc,lw,y);
-  lateList.forEach(function(r,idx){if(y>CB-6){doc.addPage();curPageNum++;chrome(curPageNum);y=CT+2;y=tH(lc,lw,y);}y=tR([{t:trunc(r.id,12)},{t:trunc(r.dest,26)},{t:trunc(r.city,11)},{t:r.window},{t:r.arrival},{t:'+'+fmtDelay(r.mins),r:1,c:'#991B1B'},{t:String(r.pallets),r:1},{t:r.dtype}],lw,y,{shade:idx%2!==0});});
+  lateList.forEach(function(r,idx){if(y>CB-6){doc.addPage();curPageNum++;chrome();y=CT+2;y=tH(lc,lw,y);}y=tR([{t:trunc(r.id,12)},{t:trunc(r.dest,26)},{t:trunc(r.city,11)},{t:r.window},{t:r.arrival},{t:'+'+fmtDelay(r.mins),r:1,c:'#991B1B'},{t:String(r.pallets),r:1},{t:r.dtype}],lw,y,{shade:idx%2!==0});});
   if(lateList.length===0){txt('#888888');doc.setFontSize(9);doc.text('No late consignments this period.',ML+CW/2,y+12,{align:'center'});y+=20;}y+=8;
   if(y<CB-50){fill('#111111');doc.rect(ML,y,CW,22,'F');fill('#F47920');doc.rect(ML,y,3,22,'F');
     try{doc.addImage(PLG_LOGO_URL,'SVG',ML+6,y+3,36,14);}catch(e){txt('#FFFFFF');doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('Premier Logistics Group',ML+6,y+11);}
@@ -1254,7 +1246,17 @@ function buildReport(mapImg,onComplete){
 
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
   var FINAL_TOTAL=doc.internal.getNumberOfPages();
-  for(var pgi=1;pgi<=FINAL_TOTAL;pgi++){doc.setPage(pgi);fill('#FFFFFF');doc.rect(W-ML-32,0,32,13,'F');txt('#999999');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,8,{align:'right'});fill('#FFFFFF');doc.rect(W-ML-20,H-10,20,10,'F');txt('#BBBBBB');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text('Page '+pgi,W-ML,H-4,{align:'right'});}
+  for(var pgi=1;pgi<=FINAL_TOTAL;pgi++){
+    doc.setPage(pgi);
+    // Overwrite right side of header with correct page number
+    fill('#FFFFFF');doc.rect(W-50,0.5,50,12,'F');
+    txt('#999999');doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+    doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,8,{align:'right'});
+    // Overwrite right side of footer with correct page number
+    fill('#FFFFFF');doc.rect(W-30,H-9.5,30,9,'F');
+    txt('#BBBBBB');doc.setFontSize(6);doc.setFont('helvetica','normal');
+    doc.text('Page '+pgi,W-ML,H-4,{align:'right'});
+  }
   doc.save(currentCustomer+' - '+periodLabel+'.pdf');
   showAlert('success','PDF downloaded \u2014 '+FINAL_TOTAL+' pages.');
 
