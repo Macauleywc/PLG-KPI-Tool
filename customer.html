@@ -405,6 +405,15 @@ function calcMonth(rows){
   return{cons:cons,pallets:pallets,revenue:revenue,lates:lates,latePallets:latePallets,timeliness:pallets>0?(pallets-latePallets)/pallets:0,avgPC:cons>0?pallets/cons:0,avgRC:cons>0?revenue/cons:0,avgRP:pallets>0?revenue/pallets:0,completedRows:comp};
 }
 
+// Returns the true actual delivery date, preferring the new Qargo column
+// "Last delivery stop > Date (by type) > Actual" and falling back to
+// "Actual Delivery Date" only when the new column is blank/nan.
+function _realActual(r){
+  var v=r['Last delivery stop > Date (by type) > Actual'];
+  if(v!=null&&v!==''&&String(v).toLowerCase()!=='nan')return v;
+  return r['Actual Delivery Date']||r['Delivery Date']||r['Actual date']||null;
+}
+
 function handleDeliveryData(input){
   var file=input.files[0];if(!file)return;
   var reader=new FileReader();
@@ -417,7 +426,7 @@ function handleDeliveryData(input){
         var ref=r['Customer Consignment Ref']||r['Consignments > Consignment reference number']||r['consignment reference']||r['Consignment Ref']||r['Consignment reference']||r['ref']||'';
         ref=String(ref).replace(/\.0$/,'').replace(/\+$/,'').trim();
         var planned=r['Requested Delivery Date']||r['Consignments > Delivery stop > Date (by type) > Requested']||r['Requested']||null;
-        var actual=r['Actual Delivery Date']||r['Delivery Date']||r['Actual date']||null;
+        var actual=_realActual(r);
         var cost=r['Customer Cost']||r['Cost']||r['cost']||null;
         if(ref&&actual){deliveryDateMap[ref]={planned:planned,actual:actual,cost:cost};count++;}
       });
@@ -442,7 +451,7 @@ function handleRaw(input){
       if(isV4Format){
         rows=rows.map(function(r){
           var reqDate=r['Requested Delivery Date'];
-          var actDate=r['Actual Delivery Date'];
+          var actDate=_realActual(r);
           var isLateRow=actDate&&reqDate&&new Date(actDate)>new Date(reqDate);
           var focSurcharges=String(r['FOC Surcharges']||'');
           var chargeableSurcharges=String(r['Surcharges']||'');
