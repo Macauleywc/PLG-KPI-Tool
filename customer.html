@@ -1023,18 +1023,18 @@ function buildReport(mapImg,onComplete){
   function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'...':s||'';}
   function fmt(n){return n!=null&&!isNaN(n)?'£'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
   function chrome(){
-    // White header with orange top rule — page numbers stamped by final pass
-    fill('#FFFFFF');doc.rect(0,0,W,13,'F');
-    fill('#F47920');doc.rect(0,0,W,0.8,'F');
-    try{doc.addImage(PLG_LOGO_URL,'SVG',ML,2,28,8);}catch(e){txt('#F47920');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('PLG',ML,8);}
-    txt('#111111');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(currentCustomer,W/2,6,{align:'center'});
-    txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text(periodLabel,W/2,10,{align:'center'});
-    drw('#E5E3DE');doc.line(0,13,W,13);
-    // White footer — page numbers stamped by final pass
-    fill('#FFFFFF');doc.rect(0,H-10,W,10,'F');
-    drw('#E5E3DE');doc.line(0,H-10,W,H-10);
-    txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','normal');
+    // Dark header bar — matches PDF 9 design
+    fill('#111111');doc.rect(0,0,W,12,'F');
+    fill('#F47920');doc.rect(0,12,W,1,'F');
+    try{doc.addImage(PLG_LOGO_URL,'SVG',ML,1.5,22,8);}catch(e){txt('#F47920');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('PLG',ML,7);}
+    txt('#FFFFFF');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text(currentCustomer,W/2,6,{align:'center'});
+    txt('#888888');doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text(periodLabel,W/2,10,{align:'center'});
+    // Page number stamped by final pass
+    // Dark footer bar
+    fill('#111111');doc.rect(0,H-10,W,10,'F');
+    txt('#666666');doc.setFontSize(6);doc.setFont('helvetica','normal');
     doc.text('Confidential \u00B7 Premier Logistics Group \u00B7 premier-logistics.co.uk',ML,H-4);
+    // Footer page number stamped by final pass
   }
   function kpiCard(x,y,w,h,label,value,sub,valueColor){fill('#FFFFFF');doc.rect(x,y,w,h,'F');drw('#E5E3DE');doc.rect(x,y,w,h,'S');fill('#F47920');doc.rect(x,y,w,1,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(label.toUpperCase(),x+3,y+6);txt(valueColor||'#111111');doc.setFontSize(16);doc.setFont('helvetica','bold');doc.text(String(value||''),x+3,y+16);if(sub){txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+3,y+21);}}
   function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
@@ -1246,15 +1246,15 @@ function buildReport(mapImg,onComplete){
 
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
   var FINAL_TOTAL=doc.internal.getNumberOfPages();
-  for(var pgi=1;pgi<=FINAL_TOTAL;pgi++){
+  for(var pgi=2;pgi<=FINAL_TOTAL;pgi++){
     doc.setPage(pgi);
-    // Overwrite right side of header with correct page number
-    fill('#FFFFFF');doc.rect(W-50,0.5,50,12,'F');
-    txt('#999999');doc.setFontSize(6.5);doc.setFont('helvetica','normal');
-    doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,8,{align:'right'});
-    // Overwrite right side of footer with correct page number
-    fill('#FFFFFF');doc.rect(W-30,H-9.5,30,9,'F');
-    txt('#BBBBBB');doc.setFontSize(6);doc.setFont('helvetica','normal');
+    // Stamp page number into dark header — overwrite right portion with dark bg
+    fill('#111111');doc.rect(W-50,0,50,12,'F');
+    txt('#777777');doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+    doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,7,{align:'right'});
+    // Stamp page number into dark footer
+    fill('#111111');doc.rect(W-30,H-10,30,10,'F');
+    txt('#666666');doc.setFontSize(6);doc.setFont('helvetica','normal');
     doc.text('Page '+pgi,W-ML,H-4,{align:'right'});
   }
   doc.save(currentCustomer+' - '+periodLabel+'.pdf');
