@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-25T15:56:27.392Z",
+  "lastUpdated": "2026-06-25T16:05:59.081Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -579,34 +579,40 @@
       }
     },
     "2026-06": {
-      "cons": 203,
-      "pallets": 1115,
-      "revenue": 42693.65,
+      "cons": 205,
+      "pallets": 1117,
+      "revenue": 43343.78,
       "lates": 0,
       "latePallets": 0,
       "timeliness": 1,
-      "avgRC": 210.31,
-      "avgRP": 38.29,
-      "avgPC": 5.49,
+      "avgRC": 211.43,
+      "avgRP": 38.8,
+      "avgPC": 5.45,
       "palletSizes": {
-        "Full": 745,
+        "Full": 746,
         "Half": 2
       },
       "typeBreakdown": {
         "Economy Booked": {
-          "cons": 116,
+          "cons": 117,
           "lates": 0
         },
         "Next Day": {
-          "cons": 87,
+          "cons": 88,
           "lates": 0
         }
       },
       "regionData": {
+        "East Midlands": {
+          "cons": 68,
+          "pallets": 491,
+          "revenue": 16856.89000000001,
+          "lates": 0
+        },
         "North West": {
-          "cons": 39,
-          "pallets": 258,
-          "revenue": 9078.5,
+          "cons": 40,
+          "pallets": 259,
+          "revenue": 9624.43,
           "lates": 0
         },
         "West Midlands": {
@@ -625,12 +631,6 @@
           "cons": 8,
           "pallets": 19,
           "revenue": 1172.8300000000002,
-          "lates": 0
-        },
-        "East Midlands": {
-          "cons": 67,
-          "pallets": 490,
-          "revenue": 16775.69000000001,
           "lates": 0
         },
         "South East": {
@@ -870,7 +870,7 @@
           "lates": 0
         },
         "Fri": {
-          "cons": 61,
+          "cons": 63,
           "lates": 0
         }
       }
