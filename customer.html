@@ -1023,6 +1023,7 @@ function buildReport(mapImg,onComplete){
   function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'...':s||'';}
   function fmt(n){return n!=null&&!isNaN(n)?'£'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
   function chrome(pg){
+    var pgNum=pg||doc.internal.getCurrentPageInfo().pageNumber;
     // White header with orange top rule
     fill('#FFFFFF');doc.rect(0,0,W,13,'F');
     fill('#F47920');doc.rect(0,0,W,0.8,'F');
@@ -1032,8 +1033,8 @@ function buildReport(mapImg,onComplete){
     txt('#111111');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(currentCustomer,W/2,6,{align:'center'});
     // Period label below
     txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text(periodLabel,W/2,10,{align:'center'});
-    // Page number right
-    txt('#999999');doc.setFontSize(6.5);doc.text('Page '+pg+' / '+TOTAL,W-ML,8,{align:'right'});
+    // Page number right — placeholder, overwritten by final pass
+    txt('#999999');doc.setFontSize(6.5);doc.text('Page '+pgNum+' / ?',W-ML,8,{align:'right'});
     // Thin separator line
     drw('#E5E3DE');doc.line(0,13,W,13);
     // White footer with light text only
@@ -1041,7 +1042,7 @@ function buildReport(mapImg,onComplete){
     drw('#E5E3DE');doc.line(0,H-10,W,H-10);
     txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','normal');
     doc.text('Confidential \u00B7 Premier Logistics Group \u00B7 premier-logistics.co.uk',ML,H-4);
-    txt('#BBBBBB');doc.text('Page '+pg,W-ML,H-4,{align:'right'});
+    txt('#BBBBBB');doc.text('Page '+pgNum,W-ML,H-4,{align:'right'});
   }
   function kpiCard(x,y,w,h,label,value,sub,valueColor){fill('#FFFFFF');doc.rect(x,y,w,h,'F');drw('#E5E3DE');doc.rect(x,y,w,h,'S');fill('#F47920');doc.rect(x,y,w,1,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(label.toUpperCase(),x+3,y+6);txt(valueColor||'#111111');doc.setFontSize(16);doc.setFont('helvetica','bold');doc.text(String(value||''),x+3,y+16);if(sub){txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+3,y+21);}}
   function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
@@ -1253,7 +1254,7 @@ function buildReport(mapImg,onComplete){
 
   var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
   var FINAL_TOTAL=doc.internal.getNumberOfPages();
-  for(var pgi=1;pgi<=FINAL_TOTAL;pgi++){doc.setPage(pgi);fill('#111111');doc.rect(W-ML-26,1.5,26,9,'F');txt('#777777');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,7,{align:'right'});}
+  for(var pgi=1;pgi<=FINAL_TOTAL;pgi++){doc.setPage(pgi);fill('#FFFFFF');doc.rect(W-ML-32,0,32,13,'F');txt('#999999');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,8,{align:'right'});fill('#FFFFFF');doc.rect(W-ML-20,H-10,20,10,'F');txt('#BBBBBB');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text('Page '+pgi,W-ML,H-4,{align:'right'});}
   doc.save(currentCustomer+' - '+periodLabel+'.pdf');
   showAlert('success','PDF downloaded \u2014 '+FINAL_TOTAL+' pages.');
 
