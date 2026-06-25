@@ -1039,19 +1039,24 @@ function buildReport(mapImg,onComplete){
   function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
   function tR(vals,widths,y,opts,ox){ox=ox||0;opts=opts||{};var rh=6.5,tw=widths.reduce(function(a,b){return a+b;},0);if(opts.total){fill('#F47920');doc.rect(ML+ox,y,tw,rh,'F');}else if(opts.shade){fill('#F7F6F3');doc.rect(ML+ox,y,tw,rh,'F');}drw('#E5E3DE');doc.line(ML+ox,y+rh,ML+ox+tw,y+rh);doc.setFontSize(7);doc.setFont('helvetica',opts.total?'bold':'normal');var x=ML+ox;vals.forEach(function(v,i){var text=typeof v==='object'?String(v.t===null||v.t===undefined?'':v.t):String(v===null||v===undefined?'':v);if(!text)text='';var right=typeof v==='object'&&v.r;txt(opts.total?'#FFFFFF':typeof v==='object'&&v.c?v.c:'#1C1C1C');doc.text(text,right?x+widths[i]-2:x+2,y+4.8,{align:right?'right':'left'});x+=widths[i];});return y+rh;}
 
-  // PAGE 1 — Option A: clean minimal, white, 2x2 stat boxes
+  // PAGE 1 — Option A: fixed layout, 2x2 stat boxes filling page
+  // Orange top rule
   fill('#F47920');doc.rect(0,0,W,2,'F');
-  try{doc.addImage(PLG_LOGO_URL,'SVG',ML,6,32,10);}catch(e){txt('#F47920');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',ML,13);}
-  txt('#BBBBBB');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('CUSTOMER KPI REPORT',W-ML,13,{align:'right'});
-  drw('#EEEEEE');doc.line(ML,20,W-ML,20);
+  // Header: PLG logo left, report title right, separator
+  try{doc.addImage(PLG_LOGO_URL,'SVG',ML,5,30,9);}catch(e){txt('#F47920');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',ML,12);}
+  txt('#BBBBBB');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('CUSTOMER KPI REPORT',W-ML,12,{align:'right'});
+  drw('#EEEEEE');doc.line(ML,17,W-ML,17);
+  // Customer name — large, fixed at y=45
   txt('#111111');doc.setFontSize(26);doc.setFont('helvetica','bold');
   var nameLines=doc.splitTextToSize(currentCustomer,CW);
-  doc.text(nameLines,ML,52);
-  var nameBottom=52+(nameLines.length-1)*10;
-  drw('#DDDDDD');doc.line(ML,nameBottom+7,ML+CW,nameBottom+7);
-  txt('#555555');doc.setFontSize(11);doc.setFont('helvetica','normal');doc.text(periodLabel,ML,nameBottom+18);
-  txt('#BBBBBB');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Confidential  ·  Prepared '+dateStr,ML,nameBottom+27);
-  var bxTop=H-108,bxH=46,bxW=(CW-4)/2;
+  doc.text(nameLines,ML,45);
+  // Grey divider
+  drw('#DDDDDD');doc.line(ML,62,W-ML,62);
+  // Period + confidential
+  txt('#444444');doc.setFontSize(11);doc.setFont('helvetica','normal');doc.text(periodLabel,ML,73);
+  txt('#BBBBBB');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Confidential  ·  Prepared '+dateStr,ML,81);
+  // 2x2 stat boxes — fixed from y=100 to y=260, filling the page
+  var bxTop=100,bxGap=5,bxW=(CW-bxGap)/2,bxH=(160-bxGap)/2;
   var coverStats=[
     {l:'CONSIGNMENTS',v:String(aC||0),s:'Completed & invoiced',accent:'#F47920'},
     {l:'PALLETS DELIVERED',v:String(aP||0),s:'This period',accent:'#F47920'},
@@ -1060,14 +1065,15 @@ function buildReport(mapImg,onComplete){
   ];
   coverStats.forEach(function(k,i){
     var col=i%2,row=Math.floor(i/2);
-    var bx3=ML+col*(bxW+4),by3=bxTop+row*(bxH+4);
+    var bx3=ML+col*(bxW+bxGap),by3=bxTop+row*(bxH+bxGap);
     fill('#FFFFFF');doc.rect(bx3,by3,bxW,bxH,'F');
     drw('#E5E3DE');doc.rect(bx3,by3,bxW,bxH,'S');
-    fill(k.accent);doc.rect(bx3,by3,bxW,1.5,'F');
-    txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(k.l,bx3+5,by3+10);
-    txt(k.vcol||'#111111');doc.setFontSize(18);doc.setFont('helvetica','bold');doc.text(k.v,bx3+5,by3+28);
-    txt('#AAAAAA');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(k.s||'',bx3+5,by3+38);
+    fill(k.accent);doc.rect(bx3,by3,bxW,2,'F');
+    txt('#999999');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text(k.l,bx3+6,by3+13);
+    txt(k.vcol||'#111111');doc.setFontSize(24);doc.setFont('helvetica','bold');doc.text(k.v,bx3+6,by3+40);
+    txt('#AAAAAA');doc.setFontSize(7.5);doc.setFont('helvetica','normal');doc.text(k.s||'',bx3+6,by3+52);
   });
+  // Orange bottom rule + footer
   fill('#F47920');doc.rect(0,H-2,W,2,'F');
   txt('#BBBBBB');doc.setFontSize(6);doc.setFont('helvetica','normal');
   doc.text('premier-logistics.co.uk  ·  Bardon (HQ) & Northampton',ML,H-5);
