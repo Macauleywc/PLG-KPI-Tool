@@ -1039,41 +1039,39 @@ function buildReport(mapImg,onComplete){
   function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
   function tR(vals,widths,y,opts,ox){ox=ox||0;opts=opts||{};var rh=6.5,tw=widths.reduce(function(a,b){return a+b;},0);if(opts.total){fill('#F47920');doc.rect(ML+ox,y,tw,rh,'F');}else if(opts.shade){fill('#F7F6F3');doc.rect(ML+ox,y,tw,rh,'F');}drw('#E5E3DE');doc.line(ML+ox,y+rh,ML+ox+tw,y+rh);doc.setFontSize(7);doc.setFont('helvetica',opts.total?'bold':'normal');var x=ML+ox;vals.forEach(function(v,i){var text=typeof v==='object'?String(v.t===null||v.t===undefined?'':v.t):String(v===null||v===undefined?'':v);if(!text)text='';var right=typeof v==='object'&&v.r;txt(opts.total?'#FFFFFF':typeof v==='object'&&v.c?v.c:'#1C1C1C');doc.text(text,right?x+widths[i]-2:x+2,y+4.8,{align:right?'right':'left'});x+=widths[i];});return y+rh;}
 
-  // PAGE 1 — white cover matching PDF 9 design
-  // White background (jsPDF default), orange rules top and bottom
+  // PAGE 1 — Option A: clean minimal, white, 2x2 stat boxes
   fill('#F47920');doc.rect(0,0,W,2,'F');
-  fill('#F47920');doc.rect(0,H-2,W,2,'F');
-  // Top header bar — white with PLG left, CUSTOMER KPI REPORT right
-  fill('#FFFFFF');doc.rect(0,2,W,14,'F');
-  try{doc.addImage(PLG_LOGO_URL,'SVG',ML,3,32,10);}catch(e){txt('#F47920');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',ML,10);}
-  txt('#CCCCCC');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('CUSTOMER KPI REPORT',W-ML,10,{align:'right'});
-  // Thin grey separator
-  drw('#E5E3DE');doc.line(0,16,W,16);
-  // Customer name large, black
-  txt('#111111');doc.setFontSize(32);doc.setFont('helvetica','bold');doc.text(currentCustomer,ML,60,{maxWidth:CW});
-  // Grey rule below name
-  drw('#CCCCCC');doc.line(ML,65,ML+CW,65);
-  // Period label
-  txt('#555555');doc.setFontSize(12);doc.setFont('helvetica','normal');doc.text(periodLabel,ML,75);
-  // Confidential + date
-  txt('#AAAAAA');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Confidential',ML,83);
-  txt('#AAAAAA');doc.text('Prepared '+dateStr,ML+22,83);
-  // 4 KPI boxes at bottom
-  var boxY=H-90,boxW=(CW)/4,boxGap=2,bx2=ML;
-  var kpiItems=[{l:'CONSIGNMENTS',v:String(aC||0),s:'Completed & invoiced'},{l:'PALLETS DELIVERED',v:String(aP||0),s:'This period'},{l:'PALLET OTIF',v:ytdOTIF+'%',s:'Target: 97%',col:otifNum>=97?'#166534':'#DC2626'},{l:'LATE DELIVERIES',v:String(aL||0),s:(aC>0?(aL/aC*100).toFixed(1):0)+'% of consignments',col:aL>0?'#DC2626':undefined}];
-  kpiItems.forEach(function(k,i){
-    var bx3=ML+i*(boxW+boxGap);
-    fill('#FFFFFF');doc.rect(bx3,boxY,boxW,70,'F');
-    drw('#E5E3DE');doc.rect(bx3,boxY,boxW,70,'S');
-    fill('#F47920');doc.rect(bx3,boxY,boxW,1.5,'F');
-    txt('#888888');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(k.l,bx3+4,boxY+9);
-    txt(k.col||'#111111');doc.setFontSize(20);doc.setFont('helvetica','bold');doc.text(k.v,bx3+4,boxY+30);
-    txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text(k.s||'',bx3+4,boxY+40);
+  try{doc.addImage(PLG_LOGO_URL,'SVG',ML,6,32,10);}catch(e){txt('#F47920');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',ML,13);}
+  txt('#BBBBBB');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('CUSTOMER KPI REPORT',W-ML,13,{align:'right'});
+  drw('#EEEEEE');doc.line(ML,20,W-ML,20);
+  txt('#111111');doc.setFontSize(26);doc.setFont('helvetica','bold');
+  var nameLines=doc.splitTextToSize(currentCustomer,CW);
+  doc.text(nameLines,ML,52);
+  var nameBottom=52+(nameLines.length-1)*10;
+  drw('#DDDDDD');doc.line(ML,nameBottom+7,ML+CW,nameBottom+7);
+  txt('#555555');doc.setFontSize(11);doc.setFont('helvetica','normal');doc.text(periodLabel,ML,nameBottom+18);
+  txt('#BBBBBB');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Confidential  ·  Prepared '+dateStr,ML,nameBottom+27);
+  var bxTop=H-108,bxH=46,bxW=(CW-4)/2;
+  var coverStats=[
+    {l:'CONSIGNMENTS',v:String(aC||0),s:'Completed & invoiced',accent:'#F47920'},
+    {l:'PALLETS DELIVERED',v:String(aP||0),s:'This period',accent:'#F47920'},
+    {l:'PALLET OTIF',v:ytdOTIF+'%',s:'Target: 97%',accent:otifNum>=97?'#166534':'#DC2626',vcol:otifNum>=97?'#166534':'#DC2626'},
+    {l:'LATE DELIVERIES',v:String(aL||0),s:(aC>0?(aL/aC*100).toFixed(1):'0')+'% of consignments',accent:'#F47920',vcol:aL>0?'#DC2626':undefined}
+  ];
+  coverStats.forEach(function(k,i){
+    var col=i%2,row=Math.floor(i/2);
+    var bx3=ML+col*(bxW+4),by3=bxTop+row*(bxH+4);
+    fill('#FFFFFF');doc.rect(bx3,by3,bxW,bxH,'F');
+    drw('#E5E3DE');doc.rect(bx3,by3,bxW,bxH,'S');
+    fill(k.accent);doc.rect(bx3,by3,bxW,1.5,'F');
+    txt('#999999');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(k.l,bx3+5,by3+10);
+    txt(k.vcol||'#111111');doc.setFontSize(18);doc.setFont('helvetica','bold');doc.text(k.v,bx3+5,by3+28);
+    txt('#AAAAAA');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(k.s||'',bx3+5,by3+38);
   });
-  // Footer
-  txt('#AAAAAA');doc.setFontSize(6);doc.setFont('helvetica','normal');
-  doc.text('premier-logistics.co.uk  ·  Bardon (HQ) & Northampton',ML,H-6);
-  txt('#AAAAAA');doc.text('Page 1 / '+FINAL_TOTAL,W-ML,H-6,{align:'right'});
+  fill('#F47920');doc.rect(0,H-2,W,2,'F');
+  txt('#BBBBBB');doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text('premier-logistics.co.uk  ·  Bardon (HQ) & Northampton',ML,H-5);
+  txt('#BBBBBB');doc.text('Page 1',W-ML,H-5,{align:'right'});
 
   // PAGE 2
   doc.addPage();chrome();var y=CT+4;
