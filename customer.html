@@ -1255,7 +1255,7 @@ function buildReport(mapImg,onComplete){
     // Stamp page number into dark footer
     fill('#111111');doc.rect(W-30,H-10,30,10,'F');
     txt('#666666');doc.setFontSize(6);doc.setFont('helvetica','normal');
-    doc.text('Page '+pgi,W-ML,H-4,{align:'right'});
+    doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,H-4,{align:'right'});
   }
   doc.save(currentCustomer+' - '+periodLabel+'.pdf');
   showAlert('success','PDF downloaded \u2014 '+FINAL_TOTAL+' pages.');
