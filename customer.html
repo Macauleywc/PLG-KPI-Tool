@@ -1219,10 +1219,10 @@ function chrome(pageLabel){
 var CT=18;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// PAGE 1 — SPLIT COVER (redesigned)
-// Left dark panel | Right: white with customer name + 2x2 stat grid
+// PAGE 1 — SPLIT COVER (v3)
+// Left: operational KPIs | Right: branding + commercial summary (6 cards)
 // ─────────────────────────────────────────────────────────────────────────────
-var PW=80;
+var PW=82;
 
 // ── LEFT DARK PANEL ───────────────────────────────────────────────────────────
 box(0,0,PW,H,CLR.black);
@@ -1230,88 +1230,99 @@ box(0,0,PW,3,CLR.orange);
 box(0,H-3,PW,3,CLR.orange);
 
 // PLG logo
-try{doc.addImage(PLG_LOGO_URL,'SVG',7,9,34,12);}catch(e){
+try{doc.addImage(PLG_LOGO_URL,'SVG',7,9,36,13);}catch(e){
   setInk(CLR.orange);doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('PLG',7,19);
 }
-
-// Label + rule
-setInk([90,88,84]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+setInk([85,83,79]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
 doc.text('CUSTOMER KPI REPORT',7,28);
-hline(7,30,PW-7,[40,40,40],0.3);
+hline(7,30,PW-7,[38,38,38],0.3);
 
-// 4 stacked stat blocks
+// 4 operational stat blocks — slightly taller
 var sbStats=[
   {l:'CONSIGNMENTS',  v:(aC||0).toLocaleString(),  s:'Completed & invoiced',       a:CLR.orange, vc:CLR.white},
   {l:'PALLETS',       v:(aP||0).toLocaleString(),  s:'Delivered this period',       a:CLR.orange, vc:CLR.white},
   {l:'PALLET OTIF',  v:ytdOTIF+'%',               s:'Target: 97.0%',              a:otifClr(otifNum), vc:otifLtClr(otifNum)},
   {l:'LATE',          v:String(aL||0),             s:latesPct+' of consignments',  a:aL>0?CLR.red:CLR.green, vc:aL>0?CLR.redLt:CLR.greenLt},
 ];
-var sbH=49,sbGap=3,sbY=36;
+var sbH=50,sbGap=3,sbY=36;
 sbStats.forEach(function(k){
   box(6,sbY,PW-12,sbH,CLR.darkMid);
   box(6,sbY,3,sbH,k.a);
-  setInk([100,98,94]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+  setInk([95,93,89]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
   doc.text(k.l,13,sbY+9);
   setInk(k.vc);doc.setFontSize(24);doc.setFont('helvetica','bold');
-  doc.text(String(k.v),13,sbY+31);
-  setInk([90,88,84]);doc.setFontSize(6);doc.setFont('helvetica','normal');
-  doc.text(k.s,13,sbY+40);
+  doc.text(String(k.v),13,sbY+32);
+  setInk([85,83,79]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text(k.s,13,sbY+42);
   sbY+=sbH+sbGap;
 });
-setInk([70,68,64]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+setInk([65,63,59]);doc.setFontSize(6);doc.setFont('helvetica','normal');
 doc.text('premier-logistics.co.uk',7,H-6);
 
 // ── RIGHT WHITE PANEL ─────────────────────────────────────────────────────────
-var rx=PW+12,rw=W-PW-18;
+var rx=PW+10,rw=W-PW-16;
 
-// Thin orange top strip full width
+// Orange top strip full width
 box(0,0,W,3,CLR.orange);
 
-// Customer name
-setInk(CLR.black);doc.setFontSize(22);doc.setFont('helvetica','bold');
+// Customer name — top of white panel
+setInk(CLR.black);doc.setFontSize(21);doc.setFont('helvetica','bold');
 var nameLines=doc.splitTextToSize(currentCustomer,rw);
-doc.text(nameLines,rx,50);
-var nameBottomY=50+(nameLines.length-1)*9;
+doc.text(nameLines,rx,46);
+var nameBottomY=46+(nameLines.length-1)*8;
+
+// Period
+setInk(CLR.mid);doc.setFontSize(11);doc.setFont('helvetica','normal');
+doc.text(periodLabel,rx,nameBottomY+14);
 
 // Thin rule
-hline(rx,nameBottomY+8,W-10,CLR.border,0.3);
+hline(rx,nameBottomY+20,W-8,CLR.border,0.25);
 
-// Period + date
-setInk(CLR.mid);doc.setFontSize(12);doc.setFont('helvetica','normal');
-doc.text(periodLabel,rx,nameBottomY+20);
-setInk(CLR.muted);doc.setFontSize(7);doc.setFont('helvetica','normal');
-doc.text('Prepared '+dateStr,rx,nameBottomY+30);
-doc.text('Confidential',rx,nameBottomY+39);
+// Prepared + confidential
+setInk(CLR.muted);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+doc.text('Prepared '+dateStr,rx,nameBottomY+29);
+doc.text('Confidential · Premier Logistics Group',rx,nameBottomY+38);
 
-// ── 2x2 stat grid ─────────────────────────────────────────────────────────────
-var gTop=155,gGap=8,gW=(rw-gGap)/2,gH=58;
-var coverGrid=[
-  {l:'Consignments',     v:String(aC||0),    s:'Completed & invoiced',       vc:CLR.dark,                    a:CLR.orange},
-  {l:'Pallets delivered', v:String(aP||0),    s:'This period',                vc:CLR.dark,                    a:CLR.orange},
-  {l:'Pallet OTIF',      v:ytdOTIF+'%',      s:'Target: 97.0%',             vc:otifClr(otifNum),             a:otifClr(otifNum)},
-  {l:'Late deliveries',  v:String(aL||0),    s:latesPct+' of consignments', vc:aL>0?CLR.red:CLR.green,      a:aL>0?CLR.red:CLR.green},
+// ── 6-card commercial grid ─────────────────────────────────────────────────────
+// 2 cols x 3 rows — purely commercial/financial, no overlap with left panel
+var totalCost=aR||0;
+var avgCon=aC>0?(totalCost/aC):0;
+var avgPlt=aP>0?(totalCost/aP):0;
+var avgPltsPerCon=aC>0?(aP/aC):0;
+
+var gTop=nameBottomY+48;
+var gCols=2,gRows=3;
+var gGapX=6,gGapY=6;
+var gW=(rw-gGapX)/gCols;
+var gH=(H-22-gTop-gGapY*2)/gRows; // fill to bottom strip
+
+var cGrid=[
+  {l:'Total freight cost',      v:'£'+Math.round(totalCost).toLocaleString('en-GB'), s:periodLabel,                    a:CLR.orange, vc:CLR.dark},
+  {l:'Avg cost / consignment',  v:'£'+avgCon.toFixed(2),                              s:'Per delivery',                  a:CLR.orange, vc:CLR.dark},
+  {l:'Avg cost / pallet',       v:'£'+avgPlt.toFixed(2),                              s:'Per pallet space',              a:CLR.orange, vc:CLR.dark},
+  {l:'Avg pallets / con',       v:avgPltsPerCon.toFixed(1),                                s:'Pallets per consignment',       a:CLR.orange, vc:CLR.dark},
+  {l:'Late pallets',            v:String(aLP2||0),                                         s:'Of '+String(aP||0)+' delivered',a:aLP2>0?CLR.red:CLR.green, vc:aLP2>0?CLR.red:CLR.green},
+  {l:'OTIF gap to target',      v:(otifNum>=97?'+':'')+((otifNum-97).toFixed(1))+'pts',    s:otifNum>=97?'Above target':'Below target', a:otifClr(otifNum), vc:otifClr(otifNum)},
 ];
-coverGrid.forEach(function(k,i){
-  var col=i%2,row=Math.floor(i/2);
-  var gx=rx+col*(gW+gGap),gy=gTop+row*(gH+gGap);
-  bordered(gx,gy,gW,gH,CLR.white,CLR.border,0.25);
-  box(gx,gy,gW,2.5,k.a);
-  setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','bold');
-  doc.text(k.l.toUpperCase(),gx+5,gy+10);
-  setInk(k.vc);doc.setFontSize(22);doc.setFont('helvetica','bold');
-  doc.text(String(k.v),gx+5,gy+38);
-  setInk(CLR.muted);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
-  doc.text(k.s,gx+5,gy+49);
+cGrid.forEach(function(k,i){
+  var col=i%gCols,row=Math.floor(i/gCols);
+  var gx=rx+col*(gW+gGapX),gy=gTop+row*(gH+gGapY);
+  bordered(gx,gy,gW,gH,CLR.white,CLR.border,0.2);
+  box(gx,gy,gW,2,k.a);
+  setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+  doc.text(k.l.toUpperCase(),gx+4,gy+9);
+  setInk(k.vc);doc.setFontSize(18);doc.setFont('helvetica','bold');
+  doc.text(String(k.v),gx+4,gy+gH-10);
+  setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text(k.s,gx+4,gy+gH-3);
 });
 
 // ── Bottom dark strip on right panel ──────────────────────────────────────────
 box(PW,H-22,W-PW,22,CLR.black);
 setInk(CLR.orange);doc.setFontSize(7);doc.setFont('helvetica','bold');
 doc.text('PREMIER LOGISTICS GROUP',rx,H-13);
-setInk([80,78,74]);doc.setFontSize(6);doc.setFont('helvetica','normal');
-doc.text('Bardon (HQ) & Northampton  ·  premier-logistics.co.uk',rx,H-6);
-// Page number in footer
-setInk([80,78,74]);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+setInk([75,73,69]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+doc.text('Bardon (HQ) & Northampton  ·  premier-logistics.co.uk',rx,H-5.5);
 // ─────────────────────────────────────────────────────────────────────────────
 // PAGE 2 — OTIF GAUGE + PERIOD STATS + DELIVERY TYPE
 // ─────────────────────────────────────────────────────────────────────────────
