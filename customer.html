@@ -963,8 +963,11 @@ if(pdfPalletTotal===0){Object.values(savedMonthData).forEach(function(m){if(m&&m
 var psOrder=['Full','Half','Quarter','Oversize'];
 var pdfPalletKeys=psOrder.filter(function(k){return pdfPalletMap[k];}).concat(Object.keys(pdfPalletMap).filter(function(k){return psOrder.indexOf(k)<0;}));
 
-var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
-var aLP2=getLiveLatePallets();
+var aC=getTotal('cons')||0;
+var aP=getTotal('pallets')||0;
+var aR=getTotal('revenue')||0;
+var aL=getLiveLates()||0;
+var aLP2=getLiveLatePallets()||0;
 var ytdOTIF=aP?((aP-aLP2)/aP*100).toFixed(2):'--';
 var otifNum=parseFloat(ytdOTIF)||0;
 var now=new Date();
@@ -972,13 +975,18 @@ var dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'num
 var avgRC=aC>0?(aR/aC).toFixed(2):'0.00';
 var avgRP=aP>0?(aR/aP).toFixed(2):'0.00';
 var avgPC=aC>0?(aP/aC).toFixed(1):'0.0';
+var totalCost=aR||0;
+var avgCon=aC>0?totalCost/aC:0;
+var avgPlt=aP>0?totalCost/aP:0;
+var avgPltsPerCon=aC>0?aP/aC:0;
 
 var months=[];
 MONTH_KEYS.forEach(function(key,i){
   var c2=calculatedMonths[key],ex=getExRow(i),label=MONTHS[i];
   if(c2){months.push({label:label,cons:c2.cons,pallets:c2.pallets,revenue:c2.revenue,lates:c2.lates,otif:c2.timeliness,isNew:true});}
-  else if(ex){var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});}
+  else if(ex){var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['\u00A3']!=null?parseFloat(ex['\u00A3']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});}
 });
+var moActive=months.filter(function(m){return(m.cons||0)>0||(m.pallets||0)>0;});
 
 var lateList=comp.filter(function(r){return isLate(r);}).map(function(r){
   var arr=xlDT(r['destination arrival']);
@@ -1019,30 +1027,32 @@ var avgDelay=lateDelays.length?Math.round(lateDelays.reduce(function(a,b){return
 var worstLate=lateList.length>0?lateList.reduce(function(a,b){return(parseInt(b.mins)||0)>=(parseInt(a.mins)||0)?b:a;},lateList[0]):null;
 var periodLabel=window._pdfPeriodLabelOverride||(months.length>0?months[0].label+(months.length>1?' \u2013 '+months[months.length-1].label:''):'2026');
 var latesPct=aC>0?((aL/aC)*100).toFixed(1)+'%':'0.0%';
+var otifGap=(otifNum-97).toFixed(1);
+var otifGapStr=(otifNum>=97?'+':'')+otifGap+'pts';
 
-// ── jsPDF SETUP ──────────────────────────────────────────────────────────────
+// ── jsPDF INIT ────────────────────────────────────────────────────────────────
 var {jsPDF}=window.jspdf;
 var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-var W=210,H=297,ML=12,MR=12,CW=W-ML-MR;
+var W=210,H=297,ML=13,MR=13,CW=W-ML-MR;
+var CT=20;   // content top (below chrome)
+var CB=278;  // content bottom (above footer)
 
-// ── COLOUR SYSTEM ─────────────────────────────────────────────────────────────
-// All colours as [r,g,b] arrays — no hex strings in draw calls
+// ── COLOURS ───────────────────────────────────────────────────────────────────
 var CLR={
-  orange:[244,121,32], orangeDk:[200,90,10], orangeLt:[255,236,210],
-  black:[17,17,17],    dark:[28,28,28],      darkMid:[42,42,42],
-  mid:[80,80,80],      muted:[140,138,134],  border:[218,216,210],
+  orange:[244,121,32], orangeDk:[200,90,10],
+  black:[17,17,17],    dark:[28,28,28],     darkMid:[42,42,42],
+  mid:[80,80,80],      muted:[138,136,132], border:[220,218,212],
   faint:[248,247,244], white:[255,255,255],
   green:[21,101,52],   greenLt:[187,247,208],greenBg:[240,253,244],
-  red:[153,27,27],     redLt:[254,202,202],  redBg:[255,241,241],
+  red:[153,27,27],     redLt:[254,202,202], redBg:[255,241,241],
   amber:[146,64,14],   amberLt:[253,230,138],amberBg:[255,251,235],
 };
-
 function setFill(c){doc.setFillColor(c[0],c[1],c[2]);}
 function setInk(c){doc.setTextColor(c[0],c[1],c[2]);}
-function setLine(c,w){doc.setDrawColor(c[0],c[1],c[2]);if(w)doc.setLineWidth(w);}
+function setLine(c,w){doc.setDrawColor(c[0],c[1],c[2]);if(w!=null)doc.setLineWidth(w);}
 function box(x,y,w,h,c){setFill(c);doc.rect(x,y,w,h,'F');}
-function bordered(x,y,w,h,fc,bc,lw){if(fc){setFill(fc);doc.rect(x,y,w,h,'F');}setLine(bc||CLR.border,lw||0.2);doc.rect(x,y,w,h,'S');}
-function hline(x1,y,x2,c,w){setLine(c||CLR.border,w||0.2);doc.line(x1,y,x2,y);}
+function bordered(x,y,w,h,fc,bc,lw){if(fc){setFill(fc);doc.rect(x,y,w,h,'F');}setLine(bc||CLR.border,lw!=null?lw:0.2);doc.rect(x,y,w,h,'S');}
+function hline(x1,y,x2,c,w){setLine(c||CLR.border,w!=null?w:0.2);doc.line(x1,y,x2,y);}
 function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'\u2026':s||'';}
 function fmt(n){return n!=null&&!isNaN(n)?'\u00A3'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
 function fmtK(n){return n>=1000?'\u00A3'+(n/1000).toFixed(1)+'k':'\u00A3'+Math.round(n);}
@@ -1054,7 +1064,6 @@ function otifLtClr(v){return v>=97?CLR.greenLt:v>=90?CLR.amberLt:CLR.redLt;}
 function drawGauge(cx,cy,outerR,trackW,pct,clr){
   var PI=Math.PI,steps=120;
   var start=-PI/2;
-  // helper: draw arc as polyline
   function arcPoly(fromA,toA,r,col,lw){
     setLine(col,lw);
     for(var i=1;i<=steps;i++){
@@ -1063,33 +1072,25 @@ function drawGauge(cx,cy,outerR,trackW,pct,clr){
       doc.line(cx+r*Math.cos(a0),cy+r*Math.sin(a0),cx+r*Math.cos(a1),cy+r*Math.sin(a1));
     }
   }
-  // Track ring (grey)
   arcPoly(start,start+2*PI,outerR,CLR.border,trackW);
-  // Value arc (coloured)
-  if(pct>0){
-    var endAngle=start+(Math.min(pct,100)/100)*2*PI;
-    arcPoly(start,endAngle,outerR,clr,trackW);
-  }
-  // 97% target tick
+  if(pct>0){arcPoly(start,start+(Math.min(pct,100)/100)*2*PI,outerR,clr,trackW);}
+  // 97% target tick — white notch
   var tickA=start+(0.97)*2*PI;
-  var ir=outerR-trackW/2-1.5,or2=outerR+trackW/2+1.5;
-  setLine(CLR.white,1.2);
+  var ir=outerR-trackW/2-2,or2=outerR+trackW/2+2;
+  setLine(CLR.white,1.5);
   doc.line(cx+ir*Math.cos(tickA),cy+ir*Math.sin(tickA),cx+or2*Math.cos(tickA),cy+or2*Math.sin(tickA));
-  // Inner white fill circle to create donut effect
-  box(cx-outerR+trackW+1,cy-outerR+trackW+1,(outerR-trackW-1)*2,(outerR-trackW-1)*2,CLR.white);
+  // White donut hole — slightly smaller than inner radius to avoid clipping
+  var holeR=outerR-trackW-1;
+  if(holeR>2){box(cx-holeR,cy-holeR,holeR*2,holeR*2,CLR.white);}
 }
 
 // ── SECTION HEADER ────────────────────────────────────────────────────────────
-// Returns new y after drawing the header
-function secHead(label,y,accent){
-  accent=accent||CLR.orange;
-  // Orange left rule
-  box(ML,y,3,7,accent);
-  // Label
+function secHead(label,y){
+  box(ML,y,3,7,CLR.orange);
   setInk(CLR.dark);doc.setFontSize(8.5);doc.setFont('helvetica','bold');
   doc.text(label.toUpperCase(),ML+6,y+5.5);
-  // Hairline right
-  hline(ML+6+doc.getTextWidth(label.toUpperCase())+4,y+3.5,ML+CW,CLR.border,0.15);
+  var tw=doc.getTextWidth(label.toUpperCase());
+  hline(ML+8+tw,y+3.5,ML+CW,CLR.border,0.15);
   return y+11;
 }
 
@@ -1097,35 +1098,28 @@ function secHead(label,y,accent){
 function statCard(x,y,w,h,label,value,sub,vClr,accent){
   accent=accent||CLR.orange;
   bordered(x,y,w,h,CLR.white,CLR.border,0.2);
-  // Top accent strip
-  box(x,y,w,1.8,accent);
-  // Label
+  box(x,y,w,2,accent);
   setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','bold');
   doc.text(label.toUpperCase(),x+4,y+8);
-  // Value
-  setInk(vClr||CLR.dark);doc.setFontSize(18);doc.setFont('helvetica','bold');
+  setInk(vClr||CLR.dark);doc.setFontSize(17);doc.setFont('helvetica','bold');
   doc.text(String(value||'--'),x+4,y+h-9);
-  // Sub
-  if(sub){setInk(CLR.muted);doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+4,y+h-3.5);}
+  if(sub){setInk(CLR.muted);doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+4,y+h-3);}
 }
 
 // ── TABLE HELPERS ─────────────────────────────────────────────────────────────
 var ROW_H=6.2;
-
 function tHead(cols,widths,y,ox){
   ox=ox||0;
   var tw=widths.reduce(function(a,b){return a+b;},0);
-  box(ML+ox,y,tw,7,CLR.black);
+  box(ML+ox,y,tw,7.5,CLR.black);
   setInk(CLR.white);doc.setFontSize(6);doc.setFont('helvetica','bold');
   var x=ML+ox;
   cols.forEach(function(col,i){
-    var lbl=(col.l||'').toUpperCase();
-    doc.text(lbl,col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});
+    doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2.5,y+5.2,{align:col.r?'right':'left'});
     x+=widths[i];
   });
-  return y+7;
+  return y+7.5;
 }
-
 function tRow(vals,widths,y,opts,ox){
   ox=ox||0;opts=opts||{};
   var tw=widths.reduce(function(a,b){return a+b;},0);
@@ -1138,50 +1132,45 @@ function tRow(vals,widths,y,opts,ox){
     var text=typeof v==='object'?String(v.t===null||v.t===undefined?'':v.t):String(v===null||v===undefined?'':v);
     var right=typeof v==='object'&&v.r;
     setInk(opts.total?CLR.white:typeof v==='object'&&v.c?v.c:CLR.dark);
-    doc.text(text,right?x+widths[i]-2:x+2,y+4.5,{align:right?'right':'left'});
+    doc.text(text,right?x+widths[i]-2:x+2.5,y+4.5,{align:right?'right':'left'});
     x+=widths[i];
   });
   return y+ROW_H;
 }
 
-// ── CHART BARS ────────────────────────────────────────────────────────────────
+// ── BAR CHARTS ────────────────────────────────────────────────────────────────
 function chartBars(y,title,vals,labels,opts){
   opts=opts||{};
-  var boxH=opts.boxH||50,plotH=opts.plotH||30;
-  // Card background
+  var boxH=opts.boxH||50,plotH=opts.plotH||28;
   bordered(ML,y,CW,boxH,CLR.faint,CLR.border,0.15);
-  // Left accent
   box(ML,y,3,boxH,CLR.orange);
-  // Title
   setInk(CLR.mid);doc.setFontSize(7.5);doc.setFont('helvetica','bold');
-  doc.text(title,ML+6,y+6);
-  var plotX=ML+10,plotW=CW-18,plotBot=y+boxH-8,pTop=plotBot-plotH;
+  doc.text(title,ML+7,y+6.5);
+  var plotX=ML+10,plotW=CW-18,plotBot=y+boxH-9,pTop=plotBot-plotH;
   var valid=vals.filter(function(v){return v!=null;});
   var maxV=opts.max!=null?opts.max:(valid.length?Math.max.apply(null,valid):1);
   var minV=opts.min!=null?opts.min:0;
   if(maxV<=minV)maxV=minV+1;
   var fV=opts.fmt||function(v){return String(Math.round(v));};
-  // Target line
   if(opts.target!=null){
-    var ty=plotBot-((opts.target-minV)/(maxV-minV))*plotH;
-    setLine(CLR.muted,0.25);
+    var ty2=plotBot-((opts.target-minV)/(maxV-minV))*plotH;
+    setLine(CLR.muted,0.2);
     if(doc.setLineDashPattern)doc.setLineDashPattern([1.2,0.8],0);
-    doc.line(plotX,ty,plotX+plotW,ty);
+    doc.line(plotX,ty2,plotX+plotW,ty2);
     if(doc.setLineDashPattern)doc.setLineDashPattern([],0);
     setInk(CLR.muted);doc.setFontSize(5);doc.setFont('helvetica','normal');
-    doc.text(opts.targetLabel||'97% target',plotX+plotW,ty-1,{align:'right'});
+    doc.text(opts.targetLabel||'97% target',plotX+plotW,ty2-1.5,{align:'right'});
   }
-  // Baseline
   hline(plotX,plotBot,plotX+plotW,CLR.border,0.2);
-  var n=vals.length,slot=plotW/n,bw=Math.min(slot*0.55,13);
+  var n=vals.length;
+  // Ensure bars are a reasonable width even for single month
+  var slot=plotW/Math.max(n,3),bw=Math.min(slot*0.55,16);
   vals.forEach(function(v,i){
     var cx=plotX+i*slot+slot/2;
     if(v!=null){
       var frac=Math.max(0,Math.min(1,(v-minV)/(maxV-minV)));
-      var bh=Math.max(frac*plotH,0.8);
-      // Bar with subtle top highlight
+      var bh=Math.max(frac*plotH,1);
       box(cx-bw/2,plotBot-bh,bw,bh,CLR.orange);
-      // Value label
       setInk(CLR.dark);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
       doc.text(fV(v),cx,plotBot-bh-1.5,{align:'center'});
     }
@@ -1191,81 +1180,90 @@ function chartBars(y,title,vals,labels,opts){
   return y+boxH+4;
 }
 
-// ── CHROME (header + footer for pages 2+) ─────────────────────────────────────
-// Called ONCE per page — no page numbering here (final pass handles that)
-function chrome(pageLabel){
-  // Top orange rule 2mm
+// ── CHROME — header + footer, NO page number stamped here ─────────────────────
+// Page numbers are stamped ONLY in the final pass at the very end.
+function chrome(){
+  // Orange top rule (2mm)
   box(0,0,W,2,CLR.orange);
-  // Dark header bar
-  box(0,2,W,13,CLR.black);
-  // PLG logo
-  try{doc.addImage(PLG_LOGO_URL,'SVG',ML,3,22,8);}catch(e){
-    setInk(CLR.orange);doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('PLG',ML,9);
+  // Dark header bar (13mm)
+  box(0,2,W,14,CLR.black);
+  // PLG text logo (addImage often fails in jsPDF for SVG — use styled text fallback)
+  try{
+    doc.addImage(PLG_LOGO_URL,'SVG',ML,3,22,10);
+  }catch(e){
+    // Styled text fallback: orange "PLG" + thin separator + grey tool name
+    setInk(CLR.orange);doc.setFontSize(8.5);doc.setFont('helvetica','bold');
+    doc.text('PLG',ML,11);
+    setInk([50,50,50]);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+    doc.text('PREMIER LOGISTICS',ML+12,8.5);
+    doc.text('GROUP',ML+12,12.5);
   }
-  // Customer name centred
-  setInk(CLR.white);doc.setFontSize(7.5);doc.setFont('helvetica','bold');
-  doc.text(trunc(currentCustomer,44),W/2,8.5,{align:'center'});
-  // Period
-  setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
-  doc.text(periodLabel,W/2,12.5,{align:'center'});
-  // Footer — light rule + text
-  hline(0,H-8,W,CLR.border,0.15);
-  box(0,H-8,W,8,CLR.faint);
+  // Customer name — centred
+  setInk(CLR.white);doc.setFontSize(8);doc.setFont('helvetica','bold');
+  doc.text(trunc(currentCustomer,44),W/2,9.5,{align:'center'});
+  // Period — centred below
+  setInk([110,108,104]);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+  doc.text(periodLabel,W/2,13.5,{align:'center'});
+  // Thin orange rule at bottom of header
+  box(0,16,W,0.5,CLR.orange);
+
+  // ── Footer ──
+  // Thin rule above footer
+  hline(0,CB+2,W,CLR.border,0.15);
+  box(0,CB+2,W,H-(CB+2),CLR.faint);
   setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
   doc.text('Confidential \u00B7 Premier Logistics Group \u00B7 premier-logistics.co.uk',ML,H-3.5);
+  // Page number placeholder — stamped in final pass (right side of footer)
 }
 
-// Content start y (below chrome header)
-var CT=18;
-
 // ─────────────────────────────────────────────────────────────────────────────
-// PAGE 1 — SPLIT COVER (v3)
-// Left: operational KPIs | Right: branding + commercial summary (6 cards)
+// PAGE 1 — SPLIT COVER
+// Left 82mm dark panel | Right white + 6-card commercial grid
 // ─────────────────────────────────────────────────────────────────────────────
 var PW=82;
 
-// ── LEFT DARK PANEL ───────────────────────────────────────────────────────────
+// Left dark panel
 box(0,0,PW,H,CLR.black);
 box(0,0,PW,3,CLR.orange);
 box(0,H-3,PW,3,CLR.orange);
 
-// PLG logo
+// PLG branding in panel
 try{doc.addImage(PLG_LOGO_URL,'SVG',7,9,36,13);}catch(e){
-  setInk(CLR.orange);doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('PLG',7,19);
+  setInk(CLR.orange);doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text('PLG',7,21);
 }
-setInk([85,83,79]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
-doc.text('CUSTOMER KPI REPORT',7,28);
-hline(7,30,PW-7,[38,38,38],0.3);
+setInk([88,86,82]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+doc.text('CUSTOMER KPI REPORT',7,29);
+hline(7,31,PW-7,[38,38,38],0.3);
 
-// 4 operational stat blocks — slightly taller
+// 4 operational stat blocks
 var sbStats=[
-  {l:'CONSIGNMENTS',  v:(aC||0).toLocaleString(),  s:'Completed & invoiced',       a:CLR.orange, vc:CLR.white},
-  {l:'PALLETS',       v:(aP||0).toLocaleString(),  s:'Delivered this period',       a:CLR.orange, vc:CLR.white},
-  {l:'PALLET OTIF',  v:ytdOTIF+'%',               s:'Target: 97.0%',              a:otifClr(otifNum), vc:otifLtClr(otifNum)},
-  {l:'LATE',          v:String(aL||0),             s:latesPct+' of consignments',  a:aL>0?CLR.red:CLR.green, vc:aL>0?CLR.redLt:CLR.greenLt},
+  {l:'CONSIGNMENTS',  v:(aC||0).toLocaleString(), s:'Completed & invoiced',      a:CLR.orange, vc:CLR.white},
+  {l:'PALLETS',       v:(aP||0).toLocaleString(), s:'Delivered this period',      a:CLR.orange, vc:CLR.white},
+  {l:'PALLET OTIF',  v:ytdOTIF+'%',              s:'Target: 97.0%',             a:otifClr(otifNum), vc:otifLtClr(otifNum)},
+  {l:'LATE',          v:String(aL||0),            s:latesPct+' of consignments', a:aL>0?CLR.red:CLR.green, vc:aL>0?CLR.redLt:CLR.greenLt},
 ];
-var sbH=50,sbGap=3,sbY=36;
+var sbH=50,sbGap=3,sbY=37;
 sbStats.forEach(function(k){
   box(6,sbY,PW-12,sbH,CLR.darkMid);
   box(6,sbY,3,sbH,k.a);
-  setInk([95,93,89]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+  setInk([92,90,86]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
   doc.text(k.l,13,sbY+9);
   setInk(k.vc);doc.setFontSize(24);doc.setFont('helvetica','bold');
-  doc.text(String(k.v),13,sbY+32);
+  doc.text(String(k.v),13,sbY+31);
   setInk([85,83,79]);doc.setFontSize(6);doc.setFont('helvetica','normal');
-  doc.text(k.s,13,sbY+42);
+  doc.text(k.s,13,sbY+41);
   sbY+=sbH+sbGap;
 });
-setInk([65,63,59]);doc.setFontSize(6);doc.setFont('helvetica','normal');
-doc.text('premier-logistics.co.uk',7,H-6);
+setInk([62,60,56]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+doc.text('premier-logistics.co.uk',7,H-7);
 
-// ── RIGHT WHITE PANEL ─────────────────────────────────────────────────────────
-var rx=PW+10,rw=W-PW-16;
+// Right white panel
+var rx=PW+11,rw=W-PW-17;
 
-// Orange top strip full width
-box(0,0,W,3,CLR.orange);
+// Thin orange strip across top of right panel
+box(PW,0,W-PW,3,CLR.orange);
 
-// Customer name — top of white panel
+// Customer name
 setInk(CLR.black);doc.setFontSize(21);doc.setFont('helvetica','bold');
 var nameLines=doc.splitTextToSize(currentCustomer,rw);
 doc.text(nameLines,rx,46);
@@ -1276,150 +1274,130 @@ setInk(CLR.mid);doc.setFontSize(11);doc.setFont('helvetica','normal');
 doc.text(periodLabel,rx,nameBottomY+14);
 
 // Thin rule
-hline(rx,nameBottomY+20,W-8,CLR.border,0.25);
+hline(rx,nameBottomY+20,W-9,CLR.border,0.25);
 
 // Prepared + confidential
 setInk(CLR.muted);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
 doc.text('Prepared '+dateStr,rx,nameBottomY+29);
-doc.text('Confidential · Premier Logistics Group',rx,nameBottomY+38);
+doc.text('Confidential \u00B7 Premier Logistics Group',rx,nameBottomY+38);
 
-// ── 6-card commercial grid ─────────────────────────────────────────────────────
-// 2 cols x 3 rows — purely commercial/financial, no overlap with left panel
-var totalCost=aR||0;
-var avgCon=aC>0?(totalCost/aC):0;
-var avgPlt=aP>0?(totalCost/aP):0;
-var avgPltsPerCon=aC>0?(aP/aC):0;
-
-var gTop=nameBottomY+48;
-var gCols=2,gRows=3;
-var gGapX=6,gGapY=6;
-var gW=(rw-gGapX)/gCols;
-var gH=(H-22-gTop-gGapY*2)/gRows; // fill to bottom strip
+// 6-card commercial grid — purely financial, no overlap with left panel
+// 2 cols x 3 rows, fills space down to the bottom dark strip
+var gTop=nameBottomY+50;
+var gGapX=7,gGapY=7;
+var gW=(rw-gGapX)/2;
+var gH=(H-25-gTop-(gGapY*2))/3;
 
 var cGrid=[
-  {l:'Total freight cost',      v:'£'+Math.round(totalCost).toLocaleString('en-GB'), s:periodLabel,                    a:CLR.orange, vc:CLR.dark},
-  {l:'Avg cost / consignment',  v:'£'+avgCon.toFixed(2),                              s:'Per delivery',                  a:CLR.orange, vc:CLR.dark},
-  {l:'Avg cost / pallet',       v:'£'+avgPlt.toFixed(2),                              s:'Per pallet space',              a:CLR.orange, vc:CLR.dark},
-  {l:'Avg pallets / con',       v:avgPltsPerCon.toFixed(1),                                s:'Pallets per consignment',       a:CLR.orange, vc:CLR.dark},
-  {l:'Late pallets',            v:String(aLP2||0),                                         s:'Of '+String(aP||0)+' delivered',a:aLP2>0?CLR.red:CLR.green, vc:aLP2>0?CLR.red:CLR.green},
-  {l:'OTIF gap to target',      v:(otifNum>=97?'+':'')+((otifNum-97).toFixed(1))+'pts',    s:otifNum>=97?'Above target':'Below target', a:otifClr(otifNum), vc:otifClr(otifNum)},
+  {l:'Total freight cost',     v:'\u00A3'+Math.round(totalCost).toLocaleString('en-GB'), s:periodLabel,                               a:CLR.orange, vc:CLR.dark},
+  {l:'Avg cost / consignment', v:'\u00A3'+avgCon.toFixed(2),                             s:'Per delivery',                             a:CLR.orange, vc:CLR.dark},
+  {l:'Avg cost / pallet',      v:'\u00A3'+avgPlt.toFixed(2),                             s:'Per pallet space',                         a:CLR.orange, vc:CLR.dark},
+  {l:'Avg pallets / con',      v:avgPltsPerCon.toFixed(1),                               s:'Pallets per consignment',                  a:CLR.orange, vc:CLR.dark},
+  {l:'Late pallets',           v:String(aLP2||0),                                        s:'Of '+String(aP||0)+' delivered',           a:aLP2>0?CLR.red:CLR.green, vc:aLP2>0?CLR.red:CLR.green},
+  {l:'OTIF vs target',         v:otifGapStr,                                             s:otifNum>=97?'Above 97% target':'Below 97% target', a:otifClr(otifNum), vc:otifClr(otifNum)},
 ];
 cGrid.forEach(function(k,i){
-  var col=i%gCols,row=Math.floor(i/gCols);
+  var col=i%2,row=Math.floor(i/2);
   var gx=rx+col*(gW+gGapX),gy=gTop+row*(gH+gGapY);
   bordered(gx,gy,gW,gH,CLR.white,CLR.border,0.2);
   box(gx,gy,gW,2,k.a);
   setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
   doc.text(k.l.toUpperCase(),gx+4,gy+9);
-  setInk(k.vc);doc.setFontSize(18);doc.setFont('helvetica','bold');
+  setInk(k.vc);doc.setFontSize(17);doc.setFont('helvetica','bold');
   doc.text(String(k.v),gx+4,gy+gH-10);
   setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
   doc.text(k.s,gx+4,gy+gH-3);
 });
 
-// ── Bottom dark strip on right panel ──────────────────────────────────────────
+// Bottom dark strip — right panel footer
 box(PW,H-22,W-PW,22,CLR.black);
 setInk(CLR.orange);doc.setFontSize(7);doc.setFont('helvetica','bold');
 doc.text('PREMIER LOGISTICS GROUP',rx,H-13);
-setInk([75,73,69]);doc.setFontSize(6);doc.setFont('helvetica','normal');
-doc.text('Bardon (HQ) & Northampton  ·  premier-logistics.co.uk',rx,H-5.5);
+setInk([72,70,66]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+doc.text('Bardon (HQ) & Northampton  \u00B7  premier-logistics.co.uk',rx,H-6);
+
 // ─────────────────────────────────────────────────────────────────────────────
-// PAGE 2 — OTIF GAUGE + PERIOD STATS + DELIVERY TYPE
+// PAGE 2 — OTIF GAUGE + PERIOD STATS + DELIVERY MIX
 // ─────────────────────────────────────────────────────────────────────────────
 doc.addPage();chrome();var y=CT;
-
 y=secHead('On-Time In-Full (OTIF) Performance',y);
 
 var otifMet=otifNum>=97;
 var gClr=otifClr(otifNum);
+var gZoneW=64,gCX=ML+gZoneW/2,gCY=y+36,gR=24,gTW=8;
 
-// ── Gauge layout: left 60mm zone ──────────────────────────────────────────
-var gZoneW=62,gCX=ML+gZoneW/2,gCY=y+34,gR=22,gTW=7;
-
-// Draw circular gauge
+// Draw gauge
 drawGauge(gCX,gCY,gR,gTW,otifNum,gClr);
 
-// Large % in centre of gauge
-setInk(gClr);doc.setFontSize(16);doc.setFont('helvetica','bold');
+// % centred in gauge
+setInk(gClr);doc.setFontSize(15);doc.setFont('helvetica','bold');
 doc.text(ytdOTIF+'%',gCX,gCY+3,{align:'center'});
 setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
-doc.text('PALLET OTIF',gCX,gCY+9,{align:'center'});
-
-// Target label
+doc.text('PALLET OTIF',gCX,gCY+9.5,{align:'center'});
 setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
-doc.text('Target 97.0%',gCX,gCY+gR+6,{align:'center'});
+doc.text('Target 97.0%',gCX,gCY+gR+7,{align:'center'});
 
-// Status pill below gauge
-var pW=48,pH=8,pX=gCX-pW/2,pY=gCY+gR+9;
+// Status pill
+var pW=50,pH=9,pX=gCX-pW/2,pY=gCY+gR+10;
 bordered(pX,pY,pW,pH,otifBgClr(otifNum),gClr,0.3);
 setInk(gClr);doc.setFontSize(6.5);doc.setFont('helvetica','bold');
-doc.text(otifMet?'\u2713  ON TARGET':'\u2715  BELOW TARGET',gCX,pY+5.5,{align:'center'});
+doc.text(otifMet?'\u2713  ON TARGET':'\u2715  BELOW TARGET',gCX,pY+6,{align:'center'});
 
-// ── Right of gauge: detail ────────────────────────────────────────────────
-var dX=ML+gZoneW+4,dW=CW-gZoneW-4;
-
-// Headline stat
-setInk(CLR.dark);doc.setFontSize(14);doc.setFont('helvetica','bold');
+// Right of gauge
+var dX=ML+gZoneW+5,dW=CW-gZoneW-5;
+setInk(CLR.dark);doc.setFontSize(13);doc.setFont('helvetica','bold');
 doc.text(String(aL||0)+' late from '+String(aC||0)+' consignments',dX,y+10);
-
 setInk(CLR.muted);doc.setFontSize(7);doc.setFont('helvetica','normal');
-doc.text('Target 97.0%  \u00B7  '+Math.abs(97-otifNum).toFixed(1)+(otifMet?' pts above target':' pts below target'),dX,y+17);
+doc.text('Target 97.0%  \u00B7  '+Math.abs(97-otifNum).toFixed(1)+(otifMet?' pts above':' pts below')+' target',dX,y+18);
 
 // Progress bar
-var barX=dX,barY=y+22,barW=dW,barH=6;
+var barX=dX,barY=y+23,barW=dW,barH=7;
 box(barX,barY,barW,barH,CLR.border);
 box(barX,barY,Math.min(otifNum/100,1)*barW,barH,gClr);
-// 97% tick mark
-box(barX+barW*0.97-0.8,barY-1.5,1.8,barH+3,otifMet?CLR.red:CLR.green);
-// Bar labels
+// 97% tick
+box(barX+barW*0.97-1,barY-2,2,barH+4,otifMet?CLR.red:CLR.green);
 setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
-doc.text('0%',barX,barY+barH+4);
+doc.text('0%',barX,barY+barH+4.5);
 setInk(gClr);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
-doc.text(ytdOTIF+'% actual',barX+barW*(otifNum/200),barY+barH+4,{align:'center'});
+doc.text(ytdOTIF+'% actual',barX+barW*(Math.min(otifNum,97)/200),barY+barH+4.5,{align:'center'});
 setInk(otifMet?CLR.red:CLR.green);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
-doc.text('97% target',barX+barW,barY+barH+4,{align:'right'});
+doc.text('97% target',barX+barW,barY+barH+4.5,{align:'right'});
 
-// Performance statement pill
-var stH=8,stY=barY+barH+9;
-bordered(dX,stY,dW*0.72,stH,otifBgClr(otifNum),gClr,0.25);
+// Statement pill
+var stY=barY+barH+9;
+bordered(dX,stY,dW*0.70,9,otifBgClr(otifNum),gClr,0.25);
 setInk(gClr);doc.setFontSize(6.5);doc.setFont('helvetica','bold');
-doc.text(otifMet?'Performance within agreed range':'Performance review recommended',dX+3,stY+5.5);
+doc.text(otifMet?'Performance within agreed range':'Performance review recommended',dX+3,stY+6);
 
-// Advance y past gauge section
-y=gCY+gR+22;
+y=gCY+gR+24;
 
-// ── PERIOD STATS ─────────────────────────────────────────────────────────────
+// Period stats — 6 cards 2 rows of 3
 y=secHead('Period Statistics \u2014 '+periodLabel,y);
-var cw3=(CW-8)/3,cH=28;
-var kCards=[
+var cw3=(CW-8)/3,cH=27;
+[
   {l:'Consignments',      v:String(aC||0),  s:'Completed & invoiced'},
   {l:'Pallets moved',     v:String(aP||0),  s:avgPC+' avg per consignment'},
-  {l:'Late deliveries',   v:String(aL||0),  s:latesPct+' of consignments',  vc:CLR.red, a:CLR.red},
+  {l:'Late deliveries',   v:String(aL||0),  s:latesPct+' of consignments', vc:CLR.red, a:CLR.red},
   {l:'Base freight cost', v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'), s:periodLabel},
-  {l:'Avg cost / con',    v:'\u00A3'+avgRC,  s:'Per consignment'},
-  {l:'Avg cost / pallet', v:'\u00A3'+avgRP,  s:'Per pallet space'},
-];
-kCards.forEach(function(k,i){
+  {l:'Avg cost / con',    v:'\u00A3'+avgRC, s:'Per consignment'},
+  {l:'Avg cost / pallet', v:'\u00A3'+avgRP, s:'Per pallet space'},
+].forEach(function(k,i){
   var col=i%3,row=Math.floor(i/3);
   statCard(ML+col*(cw3+4),y+row*(cH+4),cw3,cH,k.l,k.v,k.s,k.vc,k.a);
 });
 y+=(cH+4)*2+8;
 
-// ── DELIVERY TYPE + PALLET SIZE ───────────────────────────────────────────────
+// Delivery mix
 y=secHead('Delivery Mix',y);
 var lW=CW*0.46,rW=CW*0.50,gap=CW*0.04,rxp=ML+lW+gap;
-
-// Delivery type — left half
-var tyW=[lW*0.50,lW*0.26,lW*0.24];
+var tyW=[lW*0.52,lW*0.26,lW*0.22];
 var tyY=tHead([{l:'Delivery type'},{l:'Cons',r:1},{l:'OTIF',r:1}],tyW,y);
 Object.entries(typeMap2).forEach(function(e,i){
   var t=e[0],d=e[1],ov=d.cons>0?(d.cons-d.lates)/d.cons*100:0;
   tyY=tRow([{t:t},{t:String(d.cons),r:1},{t:ov.toFixed(1)+'%',r:1,c:otifClr(ov)}],tyW,tyY,{shade:i%2!==0});
 });
-
-// Pallet size — right half
 if(pdfPalletTotal>0){
-  var psW=[rW*0.50,rW*0.28,rW*0.22];
+  var psW=[rW*0.52,lW*0.26,lW*0.22];
   var psY=tHead([{l:'Pallet size'},{l:'Spaces',r:1},{l:'%',r:1}],psW,y,lW+gap);
   pdfPalletKeys.forEach(function(k,i){
     var n=pdfPalletMap[k],pct=(n/pdfPalletTotal*100).toFixed(1);
@@ -1434,22 +1412,21 @@ if(pdfPalletTotal>0){
 doc.addPage();chrome();y=CT;
 y=secHead('Month-by-Month Overview \u2014 '+periodLabel,y);
 
-// Highlight cards
-var moActive=months.filter(function(m){return(m.cons||0)>0||(m.pallets||0)>0;});
-if(moActive.length>0){
+// Highlight cards — only show when >1 active month (pointless for single month)
+if(moActive.length>1){
   var _spO=function(m){var v=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):0;return v.toFixed(1)+'%';};
   var _busy=moActive.reduce(function(a,b){return(b.cons||0)>(a.cons||0)?b:a;});
   var _best=moActive.reduce(function(a,b){return(b.otif||0)>(a.otif||0)?b:a;});
   var _worst=moActive.reduce(function(a,b){return(b.lates||0)>(a.lates||0)?b:a;});
-  statCard(ML,           y,cw3,24,'Busiest month',   _busy.label, String(_busy.cons||0)+' consignments');
-  statCard(ML+cw3+4,     y,cw3,24,'Best timeliness', _best.label, _spO(_best), CLR.green);
-  statCard(ML+cw3*2+8,   y,cw3,24,'Most lates',      _worst.label,String(_worst.lates||0)+' late deliveries',(_worst.lates||0)>0?CLR.red:CLR.green,(_worst.lates||0)>0?CLR.red:CLR.green);
+  var cw3h=(CW-8)/3;
+  statCard(ML,           y,cw3h,24,'Busiest month',    _busy.label, String(_busy.cons||0)+' consignments');
+  statCard(ML+cw3h+4,    y,cw3h,24,'Best timeliness',  _best.label, _spO(_best), CLR.green);
+  statCard(ML+cw3h*2+8,  y,cw3h,24,'Most lates',       _worst.label,String(_worst.lates||0)+' late'+((_worst.lates||0)===1?'':'s'),(_worst.lates||0)>0?CLR.red:CLR.green,(_worst.lates||0)>0?CLR.red:CLR.green);
   y+=30;
 }
 
-// Monthly table
 y=secHead('Monthly Breakdown',y);
-var moW=[36,26,28,38,30,24];
+var moW=[36,24,28,38,28,24];
 y=tHead([{l:'Month'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'Cost',r:1},{l:'OTIF',r:1},{l:'Lates',r:1}],moW,y);
 var _tC=0,_tP=0,_tR2=0,_tL=0;
 months.forEach(function(m,i){
@@ -1465,15 +1442,9 @@ months.forEach(function(m,i){
     {t:active?String(m.lates||0):'\u2014',r:1,c:(m.lates||0)>0?CLR.red:CLR.dark},
   ],moW,y,{shade:i%2!==0});
 });
-y=tRow([
-  {t:'TOTAL / PERIOD'},{t:String(_tC),r:1},{t:String(_tP),r:1},
-  {t:fmt(_tR2),r:1},
-  {t:(_tP>0&&ytdOTIF!=='--')?ytdOTIF+'%':'\u2014',r:1},
-  {t:String(_tL),r:1},
-],moW,y,{total:true});
+y=tRow([{t:'TOTAL'},{t:String(_tC),r:1},{t:String(_tP),r:1},{t:fmt(_tR2),r:1},{t:(_tP>0&&ytdOTIF!=='--')?ytdOTIF+'%':'\u2014',r:1},{t:String(_tL),r:1}],moW,y,{total:true});
 y+=8;
 
-// Charts
 y=secHead('Performance Charts by Month',y);
 var _labs=months.map(function(m){return m.label;});
 var _act=function(m){return(m.cons||0)>0||(m.pallets||0)>0;};
@@ -1482,8 +1453,7 @@ var _pltV=months.map(function(m){return _act(m)?(m.pallets||0):null;});
 var _revV=months.map(function(m){return _act(m)?(m.revenue||0):null;});
 var _timV=months.map(function(m){var op=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):null;return _act(m)?op:null;});
 var _tv=_timV.filter(function(v){return v!=null;});
-var _timMin=_tv.length?Math.max(0,Math.floor(Math.min.apply(null,_tv)-4)):86;
-
+var _timMin=_tv.length?Math.max(0,Math.floor(Math.min.apply(null,_tv)-5)):84;
 y=chartBars(y,'CONSIGNMENTS BY MONTH',_consV,_labs,{boxH:48});
 y=chartBars(y,'PALLETS DELIVERED BY MONTH',_pltV,_labs,{boxH:48});
 y=chartBars(y,'BASE FREIGHT COST BY MONTH',_revV,_labs,{boxH:48,fmt:fmtK});
@@ -1496,26 +1466,27 @@ doc.addPage();chrome();y=CT;
 y=secHead('UK Delivery Heatmap \u2014 Pallet Volume by Region',y);
 
 if(mapImg){
-  var asp=mapImg.asp||1.78,mW=Math.min(CW*0.56,100),mH=mW/asp;
-  if(mH>105){mH=105;mW=mH*asp;}
+  var asp=mapImg.asp||1.78;
+  var mH=Math.min(100,CB-y-60); // leave room for regional table
+  var mW=mH*asp;
+  if(mW>CW){mW=CW;mH=mW/asp;}
   var mX=ML+(CW-mW)/2;
   bordered(mX,y,mW,mH,null,CLR.border,0.2);
   try{doc.addImage(mapImg.url,'PNG',mX,y,mW,mH);}catch(e){}
-  y+=mH+8;
+  y+=mH+6;
 }else{
-  box(ML,y,CW,60,CLR.faint);
-  setInk(CLR.muted);doc.setFontSize(8);doc.text('Map unavailable',ML+CW/2,y+30,{align:'center'});
-  y+=64;
+  box(ML,y,CW,55,CLR.faint);
+  setInk(CLR.muted);doc.setFontSize(8);doc.text('Map unavailable',ML+CW/2,y+28,{align:'center'});
+  y+=59;
 }
 
 y=secHead('Regional Breakdown',y);
-
-// 3-column regional table — each column has its own header
-var rCols=3,rPerCol=Math.ceil(topReg.length/rCols),colW=(CW-8)/rCols;
-var rW=[colW*0.46,colW*0.22,colW*0.20,colW*0.12];
+var rCols=3,rPerCol=Math.ceil(topReg.length/rCols),rColW=(CW-8)/rCols;
+// Wider OTIF column, separate Lates column — no collision
+var rW=[rColW*0.44,rColW*0.22,rColW*0.22,rColW*0.12];
 var maxRegY=y;
 [0,1,2].forEach(function(col){
-  var ox=col*(colW+4),ry=y;
+  var ox=col*(rColW+4),ry=y;
   ry=tHead([{l:'Region'},{l:'Plts',r:1},{l:'OTIF',r:1},{l:'L',r:1}],rW,ry,ox);
   topReg.slice(col*rPerCol,(col+1)*rPerCol).forEach(function(e,idx){
     var d=e[1],ov=d.cons>0?(d.cons-d.lates)/d.cons*100:0;
@@ -1528,6 +1499,15 @@ var maxRegY=y;
   });
   if(ry>maxRegY)maxRegY=ry;
 });
+// If there's unused space below regional tables, add a subtle fill
+y=maxRegY+4;
+if(y<CB-10){
+  // Tidy up: methodology note fills empty space nicely
+  box(ML,y,CW,CB-y,CLR.faint);
+  bordered(ML,y,CW,CB-y,null,CLR.border,0.15);
+  setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text('Regions derived from delivery postcode. Pallets mapped to GB regions for volume and OTIF analysis.',ML+4,y+6);
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PAGE 5 (OPTIONAL) — CARBON & NET ZERO
@@ -1536,24 +1516,21 @@ var _carb=computeCarbon(regMap2);
 if(_carb.tPallets>0){
   doc.addPage();chrome();y=CT;
   y=secHead('Carbon & Net Zero \u2014 '+periodLabel,y);
-
   var _pp=_carb.tCons/_carb.tPallets;
   var _gpk=_carb.tPalletKm>0?_carb.tCons/_carb.tPalletKm*1000:0;
   var _sp=_carb.tStand>0?_carb.tSave/_carb.tStand*100:0;
-
   var ccw=(CW-9)/4;
-  statCard(ML,            y,ccw,26,'Total CO\u2082e',    (_carb.tCons/1000).toFixed(2)+' t',_carb.tPallets+' pallets',null,CLR.green);
-  statCard(ML+ccw+3,      y,ccw,26,'CO\u2082e / pallet', _pp.toFixed(1)+' kg',             'delivered',null,CLR.green);
-  statCard(ML+(ccw+3)*2,  y,ccw,26,'Carbon intensity', _gpk.toFixed(1)+' g',              'per pallet-km',null,CLR.green);
-  statCard(ML+(ccw+3)*3,  y,ccw,26,'Consolidation saving',(_carb.tSave/1000).toFixed(2)+' t',_sp.toFixed(1)+'% saved',CLR.green,CLR.green);
+  statCard(ML,           y,ccw,26,'Total CO\u2082e',     (_carb.tCons/1000).toFixed(2)+' t',_carb.tPallets+' pallets',CLR.green,CLR.green);
+  statCard(ML+ccw+3,     y,ccw,26,'CO\u2082e / pallet',  _pp.toFixed(1)+' kg',             'delivered',CLR.green,CLR.green);
+  statCard(ML+(ccw+3)*2, y,ccw,26,'Carbon intensity',  _gpk.toFixed(1)+' g',              'per pallet-km',CLR.green,CLR.green);
+  statCard(ML+(ccw+3)*3, y,ccw,26,'Consolidation saving',(_carb.tSave/1000).toFixed(2)+' t',_sp.toFixed(1)+'% saved',CLR.green,CLR.green);
   y+=32;
 
-  // Key metrics list
   y=secHead('CO\u2082 Intensity',y);
   var kmRows=[
     ['Carbon intensity',_gpk.toFixed(1)+' gCO\u2082e / pallet-km'],
     ['CO\u2082e per pallet',_pp.toFixed(1)+' kg'],
-    ['Est. delivery distance',_carb.tKm.toFixed(0)+' km (region legs)'],
+    ['Estimated delivery distance',_carb.tKm.toFixed(0)+' km (region legs)'],
     ['Pallet-kilometres',_carb.tPalletKm.toFixed(0)+' plt.km'],
   ];
   kmRows.forEach(function(rr,i){
@@ -1564,44 +1541,31 @@ if(_carb.tPallets>0){
   y+=kmRows.length*6.5+6;
 
   y=secHead('Groupage Consolidation Savings',y);
-  var savRows=[
+  [
     ['Saved by consolidating with other volume',(_carb.tSave/1000).toFixed(2)+' t  ('+_sp.toFixed(1)+'%)',CLR.green],
     ['Emissions if shipped alone (@'+(CARBON.us*100)+'% load)',(_carb.tStand/1000).toFixed(2)+' t',CLR.dark],
     ['Actual emissions (@'+(CARBON.uc*100)+'% consolidated load)',(_carb.tCons/1000).toFixed(2)+' t',CLR.dark],
-  ];
-  savRows.forEach(function(rr,i){
+  ].forEach(function(rr,i){
     if(i%2===0)box(ML,y+i*6.5,CW,6.5,CLR.faint);
     setInk(CLR.mid);doc.setFontSize(8);doc.setFont('helvetica','normal');doc.text(rr[0],ML+3,y+i*6.5+4.8);
     setInk(rr[2]);doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text(rr[1],ML+CW,y+i*6.5+4.8,{align:'right'});
   });
-  y+=savRows.length*6.5+8;
+  y+=3*6.5+8;
 
   y=secHead('CO\u2082 by Region',y);
-  var cbW=[48,28,28,34,34];
+  var cbW=[50,28,26,32,32];
   y=tHead([{l:'Region'},{l:'Pallets',r:1},{l:'Est km',r:1},{l:'CO\u2082e',r:1},{l:'Saving',r:1}],cbW,y);
   _carb.rows.forEach(function(rr,i){
-    y=tRow([
-      {t:rr.region},
-      {t:String(Math.round(rr.pallets)),r:1},
-      {t:rr.dist.toFixed(0),r:1},
-      {t:(rr.co2/1000).toFixed(2)+' t',r:1},
-      {t:(rr.save/1000).toFixed(2)+' t',r:1,c:CLR.green},
-    ],cbW,y,{shade:i%2!==0});
+    y=tRow([{t:rr.region},{t:String(Math.round(rr.pallets)),r:1},{t:rr.dist.toFixed(0),r:1},{t:(rr.co2/1000).toFixed(2)+' t',r:1},{t:(rr.save/1000).toFixed(2)+' t',r:1,c:CLR.green}],cbW,y,{shade:i%2!==0});
   });
-  y=tRow([
-    {t:'TOTAL'},{t:String(Math.round(_carb.tPallets)),r:1},
-    {t:_carb.tKm.toFixed(0),r:1},
-    {t:(_carb.tCons/1000).toFixed(2)+' t',r:1},
-    {t:(_carb.tSave/1000).toFixed(2)+' t',r:1,c:CLR.green},
-  ],cbW,y,{total:true});
-  y+=7;
-
-  // Methodology note
-  box(ML,y,CW,14,CLR.faint);
-  bordered(ML,y,CW,14,null,CLR.border,0.15);
+  y=tRow([{t:'TOTAL'},{t:String(Math.round(_carb.tPallets)),r:1},{t:_carb.tKm.toFixed(0),r:1},{t:(_carb.tCons/1000).toFixed(2)+' t',r:1},{t:(_carb.tSave/1000).toFixed(2)+' t',r:1,c:CLR.green}],cbW,y,{total:true});
+  y+=6;
+  // Methodology note — fills bottom of page
+  var noteH=Math.min(CB-y,18);
+  bordered(ML,y,CW,noteH,CLR.faint,CLR.border,0.15);
   setInk(CLR.muted);doc.setFontSize(5.8);doc.setFont('helvetica','normal');
-  var note='Methodology: distance from Bardon to each UK region centroid (haversine \u00D7'+CARBON.circ+' circuity). Pallets allocated share of vehicle emissions at '+CARBON.vf+' kgCO\u2082e/km WTW ('+CARBON.cap+'-pallet, '+(CARBON.uc*100)+'% load). Saving vs '+(CARBON.us*100)+'% standalone. DEFRA/DESNZ 2025. Region-level estimate.';
-  doc.text(doc.splitTextToSize(note,CW-6),ML+3,y+5);
+  var noteText='Methodology: distance from Bardon to each UK region centroid (haversine \u00D7'+CARBON.circ+' circuity, one-way). Pallets allocated share of vehicle emissions at '+CARBON.vf+' kgCO\u2082e/km WTW ('+CARBON.cap+'-pallet, '+(CARBON.uc*100)+'% load). Saving vs '+(CARBON.us*100)+'% standalone. UK DEFRA/DESNZ 2025. Region-level estimate, indicative.';
+  doc.text(doc.splitTextToSize(noteText,CW-8),ML+4,y+5);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1609,44 +1573,35 @@ if(_carb.tPallets>0){
 // ─────────────────────────────────────────────────────────────────────────────
 doc.addPage();chrome();y=CT;
 y=secHead('Top 10 Destinations by Volume',y);
-
 var dW=[46,22,14,14,13,20,29];
 y=tHead([{l:'Destination'},{l:'City'},{l:'Cons',r:1},{l:'Plts',r:1},{l:'Lates',r:1},{l:'OTIF',r:1},{l:'Cost',r:1}],dW,y);
 topDest.forEach(function(d,idx){
   var ov=d.cons>0?(d.cons-d.lates)/d.cons*100:0;
-  y=tRow([
-    {t:trunc(d.name,28)},{t:trunc(d.city,13)},
-    {t:String(d.cons),r:1},{t:String(d.pallets),r:1},
-    {t:String(d.lates),r:1,c:d.lates>0?CLR.red:CLR.dark},
-    {t:ov.toFixed(1)+'%',r:1,c:otifClr(ov)},
-    {t:fmt(d.revenue),r:1},
-  ],dW,y,{shade:idx%2!==0});
+  y=tRow([{t:trunc(d.name,28)},{t:trunc(d.city,13)},{t:String(d.cons),r:1},{t:String(d.pallets),r:1},{t:String(d.lates),r:1,c:d.lates>0?CLR.red:CLR.dark},{t:ov.toFixed(1)+'%',r:1,c:otifClr(ov)},{t:fmt(d.revenue),r:1}],dW,y,{shade:idx%2!==0});
 });
-y+=10;
+y+=8;
 
-// Late summary stat cards
 y=secHead('Late Delivery Summary',y);
 var lsc=(CW-8)/3;
-statCard(ML,          y,lsc,26,'Total lates',       String(aL||0),'of '+String(aC||0)+' consignments',CLR.red,CLR.red);
-statCard(ML+lsc+4,    y,lsc,26,'Average delay',      fmtDelay(avgDelay),'per late delivery',CLR.red,CLR.red);
-statCard(ML+lsc*2+8,  y,lsc,26,'Worst delay',worstLate?fmtDelay(worstLate.mins):'--',worstLate?trunc(worstLate.dest,22):'',CLR.red,CLR.red);
+statCard(ML,         y,lsc,26,'Total lates',      String(aL||0),'of '+String(aC||0)+' consignments',CLR.red,CLR.red);
+statCard(ML+lsc+4,   y,lsc,26,'Average delay',     fmtDelay(avgDelay),'per late delivery',CLR.red,CLR.red);
+statCard(ML+lsc*2+8, y,lsc,26,'Worst single delay',worstLate?fmtDelay(worstLate.mins):'--',worstLate?trunc(worstLate.dest,24):'',CLR.red,CLR.red);
 y+=32;
 
-// Top 10 lates by delay
 if(lateList.length>0){
   var lateSorted=lateList.slice().sort(function(a,b){return(b.mins||0)-(a.mins||0);});
   var lateShow=lateSorted.slice(0,10);
   y=secHead('Late Deliveries'+(lateList.length>10?' (Top 10 by Delay)':''),y);
-  var ldW=[54,28,26,74];
-  y=tHead([{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Reason'}],ldW,y);
+  // Reason col — only show header if any reasons exist
+  var hasReasons=lateShow.some(function(r){return r.reason&&r.reason!=='';});
+  var ldW=hasReasons?[50,26,22,62]:[50,26,22,62];
+  var ldCols=hasReasons?[{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Reason'}]:[{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Delivery type'}];
+  y=tHead(ldCols,ldW,y);
   lateShow.forEach(function(d,idx){
     var mins2=parseInt(d.mins)||0;
     var dc=mins2>2880?CLR.red:mins2>480?CLR.amber:CLR.dark;
-    y=tRow([
-      {t:trunc(d.dest,32)},{t:trunc(d.city,16)},
-      {t:'+'+fmtDelay(d.mins),r:1,c:dc},
-      {t:d.reason||'\u2014'},
-    ],ldW,y,{shade:idx%2!==0});
+    var col4=hasReasons?(d.reason||'\u2014'):d.dtype;
+    y=tRow([{t:trunc(d.dest,30)},{t:trunc(d.city,14)},{t:'+'+fmtDelay(d.mins),r:1,c:dc},{t:col4}],ldW,y,{shade:idx%2!==0});
   });
 }
 
@@ -1659,39 +1614,36 @@ if(hasSurcharge){
   y=secHead('Surcharge Summary \u2014 '+periodLabel,y);
   var sc3=(CW-8)/3;
   if(isV4){
-    statCard(ML,          y,sc3,26,'Chargeable surcharges','\u00A3'+v4ChargeTotal,(v4TA+v4TB+v4AM+v4BW+v4AZ)+' consignments',v4ChargeTotal>0?CLR.orange:CLR.muted,v4ChargeTotal>0?CLR.orange:CLR.muted);
-    statCard(ML+sc3+4,    y,sc3,26,'TA / TB / AM',v4TA+' / '+v4TB+' / '+v4AM,'consignments each');
-    statCard(ML+sc3*2+8,  y,sc3,26,'Free (TL/EB/ETA)','\u00A30',v4TL+' / '+v4EB+' / '+v4ETA,CLR.muted,CLR.muted);
+    statCard(ML,         y,sc3,26,'Chargeable surcharges','\u00A3'+v4ChargeTotal,(v4TA+v4TB+v4AM+v4BW+v4AZ)+' consignments',v4ChargeTotal>0?CLR.orange:CLR.muted,v4ChargeTotal>0?CLR.orange:CLR.muted);
+    statCard(ML+sc3+4,   y,sc3,26,'TA / TB / AM',v4TA+' / '+v4TB+' / '+v4AM,'consignments each');
+    statCard(ML+sc3*2+8, y,sc3,26,'Free (TL/EB/ETA)','\u00A30',v4TL+' / '+v4EB+' / '+v4ETA,CLR.muted,CLR.muted);
   }else{
-    statCard(ML,          y,sc3,26,'AM Delivery (09\u201312)','\u00A3'+amTotal,amCons.length+' cons \u00D7 \u00A312');
-    statCard(ML+sc3+4,    y,sc3,26,'Timed Booking','\u00A3'+timedTotal,timedCons.length+' cons \u00D7 \u00A323');
-    statCard(ML+sc3*2+8,  y,sc3,26,'Total surcharges','\u00A3'+surchTotal,surchCons+' of '+(aC||0)+' consignments',CLR.orange,CLR.orange);
+    statCard(ML,         y,sc3,26,'AM Delivery (09\u201312)','\u00A3'+amTotal,amCons.length+' cons \u00D7 \u00A312');
+    statCard(ML+sc3+4,   y,sc3,26,'Timed Booking','\u00A3'+timedTotal,timedCons.length+' cons \u00D7 \u00A323');
+    statCard(ML+sc3*2+8, y,sc3,26,'Total surcharges','\u00A3'+surchTotal,surchCons+' of '+(aC||0)+' consignments',CLR.orange,CLR.orange);
   }
   y+=32;
-
   y=secHead('Surcharge Rate Card',y);
-  var rw3=[58,68,24,16,16];
+  var rw3=[58,68,24,14,18];
   y=tHead([{l:'Surcharge type'},{l:'Trigger'},{l:'Rate',r:1},{l:'Cons',r:1},{l:'Total',r:1}],rw3,y);
   if(isV4){
-    y=tRow(['Timed AM (TA)',    'Pre-10am timed delivery',  {t:'\u00A332/con',r:1},{t:String(v4TA),r:1},{t:'\u00A3'+(v4TA*32),r:1}],rw3,y);
-    y=tRow(['Timed Booking (TB)','Specific timed slot',    {t:'\u00A323/con',r:1},{t:String(v4TB),r:1},{t:'\u00A3'+(v4TB*23),r:1}],rw3,y,{shade:true});
-    y=tRow(['AM Delivery (AM)', 'Morning window',          {t:'\u00A312/con',r:1},{t:String(v4AM),r:1},{t:'\u00A3'+(v4AM*12),r:1}],rw3,y);
-    y=tRow(['Booked Window (BW)','Specific window',        {t:'\u00A312/con',r:1},{t:String(v4BW),r:1},{t:'\u00A3'+(v4BW*12),r:1}],rw3,y,{shade:true});
-    y=tRow(['Amazon (AZ)',       'Amazon surcharge',       {t:'\u00A312/con',r:1},{t:String(v4AZ),r:1},{t:'\u00A3'+(v4AZ*12),r:1}],rw3,y);
+    y=tRow(['Timed AM (TA)','Pre-10am timed delivery',{t:'\u00A332/con',r:1},{t:String(v4TA),r:1},{t:'\u00A3'+(v4TA*32),r:1}],rw3,y);
+    y=tRow(['Timed Booking (TB)','Specific timed slot',{t:'\u00A323/con',r:1},{t:String(v4TB),r:1},{t:'\u00A3'+(v4TB*23),r:1}],rw3,y,{shade:true});
+    y=tRow(['AM Delivery (AM)','Morning window',{t:'\u00A312/con',r:1},{t:String(v4AM),r:1},{t:'\u00A3'+(v4AM*12),r:1}],rw3,y);
+    y=tRow(['Booked Window (BW)','Specific window',{t:'\u00A312/con',r:1},{t:String(v4BW),r:1},{t:'\u00A3'+(v4BW*12),r:1}],rw3,y,{shade:true});
+    y=tRow(['Amazon (AZ)','Amazon surcharge',{t:'\u00A312/con',r:1},{t:String(v4AZ),r:1},{t:'\u00A3'+(v4AZ*12),r:1}],rw3,y);
     y=tRow([{t:'CHARGEABLE TOTAL'},{t:''},{t:'',r:1},{t:String(v4TA+v4TB+v4AM+v4BW+v4AZ),r:1},{t:'\u00A3'+v4ChargeTotal,r:1}],rw3,y,{total:true});
   }else{
-    y=tRow(['AM Delivery',       '09:00\u201312:00',       {t:'\u00A312/con',r:1},{t:String(amCons.length),r:1},{t:'\u00A3'+amTotal,r:1}],rw3,y);
-    y=tRow(['Pre-10am',          '09:00\u201310:00',       {t:'\u00A332/con',r:1},{t:String(pre10Cons.length),r:1},{t:'\u00A3'+pre10Total,r:1}],rw3,y,{shade:true});
-    y=tRow(['Timed Booking',     'Same start/end time',   {t:'\u00A323/con',r:1},{t:String(timedCons.length),r:1},{t:'\u00A3'+timedTotal,r:1}],rw3,y);
+    y=tRow(['AM Delivery','09:00\u201312:00',{t:'\u00A312/con',r:1},{t:String(amCons.length),r:1},{t:'\u00A3'+amTotal,r:1}],rw3,y);
+    y=tRow(['Pre-10am','09:00\u201310:00',{t:'\u00A332/con',r:1},{t:String(pre10Cons.length),r:1},{t:'\u00A3'+pre10Total,r:1}],rw3,y,{shade:true});
+    y=tRow(['Timed Booking','Same start/end time',{t:'\u00A323/con',r:1},{t:String(timedCons.length),r:1},{t:'\u00A3'+timedTotal,r:1}],rw3,y);
     y=tRow([{t:'TOTAL'},{t:''},{t:'',r:1},{t:String(surchCons),r:1},{t:'\u00A3'+surchTotal,r:1}],rw3,y,{total:true});
   }
   y+=8;
-  // Note
-  bordered(ML,y,CW,10,CLR.amberBg,CLR.amber,0.2);
-  setInk(CLR.amber);doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('Note: ',ML+3,y+4.5);
+  bordered(ML,y,CW,11,CLR.amberBg,CLR.amber,0.2);
+  setInk(CLR.amber);doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('Note: ',ML+3,y+5);
   doc.setFont('helvetica','normal');
-  if(isV4){doc.text('Chargeable surcharges (TA/TB/AM/BW/AZ) are additional to base freight. Free surcharges (TL/EB/ETA) are included in Customer Cost.',ML+13,y+4.5);}
-  else{doc.text('Surcharges derived from destination time window in Qargo TMS. These are additional to base freight cost.',ML+13,y+4.5);}
+  doc.text(isV4?'Chargeable surcharges (TA/TB/AM/BW/AZ) are additional to base freight. Free surcharges (TL/EB/ETA) included in Customer Cost.':'Surcharges derived from destination time window in Qargo TMS. Additional to base freight cost.',ML+14,y+5);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1700,18 +1652,20 @@ if(hasSurcharge){
 doc.addPage();chrome();y=CT;
 y=secHead('Late Consignments \u2014 '+String(aL||0)+' of '+String(aC||0),y);
 
-// Notice
-bordered(ML,y,CW,8,CLR.redBg,CLR.red,0.2);
+bordered(ML,y,CW,9,CLR.redBg,CLR.red,0.2);
 setInk(CLR.red);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
-doc.text('Late = delivery arrival after booked time window end. Contact your account manager to dispute any entry.',ML+3,y+5);
-y+=11;
+doc.text('Late = delivery arrival after booked time window end. Contact your account manager to dispute any entry.',ML+3,y+5.5);
+y+=12;
 
 var lc=[{l:'Order ID'},{l:'Destination'},{l:'City'},{l:'Window'},{l:'Arrived'},{l:'Delay',r:1},{l:'Plts',r:1},{l:'Type'}];
 var lw=[20,42,18,16,13,13,10,20];
 y=tHead(lc,lw,y);
 
 lateList.forEach(function(r,idx){
-  if(y>H-20){
+  // Page break — leave enough room so PLG block fits on final page
+  var isLast=(idx===lateList.length-1);
+  var spaceNeeded=isLast?36:ROW_H;
+  if(y+spaceNeeded>CB){
     doc.addPage();chrome();y=CT+2;
     y=tHead(lc,lw,y);
   }
@@ -1731,48 +1685,50 @@ if(lateList.length===0){
   doc.text('No late consignments this period.',ML+CW/2,y+14,{align:'center'});
   y+=20;
 }
-y+=10;
+y+=8;
 
-// Closing PLG brand block
-if(y<H-26){
-  box(ML,y,CW,22,CLR.black);
-  box(ML,y,4,22,CLR.orange);
-  try{doc.addImage(PLG_LOGO_URL,'SVG',ML+7,y+4,36,13);}catch(e){
-    setInk(CLR.white);doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('Premier Logistics Group',ML+7,y+12);
+// PLG closing brand block — always fits because of the space check above
+if(y<CB-24){
+  box(ML,y,CW,24,CLR.black);
+  box(ML,y,4,24,CLR.orange);
+  try{doc.addImage(PLG_LOGO_URL,'SVG',ML+8,y+4,36,14);}catch(e){
+    setInk(CLR.white);doc.setFontSize(9);doc.setFont('helvetica','bold');
+    doc.text('Premier Logistics Group',ML+8,y+13);
   }
   setInk(CLR.muted);doc.setFontSize(7);doc.setFont('helvetica','normal');
-  doc.text('Bardon (HQ) & Northampton  \u00B7  premier-logistics.co.uk',ML+7,y+17);
-  setInk([80,80,80]);doc.setFontSize(6.5);
-  doc.text('Confidential. Prepared exclusively for '+currentCustomer+'. '+dateStr,W-MR,y+17,{align:'right'});
+  doc.text('Bardon (HQ) & Northampton  \u00B7  premier-logistics.co.uk',ML+8,y+19);
+  setInk([75,73,69]);doc.setFontSize(6.5);
+  doc.text('Confidential. Prepared exclusively for '+currentCustomer+'. '+dateStr,W-MR,y+19,{align:'right'});
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// FINAL PASS — page numbers (SINGLE pass, no duplication)
+// FINAL PASS — page numbers, ONCE ONLY
+// Page 1: bottom-right of white panel
+// Pages 2+: right side of header bar + right side of footer
+// No other code stamps page numbers anywhere.
 // ─────────────────────────────────────────────────────────────────────────────
 var TOTAL=doc.internal.getNumberOfPages();
 
-// Page 1: bottom-right of white panel, small
 doc.setPage(1);
-setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
-doc.text('Page 1 / '+TOTAL,W-MR,H-5,{align:'right'});
+setInk([85,83,79]);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+doc.text('Page 1 / '+TOTAL,W-MR,H-7,{align:'right'});
 
-// Pages 2+: stamp into the dark header (right side) and footer
 for(var pgi=2;pgi<=TOTAL;pgi++){
   doc.setPage(pgi);
-  // Header slot (overwrite right of black bar)
-  box(W-38,2,38,13,CLR.black);
-  setInk([100,100,100]);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
-  doc.text('Page '+pgi+' / '+TOTAL,W-MR,10,{align:'right'});
-  // Footer
+  // Stamp into right of dark header — overwrite that zone cleanly
+  box(W-36,2,36,14,CLR.black);
+  setInk([105,103,99]);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+  doc.text('Page '+pgi+' / '+TOTAL,W-MR,11,{align:'right'});
+  // Stamp into footer right
   setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
   doc.text('Page '+pgi+' / '+TOTAL,W-MR,H-3.5,{align:'right'});
 }
 
-var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+// Save
 doc.save(currentCustomer+' \u2014 '+periodLabel+'.pdf');
 showAlert('success','PDF downloaded \u2014 '+TOTAL+' pages.');
 
-// ── Snapshot write ────────────────────────────────────────────────────────────
+// Snapshot write
 if(window._pendingSnapshot){
   window._pendingSnapshot=false;
   var snapPayload={customer:currentCustomer,createdAt:new Date().toISOString(),months:{}};
