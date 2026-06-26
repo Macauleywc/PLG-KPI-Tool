@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T08:20:15.210Z",
+  "lastUpdated": "2026-06-26T08:20:16.213Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 237,
       "pallets": 814,
       "revenue": 35384.2,
-      "lates": 37,
-      "latePallets": 92,
-      "timeliness": 0.8869778869778869,
+      "lates": 35,
+      "latePallets": 84,
+      "timeliness": 0.8968058968058968,
       "avgRC": 149.3,
       "avgRP": 43.47,
       "avgPC": 3.43,
@@ -901,42 +901,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "91231",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - LPL2",
-      "city": "Amazon - LPL2",
-      "pc": "L33 7AP",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "28/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 2,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91187",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - XEM4 - AFTX 3P IXD(Corby, UK)",
-      "city": "Amazon - XEM4 - AFTX 3P IXD(Corby, UK)",
-      "pc": "NN17 3JG",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 6,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "91176",
       "acct": "IRON",
@@ -2433,7 +2397,7 @@
     "North West": {
       "pallets": 494,
       "cons": 85,
-      "lates": 1
+      "lates": 0
     },
     "South East": {
       "pallets": 311,
