@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T08:30:40.142Z",
+  "lastUpdated": "2026-06-26T09:33:47.704Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -594,9 +594,9 @@
       "cons": 254,
       "pallets": 1328,
       "revenue": 51670.33,
-      "lates": 8,
-      "latePallets": 17,
-      "timeliness": 0.987199,
+      "lates": 6,
+      "latePallets": 14,
+      "timeliness": 0.989458,
       "avgRC": 203.43,
       "avgRP": 38.91,
       "avgPC": 5.23,
@@ -607,7 +607,7 @@
       "typeBreakdown": {
         "Economy Booked": {
           "cons": 143,
-          "lates": 7
+          "lates": 5
         },
         "Next Day": {
           "cons": 111,
@@ -619,7 +619,7 @@
           "cons": 45,
           "pallets": 282,
           "revenue": 10044.330000000002,
-          "lates": 2
+          "lates": 1
         },
         "South": {
           "cons": 13,
@@ -631,7 +631,7 @@
           "cons": 35,
           "pallets": 220,
           "revenue": 8008.659999999999,
-          "lates": 1
+          "lates": 0
         },
         "Yorkshire": {
           "cons": 23,
@@ -883,7 +883,7 @@
         },
         "Tue": {
           "cons": 43,
-          "lates": 1
+          "lates": 0
         },
         "Wed": {
           "cons": 46,
@@ -895,7 +895,7 @@
         },
         "Fri": {
           "cons": 71,
-          "lates": 3
+          "lates": 2
         }
       }
     }
@@ -992,24 +992,6 @@
       "failed": true
     },
     {
-      "id": "91721",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "BOOGHE TOYS",
-      "city": "BOOGHE TOYS",
-      "pc": "B24 9QR",
-      "window": "",
-      "commitDate": "19/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "DGB0091542, HELEN2.6",
       "acct": "IRON",
       "month": "Jun-26",
@@ -1023,24 +1005,6 @@
       "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "PJUNE26",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "Cube n Space",
-      "city": "Cube n Space",
-      "pc": "L19 8JA",
-      "window": "",
-      "commitDate": "16/06/26",
-      "arrDate": "17/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Economy Booked",
       "note": "",
       "reason": "",
       "failed": false
