@@ -1676,8 +1676,8 @@ setInk(CLR.red);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
 doc.text('Late = delivery arrival after booked time window end. Contact your account manager to dispute any entry.',ML+3,y+5.5);
 y+=12;
 
-var lc=[{l:'Order ID'},{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Plts',r:1},{l:'Type'},{l:'Reason'}];
-var lw=[20,38,18,14,10,18,34];
+var lc=[{l:'Order ID'},{l:'Destination'},{l:'Delay',r:1},{l:'Plts',r:1},{l:'Type'},{l:'Reason'}];
+var lw=[22,52,16,10,26,52];
 y=tHead(lc,lw,y);
 
 lateList.forEach(function(r,idx){
@@ -1692,11 +1692,11 @@ lateList.forEach(function(r,idx){
   var dc=mins2>2880?CLR.red:mins2>480?CLR.amber:CLR.dark;
   var reasonTxt=r.reason||'—';
   y=tRow([
-    {t:trunc(r.id,12)},{t:trunc(r.dest,24)},{t:trunc(r.city,11)},
+    {t:trunc(r.id,14)},{t:trunc(r.dest,32)},
     {t:'+'+fmtDelay(r.mins),r:1,c:dc},
     {t:String(r.pallets),r:1},
-    {t:r.dtype},
-    {t:trunc(reasonTxt,20)},
+    {t:trunc(r.dtype,16)},
+    {t:trunc(reasonTxt,30)},
   ],lw,y,{shade:idx%2!==0});
 });
 
