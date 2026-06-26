@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T08:26:02.540Z",
+  "lastUpdated": "2026-06-26T08:26:08.111Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 237,
       "pallets": 814,
       "revenue": 35384.2,
-      "lates": 10,
-      "latePallets": 18,
-      "timeliness": 0.9778869778869779,
+      "lates": 9,
+      "latePallets": 16,
+      "timeliness": 0.9803439803439803,
       "avgRC": 149.3,
       "avgRP": 43.47,
       "avgPC": 3.43,
@@ -1599,24 +1599,6 @@
       "mins": 7200,
       "pallets": 1,
       "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "30151",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "JTS London",
-      "city": "JTS London",
-      "pc": "L24 9BD",
-      "window": "",
-      "commitDate": "07/05/26",
-      "arrDate": "08/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
