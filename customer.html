@@ -569,6 +569,32 @@ function renderPreview(){
       lateRows.push({id:r['id']||'',custref:r['custref']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'—',arrDate:arrDate,commitDate:commitStr,mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,reason:r._reason||'',failed:!!r._failed});
     });
   });
+  // Re-apply current sort to lateRows array before rendering
+  // so Remove preserves A-Z (or whatever sort is active)
+  if(_lateSortCol>=0){
+    var _colMap=[
+      function(r){return String(r.id||'');},           // 0 Order ID
+      function(r){return String(r.custref||'');},      // 1 Cust Ref
+      function(r){return String(r.acct||'');},         // 2 Account
+      function(r){return String(r.month||'');},        // 3 Month
+      function(r){return String(r.dest||'');},         // 4 Destination
+      function(r){return String(r.city||'');},         // 5 City
+      function(r){return String(r.pc||'');},           // 6 Postcode
+      function(r){return String(r.commitDate||'');},   // 7 Commit Date
+      function(r){return '';},                         // 8 Window (skip)
+      function(r){return String(r.arrDate||'');},      // 9 Actual Delivery
+      function(r){return parseInt(r.mins)||0;},        // 10 Mins Late
+      function(r){return parseFloat(r.pallets)||0;},   // 11 Pallets
+      function(r){return String(r.dtype||'');},        // 12 Type
+    ];
+    var _fn=_colMap[_lateSortCol]||function(r){return '';};
+    var _isNum=(_lateSortCol===10||_lateSortCol===11);
+    lateRows.sort(function(a,b){
+      var av=_fn(a),bv=_fn(b);
+      if(_isNum){return _lateSortAsc?(av-bv):(bv-av);}
+      return _lateSortAsc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+    });
+  }
   var destMap={};
   comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap[k])destMap[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap[k].cons++;destMap[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap[k].lates++;});
   var byC=Object.values(destMap).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
