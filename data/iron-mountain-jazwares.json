@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T08:20:16.213Z",
+  "lastUpdated": "2026-06-26T08:20:17.314Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 237,
       "pallets": 814,
       "revenue": 35384.2,
-      "lates": 35,
-      "latePallets": 84,
-      "timeliness": 0.8968058968058968,
+      "lates": 33,
+      "latePallets": 80,
+      "timeliness": 0.9017199017199017,
       "avgRC": 149.3,
       "avgRP": 43.47,
       "avgPC": 3.43,
@@ -901,42 +901,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "91176",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon EU SarL",
-      "city": "Amazon EU SarL",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91196",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon EU SarL",
-      "city": "Amazon EU SarL",
-      "pc": "L33 7TJ",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "91603",
       "acct": "IRON",
