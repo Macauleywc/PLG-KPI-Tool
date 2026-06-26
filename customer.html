@@ -1499,15 +1499,8 @@ var maxRegY=y;
   });
   if(ry>maxRegY)maxRegY=ry;
 });
-// If there's unused space below regional tables, add a subtle fill
+// Advance y past regional tables — page ends cleanly here
 y=maxRegY+4;
-if(y<CB-10){
-  // Tidy up: methodology note fills empty space nicely
-  box(ML,y,CW,CB-y,CLR.faint);
-  bordered(ML,y,CW,CB-y,null,CLR.border,0.15);
-  setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
-  doc.text('Regions derived from delivery postcode. Pallets mapped to GB regions for volume and OTIF analysis.',ML+4,y+6);
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PAGE 5 (OPTIONAL) — CARBON & NET ZERO
