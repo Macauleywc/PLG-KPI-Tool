@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T08:20:11.044Z",
+  "lastUpdated": "2026-06-26T08:20:12.082Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 237,
       "pallets": 814,
       "revenue": 35384.2,
-      "lates": 45,
-      "latePallets": 104,
-      "timeliness": 0.8722358722358723,
+      "lates": 43,
+      "latePallets": 102,
+      "timeliness": 0.8746928746928747,
       "avgRC": 149.3,
       "avgRP": 43.47,
       "avgPC": 3.43,
@@ -901,42 +901,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "91273",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "NE10 8YA",
-      "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91275",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "DH6 5NP",
-      "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 31680,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "91299",
       "acct": "IRON",
