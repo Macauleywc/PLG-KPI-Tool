@@ -1820,6 +1820,31 @@ function updateSavedNote(idx,val){
 function renderSavedLateLog(){
   var saved=window._savedLateRows||[];
   var saved=window._savedLateRows;
+  // Apply active sort to the saved rows array before rendering
+  if(_lateSortCol>=0&&saved&&saved.length>0){
+    var _rslColFns=[
+      function(r){return String(r.id||'');},
+      function(r){return String(r.custref||'');},
+      function(r){return String(r.acct||'');},
+      function(r){return MONTHS.indexOf(r.month||'');},
+      function(r){return String(r.dest||'');},
+      function(r){return String(r.city||'');},
+      function(r){return String(r.pc||'');},
+      function(r){return String(r.commitDate||'');},
+      function(r){return '';},
+      function(r){return String(r.arrDate||'');},
+      function(r){return parseInt(r.mins)||0;},
+      function(r){return parseFloat(r.pallets)||0;},
+      function(r){return String(r.dtype||'');},
+    ];
+    var _rsf=_rslColFns[_lateSortCol]||function(r){return '';};
+    var _rsNum=(_lateSortCol===3||_lateSortCol===10||_lateSortCol===11);
+    saved=saved.slice().sort(function(a,b){
+      var av=_rsf(a),bv=_rsf(b);
+      if(_rsNum){return _lateSortAsc?(av-bv):(bv-av);}
+      return _lateSortAsc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+    });
+  }
   var lateMonths=Array.from(new Set(saved.map(function(r){return r.month;}))).sort(function(a,b){return MONTHS.indexOf(a)-MONTHS.indexOf(b);});
   var lateTypes=Array.from(new Set(saved.map(function(r){return r.dtype;})));
   var filterBar='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;padding:12px 14px;background:#f9f8f5;border:1px solid #e8e6e1;border-radius:8px;"><span style="font-size:11px;font-weight:600;color:#8C8984;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Filter:</span><input id="late-search" oninput="filterLateLog()" type="text" placeholder="Search destination..." style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;width:180px;outline:none;"><select id="late-month" onchange="lateMonthChanged()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All months</option>'+lateMonths.map(function(m){return'<option value="'+m+'">'+m+'</option>';}).join('')+'</select><select id="late-type" onchange="filterLateLog()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 10px;font-size:12px;font-family:inherit;outline:none;background:#fff;"><option value="">All types</option>'+lateTypes.map(function(t){return'<option value="'+t+'">'+t+'</option>';}).join('')+'</select><button onclick="clearLateFilters()" style="border:1px solid #e0deda;border-radius:6px;padding:5px 12px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer;color:#8C8984;">Clear</button><span id="late-count" style="font-size:12px;color:#8C8984;margin-left:auto;">'+saved.length+' entries</span></div>';
@@ -1834,6 +1859,31 @@ function removeSavedLate(idx){
   if(key&&savedMonthData[key]){var m=savedMonthData[key];m.lates=Math.max(0,(m.lates||0)-1);m.latePallets=Math.max(0,(m.latePallets||0)-(parseFloat(r.pallets)||0));m.timeliness=m.pallets>0?(m.pallets-m.latePallets)/m.pallets:0;}
   if(window._savedRegionData){var reg=region(r.pc||'');if(window._savedRegionData[reg]&&window._savedRegionData[reg].lates>0)window._savedRegionData[reg].lates--;}
   rows.splice(idx,1);window._savedLateRows=rows;
+  // Re-apply active sort to _savedLateRows before re-rendering
+  if(_lateSortCol>=0&&window._savedLateRows&&window._savedLateRows.length>0){
+    var _savedColFns=[
+      function(r){return String(r.id||'');},
+      function(r){return String(r.custref||'');},
+      function(r){return String(r.acct||'');},
+      function(r){return MONTHS.indexOf(r.month||'');},
+      function(r){return String(r.dest||'');},
+      function(r){return String(r.city||'');},
+      function(r){return String(r.pc||'');},
+      function(r){return String(r.commitDate||'');},
+      function(r){return '';},
+      function(r){return String(r.arrDate||'');},
+      function(r){return parseInt(r.mins)||0;},
+      function(r){return parseFloat(r.pallets)||0;},
+      function(r){return String(r.dtype||'');},
+    ];
+    var _sf=_savedColFns[_lateSortCol]||function(r){return '';};
+    var _sNum=(_lateSortCol===3||_lateSortCol===10||_lateSortCol===11);
+    window._savedLateRows.sort(function(a,b){
+      var av=_sf(a),bv=_sf(b);
+      if(_sNum){return _lateSortAsc?(av-bv):(bv-av);}
+      return _lateSortAsc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+    });
+  }
   renderSavedLateLog();renderHistory();
   persistSavedData().then(function(){showAlert('success','Late entry removed and saved.');}).catch(function(e){showAlert('warn','Remove failed: '+e.message);});
 }
