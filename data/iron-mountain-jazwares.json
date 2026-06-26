@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T08:20:12.082Z",
+  "lastUpdated": "2026-06-26T08:20:13.411Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 237,
       "pallets": 814,
       "revenue": 35384.2,
-      "lates": 43,
-      "latePallets": 102,
-      "timeliness": 0.8746928746928747,
+      "lates": 41,
+      "latePallets": 99,
+      "timeliness": 0.8783783783783784,
       "avgRC": 149.3,
       "avgRP": 43.47,
       "avgPC": 3.43,
@@ -901,42 +901,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "91299",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon",
-      "city": "Amazon",
-      "pc": "DA1 5XU",
-      "window": "",
-      "commitDate": "26/05/26",
-      "arrDate": "03/06/26",
-      "arrival": "01:00",
-      "mins": 11520,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91241",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon - DSA6",
-      "city": "Amazon - DSA6",
-      "pc": "LS26 9DN",
-      "window": "",
-      "commitDate": "23/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 2,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "91193",
       "acct": "IRON",
@@ -2546,7 +2510,7 @@
     "South East": {
       "pallets": 311,
       "cons": 43,
-      "lates": 1
+      "lates": 0
     },
     "East of England": {
       "pallets": 27,
