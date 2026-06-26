@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T09:36:23.888Z",
+  "lastUpdated": "2026-06-26T09:37:04.064Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -594,9 +594,9 @@
       "cons": 254,
       "pallets": 1328,
       "revenue": 51670.33,
-      "lates": 6,
-      "latePallets": 14,
-      "timeliness": 0.989458,
+      "lates": 3,
+      "latePallets": 10,
+      "timeliness": 0.99247,
       "avgRC": 203.43,
       "avgRP": 38.91,
       "avgPC": 5.23,
@@ -607,11 +607,11 @@
       "typeBreakdown": {
         "Economy Booked": {
           "cons": 143,
-          "lates": 5
+          "lates": 3
         },
         "Next Day": {
           "cons": 111,
-          "lates": 1
+          "lates": 0
         }
       },
       "regionData": {
@@ -655,7 +655,7 @@
           "cons": 19,
           "pallets": 96,
           "revenue": 3836.6699999999996,
-          "lates": 1
+          "lates": 0
         },
         "East of England": {
           "cons": 7,
@@ -667,7 +667,7 @@
           "cons": 15,
           "pallets": 30,
           "revenue": 2530.0200000000004,
-          "lates": 2
+          "lates": 0
         },
         "South West": {
           "cons": 6,
@@ -879,7 +879,7 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 41,
-          "lates": 1
+          "lates": 0
         },
         "Tue": {
           "cons": 43,
@@ -887,7 +887,7 @@
         },
         "Wed": {
           "cons": 46,
-          "lates": 2
+          "lates": 0
         },
         "Thu": {
           "cons": 53,
@@ -992,24 +992,6 @@
       "failed": true
     },
     {
-      "id": "DGB0091542, HELEN2.6",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: TOYS N TRENDS",
-      "city": "TOYMASTER LTD: TOYS N TRENDS",
-      "pc": "CT5 1AY",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C2842 ",
       "acct": "IRON",
       "month": "Jun-26",
@@ -1046,24 +1028,6 @@
       "failed": false
     },
     {
-      "id": "91172",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: GROOVES",
-      "city": "TOYMASTER LTD: GROOVES",
-      "pc": "KW15 1HP",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91569",
       "acct": "IRON",
       "month": "Jun-26",
@@ -1078,25 +1042,7 @@
       "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91378",
-      "acct": "IRON",
-      "month": "Jun-26",
-      "dest": "TOYMASTER LTD: GROOVES",
-      "city": "TOYMASTER LTD: GROOVES",
-      "pc": "KW15 1HP",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
+      "reason": "Hub Held",
       "failed": false
     },
     {
