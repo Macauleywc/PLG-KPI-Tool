@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T08:20:24.239Z",
+  "lastUpdated": "2026-06-26T08:20:25.647Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -277,9 +277,9 @@
       "cons": 237,
       "pallets": 814,
       "revenue": 35384.2,
-      "lates": 15,
-      "latePallets": 51,
-      "timeliness": 0.9373464373464373,
+      "lates": 14,
+      "latePallets": 50,
+      "timeliness": 0.9385749385749386,
       "avgRC": 149.3,
       "avgRP": 43.47,
       "avgPC": 3.43,
@@ -1545,24 +1545,6 @@
       "mins": 10080,
       "pallets": 1,
       "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91192",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Amazon.co.uk Ltd ,BRS1",
-      "city": "Amazon.co.uk Ltd ,BRS1",
-      "pc": "BS35 4DJ",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "02/06/26",
-      "arrival": "01:00",
-      "mins": 17280,
-      "pallets": 1,
-      "dtype": "Economy Booked",
       "note": "",
       "reason": "",
       "failed": false
