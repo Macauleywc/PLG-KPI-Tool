@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:13:52.352Z",
+  "lastUpdated": "2026-06-30T15:13:54.425Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 22,
-      "latePallets": 27,
-      "timeliness": 0.9309462915601023,
+      "lates": 20,
+      "latePallets": 23,
+      "timeliness": 0.9411764705882353,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -1870,24 +1870,6 @@
       "failed": false
     },
     {
-      "id": "7310605248",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "HAEMATO DEPARTMENT (2038551)",
-      "city": "HAEMATO DEPARTMENT (2038551)",
-      "pc": "KT16 0PZ",
-      "window": "",
-      "commitDate": "11/05/26",
-      "arrDate": "13/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310605354",
       "acct": "GREINER",
       "month": "May-26",
@@ -1972,24 +1954,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310605594",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "Leeds General Infirmary (2036644)",
-      "city": "Leeds General Infirmary (2036644)",
-      "pc": "LS9 7TU",
-      "window": "",
-      "commitDate": "14/05/26",
-      "arrDate": "15/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -2362,7 +2326,7 @@
     "South East": {
       "pallets": 345,
       "cons": 253,
-      "lates": 7
+      "lates": 6
     },
     "South West": {
       "pallets": 255,
@@ -2372,7 +2336,7 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 3
+      "lates": 2
     },
     "London": {
       "pallets": 124,
