@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:25:55.539Z",
+  "lastUpdated": "2026-06-30T14:25:56.825Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 14,
-      "latePallets": 16,
-      "timeliness": 0.9625292740046838,
+      "lates": 13,
+      "latePallets": 13,
+      "timeliness": 0.9695550351288056,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -3436,24 +3436,6 @@
       "failed": false
     },
     {
-      "id": "7310596098",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "LINCOLN COUNTY HOSPITAL  (1007602)",
-      "city": "LINCOLN COUNTY HOSPITAL  (1007602)",
-      "pc": "LN2 5QY",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310596519",
       "acct": "GREINER",
       "month": "Feb-26",
@@ -3779,7 +3761,7 @@
     "East Midlands": {
       "pallets": 254,
       "cons": 166,
-      "lates": 9
+      "lates": 8
     },
     "South East": {
       "pallets": 345,
