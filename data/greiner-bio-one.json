@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:14:00.038Z",
+  "lastUpdated": "2026-06-30T15:14:02.347Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 16,
-      "latePallets": 16,
-      "timeliness": 0.959079283887468,
+      "lates": 15,
+      "latePallets": 15,
+      "timeliness": 0.9616368286445013,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -1690,24 +1690,6 @@
       "failed": false
     },
     {
-      "id": "7310604806",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "Roslin Cell Therapies",
-      "city": "Roslin Cell Therapies",
-      "pc": "EH54 9BJ",
-      "window": "",
-      "commitDate": "06/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310604946",
       "acct": "GREINER",
       "month": "May-26",
@@ -2239,7 +2221,7 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 9
+      "lates": 8
     },
     "South": {
       "pallets": 207,
