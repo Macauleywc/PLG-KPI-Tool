@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:13:55.363Z",
+  "lastUpdated": "2026-06-30T15:13:57.127Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 19,
-      "latePallets": 19,
-      "timeliness": 0.9514066496163683,
+      "lates": 18,
+      "latePallets": 18,
+      "timeliness": 0.9539641943734015,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -1996,24 +1996,6 @@
       "failed": false
     },
     {
-      "id": "7310606035",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "Leeds General Infirmary (2036644)",
-      "city": "Leeds General Infirmary (2036644)",
-      "pc": "LS9 7TU",
-      "window": "",
-      "commitDate": "15/05/26",
-      "arrDate": "18/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310605817",
       "acct": "GREINER",
       "month": "May-26",
@@ -2318,7 +2300,7 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 2
+      "lates": 1
     },
     "London": {
       "pallets": 124,
