@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:24:01.145Z",
+  "lastUpdated": "2026-06-30T14:24:30.350Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -612,9 +612,9 @@
       "cons": 266,
       "pallets": 401,
       "revenue": 24501.41,
-      "lates": 19,
-      "latePallets": 29,
-      "timeliness": 0.927681,
+      "lates": 4,
+      "latePallets": 4,
+      "timeliness": 0.990025,
       "avgRC": 92.11,
       "avgRP": 61.1,
       "avgPC": 1.51,
@@ -626,7 +626,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 266,
-          "lates": 19
+          "lates": 4
         }
       },
       "regionData": {
@@ -634,7 +634,7 @@
           "cons": 20,
           "pallets": 31,
           "revenue": 2164.21,
-          "lates": 3
+          "lates": 1
         },
         "North West": {
           "cons": 22,
@@ -646,13 +646,13 @@
           "cons": 9,
           "pallets": 13,
           "revenue": 660.14,
-          "lates": 1
+          "lates": 0
         },
         "Scotland": {
           "cons": 20,
           "pallets": 20,
           "revenue": 1535.06,
-          "lates": 6
+          "lates": 1
         },
         "East Midlands": {
           "cons": 33,
@@ -676,25 +676,25 @@
           "cons": 49,
           "pallets": 67,
           "revenue": 4300.740000000001,
-          "lates": 3
+          "lates": 1
         },
         "South West": {
           "cons": 18,
           "pallets": 40,
           "revenue": 2702.9599999999996,
-          "lates": 3
+          "lates": 0
         },
         "East of England": {
           "cons": 20,
           "pallets": 25,
           "revenue": 1356.5399999999997,
-          "lates": 1
+          "lates": 0
         },
         "South": {
           "cons": 26,
           "pallets": 44,
           "revenue": 3300.960000000001,
-          "lates": 2
+          "lates": 1
         },
         "Other": {
           "cons": 5,
@@ -712,23 +712,23 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 55,
-          "lates": 5
+          "lates": 1
         },
         "Tue": {
           "cons": 59,
-          "lates": 3
+          "lates": 1
         },
         "Wed": {
           "cons": 54,
-          "lates": 3
+          "lates": 1
         },
         "Thu": {
           "cons": 52,
-          "lates": 1
+          "lates": 0
         },
         "Fri": {
           "cons": 46,
-          "lates": 7
+          "lates": 1
         }
       },
       "destData": [
@@ -793,7 +793,7 @@
           "cons": 5,
           "pallets": 9,
           "revenue": 578.57,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "SANDWELL GENERAL HOSPITAL (2010051)",
@@ -802,7 +802,7 @@
           "cons": 5,
           "pallets": 9,
           "revenue": 441.91,
-          "lates": 2
+          "lates": 1
         },
         {
           "name": "UNIVERSITY OF CAMBRIDGE",
@@ -811,7 +811,7 @@
           "cons": 4,
           "pallets": 5,
           "revenue": 268.39000000000004,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "LAB MANCHESTER  (1006595)",
@@ -856,7 +856,7 @@
           "cons": 4,
           "pallets": 8,
           "revenue": 440.16,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "NHS BLOOD AND TRANSPLANT STORE (1008036)",
@@ -901,7 +901,7 @@
           "cons": 3,
           "pallets": 6,
           "revenue": 302.25,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Q SQUARED SOLUTIONS LTD (1006114)",
@@ -2482,114 +2482,6 @@
       "failed": false
     },
     {
-      "id": "7310591546",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "Scottiish Gov",
-      "city": "Scottiish Gov",
-      "pc": "AB12 3JZ",
-      "window": "",
-      "commitDate": "16/01/26",
-      "arrDate": "19/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310590559",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "SYNNOVIS SERVICES (2037382)",
-      "city": "SYNNOVIS SERVICES (2037382)",
-      "pc": "SE1 7EH",
-      "window": "",
-      "commitDate": "08/01/26",
-      "arrDate": "09/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310592098",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "DARENT VALLEY HOSPITAL",
-      "city": "DARENT VALLEY HOSPITAL",
-      "pc": "DA2 8DA",
-      "window": "",
-      "commitDate": "21/01/26",
-      "arrDate": "22/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310590856",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "NHS BLOOD AND TRANSPLANT (1008046)",
-      "city": "NHS BLOOD AND TRANSPLANT (1008046)",
-      "pc": "BS16 7FG",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "12/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310590728",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "SANDWELL GENERAL HOSPITAL (2010051)",
-      "city": "SANDWELL GENERAL HOSPITAL (2010051)",
-      "pc": "B71 4HJ",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "12/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310590278",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "Roslin Cell Therapies",
-      "city": "Roslin Cell Therapies",
-      "pc": "EH54 9BJ",
-      "window": "",
-      "commitDate": "05/01/26",
-      "arrDate": "06/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310592695",
       "acct": "GREINER",
       "month": "Jan-26",
@@ -2608,24 +2500,6 @@
       "failed": false
     },
     {
-      "id": "7310591109",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "UNIVERSITY OF CAMBRIDGE",
-      "city": "UNIVERSITY OF CAMBRIDGE",
-      "pc": "CB2 0AW",
-      "window": "",
-      "commitDate": "13/01/26",
-      "arrDate": "15/01/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310592022",
       "acct": "GREINER",
       "month": "Jan-26",
@@ -2637,150 +2511,6 @@
       "arrDate": "22/01/26",
       "arrival": "00:00",
       "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310592952",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "HUGH ROBSON STORES (2038284)",
-      "city": "HUGH ROBSON STORES (2038284)",
-      "pc": "EH8 9XD",
-      "window": "",
-      "commitDate": "28/01/26",
-      "arrDate": "29/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310590725",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "Bentley Bridge Distribution Centre (2034136)",
-      "city": "Bentley Bridge Distribution Centre (2034136)",
-      "pc": "WV11 3DR",
-      "window": "",
-      "commitDate": "09/01/26",
-      "arrDate": "12/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310590852",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "Glasgow Caledonian University",
-      "city": "Glasgow Caledonian University",
-      "pc": "G4 0BA",
-      "window": "",
-      "commitDate": "12/01/26",
-      "arrDate": "13/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310590272",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "ST PETERS HOSPITAL (2039186)",
-      "city": "ST PETERS HOSPITAL (2039186)",
-      "pc": "KT16 0PZ",
-      "window": "",
-      "commitDate": "05/01/26",
-      "arrDate": "07/01/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "R181446",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "GREINER BIO-ONE LTD",
-      "city": "GREINER BIO-ONE LTD",
-      "pc": "GL10 3SX",
-      "window": "",
-      "commitDate": "13/01/26",
-      "arrDate": "14/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310592505",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "SYNNOVIS SERVICES LLP C/O GSG",
-      "city": "SYNNOVIS SERVICES LLP C/O GSG",
-      "pc": "SE15 6NF",
-      "window": "",
-      "commitDate": "26/01/26",
-      "arrDate": "27/01/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310592244",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "NHS BLOOD AND TRANSPLANT (1008046)",
-      "city": "NHS BLOOD AND TRANSPLANT (1008046)",
-      "pc": "BS16 7FG",
-      "window": "",
-      "commitDate": "23/01/26",
-      "arrDate": "26/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310591548",
-      "acct": "GREINER",
-      "month": "Jan-26",
-      "dest": "University of St Andrews (1025276)",
-      "city": "University of St Andrews (1025276)",
-      "pc": "KY16 9ST",
-      "window": "",
-      "commitDate": "16/01/26",
-      "arrDate": "19/01/26",
-      "arrival": "00:00",
-      "mins": 4320,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
