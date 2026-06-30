@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:13.522Z",
+  "lastUpdated": "2026-06-30T14:27:18.992Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 31,
-      "latePallets": 39,
-      "timeliness": 0.9232283464566929,
+      "lates": 30,
+      "latePallets": 37,
+      "timeliness": 0.9271653543307087,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -2716,24 +2716,6 @@
       "failed": false
     },
     {
-      "id": "7310598912",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "city": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "pc": "WA3 6PL",
-      "window": "",
-      "commitDate": "13/03/26",
-      "arrDate": "16/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310598995",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -3624,7 +3606,7 @@
     "North West": {
       "pallets": 172,
       "cons": 103,
-      "lates": 6
+      "lates": 5
     },
     "Wales": {
       "pallets": 86,
