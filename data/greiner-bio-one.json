@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:40.726Z",
+  "lastUpdated": "2026-06-30T14:27:43.316Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 8,
-      "latePallets": 8,
-      "timeliness": 0.984251968503937,
+      "lates": 6,
+      "latePallets": 6,
+      "timeliness": 0.9881889763779528,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -2536,24 +2536,6 @@
       "failed": false
     },
     {
-      "id": "7310599217",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "OXFORD BIO MEDICA",
-      "city": "OXFORD BIO MEDICA",
-      "pc": "OX4 2ZY",
-      "window": "",
-      "commitDate": "17/03/26",
-      "arrDate": "18/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310605941",
       "acct": "GREINER",
       "month": "May-26",
@@ -2655,24 +2637,6 @@
       "arrDate": "20/02/26",
       "arrival": "00:00",
       "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310599384",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Polianidou, Miss Georgia (2038147)",
-      "city": "Polianidou, Miss Georgia (2038147)",
-      "pc": "WC1E 6AE",
-      "window": "",
-      "commitDate": "19/03/26",
-      "arrDate": "20/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -3190,7 +3154,7 @@
     "South East": {
       "pallets": 345,
       "cons": 253,
-      "lates": 21
+      "lates": 20
     },
     "South West": {
       "pallets": 255,
@@ -3205,7 +3169,7 @@
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 16
+      "lates": 15
     },
     "North West": {
       "pallets": 172,
