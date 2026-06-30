@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:28.103Z",
+  "lastUpdated": "2026-06-30T14:27:30.608Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 20,
-      "latePallets": 20,
-      "timeliness": 0.9606299212598425,
+      "lates": 15,
+      "latePallets": 15,
+      "timeliness": 0.9704724409448819,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -2194,96 +2194,6 @@
       "failed": false
     },
     {
-      "id": "7310597774",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "TUNBRIDGE WELLS HOSPITAL AT PEMBURY",
-      "city": "TUNBRIDGE WELLS HOSPITAL AT PEMBURY",
-      "pc": "TN2 4QJ",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598221",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "WORTHING HOSPITAL (2038463)",
-      "city": "WORTHING HOSPITAL (2038463)",
-      "pc": "BN11 2DH",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598053",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "SEACROFT HOSPITAL (2037217)",
-      "city": "SEACROFT HOSPITAL (2037217)",
-      "pc": "LS14 6UH",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598295",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "city": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "pc": "ME7 5NY",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598297",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "city": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "pc": "ME7 5NY",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310601738",
       "acct": "GREINER",
       "month": "Apr-26",
@@ -3406,7 +3316,7 @@
     "South East": {
       "pallets": 345,
       "cons": 253,
-      "lates": 25
+      "lates": 21
     },
     "South West": {
       "pallets": 255,
@@ -3416,7 +3326,7 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 6
+      "lates": 5
     },
     "London": {
       "pallets": 124,
