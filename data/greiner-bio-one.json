@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:25:53.723Z",
+  "lastUpdated": "2026-06-30T14:25:55.539Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 16,
-      "latePallets": 23,
-      "timeliness": 0.9461358313817331,
+      "lates": 14,
+      "latePallets": 16,
+      "timeliness": 0.9625292740046838,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -2212,24 +2212,6 @@
       "failed": false
     },
     {
-      "id": "7310594103",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "city": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "pc": "WA3 6PL",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310597901",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2458,24 +2440,6 @@
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "187899",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "CHARLES RIVER MICROBIAL SOLUTIOS",
-      "city": "CHARLES RIVER MICROBIAL SOLUTIOS",
-      "pc": "D24 NF21",
-      "window": "",
-      "commitDate": "10/02/26",
-      "arrDate": "12/02/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 5,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -3830,7 +3794,7 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 9
+      "lates": 8
     },
     "London": {
       "pallets": 124,
@@ -3840,7 +3804,7 @@
     "North West": {
       "pallets": 172,
       "cons": 103,
-      "lates": 7
+      "lates": 6
     },
     "Wales": {
       "pallets": 86,
