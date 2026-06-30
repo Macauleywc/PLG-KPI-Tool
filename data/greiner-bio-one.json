@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:25:56.825Z",
+  "lastUpdated": "2026-06-30T14:25:58.169Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 13,
-      "latePallets": 13,
-      "timeliness": 0.9695550351288056,
+      "lates": 11,
+      "latePallets": 11,
+      "timeliness": 0.9742388758782201,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -3418,42 +3418,6 @@
       "failed": false
     },
     {
-      "id": "7310596030",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "WORTHING HOSPITAL (2038463)",
-      "city": "WORTHING HOSPITAL (2038463)",
-      "pc": "BN11 2DH",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310596519",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "LABCORP EARLY DEVELOPMENT LABS",
-      "city": "LABCORP EARLY DEVELOPMENT LABS",
-      "pc": "HG3 1PY",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310600116",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -3766,7 +3730,7 @@
     "South East": {
       "pallets": 345,
       "cons": 253,
-      "lates": 27
+      "lates": 26
     },
     "South West": {
       "pallets": 255,
@@ -3776,7 +3740,7 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 8
+      "lates": 7
     },
     "London": {
       "pallets": 124,
