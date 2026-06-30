@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:30.608Z",
+  "lastUpdated": "2026-06-30T14:27:31.664Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 15,
-      "latePallets": 15,
-      "timeliness": 0.9704724409448819,
+      "lates": 13,
+      "latePallets": 13,
+      "timeliness": 0.9744094488188977,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -1852,24 +1852,6 @@
       "failed": false
     },
     {
-      "id": "7310597721",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
-      "city": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
-      "pc": "DD1 5EH",
-      "window": "",
-      "commitDate": "05/03/26",
-      "arrDate": "06/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310601133",
       "acct": "GREINER",
       "month": "Apr-26",
@@ -2206,24 +2188,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597813",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "city": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "pc": "PO19 6SE",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "11/03/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 1,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -3301,12 +3265,12 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 22
+      "lates": 21
     },
     "South": {
       "pallets": 207,
       "cons": 128,
-      "lates": 7
+      "lates": 6
     },
     "East Midlands": {
       "pallets": 254,
