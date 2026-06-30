@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:13:50.338Z",
+  "lastUpdated": "2026-06-30T15:13:52.352Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 24,
-      "latePallets": 32,
-      "timeliness": 0.9181585677749361,
+      "lates": 22,
+      "latePallets": 27,
+      "timeliness": 0.9309462915601023,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -1528,24 +1528,6 @@
   },
   "lateRows": [
     {
-      "id": "7310607200,7310607120",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "DARENT VALLEY HOSPITAL",
-      "city": "DARENT VALLEY HOSPITAL",
-      "pc": "DA2 8DA",
-      "window": "",
-      "commitDate": "29/05/26",
-      "arrDate": "01/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310596780",
       "acct": "GREINER",
       "month": "Feb-26",
@@ -1882,24 +1864,6 @@
       "arrival": "01:00",
       "mins": 4320,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310604997",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "ST PETERS HOSPITAL (2039186)",
-      "city": "ST PETERS HOSPITAL (2039186)",
-      "pc": "KT16 0PZ",
-      "window": "",
-      "commitDate": "11/05/26",
-      "arrDate": "13/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 3,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -2398,7 +2362,7 @@
     "South East": {
       "pallets": 345,
       "cons": 253,
-      "lates": 9
+      "lates": 7
     },
     "South West": {
       "pallets": 255,
