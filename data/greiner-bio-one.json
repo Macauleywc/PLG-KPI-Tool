@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:39.167Z",
+  "lastUpdated": "2026-06-30T14:27:40.726Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 11,
-      "latePallets": 11,
-      "timeliness": 0.9783464566929134,
+      "lates": 8,
+      "latePallets": 8,
+      "timeliness": 0.984251968503937,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -1762,24 +1762,6 @@
       "failed": false
     },
     {
-      "id": "7310597303",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "SYNNOVIS SERVICES (2037382)",
-      "city": "SYNNOVIS SERVICES (2037382)",
-      "pc": "SE1 7EH",
-      "window": "",
-      "commitDate": "04/03/26",
-      "arrDate": "05/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310597305",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2086,24 +2068,6 @@
       "failed": false
     },
     {
-      "id": "7310597901",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "city": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "pc": "SE1 1UL",
-      "window": "",
-      "commitDate": "06/03/26",
-      "arrDate": "09/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310601527",
       "acct": "GREINER",
       "month": "Apr-26",
@@ -2170,24 +2134,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598542",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "King's College London",
-      "city": "King's College London",
-      "pc": "SE5 9NU",
-      "window": "",
-      "commitDate": "11/03/26",
-      "arrDate": "12/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -3259,7 +3205,7 @@
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 19
+      "lates": 16
     },
     "North West": {
       "pallets": 172,
