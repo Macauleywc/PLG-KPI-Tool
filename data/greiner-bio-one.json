@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:13:58.615Z",
+  "lastUpdated": "2026-06-30T15:14:00.038Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 17,
-      "latePallets": 17,
-      "timeliness": 0.9565217391304348,
+      "lates": 16,
+      "latePallets": 16,
+      "timeliness": 0.959079283887468,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -2068,24 +2068,6 @@
       "failed": false
     },
     {
-      "id": "7310606332",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "BIOMEDICAL LAB (1008085)",
-      "city": "BIOMEDICAL LAB (1008085)",
-      "pc": "LE5 1TY",
-      "window": "",
-      "commitDate": "20/05/26",
-      "arrDate": "21/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310603254",
       "acct": "GREINER",
       "month": "Apr-26",
@@ -2267,7 +2249,7 @@
     "East Midlands": {
       "pallets": 254,
       "cons": 166,
-      "lates": 1
+      "lates": 0
     },
     "South East": {
       "pallets": 345,
