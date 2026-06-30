@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:25:49.912Z",
+  "lastUpdated": "2026-06-30T14:25:51.597Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 20,
-      "latePallets": 29,
-      "timeliness": 0.9320843091334895,
+      "lates": 18,
+      "latePallets": 27,
+      "timeliness": 0.936768149882904,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -1654,24 +1654,6 @@
       "failed": false
     },
     {
-      "id": "7310596493",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "city": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "pc": "SE1 1UL",
-      "window": "",
-      "commitDate": "27/02/26",
-      "arrDate": "02/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310607069",
       "acct": "GREINER",
       "month": "May-26",
@@ -2205,24 +2187,6 @@
       "arrDate": "09/02/26",
       "arrival": "00:00",
       "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594036",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "PATH BLK 31/32 LINK Chancellor WG/Lincoln(2010386)",
-      "city": "PATH BLK 31/32 LINK Chancellor WG/Lincoln(2010386)",
-      "pc": "LS9 7TU",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -3902,12 +3866,12 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 10
+      "lates": 9
     },
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 23
+      "lates": 22
     },
     "North West": {
       "pallets": 172,
