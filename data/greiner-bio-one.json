@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:25.736Z",
+  "lastUpdated": "2026-06-30T14:27:26.735Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 24,
-      "latePallets": 24,
-      "timeliness": 0.952755905511811,
+      "lates": 22,
+      "latePallets": 22,
+      "timeliness": 0.9566929133858267,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -3202,24 +3202,6 @@
       "failed": false
     },
     {
-      "id": "7310600116",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "city": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "pc": "PO19 6SE",
-      "window": "",
-      "commitDate": "24/03/26",
-      "arrDate": "25/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310596360",
       "acct": "GREINER",
       "month": "Feb-26",
@@ -3434,24 +3416,6 @@
       "note": "",
       "reason": "",
       "failed": false
-    },
-    {
-      "id": "7310600809",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "IQVIA Laboratories",
-      "city": "IQVIA Laboratories",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "30/03/26",
-      "arrDate": "31/03/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
     }
   ],
   "regionData": {
@@ -3463,12 +3427,12 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 25
+      "lates": 24
     },
     "South": {
       "pallets": 207,
       "cons": 128,
-      "lates": 8
+      "lates": 7
     },
     "East Midlands": {
       "pallets": 254,
