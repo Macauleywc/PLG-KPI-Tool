@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:24.576Z",
+  "lastUpdated": "2026-06-30T14:27:25.736Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 25,
-      "latePallets": 28,
-      "timeliness": 0.9448818897637795,
+      "lates": 24,
+      "latePallets": 24,
+      "timeliness": 0.952755905511811,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -3452,24 +3452,6 @@
       "note": "",
       "reason": "",
       "failed": false
-    },
-    {
-      "id": "7310600601",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "BSPS SUPPORT SERVICES (2038575",
-      "city": "BSPS SUPPORT SERVICES (2038575",
-      "pc": "RG1 8NQ",
-      "window": "",
-      "commitDate": "30/03/26",
-      "arrDate": "31/03/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
     }
   ],
   "regionData": {
@@ -3486,7 +3468,7 @@
     "South": {
       "pallets": 207,
       "cons": 128,
-      "lates": 9
+      "lates": 8
     },
     "East Midlands": {
       "pallets": 254,
