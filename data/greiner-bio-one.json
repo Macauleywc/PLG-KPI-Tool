@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:56:46.154Z",
+  "lastUpdated": "2026-06-30T14:57:27.304Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 21,
-      "latePallets": 30,
-      "timeliness": 0.929742,
+      "lates": 5,
+      "latePallets": 5,
+      "timeliness": 0.98829,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -20,7 +20,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 301,
-          "lates": 21
+          "lates": 5
         }
       },
       "regionData": {
@@ -28,31 +28,31 @@
           "cons": 36,
           "pallets": 49,
           "revenue": 2705.2799999999997,
-          "lates": 1
+          "lates": 0
         },
         "Scotland": {
           "cons": 18,
           "pallets": 22,
           "revenue": 1629.56,
-          "lates": 6
+          "lates": 1
         },
         "South": {
           "cons": 25,
           "pallets": 34,
           "revenue": 2703.3200000000006,
-          "lates": 2
+          "lates": 1
         },
         "East Midlands": {
           "cons": 35,
           "pallets": 49,
           "revenue": 2688.9600000000014,
-          "lates": 1
+          "lates": 0
         },
         "South East": {
           "cons": 50,
           "pallets": 60,
           "revenue": 3884.550000000001,
-          "lates": 2
+          "lates": 1
         },
         "South West": {
           "cons": 16,
@@ -64,19 +64,19 @@
           "cons": 50,
           "pallets": 69,
           "revenue": 3810.94,
-          "lates": 4
+          "lates": 0
         },
         "London": {
           "cons": 22,
           "pallets": 31,
           "revenue": 2105.02,
-          "lates": 2
+          "lates": 1
         },
         "North West": {
           "cons": 18,
           "pallets": 27,
           "revenue": 1384.79,
-          "lates": 2
+          "lates": 0
         },
         "Wales": {
           "cons": 14,
@@ -104,19 +104,19 @@
         },
         "Tue": {
           "cons": 60,
-          "lates": 6
+          "lates": 1
         },
         "Wed": {
           "cons": 57,
-          "lates": 3
+          "lates": 1
         },
         "Thu": {
           "cons": 53,
-          "lates": 2
+          "lates": 0
         },
         "Fri": {
           "cons": 68,
-          "lates": 9
+          "lates": 2
         }
       },
       "destData": [
@@ -136,7 +136,7 @@
           "cons": 8,
           "pallets": 12,
           "revenue": 701.1700000000001,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "ST PETERS HOSPITAL (2039186)",
@@ -154,7 +154,7 @@
           "cons": 6,
           "pallets": 6,
           "revenue": 307.37,
-          "lates": 2
+          "lates": 1
         },
         {
           "name": "PATH BLK 31/32 LINK Chancellor WG/Lincoln(2010386)",
@@ -163,7 +163,7 @@
           "cons": 6,
           "pallets": 6,
           "revenue": 310.96000000000004,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "CHERWELL LABORATORIES LTD  (10",
@@ -217,7 +217,7 @@
           "cons": 5,
           "pallets": 8,
           "revenue": 411.99000000000007,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "DIANA, PRINCESS OF WALES HOSPITAL (1007633)",
@@ -262,7 +262,7 @@
           "cons": 4,
           "pallets": 5,
           "revenue": 260.27000000000004,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "LONZA BIOLOGICS PLC  (1006156)",
@@ -1528,78 +1528,6 @@
   },
   "lateRows": [
     {
-      "id": "7310596361",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "SANDWELL GENERAL HOSPITAL (2010051)",
-      "city": "SANDWELL GENERAL HOSPITAL (2010051)",
-      "pc": "B71 4HJ",
-      "window": "",
-      "commitDate": "25/02/26",
-      "arrDate": "26/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310596030",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "WORTHING HOSPITAL (2038463)",
-      "city": "WORTHING HOSPITAL (2038463)",
-      "pc": "BN11 2DH",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310596098",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "LINCOLN COUNTY HOSPITAL  (1007602)",
-      "city": "LINCOLN COUNTY HOSPITAL  (1007602)",
-      "pc": "LN2 5QY",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310595424",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "Bit Bio (1029825)",
-      "city": "Bit Bio (1029825)",
-      "pc": "CB22 3FH",
-      "window": "",
-      "commitDate": "18/02/26",
-      "arrDate": "20/02/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310596780",
       "acct": "GREINER",
       "month": "Feb-26",
@@ -1627,24 +1555,6 @@
       "window": "",
       "commitDate": "25/02/26",
       "arrDate": "26/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310596519",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "LABCORP EARLY DEVELOPMENT LABS",
-      "city": "LABCORP EARLY DEVELOPMENT LABS",
-      "pc": "HG3 1PY",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
@@ -1690,168 +1600,6 @@
       "failed": false
     },
     {
-      "id": "7310595070",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "Life Sciences Stores (2010216)",
-      "city": "Life Sciences Stores (2010216)",
-      "pc": "G11 6PE",
-      "window": "",
-      "commitDate": "13/02/26",
-      "arrDate": "16/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310593872",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "ROSLIN CELL THERAPIES",
-      "city": "ROSLIN CELL THERAPIES",
-      "pc": "EH54 9BJ",
-      "window": "",
-      "commitDate": "05/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594036",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "PATH BLK 31/32 LINK Chancellor WG/Lincoln(2010386)",
-      "city": "PATH BLK 31/32 LINK Chancellor WG/Lincoln(2010386)",
-      "pc": "LS9 7TU",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "187899",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "CHARLES RIVER MICROBIAL SOLUTIOS",
-      "city": "CHARLES RIVER MICROBIAL SOLUTIOS",
-      "pc": "D24 NF21",
-      "window": "",
-      "commitDate": "10/02/26",
-      "arrDate": "12/02/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 5,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310593944",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "KCL-INNOVATION HUB",
-      "city": "KCL-INNOVATION HUB",
-      "pc": "SE1 9RT",
-      "window": "",
-      "commitDate": "05/02/26",
-      "arrDate": "06/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594006",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "ROSLIN CELL THERAPIES",
-      "city": "ROSLIN CELL THERAPIES",
-      "pc": "EH54 9BJ",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594169",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "E & O LABS LTD (2031705)",
-      "city": "E & O LABS LTD (2031705)",
-      "pc": "FK4 2HH",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310593938",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "LAB MANCHESTER  (1006595)",
-      "city": "LAB MANCHESTER  (1006595)",
-      "pc": "M34 3RB",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "10/02/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310593609",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "UNIVERSITY OF ABERDEEN (1008151)",
-      "city": "UNIVERSITY OF ABERDEEN (1008151)",
-      "pc": "AB25 2ZD",
-      "window": "",
-      "commitDate": "03/02/26",
-      "arrDate": "04/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310593597",
       "acct": "GREINER",
       "month": "Feb-26",
@@ -1864,42 +1612,6 @@
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594117",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "SEACROFT HOSPITAL (2037217)",
-      "city": "SEACROFT HOSPITAL (2037217)",
-      "pc": "LS14 6UH",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594103",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "city": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "pc": "WA3 6PL",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -3890,27 +3602,27 @@
     "East of England": {
       "pallets": 188,
       "cons": 145,
-      "lates": 5
+      "lates": 4
     },
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 32
+      "lates": 27
     },
     "South": {
       "pallets": 207,
       "cons": 128,
-      "lates": 10
+      "lates": 9
     },
     "East Midlands": {
       "pallets": 254,
       "cons": 166,
-      "lates": 9
+      "lates": 8
     },
     "South East": {
       "pallets": 345,
       "cons": 253,
-      "lates": 28
+      "lates": 27
     },
     "South West": {
       "pallets": 255,
@@ -3920,17 +3632,17 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 10
+      "lates": 6
     },
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 23
+      "lates": 22
     },
     "North West": {
       "pallets": 172,
       "cons": 103,
-      "lates": 7
+      "lates": 5
     },
     "Wales": {
       "pallets": 86,
@@ -4015,7 +3727,7 @@
       "cons": 22,
       "pallets": 37,
       "revenue": 2209.6400000000003,
-      "lates": 4
+      "lates": 3
     },
     {
       "name": "ABBOTT (GLASGOW MSC)",
@@ -4051,7 +3763,7 @@
       "cons": 19,
       "pallets": 27,
       "revenue": 1446.0200000000002,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "ROYAL SUSSEX C. HOSPITAL (2020345)",
@@ -4078,7 +3790,7 @@
       "cons": 17,
       "pallets": 32,
       "revenue": 1611.72,
-      "lates": 3
+      "lates": 2
     },
     {
       "name": "TRAFALGAR SCIENTIFIC LTD  (1009367)",
