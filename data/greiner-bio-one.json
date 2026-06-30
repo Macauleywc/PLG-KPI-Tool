@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:25:59.144Z",
+  "lastUpdated": "2026-06-30T14:26:00.224Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 10,
-      "latePallets": 10,
-      "timeliness": 0.9765807962529274,
+      "lates": 8,
+      "latePallets": 8,
+      "timeliness": 0.9812646370023419,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -1906,24 +1906,6 @@
       "failed": false
     },
     {
-      "id": "7310593944",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "KCL-INNOVATION HUB",
-      "city": "KCL-INNOVATION HUB",
-      "pc": "SE1 9RT",
-      "window": "",
-      "commitDate": "05/02/26",
-      "arrDate": "06/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310597721",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2182,24 +2164,6 @@
       "dest": "ROSLIN CELL THERAPIES",
       "city": "ROSLIN CELL THERAPIES",
       "pc": "EH54 9BJ",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594117",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "SEACROFT HOSPITAL (2037217)",
-      "city": "SEACROFT HOSPITAL (2037217)",
-      "pc": "LS14 6UH",
       "window": "",
       "commitDate": "06/02/26",
       "arrDate": "09/02/26",
@@ -3722,12 +3686,12 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 7
+      "lates": 6
     },
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 22
+      "lates": 21
     },
     "North West": {
       "pallets": 172,
