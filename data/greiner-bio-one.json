@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:14:12.478Z",
+  "lastUpdated": "2026-06-30T15:14:14.742Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 11,
-      "latePallets": 11,
-      "timeliness": 0.9718670076726342,
+      "lates": 10,
+      "latePallets": 10,
+      "timeliness": 0.9744245524296675,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -1942,24 +1942,6 @@
       "failed": false
     },
     {
-      "id": "7310606272",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "PATHOLOGY DEPARTMENT PRINCESS (2020589)",
-      "city": "PATHOLOGY DEPARTMENT PRINCESS (2020589)",
-      "pc": "RH16 4EX",
-      "window": "",
-      "commitDate": "19/05/26",
-      "arrDate": "20/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310606282",
       "acct": "GREINER",
       "month": "May-26",
@@ -2154,7 +2136,7 @@
     "South": {
       "pallets": 207,
       "cons": 128,
-      "lates": 6
+      "lates": 5
     },
     "East Midlands": {
       "pallets": 254,
