@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:20.176Z",
+  "lastUpdated": "2026-06-30T14:27:21.600Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 29,
-      "latePallets": 36,
-      "timeliness": 0.9291338582677166,
+      "lates": 28,
+      "latePallets": 35,
+      "timeliness": 0.9311023622047244,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -2914,24 +2914,6 @@
       "failed": false
     },
     {
-      "id": "195524",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Ocon Chemicals Ltd",
-      "city": "Ocon Chemicals Ltd",
-      "pc": "T12 XFW6",
-      "window": "",
-      "commitDate": "16/03/26",
-      "arrDate": "20/03/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310599384",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -3608,7 +3590,7 @@
     "Other": {
       "pallets": 13,
       "cons": 11,
-      "lates": 1
+      "lates": 0
     }
   },
   "destData": [
