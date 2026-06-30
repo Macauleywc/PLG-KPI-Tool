@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:13:57.127Z",
+  "lastUpdated": "2026-06-30T15:13:58.615Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 18,
-      "latePallets": 18,
-      "timeliness": 0.9539641943734015,
+      "lates": 17,
+      "latePallets": 17,
+      "timeliness": 0.9565217391304348,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -2014,24 +2014,6 @@
       "failed": false
     },
     {
-      "id": "7310606123",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "FISHER SCIENTIFIC UK",
-      "city": "FISHER SCIENTIFIC UK",
-      "pc": "LE11 5TR",
-      "window": "",
-      "commitDate": "18/05/26",
-      "arrDate": "19/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310599608",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2285,7 +2267,7 @@
     "East Midlands": {
       "pallets": 254,
       "cons": 166,
-      "lates": 2
+      "lates": 1
     },
     "South East": {
       "pallets": 345,
