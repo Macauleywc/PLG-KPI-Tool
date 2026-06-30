@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:26:00.224Z",
+  "lastUpdated": "2026-06-30T14:26:04.472Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 8,
-      "latePallets": 8,
-      "timeliness": 0.9812646370023419,
+      "lates": 5,
+      "latePallets": 5,
+      "timeliness": 0.9882903981264637,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -1690,24 +1690,6 @@
       "failed": false
     },
     {
-      "id": "7310597042",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "IQVIA Laboratories",
-      "city": "IQVIA Laboratories",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "02/03/26",
-      "arrDate": "03/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310601341",
       "acct": "GREINER",
       "month": "Apr-26",
@@ -1718,24 +1700,6 @@
       "commitDate": "02/04/26",
       "arrDate": "03/04/26",
       "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310593609",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "UNIVERSITY OF ABERDEEN (1008151)",
-      "city": "UNIVERSITY OF ABERDEEN (1008151)",
-      "pc": "AB25 2ZD",
-      "window": "",
-      "commitDate": "03/02/26",
-      "arrDate": "04/02/26",
-      "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
@@ -3382,24 +3346,6 @@
       "failed": false
     },
     {
-      "id": "7310596361",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "SANDWELL GENERAL HOSPITAL (2010051)",
-      "city": "SANDWELL GENERAL HOSPITAL (2010051)",
-      "pc": "B71 4HJ",
-      "window": "",
-      "commitDate": "25/02/26",
-      "arrDate": "26/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310596360",
       "acct": "GREINER",
       "month": "Feb-26",
@@ -3661,12 +3607,12 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 28
+      "lates": 26
     },
     "South": {
       "pallets": 207,
       "cons": 128,
-      "lates": 10
+      "lates": 9
     },
     "East Midlands": {
       "pallets": 254,
