@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:14:05.408Z",
+  "lastUpdated": "2026-06-30T15:14:12.478Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 13,
-      "latePallets": 13,
-      "timeliness": 0.9667519181585678,
+      "lates": 11,
+      "latePallets": 11,
+      "timeliness": 0.9718670076726342,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -1654,42 +1654,6 @@
       "failed": false
     },
     {
-      "id": "7310604631",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "SEACROFT HOSPITAL (2037217)",
-      "city": "SEACROFT HOSPITAL (2037217)",
-      "pc": "LS14 6UH",
-      "window": "",
-      "commitDate": "06/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310604946",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "SYNNOVIS SERVICES (2037382)",
-      "city": "SYNNOVIS SERVICES (2037382)",
-      "pc": "SE1 7EH",
-      "window": "",
-      "commitDate": "07/05/26",
-      "arrDate": "08/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310597901",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2210,12 +2174,12 @@
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 1
+      "lates": 0
     },
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 9
+      "lates": 8
     },
     "North West": {
       "pallets": 172,
