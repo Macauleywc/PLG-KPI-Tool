@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:25:51.597Z",
+  "lastUpdated": "2026-06-30T14:25:53.723Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 18,
-      "latePallets": 27,
-      "timeliness": 0.936768149882904,
+      "lates": 16,
+      "latePallets": 23,
+      "timeliness": 0.9461358313817331,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -2176,24 +2176,6 @@
       "failed": false
     },
     {
-      "id": "7310593872",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "ROSLIN CELL THERAPIES",
-      "city": "ROSLIN CELL THERAPIES",
-      "pc": "EH54 9BJ",
-      "window": "",
-      "commitDate": "05/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310594006",
       "acct": "GREINER",
       "month": "Feb-26",
@@ -2206,24 +2188,6 @@
       "arrival": "00:00",
       "mins": 4320,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310594169",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "E & O LABS LTD (2031705)",
-      "city": "E & O LABS LTD (2031705)",
-      "pc": "FK4 2HH",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 3,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -3841,7 +3805,7 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 31
+      "lates": 29
     },
     "South": {
       "pallets": 207,
