@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:13:54.425Z",
+  "lastUpdated": "2026-06-30T15:13:55.363Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 20,
-      "latePallets": 23,
-      "timeliness": 0.9411764705882353,
+      "lates": 19,
+      "latePallets": 19,
+      "timeliness": 0.9514066496163683,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -2050,24 +2050,6 @@
       "failed": false
     },
     {
-      "id": "7310606036",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "GENOME RESEARCH LIMITED  (1006628)",
-      "city": "GENOME RESEARCH LIMITED  (1006628)",
-      "pc": "CB10 1SA",
-      "window": "",
-      "commitDate": "18/05/26",
-      "arrDate": "19/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310599608",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2306,7 +2288,7 @@
     "East of England": {
       "pallets": 188,
       "cons": 145,
-      "lates": 3
+      "lates": 2
     },
     "Scotland": {
       "pallets": 114,
