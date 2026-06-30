@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:26.735Z",
+  "lastUpdated": "2026-06-30T14:27:28.103Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 22,
-      "latePallets": 22,
-      "timeliness": 0.9566929133858267,
+      "lates": 20,
+      "latePallets": 20,
+      "timeliness": 0.9606299212598425,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -2302,24 +2302,6 @@
       "failed": false
     },
     {
-      "id": "7310598019",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "ROSLIN CELL THERAPIES",
-      "city": "ROSLIN CELL THERAPIES",
-      "pc": "EH54 9BJ",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "11/03/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310597813",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2331,24 +2313,6 @@
       "arrDate": "11/03/26",
       "arrival": "00:00",
       "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598392",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Easter Bush campus Stores University of Edinburgh(2009951)",
-      "city": "Easter Bush campus Stores University of Edinburgh(2009951)",
-      "pc": "EH25 9RG",
-      "window": "",
-      "commitDate": "10/03/26",
-      "arrDate": "11/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -3427,7 +3391,7 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 24
+      "lates": 22
     },
     "South": {
       "pallets": 207,
