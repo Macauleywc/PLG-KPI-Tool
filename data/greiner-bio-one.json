@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:14:02.347Z",
+  "lastUpdated": "2026-06-30T15:14:05.408Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -918,9 +918,9 @@
       "cons": 266,
       "pallets": 391,
       "revenue": 25805.53,
-      "lates": 15,
-      "latePallets": 15,
-      "timeliness": 0.9616368286445013,
+      "lates": 13,
+      "latePallets": 13,
+      "timeliness": 0.9667519181585678,
       "avgRC": 97.01,
       "avgRP": 66,
       "avgPC": 1.47,
@@ -1672,48 +1672,12 @@
       "failed": false
     },
     {
-      "id": "7310604767",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "GENOME RESEARCH LIMITED  (1006628)",
-      "city": "GENOME RESEARCH LIMITED  (1006628)",
-      "pc": "CB10 1SA",
-      "window": "",
-      "commitDate": "06/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310604946",
       "acct": "GREINER",
       "month": "May-26",
       "dest": "SYNNOVIS SERVICES (2037382)",
       "city": "SYNNOVIS SERVICES (2037382)",
       "pc": "SE1 7EH",
-      "window": "",
-      "commitDate": "07/05/26",
-      "arrDate": "08/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310604925",
-      "acct": "GREINER",
-      "month": "May-26",
-      "dest": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "city": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "pc": "SE1 1UL",
       "window": "",
       "commitDate": "07/05/26",
       "arrDate": "08/05/26",
@@ -2216,7 +2180,7 @@
     "East of England": {
       "pallets": 188,
       "cons": 145,
-      "lates": 2
+      "lates": 1
     },
     "Scotland": {
       "pallets": 114,
@@ -2251,7 +2215,7 @@
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 10
+      "lates": 9
     },
     "North West": {
       "pallets": 172,
