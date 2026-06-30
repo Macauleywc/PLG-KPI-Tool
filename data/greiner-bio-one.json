@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:27:21.600Z",
+  "lastUpdated": "2026-06-30T14:27:23.231Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 28,
-      "latePallets": 35,
-      "timeliness": 0.9311023622047244,
+      "lates": 27,
+      "latePallets": 32,
+      "timeliness": 0.937007874015748,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -3040,24 +3040,6 @@
       "failed": false
     },
     {
-      "id": "7310599671",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "E & O LABS LTD (2031705)",
-      "city": "E & O LABS LTD (2031705)",
-      "pc": "FK4 2HH",
-      "window": "",
-      "commitDate": "20/03/26",
-      "arrDate": "23/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310599627",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -3535,7 +3517,7 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 26
+      "lates": 25
     },
     "South": {
       "pallets": 207,
