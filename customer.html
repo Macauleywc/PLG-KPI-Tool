@@ -127,6 +127,10 @@ tr.empty-row td{color:var(--muted);opacity:0.55;padding-top:7px!important;paddin
 .pill-red{font-size:11px;font-weight:600;background:#fff5f5;border:1px solid #fca5a5;padding:2px 9px;border-radius:10px;letter-spacing:0;text-transform:none;color:var(--red);margin-left:8px;vertical-align:middle;}
 .section-card-standalone{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:16px;}
 .tracker-table-wrap{overflow-x:auto;}
+#late-table th:last-child,#late-table td:last-child{position:sticky;right:0;z-index:3;box-shadow:-3px 0 6px rgba(0,0,0,0.08);}
+#late-table td:last-child{background:#fff;}
+#late-table tbody tr:hover td:last-child{background:#FAFAF8;}
+#late-table thead th:last-child{background:var(--faint);}
 /* ── Stat cards ───────────────────────────────────── */
 .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:0;border:1px solid var(--border);border-bottom:none;border-radius:12px 12px 0 0;overflow:hidden;}
 .stat-card{background:var(--surface);border-radius:0;padding:20px 24px;border:none;border-right:1px solid var(--border);border-top:3px solid var(--orange);box-shadow:none;}
