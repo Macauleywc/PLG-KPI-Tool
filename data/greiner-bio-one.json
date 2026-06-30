@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:57:27.304Z",
+  "lastUpdated": "2026-06-30T14:58:22.819Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -306,9 +306,9 @@
       "cons": 329,
       "pallets": 508,
       "revenue": 31865.25,
-      "lates": 32,
-      "latePallets": 42,
-      "timeliness": 0.917323,
+      "lates": 6,
+      "latePallets": 6,
+      "timeliness": 0.988189,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -320,7 +320,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 329,
-          "lates": 32
+          "lates": 6
         }
       },
       "regionData": {
@@ -328,13 +328,13 @@
           "cons": 64,
           "pallets": 89,
           "revenue": 5805.470000000001,
-          "lates": 6
+          "lates": 3
         },
         "East Midlands": {
           "cons": 32,
           "pallets": 57,
           "revenue": 2896.870000000001,
-          "lates": 1
+          "lates": 0
         },
         "East of England": {
           "cons": 32,
@@ -346,19 +346,19 @@
           "cons": 48,
           "pallets": 71,
           "revenue": 3751.019999999999,
-          "lates": 1
+          "lates": 0
         },
         "Scotland": {
           "cons": 25,
           "pallets": 27,
           "revenue": 2085.5099999999998,
-          "lates": 9
+          "lates": 2
         },
         "London": {
           "cons": 15,
           "pallets": 18,
           "revenue": 1368.8400000000004,
-          "lates": 8
+          "lates": 1
         },
         "West Midlands": {
           "cons": 12,
@@ -370,7 +370,7 @@
           "cons": 26,
           "pallets": 71,
           "revenue": 5050.469999999999,
-          "lates": 1
+          "lates": 0
         },
         "North East": {
           "cons": 3,
@@ -382,19 +382,19 @@
           "cons": 28,
           "pallets": 45,
           "revenue": 3174.1099999999997,
-          "lates": 3
+          "lates": 0
         },
         "Other": {
           "cons": 2,
           "pallets": 2,
           "revenue": 342.78,
-          "lates": 1
+          "lates": 0
         },
         "North West": {
           "cons": 27,
           "pallets": 42,
           "revenue": 2377.84,
-          "lates": 2
+          "lates": 0
         },
         "Wales": {
           "cons": 15,
@@ -406,23 +406,23 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 79,
-          "lates": 12
+          "lates": 3
         },
         "Tue": {
           "cons": 59,
-          "lates": 4
+          "lates": 1
         },
         "Wed": {
           "cons": 75,
-          "lates": 6
+          "lates": 0
         },
         "Thu": {
           "cons": 54,
-          "lates": 4
+          "lates": 1
         },
         "Fri": {
           "cons": 62,
-          "lates": 6
+          "lates": 1
         }
       },
       "destData": [
@@ -442,7 +442,7 @@
           "cons": 10,
           "pallets": 13,
           "revenue": 804.79,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "DARENT VALLEY HOSPITAL",
@@ -541,7 +541,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 252.01000000000002,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "The University of Liverpool,(2036628)",
@@ -586,7 +586,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 357.66,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "RECEIPT & DISTRIBUTION CENTRE (2024609)",
@@ -604,7 +604,7 @@
           "cons": 4,
           "pallets": 8,
           "revenue": 674.7800000000001,
-          "lates": 2
+          "lates": 0
         }
       ]
     },
@@ -1636,42 +1636,6 @@
       "failed": false
     },
     {
-      "id": "195524",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Ocon Chemicals Ltd",
-      "city": "Ocon Chemicals Ltd",
-      "pc": "T12 XFW6",
-      "window": "",
-      "commitDate": "16/03/26",
-      "arrDate": "20/03/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598930",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "INUVI (1029110)",
-      "city": "INUVI (1029110)",
-      "pc": "GL2 8AX",
-      "window": "",
-      "commitDate": "13/03/26",
-      "arrDate": "16/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310598221",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -1681,114 +1645,6 @@
       "window": "",
       "commitDate": "09/03/26",
       "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598053",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "SEACROFT HOSPITAL (2037217)",
-      "city": "SEACROFT HOSPITAL (2037217)",
-      "pc": "LS14 6UH",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598912",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "city": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "pc": "WA3 6PL",
-      "window": "",
-      "commitDate": "13/03/26",
-      "arrDate": "16/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310599671",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "E & O LABS LTD (2031705)",
-      "city": "E & O LABS LTD (2031705)",
-      "pc": "FK4 2HH",
-      "window": "",
-      "commitDate": "20/03/26",
-      "arrDate": "23/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598295",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "city": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "pc": "ME7 5NY",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597216",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "TUNBRIDGE WELLS HOSPITAL AT PEMBURY",
-      "city": "TUNBRIDGE WELLS HOSPITAL AT PEMBURY",
-      "pc": "TN2 4QJ",
-      "window": "",
-      "commitDate": "03/03/26",
-      "arrDate": "04/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598542",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "King's College London",
-      "city": "King's College London",
-      "pc": "SE5 9NU",
-      "window": "",
-      "commitDate": "11/03/26",
-      "arrDate": "12/03/26",
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
@@ -1816,114 +1672,6 @@
       "failed": false
     },
     {
-      "id": "7310600079",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "city": "NHS BLOOD AND TRANSPLANT (1008047)",
-      "pc": "WA3 6PL",
-      "window": "",
-      "commitDate": "23/03/26",
-      "arrDate": "24/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598995",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "BIOMEDICAL LAB (1008085)",
-      "city": "BIOMEDICAL LAB (1008085)",
-      "pc": "LE5 1TY",
-      "window": "",
-      "commitDate": "13/03/26",
-      "arrDate": "16/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310600783",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "University of St Andrews (1025276)",
-      "city": "University of St Andrews (1025276)",
-      "pc": "KY16 9ST",
-      "window": "",
-      "commitDate": "30/03/26",
-      "arrDate": "31/03/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310600116",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "city": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "pc": "PO19 6SE",
-      "window": "",
-      "commitDate": "24/03/26",
-      "arrDate": "25/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310599384",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Polianidou, Miss Georgia (2038147)",
-      "city": "Polianidou, Miss Georgia (2038147)",
-      "pc": "WC1E 6AE",
-      "window": "",
-      "commitDate": "19/03/26",
-      "arrDate": "20/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597721",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
-      "city": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
-      "pc": "DD1 5EH",
-      "window": "",
-      "commitDate": "05/03/26",
-      "arrDate": "06/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310599608",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -1934,24 +1682,6 @@
       "commitDate": "19/03/26",
       "arrDate": "20/03/26",
       "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310600809",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "IQVIA Laboratories",
-      "city": "IQVIA Laboratories",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "30/03/26",
-      "arrDate": "31/03/26",
-      "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
@@ -1978,150 +1708,6 @@
       "failed": false
     },
     {
-      "id": "7310597120",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "KCL - JAMES BLACK CENTRE",
-      "city": "KCL - JAMES BLACK CENTRE",
-      "pc": "SE5 9NU",
-      "window": "",
-      "commitDate": "04/03/26",
-      "arrDate": "05/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310600601",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "BSPS SUPPORT SERVICES (2038575",
-      "city": "BSPS SUPPORT SERVICES (2038575",
-      "pc": "RG1 8NQ",
-      "window": "",
-      "commitDate": "30/03/26",
-      "arrDate": "31/03/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597424",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "School of Biomedical Sciences",
-      "city": "School of Biomedical Sciences",
-      "pc": "KY16 9TS",
-      "window": "",
-      "commitDate": "04/03/26",
-      "arrDate": "05/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310599627",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "city": "KINGS COLLEGE LONDON BIOMEDICAL (1007837)",
-      "pc": "SE1 1UL",
-      "window": "",
-      "commitDate": "20/03/26",
-      "arrDate": "23/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597303",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "SYNNOVIS SERVICES (2037382)",
-      "city": "SYNNOVIS SERVICES (2037382)",
-      "pc": "SE1 7EH",
-      "window": "",
-      "commitDate": "04/03/26",
-      "arrDate": "05/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597343",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "KCL-INNOVATION HUB",
-      "city": "KCL-INNOVATION HUB",
-      "pc": "SE1 9RT",
-      "window": "",
-      "commitDate": "04/03/26",
-      "arrDate": "05/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598764",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "IQVIA Laboratories",
-      "city": "IQVIA Laboratories",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "12/03/26",
-      "arrDate": "13/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598297",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "city": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
-      "pc": "ME7 5NY",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "10/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310598019",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -2133,60 +1719,6 @@
       "arrDate": "11/03/26",
       "arrival": "00:00",
       "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597813",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "city": "Phlebotomy DEPARTMENT ST RICHARDS (2020446)",
-      "pc": "PO19 6SE",
-      "window": "",
-      "commitDate": "09/03/26",
-      "arrDate": "11/03/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310597305",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "SYNNOVIS SERVICES (2037382)",
-      "city": "SYNNOVIS SERVICES (2037382)",
-      "pc": "SE1 7EH",
-      "window": "",
-      "commitDate": "04/03/26",
-      "arrDate": "05/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "7310598392",
-      "acct": "GREINER",
-      "month": "Mar-26",
-      "dest": "Easter Bush campus Stores University of Edinburgh(2009951)",
-      "city": "Easter Bush campus Stores University of Edinburgh(2009951)",
-      "pc": "EH25 9RG",
-      "window": "",
-      "commitDate": "10/03/26",
-      "arrDate": "11/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -3607,42 +3139,42 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 27
+      "lates": 20
     },
     "South": {
       "pallets": 207,
       "cons": 128,
-      "lates": 9
+      "lates": 6
     },
     "East Midlands": {
       "pallets": 254,
       "cons": 166,
-      "lates": 8
+      "lates": 7
     },
     "South East": {
       "pallets": 345,
       "cons": 253,
-      "lates": 27
+      "lates": 24
     },
     "South West": {
       "pallets": 255,
       "cons": 94,
-      "lates": 3
+      "lates": 2
     },
     "Yorkshire": {
       "pallets": 288,
       "cons": 198,
-      "lates": 6
+      "lates": 5
     },
     "London": {
       "pallets": 124,
       "cons": 91,
-      "lates": 22
+      "lates": 15
     },
     "North West": {
       "pallets": 172,
       "cons": 103,
-      "lates": 5
+      "lates": 3
     },
     "Wales": {
       "pallets": 86,
@@ -3662,7 +3194,7 @@
     "Other": {
       "pallets": 13,
       "cons": 11,
-      "lates": 1
+      "lates": 0
     }
   },
   "destData": [
@@ -3682,7 +3214,7 @@
       "cons": 25,
       "pallets": 33,
       "revenue": 2155.58,
-      "lates": 6
+      "lates": 4
     },
     {
       "name": "SCIENTIFIC LABORATORY SUPPLIES LTD (2039907)",
@@ -3700,7 +3232,7 @@
       "cons": 23,
       "pallets": 58,
       "revenue": 5494.070000000001,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "Bentley Bridge Distribution Centre (2034136)",
@@ -3727,7 +3259,7 @@
       "cons": 22,
       "pallets": 37,
       "revenue": 2209.6400000000003,
-      "lates": 3
+      "lates": 1
     },
     {
       "name": "ABBOTT (GLASGOW MSC)",
@@ -3781,7 +3313,7 @@
       "cons": 18,
       "pallets": 18,
       "revenue": 1633.22,
-      "lates": 4
+      "lates": 3
     },
     {
       "name": "SANDWELL GENERAL HOSPITAL (2010051)",
