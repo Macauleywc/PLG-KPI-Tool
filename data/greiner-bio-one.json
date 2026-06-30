@@ -1,14 +1,14 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T14:25:58.169Z",
+  "lastUpdated": "2026-06-30T14:25:59.144Z",
   "months": {
     "2026-02": {
       "cons": 301,
       "pallets": 427,
       "revenue": 26282.35,
-      "lates": 11,
-      "latePallets": 11,
-      "timeliness": 0.9742388758782201,
+      "lates": 10,
+      "latePallets": 10,
+      "timeliness": 0.9765807962529274,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -2788,24 +2788,6 @@
       "failed": false
     },
     {
-      "id": "7310595070",
-      "acct": "GREINER",
-      "month": "Feb-26",
-      "dest": "Life Sciences Stores (2010216)",
-      "city": "Life Sciences Stores (2010216)",
-      "pc": "G11 6PE",
-      "window": "",
-      "commitDate": "13/02/26",
-      "arrDate": "16/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "7310598930",
       "acct": "GREINER",
       "month": "Mar-26",
@@ -3715,7 +3697,7 @@
     "Scotland": {
       "pallets": 114,
       "cons": 103,
-      "lates": 29
+      "lates": 28
     },
     "South": {
       "pallets": 207,
