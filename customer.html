@@ -2051,7 +2051,19 @@ async function loadFromGitHub(){
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
     var resp=await fetch(url,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}});
     if(resp.status===404){var _gs3=document.getElementById('gh-status');if(_gs3){_gs3.textContent='No saved data yet';}savedMonthData={};ghFileSha=null;buildTrackerFromSaved();renderHistory();return;}
+    if(!resp.ok){
+      var errBody=null;try{errBody=await resp.json();}catch(e){}
+      var errMsg=(errBody&&errBody.message)?errBody.message:('HTTP '+resp.status);
+      var _gsErr=document.getElementById('gh-status');if(_gsErr){_gsErr.textContent='GitHub error: '+errMsg;}
+      console.error('loadFromGitHub failed:',resp.status,errBody);
+      return;
+    }
     var json=await resp.json();ghFileSha=json.sha;
+    if(!json.content){
+      var _gsErr2=document.getElementById('gh-status');if(_gsErr2){_gsErr2.textContent='GitHub returned no file content — try again.';}
+      console.error('loadFromGitHub: response missing content field',json);
+      return;
+    }
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
     savedMonthData=decoded.months||{};window._savedLateRows=decoded.lateRows||[];window._savedRegionData=decoded.regionData||null;window._savedDestData=decoded.destData||[];
     var mCount=Object.keys(savedMonthData).length;
