@@ -1,6 +1,6 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-07-06T14:52:50.429Z",
+  "lastUpdated": "2026-07-06T14:53:09.043Z",
   "months": {
     "2026-04": {
       "cons": 109,
@@ -1580,9 +1580,9 @@
       "cons": 101,
       "pallets": 162,
       "revenue": 7430.35,
-      "lates": 5,
-      "latePallets": 5,
-      "timeliness": 0.969136,
+      "lates": 4,
+      "latePallets": 4,
+      "timeliness": 0.975309,
       "avgRC": 73.57,
       "avgRP": 45.87,
       "avgPC": 1.6,
@@ -1594,7 +1594,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 67,
-          "lates": 5
+          "lates": 4
         },
         "Economy Booked": {
           "cons": 34,
@@ -1618,7 +1618,7 @@
           "cons": 10,
           "pallets": 11,
           "revenue": 460,
-          "lates": 1
+          "lates": 0
         },
         "Yorkshire": {
           "cons": 9,
@@ -1694,7 +1694,7 @@
         },
         "Fri": {
           "cons": 27,
-          "lates": 1
+          "lates": 0
         }
       },
       "destData": [
@@ -1912,24 +1912,6 @@
       "arrDate": "09/06/26",
       "arrival": "01:00",
       "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "264369",
-      "acct": "ANAND",
-      "month": "Jun-26",
-      "dest": "TRADELINK PRIVATE Ltd",
-      "city": "TRADELINK PRIVATE Ltd",
-      "pc": "B19 3QD",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
