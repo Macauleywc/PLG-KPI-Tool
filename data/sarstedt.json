@@ -1,6 +1,6 @@
 {
   "customer": "Sarstedt",
-  "lastUpdated": "2026-07-06T14:50:06.560Z",
+  "lastUpdated": "2026-07-06T14:50:59.114Z",
   "months": {
     "2026-06": {
       "cons": 290,
@@ -1246,9 +1246,9 @@
       "cons": 272,
       "pallets": 657,
       "revenue": 31389.55,
-      "lates": 28,
-      "latePallets": 39,
-      "timeliness": 0.940639,
+      "lates": 7,
+      "latePallets": 9,
+      "timeliness": 0.986301,
       "avgRC": 115.4,
       "avgRP": 47.78,
       "avgPC": 2.42,
@@ -1260,11 +1260,11 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 236,
-          "lates": 27
+          "lates": 7
         },
         "Economy Booked": {
           "cons": 36,
-          "lates": 1
+          "lates": 0
         }
       },
       "regionData": {
@@ -1272,7 +1272,7 @@
           "cons": 24,
           "pallets": 99,
           "revenue": 6199.700000000002,
-          "lates": 4
+          "lates": 0
         },
         "West Midlands": {
           "cons": 17,
@@ -1284,7 +1284,7 @@
           "cons": 58,
           "pallets": 134,
           "revenue": 5924.2000000000035,
-          "lates": 4
+          "lates": 1
         },
         "Other": {
           "cons": 8,
@@ -1296,25 +1296,25 @@
           "cons": 14,
           "pallets": 23,
           "revenue": 1395.9499999999998,
-          "lates": 2
+          "lates": 1
         },
         "South West": {
           "cons": 15,
           "pallets": 16,
           "revenue": 1026.6499999999999,
-          "lates": 5
+          "lates": 1
         },
         "North West": {
           "cons": 37,
           "pallets": 120,
           "revenue": 4814.500000000001,
-          "lates": 3
+          "lates": 0
         },
         "Wales": {
           "cons": 12,
           "pallets": 29,
           "revenue": 1298.45,
-          "lates": 1
+          "lates": 0
         },
         "North East": {
           "cons": 8,
@@ -1332,41 +1332,41 @@
           "cons": 44,
           "pallets": 76,
           "revenue": 3515.05,
-          "lates": 5
+          "lates": 2
         },
         "East Midlands": {
           "cons": 20,
           "pallets": 79,
           "revenue": 3247.8500000000004,
-          "lates": 1
+          "lates": 0
         },
         "London": {
           "cons": 10,
           "pallets": 14,
           "revenue": 890.9499999999999,
-          "lates": 2
+          "lates": 1
         }
       },
       "dowBreakdown": {
         "Mon": {
           "cons": 57,
-          "lates": 6
+          "lates": 0
         },
         "Tue": {
           "cons": 44,
-          "lates": 3
+          "lates": 0
         },
         "Wed": {
           "cons": 59,
-          "lates": 7
+          "lates": 3
         },
         "Thu": {
           "cons": 60,
-          "lates": 6
+          "lates": 3
         },
         "Fri": {
           "cons": 52,
-          "lates": 6
+          "lates": 1
         }
       },
       "destData": [
@@ -1440,7 +1440,7 @@
           "cons": 5,
           "pallets": 6,
           "revenue": 515.75,
-          "lates": 4
+          "lates": 0
         },
         {
           "name": "Frimley Health NHSFT",
@@ -1467,7 +1467,7 @@
           "cons": 5,
           "pallets": 5,
           "revenue": 211.55,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Institute Of Cancer Research",
@@ -1485,7 +1485,7 @@
           "cons": 5,
           "pallets": 5,
           "revenue": 208.5,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "NHS SUPPLY CHAIN BRIDGWATER",
@@ -1494,7 +1494,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 326.5,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "NHS SUPPLY CHAIN RUGBY C",
@@ -1521,7 +1521,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 219.85000000000002,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "R & L SLAUGHTER LTD",
@@ -2063,60 +2063,6 @@
       "failed": false
     },
     {
-      "id": "0742385/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "Cambridge Univ Hospitals NHSF Trust",
-      "city": "Cambridge Univ Hospitals NHSF Trust",
-      "pc": "CB23 8EL",
-      "window": "",
-      "commitDate": "09/04/26",
-      "arrDate": "10/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 7,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742314/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "NHS HIGHLAND",
-      "city": "NHS HIGHLAND",
-      "pc": "IV3 8DU",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0744295/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "university of manchester",
-      "city": "university of manchester",
-      "pc": "m13 9pt",
-      "window": "",
-      "commitDate": "27/04/26",
-      "arrDate": "28/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0742881/00",
       "acct": "SARSTEDT",
       "month": "Apr-26",
@@ -2135,24 +2081,6 @@
       "failed": false
     },
     {
-      "id": "0743470/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "MRC - IPROC-LMB-FCC",
-      "city": "MRC - IPROC-LMB-FCC",
-      "pc": "CB2 0QH",
-      "window": "",
-      "commitDate": "20/04/26",
-      "arrDate": "21/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0744506/00",
       "acct": "SARSTEDT",
       "month": "Apr-26",
@@ -2162,42 +2090,6 @@
       "window": "",
       "commitDate": "29/04/26",
       "arrDate": "30/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0741951/m1+0741951/m2",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "Kings College London",
-      "city": "Kings College London",
-      "pc": "SE1 9RT",
-      "window": "",
-      "commitDate": "17/04/26",
-      "arrDate": "20/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0744148/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "NHS HIGHLAND",
-      "city": "NHS HIGHLAND",
-      "pc": "IV3 8DU",
-      "window": "",
-      "commitDate": "28/04/26",
-      "arrDate": "29/04/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
@@ -2225,24 +2117,6 @@
       "failed": false
     },
     {
-      "id": "0729614/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "CAMPDEN BRI (CHIPPING CAMPDEN) LTD",
-      "city": "CAMPDEN BRI (CHIPPING CAMPDEN) LTD",
-      "pc": "GL55 6LD",
-      "window": "",
-      "commitDate": "14/04/26",
-      "arrDate": "15/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0742371/00",
       "acct": "SARSTEDT",
       "month": "Apr-26",
@@ -2261,24 +2135,6 @@
       "failed": false
     },
     {
-      "id": "0735098/02",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "Cogent Breeding Ltd",
-      "city": "Cogent Breeding Ltd",
-      "pc": "CH3 6JQ",
-      "window": "",
-      "commitDate": "20/04/26",
-      "arrDate": "21/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0744970",
       "acct": "SARSTEDT",
       "month": "Apr-26",
@@ -2290,132 +2146,6 @@
       "arrDate": "06/05/26",
       "arrival": "01:00",
       "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742373/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "Maidstone and Tunbridge Wells NHS Trust",
-      "city": "Maidstone and Tunbridge Wells NHS Trust",
-      "pc": "ME16 9QQ",
-      "window": "",
-      "commitDate": "09/04/26",
-      "arrDate": "10/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0735083/02",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "Cogent Breeding Ltd",
-      "city": "Cogent Breeding Ltd",
-      "pc": "CH3 6JQ",
-      "window": "",
-      "commitDate": "20/04/26",
-      "arrDate": "21/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742734/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "NHS HIGHLAND",
-      "city": "NHS HIGHLAND",
-      "pc": "IV3 8DU",
-      "window": "",
-      "commitDate": "15/04/26",
-      "arrDate": "16/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742452/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "solus scientific  solutions ltd",
-      "city": "solus scientific  solutions ltd",
-      "pc": "ng19 7jz",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742628/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "CAMBRIDGE UNIV HOSPITALS NHSF",
-      "city": "CAMBRIDGE UNIV HOSPITALS NHSF",
-      "pc": "CB2 0QQ",
-      "window": "",
-      "commitDate": "13/04/26",
-      "arrDate": "16/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742367/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "NHS HIGHLAND",
-      "city": "NHS HIGHLAND",
-      "pc": "IV2 3UJ",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "15/04/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742634/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "CAMPDEN BRI (CHIPPING CAMPDEN) LTD",
-      "city": "CAMPDEN BRI (CHIPPING CAMPDEN) LTD",
-      "pc": "GL55 6LD",
-      "window": "",
-      "commitDate": "13/04/26",
-      "arrDate": "15/04/26",
-      "arrival": "01:00",
-      "mins": 2880,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -2450,114 +2180,6 @@
       "window": "",
       "commitDate": "29/04/26",
       "arrDate": "30/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742531/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "Cultech Ltd",
-      "city": "Cultech Ltd",
-      "pc": "SA12 7DJ",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0741597/01",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "University of Leeds",
-      "city": "University of Leeds",
-      "pc": "LS2 9JT",
-      "window": "",
-      "commitDate": "02/04/26",
-      "arrDate": "08/04/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0741986/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "institute of cancer research",
-      "city": "institute of cancer research",
-      "pc": "sm2 5gp",
-      "window": "",
-      "commitDate": "07/04/26",
-      "arrDate": "08/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0729613/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "CAMPDEN BRI (CHIPPING CAMPDEN) LTD",
-      "city": "CAMPDEN BRI (CHIPPING CAMPDEN) LTD",
-      "pc": "GL55 6LD",
-      "window": "",
-      "commitDate": "08/04/26",
-      "arrDate": "09/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0741881/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "NHS SUPPLY CHAIN BRIDGWATER",
-      "city": "NHS SUPPLY CHAIN BRIDGWATER",
-      "pc": "TA6 4RN",
-      "window": "",
-      "commitDate": "08/04/26",
-      "arrDate": "14/04/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0742200/00",
-      "acct": "SARSTEDT",
-      "month": "Apr-26",
-      "dest": "chesterfield royal hosp nhsft roche",
-      "city": "chesterfield royal hosp nhsft roche",
-      "pc": "s44 5bl",
-      "window": "",
-      "commitDate": "08/04/26",
-      "arrDate": "09/04/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
