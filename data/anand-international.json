@@ -1,6 +1,6 @@
 {
   "customer": "Anand International",
-  "lastUpdated": "2026-06-22T14:45:11.496Z",
+  "lastUpdated": "2026-07-06T14:52:50.429Z",
   "months": {
     "2026-04": {
       "cons": 109,
@@ -1575,9 +1575,547 @@
           "lates": 0
         }
       ]
+    },
+    "2026-06": {
+      "cons": 101,
+      "pallets": 162,
+      "revenue": 7430.35,
+      "lates": 5,
+      "latePallets": 5,
+      "timeliness": 0.969136,
+      "avgRC": 73.57,
+      "avgRP": 45.87,
+      "avgPC": 1.6,
+      "palletSizes": {
+        "Full": 71,
+        "Quarter": 22,
+        "Half": 69
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 67,
+          "lates": 5
+        },
+        "Economy Booked": {
+          "cons": 34,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "Scotland": {
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 339.8,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 317.65,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 10,
+          "pallets": 11,
+          "revenue": 460,
+          "lates": 1
+        },
+        "Yorkshire": {
+          "cons": 9,
+          "pallets": 11,
+          "revenue": 513.35,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 35,
+          "pallets": 71,
+          "revenue": 2930.0500000000006,
+          "lates": 2
+        },
+        "South West": {
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 274.90000000000003,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 7,
+          "pallets": 11,
+          "revenue": 468.85,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 4,
+          "pallets": 11,
+          "revenue": 538.65,
+          "lates": 0
+        },
+        "London": {
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 395,
+          "lates": 1
+        },
+        "East Midlands": {
+          "cons": 6,
+          "pallets": 13,
+          "revenue": 592.45,
+          "lates": 0
+        },
+        "South": {
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 146.65,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 5,
+          "pallets": 8,
+          "revenue": 453,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 12,
+          "lates": 2
+        },
+        "Tue": {
+          "cons": 17,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 21,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 24,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 27,
+          "lates": 1
+        }
+      },
+      "destData": [
+        {
+          "name": "Savers Health & Beauty Ltd",
+          "city": "Savers Health & Beauty Ltd",
+          "pc": "LU5 4RZ",
+          "cons": 5,
+          "pallets": 16,
+          "revenue": 770.25,
+          "lates": 0
+        },
+        {
+          "name": "PREMIER LIFE LTD",
+          "city": "PREMIER LIFE LTD",
+          "pc": "NW10 7XR",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 259.75,
+          "lates": 1
+        },
+        {
+          "name": "FIZZA ELECTRONICS LTD",
+          "city": "FIZZA ELECTRONICS LTD",
+          "pc": "M8 8LG",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 127,
+          "lates": 0
+        },
+        {
+          "name": "Marks And Spencer PLC",
+          "city": "Marks And Spencer PLC",
+          "pc": "BD5 8LZ",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 156.65,
+          "lates": 0
+        },
+        {
+          "name": "TS Distribution/Trades Store",
+          "city": "TS Distribution/Trades Store",
+          "pc": "BB1 5BY",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 129.14999999999998,
+          "lates": 0
+        },
+        {
+          "name": "GAP Convenience Distribution Ltd",
+          "city": "GAP Convenience Distribution Ltd",
+          "pc": "PR2 5PZ",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 162.60000000000002,
+          "lates": 0
+        },
+        {
+          "name": "Legacy Vape Hub UK Ltd",
+          "city": "Legacy Vape Hub UK Ltd",
+          "pc": "M8 8FN",
+          "cons": 3,
+          "pallets": 17,
+          "revenue": 638.3499999999999,
+          "lates": 0
+        },
+        {
+          "name": "B & M BARGAINS",
+          "city": "B & M BARGAINS",
+          "pc": "L24 8RJ",
+          "cons": 3,
+          "pallets": 5,
+          "revenue": 247.35000000000002,
+          "lates": 0
+        },
+        {
+          "name": "SHINING STAR (UK) LTD",
+          "city": "SHINING STAR (UK) LTD",
+          "pc": "M7 1SL",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 163.75,
+          "lates": 1
+        },
+        {
+          "name": "V-TULIP LIMITED",
+          "city": "V-TULIP LIMITED",
+          "pc": "UB6 8AA",
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 353.4,
+          "lates": 0
+        },
+        {
+          "name": "Hovemint Ltd",
+          "city": "Hovemint Ltd",
+          "pc": "M7 1SS",
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 223.14999999999998,
+          "lates": 1
+        },
+        {
+          "name": "J W FILSHILL LTD",
+          "city": "J W FILSHILL LTD",
+          "pc": "PA4 8DJ",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 212.8,
+          "lates": 0
+        },
+        {
+          "name": "GO GREEN BATTERIES LTD",
+          "city": "GO GREEN BATTERIES LTD",
+          "pc": "S81 8AD",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 77.3,
+          "lates": 0
+        },
+        {
+          "name": "Nuvo Trading Solutions Ltd",
+          "city": "Nuvo Trading Solutions Ltd",
+          "pc": "B69 2RD",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 81.1,
+          "lates": 0
+        },
+        {
+          "name": "S & R TRADELINK LTD",
+          "city": "S & R TRADELINK LTD",
+          "pc": "SA10 6RP",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 131.8,
+          "lates": 0
+        },
+        {
+          "name": "GOLDSTAR (Manchester) Ltd",
+          "city": "GOLDSTAR (Manchester) Ltd",
+          "pc": "M7 1SL",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 133.45,
+          "lates": 0
+        },
+        {
+          "name": "Good Deals 4 U Ltd",
+          "city": "Good Deals 4 U Ltd",
+          "pc": "M8 8AT",
+          "cons": 2,
+          "pallets": 8,
+          "revenue": 287.85,
+          "lates": 0
+        },
+        {
+          "name": "TRADEZGLOBAL LTD",
+          "city": "TRADEZGLOBAL LTD",
+          "pc": "PR1 5DL",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 96.3,
+          "lates": 0
+        },
+        {
+          "name": "COSMEDIC SHOP LTD",
+          "city": "COSMEDIC SHOP LTD",
+          "pc": "PR1 5DL",
+          "cons": 2,
+          "pallets": 6,
+          "revenue": 257.9,
+          "lates": 0
+        },
+        {
+          "name": "B & M Retail Ltd",
+          "city": "B & M Retail Ltd",
+          "pc": "MK42 6EY",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 190.8,
+          "lates": 0
+        }
+      ]
     }
   },
   "lateRows": [
+    {
+      "id": "264321",
+      "acct": "ANAND",
+      "month": "Jun-26",
+      "dest": "Hovemint Ltd",
+      "city": "Hovemint Ltd",
+      "pc": "M7 1SS",
+      "window": "",
+      "commitDate": "16/06/26",
+      "arrDate": "17/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "264225",
+      "acct": "ANAND",
+      "month": "Jun-26",
+      "dest": "Cosmopolitan Bazaar/ Lightwood Logistics ",
+      "city": "Cosmopolitan Bazaar/ Lightwood Logistics ",
+      "pc": "CM6 1TH",
+      "window": "",
+      "commitDate": "08/06/26",
+      "arrDate": "09/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "264369",
+      "acct": "ANAND",
+      "month": "Jun-26",
+      "dest": "TRADELINK PRIVATE Ltd",
+      "city": "TRADELINK PRIVATE Ltd",
+      "pc": "B19 3QD",
+      "window": "",
+      "commitDate": "12/06/26",
+      "arrDate": "15/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "264506",
+      "acct": "ANAND",
+      "month": "Jun-26",
+      "dest": "SHINING STAR (UK) LTD",
+      "city": "SHINING STAR (UK) LTD",
+      "pc": "M7 1SL",
+      "window": "",
+      "commitDate": "18/06/26",
+      "arrDate": "19/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "264690",
+      "acct": "ANAND",
+      "month": "Jun-26",
+      "dest": "PREMIER LIFE LTD",
+      "city": "PREMIER LIFE LTD",
+      "pc": "NW10 7XR",
+      "window": "",
+      "commitDate": "29/06/26",
+      "arrDate": "30/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "263001",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "Dhamecha Cash & Carry ",
+      "city": "Dhamecha Cash & Carry ",
+      "pc": "CR0 3AF",
+      "window": "",
+      "commitDate": "21/04/26",
+      "arrDate": "22/04/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "262759",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "UNITED WHOLESALE GROCERS LTD",
+      "city": "UNITED WHOLESALE GROCERS LTD",
+      "pc": "NE11 0RQ",
+      "window": "",
+      "commitDate": "10/04/26",
+      "arrDate": "11/04/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "262464",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "Perkins Group Services Ltd",
+      "city": "Perkins Group Services Ltd",
+      "pc": "SA5 4HW",
+      "window": "",
+      "commitDate": "09/04/26",
+      "arrDate": "13/04/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "263345",
+      "acct": "ANAND",
+      "month": "Apr-26",
+      "dest": "LIGHTER LTD",
+      "city": "LIGHTER LTD",
+      "pc": "CM18 7QR",
+      "window": "",
+      "commitDate": "05/05/26",
+      "arrDate": "06/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "264061",
+      "acct": "ANAND",
+      "month": "May-26",
+      "dest": "H-SQUARED ELECTRONICS LTD",
+      "city": "H-SQUARED ELECTRONICS LTD",
+      "pc": "SG17 5HQ",
+      "window": "",
+      "commitDate": "01/06/26",
+      "arrDate": "02/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "263589",
+      "acct": "ANAND",
+      "month": "May-26",
+      "dest": "Kapadia Superstore",
+      "city": "Kapadia Superstore",
+      "pc": "E5 0PD",
+      "window": "",
+      "commitDate": "12/05/26",
+      "arrDate": "13/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "263430",
+      "acct": "ANAND",
+      "month": "May-26",
+      "dest": "Fastcar Direct T/A Optiproducts Ltd",
+      "city": "Fastcar Direct T/A Optiproducts Ltd",
+      "pc": "WS3 2DG",
+      "window": "",
+      "commitDate": "08/05/26",
+      "arrDate": "11/05/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "263517",
+      "acct": "ANAND",
+      "month": "May-26",
+      "dest": "Dhamecha Cash & Carry ",
+      "city": "Dhamecha Cash & Carry ",
+      "pc": "CR0 3AF",
+      "window": "",
+      "commitDate": "12/05/26",
+      "arrDate": "13/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
     {
       "id": "262035",
       "acct": "ANAND",
@@ -1664,150 +2202,6 @@
       "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "264061",
-      "acct": "ANAND",
-      "month": "May-26",
-      "dest": "H-SQUARED ELECTRONICS LTD",
-      "city": "H-SQUARED ELECTRONICS LTD",
-      "pc": "SG17 5HQ",
-      "window": "",
-      "commitDate": "01/06/26",
-      "arrDate": "02/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "263589",
-      "acct": "ANAND",
-      "month": "May-26",
-      "dest": "Kapadia Superstore",
-      "city": "Kapadia Superstore",
-      "pc": "E5 0PD",
-      "window": "",
-      "commitDate": "12/05/26",
-      "arrDate": "13/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "263430",
-      "acct": "ANAND",
-      "month": "May-26",
-      "dest": "Fastcar Direct T/A Optiproducts Ltd",
-      "city": "Fastcar Direct T/A Optiproducts Ltd",
-      "pc": "WS3 2DG",
-      "window": "",
-      "commitDate": "08/05/26",
-      "arrDate": "11/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "263517",
-      "acct": "ANAND",
-      "month": "May-26",
-      "dest": "Dhamecha Cash & Carry ",
-      "city": "Dhamecha Cash & Carry ",
-      "pc": "CR0 3AF",
-      "window": "",
-      "commitDate": "12/05/26",
-      "arrDate": "13/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "263001",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "Dhamecha Cash & Carry ",
-      "city": "Dhamecha Cash & Carry ",
-      "pc": "CR0 3AF",
-      "window": "",
-      "commitDate": "21/04/26",
-      "arrDate": "22/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "262759",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "UNITED WHOLESALE GROCERS LTD",
-      "city": "UNITED WHOLESALE GROCERS LTD",
-      "pc": "NE11 0RQ",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "11/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "262464",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "Perkins Group Services Ltd",
-      "city": "Perkins Group Services Ltd",
-      "pc": "SA5 4HW",
-      "window": "",
-      "commitDate": "09/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "263345",
-      "acct": "ANAND",
-      "month": "Apr-26",
-      "dest": "LIGHTER LTD",
-      "city": "LIGHTER LTD",
-      "pc": "CM18 7QR",
-      "window": "",
-      "commitDate": "05/05/26",
-      "arrDate": "06/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
       "note": "",
       "reason": "",
       "failed": false
