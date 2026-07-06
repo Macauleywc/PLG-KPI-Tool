@@ -1,6 +1,6 @@
 {
   "customer": "Sarstedt",
-  "lastUpdated": "2026-07-06T14:50:59.114Z",
+  "lastUpdated": "2026-07-06T14:51:16.940Z",
   "months": {
     "2026-06": {
       "cons": 290,
@@ -1556,9 +1556,9 @@
       "cons": 271,
       "pallets": 611,
       "revenue": 28615.85,
-      "lates": 10,
-      "latePallets": 20,
-      "timeliness": 0.967267,
+      "lates": 7,
+      "latePallets": 12,
+      "timeliness": 0.98036,
       "avgRC": 105.59,
       "avgRP": 46.83,
       "avgPC": 2.25,
@@ -1570,7 +1570,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 247,
-          "lates": 10
+          "lates": 7
         },
         "Economy Booked": {
           "cons": 24,
@@ -1588,7 +1588,7 @@
           "cons": 46,
           "pallets": 80,
           "revenue": 3538.5500000000006,
-          "lates": 3
+          "lates": 1
         },
         "South": {
           "cons": 5,
@@ -1630,7 +1630,7 @@
           "cons": 17,
           "pallets": 44,
           "revenue": 2030.4,
-          "lates": 1
+          "lates": 0
         },
         "Scotland": {
           "cons": 30,
@@ -1664,7 +1664,7 @@
         },
         "Tue": {
           "cons": 63,
-          "lates": 3
+          "lates": 1
         },
         "Wed": {
           "cons": 59,
@@ -1676,7 +1676,7 @@
         },
         "Fri": {
           "cons": 42,
-          "lates": 2
+          "lates": 1
         }
       },
       "destData": [
@@ -1741,7 +1741,7 @@
           "cons": 6,
           "pallets": 12,
           "revenue": 493.84999999999997,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "NDC LOGISTICS",
@@ -2207,24 +2207,6 @@
       "failed": false
     },
     {
-      "id": "0744993/00",
-      "acct": "SARSTEDT",
-      "month": "May-26",
-      "dest": "Cambridge Univ Hospitals NHSF Trust",
-      "city": "Cambridge Univ Hospitals NHSF Trust",
-      "pc": "CB23 8EL",
-      "window": "",
-      "commitDate": "05/05/26",
-      "arrDate": "06/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 6,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0743278/02",
       "acct": "SARSTEDT",
       "month": "May-26",
@@ -2237,24 +2219,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0746230/00",
-      "acct": "SARSTEDT",
-      "month": "May-26",
-      "dest": "Univ Hospitals of Leicester NHSFT",
-      "city": "Univ Hospitals of Leicester NHSFT",
-      "pc": "LE1 5WW",
-      "window": "",
-      "commitDate": "15/05/26",
-      "arrDate": "18/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -2288,24 +2252,6 @@
       "window": "",
       "commitDate": "20/05/26",
       "arrDate": "21/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0744993/00A",
-      "acct": "SARSTEDT",
-      "month": "May-26",
-      "dest": "Cambridge Univ Hospitals NHSF Trust",
-      "city": "Cambridge Univ Hospitals NHSF Trust",
-      "pc": "CB23 8EL",
-      "window": "",
-      "commitDate": "05/05/26",
-      "arrDate": "06/05/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
