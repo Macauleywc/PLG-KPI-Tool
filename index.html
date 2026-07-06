@@ -403,12 +403,18 @@ function render() {
 }
 
 async function loadMeta() {
-  var token = getToken(); if (!token) return;
+  var token = getToken();
+  hideMetaError();
+  if (!token) return;
+  var errors = [], okCount = 0;
   await Promise.all(getList().map(async function(name) {
     try {
       var r = await fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/data/' + slug(name) + '.json',
         { headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' } });
-      if (!r.ok) return;
+      if (!r.ok) {
+        if (r.status !== 404) errors.push(name + ': HTTP ' + r.status);
+        return;
+      }
       var j = await r.json();
       var raw = j.content.replace(/\s/g, '');
       var d = JSON.parse(atob(raw));
@@ -422,9 +428,35 @@ async function loadMeta() {
       });
       if (hasPlt && totPlt > 0) otif = ((totPlt - totLatePlt) / totPlt * 100).toFixed(1);
       meta[name] = { months: months.length, otif: otif };
-    } catch(e) {}
+      okCount++;
+    } catch(e) {
+      errors.push(name + ': ' + e.message);
+    }
   }));
+  if (errors.length > 0 && okCount === 0) {
+    showMetaError('GitHub sync failed for all customers — first error: ' + errors[0] + '. Check your token in Settings.');
+    console.error('loadMeta errors:', errors);
+  } else if (errors.length > 0) {
+    console.error('loadMeta partial errors:', errors);
+  }
   render();
+}
+
+function showMetaError(msg) {
+  var el = document.getElementById('meta-error-banner');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'meta-error-banner';
+    el.style.cssText = 'background:#FEF2F2;color:#991B1B;border-bottom:1px solid #FCA5A5;padding:10px 28px;font-size:13px;font-weight:500';
+    var hdr = document.querySelector('.hdr');
+    hdr.parentNode.insertBefore(el, hdr.nextSibling);
+  }
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideMetaError() {
+  var el = document.getElementById('meta-error-banner');
+  if (el) el.style.display = 'none';
 }
 
 function toggleEdit() { editMode = !editMode; document.getElementById('edit-btn').textContent = editMode ? 'Done' : 'Manage'; render(); }
