@@ -179,6 +179,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 .modal-footer { display: flex; gap: 8px; justify-content: flex-end; }
 footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -194,6 +195,7 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
       <span class="token-label">GitHub</span>
       <input type="password" class="token-input" id="gh-token" placeholder="ghp_..." oninput="saveToken()" autocomplete="off">
     </div>
+    <button class="btn btn-outline" id="users-btn" style="display:none" onclick="openUsersModal()">Users</button>
     <button onclick="sessionStorage.removeItem('plg_auth');window.location.href='login.html'" class="signout-btn">Sign out</button>
   </div>
 </div>
@@ -222,6 +224,53 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="hideModal()">Cancel</button>
       <button class="btn btn-primary" onclick="addCustomer()">Add customer</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="users-overlay" style="display:none" onclick="if(event.target===this)closeUsersModal()">
+  <div class="modal" style="width:560px;max-height:86vh;overflow-y:auto">
+    <div class="modal-title">Manage Users</div>
+    <div class="modal-sub">Add, remove, or invite users to the KPI Portal</div>
+
+    <div id="users-status" style="display:none;font-size:12px;padding:8px 12px;border-radius:6px;margin-bottom:12px"></div>
+
+    <div id="users-list" style="border:1px solid var(--border);border-radius:8px;margin-bottom:20px;overflow:hidden">
+      <div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">Loading users…</div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:16px;margin-bottom:16px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:10px">Add a new user</div>
+      <input class="modal-input" id="nu-username" type="text" placeholder="Username (e.g. sarah)" style="margin-bottom:8px">
+      <input class="modal-input" id="nu-name" type="text" placeholder="Full name" style="margin-bottom:8px">
+      <input class="modal-input" id="nu-email" type="email" placeholder="Email address" style="margin-bottom:8px">
+      <select class="modal-input" id="nu-role" style="margin-bottom:8px">
+        <option value="user">User</option>
+        <option value="admin">Admin (can manage users)</option>
+      </select>
+      <input class="modal-input" id="nu-password" type="text" placeholder="Temporary password" style="margin-bottom:4px">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+        <button type="button" style="background:none;border:none;color:var(--orange);font-size:12px;font-weight:600;cursor:pointer" onclick="generateTempPassword()">Generate password</button>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px;cursor:pointer">
+        <input type="checkbox" id="nu-sendinvite" checked style="width:auto;margin:0">
+        Email this person their login details
+      </label>
+    </div>
+
+    <details style="margin-bottom:16px" id="ejs-invite-details">
+      <summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--muted)">Invite email settings (EmailJS)</summary>
+      <div style="margin-top:10px">
+        <input class="modal-input" id="inv-ejs-service" placeholder="EmailJS Service ID" style="margin-bottom:8px">
+        <input class="modal-input" id="inv-ejs-template" placeholder="Invite Template ID" style="margin-bottom:8px">
+        <input class="modal-input" id="inv-ejs-pubkey" placeholder="EmailJS Public Key" style="margin-bottom:8px">
+        <input class="modal-input" id="inv-admin-secret" type="password" placeholder="Admin Secret (given to you separately)" style="margin-bottom:0">
+      </div>
+    </details>
+
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeUsersModal()">Close</button>
+      <button class="btn btn-primary" id="nu-submit" onclick="submitNewUser()">Add user</button>
     </div>
   </div>
 </div>
@@ -375,7 +424,180 @@ window.addEventListener('load', function() {
   if (t) { document.getElementById('gh-token').value = t; document.getElementById('tok-dot').classList.add('active'); }
   render();
   if (t) loadMeta();
+  if (sessionStorage.getItem('plg_role') === 'admin') { document.getElementById('users-btn').style.display = ''; }
 });
+
+// ===== USER MANAGEMENT =====
+var SB_URL = 'https://ahvyirnebbbfmktewdva.supabase.co';
+var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFodnlpcm5lYmJiZm1rdGV3ZHZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODQxMzAsImV4cCI6MjA5MjI2MDEzMH0.4uOvx11sNPOYGRSAxu4J7MwtgOQpHJsNtCg2BaP1Y3c';
+var EDGE_URL = SB_URL + '/functions/v1/kpi-admin';
+
+function usersStatus(msg, kind) {
+  var el = document.getElementById('users-status');
+  el.textContent = msg;
+  el.style.display = msg ? 'block' : 'none';
+  el.style.background = kind === 'error' ? '#FEF2F2' : '#F0FDF4';
+  el.style.color = kind === 'error' ? '#991B1B' : '#166534';
+}
+
+async function sha256Hex(str) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+}
+
+function generateTempPassword() {
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  var out = '';
+  for (var i = 0; i < 10; i++) out += chars[Math.floor(Math.random() * chars.length)];
+  document.getElementById('nu-password').value = out;
+}
+
+function loadInviteConfig() {
+  try {
+    var s = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
+    document.getElementById('inv-ejs-service').value = s.service || '';
+    document.getElementById('inv-ejs-pubkey').value = s.pubkey || '';
+  } catch(e) {}
+  document.getElementById('inv-ejs-template').value = localStorage.getItem('plg_ejs_invite_template') || '';
+  document.getElementById('inv-admin-secret').value = localStorage.getItem('plg_admin_secret') || '';
+}
+function saveInviteConfig() {
+  localStorage.setItem('plg_ejs_invite_template', document.getElementById('inv-ejs-template').value.trim());
+  localStorage.setItem('plg_admin_secret', document.getElementById('inv-admin-secret').value.trim());
+  try {
+    var s = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
+    s.service = document.getElementById('inv-ejs-service').value.trim();
+    s.pubkey = document.getElementById('inv-ejs-pubkey').value.trim();
+    localStorage.setItem('plg_ejs', JSON.stringify(s));
+  } catch(e) {}
+}
+
+function openUsersModal() {
+  document.getElementById('users-overlay').style.display = 'flex';
+  loadInviteConfig();
+  loadUsersList();
+}
+function closeUsersModal() {
+  document.getElementById('users-overlay').style.display = 'none';
+  usersStatus('');
+}
+
+async function loadUsersList() {
+  var box = document.getElementById('users-list');
+  box.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">Loading users…</div>';
+  try {
+    var res = await fetch(SB_URL + '/rest/v1/rpc/kpi_list_users', {
+      method: 'POST',
+      headers: {'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Content-Type': 'application/json'},
+      body: JSON.stringify({})
+    });
+    var users = await res.json();
+    if (!Array.isArray(users) || users.length === 0) { box.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">No users yet.</div>'; return; }
+    var rows = users.map(function(u) {
+      var lastLogin = u.last_login ? new Date(u.last_login).toLocaleDateString('en-GB', {day:'numeric', month:'short'}) : 'Never';
+      var statusColor = u.active ? '#166534' : '#991B1B';
+      var statusText = u.active ? 'Active' : 'Disabled';
+      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px">' +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:600">' + (u.name || u.username) + (u.role === 'admin' ? ' <span style="font-size:10px;font-weight:700;color:var(--orange)">ADMIN</span>' : '') + '</div>' +
+          '<div style="color:var(--muted);font-size:12px">@' + u.username + (u.email ? ' · ' + u.email : '') + '</div>' +
+        '</div>' +
+        '<div style="font-size:11px;color:' + statusColor + ';font-weight:600;white-space:nowrap">' + statusText + '</div>' +
+        '<div style="font-size:11px;color:var(--muted);white-space:nowrap;width:70px">' + lastLogin + '</div>' +
+        '<button type="button" style="background:none;border:1px solid var(--border);border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer" onclick="toggleUserActive(\'' + u.username + '\',' + (!u.active) + ')">' + (u.active ? 'Disable' : 'Enable') + '</button>' +
+        '<button type="button" style="background:none;border:1px solid var(--border);border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer;color:#991B1B" onclick="removeUser(\'' + u.username + '\')">Remove</button>' +
+      '</div>';
+    }).join('');
+    box.innerHTML = rows;
+  } catch (e) {
+    box.innerHTML = '<div style="padding:20px;text-align:center;color:#991B1B;font-size:13px">Could not load users.</div>';
+  }
+}
+
+async function callAdminEdge(payload) {
+  var secret = document.getElementById('inv-admin-secret').value.trim();
+  if (!secret) { usersStatus('Enter the Admin Secret (see invite email settings) before making changes.', 'error'); throw new Error('no secret'); }
+  var res = await fetch(EDGE_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
+    body: JSON.stringify(payload)
+  });
+  var data = await res.json();
+  if (!res.ok || data.error) { throw new Error(data.error || 'Request failed'); }
+  return data;
+}
+
+async function submitNewUser() {
+  saveInviteConfig();
+  var username = document.getElementById('nu-username').value.trim().toLowerCase();
+  var name = document.getElementById('nu-name').value.trim();
+  var email = document.getElementById('nu-email').value.trim();
+  var role = document.getElementById('nu-role').value;
+  var password = document.getElementById('nu-password').value;
+  var sendInvite = document.getElementById('nu-sendinvite').checked;
+
+  if (!username) { usersStatus('Enter a username.', 'error'); return; }
+  if (!password) { usersStatus('Enter or generate a temporary password.', 'error'); return; }
+  if (sendInvite && !email) { usersStatus('Enter an email address, or untick "email this person".', 'error'); return; }
+
+  var btn = document.getElementById('nu-submit');
+  btn.disabled = true; btn.textContent = 'Adding…';
+
+  try {
+    var hash = await sha256Hex(password);
+    await callAdminEdge({action: 'add', username: username, name: name, email: email, password_hash: hash, role: role});
+
+    if (sendInvite) {
+      var ejs = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
+      var tplId = document.getElementById('inv-ejs-template').value.trim();
+      if (ejs.service && tplId && ejs.pubkey) {
+        emailjs.init(ejs.pubkey);
+        await emailjs.send(ejs.service, tplId, {
+          to_email: email,
+          to_name: name || username,
+          username: username,
+          temp_password: password,
+          login_url: window.location.origin + window.location.pathname.replace('index.html', 'login.html')
+        });
+      } else {
+        usersStatus('User added, but invite email settings are incomplete — email not sent.', 'error');
+        btn.disabled = false; btn.textContent = 'Add user';
+        loadUsersList();
+        return;
+      }
+    }
+
+    usersStatus('User added' + (sendInvite ? ' and invited.' : '.'), 'success');
+    document.getElementById('nu-username').value = '';
+    document.getElementById('nu-name').value = '';
+    document.getElementById('nu-email').value = '';
+    document.getElementById('nu-password').value = '';
+    loadUsersList();
+  } catch (e) {
+    usersStatus('Error: ' + e.message, 'error');
+  }
+  btn.disabled = false; btn.textContent = 'Add user';
+}
+
+async function removeUser(username) {
+  if (!confirm('Remove user "' + username + '"? They will lose access immediately.')) return;
+  try {
+    await callAdminEdge({action: 'remove', username: username});
+    usersStatus('User removed.', 'success');
+    loadUsersList();
+  } catch (e) {
+    usersStatus('Error: ' + e.message, 'error');
+  }
+}
+
+async function toggleUserActive(username, active) {
+  try {
+    await callAdminEdge({action: 'set_active', username: username, active: active});
+    loadUsersList();
+  } catch (e) {
+    usersStatus('Error: ' + e.message, 'error');
+  }
+}
 </script>
 </body>
 </html>
