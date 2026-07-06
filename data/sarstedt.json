@@ -1,6 +1,6 @@
 {
   "customer": "Sarstedt",
-  "lastUpdated": "2026-07-06T14:47:27.619Z",
+  "lastUpdated": "2026-07-06T14:47:46.333Z",
   "months": {
     "2026-06": {
       "cons": 290,
@@ -626,9 +626,9 @@
       "cons": 261,
       "pallets": 594,
       "revenue": 27887.75,
-      "lates": 13,
-      "latePallets": 18,
-      "timeliness": 0.969697,
+      "lates": 4,
+      "latePallets": 5,
+      "timeliness": 0.991582,
       "avgRC": 106.85,
       "avgRP": 46.95,
       "avgPC": 2.28,
@@ -640,11 +640,11 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 238,
-          "lates": 11
+          "lates": 3
         },
         "Economy Booked": {
           "cons": 23,
-          "lates": 2
+          "lates": 1
         }
       },
       "regionData": {
@@ -694,25 +694,25 @@
           "cons": 24,
           "pallets": 77,
           "revenue": 4885.2,
-          "lates": 6
+          "lates": 1
         },
         "Wales": {
           "cons": 12,
           "pallets": 15,
           "revenue": 729.3,
-          "lates": 1
+          "lates": 0
         },
         "South": {
           "cons": 9,
           "pallets": 11,
           "revenue": 617.9499999999999,
-          "lates": 2
+          "lates": 1
         },
         "Yorkshire": {
           "cons": 44,
           "pallets": 90,
           "revenue": 3901.3000000000006,
-          "lates": 2
+          "lates": 0
         },
         "London": {
           "cons": 11,
@@ -730,7 +730,7 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 74,
-          "lates": 4
+          "lates": 1
         },
         "Tue": {
           "cons": 44,
@@ -738,11 +738,11 @@
         },
         "Wed": {
           "cons": 43,
-          "lates": 3
+          "lates": 0
         },
         "Thu": {
           "cons": 48,
-          "lates": 4
+          "lates": 1
         },
         "Fri": {
           "cons": 52,
@@ -856,7 +856,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 340.65000000000003,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "IQVIA LABORATORIES LTD",
@@ -865,7 +865,7 @@
           "cons": 4,
           "pallets": 5,
           "revenue": 345.1,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "BOLTON NHSFT",
@@ -892,7 +892,7 @@
           "cons": 4,
           "pallets": 6,
           "revenue": 281.05000000000007,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "mid yorkshire hospitals nhst sysmex",
@@ -1425,42 +1425,6 @@
       "failed": false
     },
     {
-      "id": "0736235/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "NHS HIGHLAND",
-      "city": "NHS HIGHLAND",
-      "pc": "IV3 8DU",
-      "window": "",
-      "commitDate": "16/02/26",
-      "arrDate": "17/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0735771/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "MERSEY & WEST LANCASHIRE HOSP NHSFT",
-      "city": "MERSEY & WEST LANCASHIRE HOSP NHSFT",
-      "pc": "L35 5DR",
-      "window": "",
-      "commitDate": "12/02/26",
-      "arrDate": "13/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0734828/01",
       "acct": "SARSTEDT",
       "month": "Feb-26",
@@ -1497,60 +1461,6 @@
       "failed": false
     },
     {
-      "id": "0737429/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "IQVIA LABORATORIES LTD",
-      "city": "IQVIA LABORATORIES LTD",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "25/02/26",
-      "arrDate": "26/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0732309/01",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "Q SQUARED SOLUTIONS LTD (1006114)",
-      "city": "Q SQUARED SOLUTIONS LTD (1006114)",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "09/02/26",
-      "arrDate": "10/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0737466/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "Leeds Teaching Hospitals NHSFT MSC",
-      "city": "Leeds Teaching Hospitals NHSFT MSC",
-      "pc": "LS9 7TF",
-      "window": "",
-      "commitDate": "25/02/26",
-      "arrDate": "26/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0736809/00",
       "acct": "SARSTEDT",
       "month": "Feb-26",
@@ -1569,42 +1479,6 @@
       "failed": false
     },
     {
-      "id": "0735250/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "NHS HIGHLAND",
-      "city": "NHS HIGHLAND",
-      "pc": "IV3 8DU",
-      "window": "",
-      "commitDate": "09/02/26",
-      "arrDate": "11/02/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0734921/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "Leeds Teaching Hospitals NHSFT MSC",
-      "city": "Leeds Teaching Hospitals NHSFT MSC",
-      "pc": "LS9 7TF",
-      "window": "",
-      "commitDate": "05/02/26",
-      "arrDate": "06/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0734438/00",
       "acct": "SARSTEDT",
       "month": "Feb-26",
@@ -1617,42 +1491,6 @@
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0734837/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "NHS Highland",
-      "city": "NHS Highland",
-      "pc": "PA34 4HH",
-      "window": "",
-      "commitDate": "05/02/26",
-      "arrDate": "10/02/26",
-      "arrival": "00:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0734799/00",
-      "acct": "SARSTEDT",
-      "month": "Feb-26",
-      "dest": "University of Southampton",
-      "city": "University of Southampton",
-      "pc": "SO16 6YD",
-      "window": "",
-      "commitDate": "04/02/26",
-      "arrDate": "05/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
