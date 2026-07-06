@@ -1,6 +1,6 @@
 {
   "customer": "Sarstedt",
-  "lastUpdated": "2026-07-06T14:47:46.333Z",
+  "lastUpdated": "2026-07-06T14:48:02.397Z",
   "months": {
     "2026-06": {
       "cons": 290,
@@ -316,9 +316,9 @@
       "cons": 289,
       "pallets": 576,
       "revenue": 27541.45,
-      "lates": 10,
-      "latePallets": 20,
-      "timeliness": 0.965278,
+      "lates": 5,
+      "latePallets": 12,
+      "timeliness": 0.979167,
       "avgRC": 95.3,
       "avgRP": 47.82,
       "avgPC": 1.99,
@@ -334,7 +334,7 @@
         },
         "Next Day": {
           "cons": 265,
-          "lates": 10
+          "lates": 5
         }
       },
       "regionData": {
@@ -342,7 +342,7 @@
           "cons": 50,
           "pallets": 85,
           "revenue": 3676.600000000001,
-          "lates": 1
+          "lates": 0
         },
         "South West": {
           "cons": 23,
@@ -372,7 +372,7 @@
           "cons": 35,
           "pallets": 134,
           "revenue": 5393.2,
-          "lates": 1
+          "lates": 0
         },
         "London": {
           "cons": 12,
@@ -390,7 +390,7 @@
           "cons": 27,
           "pallets": 77,
           "revenue": 4941.300000000001,
-          "lates": 3
+          "lates": 1
         },
         "South": {
           "cons": 11,
@@ -408,7 +408,7 @@
           "cons": 18,
           "pallets": 37,
           "revenue": 1604.6,
-          "lates": 2
+          "lates": 1
         },
         "South East": {
           "cons": 15,
@@ -420,19 +420,19 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 64,
-          "lates": 2
+          "lates": 1
         },
         "Tue": {
           "cons": 52,
-          "lates": 1
+          "lates": 0
         },
         "Wed": {
           "cons": 68,
-          "lates": 2
+          "lates": 0
         },
         "Thu": {
           "cons": 47,
-          "lates": 4
+          "lates": 3
         },
         "Fri": {
           "cons": 58,
@@ -519,7 +519,7 @@
           "cons": 6,
           "pallets": 7,
           "revenue": 489.55,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "BOLTON NHSFT",
@@ -1245,24 +1245,6 @@
   },
   "lateRows": [
     {
-      "id": "0739513/00",
-      "acct": "SARSTEDT",
-      "month": "Mar-26",
-      "dest": "Lancashire Teaching Hospitals NHSFT",
-      "city": "Lancashire Teaching Hospitals NHSFT",
-      "pc": "PR2 9HT",
-      "window": "",
-      "commitDate": "12/03/26",
-      "arrDate": "13/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0739734/00",
       "acct": "SARSTEDT",
       "month": "Mar-26",
@@ -1281,24 +1263,6 @@
       "failed": false
     },
     {
-      "id": "0740940/00",
-      "acct": "SARSTEDT",
-      "month": "Mar-26",
-      "dest": "YORK & SCARB TEACHING HOSP NHS",
-      "city": "YORK & SCARB TEACHING HOSP NHS",
-      "pc": "YO12 6QL",
-      "window": "",
-      "commitDate": "25/03/26",
-      "arrDate": "26/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "0736174/00",
       "acct": "SARSTEDT",
       "month": "Mar-26",
@@ -1308,42 +1272,6 @@
       "window": "",
       "commitDate": "26/03/26",
       "arrDate": "27/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0739263/00",
-      "acct": "SARSTEDT",
-      "month": "Mar-26",
-      "dest": "Univ Hospitals of Leicester NHSFT",
-      "city": "Univ Hospitals of Leicester NHSFT",
-      "pc": "LE1 5WW",
-      "window": "",
-      "commitDate": "11/03/26",
-      "arrDate": "12/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0738974/00",
-      "acct": "SARSTEDT",
-      "month": "Mar-26",
-      "dest": "Q SQUARED SOLUTIONS LTD",
-      "city": "Q SQUARED SOLUTIONS LTD",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "10/03/26",
-      "arrDate": "11/03/26",
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
@@ -1400,24 +1328,6 @@
       "arrDate": "31/03/26",
       "arrival": "01:00",
       "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0741425/00",
-      "acct": "SARSTEDT",
-      "month": "Mar-26",
-      "dest": "Q SQUARED SOLUTIONS LTD (1006114)",
-      "city": "Q SQUARED SOLUTIONS LTD (1006114)",
-      "pc": "EH54 7EG",
-      "window": "",
-      "commitDate": "30/03/26",
-      "arrDate": "31/03/26",
-      "arrival": "01:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
