@@ -374,6 +374,9 @@ function isLate(r){
   }
   try{var e=twEnd(r['destination time window']);if(!e)return false;var dd=xlDate(r['destination date']);if(!dd)return false;var arr=xlDT(r['destination arrival']);if(!arr)return false;var dl=new Date(dd.toISOString().split('T')[0]+'T'+e+':00');return arr>dl;}catch(x){return false;}
 }
+function _realActual(r){
+  return r['Last delivery stop > Date (by type) > Actual']||r['Consignments > Last delivery stop > Date (by type) > Actual']||r['Actual Delivery Date']||null;
+}
 function minsLate(r){try{var e=twEnd(r['destination time window']);if(!e){var rq=r['v4_requested_date']||r['destination date'];var ac=r['v4_actual_date']||r['destination arrival'];if(rq&&ac){var rqd=new Date(rq),acd=new Date(ac);if(!isNaN(rqd)&&!isNaN(acd)){var rD=new Date(rqd.getFullYear(),rqd.getMonth(),rqd.getDate());var aD=new Date(acd.getFullYear(),acd.getMonth(),acd.getDate());var dd2=Math.round((aD-rD)/86400000);if(dd2>0)return dd2*1440;}}return 0;}var dd=xlDate(r['destination date']);var arr=xlDT(r['destination arrival']);var dl=new Date(dd.toISOString().split('T')[0]+'T'+e+':00');return Math.max(0,Math.round((arr-dl)/60000));}catch(x){return 0;}}
 
 function fmtDelay(mins){mins=parseInt(mins)||0;if(mins>=1440){var d=Math.floor(mins/1440);var h=Math.floor((mins%1440)/60);return d+'d'+(h?' '+h+'h':'');}if(mins>=60){return Math.floor(mins/60)+'h '+(mins%60)+'m';}return mins+'m';}
@@ -417,7 +420,7 @@ function handleDeliveryData(input){
         var ref=r['Customer Consignment Ref']||r['Consignments > Consignment reference number']||r['consignment reference']||r['Consignment Ref']||r['Consignment reference']||r['ref']||'';
         ref=String(ref).replace(/\.0$/,'').replace(/\+$/,'').trim();
         var planned=r['Requested Delivery Date']||r['Consignments > Delivery stop > Date (by type) > Requested']||r['Requested']||null;
-        var actual=r['Actual Delivery Date']||r['Delivery Date']||r['Actual date']||null;
+        var actual=r['Last delivery stop > Date (by type) > Actual']||r['Consignments > Last delivery stop > Date (by type) > Actual']||r['Actual Delivery Date']||r['Delivery Date']||r['Actual date']||null;
         var cost=r['Customer Cost']||r['Cost']||r['cost']||null;
         if(ref&&actual){deliveryDateMap[ref]={planned:planned,actual:actual,cost:cost};count++;}
       });
@@ -442,7 +445,7 @@ function handleRaw(input){
       if(isV4Format){
         rows=rows.map(function(r){
           var reqDate=r['Requested Delivery Date'];
-          var actDate=r['Actual Delivery Date'];
+          var actDate=_realActual(r);
           var isLateRow=actDate&&reqDate&&new Date(actDate)>new Date(reqDate);
           var focSurcharges=String(r['FOC Surcharges']||'');
           var chargeableSurcharges=String(r['Surcharges']||'');
@@ -941,313 +944,797 @@ function captureMapAndBuild(onComplete){
 }
 
 function buildReport(mapImg,onComplete){
+try{
+
+// ── DATA PREP ────────────────────────────────────────────────────────────────
+var isV4=rawData&&rawData.length>0&&rawData[0]['_v4_late']!==undefined;
+var comp=allCompleted();
+
+var pdfPalletMap={};
+comp.forEach(function(r){var pb=r['palletBreakdown'];if(pb){Object.keys(pb).forEach(function(nm){pdfPalletMap[nm]=(pdfPalletMap[nm]||0)+pb[nm];});}});
+var pdfPalletTotal=Object.values(pdfPalletMap).reduce(function(a,b){return a+b;},0);
+if(pdfPalletTotal===0){Object.values(savedMonthData).forEach(function(m){if(m&&m.palletSizes){Object.keys(m.palletSizes).forEach(function(nm){pdfPalletMap[nm]=(pdfPalletMap[nm]||0)+m.palletSizes[nm];});}});pdfPalletTotal=Object.values(pdfPalletMap).reduce(function(a,b){return a+b;},0);}
+var psOrder=['Full','Half','Quarter','Oversize'];
+var pdfPalletKeys=psOrder.filter(function(k){return pdfPalletMap[k];}).concat(Object.keys(pdfPalletMap).filter(function(k){return psOrder.indexOf(k)<0;}));
+
+var aC=getTotal('cons')||0;
+var aP=getTotal('pallets')||0;
+var aR=getTotal('revenue')||0;
+var aL=getLiveLates()||0;
+var aLP2=getLiveLatePallets()||0;
+var ytdOTIF=aP?((aP-aLP2)/aP*100).toFixed(2):'--';
+var otifNum=parseFloat(ytdOTIF)||0;
+var now=new Date();
+var dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+var avgRC=aC>0?(aR/aC).toFixed(2):'0.00';
+var avgRP=aP>0?(aR/aP).toFixed(2):'0.00';
+var avgPC=aC>0?(aP/aC).toFixed(1):'0.0';
+var totalCost=aR||0;
+var avgCon=aC>0?totalCost/aC:0;
+var avgPlt=aP>0?totalCost/aP:0;
+var avgPltsPerCon=aC>0?aP/aC:0;
+
+var months=[];
+MONTH_KEYS.forEach(function(key,i){
+  var c2=calculatedMonths[key],ex=getExRow(i),label=MONTHS[i];
+  if(c2){months.push({label:label,cons:c2.cons,pallets:c2.pallets,revenue:c2.revenue,lates:c2.lates,otif:c2.timeliness,isNew:true});}
+  else if(ex){var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['\u00A3']!=null?parseFloat(ex['\u00A3']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});}
+});
+var moActive=months.filter(function(m){return(m.cons||0)>0||(m.pallets||0)>0;});
+
+var lateList=comp.filter(function(r){return isLate(r);}).map(function(r){
+  var arr=xlDT(r['destination arrival']);
+  var ex2=r['destination extras']||'';
+  var dtype=ex2.includes('Economy Booked')?'Eco Booked':ex2.includes('Booked')?'Booked':'Next Day';
+  return{id:r['id']||'',dest:r['destination name']||'',city:r['destination city']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'--',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,reason:r._reason||''};
+});
+if(lateList.length===0&&window._savedLateRows&&window._savedLateRows.length>0){
+  lateList=(window._savedLateRows||[]).map(function(r){return{id:r.id||'',dest:r.dest||'',city:r.city||'',window:r.window||'',arrival:r.arrival||'--',mins:savedRowMins(r),pallets:r.pallets||0,dtype:r.dtype||'Standard',reason:r.reason||''};});
+}
+
+var destMap2={};
+if(comp.length>0){comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});}
+else if(window._savedDestData&&window._savedDestData.length>0){window._savedDestData.forEach(function(d){destMap2[d.name]={name:d.name,city:d.city||'',cons:d.cons||0,pallets:d.pallets||0,revenue:d.revenue||0,lates:d.lates||0};});}
+var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
+
+var regMap2={};
+if(comp.length>0){comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap2[reg])regMap2[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap2[reg].cons++;regMap2[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap2[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap2[reg].lates++;});}
+else if(window._savedRegionData){regMap2=window._savedRegionData;}
+var topReg=Object.entries(regMap2).sort(function(a,b){return b[1].pallets-a[1].pallets;});
+
+var typeMap2={};
+comp.forEach(function(r){var ex2=r['destination extras']||'';var t=ex2.includes('Economy Booked')?'Economy Booked':'Next Day';if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons++;if(isLate(r))typeMap2[t].lates++;});
+if(Object.keys(typeMap2).length===0){Object.values(savedMonthData).forEach(function(m){if(m&&m.typeBreakdown){Object.keys(m.typeBreakdown).forEach(function(t){if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons+=m.typeBreakdown[t].cons||0;typeMap2[t].lates+=m.typeBreakdown[t].lates||0;});}});}
+
+var v4TL=0,v4EB=0,v4ETA=0,v4TA=0,v4TB=0,v4AM=0,v4BW=0,v4AZ=0;
+if(isV4){comp.forEach(function(r){var foc=String(r['v4_foc']||r['v4_surcharges']||'');var chg=String(r['v4_chargeable']||'');var fc=foc.split(',').map(function(x){return x.trim();});var cc=chg.split(',').map(function(x){return x.trim();});if(fc.indexOf('TL')>-1)v4TL++;if(fc.indexOf('EB')>-1)v4EB++;if(fc.indexOf('ETA')>-1)v4ETA++;if(cc.indexOf('TA')>-1)v4TA++;if(cc.indexOf('TB')>-1)v4TB++;if(cc.indexOf('AM')>-1)v4AM++;if(cc.indexOf('BW')>-1)v4BW++;if(cc.indexOf('AZ')>-1)v4AZ++;});}
+var v4ChargeTotal=v4TA*32+v4TB*23+v4AM*12+v4BW*12+v4AZ*12;
+
+function classifySurcharge(tw){if(!tw)return{type:'Standard',rate:0};var w=tw.trim();var p=w.split(' - ');if(p.length!==2)return{type:'Standard',rate:0};var s=p[0].trim(),e=p[1].trim();if(s==='09:00'&&e==='10:00')return{type:'Pre-10am',rate:32};if(s==='09:00'&&e==='12:00')return{type:'AM Delivery',rate:12};if(s===e)return{type:'Timed Booking',rate:23};return{type:'Standard',rate:0};}
+var amCons=[],timedCons=[],pre10Cons=[];
+comp.forEach(function(r){var s=classifySurcharge(r['destination time window']);if(s.type==='AM Delivery')amCons.push(r);else if(s.type==='Timed Booking')timedCons.push(r);else if(s.type==='Pre-10am')pre10Cons.push(r);});
+var amTotal=amCons.length*12,timedTotal=timedCons.length*23,pre10Total=pre10Cons.length*32;
+var surchTotal=amTotal+timedTotal+pre10Total,surchCons=amCons.length+timedCons.length+pre10Cons.length;
+
+var lateDelays=lateList.map(function(r){return parseInt(r.mins)||0;}).filter(function(m){return m>0;});
+var avgDelay=lateDelays.length?Math.round(lateDelays.reduce(function(a,b){return a+b;},0)/lateDelays.length):0;
+var worstLate=lateList.length>0?lateList.reduce(function(a,b){return(parseInt(b.mins)||0)>=(parseInt(a.mins)||0)?b:a;},lateList[0]):null;
+var periodLabel=window._pdfPeriodLabelOverride||(months.length>0?months[0].label+(months.length>1?' \u2013 '+months[months.length-1].label:''):'2026');
+var latesPct=aC>0?((aL/aC)*100).toFixed(1)+'%':'0.0%';
+var otifGap=(otifNum-97).toFixed(1);
+var otifGapStr=(otifNum>=97?'+':'')+otifGap+'pts';
+
+// ── jsPDF INIT ────────────────────────────────────────────────────────────────
+var {jsPDF}=window.jspdf;
+var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+var W=210,H=297,ML=13,MR=13,CW=W-ML-MR;
+var CT=20;   // content top (below chrome)
+var CB=278;  // content bottom (above footer)
+
+// ── COLOURS ───────────────────────────────────────────────────────────────────
+var CLR={
+  orange:[244,121,32], orangeDk:[200,90,10],
+  black:[17,17,17],    dark:[28,28,28],     darkMid:[42,42,42],
+  mid:[80,80,80],      muted:[138,136,132], border:[220,218,212],
+  faint:[248,247,244], white:[255,255,255],
+  green:[21,101,52],   greenLt:[187,247,208],greenBg:[240,253,244],
+  red:[153,27,27],     redLt:[254,202,202], redBg:[255,241,241],
+  amber:[146,64,14],   amberLt:[253,230,138],amberBg:[255,251,235],
+};
+function setFill(c){doc.setFillColor(c[0],c[1],c[2]);}
+function setInk(c){doc.setTextColor(c[0],c[1],c[2]);}
+function setLine(c,w){doc.setDrawColor(c[0],c[1],c[2]);if(w!=null)doc.setLineWidth(w);}
+function box(x,y,w,h,c){setFill(c);doc.rect(x,y,w,h,'F');}
+function bordered(x,y,w,h,fc,bc,lw){if(fc){setFill(fc);doc.rect(x,y,w,h,'F');}setLine(bc||CLR.border,lw!=null?lw:0.2);doc.rect(x,y,w,h,'S');}
+function hline(x1,y,x2,c,w){setLine(c||CLR.border,w!=null?w:0.2);doc.line(x1,y,x2,y);}
+function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'\u2026':s||'';}
+function fmt(n){return n!=null&&!isNaN(n)?'\u00A3'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
+function fmtK(n){return n>=1000?'\u00A3'+(n/1000).toFixed(1)+'k':'\u00A3'+Math.round(n);}
+function otifClr(v){return v>=97?CLR.green:v>=90?CLR.amber:CLR.red;}
+function otifBgClr(v){return v>=97?CLR.greenBg:v>=90?CLR.amberBg:CLR.redBg;}
+function otifLtClr(v){return v>=97?CLR.greenLt:v>=90?CLR.amberLt:CLR.redLt;}
+
+// ── CIRCULAR GAUGE ────────────────────────────────────────────────────────────
+function drawGauge(cx,cy,outerR,trackW,pct,clr){
+  var PI=Math.PI,steps=120;
+  var start=-PI/2;
+  function arcPoly(fromA,toA,r,col,lw){
+    setLine(col,lw);
+    for(var i=1;i<=steps;i++){
+      var a0=fromA+(toA-fromA)*(i-1)/steps;
+      var a1=fromA+(toA-fromA)*i/steps;
+      doc.line(cx+r*Math.cos(a0),cy+r*Math.sin(a0),cx+r*Math.cos(a1),cy+r*Math.sin(a1));
+    }
+  }
+  arcPoly(start,start+2*PI,outerR,CLR.border,trackW);
+  if(pct>0){arcPoly(start,start+(Math.min(pct,100)/100)*2*PI,outerR,clr,trackW);}
+  // 97% target tick — white notch
+  var tickA=start+(0.97)*2*PI;
+  var ir=outerR-trackW/2-2,or2=outerR+trackW/2+2;
+  setLine(CLR.white,1.5);
+  doc.line(cx+ir*Math.cos(tickA),cy+ir*Math.sin(tickA),cx+or2*Math.cos(tickA),cy+or2*Math.sin(tickA));
+  // White donut hole — slightly smaller than inner radius to avoid clipping
+  var holeR=outerR-trackW-1;
+  if(holeR>2){box(cx-holeR,cy-holeR,holeR*2,holeR*2,CLR.white);}
+}
+
+// ── SECTION HEADER ────────────────────────────────────────────────────────────
+function secHead(label,y){
+  box(ML,y,3,7,CLR.orange);
+  setInk(CLR.dark);doc.setFontSize(8.5);doc.setFont('helvetica','bold');
+  doc.text(label.toUpperCase(),ML+6,y+5.5);
+  var tw=doc.getTextWidth(label.toUpperCase());
+  hline(ML+8+tw,y+3.5,ML+CW,CLR.border,0.15);
+  return y+11;
+}
+
+// ── STAT CARD ─────────────────────────────────────────────────────────────────
+function statCard(x,y,w,h,label,value,sub,vClr,accent){
+  accent=accent||CLR.orange;
+  bordered(x,y,w,h,CLR.white,CLR.border,0.2);
+  box(x,y,w,2,accent);
+  setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','bold');
+  doc.text(label.toUpperCase(),x+4,y+8);
+  setInk(vClr||CLR.dark);doc.setFontSize(17);doc.setFont('helvetica','bold');
+  doc.text(String(value||'--'),x+4,y+h-9);
+  if(sub){setInk(CLR.muted);doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+4,y+h-3);}
+}
+
+// ── TABLE HELPERS ─────────────────────────────────────────────────────────────
+var ROW_H=6.2;
+function tHead(cols,widths,y,ox){
+  ox=ox||0;
+  var tw=widths.reduce(function(a,b){return a+b;},0);
+  box(ML+ox,y,tw,7.5,CLR.black);
+  setInk(CLR.white);doc.setFontSize(6);doc.setFont('helvetica','bold');
+  var x=ML+ox;
+  cols.forEach(function(col,i){
+    doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2.5,y+5.2,{align:col.r?'right':'left'});
+    x+=widths[i];
+  });
+  return y+7.5;
+}
+function tRow(vals,widths,y,opts,ox){
+  ox=ox||0;opts=opts||{};
+  var tw=widths.reduce(function(a,b){return a+b;},0);
+  if(opts.total){box(ML+ox,y,tw,ROW_H,CLR.orange);}
+  else if(opts.shade){box(ML+ox,y,tw,ROW_H,CLR.faint);}
+  hline(ML+ox,y+ROW_H,ML+ox+tw,CLR.border,0.1);
+  doc.setFontSize(6.8);doc.setFont('helvetica',opts.total?'bold':'normal');
+  var x=ML+ox;
+  vals.forEach(function(v,i){
+    var text=typeof v==='object'?String(v.t===null||v.t===undefined?'':v.t):String(v===null||v===undefined?'':v);
+    var right=typeof v==='object'&&v.r;
+    setInk(opts.total?CLR.white:typeof v==='object'&&v.c?v.c:CLR.dark);
+    doc.text(text,right?x+widths[i]-2:x+2.5,y+4.5,{align:right?'right':'left'});
+    x+=widths[i];
+  });
+  return y+ROW_H;
+}
+
+// ── BAR CHARTS ────────────────────────────────────────────────────────────────
+function chartBars(y,title,vals,labels,opts){
+  opts=opts||{};
+  var boxH=opts.boxH||50,plotH=opts.plotH||28;
+  bordered(ML,y,CW,boxH,CLR.faint,CLR.border,0.15);
+  box(ML,y,3,boxH,CLR.orange);
+  setInk(CLR.mid);doc.setFontSize(7.5);doc.setFont('helvetica','bold');
+  doc.text(title,ML+7,y+6.5);
+  var plotX=ML+10,plotW=CW-18,plotBot=y+boxH-9,pTop=plotBot-plotH;
+  var valid=vals.filter(function(v){return v!=null;});
+  var maxV=opts.max!=null?opts.max:(valid.length?Math.max.apply(null,valid):1);
+  var minV=opts.min!=null?opts.min:0;
+  if(maxV<=minV)maxV=minV+1;
+  var fV=opts.fmt||function(v){return String(Math.round(v));};
+  if(opts.target!=null){
+    var ty2=plotBot-((opts.target-minV)/(maxV-minV))*plotH;
+    setLine(CLR.muted,0.2);
+    if(doc.setLineDashPattern)doc.setLineDashPattern([1.2,0.8],0);
+    doc.line(plotX,ty2,plotX+plotW,ty2);
+    if(doc.setLineDashPattern)doc.setLineDashPattern([],0);
+    setInk(CLR.muted);doc.setFontSize(5);doc.setFont('helvetica','normal');
+    doc.text(opts.targetLabel||'97% target',plotX+plotW,ty2-1.5,{align:'right'});
+  }
+  hline(plotX,plotBot,plotX+plotW,CLR.border,0.2);
+  var n=vals.length;
+  // Ensure bars are a reasonable width even for single month
+  var slot=plotW/Math.max(n,3),bw=Math.min(slot*0.55,16);
+  vals.forEach(function(v,i){
+    var cx=plotX+i*slot+slot/2;
+    if(v!=null){
+      var frac=Math.max(0,Math.min(1,(v-minV)/(maxV-minV)));
+      var bh=Math.max(frac*plotH,1);
+      box(cx-bw/2,plotBot-bh,bw,bh,CLR.orange);
+      setInk(CLR.dark);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+      doc.text(fV(v),cx,plotBot-bh-1.5,{align:'center'});
+    }
+    setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+    doc.text(String(labels[i]).replace('-26',''),cx,plotBot+4,{align:'center'});
+  });
+  return y+boxH+4;
+}
+
+// ── CHROME — header + footer, NO page number stamped here ─────────────────────
+// Page numbers are stamped ONLY in the final pass at the very end.
+function chrome(){
+  // Orange top rule (2mm)
+  box(0,0,W,2,CLR.orange);
+  // Dark header bar (13mm)
+  box(0,2,W,14,CLR.black);
+  // PLG text logo (addImage often fails in jsPDF for SVG — use styled text fallback)
   try{
-  var isV4=rawData&&rawData.length>0&&rawData[0]['_v4_late']!==undefined;
-  var comp=allCompleted();
-  var pdfPalletMap={};comp.forEach(function(r){var pb=r['palletBreakdown'];if(pb){Object.keys(pb).forEach(function(nm){pdfPalletMap[nm]=(pdfPalletMap[nm]||0)+pb[nm];});}});
-  var pdfPalletTotal=Object.values(pdfPalletMap).reduce(function(a,b){return a+b;},0);
-  if(pdfPalletTotal===0){
-    Object.values(savedMonthData).forEach(function(m){if(m&&m.palletSizes){Object.keys(m.palletSizes).forEach(function(nm){pdfPalletMap[nm]=(pdfPalletMap[nm]||0)+m.palletSizes[nm];});}});
-    pdfPalletTotal=Object.values(pdfPalletMap).reduce(function(a,b){return a+b;},0);
+    doc.addImage(PLG_LOGO_URL,'SVG',ML,3,22,10);
+  }catch(e){
+    // Styled text fallback: orange "PLG" + thin separator + grey tool name
+    setInk(CLR.orange);doc.setFontSize(8.5);doc.setFont('helvetica','bold');
+    doc.text('PLG',ML,11);
+    setInk([50,50,50]);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+    doc.text('PREMIER LOGISTICS',ML+12,8.5);
+    doc.text('GROUP',ML+12,12.5);
   }
-  var psOrder=['Full','Half','Quarter','Oversize'];
-  var pdfPalletKeys=psOrder.filter(function(k){return pdfPalletMap[k];}).concat(Object.keys(pdfPalletMap).filter(function(k){return psOrder.indexOf(k)<0;}));
-  var aC=getTotal('cons'),aP=getTotal('pallets'),aR=getTotal('revenue'),aL=getLiveLates();
-  var aLP2=getLiveLatePallets();
-  var ytdOTIF=aP?((aP-aLP2)/aP*100).toFixed(2):'--';
-  var otifNum=parseFloat(ytdOTIF)||0;
-  var now=new Date();
-  var dateStr=now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  var avgRC=aC>0?(aR/aC).toFixed(2):'0.00';
-  var avgRP=aP>0?(aR/aP).toFixed(2):'0.00';
-  var avgPC=aC>0?(aP/aC).toFixed(1):'0.0';
-  var months=[];
-  MONTH_KEYS.forEach(function(key,i){
-    var c2=calculatedMonths[key],ex=getExRow(i),label=MONTHS[i];
-    if(c2){months.push({label:label,cons:c2.cons,pallets:c2.pallets,revenue:c2.revenue,lates:c2.lates,otif:c2.timeliness,isNew:true});}
-    else if(ex){var cons=parseFloat(ex['Cons']||ex['cons'])||0,plts=parseFloat(ex['Plts']||ex['plts'])||0,rev=ex['£']!=null?parseFloat(ex['£']):null,latesRaw=ex['Lates']||ex['lates'],lates=latesRaw!=null&&!isNaN(parseFloat(latesRaw))?parseFloat(latesRaw):null;if(cons>0)months.push({label:label,cons:cons,pallets:plts,revenue:rev||0,lates:lates||0,otif:cons&&lates!=null?(cons-lates)/cons:null,isNew:false});}
+  // Customer name — centred
+  setInk(CLR.white);doc.setFontSize(8);doc.setFont('helvetica','bold');
+  doc.text(trunc(currentCustomer,44),W/2,9.5,{align:'center'});
+  // Period — centred below
+  setInk([110,108,104]);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+  doc.text(periodLabel,W/2,13.5,{align:'center'});
+  // Thin orange rule at bottom of header
+  box(0,16,W,0.5,CLR.orange);
+
+  // ── Footer ──
+  // Thin rule above footer
+  hline(0,CB+2,W,CLR.border,0.15);
+  box(0,CB+2,W,H-(CB+2),CLR.faint);
+  setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+  doc.text('Confidential \u00B7 Premier Logistics Group \u00B7 premier-logistics.co.uk',ML,H-3.5);
+  // Page number placeholder — stamped in final pass (right side of footer)
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 1 — SPLIT COVER
+// Left 82mm dark panel | Right white + 6-card commercial grid
+// ─────────────────────────────────────────────────────────────────────────────
+var PW=82;
+
+// Left dark panel
+box(0,0,PW,H,CLR.black);
+box(0,0,PW,3,CLR.orange);
+box(0,H-3,PW,3,CLR.orange);
+
+// PLG branding in panel
+try{doc.addImage(PLG_LOGO_URL,'SVG',7,9,36,13);}catch(e){
+  setInk(CLR.orange);doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text('PLG',7,21);
+}
+setInk([88,86,82]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+doc.text('CUSTOMER KPI REPORT',7,29);
+hline(7,31,PW-7,[38,38,38],0.3);
+
+// 4 operational stat blocks
+var sbStats=[
+  {l:'CONSIGNMENTS',  v:(aC||0).toLocaleString(), s:'Completed & invoiced',      a:CLR.orange, vc:CLR.white},
+  {l:'PALLETS',       v:(aP||0).toLocaleString(), s:'Delivered this period',      a:CLR.orange, vc:CLR.white},
+  {l:'PALLET OTIF',  v:ytdOTIF+'%',              s:'Target: 97.0%',             a:otifClr(otifNum), vc:otifLtClr(otifNum)},
+  {l:'LATE',          v:String(aL||0),            s:latesPct+' of consignments', a:aL>0?CLR.red:CLR.green, vc:aL>0?CLR.redLt:CLR.greenLt},
+];
+var sbH=50,sbGap=3,sbY=37;
+sbStats.forEach(function(k){
+  box(6,sbY,PW-12,sbH,CLR.darkMid);
+  box(6,sbY,3,sbH,k.a);
+  setInk([92,90,86]);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+  doc.text(k.l,13,sbY+9);
+  setInk(k.vc);doc.setFontSize(24);doc.setFont('helvetica','bold');
+  doc.text(String(k.v),13,sbY+31);
+  setInk([85,83,79]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text(k.s,13,sbY+41);
+  sbY+=sbH+sbGap;
+});
+setInk([62,60,56]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+doc.text('premier-logistics.co.uk',7,H-7);
+
+// Right white panel
+var rx=PW+11,rw=W-PW-17;
+
+// Thin orange strip across top of right panel
+box(PW,0,W-PW,3,CLR.orange);
+
+// Customer name
+setInk(CLR.black);doc.setFontSize(21);doc.setFont('helvetica','bold');
+var nameLines=doc.splitTextToSize(currentCustomer,rw);
+doc.text(nameLines,rx,46);
+var nameBottomY=46+(nameLines.length-1)*8;
+
+// Period
+setInk(CLR.mid);doc.setFontSize(11);doc.setFont('helvetica','normal');
+doc.text(periodLabel,rx,nameBottomY+14);
+
+// Thin rule
+hline(rx,nameBottomY+20,W-9,CLR.border,0.25);
+
+// Prepared + confidential
+setInk(CLR.muted);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+doc.text('Prepared '+dateStr,rx,nameBottomY+29);
+doc.text('Confidential \u00B7 Premier Logistics Group',rx,nameBottomY+38);
+
+// 6-card commercial grid — purely financial, no overlap with left panel
+// 2 cols x 3 rows, fills space down to the bottom dark strip
+var gTop=nameBottomY+50;
+var gGapX=7,gGapY=7;
+var gW=(rw-gGapX)/2;
+var gH=(H-25-gTop-(gGapY*2))/3;
+
+var cGrid=[
+  {l:'Total freight cost',     v:'\u00A3'+Math.round(totalCost).toLocaleString('en-GB'), s:periodLabel,                               a:CLR.orange, vc:CLR.dark},
+  {l:'Avg cost / consignment', v:'\u00A3'+avgCon.toFixed(2),                             s:'Per delivery',                             a:CLR.orange, vc:CLR.dark},
+  {l:'Avg cost / pallet',      v:'\u00A3'+avgPlt.toFixed(2),                             s:'Per pallet space',                         a:CLR.orange, vc:CLR.dark},
+  {l:'Avg pallets / con',      v:avgPltsPerCon.toFixed(1),                               s:'Pallets per consignment',                  a:CLR.orange, vc:CLR.dark},
+  {l:'Late pallets',           v:String(aLP2||0),                                        s:'Of '+String(aP||0)+' delivered',           a:aLP2>0?CLR.red:CLR.green, vc:aLP2>0?CLR.red:CLR.green},
+  {l:'OTIF vs target',         v:otifGapStr,                                             s:otifNum>=97?'Above 97% target':'Below 97% target', a:otifClr(otifNum), vc:otifClr(otifNum)},
+];
+cGrid.forEach(function(k,i){
+  var col=i%2,row=Math.floor(i/2);
+  var gx=rx+col*(gW+gGapX),gy=gTop+row*(gH+gGapY);
+  bordered(gx,gy,gW,gH,CLR.white,CLR.border,0.2);
+  box(gx,gy,gW,2,k.a);
+  setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+  doc.text(k.l.toUpperCase(),gx+4,gy+9);
+  setInk(k.vc);doc.setFontSize(17);doc.setFont('helvetica','bold');
+  doc.text(String(k.v),gx+4,gy+gH-10);
+  setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
+  doc.text(k.s,gx+4,gy+gH-3);
+});
+
+// Bottom dark strip — right panel footer
+box(PW,H-22,W-PW,22,CLR.black);
+setInk(CLR.orange);doc.setFontSize(7);doc.setFont('helvetica','bold');
+doc.text('PREMIER LOGISTICS GROUP',rx,H-13);
+setInk([72,70,66]);doc.setFontSize(6);doc.setFont('helvetica','normal');
+doc.text('Bardon (HQ) & Northampton  \u00B7  premier-logistics.co.uk',rx,H-6);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 2 — OTIF GAUGE + PERIOD STATS + DELIVERY MIX
+// ─────────────────────────────────────────────────────────────────────────────
+doc.addPage();chrome();var y=CT;
+y=secHead('On-Time In-Full (OTIF) Performance',y);
+
+var otifMet=otifNum>=97;
+var gClr=otifClr(otifNum);
+var gZoneW=64,gCX=ML+gZoneW/2,gCY=y+36,gR=24,gTW=8;
+
+// Draw gauge
+drawGauge(gCX,gCY,gR,gTW,otifNum,gClr);
+
+// % centred in gauge
+setInk(gClr);doc.setFontSize(15);doc.setFont('helvetica','bold');
+doc.text(ytdOTIF+'%',gCX,gCY+3,{align:'center'});
+setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
+doc.text('PALLET OTIF',gCX,gCY+9.5,{align:'center'});
+setInk(CLR.muted);doc.setFontSize(6);doc.setFont('helvetica','normal');
+doc.text('Target 97.0%',gCX,gCY+gR+7,{align:'center'});
+
+// Status pill
+var pW=50,pH=9,pX=gCX-pW/2,pY=gCY+gR+10;
+bordered(pX,pY,pW,pH,otifBgClr(otifNum),gClr,0.3);
+setInk(gClr);doc.setFontSize(6.5);doc.setFont('helvetica','bold');
+doc.text(otifMet?'\u2713  ON TARGET':'\u2715  BELOW TARGET',gCX,pY+6,{align:'center'});
+
+// Right of gauge
+var dX=ML+gZoneW+5,dW=CW-gZoneW-5;
+setInk(CLR.dark);doc.setFontSize(13);doc.setFont('helvetica','bold');
+doc.text(String(aL||0)+' late from '+String(aC||0)+' consignments',dX,y+10);
+setInk(CLR.muted);doc.setFontSize(7);doc.setFont('helvetica','normal');
+doc.text('Target 97.0%  \u00B7  '+Math.abs(97-otifNum).toFixed(1)+(otifMet?' pts above':' pts below')+' target',dX,y+18);
+
+// Progress bar
+var barX=dX,barY=y+23,barW=dW,barH=7;
+box(barX,barY,barW,barH,CLR.border);
+box(barX,barY,Math.min(otifNum/100,1)*barW,barH,gClr);
+// 97% tick
+box(barX+barW*0.97-1,barY-2,2,barH+4,otifMet?CLR.red:CLR.green);
+setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+doc.text('0%',barX,barY+barH+4.5);
+setInk(gClr);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+doc.text(ytdOTIF+'% actual',barX+barW*(Math.min(otifNum,97)/200),barY+barH+4.5,{align:'center'});
+setInk(otifMet?CLR.red:CLR.green);doc.setFontSize(5.5);doc.setFont('helvetica','bold');
+doc.text('97% target',barX+barW,barY+barH+4.5,{align:'right'});
+
+// Statement pill
+var stY=barY+barH+9;
+bordered(dX,stY,dW*0.70,9,otifBgClr(otifNum),gClr,0.25);
+setInk(gClr);doc.setFontSize(6.5);doc.setFont('helvetica','bold');
+doc.text(otifMet?'Performance within agreed range':'Performance review recommended',dX+3,stY+6);
+
+y=gCY+gR+24;
+
+// Period stats — 6 cards 2 rows of 3
+y=secHead('Period Statistics \u2014 '+periodLabel,y);
+var cw3=(CW-8)/3,cH=27;
+[
+  {l:'Consignments',      v:String(aC||0),  s:'Completed & invoiced'},
+  {l:'Pallets moved',     v:String(aP||0),  s:avgPC+' avg per consignment'},
+  {l:'Late deliveries',   v:String(aL||0),  s:latesPct+' of consignments', vc:CLR.red, a:CLR.red},
+  {l:'Base freight cost', v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'), s:periodLabel},
+  {l:'Avg cost / con',    v:'\u00A3'+avgRC, s:'Per consignment'},
+  {l:'Avg cost / pallet', v:'\u00A3'+avgRP, s:'Per pallet space'},
+].forEach(function(k,i){
+  var col=i%3,row=Math.floor(i/3);
+  statCard(ML+col*(cw3+4),y+row*(cH+4),cw3,cH,k.l,k.v,k.s,k.vc,k.a);
+});
+y+=(cH+4)*2+8;
+
+// Delivery mix
+y=secHead('Delivery Mix',y);
+var lW=CW*0.46,rW=CW*0.50,gap=CW*0.04,rxp=ML+lW+gap;
+var tyW=[lW*0.52,lW*0.26,lW*0.22];
+var tyY=tHead([{l:'Delivery type'},{l:'Cons',r:1},{l:'OTIF',r:1}],tyW,y);
+Object.entries(typeMap2).forEach(function(e,i){
+  var t=e[0],d=e[1],ov=d.cons>0?(d.cons-d.lates)/d.cons*100:0;
+  tyY=tRow([{t:t},{t:String(d.cons),r:1},{t:ov.toFixed(1)+'%',r:1,c:otifClr(ov)}],tyW,tyY,{shade:i%2!==0});
+});
+if(pdfPalletTotal>0){
+  var psW=[rW*0.52,lW*0.26,lW*0.22];
+  var psY=tHead([{l:'Pallet size'},{l:'Spaces',r:1},{l:'%',r:1}],psW,y,lW+gap);
+  pdfPalletKeys.forEach(function(k,i){
+    var n=pdfPalletMap[k],pct=(n/pdfPalletTotal*100).toFixed(1);
+    psY=tRow([{t:k},{t:String(n),r:1},{t:pct+'%',r:1}],psW,psY,{shade:i%2!==0},lW+gap);
   });
-  var lateList=comp.filter(function(r){return isLate(r);}).map(function(r){var arr=xlDT(r['destination arrival']);var ex2=r['destination extras']||'';var dtype=ex2.includes('Economy Booked')?'Eco Booked':ex2.includes('Booked')?'Booked':'Next Day';return{id:r['id']||'',dest:r['destination name']||'',city:r['destination city']||'',window:r['destination time window']||'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'--',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,reason:r._reason||''};});
-  // Fall back to savedLateRows when no raw data available
-  if(lateList.length===0&&window._savedLateRows&&window._savedLateRows.length>0){
-    lateList=(window._savedLateRows||[]).map(function(r){return{id:r.id||'',dest:r.dest||'',city:r.city||'',window:r.window||'',arrival:r.arrival||'--',mins:savedRowMins(r),pallets:r.pallets||0,dtype:r.dtype||'Standard',reason:r.reason||''};});
-  }
-  var destMap2={};
-  if(comp.length>0){
-    comp.forEach(function(r){var k=r['destination name']||'?';if(!destMap2[k])destMap2[k]={name:k,city:r['destination city']||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r['goods pallet spaces'])||0;destMap2[k].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))destMap2[k].lates++;});
-  } else if(window._savedDestData&&window._savedDestData.length>0){
-    window._savedDestData.forEach(function(d){destMap2[d.name]={name:d.name,city:d.city||'',cons:d.cons||0,pallets:d.pallets||0,revenue:d.revenue||0,lates:d.lates||0};});
-  } else if(window._savedLateRows&&window._savedLateRows.length>0){
-    window._savedLateRows.forEach(function(r){var k=r.dest||'?';if(!destMap2[k])destMap2[k]={name:k,city:r.city||'',cons:0,pallets:0,revenue:0,lates:0};destMap2[k].cons++;destMap2[k].pallets+=parseFloat(r.pallets)||0;destMap2[k].lates++;});
-  }
-  var topDest=Object.values(destMap2).sort(function(a,b){return b.cons-a.cons;}).slice(0,10);
-  var regMap2={};
-  if(comp.length>0){comp.forEach(function(r){var reg=region(r['destination postal code']||'');if(!regMap2[reg])regMap2[reg]={cons:0,pallets:0,revenue:0,lates:0};regMap2[reg].cons++;regMap2[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;regMap2[reg].revenue+=parseFloat(r['revenue'])||0;if(isLate(r))regMap2[reg].lates++;});}
-  else if(window._savedRegionData){regMap2=window._savedRegionData;}
-  var topReg=Object.entries(regMap2).sort(function(a,b){return b[1].pallets-a[1].pallets;});
-  var typeMap2={};comp.forEach(function(r){var ex2=r['destination extras']||'';var t=ex2.includes('Economy Booked')?'Economy Booked':'Next Day';if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons++;if(isLate(r))typeMap2[t].lates++;});
-  if(Object.keys(typeMap2).length===0){
-    Object.values(savedMonthData).forEach(function(m){if(m&&m.typeBreakdown){Object.keys(m.typeBreakdown).forEach(function(t){if(!typeMap2[t])typeMap2[t]={cons:0,lates:0};typeMap2[t].cons+=m.typeBreakdown[t].cons||0;typeMap2[t].lates+=m.typeBreakdown[t].lates||0;});}});
-  }
-  var v4TL=0,v4EB=0,v4ETA=0,v4TA=0,v4TB=0,v4AM=0,v4BW=0,v4AZ=0;
-  if(isV4){comp.forEach(function(r){var foc=String(r['v4_foc']||r['v4_surcharges']||'');var chg=String(r['v4_chargeable']||'');var focCodes=foc.split(',').map(function(x){return x.trim();});var chgCodes=chg.split(',').map(function(x){return x.trim();});if(focCodes.indexOf('TL')>-1)v4TL++;if(focCodes.indexOf('EB')>-1)v4EB++;if(focCodes.indexOf('ETA')>-1)v4ETA++;if(chgCodes.indexOf('TA')>-1)v4TA++;if(chgCodes.indexOf('TB')>-1)v4TB++;if(chgCodes.indexOf('AM')>-1)v4AM++;if(chgCodes.indexOf('BW')>-1)v4BW++;if(chgCodes.indexOf('AZ')>-1)v4AZ++;});}
-  var v4ChargeTotal=v4TA*32+v4TB*23+v4AM*12+v4BW*12+v4AZ*12;
-  function classifySurcharge(window){if(!window)return{type:'Standard',rate:0};var w=window.trim();var parts=w.split(' - ');if(parts.length!==2)return{type:'Standard',rate:0};var start=parts[0].trim(),end=parts[1].trim();if(start==='09:00'&&end==='10:00')return{type:'Pre-10am Delivery',rate:32};if(start==='09:00'&&end==='12:00')return{type:'AM Delivery',rate:12};if(start===end)return{type:'Timed Booking',rate:23};return{type:'Standard',rate:0};}
-  var amCons=[],timedCons=[],pre10Cons=[];
-  comp.forEach(function(r){var s=classifySurcharge(r['destination time window']);if(s.type==='AM Delivery')amCons.push(r);else if(s.type==='Timed Booking')timedCons.push(r);else if(s.type==='Pre-10am Delivery')pre10Cons.push(r);});
-  var amTotal=amCons.length*12,timedTotal=timedCons.length*23,pre10Total=pre10Cons.length*32;
-  var surchTotal=amTotal+timedTotal+pre10Total;
-  var surchCons=amCons.length+timedCons.length+pre10Cons.length;
-  var lateDelays=lateList.map(function(r){return parseInt(r.mins)||0;}).filter(function(m){return m>0;});
-  var avgDelay=lateDelays.length?Math.round(lateDelays.reduce(function(a,b){return a+b;},0)/lateDelays.length):0;
-  var worstLate=lateList.length>0?lateList.reduce(function(a,b){return (parseInt(b.mins)||0)>=(parseInt(a.mins)||0)?b:a;},lateList[0]):null;
-  var periodLabel=window._pdfPeriodLabelOverride||(months.length>0?months[0].label+(months.length>1?' - '+months[months.length-1].label:''):'2026');
-  var latesPct=aC>0?((aL/aC)*100).toFixed(1)+'%':'0.0%';
-  var {jsPDF}=window.jspdf;
-  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-  (function(){var _ot=doc.text.bind(doc);var _san=function(s){return String(s).replace(/\u2082/g,'2').replace(/\u2083/g,'3').replace(/[\u2013\u2014\u2015]/g,'-').replace(/[\u2018\u2019\u201A\u2032]/g,"'").replace(/[\u201C\u201D\u201E]/g,'"').replace(/\u2022/g,'-').replace(/\u2026/g,'...').replace(/\u00A0/g,' ').replace(/[^\x00-\xFF]/g,'');};doc.text=function(t,x,y,o){try{if(Array.isArray(t)){t=t.map(_san);}else if(t!=null){t=_san(t);}}catch(e){}return _ot(t,x,y,o);};})();
-  var W=210,H=297,ML=14,CW=182,CT=16,CB=283,TOTAL=6;
-  function rgb(hex){return[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)];}
-  function fill(hex){var r=rgb(hex);doc.setFillColor(r[0],r[1],r[2]);}
-  function txt(hex){var r=rgb(hex);doc.setTextColor(r[0],r[1],r[2]);}
-  function drw(hex){var r=rgb(hex);doc.setDrawColor(r[0],r[1],r[2]);}
-  function otifC(v){return v>=97?'#166534':v>=85?'#D97706':'#991B1B';}
-  function trunc(s,n){return s&&s.length>n?s.slice(0,n-1)+'...':s||'';}
-  function fmt(n){return n!=null&&!isNaN(n)?'£'+parseFloat(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2}):'--';}
-  function chrome(pg){fill('#111111');doc.rect(0,0,W,12,'F');fill('#F47920');doc.rect(0,12,W,1.2,'F');try{doc.addImage(PLG_LOGO_URL,'SVG',ML,1.5,32,9);}catch(e){txt('#F47920');doc.setFontSize(7);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',ML,7);}txt('#FFFFFF');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(currentCustomer,W/2,7,{align:'center'});txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(periodLabel,W/2,10.5,{align:'center'});txt('#777777');doc.setFontSize(6.5);doc.text('Page '+pg+' / '+TOTAL,W-ML,7,{align:'right'});fill('#111111');doc.rect(0,H-10,W,10,'F');fill('#F47920');doc.rect(0,H-10,W,0.8,'F');txt('#555555');doc.setFontSize(6);doc.setFont('helvetica','normal');doc.text('CONFIDENTIAL \u00B7 PREMIER LOGISTICS GROUP',ML,H-4);doc.text('premier-logistics.co.uk',W-ML,H-4,{align:'right'});}
-  function kpiCard(x,y,w,h,label,value,sub,valueColor){fill('#FFFFFF');doc.rect(x,y,w,h,'F');drw('#E5E3DE');doc.rect(x,y,w,h,'S');fill('#F47920');doc.rect(x,y,w,1,'F');txt('#888888');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(label.toUpperCase(),x+3,y+6);txt(valueColor||'#111111');doc.setFontSize(16);doc.setFont('helvetica','bold');doc.text(String(value||''),x+3,y+16);if(sub){txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(sub,x+3,y+21);}}
-  function tH(cols,widths,y,ox){ox=ox||0;var tw=widths.reduce(function(a,b){return a+b;},0);fill('#111111');doc.rect(ML+ox,y,tw,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');var x=ML+ox;cols.forEach(function(col,i){doc.text((col.l||'').toUpperCase(),col.r?x+widths[i]-2:x+2,y+5,{align:col.r?'right':'left'});x+=widths[i];});return y+7;}
-  function tR(vals,widths,y,opts,ox){ox=ox||0;opts=opts||{};var rh=6.5,tw=widths.reduce(function(a,b){return a+b;},0);if(opts.total){fill('#F47920');doc.rect(ML+ox,y,tw,rh,'F');}else if(opts.shade){fill('#F7F6F3');doc.rect(ML+ox,y,tw,rh,'F');}drw('#E5E3DE');doc.line(ML+ox,y+rh,ML+ox+tw,y+rh);doc.setFontSize(7);doc.setFont('helvetica',opts.total?'bold':'normal');var x=ML+ox;vals.forEach(function(v,i){var text=typeof v==='object'?String(v.t===null||v.t===undefined?'':v.t):String(v===null||v===undefined?'':v);if(!text)text='';var right=typeof v==='object'&&v.r;txt(opts.total?'#FFFFFF':typeof v==='object'&&v.c?v.c:'#1C1C1C');doc.text(text,right?x+widths[i]-2:x+2,y+4.8,{align:right?'right':'left'});x+=widths[i];});return y+rh;}
+  psY=tRow([{t:'Total'},{t:String(pdfPalletTotal),r:1},{t:'100%',r:1}],psW,psY,{total:true},lW+gap);
+}
 
-  // PAGE 1
-  fill('#111111');doc.rect(0,0,W,H,'F');fill('#F47920');doc.rect(0,0,7,H,'F');
-  try{doc.addImage(PLG_LOGO_URL,'SVG',18,14,55,18);}catch(e){txt('#F47920');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text('PREMIER LOGISTICS GROUP',18,22);}
-  txt('#F47920');doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('CUSTOMER KPI REPORT',18,90);
-  txt('#FFFFFF');doc.setFontSize(38);doc.setFont('helvetica','bold');doc.text(currentCustomer,18,108,{maxWidth:180});
-  txt('#777777');doc.setFontSize(16);doc.setFont('helvetica','normal');doc.text(periodLabel,18,120);
-  var sbY=H-70;fill('#F47920');doc.rect(0,sbY,W,46,'F');var statW=W/4;
-  [{l:'CONSIGNMENTS',v:String(aC||0)},{l:'PALLETS DELIVERED',v:String(aP||0)},{l:'OTIF',v:ytdOTIF+'%',dim:true},{l:'LATE DELIVERIES',v:String(aL||0)}].forEach(function(s,i){var sx=i*statW;if(i>0){drw('#E06810');doc.line(sx,sbY+8,sx,sbY+40);}txt(s.dim?'#FECACA':'#FFFFFF');doc.setFontSize(22);doc.setFont('helvetica','bold');doc.text(s.v,sx+statW/2,sbY+28,{align:'center'});txt('#F9C9A8');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text(s.l,sx+statW/2,sbY+38,{align:'center'});});
-  fill('#111111');doc.rect(0,H-24,W,24,'F');fill('#1E1E1E');doc.rect(0,H-24,W,0.5,'F');
-  txt('#555555');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Prepared exclusively for '+currentCustomer,18,H-14);
-  txt('#333333');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text('CONFIDENTIAL',18,H-7);
-  txt('#555555');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(dateStr,W-ML,H-10,{align:'right'});
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 3 — MONTHLY OVERVIEW + CHARTS
+// ─────────────────────────────────────────────────────────────────────────────
+doc.addPage();chrome();y=CT;
+y=secHead('Month-by-Month Overview \u2014 '+periodLabel,y);
 
-  // PAGE 2
-  doc.addPage();chrome(2);var y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('ON-TIME IN-FULL (OTIF)',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var heroH=42;fill('#F5F4F1');doc.rect(ML,y,CW,heroH,'F');
-  var otifMet=otifNum>=97;
-  var heroCol=otifMet?'#16A34A':'#DC2626',heroColLt=otifMet?'#BBF7D0':'#FFCCCC',heroColLt2=otifMet?'#86EFAC':'#FFAAAA',markCol=otifMet?'#DC2626':'#16A34A',barCol=otifMet?'#16A34A':'#DC2626';
-  fill(heroCol);doc.rect(ML,y,34,heroH,'F');
-  txt('#FFFFFF');doc.setFontSize(15);doc.setFont('helvetica','bold');doc.text(ytdOTIF+'%',ML+17,y+16,{align:'center'});
-  txt(heroColLt);doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text('OTIF',ML+17,y+23,{align:'center'});
-  txt(heroColLt2);doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text('Target: 97%',ML+17,y+29,{align:'center'});
-  txt(heroColLt2);doc.setFontSize(4.5);doc.setFont('helvetica','normal');doc.text('Pallet-weighted',ML+17,y+34,{align:'center'});
-  var bx=ML+40,bw=CW-44;
-  txt('#111111');doc.setFontSize(11);doc.setFont('helvetica','bold');doc.text(String(aL||0)+' late consignments from '+String(aC||0)+' total',bx,y+9);
-  txt('#666666');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Target: 97.0%   |   '+Math.abs(97-otifNum).toFixed(1)+(otifMet?' pts above target':' pts below target'),bx,y+16);
-  var barY=y+21;fill('#DDDDDD');doc.rect(bx,barY,bw,5,'F');fill(barCol);doc.rect(bx,barY,Math.min(otifNum/100,1)*bw,5,'F');fill(markCol);doc.rect(bx+bw*0.97-0.5,barY-1,1.5,7,'F');
-  txt('#888888');doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text('0%',bx,barY+9);
-  txt(barCol);doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(ytdOTIF+'% actual',bx+(bw*0.5),barY+9,{align:'center'});
-  txt(markCol);doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text('97% target',bx+bw,barY+9,{align:'right'});
-  fill(otifMet?'#DCFCE7':'#FEE2E2');doc.roundedRect(bx,barY+12,92,6,1,1,'F');txt(otifMet?'#166534':'#991B1B');doc.setFontSize(6);doc.setFont('helvetica','bold');doc.text(otifMet?'On target  -  performance within agreed range':'Below target  -  performance review recommended',bx+3,barY+16.5);
-  y+=heroH+6;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PERIOD STATISTICS \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var cw3=(CW-8)/3;
-  var kpiCards=[{l:'Consignments',v:String(aC||0),s:'Completed & invoiced'},{l:'Pallets moved',v:String(aP||0),s:avgPC+' avg per consignment'},{l:'Late deliveries',v:String(aL||0),s:latesPct+' of consignments',c:'#DC2626'},{l:'Base freight cost',v:'\u00A3'+Math.round(aR||0).toLocaleString('en-GB'),s:periodLabel},{l:'Avg cost / con',v:'\u00A3'+avgRC,s:'Per consignment'},{l:'Avg cost / pallet',v:'\u00A3'+avgRP,s:'Per pallet space'}];
-  kpiCards.forEach(function(k,i){var col=i%3,row=Math.floor(i/3);kpiCard(ML+col*(cw3+4),y+row*28,cw3,25,k.l,k.v,k.s,k.c);});y+=60;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('DELIVERY TYPE & PALLET SIZE',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var lW2=CW*0.46,rW2=CW*0.50,gap2=CW*0.04,rx2=ML+lW2+gap2;
-  fill('#111111');doc.rect(ML,y,lW2,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('DELIVERY TYPE BREAKDOWN',ML+3,y+5);
-  var ty2=y+7;
-  Object.entries(typeMap2).forEach(function(e,i){var t=e[0],d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';if(i%2===0){fill('#F7F6F3');doc.rect(ML,ty2,lW2,10,'F');}drw('#E5E3DE');doc.line(ML,ty2+10,ML+lW2,ty2+10);txt('#111111');doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text(t,ML+3,ty2+5);txt('#888888');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text(String(d.cons)+' consignments',ML+3,ty2+9);var oc=parseFloat(otif);txt(oc>=90?'#D97706':'#DC2626');doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text(otif+'%',ML+lW2-3,ty2+7,{align:'right'});ty2+=10;});
-  if(pdfPalletTotal>0){var py2=y;fill('#111111');doc.rect(rx2,py2,rW2,7,'F');txt('#FFFFFF');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('PALLET SIZE SPLIT',rx2+3,py2+5);py2+=7;pdfPalletKeys.forEach(function(k,i){var n=pdfPalletMap[k],pct=(n/pdfPalletTotal*100).toFixed(1);if(i%2===0){fill('#F7F6F3');doc.rect(rx2,py2,rW2,8,'F');}drw('#E5E3DE');doc.line(rx2,py2+8,rx2+rW2,py2+8);txt('#111111');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(k,rx2+3,py2+5.5);txt('#888888');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text(String(n)+' ('+pct+'%)',rx2+rW2-3,py2+5.5,{align:'right'});py2+=8;});}
-
-  // ===== MONTH OVERVIEW + CHARTS (Anand-style; page numbers re-stamped at end) =====
-  function chartSection(y,title,vals,labels,opts){
-    opts=opts||{};
-    var boxH=opts.boxH||50;
-    fill('#FCFBF9');doc.rect(ML,y,CW,boxH,'F');drw('#E5E3DE');doc.rect(ML,y,CW,boxH,'S');
-    fill('#F47920');doc.rect(ML,y,1.4,boxH,'F');
-    txt('#666666');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text(title,ML+5,y+6);
-    var plotTop=y+12,plotH=(opts.h||30),plotBot=plotTop+plotH,plotX=ML+10,plotW=CW-16;
-    var n=vals.length,valid=vals.filter(function(v){return v!=null;});
-    var maxV=opts.max!=null?opts.max:(valid.length?Math.max.apply(null,valid):1);
-    var minV=opts.min!=null?opts.min:0;if(maxV<=minV)maxV=minV+1;
-    var fV=opts.fmt||function(v){return String(Math.round(v));};
-    if(opts.target!=null&&opts.target<=maxV&&opts.target>=minV){var ty=plotBot-((opts.target-minV)/(maxV-minV))*plotH;drw('#C8CED6');if(doc.setLineDashPattern)doc.setLineDashPattern([1,1],0);doc.line(plotX,ty,plotX+plotW,ty);if(doc.setLineDashPattern)doc.setLineDashPattern([],0);txt('#94A3B8');doc.setFontSize(5);doc.setFont('helvetica','normal');doc.text(opts.targetLabel||'',plotX+plotW,ty-1,{align:'right'});}
-    drw('#E5E3DE');doc.line(plotX,plotBot,plotX+plotW,plotBot);
-    var slot=plotW/n,bw=Math.min(slot*0.5,11);
-    vals.forEach(function(v,i){var cx=plotX+i*slot+slot/2;if(v!=null){var frac=(v-minV)/(maxV-minV);if(frac<0)frac=0;if(frac>1)frac=1;var bh=Math.max(frac*plotH,0.8);fill('#F47920');doc.rect(cx-bw/2,plotBot-bh,bw,bh,'F');txt('#555555');doc.setFontSize(5.5);doc.setFont('helvetica','bold');doc.text(fV(v),cx,plotBot-bh-1.5,{align:'center'});}txt('#999999');doc.setFontSize(5.5);doc.setFont('helvetica','normal');doc.text(String(labels[i]).replace('-26',''),cx,plotBot+4,{align:'center'});});
-    return y+boxH+5;
-  }
-  doc.addPage();chrome(3);y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('MONTH-BY-MONTH OVERVIEW \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
+// Highlight cards — only show when >1 active month (pointless for single month)
+if(moActive.length>1){
   var _spO=function(m){var v=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):0;return v.toFixed(1)+'%';};
-  var moActive=months.filter(function(m){return (m.cons||0)>0||(m.pallets||0)>0;});
-  if(moActive.length>0){
-    var _busy=moActive.reduce(function(a,b){return (b.cons||0)>(a.cons||0)?b:a;});
-    var _best=moActive.reduce(function(a,b){return ((b.otif||0))>((a.otif||0))?b:a;});
-    var _worst=moActive.reduce(function(a,b){return (b.lates||0)>(a.lates||0)?b:a;});
-    var cw3=(CW-8)/3;
-    kpiCard(ML,y,cw3,24,'Busiest month',_busy.label,String(_busy.cons||0)+' consignments',null);
-    kpiCard(ML+cw3+4,y,cw3,24,'Best timeliness',_best.label,_spO(_best),'#166534');
-    kpiCard(ML+cw3*2+8,y,cw3,24,'Most late deliveries',_worst.label,String(_worst.lates||0)+' late'+((_worst.lates||0)===1?'':'s'),(_worst.lates||0)>0?'#991B1B':'#166534');
-    y+=30;
-  }
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('MONTHLY BREAKDOWN',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var moW=[34,26,30,40,30,22];
-  y=tH([{l:'Month'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'\u00A3',r:1},{l:'Timeliness',r:1},{l:'Lates',r:1}],moW,y);
-  var _tC=0,_tP=0,_tR2=0,_tL=0;
-  months.forEach(function(m,i){
-    var hd=(m.cons||0)>0||(m.pallets||0)>0||(m.revenue!=null&&m.revenue>0)||(m.lates||0)>0;
-    var op=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):null;
-    if(hd){_tC+=m.cons||0;_tP+=m.pallets||0;_tR2+=m.revenue||0;_tL+=m.lates||0;}
-    y=tR([{t:m.label},{t:hd?String(m.cons||0):'\u2014',r:1},{t:hd?String(m.pallets||0):'\u2014',r:1},{t:(hd&&m.revenue!=null)?fmt(m.revenue):'\u2014',r:1},{t:op!=null?op.toFixed(1)+'%':'\u2014',r:1,c:op!=null?otifC(op):'#BBBBBB'},{t:hd?String(m.lates||0):'\u2014',r:1,c:(m.lates||0)>0?'#991B1B':'#111111'}],moW,y,{shade:i%2!==0});
+  var _busy=moActive.reduce(function(a,b){return(b.cons||0)>(a.cons||0)?b:a;});
+  var _best=moActive.reduce(function(a,b){return(b.otif||0)>(a.otif||0)?b:a;});
+  var _worst=moActive.reduce(function(a,b){return(b.lates||0)>(a.lates||0)?b:a;});
+  var cw3h=(CW-8)/3;
+  statCard(ML,           y,cw3h,24,'Busiest month',    _busy.label, String(_busy.cons||0)+' consignments');
+  statCard(ML+cw3h+4,    y,cw3h,24,'Best timeliness',  _best.label, _spO(_best), CLR.green);
+  statCard(ML+cw3h*2+8,  y,cw3h,24,'Most lates',       _worst.label,String(_worst.lates||0)+' late'+((_worst.lates||0)===1?'':'s'),(_worst.lates||0)>0?CLR.red:CLR.green,(_worst.lates||0)>0?CLR.red:CLR.green);
+  y+=30;
+}
+
+y=secHead('Monthly Breakdown',y);
+var moW=[36,24,28,38,28,24];
+y=tHead([{l:'Month'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'Cost',r:1},{l:'OTIF',r:1},{l:'Lates',r:1}],moW,y);
+var _tC=0,_tP=0,_tR2=0,_tL=0;
+months.forEach(function(m,i){
+  var active=(m.cons||0)>0||(m.pallets||0)>0||(m.revenue!=null&&m.revenue>0)||(m.lates||0)>0;
+  var op=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):null;
+  if(active){_tC+=m.cons||0;_tP+=m.pallets||0;_tR2+=m.revenue||0;_tL+=m.lates||0;}
+  y=tRow([
+    {t:m.label},
+    {t:active?String(m.cons||0):'\u2014',r:1},
+    {t:active?String(m.pallets||0):'\u2014',r:1},
+    {t:(active&&m.revenue!=null)?fmt(m.revenue):'\u2014',r:1},
+    {t:op!=null?op.toFixed(1)+'%':'\u2014',r:1,c:op!=null?otifClr(op):CLR.muted},
+    {t:active?String(m.lates||0):'\u2014',r:1,c:(m.lates||0)>0?CLR.red:CLR.dark},
+  ],moW,y,{shade:i%2!==0});
+});
+y=tRow([{t:'TOTAL'},{t:String(_tC),r:1},{t:String(_tP),r:1},{t:fmt(_tR2),r:1},{t:(_tP>0&&ytdOTIF!=='--')?ytdOTIF+'%':'\u2014',r:1},{t:String(_tL),r:1}],moW,y,{total:true});
+y+=8;
+
+y=secHead('Performance Charts by Month',y);
+var _labs=months.map(function(m){return m.label;});
+var _act=function(m){return(m.cons||0)>0||(m.pallets||0)>0;};
+var _consV=months.map(function(m){return _act(m)?(m.cons||0):null;});
+var _pltV=months.map(function(m){return _act(m)?(m.pallets||0):null;});
+var _revV=months.map(function(m){return _act(m)?(m.revenue||0):null;});
+var _timV=months.map(function(m){var op=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):null;return _act(m)?op:null;});
+var _tv=_timV.filter(function(v){return v!=null;});
+var _timMin=_tv.length?Math.max(0,Math.floor(Math.min.apply(null,_tv)-5)):84;
+y=chartBars(y,'CONSIGNMENTS BY MONTH',_consV,_labs,{boxH:48});
+y=chartBars(y,'PALLETS DELIVERED BY MONTH',_pltV,_labs,{boxH:48});
+y=chartBars(y,'BASE FREIGHT COST BY MONTH',_revV,_labs,{boxH:48,fmt:fmtK});
+y=chartBars(y,'TIMELINESS (OTIF %) BY MONTH',_timV,_labs,{boxH:48,min:_timMin,max:100,fmt:function(v){return v.toFixed(1)+'%';},target:97,targetLabel:'97% target'});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 4 — UK HEATMAP + REGIONAL BREAKDOWN
+// ─────────────────────────────────────────────────────────────────────────────
+doc.addPage();chrome();y=CT;
+y=secHead('UK Delivery Heatmap \u2014 Pallet Volume by Region',y);
+
+if(mapImg){
+  var asp=mapImg.asp||1.78;
+  var mH=Math.min(100,CB-y-60); // leave room for regional table
+  var mW=mH*asp;
+  if(mW>CW){mW=CW;mH=mW/asp;}
+  var mX=ML+(CW-mW)/2;
+  bordered(mX,y,mW,mH,null,CLR.border,0.2);
+  try{doc.addImage(mapImg.url,'PNG',mX,y,mW,mH);}catch(e){}
+  y+=mH+6;
+}else{
+  box(ML,y,CW,55,CLR.faint);
+  setInk(CLR.muted);doc.setFontSize(8);doc.text('Map unavailable',ML+CW/2,y+28,{align:'center'});
+  y+=59;
+}
+
+y=secHead('Regional Breakdown',y);
+var rCols=3,rPerCol=Math.ceil(topReg.length/rCols),rColW=(CW-8)/rCols;
+// Wider OTIF column, separate Lates column — no collision
+var rW=[rColW*0.44,rColW*0.22,rColW*0.22,rColW*0.12];
+var maxRegY=y;
+[0,1,2].forEach(function(col){
+  var ox=col*(rColW+4),ry=y;
+  ry=tHead([{l:'Region'},{l:'Plts',r:1},{l:'OTIF',r:1},{l:'L',r:1}],rW,ry,ox);
+  topReg.slice(col*rPerCol,(col+1)*rPerCol).forEach(function(e,idx){
+    var d=e[1],ov=d.cons>0?(d.cons-d.lates)/d.cons*100:0;
+    ry=tRow([
+      {t:trunc(e[0],13)},
+      {t:String(d.pallets),r:1},
+      {t:ov.toFixed(1)+'%',r:1,c:otifClr(ov)},
+      {t:String(d.lates),r:1,c:d.lates>0?CLR.red:CLR.dark},
+    ],rW,ry,{shade:idx%2!==0},ox);
   });
-  y=tR([{t:'TOTAL / PERIOD'},{t:String(_tC),r:1},{t:String(_tP),r:1},{t:fmt(_tR2),r:1},{t:(_tP>0&&ytdOTIF!=='--')?ytdOTIF+'%':'\u2014',r:1},{t:String(_tL),r:1}],moW,y,{total:true});
-  doc.addPage();chrome(3);y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('PERFORMANCE CHARTS BY MONTH \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=9;
-  var _labs=months.map(function(m){return m.label;});
-  var _act=function(m){return (m.cons||0)>0||(m.pallets||0)>0;};
-  var _consV=months.map(function(m){return _act(m)?(m.cons||0):null;});
-  var _pltV=months.map(function(m){return _act(m)?(m.pallets||0):null;});
-  var _revV=months.map(function(m){return _act(m)?(m.revenue||0):null;});
-  var _timV=months.map(function(m){var op=(m.otif!=null)?(m.otif<=1?m.otif*100:m.otif):null;return _act(m)?op:null;});
-  var _timValid=_timV.filter(function(v){return v!=null;});
-  var _timMin=_timValid.length?Math.max(0,Math.floor(Math.min.apply(null,_timValid)-3)):90;
-  var _gbpL=function(v){return v>=1000?'\u00A3'+(v/1000).toFixed(1)+'k':'\u00A3'+Math.round(v);};
-  y=chartSection(y,'CONSIGNMENTS BY MONTH',_consV,_labs,{});
-  y=chartSection(y,'PALLETS DELIVERED BY MONTH',_pltV,_labs,{});
-  y=chartSection(y,'BASE FREIGHT COST BY MONTH',_revV,_labs,{fmt:_gbpL});
-  y=chartSection(y,'TIMELINESS (OTIF %) BY MONTH',_timV,_labs,{min:_timMin,max:100,fmt:function(v){return v.toFixed(1)+'%';},target:97,targetLabel:'Target 97%'});
+  if(ry>maxRegY)maxRegY=ry;
+});
+// Advance y past regional tables — page ends cleanly here
+y=maxRegY+4;
 
-  // PAGE 3
-  doc.addPage();chrome(3);y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('UK DELIVERY HEATMAP \u2014 PALLET VOLUME BY REGION',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  if(mapImg){var asp=mapImg.asp||2.5,mW=CW,mH=mW/asp;if(mH>100){mH=100;mW=mH*asp;}if(mW>CW){mW=CW;mH=mW/asp;}drw('#E5E3DE');doc.rect(ML+(CW-mW)/2,y,mW,mH,'S');try{doc.addImage(mapImg.url,'PNG',ML+(CW-mW)/2,y,mW,mH);}catch(e){}y+=mH+6;}
-  else{fill('#F7F6F3');doc.rect(ML,y,CW,70,'F');txt('#CCCCCC');doc.setFontSize(8);doc.text('Map unavailable',ML+CW/2,y+35,{align:'center'});y+=74;}
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('REGIONAL BREAKDOWN',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var regPerCol=Math.ceil(topReg.length/3),col3W=(CW-8)/3,maxRegY=y;
-  [0,1,2].forEach(function(col){var cx3=col*(col3W+4),rw=[col3W*0.52,col3W*0.20,col3W*0.16,col3W*0.12],ry=y;ry=tH([{l:'Region'},{l:'Plts',r:1},{l:'OTIF',r:1},{l:'Lates',r:1}],rw,ry,cx3);topReg.slice(col*regPerCol,(col+1)*regPerCol).forEach(function(e,idx){var d=e[1],otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';ry=tR([{t:trunc(e[0],14)},{t:String(d.pallets),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))},{t:String(d.lates),r:1}],rw,ry,{shade:idx%2!==0},cx3);});if(ry>maxRegY)maxRegY=ry;});
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 5 (OPTIONAL) — CARBON & NET ZERO
+// ─────────────────────────────────────────────────────────────────────────────
+var _carb=computeCarbon(regMap2);
+if(_carb.tPallets>0){
+  doc.addPage();chrome();y=CT;
+  y=secHead('Carbon & Net Zero \u2014 '+periodLabel,y);
+  var _pp=_carb.tCons/_carb.tPallets;
+  var _gpk=_carb.tPalletKm>0?_carb.tCons/_carb.tPalletKm*1000:0;
+  var _sp=_carb.tStand>0?_carb.tSave/_carb.tStand*100:0;
+  var ccw=(CW-9)/4;
+  statCard(ML,           y,ccw,26,'Total CO\u2082e',     (_carb.tCons/1000).toFixed(2)+' t',_carb.tPallets+' pallets',CLR.green,CLR.green);
+  statCard(ML+ccw+3,     y,ccw,26,'CO\u2082e / pallet',  _pp.toFixed(1)+' kg',             'delivered',CLR.green,CLR.green);
+  statCard(ML+(ccw+3)*2, y,ccw,26,'Carbon intensity',  _gpk.toFixed(1)+' g',              'per pallet-km',CLR.green,CLR.green);
+  statCard(ML+(ccw+3)*3, y,ccw,26,'Consolidation saving',(_carb.tSave/1000).toFixed(2)+' t',_sp.toFixed(1)+'% saved',CLR.green,CLR.green);
+  y+=32;
 
-  // ===== PAGE: CARBON / NET ZERO (uses regMap2; only if pallet data) =====
-  var _carb=computeCarbon(regMap2);
-  if(_carb.tPallets>0){
-    doc.addPage();chrome(6);y=CT+4;
-    txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('CARBON & NET ZERO \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-    var _pp=_carb.tCons/_carb.tPallets,_gpk=_carb.tPalletKm>0?_carb.tCons/_carb.tPalletKm*1000:0,_sp=_carb.tStand>0?_carb.tSave/_carb.tStand*100:0;
-    var ccw=(CW-9)/4;
-    kpiCard(ML,y,ccw,24,'Total CO2e',(_carb.tCons/1000).toFixed(2)+' t',_carb.tPallets+' pallets',null);
-    kpiCard(ML+ccw+3,y,ccw,24,'CO2e per pallet',_pp.toFixed(1)+' kg','delivered',null);
-    kpiCard(ML+(ccw+3)*2,y,ccw,24,'Carbon intensity',_gpk.toFixed(1)+' g','per pallet-km',null);
-    kpiCard(ML+(ccw+3)*3,y,ccw,24,'Consolidation saving',(_carb.tSave/1000).toFixed(2)+' t',_sp.toFixed(1)+'% saved','#166534');
-    y+=30;
-    txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('CO2 PER KILOMETRE (BY PALLET-KM)',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=7;
-    [['Carbon intensity',_gpk.toFixed(1)+' gCO2e / pallet-km'],['CO2e per pallet',_pp.toFixed(1)+' kg'],['Estimated delivery distance',_carb.tKm.toFixed(0)+' km (region legs)'],['Pallet-kilometres',_carb.tPalletKm.toFixed(0)+' plt.km']].forEach(function(rr,i){var yy=y+i*6.5;txt('#5a5a5a');doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text(rr[0],ML+2,yy);txt('#1a1a1a');doc.setFont('helvetica','bold');doc.text(rr[1],ML+CW,yy,{align:'right'});});
-    y+=4*6.5+4;
-    txt('#888888');doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.text('GROUPAGE CONSOLIDATION SAVINGS',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=7;
-    [['Saved by consolidating with other volume',(_carb.tSave/1000).toFixed(2)+' t  ('+_sp.toFixed(1)+'%)','#166534'],['Emissions if shipped alone (@'+(CARBON.us*100)+'% load)',(_carb.tStand/1000).toFixed(2)+' t','#1a1a1a'],['Actual emissions (@'+(CARBON.uc*100)+'% consolidated load)',(_carb.tCons/1000).toFixed(2)+' t','#1a1a1a']].forEach(function(rr,i){var yy=y+i*6.5;txt('#5a5a5a');doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text(rr[0],ML+2,yy);doc.setTextColor(rr[2]==='#166534'?22:26,rr[2]==='#166534'?101:26,rr[2]==='#166534'?52:26);doc.setFont('helvetica','bold');doc.text(rr[1],ML+CW,yy,{align:'right'});});
-    y+=3*6.5+6;
-    txt('#888888');doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.text('CO2 BY REGION',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-    var cbw=[50,30,30,36,36];
-    y=tH([{l:'Region'},{l:'Pallets',r:1},{l:'Est km',r:1},{l:'CO2e',r:1},{l:'Saving',r:1}],cbw,y);
-    _carb.rows.forEach(function(rr,i){y=tR([{t:rr.region},{t:String(Math.round(rr.pallets)),r:1},{t:rr.dist.toFixed(0),r:1},{t:(rr.co2/1000).toFixed(2)+' t',r:1},{t:(rr.save/1000).toFixed(2)+' t',r:1,c:'#166534'}],cbw,y,{shade:i%2!==0});});
-    y=tR([{t:'TOTAL'},{t:String(Math.round(_carb.tPallets)),r:1},{t:_carb.tKm.toFixed(0),r:1},{t:(_carb.tCons/1000).toFixed(2)+' t',r:1},{t:(_carb.tSave/1000).toFixed(2)+' t',r:1,c:'#166534'}],cbw,y,{total:true});
-    y+=6;
-    txt('#9a9a9a');doc.setFont('helvetica','normal');doc.setFontSize(6.5);
-    var _cm='Methodology: distance estimated from Bardon to each UK region centroid (haversine x '+CARBON.circ+' circuity, one-way). Pallets allocated their share of vehicle emissions at '+CARBON.vf+' kgCO2e/km well-to-wheel ('+CARBON.cap+'-pallet capacity, '+(CARBON.uc*100)+'% consolidated load). Consolidation saving vs '+(CARBON.us*100)+'% standalone load. Vehicle factor from UK DEFRA/DESNZ 2025 (diesel '+CARBON.diesel+' kgCO2e/litre TTW + ~19% WTT). CO2e includes CO2, CH4, N2O at AR5 GWP. Region-level estimate, indicative.';
-    doc.text(doc.splitTextToSize(_cm,CW),ML,y);
-  }
-  // PAGE 4
-  doc.addPage();chrome(4);y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('TOP 10 DESTINATIONS BY VOLUME',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var dc=[{l:'Destination'},{l:'City'},{l:'Cons',r:1},{l:'Pallets',r:1},{l:'Lates',r:1},{l:'OTIF',r:1},{l:'Cost',r:1}],dw=[48,24,13,14,13,18,30];
-  y=tH(dc,dw,y);topDest.forEach(function(d,idx){var otif=d.cons>0?((d.cons-d.lates)/d.cons*100).toFixed(1):'--';y=tR([{t:trunc(d.name,30)},{t:trunc(d.city,14)},{t:String(d.cons),r:1},{t:String(d.pallets),r:1},{t:String(d.lates),r:1},{t:otif+'%',r:1,c:otifC(parseFloat(otif))},{t:fmt(d.revenue),r:1}],dw,y,{shade:idx%2!==0});});y+=8;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('LATE DELIVERY SUMMARY',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var lsc=(CW-8)/3;
-  kpiCard(ML,y,lsc,24,'Total lates',String(aL||0),'of '+String(aC||0)+' consignments','#DC2626');
-  kpiCard(ML+lsc+4,y,lsc,24,'Average delay',fmtDelay(avgDelay),'per late delivery','#DC2626');
-  kpiCard(ML+lsc*2+8,y,lsc,24,'Worst single delay',(worstLate?fmtDelay(worstLate.mins):'--'),(worstLate?trunc(worstLate.dest,22):''),'#DC2626');
-  y+=30;
-  if(lateList.length>0){
-    var lateSorted=lateList.slice().sort(function(a,b){return (b.mins||0)-(a.mins||0);});
-    var lateShow=lateSorted.slice(0,10);
-    txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('LATE DELIVERIES'+(lateList.length>10?' (TOP 10 BY DELAY)':''),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-    var ldw=[55,28,24,75];y=tH([{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Reason'}],ldw,y);
-    lateShow.forEach(function(d,idx){y=tR([{t:trunc(d.dest,30)},{t:trunc(d.city,16)},{t:fmtDelay(d.mins),r:1,c:'#DC2626'},{t:d.reason||'\u2014'}],ldw,y,{shade:idx%2!==0});});
-  }
+  y=secHead('CO\u2082 Intensity',y);
+  var kmRows=[
+    ['Carbon intensity',_gpk.toFixed(1)+' gCO\u2082e / pallet-km'],
+    ['CO\u2082e per pallet',_pp.toFixed(1)+' kg'],
+    ['Estimated delivery distance',_carb.tKm.toFixed(0)+' km (region legs)'],
+    ['Pallet-kilometres',_carb.tPalletKm.toFixed(0)+' plt.km'],
+  ];
+  kmRows.forEach(function(rr,i){
+    if(i%2===0)box(ML,y+i*6.5,CW,6.5,CLR.faint);
+    setInk(CLR.mid);doc.setFontSize(8);doc.setFont('helvetica','normal');doc.text(rr[0],ML+3,y+i*6.5+4.8);
+    setInk(CLR.dark);doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text(rr[1],ML+CW,y+i*6.5+4.8,{align:'right'});
+  });
+  y+=kmRows.length*6.5+6;
 
-  // PAGE 5 (surcharges) \u2014 only rendered when there are surcharges
-  var hasSurcharge=(isV4?((v4TA+v4TB+v4AM+v4BW+v4AZ)>0):(surchCons>0));
-  if(hasSurcharge){
-  doc.addPage();chrome(5);y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('SURCHARGE SUMMARY \u2014 '+periodLabel.toUpperCase(),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
+  y=secHead('Groupage Consolidation Savings',y);
+  [
+    ['Saved by consolidating with other volume',(_carb.tSave/1000).toFixed(2)+' t  ('+_sp.toFixed(1)+'%)',CLR.green],
+    ['Emissions if shipped alone (@'+(CARBON.us*100)+'% load)',(_carb.tStand/1000).toFixed(2)+' t',CLR.dark],
+    ['Actual emissions (@'+(CARBON.uc*100)+'% consolidated load)',(_carb.tCons/1000).toFixed(2)+' t',CLR.dark],
+  ].forEach(function(rr,i){
+    if(i%2===0)box(ML,y+i*6.5,CW,6.5,CLR.faint);
+    setInk(CLR.mid);doc.setFontSize(8);doc.setFont('helvetica','normal');doc.text(rr[0],ML+3,y+i*6.5+4.8);
+    setInk(rr[2]);doc.setFontSize(8);doc.setFont('helvetica','bold');doc.text(rr[1],ML+CW,y+i*6.5+4.8,{align:'right'});
+  });
+  y+=3*6.5+8;
+
+  y=secHead('CO\u2082 by Region',y);
+  var cbW=[50,28,26,32,32];
+  y=tHead([{l:'Region'},{l:'Pallets',r:1},{l:'Est km',r:1},{l:'CO\u2082e',r:1},{l:'Saving',r:1}],cbW,y);
+  _carb.rows.forEach(function(rr,i){
+    y=tRow([{t:rr.region},{t:String(Math.round(rr.pallets)),r:1},{t:rr.dist.toFixed(0),r:1},{t:(rr.co2/1000).toFixed(2)+' t',r:1},{t:(rr.save/1000).toFixed(2)+' t',r:1,c:CLR.green}],cbW,y,{shade:i%2!==0});
+  });
+  y=tRow([{t:'TOTAL'},{t:String(Math.round(_carb.tPallets)),r:1},{t:_carb.tKm.toFixed(0),r:1},{t:(_carb.tCons/1000).toFixed(2)+' t',r:1},{t:(_carb.tSave/1000).toFixed(2)+' t',r:1,c:CLR.green}],cbW,y,{total:true});
+  y+=6;
+  // Methodology note — fills bottom of page
+  var noteH=Math.min(CB-y,18);
+  bordered(ML,y,CW,noteH,CLR.faint,CLR.border,0.15);
+  setInk(CLR.muted);doc.setFontSize(5.8);doc.setFont('helvetica','normal');
+  var noteText='Methodology: distance from Bardon to each UK region centroid (haversine \u00D7'+CARBON.circ+' circuity, one-way). Pallets allocated share of vehicle emissions at '+CARBON.vf+' kgCO\u2082e/km WTW ('+CARBON.cap+'-pallet, '+(CARBON.uc*100)+'% load). Saving vs '+(CARBON.us*100)+'% standalone. UK DEFRA/DESNZ 2025. Region-level estimate, indicative.';
+  doc.text(doc.splitTextToSize(noteText,CW-8),ML+4,y+5);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE — TOP DESTINATIONS + LATE SUMMARY
+// ─────────────────────────────────────────────────────────────────────────────
+doc.addPage();chrome();y=CT;
+y=secHead('Top 10 Destinations by Volume',y);
+var dW=[46,22,14,14,13,20,29];
+y=tHead([{l:'Destination'},{l:'City'},{l:'Cons',r:1},{l:'Plts',r:1},{l:'Lates',r:1},{l:'OTIF',r:1},{l:'Cost',r:1}],dW,y);
+topDest.forEach(function(d,idx){
+  var ov=d.cons>0?(d.cons-d.lates)/d.cons*100:0;
+  y=tRow([{t:trunc(d.name,28)},{t:trunc(d.city,13)},{t:String(d.cons),r:1},{t:String(d.pallets),r:1},{t:String(d.lates),r:1,c:d.lates>0?CLR.red:CLR.dark},{t:ov.toFixed(1)+'%',r:1,c:otifClr(ov)},{t:fmt(d.revenue),r:1}],dW,y,{shade:idx%2!==0});
+});
+y+=8;
+
+y=secHead('Late Delivery Summary',y);
+var lsc=(CW-8)/3;
+statCard(ML,         y,lsc,26,'Total lates',      String(aL||0),'of '+String(aC||0)+' consignments',CLR.red,CLR.red);
+statCard(ML+lsc+4,   y,lsc,26,'Average delay',     fmtDelay(avgDelay),'per late delivery',CLR.red,CLR.red);
+statCard(ML+lsc*2+8, y,lsc,26,'Worst single delay',worstLate?fmtDelay(worstLate.mins):'--',worstLate?trunc(worstLate.dest,24):'',CLR.red,CLR.red);
+y+=32;
+
+if(lateList.length>0){
+  var lateSorted=lateList.slice().sort(function(a,b){return(b.mins||0)-(a.mins||0);});
+  var lateShow=lateSorted.slice(0,10);
+  y=secHead('Late Deliveries'+(lateList.length>10?' (Top 10 by Delay)':''),y);
+  // Reason col — only show header if any reasons exist
+  var hasReasons=lateShow.some(function(r){return r.reason&&r.reason!=='';});
+  var ldW=hasReasons?[50,26,22,62]:[50,26,22,62];
+  var ldCols=hasReasons?[{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Reason'}]:[{l:'Destination'},{l:'City'},{l:'Delay',r:1},{l:'Delivery type'}];
+  y=tHead(ldCols,ldW,y);
+  lateShow.forEach(function(d,idx){
+    var mins2=parseInt(d.mins)||0;
+    var dc=mins2>2880?CLR.red:mins2>480?CLR.amber:CLR.dark;
+    var col4=hasReasons?(d.reason||'\u2014'):d.dtype;
+    y=tRow([{t:trunc(d.dest,30)},{t:trunc(d.city,14)},{t:'+'+fmtDelay(d.mins),r:1,c:dc},{t:col4}],ldW,y,{shade:idx%2!==0});
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE — SURCHARGES (conditional)
+// ─────────────────────────────────────────────────────────────────────────────
+var hasSurcharge=isV4?((v4TA+v4TB+v4AM+v4BW+v4AZ)>0):(surchCons>0);
+if(hasSurcharge){
+  doc.addPage();chrome();y=CT;
+  y=secHead('Surcharge Summary \u2014 '+periodLabel,y);
   var sc3=(CW-8)/3;
-  if(isV4){kpiCard(ML,y,sc3,24,'Chargeable surcharges','\u00A3'+v4ChargeTotal,(v4TA+v4TB+v4AM+v4BW+v4AZ)+' consignments',v4ChargeTotal>0?'#F47920':'#888888');kpiCard(ML+sc3+4,y,sc3,24,'TA / TB / AM',v4TA+'  /  '+v4TB+'  /  '+v4AM,'consignments each',null);kpiCard(ML+sc3*2+8,y,sc3,24,'Free surcharges (TL/EB/ETA)','\u00A30',v4TL+' / '+v4EB+' / '+v4ETA,'#888888');}
-  else{kpiCard(ML,y,sc3,24,'AM Delivery (09:00\u201312:00)','\u00A3'+amTotal,amCons.length+' cons \u00D7 \u00A312',null);kpiCard(ML+sc3+4,y,sc3,24,'Timed Booking','\u00A3'+timedTotal,timedCons.length+' cons \u00D7 \u00A323',null);kpiCard(ML+sc3*2+8,y,sc3,24,'Total surcharges','\u00A3'+surchTotal,surchCons+' of '+(aC||0)+' consignments','#F47920');}
-  y+=30;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('SURCHARGE RATE CARD',ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  var rw3=[60,70,22,14,16];y=tH([{l:'Surcharge type'},{l:'Trigger'},{l:'Rate',r:1},{l:'Cons',r:1},{l:'Total',r:1}],rw3,y);
-  if(isV4){y=tR(['Timed AM (TA)','Pre-10am timed delivery',{t:'\u00A332 / con',r:1},{t:String(v4TA),r:1},{t:'\u00A3'+(v4TA*32),r:1}],rw3,y);y=tR(['Timed Booking (TB)','Specific timed slot',{t:'\u00A323 / con',r:1},{t:String(v4TB),r:1},{t:'\u00A3'+(v4TB*23),r:1}],rw3,y,{shade:true});y=tR(['AM Delivery (AM)','Morning delivery window',{t:'\u00A312 / con',r:1},{t:String(v4AM),r:1},{t:'\u00A3'+(v4AM*12),r:1}],rw3,y);y=tR(['Booked Window (BW)','Specific delivery window',{t:'\u00A312 / con',r:1},{t:String(v4BW),r:1},{t:'\u00A3'+(v4BW*12),r:1}],rw3,y,{shade:true});y=tR(['Amazon (AZ)','Amazon delivery surcharge',{t:'\u00A312 / con',r:1},{t:String(v4AZ),r:1},{t:'\u00A3'+(v4AZ*12),r:1}],rw3,y);y=tR([{t:'Chargeable total'},{t:''},{t:'',r:1},{t:String(v4TA+v4TB+v4AM+v4BW+v4AZ),r:1},{t:'\u00A3'+v4ChargeTotal,r:1}],rw3,y,{total:true});}
-  else{y=tR(['AM Delivery','Delivery window 09:00\u201312:00',{t:'\u00A312 / con',r:1},{t:String(amCons.length),r:1},{t:'\u00A3'+amTotal,r:1}],rw3,y);y=tR(['Pre-10am Delivery','Delivery window 09:00\u201310:00',{t:'\u00A332 / con',r:1},{t:String(pre10Cons.length),r:1},{t:'\u00A3'+pre10Total,r:1}],rw3,y,{shade:true});y=tR(['Timed Booking','Same start & end time',{t:'\u00A323 / con',r:1},{t:String(timedCons.length),r:1},{t:'\u00A3'+timedTotal,r:1}],rw3,y);y=tR([{t:'TOTAL'},{t:''},{t:'',r:1},{t:String(surchCons),r:1},{t:'\u00A3'+surchTotal,r:1}],rw3,y,{total:true});}
+  if(isV4){
+    statCard(ML,         y,sc3,26,'Chargeable surcharges','\u00A3'+v4ChargeTotal,(v4TA+v4TB+v4AM+v4BW+v4AZ)+' consignments',v4ChargeTotal>0?CLR.orange:CLR.muted,v4ChargeTotal>0?CLR.orange:CLR.muted);
+    statCard(ML+sc3+4,   y,sc3,26,'TA / TB / AM',v4TA+' / '+v4TB+' / '+v4AM,'consignments each');
+    statCard(ML+sc3*2+8, y,sc3,26,'Free (TL/EB/ETA)','\u00A30',v4TL+' / '+v4EB+' / '+v4ETA,CLR.muted,CLR.muted);
+  }else{
+    statCard(ML,         y,sc3,26,'AM Delivery (09\u201312)','\u00A3'+amTotal,amCons.length+' cons \u00D7 \u00A312');
+    statCard(ML+sc3+4,   y,sc3,26,'Timed Booking','\u00A3'+timedTotal,timedCons.length+' cons \u00D7 \u00A323');
+    statCard(ML+sc3*2+8, y,sc3,26,'Total surcharges','\u00A3'+surchTotal,surchCons+' of '+(aC||0)+' consignments',CLR.orange,CLR.orange);
+  }
+  y+=32;
+  y=secHead('Surcharge Rate Card',y);
+  var rw3=[58,68,24,14,18];
+  y=tHead([{l:'Surcharge type'},{l:'Trigger'},{l:'Rate',r:1},{l:'Cons',r:1},{l:'Total',r:1}],rw3,y);
+  if(isV4){
+    y=tRow(['Timed AM (TA)','Pre-10am timed delivery',{t:'\u00A332/con',r:1},{t:String(v4TA),r:1},{t:'\u00A3'+(v4TA*32),r:1}],rw3,y);
+    y=tRow(['Timed Booking (TB)','Specific timed slot',{t:'\u00A323/con',r:1},{t:String(v4TB),r:1},{t:'\u00A3'+(v4TB*23),r:1}],rw3,y,{shade:true});
+    y=tRow(['AM Delivery (AM)','Morning window',{t:'\u00A312/con',r:1},{t:String(v4AM),r:1},{t:'\u00A3'+(v4AM*12),r:1}],rw3,y);
+    y=tRow(['Booked Window (BW)','Specific window',{t:'\u00A312/con',r:1},{t:String(v4BW),r:1},{t:'\u00A3'+(v4BW*12),r:1}],rw3,y,{shade:true});
+    y=tRow(['Amazon (AZ)','Amazon surcharge',{t:'\u00A312/con',r:1},{t:String(v4AZ),r:1},{t:'\u00A3'+(v4AZ*12),r:1}],rw3,y);
+    y=tRow([{t:'CHARGEABLE TOTAL'},{t:''},{t:'',r:1},{t:String(v4TA+v4TB+v4AM+v4BW+v4AZ),r:1},{t:'\u00A3'+v4ChargeTotal,r:1}],rw3,y,{total:true});
+  }else{
+    y=tRow(['AM Delivery','09:00\u201312:00',{t:'\u00A312/con',r:1},{t:String(amCons.length),r:1},{t:'\u00A3'+amTotal,r:1}],rw3,y);
+    y=tRow(['Pre-10am','09:00\u201310:00',{t:'\u00A332/con',r:1},{t:String(pre10Cons.length),r:1},{t:'\u00A3'+pre10Total,r:1}],rw3,y,{shade:true});
+    y=tRow(['Timed Booking','Same start/end time',{t:'\u00A323/con',r:1},{t:String(timedCons.length),r:1},{t:'\u00A3'+timedTotal,r:1}],rw3,y);
+    y=tRow([{t:'TOTAL'},{t:''},{t:'',r:1},{t:String(surchCons),r:1},{t:'\u00A3'+surchTotal,r:1}],rw3,y,{total:true});
+  }
   y+=8;
-  var hw=(CW-6)/2;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('AM DELIVERIES \u2014 '+amCons.length+' CONSIGNMENTS',ML,y);doc.text('TIMED BOOKINGS \u2014 '+timedCons.length+' CONSIGNMENTS',ML+hw+6,y);
-  drw('#E5E3DE');doc.line(ML,y+1,ML+hw,y+1);doc.line(ML+hw+6,y+1,ML+CW,y+1);y+=5;
-  var aw=[22,hw-40,18],tw2=[22,hw-40,18],ay=y,ty=y;
-  ay=tH([{l:'Order ID'},{l:'Destination'},{l:'Window',r:1}],aw,ay,0);ty=tH([{l:'Order ID'},{l:'Destination'},{l:'Slot',r:1}],tw2,ty,hw+6);
-  amCons.forEach(function(r,i){ay=tR([{t:trunc(r['id']||'',10)},{t:trunc(r['destination name']||'',22)},{t:(r['destination time window']||'').replace(' - ','\u2013'),r:1}],aw,ay,{shade:i%2!==0},0);});
-  ay=tR([{t:'Total'},{t:''},{t:'\u00A3'+amTotal,r:1}],aw,ay,{total:true},0);
-  timedCons.forEach(function(r,i){ty=tR([{t:trunc(r['id']||'',10)},{t:trunc(r['destination name']||'',22)},{t:(r['destination time window']||'').replace(' - ','\u2013'),r:1}],tw2,ty,{shade:i%2!==0},hw+6);});
-  ty=tR([{t:'Total'},{t:''},{t:'\u00A3'+timedTotal,r:1}],tw2,ty,{total:true},hw+6);
-  y=Math.max(ay,ty)+6;
-  fill('#FFF7ED');doc.rect(ML,y,CW,10,'F');drw('#FED7AA');doc.rect(ML,y,CW,10,'S');
-  txt('#92400E');doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('Note: ',ML+3,y+4.5);doc.setFont('helvetica','normal');
-  if(isV4){doc.text('Chargeable surcharges (TA/TB/AM) additional to base freight. Free surcharges (TL/EB/ETA) included in Customer Cost.',ML+12,y+4.5);if(v4ChargeTotal===0){doc.text('No chargeable surcharges recorded this period.',ML+3,y+8.5);}}
-  else{doc.text('Surcharges from destination time window in Qargo TMS. Additional to base freight.',ML+12,y+4.5);if(pre10Cons.length===0){doc.text('Pre-10am Delivery (\u00A332) \u2014 no consignments this period.',ML+3,y+8.5);}}
+  bordered(ML,y,CW,11,CLR.amberBg,CLR.amber,0.2);
+  setInk(CLR.amber);doc.setFontSize(6.5);doc.setFont('helvetica','bold');doc.text('Note: ',ML+3,y+5);
+  doc.setFont('helvetica','normal');
+  doc.text(isV4?'Chargeable surcharges (TA/TB/AM/BW/AZ) are additional to base freight. Free surcharges (TL/EB/ETA) included in Customer Cost.':'Surcharges derived from destination time window in Qargo TMS. Additional to base freight cost.',ML+14,y+5);
+}
 
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE — FULL LATE LOG
+// ─────────────────────────────────────────────────────────────────────────────
+doc.addPage();chrome();y=CT;
+y=secHead('Late Consignments \u2014 '+String(aL||0)+' of '+String(aC||0),y);
+
+bordered(ML,y,CW,9,CLR.redBg,CLR.red,0.2);
+setInk(CLR.red);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+doc.text('Late = delivery arrival after booked time window end. Contact your account manager to dispute any entry.',ML+3,y+5.5);
+y+=12;
+
+var lc=[{l:'Order ID'},{l:'Destination'},{l:'Delay',r:1},{l:'Plts',r:1},{l:'Type'},{l:'Reason'}];
+var lw=[22,52,16,10,26,52];
+y=tHead(lc,lw,y);
+
+lateList.forEach(function(r,idx){
+  // Page break — leave enough room so PLG block fits on final page
+  var isLast=(idx===lateList.length-1);
+  var spaceNeeded=isLast?36:ROW_H;
+  if(y+spaceNeeded>CB){
+    doc.addPage();chrome();y=CT+2;
+    y=tHead(lc,lw,y);
   }
-  // PAGE 6
-  var curPageNum=6;
-  doc.addPage();chrome(6);y=CT+4;
-  txt('#888888');doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.text('LATE CONSIGNMENTS \u2014 '+String(aL||0)+' OF '+String(aC||0),ML,y);drw('#E5E3DE');doc.line(ML,y+1,ML+CW,y+1);y+=5;
-  fill('#FFF7ED');doc.rect(ML,y,CW,7,'F');drw('#FED7AA');doc.rect(ML,y,CW,7,'S');txt('#92400E');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Late = delivery arrival after booked time window end. Contact your account manager to dispute.',ML+3,y+4.5);y+=9;
-  var lc=[{l:'Order ID'},{l:'Destination'},{l:'City'},{l:'Window'},{l:'Arrived'},{l:'Delay',r:1},{l:'Plts',r:1},{l:'Type'}],lw=[20,42,18,18,13,13,10,18];
-  y=tH(lc,lw,y);
-  lateList.forEach(function(r,idx){if(y>CB-6){doc.addPage();curPageNum++;chrome(curPageNum);y=CT+2;y=tH(lc,lw,y);}y=tR([{t:trunc(r.id,12)},{t:trunc(r.dest,26)},{t:trunc(r.city,11)},{t:r.window},{t:r.arrival},{t:'+'+fmtDelay(r.mins),r:1,c:'#991B1B'},{t:String(r.pallets),r:1},{t:r.dtype}],lw,y,{shade:idx%2!==0});});
-  if(lateList.length===0){txt('#888888');doc.setFontSize(9);doc.text('No late consignments this period.',ML+CW/2,y+12,{align:'center'});y+=20;}y+=8;
-  if(y<CB-50){fill('#111111');doc.rect(ML,y,CW,22,'F');fill('#F47920');doc.rect(ML,y,3,22,'F');
-    try{doc.addImage(PLG_LOGO_URL,'SVG',ML+6,y+3,36,14);}catch(e){txt('#FFFFFF');doc.setFontSize(9);doc.setFont('helvetica','bold');doc.text('Premier Logistics Group',ML+6,y+11);}
-    txt('#888888');doc.setFontSize(7);doc.setFont('helvetica','normal');doc.text('Bardon (HQ) & Northampton | premier-logistics.co.uk',ML+6,y+17);
-    txt('#555555');doc.setFontSize(6.5);doc.text('Confidential. Prepared exclusively for '+currentCustomer+'. '+dateStr,W-ML,y+17,{align:'right'});
+  var mins2=parseInt(r.mins)||0;
+  var dc=mins2>2880?CLR.red:mins2>480?CLR.amber:CLR.dark;
+  var reasonTxt=r.reason||'—';
+  y=tRow([
+    {t:trunc(r.id,14)},{t:trunc(r.dest,32)},
+    {t:'+'+fmtDelay(r.mins),r:1,c:dc},
+    {t:String(r.pallets),r:1},
+    {t:trunc(r.dtype,16)},
+    {t:trunc(reasonTxt,30)},
+  ],lw,y,{shade:idx%2!==0});
+});
+
+if(lateList.length===0){
+  setInk(CLR.muted);doc.setFontSize(9);
+  doc.text('No late consignments this period.',ML+CW/2,y+14,{align:'center'});
+  y+=20;
+}
+y+=8;
+
+// PLG closing brand block — always fits because of the space check above
+if(y<CB-24){
+  box(ML,y,CW,24,CLR.black);
+  box(ML,y,4,24,CLR.orange);
+  try{doc.addImage(PLG_LOGO_URL,'SVG',ML+8,y+4,36,14);}catch(e){
+    setInk(CLR.white);doc.setFontSize(9);doc.setFont('helvetica','bold');
+    doc.text('Premier Logistics Group',ML+8,y+13);
   }
+  setInk(CLR.muted);doc.setFontSize(7);doc.setFont('helvetica','normal');
+  doc.text('Bardon (HQ) & Northampton  \u00B7  premier-logistics.co.uk',ML+8,y+19);
+  setInk([75,73,69]);doc.setFontSize(6.5);
+  doc.text('Confidential. Prepared exclusively for '+currentCustomer+'. '+dateStr,W-MR,y+19,{align:'right'});
+}
 
-  var stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
-  var FINAL_TOTAL=doc.internal.getNumberOfPages();
-  for(var pgi=1;pgi<=FINAL_TOTAL;pgi++){doc.setPage(pgi);fill('#111111');doc.rect(W-ML-26,1.5,26,9,'F');txt('#777777');doc.setFontSize(6.5);doc.setFont('helvetica','normal');doc.text('Page '+pgi+' / '+FINAL_TOTAL,W-ML,7,{align:'right'});}
-  doc.save(currentCustomer+' - '+periodLabel+'.pdf');
-  showAlert('success','PDF downloaded \u2014 '+FINAL_TOTAL+' pages.');
+// ─────────────────────────────────────────────────────────────────────────────
+// FINAL PASS — page numbers, ONCE ONLY
+// Page 1: bottom-right of white panel
+// Pages 2+: right side of header bar + right side of footer
+// No other code stamps page numbers anywhere.
+// ─────────────────────────────────────────────────────────────────────────────
+var TOTAL=doc.internal.getNumberOfPages();
 
-  // Write snapshot if this is a fresh (unsnapshotted) download
-  if(window._pendingSnapshot){
-    window._pendingSnapshot=false;
-    var snapPayload={customer:currentCustomer,createdAt:new Date().toISOString(),months:{}};
-    Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];snapPayload.months[key]={cons:c.cons||0,pallets:c.pallets||0,revenue:parseFloat((c.revenue||0).toFixed(2)),lates:c.lates||0,latePallets:c.latePallets||0,timeliness:parseFloat((c.timeliness||0).toFixed(6)),avgRC:parseFloat((c.avgRC||0).toFixed(2)),avgRP:parseFloat((c.avgRP||0).toFixed(2)),avgPC:parseFloat((c.avgPC||0).toFixed(2))};});
-    var snapLates=[];
-    try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];(s.completedRows||[]).filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex2=r['destination extras']||'';var dtype=ex2.includes('Economy Booked')?'Economy Booked':ex2.includes('Booked')?'Booked':'Standard';snapLates.push({id:r['id']||'',custref:r['custref']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||'',reason:r._reason||'',failed:!!r._failed});});});}catch(e){}
-    snapPayload.lateRows=snapLates;
-    var snapReg={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!snapReg[reg])snapReg[reg]={pallets:0,cons:0,lates:0};snapReg[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;snapReg[reg].cons++;if(isLate(r))snapReg[reg].lates++;});}catch(e){}
-    snapPayload.regionData=snapReg;
-    console.log('Writing snapshot for key:', snapshotKey());
-    writeSnapshot(snapPayload).then(function(){
-      console.log('Snapshot written successfully: '+snapshotKey());
-      showAlert('success','Snapshot saved — PDF will be consistent on future downloads.');
-    }).catch(function(e){console.error('Snapshot write error:',e);});
-  }
-  if(onComplete)onComplete();
+doc.setPage(1);
+setInk([85,83,79]);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+doc.text('Page 1 / '+TOTAL,W-MR,H-7,{align:'right'});
 
-  }catch(err){console.error('buildReport error:',err);showAlert('error','PDF failed: '+err.message);}
+for(var pgi=2;pgi<=TOTAL;pgi++){
+  doc.setPage(pgi);
+  // Stamp into right of dark header — overwrite that zone cleanly
+  box(W-36,2,36,14,CLR.black);
+  setInk([105,103,99]);doc.setFontSize(6.5);doc.setFont('helvetica','normal');
+  doc.text('Page '+pgi+' / '+TOTAL,W-MR,11,{align:'right'});
+  // Stamp into footer right
+  setInk(CLR.muted);doc.setFontSize(5.5);doc.setFont('helvetica','normal');
+  doc.text('Page '+pgi+' / '+TOTAL,W-MR,H-3.5,{align:'right'});
+}
+
+// Save
+doc.save(currentCustomer+' \u2014 '+periodLabel+'.pdf');
+showAlert('success','PDF downloaded \u2014 '+TOTAL+' pages.');
+
+// Snapshot write
+if(window._pendingSnapshot){
+  window._pendingSnapshot=false;
+  var snapPayload={customer:currentCustomer,createdAt:new Date().toISOString(),months:{}};
+  Object.keys(calculatedMonths).forEach(function(key){var c=calculatedMonths[key];snapPayload.months[key]={cons:c.cons||0,pallets:c.pallets||0,revenue:parseFloat((c.revenue||0).toFixed(2)),lates:c.lates||0,latePallets:c.latePallets||0,timeliness:parseFloat((c.timeliness||0).toFixed(6)),avgRC:parseFloat((c.avgRC||0).toFixed(2)),avgRP:parseFloat((c.avgRP||0).toFixed(2)),avgPC:parseFloat((c.avgPC||0).toFixed(2))};});
+  var snapLates=[];
+  try{Object.entries(calculatedMonths).forEach(function(e){var key=e[0],s=e[1];(s.completedRows||[]).filter(function(r){return isLate(r)&&!r._manuallyRemoved;}).forEach(function(r){var arr=xlDT(r['destination arrival']);var ex2=r['destination extras']||'';var dtype=ex2.includes('Economy Booked')?'Economy Booked':ex2.includes('Booked')?'Booked':'Standard';snapLates.push({id:r['id']||'',custref:r['custref']||'',acct:r['customer']||'',month:MONTHS[MONTH_KEYS.indexOf(key)]||key,dest:r['destination name']||'',city:r['destination city']||'',pc:r['destination postal code']||'',window:r['destination time window']||'',commitDate:xlDate(r['destination date'])?xlDate(r['destination date']).toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrDate:arr?arr.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}):'',arrival:arr?arr.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}):'',mins:minsLate(r),pallets:r['goods pallet spaces']||0,dtype:dtype,note:r._note||'',reason:r._reason||'',failed:!!r._failed});});});}catch(e){}
+  snapPayload.lateRows=snapLates;
+  var snapReg={};try{allCompleted().forEach(function(r){var reg=region(r['destination postal code']||'');if(!snapReg[reg])snapReg[reg]={pallets:0,cons:0,lates:0};snapReg[reg].pallets+=parseFloat(r['goods pallet spaces'])||0;snapReg[reg].cons++;if(isLate(r))snapReg[reg].lates++;});}catch(e){}
+  snapPayload.regionData=snapReg;
+  writeSnapshot(snapPayload).then(function(){showAlert('success','Snapshot saved.');}).catch(function(e){console.error('Snapshot error:',e);});
+}
+
+if(onComplete)onComplete();
+
+}catch(err){
+  console.error('buildReport error:',err);
+  showAlert('warn','PDF failed: '+err.message);
+}
 }
 
 var LATE_REASONS=['','Traffic Delays','Vehicle Breakdown','Delayed at previous location','Late Collection','Hub Held','Admin Error','Miss Connection','Arrived location closed','Driver Sickness','Split Delivery','Other'];
