@@ -187,6 +187,8 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
   </div>
 
   <div class="hdr-mid">
+    <input type="text" name="username" autocomplete="username" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" tabindex="-1" aria-hidden="true">
+    <input type="password" name="password" autocomplete="current-password" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" tabindex="-1" aria-hidden="true">
     <div class="search-wrap">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input type="text" class="search-input" id="search" name="kpi-search-query" placeholder="Search customers..." oninput="render()" autocomplete="off">
