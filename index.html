@@ -198,9 +198,9 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
   </div>
 
   <div class="hdr-right">
-    <button class="btn btn-outline" id="edit-btn" onclick="toggleEdit()">Manage</button>
-    <button class="btn btn-primary" onclick="showModal()">+ Add customer</button>
-    <button class="icon-btn" title="Settings" onclick="openSettingsModal()">
+    <button class="btn btn-outline" id="edit-btn" style="display:none" onclick="toggleEdit()">Manage</button>
+    <button class="btn btn-primary" id="add-customer-btn" style="display:none" onclick="showModal()">+ Add customer</button>
+    <button class="icon-btn" id="settings-btn" title="Settings" style="display:none" onclick="openSettingsModal()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </button>
     <button class="btn btn-outline" id="users-btn" style="display:none" onclick="openUsersModal()">Users</button>
@@ -217,26 +217,36 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
     <input class="modal-input" id="modal-input" type="text" placeholder="e.g. Anand International" onkeydown="if(event.key==='Enter')addCustomer()">
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="hideModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="addCustomer()">Add customer</button>
+      <button class="btn btn-primary" id="modal-add-btn" onclick="addCustomer()">Add customer</button>
     </div>
   </div>
 </div>
 
 <div class="overlay" id="settings-overlay" style="display:none" onclick="if(event.target===this)closeSettingsModal()">
-  <div class="modal" style="width:400px">
+  <div class="modal" style="width:420px">
     <div class="modal-title">Settings</div>
-    <div class="modal-sub">GitHub connection for saving customer data</div>
-    <label class="modal-label">GitHub personal access token</label>
+    <div class="modal-sub">Admin-only connection settings</div>
+
+    <label class="modal-label">Your personal GitHub token (for editing/uploading data)</label>
     <input type="password" class="modal-input" id="gh-token" placeholder="ghp_..." oninput="saveToken()" autocomplete="off">
     <div class="token-status">
       <div class="token-status-dot" id="tok-dot"></div>
       <span id="tok-status-text">Not connected</span>
     </div>
+
+    <div style="border-top:1px solid var(--border);margin:16px 0;padding-top:14px">
+      <label class="modal-label">Shared data source token (powers everyone's view — set once)</label>
+      <input type="password" class="modal-input" id="shared-gh-token" placeholder="ghp_..." autocomplete="off" style="margin-bottom:8px">
+      <div id="shared-token-status" style="font-size:12px;color:var(--muted);margin-bottom:10px"></div>
+      <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="saveSharedToken()">Save shared token</button>
+    </div>
+
     <div class="modal-footer">
       <button class="btn btn-primary" onclick="closeSettingsModal()">Done</button>
     </div>
   </div>
 </div>
+
 
 <div class="overlay" id="users-overlay" style="display:none" onclick="if(event.target===this)closeUsersModal()">
   <div class="modal" style="width:560px;max-height:86vh;overflow-y:auto">
@@ -318,18 +328,30 @@ function closeSettingsModal() {
 function getToken() { return localStorage.getItem('plg_gh_token') || ''; }
 function slug(n) { return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 function inits(n) { return n.split(' ').map(function(w) { return w[0] || ''; }).slice(0, 2).join('').toUpperCase(); }
+var customerList = null;
 function getList() {
+  if (Array.isArray(customerList)) return customerList;
   try { var a = JSON.parse(localStorage.getItem('plg_customers')); if (Array.isArray(a) && a.length > 0) return a; } catch(e) {}
-  saveList(DEFAULTS.slice()); return DEFAULTS.slice();
+  return DEFAULTS.slice();
 }
-function saveList(a) { localStorage.setItem('plg_customers', JSON.stringify(a)); }
+function cacheList(a) { localStorage.setItem('plg_customers', JSON.stringify(a)); }
 function otifClass(v) { if (v == null) return ''; return parseFloat(v) >= 98 ? 'good' : parseFloat(v) >= 95 ? 'warn' : 'bad'; }
 
 function delCustomer(name) {
-  if (!confirm('Remove ' + name + ' from the portal?')) return;
-  var l = getList().filter(function(c) { return c !== name; });
-  saveList(l); delete meta[name]; render();
+  if (!confirm('Remove ' + name + ' from the portal? This removes it for everyone.')) return;
+  var secret = getAdminSecret();
+  if (!secret) { alert('Admin secret required to remove a customer. Set it via the Users panel first.'); return; }
+  fetch(EDGE_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
+    body: JSON.stringify({action: 'remove_customer', name: name})
+  }).then(function(r){ return r.json(); }).then(function(data){
+    if (data.error) { alert('Error removing customer: ' + data.error); return; }
+    customerList = data.customers; cacheList(customerList);
+    delete meta[name]; render();
+  }).catch(function(e){ alert('Error removing customer: ' + e.message); });
 }
+
 
 function render() {
   var list = getList();
@@ -405,21 +427,21 @@ function render() {
 }
 
 async function loadMeta() {
-  var token = getToken();
   hideMetaError();
-  if (!token) return;
-  var errors = [], okCount = 0;
-  await Promise.all(getList().map(async function(name) {
-    try {
-      var r = await fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/data/' + slug(name) + '.json',
-        { headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' } });
-      if (!r.ok) {
-        if (r.status !== 404) errors.push(name + ': HTTP ' + r.status);
-        return;
-      }
-      var j = await r.json();
-      var raw = j.content.replace(/\s/g, '');
-      var d = JSON.parse(atob(raw));
+  try {
+    var res = await fetch(KPI_DATA_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'get_many', customers: getList()})
+    });
+    var payload = await res.json();
+    if (!res.ok || payload.error) {
+      showMetaError('Could not load KPI data: ' + (payload.error || ('HTTP ' + res.status)) + '. Ask your admin to check the shared data source in Settings.');
+      render();
+      return;
+    }
+    Object.keys(payload.data || {}).forEach(function(name) {
+      var d = payload.data[name];
       var months = Object.keys(d.months || {}).sort();
       var otif = null, totPlt = 0, totLatePlt = 0, hasPlt = false;
       months.forEach(function(k) {
@@ -430,16 +452,11 @@ async function loadMeta() {
       });
       if (hasPlt && totPlt > 0) otif = ((totPlt - totLatePlt) / totPlt * 100).toFixed(1);
       meta[name] = { months: months.length, otif: otif };
-      okCount++;
-    } catch(e) {
-      errors.push(name + ': ' + e.message);
-    }
-  }));
-  if (errors.length > 0 && okCount === 0) {
-    showMetaError('GitHub sync failed for all customers — first error: ' + errors[0] + '. Check your token in Settings.');
-    console.error('loadMeta errors:', errors);
-  } else if (errors.length > 0) {
-    console.error('loadMeta partial errors:', errors);
+    });
+    var errs = payload.errors || {};
+    if (Object.keys(errs).length > 0) console.error('loadMeta partial errors:', errs);
+  } catch(e) {
+    showMetaError('Could not reach the shared data service: ' + e.message);
   }
   render();
 }
@@ -466,20 +483,75 @@ function showModal() { document.getElementById('overlay').style.display = 'flex'
 function hideModal() { document.getElementById('overlay').style.display = 'none'; document.getElementById('modal-input').value = ''; }
 function addCustomer() {
   var name = document.getElementById('modal-input').value.trim(); if (!name) return;
-  var l = getList(); if (l.indexOf(name) === -1) { l.push(name); saveList(l); }
-  var l2=getList();l2.sort(function(a,b){return a.localeCompare(b);});saveList(l2);
-    hideModal(); render(); if (getToken()) loadMeta();
+  var secret = getAdminSecret();
+  if (!secret) { alert('Admin secret required to add a customer. Set it via the Users panel first.'); return; }
+  var btn = document.getElementById('modal-add-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Adding…'; }
+  fetch(EDGE_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
+    body: JSON.stringify({action: 'add_customer', name: name})
+  }).then(function(r){ return r.json(); }).then(function(data){
+    if (btn) { btn.disabled = false; btn.textContent = 'Add customer'; }
+    if (data.error) { alert('Error adding customer: ' + data.error); return; }
+    customerList = data.customers; cacheList(customerList);
+    hideModal(); render(); loadMeta();
+  }).catch(function(e){
+    if (btn) { btn.disabled = false; btn.textContent = 'Add customer'; }
+    alert('Error adding customer: ' + e.message);
+  });
+}
+function getAdminSecret() { return localStorage.getItem('plg_admin_secret') || ''; }
+
+function saveSharedToken() {
+  var token = document.getElementById('shared-gh-token').value.trim();
+  var statusEl = document.getElementById('shared-token-status');
+  if (!token) { statusEl.textContent = 'Enter a token first.'; statusEl.style.color = '#991B1B'; return; }
+  var secret = getAdminSecret();
+  if (!secret) { statusEl.textContent = 'Set your Admin Secret in the Users panel first.'; statusEl.style.color = '#991B1B'; return; }
+  statusEl.textContent = 'Saving…'; statusEl.style.color = 'var(--muted)';
+  fetch(EDGE_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
+    body: JSON.stringify({action: 'set_github_token', github_token: token})
+  }).then(function(r){ return r.json(); }).then(function(data){
+    if (data.error) { statusEl.textContent = 'Error: ' + data.error; statusEl.style.color = '#991B1B'; return; }
+    statusEl.textContent = 'Saved. Everyone\'s view now uses this token.'; statusEl.style.color = '#166534';
+    document.getElementById('shared-gh-token').value = '';
+    refreshCustomerList().then(loadMeta);
+  }).catch(function(e){ statusEl.textContent = 'Error: ' + e.message; statusEl.style.color = '#991B1B'; });
+}
+
+
+async function refreshCustomerList() {
+  try {
+    var res = await fetch(KPI_DATA_URL, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'list'})
+    });
+    var payload = await res.json();
+    if (res.ok && Array.isArray(payload.customers)) {
+      customerList = payload.customers.slice().sort(function(a,b){return a.localeCompare(b);});
+      cacheList(customerList);
+      render();
+    } else if (payload.error) {
+      console.error('refreshCustomerList error:', payload.error);
+    }
+  } catch(e) {
+    console.error('refreshCustomerList failed:', e.message);
+  }
 }
 
 window.addEventListener('load', function() {
-  var stored = null;
-  try { stored = JSON.parse(localStorage.getItem('plg_customers')); } catch(e) {}
-  if (!Array.isArray(stored) || stored.length === 0) { localStorage.setItem('plg_customers', JSON.stringify(DEFAULTS)); }
-  var t = getToken();
   document.getElementById('search').value = '';
   render();
-  if (t) loadMeta();
-  if (sessionStorage.getItem('plg_role') === 'admin') { document.getElementById('users-btn').style.display = ''; }
+  refreshCustomerList().then(loadMeta);
+  if (sessionStorage.getItem('plg_role') === 'admin') {
+    document.getElementById('users-btn').style.display = '';
+    document.getElementById('edit-btn').style.display = '';
+    document.getElementById('add-customer-btn').style.display = '';
+    document.getElementById('settings-btn').style.display = '';
+  }
   // Some browsers autofill after the load event fires — clear it again shortly after
   setTimeout(function(){ var s=document.getElementById('search'); if(s && s.value){ s.value=''; render(); } }, 300);
 });
@@ -488,6 +560,7 @@ window.addEventListener('load', function() {
 var SB_URL = 'https://ahvyirnebbbfmktewdva.supabase.co';
 var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFodnlpcm5lYmJiZm1rdGV3ZHZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODQxMzAsImV4cCI6MjA5MjI2MDEzMH0.4uOvx11sNPOYGRSAxu4J7MwtgOQpHJsNtCg2BaP1Y3c';
 var EDGE_URL = SB_URL + '/functions/v1/kpi-admin';
+var KPI_DATA_URL = SB_URL + '/functions/v1/kpi-data';
 
 function usersStatus(msg, kind) {
   var el = document.getElementById('users-status');
