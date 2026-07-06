@@ -26,63 +26,55 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-/* ── Header ── */
+/* ── Header (single consolidated bar) ── */
 .hdr {
-  background: var(--dark); height: 52px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 28px; border-bottom: 2.5px solid var(--orange);
-  position: sticky; top: 0; z-index: 100;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 14px 28px; display: flex; align-items: center; gap: 20px;
+  position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm);
 }
-.hdr-left { display: flex; align-items: center; gap: 14px; }
-.hdr-logo { height: 22px; width: auto; opacity: 0.88; }
-.hdr-divider { width: 1px; height: 18px; background: #2a2a2a; }
-.hdr-title { font-size: 13px; font-weight: 600; color: #888; letter-spacing: 0.01em; }
-.hdr-right { display: flex; align-items: center; gap: 8px; }
-.token-wrap {
-  display: flex; align-items: center; gap: 8px;
-  background: #1c1c1c; border: 1px solid #262626;
-  border-radius: 7px; padding: 0 12px; height: 32px; transition: border-color 0.2s;
-}
-.token-wrap:focus-within { border-color: var(--orange); }
-.token-dot { width: 7px; height: 7px; border-radius: 50%; background: #2a2a2a; flex-shrink: 0; transition: background 0.2s; }
-.token-dot.active { background: #22C55E; }
-.token-label { font-size: 10px; font-weight: 700; color: #3e3e3e; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
-.token-input { background: none; border: none; color: #bbb; font-size: 12px; font-family: monospace; width: 155px; outline: none; }
-.token-input::placeholder { color: #2e2e2e; }
-.signout-btn {
-  background: none; border: 1px solid #262626; border-radius: 6px;
-  color: #5a5a5a; font-size: 12px; font-family: 'Inter', sans-serif;
-  padding: 5px 12px; cursor: pointer; transition: all 0.15s;
-}
-.signout-btn:hover { border-color: #333; color: #aaa; }
+.hdr-left { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.hdr-logo { height: 22px; width: auto; }
+.hdr-divider { width: 1px; height: 20px; background: var(--border); }
+.hdr-title { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; white-space: nowrap; }
 
-/* ── Toolbar ── */
-.toolbar-wrap { background: var(--surface); border-bottom: 1px solid var(--border); }
-.toolbar {
-  max-width: 1280px; margin: 0 auto; padding: 12px 28px;
-  display: flex; align-items: center; gap: 12px;
-}
+.hdr-mid { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
 .search-wrap {
   display: flex; align-items: center; gap: 8px;
   background: var(--bg); border: 1px solid var(--border);
   border-radius: 7px; padding: 0 12px; height: 36px; transition: border-color 0.15s;
+  width: 100%; max-width: 280px;
 }
 .search-wrap:focus-within { border-color: var(--orange); background: var(--surface); }
 .search-wrap svg { color: var(--muted); flex-shrink: 0; }
-.search-input { border: none; background: none; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--text); width: 220px; outline: none; }
+.search-input { border: none; background: none; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--text); width: 100%; outline: none; }
 .search-input::placeholder { color: var(--muted); }
 .count-badge {
   font-size: 12px; font-weight: 500; color: var(--muted);
   background: var(--surface); border: 1px solid var(--border);
-  padding: 4px 12px; border-radius: 20px; white-space: nowrap;
+  padding: 4px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
 }
 /* Stat pills — hidden from view but in DOM for JS */
 #s-total, #s-data, #s-best, #s-bestname, #s-att { display: none; }
-.toolbar-spacer { flex: 1; }
+
+.hdr-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.icon-btn {
+  width: 36px; height: 36px; border-radius: 7px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.icon-btn:hover { background: var(--faint); color: var(--text); }
+.signout-btn {
+  background: none; border: 1px solid var(--border); border-radius: 7px;
+  color: var(--muted); font-size: 12px; font-weight: 600; font-family: 'Inter', sans-serif;
+  padding: 0 14px; height: 36px; cursor: pointer; transition: all 0.15s;
+}
+.signout-btn:hover { border-color: #d4d1cb; color: var(--text); background: var(--faint); }
+
 .btn {
   height: 36px; padding: 0 18px; border-radius: 7px; border: none;
   cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif;
   font-weight: 600; transition: all 0.12s; display: flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
 }
 .btn:active { transform: scale(0.97); }
 .btn-outline { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
@@ -177,6 +169,10 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 }
 .modal-input:focus { border-color: var(--orange); background: var(--surface); }
 .modal-footer { display: flex; gap: 8px; justify-content: flex-end; }
+.modal-label { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; display: block; }
+.token-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-top: -6px; margin-bottom: 14px; }
+.token-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+.token-status-dot.active { background: #22C55E; }
 footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -189,28 +185,24 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
     <div class="hdr-divider"></div>
     <span class="hdr-title">KPI Portal</span>
   </div>
-  <div class="hdr-right">
-    <div class="token-wrap">
-      <div class="token-dot" id="tok-dot"></div>
-      <span class="token-label">GitHub</span>
-      <input type="password" class="token-input" id="gh-token" placeholder="ghp_..." oninput="saveToken()" autocomplete="off">
-    </div>
-    <button class="btn btn-outline" id="users-btn" style="display:none" onclick="openUsersModal()">Users</button>
-    <button onclick="sessionStorage.removeItem('plg_auth');window.location.href='login.html'" class="signout-btn">Sign out</button>
-  </div>
-</div>
 
-<div class="toolbar-wrap">
-  <div class="toolbar">
+  <div class="hdr-mid">
     <div class="search-wrap">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input type="text" class="search-input" id="search" placeholder="Search customers..." oninput="render()">
     </div>
     <div class="count-badge" id="count-badge">--</div>
     <span id="s-total"></span><span id="s-data"></span><span id="s-best"></span><span id="s-bestname"></span><span id="s-att"></span>
-    <div class="toolbar-spacer"></div>
+  </div>
+
+  <div class="hdr-right">
     <button class="btn btn-outline" id="edit-btn" onclick="toggleEdit()">Manage</button>
     <button class="btn btn-primary" onclick="showModal()">+ Add customer</button>
+    <button class="icon-btn" title="Settings" onclick="openSettingsModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <button class="btn btn-outline" id="users-btn" style="display:none" onclick="openUsersModal()">Users</button>
+    <button onclick="sessionStorage.removeItem('plg_auth');window.location.href='login.html'" class="signout-btn">Sign out</button>
   </div>
 </div>
 
@@ -224,6 +216,22 @@ footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted)
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="hideModal()">Cancel</button>
       <button class="btn btn-primary" onclick="addCustomer()">Add customer</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="settings-overlay" style="display:none" onclick="if(event.target===this)closeSettingsModal()">
+  <div class="modal" style="width:400px">
+    <div class="modal-title">Settings</div>
+    <div class="modal-sub">GitHub connection for saving customer data</div>
+    <label class="modal-label">GitHub personal access token</label>
+    <input type="password" class="modal-input" id="gh-token" placeholder="ghp_..." oninput="saveToken()" autocomplete="off">
+    <div class="token-status">
+      <div class="token-status-dot" id="tok-dot"></div>
+      <span id="tok-status-text">Not connected</span>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeSettingsModal()">Done</button>
     </div>
   </div>
 </div>
@@ -290,7 +298,20 @@ window.goTo = function(name) {
 function saveToken() {
   var t = document.getElementById('gh-token').value;
   localStorage.setItem('plg_gh_token', t);
-  document.getElementById('tok-dot').classList.toggle('active', t.length > 4);
+  var connected = t.length > 4;
+  document.getElementById('tok-dot').classList.toggle('active', connected);
+  document.getElementById('tok-status-text').textContent = connected ? 'Connected' : 'Not connected';
+}
+function openSettingsModal() {
+  var t = getToken();
+  document.getElementById('gh-token').value = t;
+  var connected = t.length > 4;
+  document.getElementById('tok-dot').classList.toggle('active', connected);
+  document.getElementById('tok-status-text').textContent = connected ? 'Connected' : 'Not connected';
+  document.getElementById('settings-overlay').style.display = 'flex';
+}
+function closeSettingsModal() {
+  document.getElementById('settings-overlay').style.display = 'none';
 }
 function getToken() { return localStorage.getItem('plg_gh_token') || ''; }
 function slug(n) { return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
@@ -420,8 +441,7 @@ window.addEventListener('load', function() {
   var stored = null;
   try { stored = JSON.parse(localStorage.getItem('plg_customers')); } catch(e) {}
   if (!Array.isArray(stored) || stored.length === 0) { localStorage.setItem('plg_customers', JSON.stringify(DEFAULTS)); }
-  var t = localStorage.getItem('plg_gh_token');
-  if (t) { document.getElementById('gh-token').value = t; document.getElementById('tok-dot').classList.add('active'); }
+  var t = getToken();
   render();
   if (t) loadMeta();
   if (sessionStorage.getItem('plg_role') === 'admin') { document.getElementById('users-btn').style.display = ''; }
