@@ -165,11 +165,8 @@ body::after{
 </div>
 
 <script>
-var HASH = 'b8744063d50e6bd06fef6834943191331b10862a8cbac33f8e0606e68eecac28';
-
-// Allowed users (username -> true, case-insensitive)
-// Add/remove names here as needed
-var USERS = ['macauley'];
+var SB_URL = 'https://ahvyirnebbbfmktewdva.supabase.co';
+var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFodnlpcm5lYmJiZm1rdGV3ZHZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODQxMzAsImV4cCI6MjA5MjI2MDEzMH0.4uOvx11sNPOYGRSAxu4J7MwtgOQpHJsNtCg2BaP1Y3c';
 
 async function sha256(str){
   var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
@@ -200,27 +197,37 @@ async function doLogin(){
 
   if(!username){ showError('Please enter your username.'); document.getElementById('username').focus(); return; }
   if(!password){ showError('Please enter your password.'); document.getElementById('password').focus(); return; }
-  if(!USERS.includes(username)){ showError('Username not recognised. Contact your administrator.'); return; }
 
   btn.classList.add('loading');
   btnText.textContent = 'Signing in...';
 
   var hashed = await sha256(password);
 
-  // Small artificial delay for UX
-  await new Promise(r => setTimeout(r, 600));
+  try{
+    var res = await fetch(SB_URL + '/rest/v1/rpc/kpi_verify_login', {
+      method:'POST',
+      headers:{'apikey':SB_ANON,'Authorization':'Bearer '+SB_ANON,'Content-Type':'application/json'},
+      body: JSON.stringify({p_username:username, p_password_hash:hashed})
+    });
+    var data = await res.json();
 
-  if(hashed === HASH){
-    // Store session (tab-level — expires when browser closes)
-    sessionStorage.setItem('plg_auth', btoa(username + ':' + Date.now()));
-    btnText.textContent = 'Redirecting...';
-    setTimeout(function(){ window.location.href = 'index.html'; }, 300);
-  } else {
+    if(data && data.valid){
+      sessionStorage.setItem('plg_auth', btoa(data.username + ':' + Date.now()));
+      sessionStorage.setItem('plg_role', data.role || 'user');
+      sessionStorage.setItem('plg_name', data.name || data.username);
+      btnText.textContent = 'Redirecting...';
+      setTimeout(function(){ window.location.href = 'index.html'; }, 300);
+      return;
+    }
     btn.classList.remove('loading');
     btnText.textContent = 'Sign in →';
-    showError('Incorrect password. Please try again.');
+    showError('Incorrect username or password.');
     document.getElementById('password').value = '';
     document.getElementById('password').focus();
+  }catch(e){
+    btn.classList.remove('loading');
+    btnText.textContent = 'Sign in →';
+    showError('Could not reach login service. Check your connection and try again.');
   }
 }
 
