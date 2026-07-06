@@ -474,9 +474,12 @@ window.addEventListener('load', function() {
   try { stored = JSON.parse(localStorage.getItem('plg_customers')); } catch(e) {}
   if (!Array.isArray(stored) || stored.length === 0) { localStorage.setItem('plg_customers', JSON.stringify(DEFAULTS)); }
   var t = getToken();
+  document.getElementById('search').value = '';
   render();
   if (t) loadMeta();
   if (sessionStorage.getItem('plg_role') === 'admin') { document.getElementById('users-btn').style.display = ''; }
+  // Some browsers autofill after the load event fires — clear it again shortly after
+  setTimeout(function(){ var s=document.getElementById('search'); if(s && s.value){ s.value=''; render(); } }, 300);
 });
 
 // ===== USER MANAGEMENT =====
