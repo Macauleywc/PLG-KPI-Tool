@@ -2045,7 +2045,7 @@ function selectMonth(key){
 
 async function loadFromGitHub(){
   var token=getToken();
-  if(!token){var gs=document.getElementById('gh-status');if(gs){gs.textContent='No token — enter on homepage';gs.className='gh-status';}savedMonthData={};renderHistory();return;}
+  if(!token){ return loadFromSharedSource(); }
   var _gs2=document.getElementById('gh-status');if(_gs2){_gs2.textContent='Loading...';_gs2.className='gh-status';}
   try{
     var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
@@ -2079,6 +2079,42 @@ async function loadFromGitHub(){
       renderSavedLateLog();
     }
   }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;}}
+}
+
+async function loadFromSharedSource(){
+  var _gs2=document.getElementById('gh-status');if(_gs2){_gs2.textContent='Loading...';_gs2.className='gh-status';}
+  try{
+    var res=await fetch('https://ahvyirnebbbfmktewdva.supabase.co/functions/v1/kpi-data',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'get',customer:currentCustomer})
+    });
+    var payload=await res.json();
+    if(!res.ok||payload.error){
+      var _gsErr=document.getElementById('gh-status');if(_gsErr){_gsErr.textContent='Could not load data: '+(payload.error||('HTTP '+res.status));}
+      console.error('loadFromSharedSource failed:',payload.error||res.status);
+      return;
+    }
+    ghFileSha=null; // view-only users never save, so no sha needed
+    if(!payload.data){
+      var _gs3=document.getElementById('gh-status');if(_gs3){_gs3.textContent='No saved data yet';}
+      savedMonthData={};buildTrackerFromSaved();renderHistory();return;
+    }
+    var decoded=payload.data;
+    savedMonthData=decoded.months||{};window._savedLateRows=decoded.lateRows||[];window._savedRegionData=decoded.regionData||null;window._savedDestData=decoded.destData||[];
+    var mCount=Object.keys(savedMonthData).length;
+    var _gsOk=document.getElementById('gh-status');if(_gsOk){_gsOk.innerHTML='<span style="color:#2e7d32">✓ '+mCount+' month'+(mCount!==1?'s':'')+' saved</span>';}
+    buildTrackerFromSaved();renderHistory();
+    if(Object.keys(savedMonthData).length>0){
+      calculatedMonths={};
+      Object.keys(savedMonthData).forEach(function(key){var d=savedMonthData[key];if(!d)return;calculatedMonths[key]={cons:parseFloat(d.cons)||0,pallets:parseFloat(d.pallets)||0,revenue:parseFloat(d.revenue)||0,lates:parseFloat(d.lates)||0,latePallets:parseFloat(d.latePallets)||0,timeliness:parseFloat(d.timeliness)||0,avgRC:parseFloat(d.avgRC)||0,avgRP:parseFloat(d.avgRP)||0,avgPC:parseFloat(d.avgPC)||0,completedRows:[]};});
+      rawData=[];window._loadedFromSaved=true;renderPreview();
+      var _ab=document.getElementById('actions-bar');if(_ab)_ab.style.display='flex';
+      var _ks=document.getElementById('kpi-section');if(_ks)_ks.style.display='block';
+      renderSavedLateLog();
+    }
+  }catch(err){
+    var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;}
+  }
 }
 
 async function saveToGitHub(){
