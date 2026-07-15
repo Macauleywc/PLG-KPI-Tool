@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:26.523Z",
+  "lastUpdated": "2026-07-15T14:10:34.074Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 19,
-      "latePallets": 28,
-      "timeliness": 0.9565891472868217,
+      "lates": 18,
+      "latePallets": 23,
+      "timeliness": 0.9643410852713178,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2893,24 +2893,6 @@
       "failed": false
     },
     {
-      "id": "C07506/C07507/C07508",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "DINGBRO LIMITED (FALKIRK)",
-      "city": "DINGBRO LIMITED (FALKIRK)",
-      "pc": "FK2 9EQ",
-      "window": "",
-      "commitDate": "13/05/26",
-      "arrDate": "14/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 5,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C08043",
       "acct": "BPW01",
       "month": "May-26",
@@ -3015,7 +2997,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 30
+      "lates": 29
     },
     "South West": {
       "pallets": 128,
