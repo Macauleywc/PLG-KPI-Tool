@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:54:40.282Z",
+  "lastUpdated": "2026-07-15T13:54:44.126Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 18,
-      "latePallets": 22,
-      "timeliness": 0.9683453237410072,
+      "lates": 17,
+      "latePallets": 21,
+      "timeliness": 0.9697841726618706,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2189,24 +2189,6 @@
       "failed": false
     },
     {
-      "id": "C06084",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "N E TRUCK SPARES LTD",
-      "city": "N E TRUCK SPARES LTD",
-      "pc": "S60 1EW",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05888",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3375,7 +3357,7 @@
     "London": {
       "pallets": 34,
       "cons": 29,
-      "lates": 2
+      "lates": 1
     }
   },
   "destData": [
