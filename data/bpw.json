@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:53:31.465Z",
+  "lastUpdated": "2026-07-15T13:53:34.842Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 34,
-      "latePallets": 46,
-      "timeliness": 0.9338129496402877,
+      "lates": 33,
+      "latePallets": 44,
+      "timeliness": 0.9366906474820144,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2549,24 +2549,6 @@
       "failed": false
     },
     {
-      "id": "C06889",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "MAN TRUCK & BUS LTD",
-      "city": "MAN TRUCK & BUS LTD",
-      "pc": "FK3 9UT",
-      "window": "",
-      "commitDate": "29/04/26",
-      "arrDate": "30/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06896",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3608,7 +3590,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 39
+      "lates": 38
     },
     "South West": {
       "pallets": 128,
