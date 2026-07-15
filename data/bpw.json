@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:52.690Z",
+  "lastUpdated": "2026-07-15T14:10:53.954Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 15,
-      "latePallets": 19,
-      "timeliness": 0.9705426356589147,
+      "lates": 14,
+      "latePallets": 18,
+      "timeliness": 0.9720930232558139,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2785,24 +2785,6 @@
       "failed": false
     },
     {
-      "id": "C07371",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "EMS-FP&S LIMITED DEREHAM",
-      "city": "EMS-FP&S LIMITED DEREHAM",
-      "pc": "NR19 1WD",
-      "window": "",
-      "commitDate": "08/05/26",
-      "arrDate": "09/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07115",
       "acct": "BPW01",
       "month": "May-26",
@@ -2973,7 +2955,7 @@
     "East of England": {
       "pallets": 226,
       "cons": 193,
-      "lates": 4
+      "lates": 3
     },
     "Northern Ireland": {
       "pallets": 17,
