@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:28:58.198Z",
+  "lastUpdated": "2026-07-15T13:29:00.000Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 18,
-      "latePallets": 24,
-      "timeliness": 0.9664804469273743,
+      "lates": 17,
+      "latePallets": 22,
+      "timeliness": 0.9692737430167597,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -3125,24 +3125,6 @@
       "failed": false
     },
     {
-      "id": "C03371",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "FLEETWHEEL LTD",
-      "city": "FLEETWHEEL LTD",
-      "pc": "SA31 3NG",
-      "window": "",
-      "commitDate": "25/03/26",
-      "arrDate": "26/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05295",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -4070,7 +4052,7 @@
     "Wales": {
       "pallets": 136,
       "cons": 110,
-      "lates": 7
+      "lates": 6
     },
     "Scotland": {
       "pallets": 488,
