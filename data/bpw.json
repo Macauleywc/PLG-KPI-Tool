@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:11:01.450Z",
+  "lastUpdated": "2026-07-15T14:11:07.081Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 9,
-      "latePallets": 12,
-      "timeliness": 0.9813953488372092,
+      "lates": 8,
+      "latePallets": 10,
+      "timeliness": 0.9844961240310077,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2785,24 +2785,6 @@
       "failed": false
     },
     {
-      "id": "C07627",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "DON-BUR SERVICE",
-      "city": "DON-BUR SERVICE",
-      "pc": "ST4 4EE",
-      "window": "",
-      "commitDate": "15/05/26",
-      "arrDate": "18/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07108",
       "acct": "BPW01",
       "month": "May-26",
@@ -2825,7 +2807,7 @@
     "West Midlands": {
       "pallets": 147,
       "cons": 114,
-      "lates": 4
+      "lates": 3
     },
     "Wales": {
       "pallets": 136,
