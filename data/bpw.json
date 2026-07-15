@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:28:34.958Z",
+  "lastUpdated": "2026-07-15T13:28:37.864Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 27,
-      "latePallets": 34,
-      "timeliness": 0.952513966480447,
+      "lates": 25,
+      "latePallets": 31,
+      "timeliness": 0.9567039106145251,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -2927,24 +2927,6 @@
       "failed": false
     },
     {
-      "id": "E56781",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "DINGBRO LTD",
-      "city": "DINGBRO LTD",
-      "pc": "AB16 6HQ",
-      "window": "",
-      "commitDate": "01/04/26",
-      "arrDate": "02/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "N13906",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -2956,24 +2938,6 @@
       "arrDate": "31/03/26",
       "arrival": "01:00",
       "mins": 5760,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "E55851",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "GRAY & ADAMS (SCOTLAND)",
-      "city": "GRAY & ADAMS (SCOTLAND)",
-      "pc": "AB43 9HU",
-      "window": "",
-      "commitDate": "13/03/26",
-      "arrDate": "16/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
       "pallets": 2,
       "dtype": "Standard",
       "note": "",
@@ -4237,7 +4201,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 58
+      "lates": 56
     },
     "South West": {
       "pallets": 128,
