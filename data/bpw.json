@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:13:53.448Z",
+  "lastUpdated": "2026-07-15T14:13:54.463Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1258,9 +1258,9 @@
       "cons": 461,
       "pallets": 714,
       "revenue": 43117.62,
-      "lates": 14,
-      "latePallets": 21,
-      "timeliness": 0.9705882352941176,
+      "lates": 12,
+      "latePallets": 19,
+      "timeliness": 0.9733893557422969,
       "avgRC": 93.53,
       "avgRP": 60.39,
       "avgPC": 1.55,
@@ -2389,42 +2389,6 @@
       "failed": false
     },
     {
-      "id": "C09372",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "FLEET COMPONENTS",
-      "city": "FLEET COMPONENTS",
-      "pc": "PL26 8LX",
-      "window": "",
-      "commitDate": "24/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C09364",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "WAVENEY TRUCK PARTS",
-      "city": "WAVENEY TRUCK PARTS",
-      "pc": "NR35 1HE",
-      "window": "",
-      "commitDate": "24/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C09290",
       "acct": "BPW01",
       "month": "Jun-26",
@@ -2642,7 +2606,7 @@
     "South West": {
       "pallets": 128,
       "cons": 110,
-      "lates": 3
+      "lates": 2
     },
     "East Midlands": {
       "pallets": 850,
@@ -2667,7 +2631,7 @@
     "East of England": {
       "pallets": 226,
       "cons": 193,
-      "lates": 3
+      "lates": 2
     },
     "Northern Ireland": {
       "pallets": 17,
