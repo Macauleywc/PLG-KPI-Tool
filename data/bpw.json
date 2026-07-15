@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:11:07.081Z",
+  "lastUpdated": "2026-07-15T14:11:08.937Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 8,
-      "latePallets": 10,
-      "timeliness": 0.9844961240310077,
+      "lates": 6,
+      "latePallets": 7,
+      "timeliness": 0.9891472868217054,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2695,24 +2695,6 @@
       "failed": false
     },
     {
-      "id": "C07604",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "ALLIANCE AUTOMOTIVE UK CV LTD",
-      "city": "ALLIANCE AUTOMOTIVE UK CV LTD",
-      "pc": "ST6 2EB",
-      "window": "",
-      "commitDate": "14/05/26",
-      "arrDate": "15/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C08186",
       "acct": "BPW01",
       "month": "May-26",
@@ -2783,31 +2765,13 @@
       "note": "",
       "reason": "",
       "failed": false
-    },
-    {
-      "id": "C07108",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "LT & T LIMITED",
-      "city": "LT & T LIMITED",
-      "pc": "WA1 4RZ",
-      "window": "",
-      "commitDate": "05/05/26",
-      "arrDate": "06/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
     }
   ],
   "regionData": {
     "West Midlands": {
       "pallets": 147,
       "cons": 114,
-      "lates": 3
+      "lates": 2
     },
     "Wales": {
       "pallets": 136,
@@ -2842,7 +2806,7 @@
     "North West": {
       "pallets": 438,
       "cons": 349,
-      "lates": 3
+      "lates": 2
     },
     "East of England": {
       "pallets": 226,
