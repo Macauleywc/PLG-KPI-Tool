@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:52:20.804Z",
+  "lastUpdated": "2026-07-15T13:52:48.829Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 49,
-      "latePallets": 67,
-      "timeliness": 0.9035971223021583,
+      "lates": 48,
+      "latePallets": 66,
+      "timeliness": 0.9050359712230216,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2513,24 +2513,6 @@
       "failed": false
     },
     {
-      "id": "C06012",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "MONTRACON LTD",
-      "city": "MONTRACON LTD",
-      "pc": "B69 4NQ",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "N13999",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -2955,25 +2937,6 @@
       "commitDate": "17/03/26",
       "arrDate": "18/03/26",
       "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C04896",
-      "custref": "",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "ARTIC TRAILER SERVICES",
-      "city": "ARTIC TRAILER SERVICES",
-      "pc": "FK2 7HP",
-      "window": "",
-      "commitDate": "16/03/26",
-      "arrDate": "17/03/26",
-      "arrival": "",
       "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
@@ -3862,6 +3825,25 @@
       "note": "",
       "reason": "",
       "failed": false
+    },
+    {
+      "id": "C04896",
+      "custref": "",
+      "acct": "BPW01",
+      "month": "Mar-26",
+      "dest": "ARTIC TRAILER SERVICES",
+      "city": "ARTIC TRAILER SERVICES",
+      "pc": "FK2 7HP",
+      "window": "",
+      "commitDate": "16/03/26",
+      "arrDate": "17/03/26",
+      "arrival": "",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
     }
   ],
   "regionData": {
@@ -3918,7 +3900,7 @@
     "South East": {
       "pallets": 355,
       "cons": 136,
-      "lates": 6
+      "lates": 5
     },
     "North East": {
       "pallets": 251,
