@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:23.652Z",
+  "lastUpdated": "2026-07-15T14:10:26.523Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 20,
-      "latePallets": 29,
-      "timeliness": 0.9550387596899225,
+      "lates": 19,
+      "latePallets": 28,
+      "timeliness": 0.9565891472868217,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2893,24 +2893,6 @@
       "failed": false
     },
     {
-      "id": "C07786",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "NETS C/O PULMAN FLEET SERVICES",
-      "city": "NETS C/O PULMAN FLEET SERVICES",
-      "pc": "EH54 8TB",
-      "window": "",
-      "commitDate": "19/05/26",
-      "arrDate": "21/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07506/C07507/C07508",
       "acct": "BPW01",
       "month": "May-26",
@@ -3033,7 +3015,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 31
+      "lates": 30
     },
     "South West": {
       "pallets": 128,
