@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:13:56.967Z",
+  "lastUpdated": "2026-07-15T14:13:58.517Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1258,9 +1258,9 @@
       "cons": 461,
       "pallets": 714,
       "revenue": 43117.62,
-      "lates": 10,
-      "latePallets": 17,
-      "timeliness": 0.9761904761904762,
+      "lates": 8,
+      "latePallets": 13,
+      "timeliness": 0.9817927170868347,
       "avgRC": 93.53,
       "avgRP": 60.39,
       "avgPC": 1.55,
@@ -2281,42 +2281,6 @@
       "failed": false
     },
     {
-      "id": "C08496",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
-      "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
-      "pc": "WF6 1TA",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C08873",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "DINGBRO LIMITED (ELGIN)",
-      "city": "DINGBRO LIMITED (ELGIN)",
-      "pc": "IV30 1XY",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "13/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C08596",
       "acct": "BPW01",
       "month": "Jun-26",
@@ -2565,7 +2529,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 21
+      "lates": 20
     },
     "South West": {
       "pallets": 128,
@@ -2580,7 +2544,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 3
+      "lates": 2
     },
     "Other": {
       "pallets": 192,
