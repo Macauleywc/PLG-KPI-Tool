@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:13:01.048Z",
+  "lastUpdated": "2026-07-15T13:13:04.508Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 19,
-      "latePallets": 25,
-      "timeliness": 0.9510763209393346,
+      "lates": 18,
+      "latePallets": 24,
+      "timeliness": 0.9530332681017613,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -2146,24 +2146,6 @@
       "arrDate": "11/02/26",
       "arrival": "00:00",
       "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C04182",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "EMS-FP&S LIMITED - TAMWORTH",
-      "city": "EMS-FP&S LIMITED - TAMWORTH",
-      "pc": "B77 5DQ",
-      "window": "",
-      "commitDate": "27/02/26",
-      "arrDate": "02/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -4558,7 +4540,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 14
+      "lates": 13
     },
     "Other": {
       "pallets": 192,
