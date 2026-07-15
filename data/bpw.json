@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:31:42.142Z",
+  "lastUpdated": "2026-07-15T13:31:50.071Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 8,
-      "latePallets": 10,
-      "timeliness": 0.9860335195530726,
+      "lates": 6,
+      "latePallets": 8,
+      "timeliness": 0.9888268156424581,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -2963,42 +2963,6 @@
       "failed": false
     },
     {
-      "id": "C05295",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "HOLCIM UK LIMITED",
-      "city": "HOLCIM UK LIMITED",
-      "pc": "HP10 0PD",
-      "window": "",
-      "commitDate": "24/03/26",
-      "arrDate": "26/03/26",
-      "arrival": "00:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C04399",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "ARTIC TRAILER SERVICES",
-      "city": "ARTIC TRAILER SERVICES",
-      "pc": "FK2 7HP",
-      "window": "",
-      "commitDate": "04/03/26",
-      "arrDate": "05/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C09210",
       "acct": "BPW01",
       "month": "Jun-26",
@@ -3895,7 +3859,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 49
+      "lates": 48
     },
     "South West": {
       "pallets": 128,
@@ -3915,7 +3879,7 @@
     "Other": {
       "pallets": 192,
       "cons": 151,
-      "lates": 6
+      "lates": 5
     },
     "North West": {
       "pallets": 438,
