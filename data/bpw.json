@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:55.858Z",
+  "lastUpdated": "2026-07-15T14:10:57.017Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 13,
-      "latePallets": 17,
-      "timeliness": 0.9736434108527132,
+      "lates": 12,
+      "latePallets": 15,
+      "timeliness": 0.9767441860465116,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2803,24 +2803,6 @@
       "failed": false
     },
     {
-      "id": "C07187",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "SCANIA PURFLEET, SCANIA GB LTD",
-      "city": "SCANIA PURFLEET, SCANIA GB LTD",
-      "pc": "RM19 1TB",
-      "window": "",
-      "commitDate": "07/05/26",
-      "arrDate": "08/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C08043",
       "acct": "BPW01",
       "month": "May-26",
@@ -2927,7 +2909,7 @@
     "Other": {
       "pallets": 192,
       "cons": 151,
-      "lates": 2
+      "lates": 1
     },
     "North West": {
       "pallets": 438,
