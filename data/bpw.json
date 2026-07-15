@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:53:34.842Z",
+  "lastUpdated": "2026-07-15T13:53:37.996Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 33,
-      "latePallets": 44,
-      "timeliness": 0.9366906474820144,
+      "lates": 31,
+      "latePallets": 39,
+      "timeliness": 0.943884892086331,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2513,24 +2513,6 @@
       "failed": false
     },
     {
-      "id": "C06964",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "WRIGHTPART LTD",
-      "city": "WRIGHTPART LTD",
-      "pc": "IP11 3UT",
-      "window": "",
-      "commitDate": "29/04/26",
-      "arrDate": "30/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06925",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -2543,24 +2525,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C06896",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "MAN TRUCK & BUS LTD",
-      "city": "MAN TRUCK & BUS LTD",
-      "pc": "FK3 9UT",
-      "window": "",
-      "commitDate": "29/04/26",
-      "arrDate": "01/05/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 4,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -3590,7 +3554,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 38
+      "lates": 37
     },
     "South West": {
       "pallets": 128,
@@ -3620,7 +3584,7 @@
     "East of England": {
       "pallets": 226,
       "cons": 193,
-      "lates": 6
+      "lates": 5
     },
     "Northern Ireland": {
       "pallets": 17,
