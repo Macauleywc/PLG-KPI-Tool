@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:13:56.320Z",
+  "lastUpdated": "2026-07-15T13:14:03.071Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 6,
-      "latePallets": 6,
-      "timeliness": 0.9882583170254403,
+      "lates": 4,
+      "latePallets": 4,
+      "timeliness": 0.9921722113502935,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -1919,24 +1919,6 @@
       "failed": false
     },
     {
-      "id": "C04005",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "ARTIC TRAILER SERVICES",
-      "city": "ARTIC TRAILER SERVICES",
-      "pc": "FK2 7HP",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C03429",
       "acct": "BPW01",
       "month": "Feb-26",
@@ -1966,24 +1948,6 @@
       "arrDate": "16/02/26",
       "arrival": "00:00",
       "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C04100",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "A.B.S (BURTON) LTD",
-      "city": "A.B.S (BURTON) LTD",
-      "pc": "DE14 1QR",
-      "window": "",
-      "commitDate": "26/02/26",
-      "arrDate": "27/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -4309,7 +4273,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 61
+      "lates": 60
     },
     "South West": {
       "pallets": 128,
@@ -4319,7 +4283,7 @@
     "East Midlands": {
       "pallets": 850,
       "cons": 449,
-      "lates": 7
+      "lates": 6
     },
     "Yorkshire": {
       "pallets": 389,
