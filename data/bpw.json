@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:07:06.060Z",
+  "lastUpdated": "2026-07-15T13:07:38.710Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -942,24 +942,24 @@
       ]
     },
     "2026-03": {
-      "cons": 506,
-      "pallets": 718,
-      "revenue": 40431.94,
+      "cons": 505,
+      "pallets": 716,
+      "revenue": 40335.84,
       "lates": 28,
       "latePallets": 39,
-      "timeliness": 0.945682,
-      "avgRC": 79.91,
-      "avgRP": 56.31,
+      "timeliness": 0.945531,
+      "avgRC": 79.87,
+      "avgRP": 56.33,
       "avgPC": 1.42,
       "palletSizes": {
         "Half": 88,
         "Quarter": 90,
         "Full": 385,
-        "Full Oversize": 70
+        "Full Oversize": 68
       },
       "typeBreakdown": {
         "Next Day": {
-          "cons": 506,
+          "cons": 505,
           "lates": 28
         }
       },
@@ -977,9 +977,9 @@
           "lates": 4
         },
         "East Midlands": {
-          "cons": 89,
-          "pallets": 163,
-          "revenue": 7093.569999999998,
+          "cons": 88,
+          "pallets": 161,
+          "revenue": 6997.4699999999975,
           "lates": 0
         },
         "Yorkshire": {
@@ -1059,7 +1059,7 @@
           "lates": 7
         },
         "Wed": {
-          "cons": 126,
+          "cons": 125,
           "lates": 10
         },
         "Thu": {
@@ -1208,15 +1208,6 @@
           "lates": 2
         },
         {
-          "name": "SDC TRAILERS LTD",
-          "city": "SDC TRAILERS LTD",
-          "pc": "TF7 4QU",
-          "cons": 9,
-          "pallets": 14,
-          "revenue": 618.4000000000001,
-          "lates": 0
-        },
-        {
           "name": "NE TRUCK SPARES LTD (CARLISLE)",
           "city": "NE TRUCK SPARES LTD (CARLISLE)",
           "pc": "CA6 4SH",
@@ -1244,12 +1235,334 @@
           "lates": 0
         },
         {
+          "name": "SDC TRAILERS LTD",
+          "city": "SDC TRAILERS LTD",
+          "pc": "TF7 4QU",
+          "cons": 8,
+          "pallets": 12,
+          "revenue": 522.3,
+          "lates": 0
+        },
+        {
           "name": "WAVENEY TRUCK PARTS",
           "city": "WAVENEY TRUCK PARTS",
           "pc": "NR35 1HE",
           "cons": 7,
           "pallets": 7,
           "revenue": 369.25,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-06": {
+      "cons": 462,
+      "pallets": 715,
+      "revenue": 43223.1,
+      "lates": 23,
+      "latePallets": 34,
+      "timeliness": 0.952448,
+      "avgRC": 93.56,
+      "avgRP": 60.45,
+      "avgPC": 1.55,
+      "palletSizes": {
+        "Full": 387,
+        "Full Oversize": 74,
+        "Half": 74,
+        "Quarter": 82
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 462,
+          "lates": 23
+        }
+      },
+      "regionData": {
+        "Yorkshire": {
+          "cons": 64,
+          "pallets": 73,
+          "revenue": 3904.699999999999,
+          "lates": 4
+        },
+        "Other": {
+          "cons": 24,
+          "pallets": 34,
+          "revenue": 2133.73,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 159.7,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 85,
+          "pallets": 149,
+          "revenue": 7164.939999999997,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 36,
+          "pallets": 61,
+          "revenue": 3342.4299999999994,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 64,
+          "pallets": 82,
+          "revenue": 4755.529999999999,
+          "lates": 1
+        },
+        "Scotland": {
+          "cons": 68,
+          "pallets": 111,
+          "revenue": 11140.740000000003,
+          "lates": 14
+        },
+        "West Midlands": {
+          "cons": 15,
+          "pallets": 20,
+          "revenue": 1069.73,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 24,
+          "pallets": 77,
+          "revenue": 3274.28,
+          "lates": 0
+        },
+        "London": {
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 339.46000000000004,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 17,
+          "pallets": 18,
+          "revenue": 1136.6100000000001,
+          "lates": 2
+        },
+        "South": {
+          "cons": 10,
+          "pallets": 22,
+          "revenue": 1217.58,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 16,
+          "pallets": 19,
+          "revenue": 1290.61,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 33,
+          "pallets": 41,
+          "revenue": 2293.0600000000004,
+          "lates": 1
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 66,
+          "lates": 4
+        },
+        "Tue": {
+          "cons": 125,
+          "lates": 3
+        },
+        "Wed": {
+          "cons": 113,
+          "lates": 8
+        },
+        "Thu": {
+          "cons": 81,
+          "lates": 4
+        },
+        "Fri": {
+          "cons": 77,
+          "lates": 4
+        }
+      },
+      "destData": [
+        {
+          "name": "PARTIC MOTOR SPARES LTD",
+          "city": "PARTIC MOTOR SPARES LTD",
+          "pc": "LE67 3NQ",
+          "cons": 19,
+          "pallets": 24,
+          "revenue": 1266.28,
+          "lates": 0
+        },
+        {
+          "name": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+          "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+          "pc": "WF6 1TA",
+          "cons": 18,
+          "pallets": 20,
+          "revenue": 1061.9199999999998,
+          "lates": 2
+        },
+        {
+          "name": "LT & T LIMITED",
+          "city": "LT & T LIMITED",
+          "pc": "WA1 4RZ",
+          "cons": 17,
+          "pallets": 26,
+          "revenue": 1362.33,
+          "lates": 0
+        },
+        {
+          "name": "NE TRUCK SPARES LTD (TYNE)",
+          "city": "NE TRUCK SPARES LTD (TYNE)",
+          "pc": "DH5 0RH",
+          "cons": 16,
+          "pallets": 31,
+          "revenue": 1684.67,
+          "lates": 0
+        },
+        {
+          "name": "MONTRACON LTD",
+          "city": "MONTRACON LTD",
+          "pc": "B69 4NQ",
+          "cons": 14,
+          "pallets": 65,
+          "revenue": 2422.93,
+          "lates": 0
+        },
+        {
+          "name": "DINGBRO LTD",
+          "city": "DINGBRO LTD",
+          "pc": "AB16 6HQ",
+          "cons": 13,
+          "pallets": 33,
+          "revenue": 4194.950000000001,
+          "lates": 2
+        },
+        {
+          "name": "BPW LTD",
+          "city": "BPW LTD",
+          "pc": "LE19 1UZ",
+          "cons": 12,
+          "pallets": 12,
+          "revenue": 894.92,
+          "lates": 0
+        },
+        {
+          "name": "HGV DIRECT LTD -ASHBOURNE",
+          "city": "HGV DIRECT LTD -ASHBOURNE",
+          "pc": "DE6 1HD",
+          "cons": 11,
+          "pallets": 16,
+          "revenue": 832.62,
+          "lates": 0
+        },
+        {
+          "name": "FLEETWHEEL LTD",
+          "city": "FLEETWHEEL LTD",
+          "pc": "CF11 8AT",
+          "cons": 11,
+          "pallets": 14,
+          "revenue": 910.44,
+          "lates": 0
+        },
+        {
+          "name": "HGV DIRECT LTD - WELLINGBOROUGH",
+          "city": "HGV DIRECT LTD - WELLINGBOROUGH",
+          "pc": "NN8 6UF",
+          "cons": 10,
+          "pallets": 10,
+          "revenue": 525.4599999999999,
+          "lates": 0
+        },
+        {
+          "name": "SAPPHIRE VEHICLE SERVICES",
+          "city": "SAPPHIRE VEHICLE SERVICES",
+          "pc": "NN4 9BX",
+          "cons": 10,
+          "pallets": 12,
+          "revenue": 717.8199999999999,
+          "lates": 1
+        },
+        {
+          "name": "NE TRUCK SPARES LTD (CARLISLE)",
+          "city": "NE TRUCK SPARES LTD (CARLISLE)",
+          "pc": "CA6 4SH",
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 624.25,
+          "lates": 0
+        },
+        {
+          "name": "EMS-FP&S LIMITED - TAMWORTH",
+          "city": "EMS-FP&S LIMITED - TAMWORTH",
+          "pc": "B77 5DQ",
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 420.30999999999995,
+          "lates": 1
+        },
+        {
+          "name": "MERLIN COMPONENTS LTD (LONDON)",
+          "city": "MERLIN COMPONENTS LTD (LONDON)",
+          "pc": "RM20 3BJ",
+          "cons": 8,
+          "pallets": 14,
+          "revenue": 904.3100000000001,
+          "lates": 0
+        },
+        {
+          "name": "EMS-FP&S LIMITED BELLSHILL",
+          "city": "EMS-FP&S LIMITED BELLSHILL",
+          "pc": "ML4 3LR",
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 718.03,
+          "lates": 0
+        },
+        {
+          "name": "DINGBRO LIMITED (FALKIRK)",
+          "city": "DINGBRO LIMITED (FALKIRK)",
+          "pc": "FK2 9EQ",
+          "cons": 7,
+          "pallets": 20,
+          "revenue": 1647.51,
+          "lates": 2
+        },
+        {
+          "name": "EMS-FPS LIMITED - DEWSBURY",
+          "city": "EMS-FPS LIMITED - DEWSBURY",
+          "pc": "WF12 7TH",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 357.44,
+          "lates": 0
+        },
+        {
+          "name": "EMS-FP&S LIMITED",
+          "city": "EMS-FP&S LIMITED",
+          "pc": "NN5 5HL",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 365.39000000000004,
+          "lates": 0
+        },
+        {
+          "name": "LCP ENGINEERING CO LTD",
+          "city": "LCP ENGINEERING CO LTD",
+          "pc": "CT2 7PX",
+          "cons": 7,
+          "pallets": 8,
+          "revenue": 562.1800000000001,
+          "lates": 0
+        },
+        {
+          "name": "A & P TRUCK AND TRAILER PARTS LTD",
+          "city": "A & P TRUCK AND TRAILER PARTS LTD",
+          "pc": "BB5 5YB",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 391.69,
           "lates": 0
         }
       ]
@@ -3271,260 +3584,674 @@
       "note": "",
       "reason": "",
       "failed": false
+    },
+    {
+      "id": "C09210",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "PARTIC MOTOR SPARES LTD-KNOTTINGLEY",
+      "city": "PARTIC MOTOR SPARES LTD-KNOTTINGLEY",
+      "pc": "WF11 8DS",
+      "window": "",
+      "commitDate": "19/06/26",
+      "arrDate": "22/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09357",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "DINGBRO LIMITED (FALKIRK)",
+      "city": "DINGBRO LIMITED (FALKIRK)",
+      "pc": "FK2 9EQ",
+      "window": "",
+      "commitDate": "24/06/26",
+      "arrDate": "25/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "N14150",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "ALLSPORTS TRUCK CENTRE",
+      "city": "ALLSPORTS TRUCK CENTRE",
+      "pc": "ST4 3PS",
+      "window": "",
+      "commitDate": "10/06/26",
+      "arrDate": "11/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C08496",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+      "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+      "pc": "WF6 1TA",
+      "window": "",
+      "commitDate": "04/06/26",
+      "arrDate": "05/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C08873",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "DINGBRO LIMITED (ELGIN)",
+      "city": "DINGBRO LIMITED (ELGIN)",
+      "pc": "IV30 1XY",
+      "window": "",
+      "commitDate": "12/06/26",
+      "arrDate": "13/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09639",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "EMS-FP&S LIMITED - TAMWORTH",
+      "city": "EMS-FP&S LIMITED - TAMWORTH",
+      "pc": "B77 5DQ",
+      "window": "",
+      "commitDate": "30/06/26",
+      "arrDate": "01/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C08596",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "MAN TRUCK & BUS LTD",
+      "city": "MAN TRUCK & BUS LTD",
+      "pc": "FK3 9UT",
+      "window": "",
+      "commitDate": "05/06/26",
+      "arrDate": "08/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C08844",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "Artic Trailer Services (Falkirk) Ltd",
+      "city": "Artic Trailer Services (Falkirk) Ltd",
+      "pc": "FK2 7HP",
+      "window": "",
+      "commitDate": "11/06/26",
+      "arrDate": "12/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C08453",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+      "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+      "pc": "WF6 1TA",
+      "window": "",
+      "commitDate": "03/06/26",
+      "arrDate": "05/06/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09659",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "DINGBRO LTD",
+      "city": "DINGBRO LTD",
+      "pc": "AB16 6HQ",
+      "window": "",
+      "commitDate": "01/07/26",
+      "arrDate": "02/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 5,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09498",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "ARTIC TRAILER SERVICES",
+      "city": "ARTIC TRAILER SERVICES",
+      "pc": "FK2 7HP",
+      "window": "",
+      "commitDate": "26/06/26",
+      "arrDate": "29/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09658",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "DINGBRO LTD",
+      "city": "DINGBRO LTD",
+      "pc": "AB16 6HQ",
+      "window": "",
+      "commitDate": "01/07/26",
+      "arrDate": "02/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "N14216",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "McPherson Transport",
+      "city": "McPherson Transport",
+      "pc": "G82 3PW",
+      "window": "",
+      "commitDate": "29/06/26",
+      "arrDate": "30/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09645",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "ARTIC TRAILER SERVICES",
+      "city": "ARTIC TRAILER SERVICES",
+      "pc": "FK2 7HP",
+      "window": "",
+      "commitDate": "30/06/26",
+      "arrDate": "01/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C08448",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "Dingbro Limited (Inverness)",
+      "city": "Dingbro Limited (Inverness)",
+      "pc": "IV1 1LY",
+      "window": "",
+      "commitDate": "04/06/26",
+      "arrDate": "05/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09372",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "FLEET COMPONENTS",
+      "city": "FLEET COMPONENTS",
+      "pc": "PL26 8LX",
+      "window": "",
+      "commitDate": "24/06/26",
+      "arrDate": "25/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09364",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "WAVENEY TRUCK PARTS",
+      "city": "WAVENEY TRUCK PARTS",
+      "pc": "NR35 1HE",
+      "window": "",
+      "commitDate": "24/06/26",
+      "arrDate": "25/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09290",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "SAPPHIRE VEHICLE SERVICES",
+      "city": "SAPPHIRE VEHICLE SERVICES",
+      "pc": "BS16 7FQ",
+      "window": "",
+      "commitDate": "23/06/26",
+      "arrDate": "25/06/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "E57240",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "Fitzgeralds Vehicles limited",
+      "city": "Fitzgeralds Vehicles limited",
+      "pc": "L40 8JT",
+      "window": "",
+      "commitDate": "15/06/26",
+      "arrDate": "30/06/26",
+      "arrival": "01:00",
+      "mins": 21600,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "N14185",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "Alan Davie Transport",
+      "city": "Alan Davie Transport",
+      "pc": "DD4 0PP",
+      "window": "",
+      "commitDate": "18/06/26",
+      "arrDate": "19/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09358",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "DINGBRO LIMITED (FALKIRK)",
+      "city": "DINGBRO LIMITED (FALKIRK)",
+      "pc": "FK2 9EQ",
+      "window": "",
+      "commitDate": "24/06/26",
+      "arrDate": "25/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C08981",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "CUNNINGHAM TRUCK PARTS",
+      "city": "CUNNINGHAM TRUCK PARTS",
+      "pc": "KA3 1LU",
+      "window": "",
+      "commitDate": "15/06/26",
+      "arrDate": "16/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "C09247",
+      "acct": "BPW01",
+      "month": "Jun-26",
+      "dest": "DINGBRO LIMITED (ELGIN)",
+      "city": "DINGBRO LIMITED (ELGIN)",
+      "pc": "IV30 1XY",
+      "window": "",
+      "commitDate": "22/06/26",
+      "arrDate": "23/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
     }
   ],
   "regionData": {
     "West Midlands": {
-      "pallets": 101,
-      "cons": 78,
-      "lates": 6
+      "pallets": 121,
+      "cons": 93,
+      "lates": 7
     },
     "Wales": {
-      "pallets": 87,
-      "cons": 71,
+      "pallets": 106,
+      "cons": 87,
       "lates": 8
     },
     "Scotland": {
-      "pallets": 281,
-      "cons": 216,
-      "lates": 41
+      "pallets": 392,
+      "cons": 284,
+      "lates": 55
     },
     "South West": {
-      "pallets": 83,
-      "cons": 70,
-      "lates": 1
+      "pallets": 101,
+      "cons": 87,
+      "lates": 3
     },
     "East Midlands": {
-      "pallets": 535,
-      "cons": 276,
+      "pallets": 682,
+      "cons": 360,
       "lates": 7
     },
     "Yorkshire": {
-      "pallets": 241,
-      "cons": 197,
-      "lates": 12
+      "pallets": 314,
+      "cons": 261,
+      "lates": 16
     },
     "Other": {
-      "pallets": 118,
-      "cons": 95,
+      "pallets": 152,
+      "cons": 119,
       "lates": 8
     },
     "North West": {
-      "pallets": 252,
-      "cons": 201,
-      "lates": 11
+      "pallets": 334,
+      "cons": 265,
+      "lates": 12
     },
     "East of England": {
-      "pallets": 132,
-      "cons": 114,
-      "lates": 5
+      "pallets": 173,
+      "cons": 147,
+      "lates": 6
     },
     "Northern Ireland": {
-      "pallets": 12,
-      "cons": 8,
+      "pallets": 15,
+      "cons": 10,
       "lates": 0
     },
     "South East": {
-      "pallets": 205,
-      "cons": 90,
+      "pallets": 282,
+      "cons": 114,
       "lates": 7
     },
     "North East": {
-      "pallets": 147,
-      "cons": 85,
+      "pallets": 208,
+      "cons": 121,
       "lates": 3
     },
     "South": {
-      "pallets": 122,
-      "cons": 71,
+      "pallets": 144,
+      "cons": 81,
       "lates": 1
     },
     "London": {
-      "pallets": 23,
-      "cons": 20,
+      "pallets": 28,
+      "cons": 24,
       "lates": 2
     }
   },
   "destData": [
     {
-      "name": "FLEETWHEEL LTD",
-      "city": "FLEETWHEEL LTD",
-      "pc": "NP20 2JR",
-      "cons": 52,
-      "pallets": 66,
-      "revenue": 3768.7100000000005,
-      "lates": 8
+      "name": "PARTIC MOTOR SPARES LTD",
+      "city": "PARTIC MOTOR SPARES LTD",
+      "pc": "NG24 2EG",
+      "cons": 68,
+      "pallets": 82,
+      "revenue": 4137.349999999998,
+      "lates": 2
     },
     {
       "name": "MONTRACON LTD",
       "city": "MONTRACON LTD",
       "pc": "DN4 8DE",
-      "cons": 51,
-      "pallets": 158,
-      "revenue": 8359.449999999997,
+      "cons": 65,
+      "pallets": 223,
+      "revenue": 10782.379999999996,
       "lates": 1
     },
     {
-      "name": "PARTIC MOTOR SPARES LTD",
-      "city": "PARTIC MOTOR SPARES LTD",
-      "pc": "NG24 2EG",
-      "cons": 49,
-      "pallets": 58,
-      "revenue": 2871.069999999998,
+      "name": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+      "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
+      "pc": "WF6 1TA",
+      "cons": 64,
+      "pallets": 75,
+      "revenue": 3777.8099999999995,
+      "lates": 6
+    },
+    {
+      "name": "FLEETWHEEL LTD",
+      "city": "FLEETWHEEL LTD",
+      "pc": "NP20 2JR",
+      "cons": 63,
+      "pallets": 80,
+      "revenue": 4679.150000000001,
+      "lates": 8
+    },
+    {
+      "name": "LT & T LIMITED",
+      "city": "LT & T LIMITED",
+      "pc": "WA1 4RZ",
+      "cons": 60,
+      "pallets": 93,
+      "revenue": 4548.569999999998,
       "lates": 2
     },
     {
       "name": "HGV DIRECT LTD -ASHBOURNE",
       "city": "HGV DIRECT LTD -ASHBOURNE",
       "pc": "DE6 1HD",
-      "cons": 47,
-      "pallets": 61,
-      "revenue": 2879.929999999998,
+      "cons": 58,
+      "pallets": 77,
+      "revenue": 3712.549999999998,
       "lates": 1
-    },
-    {
-      "name": "ARTIC TRAILER SERVICES",
-      "city": "ARTIC TRAILER SERVICES",
-      "pc": "FK2 7HP",
-      "cons": 47,
-      "pallets": 50,
-      "revenue": 3728.95,
-      "lates": 11
-    },
-    {
-      "name": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
-      "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
-      "pc": "WF6 1TA",
-      "cons": 46,
-      "pallets": 55,
-      "revenue": 2715.8899999999994,
-      "lates": 4
     },
     {
       "name": "BPW LTD",
       "city": "BPW LTD",
       "pc": "LE19 1UZ",
-      "cons": 44,
-      "pallets": 58,
-      "revenue": 3674.119999999998,
+      "cons": 56,
+      "pallets": 70,
+      "revenue": 4569.039999999998,
       "lates": 0
     },
     {
-      "name": "LT & T LIMITED",
-      "city": "LT & T LIMITED",
-      "pc": "WA1 4RZ",
-      "cons": 43,
-      "pallets": 67,
-      "revenue": 3186.2399999999984,
-      "lates": 2
+      "name": "ARTIC TRAILER SERVICES",
+      "city": "ARTIC TRAILER SERVICES",
+      "pc": "FK2 7HP",
+      "cons": 52,
+      "pallets": 55,
+      "revenue": 4154.74,
+      "lates": 13
     },
     {
       "name": "NE TRUCK SPARES LTD (TYNE)",
       "city": "NE TRUCK SPARES LTD (TYNE)",
       "pc": "DH5 0RH",
-      "cons": 31,
-      "pallets": 62,
-      "revenue": 3146.820000000001,
+      "cons": 47,
+      "pallets": 93,
+      "revenue": 4831.4900000000025,
       "lates": 1
     },
     {
       "name": "DINGBRO LTD",
       "city": "DINGBRO LTD",
       "pc": "AB16 6HQ",
-      "cons": 30,
-      "pallets": 50,
-      "revenue": 5733.799999999999,
-      "lates": 2
+      "cons": 43,
+      "pallets": 83,
+      "revenue": 9928.75,
+      "lates": 4
     },
     {
-      "name": "VMU C/O PULLMAN FLEET SOLUTIONS",
-      "city": "VMU C/O PULLMAN FLEET SOLUTIONS",
-      "pc": "CV8 3BB",
-      "cons": 29,
-      "pallets": 31,
-      "revenue": 1523.7400000000002,
+      "name": "SAPPHIRE VEHICLE SERVICES",
+      "city": "SAPPHIRE VEHICLE SERVICES",
+      "pc": "G75 0ZZ",
+      "cons": 34,
+      "pallets": 42,
+      "revenue": 2380.38,
+      "lates": 3
+    },
+    {
+      "name": "NE TRUCK SPARES LTD (CARLISLE)",
+      "city": "NE TRUCK SPARES LTD (CARLISLE)",
+      "pc": "CA6 4SH",
+      "cons": 32,
+      "pallets": 36,
+      "revenue": 2609.11,
       "lates": 1
     },
     {
       "name": "SDC TRAILERS LTD",
       "city": "SDC TRAILERS LTD",
       "pc": "NG18 5DB",
-      "cons": 28,
-      "pallets": 45,
-      "revenue": 2059.8,
+      "cons": 32,
+      "pallets": 49,
+      "revenue": 2284.55,
       "lates": 0
-    },
-    {
-      "name": "NE TRUCK SPARES LTD (CARLISLE)",
-      "city": "NE TRUCK SPARES LTD (CARLISLE)",
-      "pc": "CA6 4SH",
-      "cons": 24,
-      "pallets": 28,
-      "revenue": 1984.8600000000008,
-      "lates": 1
-    },
-    {
-      "name": "FLEET FACTORS LTD (CLEVELAND)",
-      "city": "FLEET FACTORS LTD (CLEVELAND)",
-      "pc": "TS6 6JB",
-      "cons": 24,
-      "pallets": 47,
-      "revenue": 2379.870000000001,
-      "lates": 1
     },
     {
       "name": "EMS-FP&S LIMITED BELLSHILL",
       "city": "EMS-FP&S LIMITED BELLSHILL",
       "pc": "ML4 3LR",
-      "cons": 24,
-      "pallets": 25,
-      "revenue": 1958.7800000000009,
+      "cons": 32,
+      "pallets": 33,
+      "revenue": 2676.8100000000013,
       "lates": 2
     },
     {
-      "name": "SAPPHIRE VEHICLE SERVICES",
-      "city": "SAPPHIRE VEHICLE SERVICES",
-      "pc": "G75 0ZZ",
-      "cons": 24,
-      "pallets": 30,
-      "revenue": 1662.5600000000006,
-      "lates": 2
+      "name": "HGV DIRECT LTD - WELLINGBOROUGH",
+      "city": "HGV DIRECT LTD - WELLINGBOROUGH",
+      "pc": "NN8 6UF",
+      "cons": 31,
+      "pallets": 34,
+      "revenue": 1657.2500000000007,
+      "lates": 0
+    },
+    {
+      "name": "FLEET FACTORS LTD (CLEVELAND)",
+      "city": "FLEET FACTORS LTD (CLEVELAND)",
+      "pc": "TS6 6JB",
+      "cons": 31,
+      "pallets": 60,
+      "revenue": 3095.250000000001,
+      "lates": 1
     },
     {
       "name": "EMS-FP&S LIMITED",
       "city": "EMS-FP&S LIMITED",
       "pc": "NN5 5HL",
-      "cons": 24,
-      "pallets": 28,
-      "revenue": 1349.0700000000004,
+      "cons": 31,
+      "pallets": 35,
+      "revenue": 1714.4600000000005,
       "lates": 0
     },
     {
-      "name": "LCP ENGINEERING CO LTD",
-      "city": "LCP ENGINEERING CO LTD",
-      "pc": "RM15 4YG",
-      "cons": 23,
-      "pallets": 28,
-      "revenue": 1726.9999999999995,
-      "lates": 3
+      "name": "VMU C/O PULLMAN FLEET SOLUTIONS",
+      "city": "VMU C/O PULLMAN FLEET SOLUTIONS",
+      "pc": "CV8 3BB",
+      "cons": 30,
+      "pallets": 32,
+      "revenue": 1578.7300000000002,
+      "lates": 1
     },
     {
       "name": "MERLIN COMPONENTS LTD (LONDON)",
       "city": "MERLIN COMPONENTS LTD (LONDON)",
       "pc": "RM20 3BJ",
-      "cons": 22,
-      "pallets": 27,
-      "revenue": 1651.6,
+      "cons": 30,
+      "pallets": 41,
+      "revenue": 2555.91,
       "lates": 2
     },
     {
-      "name": "EMS-FP&S - WARRINGTON",
-      "city": "EMS-FP&S - WARRINGTON",
-      "pc": "WA1 4RT",
-      "cons": 22,
-      "pallets": 23,
-      "revenue": 1091.7200000000003,
-      "lates": 4
+      "name": "LCP ENGINEERING CO LTD",
+      "city": "LCP ENGINEERING CO LTD",
+      "pc": "RM15 4YG",
+      "cons": 30,
+      "pallets": 36,
+      "revenue": 2289.18,
+      "lates": 3
     }
   ]
 }
