@@ -1,12 +1,12 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:32:07.135Z",
+  "lastUpdated": "2026-07-15T13:32:20.094Z",
   "months": {
     "2026-01": {
       "cons": 357,
       "pallets": 569,
       "revenue": 31074.34,
-      "lates": 2,
+      "lates": 3,
       "latePallets": 3,
       "timeliness": 0.9947275922671354,
       "avgRC": 87.04,
@@ -3843,6 +3843,25 @@
       "note": "",
       "reason": "",
       "failed": false
+    },
+    {
+      "id": "C04994",
+      "custref": "",
+      "acct": "",
+      "month": "Jan-26",
+      "dest": "",
+      "city": "",
+      "pc": "",
+      "window": "",
+      "commitDate": "",
+      "arrDate": "",
+      "arrival": "",
+      "mins": 0,
+      "pallets": 0,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": true
     }
   ],
   "regionData": {
