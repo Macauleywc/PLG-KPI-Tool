@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:51:36.667Z",
+  "lastUpdated": "2026-07-15T13:52:20.804Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -2963,6 +2963,25 @@
       "failed": false
     },
     {
+      "id": "C04896",
+      "custref": "",
+      "acct": "BPW01",
+      "month": "Mar-26",
+      "dest": "ARTIC TRAILER SERVICES",
+      "city": "ARTIC TRAILER SERVICES",
+      "pc": "FK2 7HP",
+      "window": "",
+      "commitDate": "16/03/26",
+      "arrDate": "17/03/26",
+      "arrival": "",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
       "id": "C09210",
       "acct": "BPW01",
       "month": "Jun-26",
@@ -3839,25 +3858,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C04896",
-      "custref": "",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "ARTIC TRAILER SERVICES",
-      "city": "ARTIC TRAILER SERVICES",
-      "pc": "FK2 7HP",
-      "window": "",
-      "commitDate": "16/03/26",
-      "arrDate": "17/03/26",
-      "arrival": "",
-      "mins": 1440,
-      "pallets": 1,
       "dtype": "Standard",
       "note": "",
       "reason": "",
