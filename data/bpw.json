@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:28:41.194Z",
+  "lastUpdated": "2026-07-15T13:28:43.074Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 23,
-      "latePallets": 29,
-      "timeliness": 0.9594972067039106,
+      "lates": 22,
+      "latePallets": 28,
+      "timeliness": 0.9608938547486033,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -3071,24 +3071,6 @@
       "failed": false
     },
     {
-      "id": "C05165",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "LCP ENGINEERING CO LTD",
-      "city": "LCP ENGINEERING CO LTD",
-      "pc": "CT2 7PX",
-      "window": "",
-      "commitDate": "20/03/26",
-      "arrDate": "23/03/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05388",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -4205,7 +4187,7 @@
     "South East": {
       "pallets": 355,
       "cons": 136,
-      "lates": 9
+      "lates": 8
     },
     "North East": {
       "pallets": 251,
