@@ -435,23 +435,41 @@ function handleDeliveryData(input){
 
 function expandMultiStopRows(rows){
   var out=[];
+  // Some references (e.g. "DAY HIRE", or blank refs) are reused across genuinely different
+  // rows/loads. Detect which base references actually collide across the whole file first,
+  // so we only disambiguate the ones that need it and leave unique refs untouched.
+  var refCounts={};
   rows.forEach(function(r){
+    var ref=String(r['Customer reference number']||r['Customer Consignment Ref']||'');
+    refCounts[ref]=(refCounts[ref]||0)+1;
+  });
+  rows.forEach(function(r,rowIdx){
     var dn=String(r['Delivery Name']||'');
     var parts=dn.indexOf(',')>-1?dn.split(',').map(function(s){return s.trim();}):null;
-    if(!parts||parts.length<=1){out.push(r);return;}
+    var baseRef=String(r['Customer reference number']||r['Customer Consignment Ref']||'');
+    var needsDisambiguation=refCounts[baseRef]>1;
+    if(!parts||parts.length<=1){
+      if(needsDisambiguation){var s2=Object.assign({},r);s2['Customer reference number']=baseRef+'-r'+rowIdx;out.push(s2);}
+      else{out.push(r);}
+      return;
+    }
     var n=parts.length;
-    function splitField(key){
+    function splitField(key,isDate){
       var v=r[key];
       if(v==null||v==='')return null;
       var arr=String(v).split(',').map(function(s){return s.trim();});
-      return arr.length===n?arr:null; // only trust it if it lines up 1:1 with the delivery names
+      if(arr.length===n)return arr;
+      // Count doesn't line up with the number of stops. For date fields, falling back to a
+      // garbled multi-value string breaks date parsing and silently drops the row from any
+      // month — so use the first date for every stop instead of leaving it unparseable.
+      if(isDate&&arr.length>0){var first=arr[0];return parts.map(function(){return first;});}
+      return null;
     }
-    var pcArr=splitField('Delivery PC');
-    var reqArr=splitField('Requested Delivery Date');
-    var actArr=splitField('Actual Delivery Date');
-    var collArr=splitField('Collection Date');
-    var lastActArr=splitField('Last delivery stop > Date (by type) > Actual');
-    var baseRef=String(r['Customer reference number']||r['Customer Consignment Ref']||'');
+    var pcArr=splitField('Delivery PC',false);
+    var reqArr=splitField('Requested Delivery Date',true);
+    var actArr=splitField('Actual Delivery Date',true);
+    var collArr=splitField('Collection Date',true);
+    var lastActArr=splitField('Last delivery stop > Date (by type) > Actual',true);
     for(var i=0;i<n;i++){
       var stop=Object.assign({},r);
       stop['Delivery Name']=parts[i];
@@ -460,7 +478,10 @@ function expandMultiStopRows(rows){
       if(actArr)stop['Actual Delivery Date']=actArr[i];
       if(collArr)stop['Collection Date']=collArr[i];
       if(lastActArr)stop['Last delivery stop > Date (by type) > Actual']=lastActArr[i];
-      stop['Customer reference number']=baseRef+'-'+(i+1);
+      // Row index is included because some references (e.g. "DAY HIRE") are reused across
+      // genuinely different loads — without it, stops from different rows can collide and
+      // silently overwrite each other during dedup.
+      stop['Customer reference number']=baseRef+'-r'+rowIdx+'-'+(i+1);
       // Cost is a day rate for the whole load, not per-stop — keep it on the first stop only
       stop['Customer Cost']=i===0?r['Customer Cost']:0;
       out.push(stop);
@@ -1842,13 +1863,23 @@ function updateSavedFailed(idx,val){
   persistSavedData().then(function(){showAlert('success','Saved.');}).catch(function(e){showAlert('warn','Save failed: '+e.message);});
 }
 function updateLateNote(idx,val){var comp=allCompleted();var lateRows=comp.filter(function(r){return isLate(r);});if(lateRows[idx])lateRows[idx]._note=val;}
+var KPI_DATA_URL='https://ahvyirnebbbfmktewdva.supabase.co/functions/v1/kpi-data';
+function saveViaSharedSource(payload){
+  return fetch(KPI_DATA_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save',customer:currentCustomer,payload:payload})})
+    .then(function(resp){return resp.json().then(function(j){if(resp.ok&&j.ok)return true;throw new Error(j.error||'Save failed');});});
+}
 function persistSavedData(){
-  var token=getToken();if(!token){showAlert('warn','No GitHub token.');return Promise.resolve(false);}
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:savedMonthData,lateRows:window._savedLateRows||[],regionData:window._savedRegionData||{},destData:window._savedDestData||[]};
+  var token=getToken();
+  if(!token) return saveViaSharedSource(payload);
   var body={message:'Edit late log: '+currentCustomer+' - '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
   if(ghFileSha)body.sha=ghFileSha;
   var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
-  return fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)}).then(function(resp){return resp.json().then(function(j){if(resp.ok){ghFileSha=j.content.sha;return true;}throw new Error(j.message||'GitHub error');});});
+  return fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)}).then(function(resp){return resp.json().then(function(j){if(resp.ok){ghFileSha=j.content.sha;return true;}
+    // Personal token failed (e.g. bad credentials) — fall back to the shared save path instead of failing outright
+    console.error('persistSavedData: personal token save failed, falling back to shared source:',j.message);
+    return saveViaSharedSource(payload);
+  });});
 }
 function updateSavedNote(idx,val){
   if(!window._savedLateRows||!window._savedLateRows[idx])return;
@@ -2190,7 +2221,6 @@ async function loadFromSharedSource(){
 }
 
 async function saveToGitHub(){
-  var token=getToken();if(!token){showAlert('warn','No GitHub token.');return;}
   var overwriteKeys=Object.keys(calculatedMonths).filter(function(key){return !!savedMonthData[key];});
   if(overwriteKeys.length>0){
     var lbls=overwriteKeys.map(function(k){return MONTHS[MONTH_KEYS.indexOf(k)]||k;}).join(', ');
@@ -2269,18 +2299,29 @@ async function saveToGitHub(){
     }
   });
   var payload={customer:currentCustomer,lastUpdated:new Date().toISOString(),months:merged,lateRows:lateRowsToSave,regionData:regDataToSave,destData:destDataToSave};
-  var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
-  if(ghFileSha)body.sha=ghFileSha;
+  var token=getToken();
   try{
-    var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
-    var resp=await fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
-    var json=await resp.json();if(!resp.ok)throw new Error(json.message||'GitHub error');
-    ghFileSha=json.content.sha;savedMonthData=merged;
+    if(token){
+      var body={message:'KPI update: '+currentCustomer+' — '+new Date().toLocaleDateString('en-GB'),content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH_BRANCH};
+      if(ghFileSha)body.sha=ghFileSha;
+      var url='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+ghFile(currentCustomer);
+      var resp=await fetch(url,{method:'PUT',headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify(body)});
+      var json=await resp.json();
+      if(resp.ok){ghFileSha=json.content.sha;}
+      else{
+        console.error('saveToGitHub: personal token save failed, falling back to shared source:',json.message);
+        await saveViaSharedSource(payload);
+        ghFileSha=null;
+      }
+    } else {
+      await saveViaSharedSource(payload);
+    }
+    savedMonthData=merged;
     btn.textContent='Saved ✓';btn.disabled=false;
     var _sse=document.getElementById('save-status');if(_sse){_sse.textContent='✓ Saved at '+new Date().toLocaleTimeString('en-GB');_sse.className='save-ok';}
     document.getElementById('gh-status').innerHTML='<span style="color:#2e7d32">✓ '+Object.keys(savedMonthData).length+' months saved</span>';
     var _dot2=document.getElementById('gh-dot');if(_dot2)_dot2.classList.add('ok');
-    renderHistory();showAlert('success','Saved to GitHub for '+currentCustomer+'.');
+    renderHistory();showAlert('success','Saved for '+currentCustomer+'.');
   }catch(err){btn.textContent='Save to GitHub';btn.disabled=false;showAlert('warn','Save failed: '+err.message);}
 }
 
