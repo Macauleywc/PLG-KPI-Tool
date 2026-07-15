@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:14:03.071Z",
+  "lastUpdated": "2026-07-15T13:14:04.890Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 4,
-      "latePallets": 4,
-      "timeliness": 0.9921722113502935,
+      "lates": 3,
+      "latePallets": 3,
+      "timeliness": 0.9941291585127201,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -1894,24 +1894,6 @@
       "arrDate": "09/02/26",
       "arrival": "00:00",
       "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C04139",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "ARTIC TRAILER SERVICES",
-      "city": "ARTIC TRAILER SERVICES",
-      "pc": "FK2 7HP",
-      "window": "",
-      "commitDate": "26/02/26",
-      "arrDate": "27/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -4273,7 +4255,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 60
+      "lates": 59
     },
     "South West": {
       "pallets": 128,
