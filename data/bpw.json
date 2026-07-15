@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:13:04.508Z",
+  "lastUpdated": "2026-07-15T13:13:11.460Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 18,
-      "latePallets": 24,
-      "timeliness": 0.9530332681017613,
+      "lates": 17,
+      "latePallets": 22,
+      "timeliness": 0.9569471624266145,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -1895,24 +1895,6 @@
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C03320/E55966",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "A.B.S (BURTON) LTD",
-      "city": "A.B.S (BURTON) LTD",
-      "pc": "DE14 1QR",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -4535,7 +4517,7 @@
     "East Midlands": {
       "pallets": 850,
       "cons": 449,
-      "lates": 9
+      "lates": 8
     },
     "Yorkshire": {
       "pallets": 389,
