@@ -433,6 +433,42 @@ function handleDeliveryData(input){
   reader.readAsBinaryString(file);
 }
 
+function expandMultiStopRows(rows){
+  var out=[];
+  rows.forEach(function(r){
+    var dn=String(r['Delivery Name']||'');
+    var parts=dn.indexOf(',')>-1?dn.split(',').map(function(s){return s.trim();}):null;
+    if(!parts||parts.length<=1){out.push(r);return;}
+    var n=parts.length;
+    function splitField(key){
+      var v=r[key];
+      if(v==null||v==='')return null;
+      var arr=String(v).split(',').map(function(s){return s.trim();});
+      return arr.length===n?arr:null; // only trust it if it lines up 1:1 with the delivery names
+    }
+    var pcArr=splitField('Delivery PC');
+    var reqArr=splitField('Requested Delivery Date');
+    var actArr=splitField('Actual Delivery Date');
+    var collArr=splitField('Collection Date');
+    var lastActArr=splitField('Last delivery stop > Date (by type) > Actual');
+    var baseRef=String(r['Customer reference number']||r['Customer Consignment Ref']||'');
+    for(var i=0;i<n;i++){
+      var stop=Object.assign({},r);
+      stop['Delivery Name']=parts[i];
+      if(pcArr)stop['Delivery PC']=pcArr[i];
+      if(reqArr)stop['Requested Delivery Date']=reqArr[i];
+      if(actArr)stop['Actual Delivery Date']=actArr[i];
+      if(collArr)stop['Collection Date']=collArr[i];
+      if(lastActArr)stop['Last delivery stop > Date (by type) > Actual']=lastActArr[i];
+      stop['Customer reference number']=baseRef+'-'+(i+1);
+      // Cost is a day rate for the whole load, not per-stop — keep it on the first stop only
+      stop['Customer Cost']=i===0?r['Customer Cost']:0;
+      out.push(stop);
+    }
+  });
+  return out;
+}
+
 function handleRaw(input){
   var file=input.files[0];if(!file)return;
   var reader=new FileReader();
@@ -443,6 +479,7 @@ function handleRaw(input){
       var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
       var isV4Format=rows.length>0&&rows[0]['Customer Consignment Ref']!==undefined;
       if(isV4Format){
+        rows=expandMultiStopRows(rows);
         rows=rows.map(function(r){
           var reqDate=r['Requested Delivery Date'];
           var actDate=_realActual(r);
