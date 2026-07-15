@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:13:54.463Z",
+  "lastUpdated": "2026-07-15T14:13:56.967Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1258,9 +1258,9 @@
       "cons": 461,
       "pallets": 714,
       "revenue": 43117.62,
-      "lates": 12,
-      "latePallets": 19,
-      "timeliness": 0.9733893557422969,
+      "lates": 10,
+      "latePallets": 17,
+      "timeliness": 0.9761904761904762,
       "avgRC": 93.53,
       "avgRP": 60.39,
       "avgPC": 1.55,
@@ -2443,42 +2443,6 @@
       "failed": false
     },
     {
-      "id": "C08981",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "CUNNINGHAM TRUCK PARTS",
-      "city": "CUNNINGHAM TRUCK PARTS",
-      "pc": "KA3 1LU",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C09247",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "DINGBRO LIMITED (ELGIN)",
-      "city": "DINGBRO LIMITED (ELGIN)",
-      "pc": "IV30 1XY",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07261",
       "acct": "BPW01",
       "month": "May-26",
@@ -2601,7 +2565,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 23
+      "lates": 21
     },
     "South West": {
       "pallets": 128,
