@@ -2054,15 +2054,14 @@ async function loadFromGitHub(){
     if(!resp.ok){
       var errBody=null;try{errBody=await resp.json();}catch(e){}
       var errMsg=(errBody&&errBody.message)?errBody.message:('HTTP '+resp.status);
-      var _gsErr=document.getElementById('gh-status');if(_gsErr){_gsErr.textContent='GitHub error: '+errMsg;}
-      console.error('loadFromGitHub failed:',resp.status,errBody);
-      return;
+      console.error('loadFromGitHub failed, falling back to shared source:',resp.status,errBody);
+      var _gsErr=document.getElementById('gh-status');if(_gsErr){_gsErr.textContent='Your token failed ('+errMsg+') — showing shared data (view-only)';}
+      return loadFromSharedSource();
     }
     var json=await resp.json();ghFileSha=json.sha;
     if(!json.content){
-      var _gsErr2=document.getElementById('gh-status');if(_gsErr2){_gsErr2.textContent='GitHub returned no file content — try again.';}
-      console.error('loadFromGitHub: response missing content field',json);
-      return;
+      console.error('loadFromGitHub: response missing content field, falling back to shared source',json);
+      return loadFromSharedSource();
     }
     var decoded=JSON.parse(atob(json.content.replace(/\n/g,'')));
     savedMonthData=decoded.months||{};window._savedLateRows=decoded.lateRows||[];window._savedRegionData=decoded.regionData||null;window._savedDestData=decoded.destData||[];
@@ -2078,7 +2077,7 @@ async function loadFromGitHub(){
       var _ks=document.getElementById('kpi-section');if(_ks)_ks.style.display='block';
       renderSavedLateLog();
     }
-  }catch(err){var _gs5=document.getElementById('gh-status');if(_gs5){_gs5.textContent='Error: '+err.message;}}
+  }catch(err){console.error('loadFromGitHub network error, falling back to shared source:',err.message);return loadFromSharedSource();}
 }
 
 async function loadFromSharedSource(){
