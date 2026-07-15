@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:13:45.951Z",
+  "lastUpdated": "2026-07-15T13:13:47.064Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 12,
-      "latePallets": 16,
-      "timeliness": 0.9686888454011742,
+      "lates": 10,
+      "latePallets": 13,
+      "timeliness": 0.974559686888454,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -1882,42 +1882,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "C03556",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "EMS-FP&S - WARRINGTON",
-      "city": "EMS-FP&S - WARRINGTON",
-      "pc": "WA1 4RT",
-      "window": "",
-      "commitDate": "12/02/26",
-      "arrDate": "13/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C03907",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "PURFLEET COMMERCIALS LTD",
-      "city": "PURFLEET COMMERCIALS LTD",
-      "pc": "RM20 4EH",
-      "window": "",
-      "commitDate": "24/02/26",
-      "arrDate": "25/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "C03269",
       "acct": "BPW01",
@@ -4437,12 +4401,12 @@
     "Other": {
       "pallets": 192,
       "cons": 151,
-      "lates": 7
+      "lates": 6
     },
     "North West": {
       "pallets": 438,
       "cons": 349,
-      "lates": 11
+      "lates": 10
     },
     "East of England": {
       "pallets": 226,
