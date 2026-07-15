@@ -1,6 +1,6 @@
 {
   "customer": "Cask",
-  "lastUpdated": "2026-07-15T13:03:50.867Z",
+  "lastUpdated": "2026-07-15T13:03:58.542Z",
   "months": {
     "2026-05": {
       "cons": 111,
@@ -1222,9 +1222,9 @@
       "cons": 103,
       "pallets": 1118,
       "revenue": 34896.24,
-      "lates": 4,
-      "latePallets": 25,
-      "timeliness": 0.977639,
+      "lates": 3,
+      "latePallets": 5,
+      "timeliness": 0.995528,
       "avgRC": 338.8,
       "avgRP": 31.21,
       "avgPC": 10.85,
@@ -1239,7 +1239,7 @@
         },
         "Next Day": {
           "cons": 77,
-          "lates": 2
+          "lates": 1
         }
       },
       "regionData": {
@@ -1259,7 +1259,7 @@
           "cons": 19,
           "pallets": 273,
           "revenue": 4633.68,
-          "lates": 2
+          "lates": 1
         },
         "North West": {
           "cons": 9,
@@ -1331,7 +1331,7 @@
         },
         "Thu": {
           "cons": 21,
-          "lates": 3
+          "lates": 2
         },
         "Fri": {
           "cons": 18,
@@ -1355,7 +1355,7 @@
           "cons": 11,
           "pallets": 204,
           "revenue": 2811.61,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Expect Distribution/Northern Monk",
@@ -2302,24 +2302,6 @@
       "failed": false
     },
     {
-      "id": "88631721",
-      "acct": "CASK",
-      "month": "Jun-26",
-      "dest": "CASK GLOBAL CANNING SOLUTIONS EURO",
-      "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
-      "pc": "LE67 1TA",
-      "window": "",
-      "commitDate": "25/06/26",
-      "arrDate": "26/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 20,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "3508",
       "acct": "CASK",
       "month": "Jan-26",
@@ -2411,7 +2393,7 @@
     "East Midlands": {
       "pallets": 1841,
       "cons": 115,
-      "lates": 3
+      "lates": 2
     },
     "South East": {
       "pallets": 187,
@@ -2467,7 +2449,7 @@
       "cons": 82,
       "pallets": 1471,
       "revenue": 19786.059999999998,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "Get The Drinks In- Updated",
