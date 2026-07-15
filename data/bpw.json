@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:53:55.891Z",
+  "lastUpdated": "2026-07-15T13:53:59.289Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 27,
-      "latePallets": 34,
-      "timeliness": 0.9510791366906475,
+      "lates": 26,
+      "latePallets": 33,
+      "timeliness": 0.9525179856115108,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2153,24 +2153,6 @@
       "failed": false
     },
     {
-      "id": "C06288",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "EMS-FP&S LIMITED BELLSHILL",
-      "city": "EMS-FP&S LIMITED BELLSHILL",
-      "pc": "ML4 3LR",
-      "window": "",
-      "commitDate": "15/04/26",
-      "arrDate": "16/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05844",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3482,7 +3464,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 36
+      "lates": 35
     },
     "South West": {
       "pallets": 128,
