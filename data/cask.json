@@ -1,14 +1,14 @@
 {
   "customer": "Cask",
-  "lastUpdated": "2026-07-15T13:03:37.510Z",
+  "lastUpdated": "2026-07-15T13:03:50.867Z",
   "months": {
     "2026-05": {
       "cons": 111,
       "pallets": 1467,
       "revenue": 40862.63,
-      "lates": 7,
-      "latePallets": 19,
-      "timeliness": 0.987048,
+      "lates": 5,
+      "latePallets": 17,
+      "timeliness": 0.988412,
       "avgRC": 368.13,
       "avgRP": 27.85,
       "avgPC": 13.22,
@@ -25,7 +25,7 @@
         },
         "Economy Booked": {
           "cons": 29,
-          "lates": 6
+          "lates": 4
         }
       },
       "regionData": {
@@ -63,13 +63,13 @@
           "cons": 11,
           "pallets": 99,
           "revenue": 3787.1600000000003,
-          "lates": 3
+          "lates": 2
         },
         "Scotland": {
           "cons": 7,
           "pallets": 111,
           "revenue": 6744.2300000000005,
-          "lates": 1
+          "lates": 0
         },
         "West Midlands": {
           "cons": 3,
@@ -115,7 +115,7 @@
         },
         "Fri": {
           "cons": 24,
-          "lates": 4
+          "lates": 2
         }
       },
       "destData": [
@@ -270,7 +270,7 @@
           "cons": 2,
           "pallets": 21,
           "revenue": 1591.5900000000001,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Marlish Farm",
@@ -1852,42 +1852,6 @@
       "failed": false
     },
     {
-      "id": "3992",
-      "acct": "CASK",
-      "month": "May-26",
-      "dest": "Quantock Ales Ltd",
-      "city": "Quantock Ales Ltd",
-      "pc": "TA4 3RU",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "3960",
-      "acct": "CASK",
-      "month": "May-26",
-      "dest": "Fierce Beer",
-      "city": "Fierce Beer",
-      "pc": "AB21 0GR",
-      "window": "",
-      "commitDate": "15/05/26",
-      "arrDate": "18/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "3971",
       "acct": "CASK",
       "month": "May-26",
@@ -2457,12 +2421,12 @@
     "South West": {
       "pallets": 513,
       "cons": 58,
-      "lates": 9
+      "lates": 8
     },
     "Scotland": {
       "pallets": 408,
       "cons": 38,
-      "lates": 3
+      "lates": 2
     },
     "West Midlands": {
       "pallets": 300,
