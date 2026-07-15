@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:52:57.052Z",
+  "lastUpdated": "2026-07-15T13:52:59.356Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 45,
-      "latePallets": 63,
-      "timeliness": 0.9093525179856116,
+      "lates": 44,
+      "latePallets": 61,
+      "timeliness": 0.9122302158273381,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2531,24 +2531,6 @@
       "failed": false
     },
     {
-      "id": "C06090",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "HGV DIRECT LTD -ASHBOURNE",
-      "city": "HGV DIRECT LTD -ASHBOURNE",
-      "pc": "DE6 1HD",
-      "window": "",
-      "commitDate": "13/04/26",
-      "arrDate": "14/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06218",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3816,7 +3798,7 @@
     "East Midlands": {
       "pallets": 850,
       "cons": 449,
-      "lates": 6
+      "lates": 5
     },
     "Yorkshire": {
       "pallets": 389,
