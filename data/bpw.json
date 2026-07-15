@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:52:59.356Z",
+  "lastUpdated": "2026-07-15T13:53:02.563Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 44,
-      "latePallets": 61,
-      "timeliness": 0.9122302158273381,
+      "lates": 43,
+      "latePallets": 60,
+      "timeliness": 0.9136690647482014,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2477,24 +2477,6 @@
       "failed": false
     },
     {
-      "id": "F01894",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "MARK SANDERSON DFDS LOGISTICS LTD",
-      "city": "MARK SANDERSON DFDS LOGISTICS LTD",
-      "pc": "DN40 3DJ",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06269",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3803,7 +3785,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 12
+      "lates": 11
     },
     "Other": {
       "pallets": 192,
