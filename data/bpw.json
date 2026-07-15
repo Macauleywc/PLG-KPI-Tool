@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:49.580Z",
+  "lastUpdated": "2026-07-15T14:10:51.330Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 17,
-      "latePallets": 22,
-      "timeliness": 0.9658914728682171,
+      "lates": 16,
+      "latePallets": 20,
+      "timeliness": 0.9689922480620154,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2893,24 +2893,6 @@
       "failed": false
     },
     {
-      "id": "E57299",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "DENNISON  TRAILERS LTD",
-      "city": "DENNISON  TRAILERS LTD",
-      "pc": "LA1 3TD",
-      "window": "",
-      "commitDate": "06/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07972",
       "acct": "BPW01",
       "month": "May-26",
@@ -3004,7 +2986,7 @@
     "North West": {
       "pallets": 438,
       "cons": 349,
-      "lates": 4
+      "lates": 3
     },
     "East of England": {
       "pallets": 226,
