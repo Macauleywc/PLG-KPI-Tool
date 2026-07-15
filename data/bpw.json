@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:28:43.074Z",
+  "lastUpdated": "2026-07-15T13:28:46.659Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 22,
-      "latePallets": 28,
-      "timeliness": 0.9608938547486033,
+      "lates": 20,
+      "latePallets": 26,
+      "timeliness": 0.9636871508379888,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -3143,42 +3143,6 @@
       "failed": false
     },
     {
-      "id": "C04680",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "NETS C/O PULMAN FLEET SERVICES",
-      "city": "NETS C/O PULMAN FLEET SERVICES",
-      "pc": "EH54 8TB",
-      "window": "",
-      "commitDate": "10/03/26",
-      "arrDate": "11/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C05022",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "VMU C/O PULLMAN FLEET SOLUTIONS",
-      "city": "VMU C/O PULLMAN FLEET SOLUTIONS",
-      "pc": "CV8 3BB",
-      "window": "",
-      "commitDate": "19/03/26",
-      "arrDate": "20/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C03371",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -4137,7 +4101,7 @@
     "West Midlands": {
       "pallets": 147,
       "cons": 114,
-      "lates": 6
+      "lates": 5
     },
     "Wales": {
       "pallets": 136,
@@ -4147,7 +4111,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 56
+      "lates": 55
     },
     "South West": {
       "pallets": 128,
