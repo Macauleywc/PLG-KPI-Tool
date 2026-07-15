@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:53.954Z",
+  "lastUpdated": "2026-07-15T14:10:55.858Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 14,
-      "latePallets": 18,
-      "timeliness": 0.9720930232558139,
+      "lates": 13,
+      "latePallets": 17,
+      "timeliness": 0.9736434108527132,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2767,24 +2767,6 @@
       "failed": false
     },
     {
-      "id": "C08173",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "LOCH SHIEL GARAGE",
-      "city": "LOCH SHIEL GARAGE",
-      "pc": "PH36 4JL",
-      "window": "",
-      "commitDate": "29/05/26",
-      "arrDate": "01/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07115",
       "acct": "BPW01",
       "month": "May-26",
@@ -2925,7 +2907,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 28
+      "lates": 27
     },
     "South West": {
       "pallets": 128,
