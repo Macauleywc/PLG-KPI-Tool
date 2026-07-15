@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:11:37.219Z",
+  "lastUpdated": "2026-07-15T13:13:01.048Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 20,
-      "latePallets": 27,
-      "timeliness": 0.947162,
+      "lates": 19,
+      "latePallets": 25,
+      "timeliness": 0.9510763209393346,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -2201,24 +2201,6 @@
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "E55976",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "GRAY & ADAMS (SCOTLAND)",
-      "city": "GRAY & ADAMS (SCOTLAND)",
-      "pc": "AB43 9HU",
-      "window": "",
-      "commitDate": "09/02/26",
-      "arrDate": "10/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -4561,7 +4543,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 65
+      "lates": 64
     },
     "South West": {
       "pallets": 128,
