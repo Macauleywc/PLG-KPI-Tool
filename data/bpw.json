@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:55:06.462Z",
+  "lastUpdated": "2026-07-15T13:55:15.285Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 11,
-      "latePallets": 14,
-      "timeliness": 0.9798561151079137,
+      "lates": 10,
+      "latePallets": 12,
+      "timeliness": 0.9827338129496402,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2063,24 +2063,6 @@
       "failed": false
     },
     {
-      "id": "C05354",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "Total Environmental Technology",
-      "city": "Total Environmental Technology",
-      "pc": "YO15 3QY",
-      "window": "",
-      "commitDate": "21/04/26",
-      "arrDate": "22/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05888",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3209,7 +3191,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 7
+      "lates": 6
     },
     "Other": {
       "pallets": 192,
