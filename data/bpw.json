@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:13:37.642Z",
+  "lastUpdated": "2026-07-15T13:13:45.951Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 14,
-      "latePallets": 19,
-      "timeliness": 0.9628180039138943,
+      "lates": 12,
+      "latePallets": 16,
+      "timeliness": 0.9686888454011742,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -1882,42 +1882,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "C03164",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS ROTHERHAM",
-      "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS ROTHERHAM",
-      "pc": "S60 1FG",
-      "window": "",
-      "commitDate": "04/02/26",
-      "arrDate": "10/02/26",
-      "arrival": "00:00",
-      "mins": 8640,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C03404",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "CENTRAL FLEET SOLUTIONS",
-      "city": "CENTRAL FLEET SOLUTIONS",
-      "pc": "EH48 2FH",
-      "window": "",
-      "commitDate": "11/02/26",
-      "arrDate": "12/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "C03556",
       "acct": "BPW01",
@@ -4453,7 +4417,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 63
+      "lates": 62
     },
     "South West": {
       "pallets": 128,
@@ -4468,7 +4432,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 13
+      "lates": 12
     },
     "Other": {
       "pallets": 192,
