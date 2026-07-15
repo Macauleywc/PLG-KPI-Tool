@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:09:52.964Z",
+  "lastUpdated": "2026-07-15T14:09:56.956Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 26,
-      "latePallets": 36,
-      "timeliness": 0.9441860465116279,
+      "lates": 24,
+      "latePallets": 34,
+      "timeliness": 0.9472868217054263,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -3019,24 +3019,6 @@
       "failed": false
     },
     {
-      "id": "E57466",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "GRAY & ADAMS (SCOTLAND)",
-      "city": "GRAY & ADAMS (SCOTLAND)",
-      "pc": "AB43 9HU",
-      "window": "",
-      "commitDate": "21/05/26",
-      "arrDate": "22/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07972",
       "acct": "BPW01",
       "month": "May-26",
@@ -3107,24 +3089,6 @@
       "note": "",
       "reason": "",
       "failed": false
-    },
-    {
-      "id": "C08070",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "NE TRUCK SPARES LTD (CARLISLE)",
-      "city": "NE TRUCK SPARES LTD (CARLISLE)",
-      "pc": "CA6 4SH",
-      "window": "",
-      "commitDate": "26/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
     }
   ],
   "regionData": {
@@ -3141,7 +3105,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 32
+      "lates": 31
     },
     "South West": {
       "pallets": 128,
@@ -3166,7 +3130,7 @@
     "North West": {
       "pallets": 438,
       "cons": 349,
-      "lates": 6
+      "lates": 5
     },
     "East of England": {
       "pallets": 226,
