@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:54:36.631Z",
+  "lastUpdated": "2026-07-15T13:54:39.138Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 21,
-      "latePallets": 26,
-      "timeliness": 0.962589928057554,
+      "lates": 20,
+      "latePallets": 25,
+      "timeliness": 0.9640287769784173,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2117,24 +2117,6 @@
       "failed": false
     },
     {
-      "id": "C06343",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "ALLIANCE AUTOMOTIVE T/A CENTRAL TRUCK &BUS",
-      "city": "ALLIANCE AUTOMOTIVE T/A CENTRAL TRUCK &BUS",
-      "pc": "RM19 1NR",
-      "window": "",
-      "commitDate": "16/04/26",
-      "arrDate": "17/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06576",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3394,7 +3376,7 @@
     "Other": {
       "pallets": 192,
       "cons": 151,
-      "lates": 5
+      "lates": 4
     },
     "North West": {
       "pallets": 438,
