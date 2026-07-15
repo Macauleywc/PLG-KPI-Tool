@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:53:42.849Z",
+  "lastUpdated": "2026-07-15T13:53:45.217Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 29,
-      "latePallets": 37,
-      "timeliness": 0.9467625899280575,
+      "lates": 28,
+      "latePallets": 35,
+      "timeliness": 0.9496402877697842,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2039,24 +2039,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "N13997",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "VALLELY TANKERS (UK) LTD",
-      "city": "VALLELY TANKERS (UK) LTD",
-      "pc": "LS10 2RU",
-      "window": "",
-      "commitDate": "24/04/26",
-      "arrDate": "27/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -3533,7 +3515,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 11
+      "lates": 10
     },
     "Other": {
       "pallets": 192,
