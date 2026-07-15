@@ -1,0 +1,2824 @@
+{
+  "customer": "Cask",
+  "lastUpdated": "2026-07-15T13:02:30.180Z",
+  "months": {
+    "2026-05": {
+      "cons": 111,
+      "pallets": 1467,
+      "revenue": 40989.23,
+      "lates": 7,
+      "latePallets": 19,
+      "timeliness": 0.987048,
+      "avgRC": 369.27,
+      "avgRP": 27.94,
+      "avgPC": 13.22,
+      "palletSizes": {
+        "Full": 73,
+        "Half": 1,
+        "Full Oversize": 10,
+        "Quarter": 4
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 82,
+          "lates": 1
+        },
+        "Economy Booked": {
+          "cons": 29,
+          "lates": 6
+        }
+      },
+      "regionData": {
+        "Other": {
+          "cons": 15,
+          "pallets": 178,
+          "revenue": 6949.549999999999,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 14,
+          "pallets": 79,
+          "revenue": 3042.42,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 15,
+          "pallets": 355,
+          "revenue": 5129.81,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 20,
+          "pallets": 328,
+          "revenue": 5152.43,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 7,
+          "pallets": 32,
+          "revenue": 1630.85,
+          "lates": 2
+        },
+        "South West": {
+          "cons": 11,
+          "pallets": 99,
+          "revenue": 3787.1600000000003,
+          "lates": 3
+        },
+        "Scotland": {
+          "cons": 7,
+          "pallets": 111,
+          "revenue": 6744.2300000000005,
+          "lates": 1
+        },
+        "West Midlands": {
+          "cons": 3,
+          "pallets": 60,
+          "revenue": 1040.81,
+          "lates": 0
+        },
+        "South": {
+          "cons": 8,
+          "pallets": 102,
+          "revenue": 3135.3400000000006,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 9,
+          "pallets": 112,
+          "revenue": 3981.34,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 2,
+          "pallets": 11,
+          "revenue": 395.29,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 21,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 20,
+          "lates": 3
+        },
+        "Wed": {
+          "cons": 14,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 28,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 24,
+          "lates": 4
+        }
+      },
+      "destData": [
+        {
+          "name": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "pc": "LE67 1TA",
+          "cons": 16,
+          "pallets": 283,
+          "revenue": 3675.95,
+          "lates": 0
+        },
+        {
+          "name": "Get The Drinks In- Updated",
+          "city": "Get The Drinks In- Updated",
+          "pc": "HR1 4FT",
+          "cons": 8,
+          "pallets": 118,
+          "revenue": 4008.4799999999996,
+          "lates": 0
+        },
+        {
+          "name": "Expect Distribution/Northern Monk",
+          "city": "Expect Distribution/Northern Monk",
+          "pc": "BD4 6SE",
+          "cons": 6,
+          "pallets": 270,
+          "revenue": 2744.43,
+          "lates": 0
+        },
+        {
+          "name": "CAMERONS BREWERY LIMITED",
+          "city": "CAMERONS BREWERY LIMITED",
+          "pc": "TS24 7QS",
+          "cons": 5,
+          "pallets": 70,
+          "revenue": 2693.09,
+          "lates": 0
+        },
+        {
+          "name": "BUXTON BREWERY",
+          "city": "BUXTON BREWERY",
+          "pc": "SK17 9RZ",
+          "cons": 4,
+          "pallets": 16,
+          "revenue": 744.05,
+          "lates": 0
+        },
+        {
+          "name": "BRADLEYS JUICE LIMITED",
+          "city": "BRADLEYS JUICE LIMITED",
+          "pc": "BS24 6UA",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 214.2,
+          "lates": 2
+        },
+        {
+          "name": "Refresco Bondgate Booking/Huel",
+          "city": "Refresco Bondgate Booking/Huel",
+          "pc": "WF8 2LH",
+          "cons": 3,
+          "pallets": 43,
+          "revenue": 1098.24,
+          "lates": 0
+        },
+        {
+          "name": "Red Willow Brewery",
+          "city": "Red Willow Brewery",
+          "pc": "SK11 7JW",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 202.5,
+          "lates": 0
+        },
+        {
+          "name": "71 Brewing",
+          "city": "71 Brewing",
+          "pc": "DD1 5HZ",
+          "cons": 3,
+          "pallets": 60,
+          "revenue": 3362.63,
+          "lates": 0
+        },
+        {
+          "name": "TOSCA",
+          "city": "TOSCA",
+          "pc": "DE11 9DL",
+          "cons": 3,
+          "pallets": 44,
+          "revenue": 1428.63,
+          "lates": 0
+        },
+        {
+          "name": "EDWIN HOLDEN'S BOTTLING",
+          "city": "EDWIN HOLDEN'S BOTTLING",
+          "pc": "DY1 4LW",
+          "cons": 3,
+          "pallets": 60,
+          "revenue": 1040.81,
+          "lates": 0
+        },
+        {
+          "name": "WHITE LABEL COCKTAILS",
+          "city": "WHITE LABEL COCKTAILS",
+          "pc": "RH11 0PR",
+          "cons": 3,
+          "pallets": 39,
+          "revenue": 1081.6100000000001,
+          "lates": 0
+        },
+        {
+          "name": "VERTICAL DRINKS",
+          "city": "VERTICAL DRINKS",
+          "pc": "LS7 2DF",
+          "cons": 2,
+          "pallets": 20,
+          "revenue": 421.08,
+          "lates": 0
+        },
+        {
+          "name": "EQUINOX KOMBUCHA",
+          "city": "EQUINOX KOMBUCHA",
+          "pc": "HX6 3AE",
+          "cons": 2,
+          "pallets": 15,
+          "revenue": 542.0600000000001,
+          "lates": 0
+        },
+        {
+          "name": "Nightingale Cider Co/ West Hythe Canning",
+          "city": "Nightingale Cider Co/ West Hythe Canning",
+          "pc": "TN30 7DH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 128.3,
+          "lates": 1
+        },
+        {
+          "name": "Wiper & True",
+          "city": "Wiper & True",
+          "pc": "BS5 0SP",
+          "cons": 2,
+          "pallets": 22,
+          "revenue": 843.8900000000001,
+          "lates": 0
+        },
+        {
+          "name": "Fierce Beer",
+          "city": "Fierce Beer",
+          "pc": "AB21 0GR",
+          "cons": 2,
+          "pallets": 21,
+          "revenue": 1591.5900000000001,
+          "lates": 1
+        },
+        {
+          "name": "Marlish Farm",
+          "city": "Marlish Farm",
+          "pc": "NE61 4ER",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 85.2,
+          "lates": 0
+        },
+        {
+          "name": "Luscombe Drinks",
+          "city": "Luscombe Drinks",
+          "pc": "TQ11 0LT",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 1532.32,
+          "lates": 0
+        },
+        {
+          "name": "Hall & Woodhouse",
+          "city": "Hall & Woodhouse",
+          "pc": "DT11 9LQ",
+          "cons": 2,
+          "pallets": 23,
+          "revenue": 1107.72,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-03": {
+      "cons": 96,
+      "pallets": 1099,
+      "revenue": 33704.22,
+      "lates": 12,
+      "latePallets": 26,
+      "timeliness": 0.976342,
+      "avgRC": 351.09,
+      "avgRP": 30.67,
+      "avgPC": 11.45,
+      "palletSizes": {
+        "Full": 81,
+        "Quarter": 2,
+        "Half": 1
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 72,
+          "lates": 5
+        },
+        "Economy Booked": {
+          "cons": 24,
+          "lates": 7
+        }
+      },
+      "regionData": {
+        "Scotland": {
+          "cons": 7,
+          "pallets": 79,
+          "revenue": 5228.43,
+          "lates": 1
+        },
+        "West Midlands": {
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 651,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 10,
+          "pallets": 69,
+          "revenue": 2529.3399999999997,
+          "lates": 4
+        },
+        "East Midlands": {
+          "cons": 13,
+          "pallets": 231,
+          "revenue": 3063,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 10,
+          "pallets": 54,
+          "revenue": 2213.8599999999997,
+          "lates": 2
+        },
+        "Other": {
+          "cons": 17,
+          "pallets": 194,
+          "revenue": 8008.439999999999,
+          "lates": 1
+        },
+        "Yorkshire": {
+          "cons": 18,
+          "pallets": 291,
+          "revenue": 6472.1900000000005,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 8,
+          "pallets": 101,
+          "revenue": 3812.3999999999996,
+          "lates": 1
+        },
+        "South": {
+          "cons": 5,
+          "pallets": 24,
+          "revenue": 742.35,
+          "lates": 2
+        },
+        "South East": {
+          "cons": 5,
+          "pallets": 15,
+          "revenue": 909.91,
+          "lates": 0
+        },
+        "London": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 73.3,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 25,
+          "lates": 4
+        },
+        "Tue": {
+          "cons": 22,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 12,
+          "lates": 2
+        },
+        "Thu": {
+          "cons": 14,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 23,
+          "lates": 4
+        }
+      },
+      "destData": [
+        {
+          "name": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "pc": "LE67 1TA",
+          "cons": 10,
+          "pallets": 181,
+          "revenue": 2250,
+          "lates": 0
+        },
+        {
+          "name": "Get The Drinks In- Updated",
+          "city": "Get The Drinks In- Updated",
+          "pc": "HR1 4FT",
+          "cons": 10,
+          "pallets": 154,
+          "revenue": 5366.599999999999,
+          "lates": 0
+        },
+        {
+          "name": "Expect Distribution/Northern Monk",
+          "city": "Expect Distribution/Northern Monk",
+          "pc": "BD4 6SE",
+          "cons": 7,
+          "pallets": 140,
+          "revenue": 3079.49,
+          "lates": 0
+        },
+        {
+          "name": "CAMERONS BREWERY LIMITED",
+          "city": "CAMERONS BREWERY LIMITED",
+          "pc": "TS24 7QS",
+          "cons": 7,
+          "pallets": 81,
+          "revenue": 3211.8,
+          "lates": 1
+        },
+        {
+          "name": "Refresco Bondgate Booking/Huel",
+          "city": "Refresco Bondgate Booking/Huel",
+          "pc": "WF8 2LH",
+          "cons": 5,
+          "pallets": 100,
+          "revenue": 1830.3999999999999,
+          "lates": 0
+        },
+        {
+          "name": "Stewart Brewing",
+          "city": "Stewart Brewing",
+          "pc": "EH20 9LZ",
+          "cons": 3,
+          "pallets": 41,
+          "revenue": 2074.35,
+          "lates": 0
+        },
+        {
+          "name": "BUXTON BREWERY",
+          "city": "BUXTON BREWERY",
+          "pc": "SK17 9RZ",
+          "cons": 3,
+          "pallets": 17,
+          "revenue": 652.03,
+          "lates": 0
+        },
+        {
+          "name": "EQUINOX KOMBUCHA",
+          "city": "EQUINOX KOMBUCHA",
+          "pc": "HX6 3AE",
+          "cons": 3,
+          "pallets": 26,
+          "revenue": 906.9200000000001,
+          "lates": 0
+        },
+        {
+          "name": "TOSCA",
+          "city": "TOSCA",
+          "pc": "DE11 9DL",
+          "cons": 3,
+          "pallets": 50,
+          "revenue": 813,
+          "lates": 0
+        },
+        {
+          "name": "EDWIN HOLDEN'S BOTTLING",
+          "city": "EDWIN HOLDEN'S BOTTLING",
+          "pc": "DY1 4LW",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 651,
+          "lates": 0
+        },
+        {
+          "name": "Skinners Brewery",
+          "city": "Skinners Brewery",
+          "pc": "TR9 6GX",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 253.8,
+          "lates": 1
+        },
+        {
+          "name": "Luscombe Drinks",
+          "city": "Luscombe Drinks",
+          "pc": "TQ11 0LT",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 1625.08,
+          "lates": 0
+        },
+        {
+          "name": "Track Brewing",
+          "city": "Track Brewing",
+          "pc": "M1 2NP",
+          "cons": 2,
+          "pallets": 10,
+          "revenue": 473.89,
+          "lates": 0
+        },
+        {
+          "name": "DUNKERTONS CIDER COMPANY",
+          "city": "DUNKERTONS CIDER COMPANY",
+          "pc": "GL52 6UT",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 207.79999999999998,
+          "lates": 1
+        },
+        {
+          "name": "Siren Craft Brew",
+          "city": "Siren Craft Brew",
+          "pc": "RG40 4QZ",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 133.7,
+          "lates": 1
+        },
+        {
+          "name": "VERTICAL DRINKS",
+          "city": "VERTICAL DRINKS",
+          "pc": "LS7 2DF",
+          "cons": 2,
+          "pallets": 21,
+          "revenue": 468.67999999999995,
+          "lates": 0
+        },
+        {
+          "name": "71 Brewing",
+          "city": "71 Brewing",
+          "pc": "DD1 5HZ",
+          "cons": 2,
+          "pallets": 8,
+          "revenue": 932.1700000000001,
+          "lates": 1
+        },
+        {
+          "name": "Red Willow Brewery",
+          "city": "Red Willow Brewery",
+          "pc": "SK11 7JW",
+          "cons": 2,
+          "pallets": 5,
+          "revenue": 245.5,
+          "lates": 2
+        },
+        {
+          "name": "Verdant Brewing Co",
+          "city": "Verdant Brewing Co",
+          "pc": "TR10 9EP",
+          "cons": 2,
+          "pallets": 21,
+          "revenue": 1179.9,
+          "lates": 0
+        },
+        {
+          "name": "FLOC BREWING",
+          "city": "FLOC BREWING",
+          "pc": "CT1 3RB",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 190.75,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-04": {
+      "cons": 116,
+      "pallets": 1379,
+      "revenue": 41647.83,
+      "lates": 8,
+      "latePallets": 45,
+      "timeliness": 0.967368,
+      "avgRC": 359.03,
+      "avgRP": 30.2,
+      "avgPC": 11.89,
+      "palletSizes": {
+        "Full": 87,
+        "Half": 1
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 97,
+          "lates": 6
+        },
+        "Economy Booked": {
+          "cons": 19,
+          "lates": 2
+        }
+      },
+      "regionData": {
+        "South": {
+          "cons": 6,
+          "pallets": 30,
+          "revenue": 1047.65,
+          "lates": 1
+        },
+        "East Midlands": {
+          "cons": 20,
+          "pallets": 348,
+          "revenue": 5094.2,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 18,
+          "pallets": 140,
+          "revenue": 5008.32,
+          "lates": 1
+        },
+        "Yorkshire": {
+          "cons": 18,
+          "pallets": 256,
+          "revenue": 6231.709999999999,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 12,
+          "pallets": 104,
+          "revenue": 4583.49,
+          "lates": 2
+        },
+        "North East": {
+          "cons": 5,
+          "pallets": 81,
+          "revenue": 2938.51,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 11,
+          "pallets": 139,
+          "revenue": 5208.8099999999995,
+          "lates": 2
+        },
+        "South East": {
+          "cons": 11,
+          "pallets": 88,
+          "revenue": 3401.0899999999992,
+          "lates": 1
+        },
+        "Wales": {
+          "cons": 2,
+          "pallets": 14,
+          "revenue": 962.75,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 2,
+          "pallets": 16,
+          "revenue": 669.38,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 6,
+          "pallets": 81,
+          "revenue": 4724.83,
+          "lates": 1
+        },
+        "London": {
+          "cons": 2,
+          "pallets": 22,
+          "revenue": 753.3399999999999,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 3,
+          "pallets": 60,
+          "revenue": 1023.75,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 22,
+          "lates": 1
+        },
+        "Tue": {
+          "cons": 31,
+          "lates": 2
+        },
+        "Wed": {
+          "cons": 22,
+          "lates": 2
+        },
+        "Thu": {
+          "cons": 20,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 19,
+          "lates": 2
+        }
+      },
+      "destData": [
+        {
+          "name": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "pc": "LE67 1TA",
+          "cons": 14,
+          "pallets": 271,
+          "revenue": 3500,
+          "lates": 0
+        },
+        {
+          "name": "Get The Drinks In- Updated",
+          "city": "Get The Drinks In- Updated",
+          "pc": "HR1 4FT",
+          "cons": 7,
+          "pallets": 94,
+          "revenue": 3156.5899999999997,
+          "lates": 0
+        },
+        {
+          "name": "TOSCA",
+          "city": "TOSCA",
+          "pc": "DE11 9DL",
+          "cons": 6,
+          "pallets": 77,
+          "revenue": 1594.1999999999998,
+          "lates": 0
+        },
+        {
+          "name": "Refresco Bondgate Booking/Huel",
+          "city": "Refresco Bondgate Booking/Huel",
+          "pc": "WF8 2LH",
+          "cons": 6,
+          "pallets": 107,
+          "revenue": 2196.48,
+          "lates": 0
+        },
+        {
+          "name": "Expect Distribution/Northern Monk",
+          "city": "Expect Distribution/Northern Monk",
+          "pc": "BD4 6SE",
+          "cons": 5,
+          "pallets": 100,
+          "revenue": 2231.25,
+          "lates": 0
+        },
+        {
+          "name": "Storefast Solutions",
+          "city": "Storefast Solutions",
+          "pc": "DA11 8HN",
+          "cons": 5,
+          "pallets": 69,
+          "revenue": 2370.05,
+          "lates": 0
+        },
+        {
+          "name": "BUXTON BREWERY",
+          "city": "BUXTON BREWERY",
+          "pc": "SK17 9RZ",
+          "cons": 5,
+          "pallets": 22,
+          "revenue": 1036.63,
+          "lates": 1
+        },
+        {
+          "name": "CAMERONS BREWERY LIMITED",
+          "city": "CAMERONS BREWERY LIMITED",
+          "pc": "TS24 7QS",
+          "cons": 4,
+          "pallets": 61,
+          "revenue": 2319.4300000000003,
+          "lates": 0
+        },
+        {
+          "name": "Thomas Hardy Bottling/Fentiman's, Bold Lane",
+          "city": "Thomas Hardy Bottling/Fentiman's, Bold Lane",
+          "pc": "WA5 4PH",
+          "cons": 4,
+          "pallets": 65,
+          "revenue": 1785,
+          "lates": 0
+        },
+        {
+          "name": "Siren Craft Brew",
+          "city": "Siren Craft Brew",
+          "pc": "RG40 4QZ",
+          "cons": 3,
+          "pallets": 8,
+          "revenue": 439,
+          "lates": 1
+        },
+        {
+          "name": "EQUINOX KOMBUCHA",
+          "city": "EQUINOX KOMBUCHA",
+          "pc": "HX6 3AE",
+          "cons": 3,
+          "pallets": 36,
+          "revenue": 1191.48,
+          "lates": 0
+        },
+        {
+          "name": "71 Brewing",
+          "city": "71 Brewing",
+          "pc": "DD1 5HZ",
+          "cons": 3,
+          "pallets": 31,
+          "revenue": 2163,
+          "lates": 0
+        },
+        {
+          "name": "EDWIN HOLDEN'S BOTTLING",
+          "city": "EDWIN HOLDEN'S BOTTLING",
+          "pc": "DY1 4LW",
+          "cons": 3,
+          "pallets": 60,
+          "revenue": 1023.75,
+          "lates": 0
+        },
+        {
+          "name": "Red Willow Brewery",
+          "city": "Red Willow Brewery",
+          "pc": "SK11 7JW",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 210.2,
+          "lates": 0
+        },
+        {
+          "name": "Stroud Brewery",
+          "city": "Stroud Brewery",
+          "pc": "GL5 2BY",
+          "cons": 2,
+          "pallets": 11,
+          "revenue": 588.0500000000001,
+          "lates": 1
+        },
+        {
+          "name": "Drop Bear Beer Co.",
+          "city": "Drop Bear Beer Co.",
+          "pc": "SA6 8RP",
+          "cons": 2,
+          "pallets": 14,
+          "revenue": 962.75,
+          "lates": 0
+        },
+        {
+          "name": "Hera Beauty",
+          "city": "Hera Beauty",
+          "pc": "PE3 8SB",
+          "cons": 2,
+          "pallets": 16,
+          "revenue": 669.38,
+          "lates": 0
+        },
+        {
+          "name": "Track Brewing",
+          "city": "Track Brewing",
+          "pc": "M1 2NP",
+          "cons": 2,
+          "pallets": 6,
+          "revenue": 289.8,
+          "lates": 0
+        },
+        {
+          "name": "Attic Brew Co.",
+          "city": "Attic Brew Co.",
+          "pc": "B30 2DA",
+          "cons": 2,
+          "pallets": 8,
+          "revenue": 373.4,
+          "lates": 0
+        },
+        {
+          "name": "Luscombe Drinks",
+          "city": "Luscombe Drinks",
+          "pc": "TQ11 0LT",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 1625.08,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-02": {
+      "cons": 106,
+      "pallets": 1190,
+      "revenue": 36010.63,
+      "lates": 6,
+      "latePallets": 49,
+      "timeliness": 0.958824,
+      "avgRC": 339.72,
+      "avgRP": 30.26,
+      "avgPC": 11.23,
+      "palletSizes": {
+        "Full": 100,
+        "Quarter": 1,
+        "Half": 1
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 89,
+          "lates": 4
+        },
+        "Economy Booked": {
+          "cons": 17,
+          "lates": 2
+        }
+      },
+      "regionData": {
+        "Yorkshire": {
+          "cons": 16,
+          "pallets": 257,
+          "revenue": 5750.179999999999,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 15,
+          "pallets": 120,
+          "revenue": 4140.929999999999,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 7,
+          "pallets": 74,
+          "revenue": 2701.75,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 3,
+          "pallets": 23,
+          "revenue": 1590.9,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 8,
+          "pallets": 76,
+          "revenue": 3140.3199999999997,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 21,
+          "pallets": 378,
+          "revenue": 5336.17,
+          "lates": 2
+        },
+        "South East": {
+          "cons": 7,
+          "pallets": 24,
+          "revenue": 1310.54,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 666.75,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 14,
+          "pallets": 131,
+          "revenue": 6980.26,
+          "lates": 1
+        },
+        "Scotland": {
+          "cons": 6,
+          "pallets": 30,
+          "revenue": 2804.53,
+          "lates": 0
+        },
+        "London": {
+          "cons": 2,
+          "pallets": 9,
+          "revenue": 608.55,
+          "lates": 1
+        },
+        "South": {
+          "cons": 4,
+          "pallets": 23,
+          "revenue": 726.25,
+          "lates": 1
+        },
+        "East of England": {
+          "cons": 1,
+          "pallets": 5,
+          "revenue": 253.5,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 23,
+          "lates": 1
+        },
+        "Tue": {
+          "cons": 26,
+          "lates": 2
+        },
+        "Wed": {
+          "cons": 24,
+          "lates": 2
+        },
+        "Thu": {
+          "cons": 20,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 13,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "pc": "LE67 1TA",
+          "cons": 16,
+          "pallets": 303,
+          "revenue": 3894.9,
+          "lates": 2
+        },
+        {
+          "name": "Refresco Bondgate Booking/Huel",
+          "city": "Refresco Bondgate Booking/Huel",
+          "pc": "WF8 2LH",
+          "cons": 7,
+          "pallets": 140,
+          "revenue": 2562.56,
+          "lates": 0
+        },
+        {
+          "name": "BUXTON BREWERY",
+          "city": "BUXTON BREWERY",
+          "pc": "SK17 9RZ",
+          "cons": 4,
+          "pallets": 19,
+          "revenue": 896.4799999999999,
+          "lates": 0
+        },
+        {
+          "name": "TOSCA",
+          "city": "TOSCA",
+          "pc": "DE11 9DL",
+          "cons": 4,
+          "pallets": 69,
+          "revenue": 1230.5,
+          "lates": 0
+        },
+        {
+          "name": "Encirc Beverages (The Park)",
+          "city": "Encirc Beverages (The Park)",
+          "pc": "BS11 9FG",
+          "cons": 4,
+          "pallets": 31,
+          "revenue": 1515.37,
+          "lates": 0
+        },
+        {
+          "name": "CAMERONS BREWERY LIMITED",
+          "city": "CAMERONS BREWERY LIMITED",
+          "pc": "TS24 7QS",
+          "cons": 4,
+          "pallets": 51,
+          "revenue": 1935.3500000000001,
+          "lates": 0
+        },
+        {
+          "name": "Expect Distribution/Northern Monk",
+          "city": "Expect Distribution/Northern Monk",
+          "pc": "BD4 6SE",
+          "cons": 4,
+          "pallets": 80,
+          "revenue": 1785,
+          "lates": 0
+        },
+        {
+          "name": "Thomas Hardy Bottling/Fentiman's, Bold Lane",
+          "city": "Thomas Hardy Bottling/Fentiman's, Bold Lane",
+          "pc": "WA5 4PH",
+          "cons": 4,
+          "pallets": 68,
+          "revenue": 1785,
+          "lates": 0
+        },
+        {
+          "name": "Drop Bear Beer Co.",
+          "city": "Drop Bear Beer Co.",
+          "pc": "SA6 8RP",
+          "cons": 3,
+          "pallets": 23,
+          "revenue": 1590.9,
+          "lates": 0
+        },
+        {
+          "name": "Track Brewing",
+          "city": "Track Brewing",
+          "pc": "M1 2NP",
+          "cons": 3,
+          "pallets": 13,
+          "revenue": 618.79,
+          "lates": 0
+        },
+        {
+          "name": "Healeys Cornish Cyder Farm",
+          "city": "Healeys Cornish Cyder Farm",
+          "pc": "TR4 9LW",
+          "cons": 3,
+          "pallets": 49,
+          "revenue": 3307.5,
+          "lates": 0
+        },
+        {
+          "name": "Get The Drinks In- Updated",
+          "city": "Get The Drinks In- Updated",
+          "pc": "HR1 4FT",
+          "cons": 3,
+          "pallets": 37,
+          "revenue": 1134.9699999999998,
+          "lates": 0
+        },
+        {
+          "name": "WHITE LABEL COCKTAILS",
+          "city": "WHITE LABEL COCKTAILS",
+          "pc": "RH11 0PR",
+          "cons": 3,
+          "pallets": 22,
+          "revenue": 659.4000000000001,
+          "lates": 0
+        },
+        {
+          "name": "EQUINOX KOMBUCHA",
+          "city": "EQUINOX KOMBUCHA",
+          "pc": "HX6 3AE",
+          "cons": 2,
+          "pallets": 24,
+          "revenue": 794.32,
+          "lates": 0
+        },
+        {
+          "name": "Nightingale Cider Co/ West Hythe Canning",
+          "city": "Nightingale Cider Co/ West Hythe Canning",
+          "pc": "TN30 7DH",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 190.75,
+          "lates": 0
+        },
+        {
+          "name": "EDWIN HOLDEN'S BOTTLING",
+          "city": "EDWIN HOLDEN'S BOTTLING",
+          "pc": "DY1 4LW",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 666.75,
+          "lates": 0
+        },
+        {
+          "name": "Attic Brew Co.",
+          "city": "Attic Brew Co.",
+          "pc": "B30 2DA",
+          "cons": 2,
+          "pallets": 9,
+          "revenue": 412.45,
+          "lates": 0
+        },
+        {
+          "name": "Rapscallion Soda",
+          "city": "Rapscallion Soda",
+          "pc": "G5 9QJ",
+          "cons": 2,
+          "pallets": 13,
+          "revenue": 830.92,
+          "lates": 0
+        },
+        {
+          "name": "71 Brewing",
+          "city": "71 Brewing",
+          "pc": "DD1 5HZ",
+          "cons": 2,
+          "pallets": 15,
+          "revenue": 1874.26,
+          "lates": 0
+        },
+        {
+          "name": "Hammerton Brewery",
+          "city": "Hammerton Brewery",
+          "pc": "N7 8XH",
+          "cons": 2,
+          "pallets": 9,
+          "revenue": 608.55,
+          "lates": 1
+        }
+      ]
+    },
+    "2026-06": {
+      "cons": 103,
+      "pallets": 1118,
+      "revenue": 34896.24,
+      "lates": 4,
+      "latePallets": 25,
+      "timeliness": 0.977639,
+      "avgRC": 338.8,
+      "avgRP": 31.21,
+      "avgPC": 10.85,
+      "palletSizes": {
+        "Full": 1046,
+        "Quarter": 1
+      },
+      "typeBreakdown": {
+        "Economy Booked": {
+          "cons": 26,
+          "lates": 2
+        },
+        "Next Day": {
+          "cons": 77,
+          "lates": 2
+        }
+      },
+      "regionData": {
+        "London": {
+          "cons": 2,
+          "pallets": 16,
+          "revenue": 680.98,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 17,
+          "pallets": 184,
+          "revenue": 8047.739999999999,
+          "lates": 1
+        },
+        "East Midlands": {
+          "cons": 19,
+          "pallets": 273,
+          "revenue": 4633.68,
+          "lates": 2
+        },
+        "North West": {
+          "cons": 9,
+          "pallets": 37,
+          "revenue": 1743.5800000000002,
+          "lates": 0
+        },
+        "South": {
+          "cons": 3,
+          "pallets": 20,
+          "revenue": 660.11,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 21,
+          "pallets": 293,
+          "revenue": 7466.8899999999985,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 5,
+          "pallets": 44,
+          "revenue": 2635.6400000000003,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 3,
+          "pallets": 60,
+          "revenue": 992.25,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 11,
+          "pallets": 78,
+          "revenue": 3558.4400000000005,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 5,
+          "pallets": 17,
+          "revenue": 852.91,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 5,
+          "pallets": 78,
+          "revenue": 2867.98,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 3,
+          "pallets": 18,
+          "revenue": 756.04,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 34,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 11,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 16,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 21,
+          "lates": 3
+        },
+        "Fri": {
+          "cons": 18,
+          "lates": 1
+        }
+      },
+      "destData": [
+        {
+          "name": "Get The Drinks In- Updated",
+          "city": "Get The Drinks In- Updated",
+          "pc": "HR1 4FT",
+          "cons": 13,
+          "pallets": 159,
+          "revenue": 6631.509999999998,
+          "lates": 0
+        },
+        {
+          "name": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "pc": "LE67 1TA",
+          "cons": 11,
+          "pallets": 204,
+          "revenue": 2811.61,
+          "lates": 1
+        },
+        {
+          "name": "Expect Distribution/Northern Monk",
+          "city": "Expect Distribution/Northern Monk",
+          "pc": "BD4 6SE",
+          "cons": 7,
+          "pallets": 125,
+          "revenue": 3123.75,
+          "lates": 0
+        },
+        {
+          "name": "VERTICAL DRINKS",
+          "city": "VERTICAL DRINKS",
+          "pc": "LS7 2DF",
+          "cons": 6,
+          "pallets": 67,
+          "revenue": 1620.21,
+          "lates": 0
+        },
+        {
+          "name": "TOSCA",
+          "city": "TOSCA",
+          "pc": "DE11 9DL",
+          "cons": 5,
+          "pallets": 46,
+          "revenue": 1420.52,
+          "lates": 0
+        },
+        {
+          "name": "EDWIN HOLDEN'S BOTTLING",
+          "city": "EDWIN HOLDEN'S BOTTLING",
+          "pc": "DY1 4LW",
+          "cons": 3,
+          "pallets": 60,
+          "revenue": 992.25,
+          "lates": 0
+        },
+        {
+          "name": "Wiper & True",
+          "city": "Wiper & True",
+          "pc": "BS5 0SP",
+          "cons": 3,
+          "pallets": 22,
+          "revenue": 1155.25,
+          "lates": 0
+        },
+        {
+          "name": "BUXTON BREWERY",
+          "city": "BUXTON BREWERY",
+          "pc": "SK17 9RZ",
+          "cons": 3,
+          "pallets": 16,
+          "revenue": 693.8299999999999,
+          "lates": 0
+        },
+        {
+          "name": "ICB International Distillers",
+          "city": "ICB International Distillers",
+          "pc": "TS3 8TB",
+          "cons": 3,
+          "pallets": 49,
+          "revenue": 1716.98,
+          "lates": 0
+        },
+        {
+          "name": "Quantock Ales Ltd",
+          "city": "Quantock Ales Ltd",
+          "pc": "TA4 3RU",
+          "cons": 3,
+          "pallets": 5,
+          "revenue": 277.25,
+          "lates": 1
+        },
+        {
+          "name": "Refresco Bondgate Booking/Huel",
+          "city": "Refresco Bondgate Booking/Huel",
+          "pc": "WF8 2LH",
+          "cons": 3,
+          "pallets": 51,
+          "revenue": 1204.6599999999999,
+          "lates": 0
+        },
+        {
+          "name": "EQUINOX KOMBUCHA",
+          "city": "EQUINOX KOMBUCHA",
+          "pc": "HX6 3AE",
+          "cons": 3,
+          "pallets": 41,
+          "revenue": 1093.8200000000002,
+          "lates": 0
+        },
+        {
+          "name": "Track Brewing",
+          "city": "Track Brewing",
+          "pc": "M1 2NP",
+          "cons": 2,
+          "pallets": 9,
+          "revenue": 420.9,
+          "lates": 0
+        },
+        {
+          "name": "Attic Brew Co.",
+          "city": "Attic Brew Co.",
+          "pc": "B30 2DA",
+          "cons": 2,
+          "pallets": 9,
+          "revenue": 424.45,
+          "lates": 0
+        },
+        {
+          "name": "Luscombe Drinks",
+          "city": "Luscombe Drinks",
+          "pc": "TQ11 0LT",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 1706.34,
+          "lates": 0
+        },
+        {
+          "name": "WHITE LABEL COCKTAILS",
+          "city": "WHITE LABEL COCKTAILS",
+          "pc": "RH11 0PR",
+          "cons": 2,
+          "pallets": 19,
+          "revenue": 596.51,
+          "lates": 0
+        },
+        {
+          "name": "Drinks Chef Ltd.",
+          "city": "Drinks Chef Ltd.",
+          "pc": "LE18 2FL",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 151.55,
+          "lates": 1
+        },
+        {
+          "name": "Red Willow Brewery",
+          "city": "Red Willow Brewery",
+          "pc": "SK11 7JW",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 201.2,
+          "lates": 0
+        },
+        {
+          "name": "Time and Tide Brewing",
+          "city": "Time and Tide Brewing",
+          "pc": "CT14 0BX",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 187.14999999999998,
+          "lates": 0
+        },
+        {
+          "name": "BRADLEYS JUICE LIMITED",
+          "city": "BRADLEYS JUICE LIMITED",
+          "pc": "BS24 6UA",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 114.15,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-01": {
+      "cons": 90,
+      "pallets": 971,
+      "revenue": 30681.31,
+      "lates": 4,
+      "latePallets": 12,
+      "timeliness": 0.987642,
+      "avgRC": 340.9,
+      "avgRP": 31.6,
+      "avgPC": 10.79,
+      "palletSizes": {
+        "Half": 1,
+        "Full": 66,
+        "Full Oversize": 3
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 69,
+          "lates": 3
+        },
+        "Economy Booked": {
+          "cons": 21,
+          "lates": 1
+        }
+      },
+      "regionData": {
+        "West Midlands": {
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 666.75,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 22,
+          "pallets": 283,
+          "revenue": 5407.999999999999,
+          "lates": 1
+        },
+        "Other": {
+          "cons": 12,
+          "pallets": 179,
+          "revenue": 5937.67,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 13,
+          "pallets": 168,
+          "revenue": 3671.3299999999995,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 6,
+          "pallets": 87,
+          "revenue": 2838.21,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 7,
+          "pallets": 63,
+          "revenue": 4829.02,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 3,
+          "pallets": 29,
+          "revenue": 1475.15,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 1,
+          "pallets": 11,
+          "revenue": 795.14,
+          "lates": 0
+        },
+        "South": {
+          "cons": 6,
+          "pallets": 33,
+          "revenue": 1671.92,
+          "lates": 2
+        },
+        "South East": {
+          "cons": 5,
+          "pallets": 11,
+          "revenue": 684.15,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 11,
+          "pallets": 56,
+          "revenue": 2295.98,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 1,
+          "pallets": 10,
+          "revenue": 334.69,
+          "lates": 0
+        },
+        "London": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 73.3,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 26,
+          "lates": 2
+        },
+        "Tue": {
+          "cons": 10,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 19,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 20,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 14,
+          "lates": 1
+        }
+      },
+      "destData": [
+        {
+          "name": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+          "pc": "LE67 1TA",
+          "cons": 15,
+          "pallets": 229,
+          "revenue": 3653.6,
+          "lates": 0
+        },
+        {
+          "name": "Absolute Warehouse- Norther Monk",
+          "city": "Absolute Warehouse- Norther Monk",
+          "pc": "WF2 9LP",
+          "cons": 7,
+          "pallets": 132,
+          "revenue": 2507.6499999999996,
+          "lates": 0
+        },
+        {
+          "name": "Get The Drinks In- Updated",
+          "city": "Get The Drinks In- Updated",
+          "pc": "HR1 4FT",
+          "cons": 5,
+          "pallets": 100,
+          "revenue": 2683.2999999999997,
+          "lates": 0
+        },
+        {
+          "name": "Drinks Chef Ltd.",
+          "city": "Drinks Chef Ltd.",
+          "pc": "LE18 2FL",
+          "cons": 4,
+          "pallets": 32,
+          "revenue": 761.4000000000001,
+          "lates": 1
+        },
+        {
+          "name": "BUXTON BREWERY",
+          "city": "BUXTON BREWERY",
+          "pc": "SK17 9RZ",
+          "cons": 4,
+          "pallets": 26,
+          "revenue": 789.91,
+          "lates": 0
+        },
+        {
+          "name": "71 Brewing",
+          "city": "71 Brewing",
+          "pc": "DD1 5HZ",
+          "cons": 4,
+          "pallets": 30,
+          "revenue": 2997.4,
+          "lates": 1
+        },
+        {
+          "name": "CAMERONS BREWERY LIMITED",
+          "city": "CAMERONS BREWERY LIMITED",
+          "pc": "TS24 7QS",
+          "cons": 3,
+          "pallets": 29,
+          "revenue": 1475.15,
+          "lates": 0
+        },
+        {
+          "name": "VERTICAL DRINKS",
+          "city": "VERTICAL DRINKS",
+          "pc": "LS7 2DF",
+          "cons": 3,
+          "pallets": 27,
+          "revenue": 727.3299999999999,
+          "lates": 0
+        },
+        {
+          "name": "EDWIN HOLDEN'S BOTTLING",
+          "city": "EDWIN HOLDEN'S BOTTLING",
+          "pc": "DY1 4LW",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 666.75,
+          "lates": 0
+        },
+        {
+          "name": "Stewart Brewing",
+          "city": "Stewart Brewing",
+          "pc": "EH20 9LZ",
+          "cons": 2,
+          "pallets": 21,
+          "revenue": 1076.85,
+          "lates": 0
+        },
+        {
+          "name": "Left Handed Giant",
+          "city": "Left Handed Giant",
+          "pc": "BS2 0JE",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 985.9100000000001,
+          "lates": 0
+        },
+        {
+          "name": "FLOC BREWING",
+          "city": "FLOC BREWING",
+          "pc": "CT1 3RB",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 128.3,
+          "lates": 0
+        },
+        {
+          "name": "TOSCA",
+          "city": "TOSCA",
+          "pc": "DE11 9DL",
+          "cons": 2,
+          "pallets": 21,
+          "revenue": 667,
+          "lates": 0
+        },
+        {
+          "name": "Track Brewing",
+          "city": "Track Brewing",
+          "pc": "M1 2NP",
+          "cons": 2,
+          "pallets": 8,
+          "revenue": 387.78999999999996,
+          "lates": 0
+        },
+        {
+          "name": "Red Willow Brewery",
+          "city": "Red Willow Brewery",
+          "pc": "SK11 7JW",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 201.2,
+          "lates": 0
+        },
+        {
+          "name": "HOLOS Kombucha",
+          "city": "HOLOS Kombucha",
+          "pc": "RH20 4BB",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 155.2,
+          "lates": 2
+        },
+        {
+          "name": "Attic Brew Co.",
+          "city": "Attic Brew Co.",
+          "pc": "B30 2DA",
+          "cons": 2,
+          "pallets": 8,
+          "revenue": 373.4,
+          "lates": 0
+        },
+        {
+          "name": "Get The Drinks In",
+          "city": "Get The Drinks In",
+          "pc": "HR1 4JU",
+          "cons": 2,
+          "pallets": 40,
+          "revenue": 1073.32,
+          "lates": 0
+        },
+        {
+          "name": "PREMIER LOGISTICS",
+          "city": "PREMIER LOGISTICS",
+          "pc": "LE67 1TB",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 326,
+          "lates": 0
+        },
+        {
+          "name": "DUNKERTONS CIDER COMPANY",
+          "city": "DUNKERTONS CIDER COMPANY",
+          "pc": "GL52 6UT",
+          "cons": 1,
+          "pallets": 3,
+          "revenue": 163.35,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [
+    {
+      "id": "4021",
+      "acct": "CASK",
+      "month": "May-26",
+      "dest": "BRADLEYS JUICE LIMITED",
+      "city": "BRADLEYS JUICE LIMITED",
+      "pc": "BS24 6UA",
+      "window": "",
+      "commitDate": "02/06/26",
+      "arrDate": "03/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3992",
+      "acct": "CASK",
+      "month": "May-26",
+      "dest": "Quantock Ales Ltd",
+      "city": "Quantock Ales Ltd",
+      "pc": "TA4 3RU",
+      "window": "",
+      "commitDate": "22/05/26",
+      "arrDate": "29/05/26",
+      "arrival": "01:00",
+      "mins": 10080,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3960",
+      "acct": "CASK",
+      "month": "May-26",
+      "dest": "Fierce Beer",
+      "city": "Fierce Beer",
+      "pc": "AB21 0GR",
+      "window": "",
+      "commitDate": "15/05/26",
+      "arrDate": "18/05/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3971",
+      "acct": "CASK",
+      "month": "May-26",
+      "dest": "FIREBIRD BREWING",
+      "city": "FIREBIRD BREWING",
+      "pc": "RH12 3UW",
+      "window": "",
+      "commitDate": "15/05/26",
+      "arrDate": "19/05/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 8,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3969",
+      "acct": "CASK",
+      "month": "May-26",
+      "dest": "Nightingale Cider Co/ West Hythe Canning",
+      "city": "Nightingale Cider Co/ West Hythe Canning",
+      "pc": "TN30 7DH",
+      "window": "",
+      "commitDate": "15/05/26",
+      "arrDate": "18/05/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3952",
+      "acct": "CASK",
+      "month": "May-26",
+      "dest": "BRADLEYS JUICE LIMITED",
+      "city": "BRADLEYS JUICE LIMITED",
+      "pc": "BS24 6UA",
+      "window": "",
+      "commitDate": "12/05/26",
+      "arrDate": "13/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "4022",
+      "acct": "CASK",
+      "month": "May-26",
+      "dest": "Big Smoke Brew Co",
+      "city": "Big Smoke Brew Co",
+      "pc": "KT10 8BL",
+      "window": "",
+      "commitDate": "02/06/26",
+      "arrDate": "03/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 6,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3767",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "BRADLEYS JUICE LIMITED",
+      "city": "BRADLEYS JUICE LIMITED",
+      "pc": "BS24 6UA",
+      "window": "",
+      "commitDate": "24/03/26",
+      "arrDate": "25/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3743",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Skinners Brewery",
+      "city": "Skinners Brewery",
+      "pc": "TR9 6GX",
+      "window": "",
+      "commitDate": "25/03/26",
+      "arrDate": "26/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3782",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "CAMERONS BREWERY LIMITED",
+      "city": "CAMERONS BREWERY LIMITED",
+      "pc": "TS24 7QS",
+      "window": "",
+      "commitDate": "27/03/26",
+      "arrDate": "30/03/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 6,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3785",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Attic Brew Co.",
+      "city": "Attic Brew Co.",
+      "pc": "B30 2DA",
+      "window": "",
+      "commitDate": "30/03/26",
+      "arrDate": "31/03/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 4,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3764",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Red Willow Brewery",
+      "city": "Red Willow Brewery",
+      "pc": "SK11 7JW",
+      "window": "",
+      "commitDate": "23/03/26",
+      "arrDate": "24/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 3,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3704A",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "71 Brewing",
+      "city": "71 Brewing",
+      "pc": "DD1 5HZ",
+      "window": "",
+      "commitDate": "16/03/26",
+      "arrDate": "17/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3728",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Quantock Ales Ltd",
+      "city": "Quantock Ales Ltd",
+      "pc": "TA4 3RU",
+      "window": "",
+      "commitDate": "12/03/26",
+      "arrDate": "13/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3700",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Siren Craft Brew",
+      "city": "Siren Craft Brew",
+      "pc": "RG40 4QZ",
+      "window": "",
+      "commitDate": "06/03/26",
+      "arrDate": "09/03/26",
+      "arrival": "00:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3710",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Red Willow Brewery",
+      "city": "Red Willow Brewery",
+      "pc": "SK11 7JW",
+      "window": "",
+      "commitDate": "09/03/26",
+      "arrDate": "10/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3758",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Moor Beer Co",
+      "city": "Moor Beer Co",
+      "pc": "BS2 0QS",
+      "window": "",
+      "commitDate": "18/03/26",
+      "arrDate": "19/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3699",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "Langham Brewing Company",
+      "city": "Langham Brewing Company",
+      "pc": "GU28 9BU",
+      "window": "",
+      "commitDate": "06/03/26",
+      "arrDate": "09/03/26",
+      "arrival": "00:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3706",
+      "acct": "CASK",
+      "month": "Mar-26",
+      "dest": "DUNKERTONS CIDER COMPANY",
+      "city": "DUNKERTONS CIDER COMPANY",
+      "pc": "GL52 6UT",
+      "window": "",
+      "commitDate": "06/03/26",
+      "arrDate": "07/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 3,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3863",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "Siren Craft Brew",
+      "city": "Siren Craft Brew",
+      "pc": "RG40 4QZ",
+      "window": "",
+      "commitDate": "17/04/26",
+      "arrDate": "20/04/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3719LIDS",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "Stroud Brewery",
+      "city": "Stroud Brewery",
+      "pc": "GL5 2BY",
+      "window": "",
+      "commitDate": "08/04/26",
+      "arrDate": "09/04/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3913",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "Moor Beer Co",
+      "city": "Moor Beer Co",
+      "pc": "BS2 0QS",
+      "window": "",
+      "commitDate": "05/05/26",
+      "arrDate": "06/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3804 3805",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "Tempest Brewing Co- Updated 2025",
+      "city": "Tempest Brewing Co- Updated 2025",
+      "pc": "TD1 3TE",
+      "window": "",
+      "commitDate": "02/04/26",
+      "arrDate": "07/04/26",
+      "arrival": "01:00",
+      "mins": 7200,
+      "pallets": 13,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3894",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "Nightingale Cider Co/ West Hythe Canning",
+      "city": "Nightingale Cider Co/ West Hythe Canning",
+      "pc": "TN30 7DH",
+      "window": "",
+      "commitDate": "27/04/26",
+      "arrDate": "28/04/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3779",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "Verdant Brewing Co",
+      "city": "Verdant Brewing Co",
+      "pc": "TR10 9EP",
+      "window": "",
+      "commitDate": "14/04/26",
+      "arrDate": "15/04/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 20,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3846",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "Anspach & Hobday",
+      "city": "Anspach & Hobday",
+      "pc": "CR0 4WP",
+      "window": "",
+      "commitDate": "10/04/26",
+      "arrDate": "13/04/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3853",
+      "acct": "CASK",
+      "month": "Apr-26",
+      "dest": "BUXTON BREWERY",
+      "city": "BUXTON BREWERY",
+      "pc": "SK17 9RZ",
+      "window": "",
+      "commitDate": "15/04/26",
+      "arrDate": "16/04/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 4,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3632",
+      "acct": "CASK",
+      "month": "Feb-26",
+      "dest": "Marble Brewery",
+      "city": "Marble Brewery",
+      "pc": "M50 2GN",
+      "window": "",
+      "commitDate": "18/02/26",
+      "arrDate": "19/02/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 4,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "Equinox",
+      "acct": "CASK",
+      "month": "Feb-26",
+      "dest": "IC Filling Systems Srl",
+      "city": "IC Filling Systems Srl",
+      "pc": "30038",
+      "window": "",
+      "commitDate": "05/03/26",
+      "arrDate": "19/03/26",
+      "arrival": "00:00",
+      "mins": 20160,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3658",
+      "acct": "CASK",
+      "month": "Feb-26",
+      "dest": "Hammerton Brewery",
+      "city": "Hammerton Brewery",
+      "pc": "N7 8XH",
+      "window": "",
+      "commitDate": "23/02/26",
+      "arrDate": "25/02/26",
+      "arrival": "00:00",
+      "mins": 2880,
+      "pallets": 3,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3594",
+      "acct": "CASK",
+      "month": "Feb-26",
+      "dest": "Siren Craft Brew",
+      "city": "Siren Craft Brew",
+      "pc": "RG40 4QZ",
+      "window": "",
+      "commitDate": "04/02/26",
+      "arrDate": "05/02/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "88423878",
+      "acct": "CASK",
+      "month": "Feb-26",
+      "dest": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "pc": "LE67 1TA",
+      "window": "",
+      "commitDate": "03/02/26",
+      "arrDate": "04/02/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 20,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "88423879",
+      "acct": "CASK",
+      "month": "Feb-26",
+      "dest": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "pc": "LE67 1TA",
+      "window": "",
+      "commitDate": "03/02/26",
+      "arrDate": "04/02/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 20,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "4135",
+      "acct": "CASK",
+      "month": "Jun-26",
+      "dest": "Quantock Ales Ltd",
+      "city": "Quantock Ales Ltd",
+      "pc": "TA4 3RU",
+      "window": "",
+      "commitDate": "02/07/26",
+      "arrDate": "03/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "4065",
+      "acct": "CASK",
+      "month": "Jun-26",
+      "dest": "Drinks Chef Ltd.",
+      "city": "Drinks Chef Ltd.",
+      "pc": "LE18 2FL",
+      "window": "",
+      "commitDate": "12/06/26",
+      "arrDate": "15/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 2,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "4058",
+      "acct": "CASK",
+      "month": "Jun-26",
+      "dest": "Skinners Brewery",
+      "city": "Skinners Brewery",
+      "pc": "TR9 6GX",
+      "window": "",
+      "commitDate": "11/06/26",
+      "arrDate": "15/06/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 2,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "88631721",
+      "acct": "CASK",
+      "month": "Jun-26",
+      "dest": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "pc": "LE67 1TA",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 20,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3508",
+      "acct": "CASK",
+      "month": "Jan-26",
+      "dest": "Drinks Chef Ltd.",
+      "city": "Drinks Chef Ltd.",
+      "pc": "LE18 2FL",
+      "window": "",
+      "commitDate": "09/01/26",
+      "arrDate": "12/01/26",
+      "arrival": "00:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "88369234",
+      "acct": "CASK",
+      "month": "Jan-26",
+      "dest": "71 Brewing",
+      "city": "71 Brewing",
+      "pc": "DD1 5HZ",
+      "window": "",
+      "commitDate": "05/01/26",
+      "arrDate": "06/01/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 9,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3507",
+      "acct": "CASK",
+      "month": "Jan-26",
+      "dest": "HOLOS Kombucha",
+      "city": "HOLOS Kombucha",
+      "pc": "RH20 4BB",
+      "window": "",
+      "commitDate": "08/01/26",
+      "arrDate": "09/01/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "3547",
+      "acct": "CASK",
+      "month": "Jan-26",
+      "dest": "HOLOS Kombucha",
+      "city": "HOLOS Kombucha",
+      "pc": "RH20 4BB",
+      "window": "",
+      "commitDate": "19/01/26",
+      "arrDate": "20/01/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
+  "regionData": {
+    "Other": {
+      "pallets": 1005,
+      "cons": 86,
+      "lates": 5
+    },
+    "North West": {
+      "pallets": 486,
+      "cons": 77,
+      "lates": 4
+    },
+    "Yorkshire": {
+      "pallets": 1620,
+      "cons": 101,
+      "lates": 1
+    },
+    "East Midlands": {
+      "pallets": 1841,
+      "cons": 115,
+      "lates": 5
+    },
+    "South East": {
+      "pallets": 187,
+      "cons": 40,
+      "lates": 3
+    },
+    "South West": {
+      "pallets": 513,
+      "cons": 58,
+      "lates": 10
+    },
+    "Scotland": {
+      "pallets": 408,
+      "cons": 38,
+      "lates": 4
+    },
+    "West Midlands": {
+      "pallets": 300,
+      "cons": 15,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 232,
+      "cons": 32,
+      "lates": 7
+    },
+    "North East": {
+      "pallets": 475,
+      "cons": 37,
+      "lates": 1
+    },
+    "East of England": {
+      "pallets": 60,
+      "cons": 9,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 49,
+      "cons": 8,
+      "lates": 1
+    },
+    "Wales": {
+      "pallets": 48,
+      "cons": 6,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
+      "pc": "LE67 1TA",
+      "cons": 82,
+      "pallets": 1471,
+      "revenue": 19786.059999999998,
+      "lates": 3
+    },
+    {
+      "name": "Get The Drinks In- Updated",
+      "city": "Get The Drinks In- Updated",
+      "pc": "HR1 4FT",
+      "cons": 46,
+      "pallets": 662,
+      "revenue": 22981.449999999997,
+      "lates": 0
+    },
+    {
+      "name": "Expect Distribution/Northern Monk",
+      "city": "Expect Distribution/Northern Monk",
+      "pc": "BD4 6SE",
+      "cons": 29,
+      "pallets": 715,
+      "revenue": 12963.92,
+      "lates": 0
+    },
+    {
+      "name": "Refresco Bondgate Booking/Huel",
+      "city": "Refresco Bondgate Booking/Huel",
+      "pc": "WF8 2LH",
+      "cons": 24,
+      "pallets": 441,
+      "revenue": 8892.34,
+      "lates": 0
+    },
+    {
+      "name": "CAMERONS BREWERY LIMITED",
+      "city": "CAMERONS BREWERY LIMITED",
+      "pc": "TS24 7QS",
+      "cons": 24,
+      "pallets": 301,
+      "revenue": 12155.190000000004,
+      "lates": 1
+    },
+    {
+      "name": "BUXTON BREWERY",
+      "city": "BUXTON BREWERY",
+      "pc": "SK17 9RZ",
+      "cons": 23,
+      "pallets": 116,
+      "revenue": 4812.929999999999,
+      "lates": 1
+    },
+    {
+      "name": "TOSCA",
+      "city": "TOSCA",
+      "pc": "DE11 9DL",
+      "cons": 23,
+      "pallets": 307,
+      "revenue": 7153.849999999999,
+      "lates": 0
+    },
+    {
+      "name": "71 Brewing",
+      "city": "71 Brewing",
+      "pc": "DD1 5HZ",
+      "cons": 15,
+      "pallets": 145,
+      "revenue": 11419.109999999999,
+      "lates": 2
+    },
+    {
+      "name": "EDWIN HOLDEN'S BOTTLING",
+      "city": "EDWIN HOLDEN'S BOTTLING",
+      "pc": "DY1 4LW",
+      "cons": 15,
+      "pallets": 300,
+      "revenue": 5041.3099999999995,
+      "lates": 0
+    },
+    {
+      "name": "VERTICAL DRINKS",
+      "city": "VERTICAL DRINKS",
+      "pc": "LS7 2DF",
+      "cons": 14,
+      "pallets": 139,
+      "revenue": 3424,
+      "lates": 0
+    },
+    {
+      "name": "EQUINOX KOMBUCHA",
+      "city": "EQUINOX KOMBUCHA",
+      "pc": "HX6 3AE",
+      "cons": 14,
+      "pallets": 143,
+      "revenue": 4591.549999999999,
+      "lates": 0
+    },
+    {
+      "name": "Track Brewing",
+      "city": "Track Brewing",
+      "pc": "M1 2NP",
+      "cons": 13,
+      "pallets": 55,
+      "revenue": 2637.620000000001,
+      "lates": 0
+    },
+    {
+      "name": "Red Willow Brewery",
+      "city": "Red Willow Brewery",
+      "pc": "SK11 7JW",
+      "cons": 12,
+      "pallets": 23,
+      "revenue": 1161.2,
+      "lates": 2
+    },
+    {
+      "name": "Luscombe Drinks",
+      "city": "Luscombe Drinks",
+      "pc": "TQ11 0LT",
+      "cons": 11,
+      "pallets": 220,
+      "revenue": 8672.36,
+      "lates": 0
+    },
+    {
+      "name": "WHITE LABEL COCKTAILS",
+      "city": "WHITE LABEL COCKTAILS",
+      "pc": "RH11 0PR",
+      "cons": 11,
+      "pallets": 140,
+      "revenue": 3792.82,
+      "lates": 0
+    },
+    {
+      "name": "Attic Brew Co.",
+      "city": "Attic Brew Co.",
+      "pc": "B30 2DA",
+      "cons": 10,
+      "pallets": 43,
+      "revenue": 1991.2000000000003,
+      "lates": 1
+    },
+    {
+      "name": "Wiper & True",
+      "city": "Wiper & True",
+      "pc": "BS5 0SP",
+      "cons": 9,
+      "pallets": 62,
+      "revenue": 3246.0299999999997,
+      "lates": 0
+    },
+    {
+      "name": "FLOC BREWING",
+      "city": "FLOC BREWING",
+      "pc": "CT1 3RB",
+      "cons": 9,
+      "pallets": 14,
+      "revenue": 889.6,
+      "lates": 0
+    },
+    {
+      "name": "Nightingale Cider Co/ West Hythe Canning",
+      "city": "Nightingale Cider Co/ West Hythe Canning",
+      "pc": "TN30 7DH",
+      "cons": 8,
+      "pallets": 9,
+      "revenue": 587.65,
+      "lates": 2
+    },
+    {
+      "name": "BRADLEYS JUICE LIMITED",
+      "city": "BRADLEYS JUICE LIMITED",
+      "pc": "BS24 6UA",
+      "cons": 8,
+      "pallets": 8,
+      "revenue": 435.45000000000005,
+      "lates": 3
+    }
+  ]
+}
