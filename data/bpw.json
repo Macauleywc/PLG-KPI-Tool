@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:13:11.460Z",
+  "lastUpdated": "2026-07-15T13:13:36.014Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 17,
-      "latePallets": 22,
-      "timeliness": 0.9569471624266145,
+      "lates": 16,
+      "latePallets": 21,
+      "timeliness": 0.958904109589041,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -1949,24 +1949,6 @@
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C03564",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "LT & T LIMITED",
-      "city": "LT & T LIMITED",
-      "pc": "WA1 4RZ",
-      "window": "",
-      "commitDate": "13/02/26",
-      "arrDate": "17/02/26",
-      "arrival": "00:00",
-      "mins": 5760,
-      "pallets": 1,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -4532,7 +4514,7 @@
     "North West": {
       "pallets": 438,
       "cons": 349,
-      "lates": 12
+      "lates": 11
     },
     "East of England": {
       "pallets": 226,
