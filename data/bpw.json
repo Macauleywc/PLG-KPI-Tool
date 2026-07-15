@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:52:48.829Z",
+  "lastUpdated": "2026-07-15T13:52:51.556Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 48,
-      "latePallets": 66,
-      "timeliness": 0.9050359712230216,
+      "lates": 47,
+      "latePallets": 65,
+      "timeliness": 0.9064748201438849,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2639,24 +2639,6 @@
       "failed": false
     },
     {
-      "id": "C07071",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "NE TRUCK SPARES LTD (CARLISLE)",
-      "city": "NE TRUCK SPARES LTD (CARLISLE)",
-      "pc": "CA6 4SH",
-      "window": "",
-      "commitDate": "01/05/26",
-      "arrDate": "02/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07070",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3885,7 +3867,7 @@
     "North West": {
       "pallets": 438,
       "cons": 349,
-      "lates": 7
+      "lates": 6
     },
     "East of England": {
       "pallets": 226,
