@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:53:59.289Z",
+  "lastUpdated": "2026-07-15T13:54:01.136Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 26,
-      "latePallets": 33,
-      "timeliness": 0.9525179856115108,
+      "lates": 25,
+      "latePallets": 31,
+      "timeliness": 0.9553956834532374,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2153,24 +2153,6 @@
       "failed": false
     },
     {
-      "id": "C05844",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "PARTIC MOTOR SPARES LTD",
-      "city": "PARTIC MOTOR SPARES LTD",
-      "pc": "NG24 2EG",
-      "window": "",
-      "commitDate": "07/04/26",
-      "arrDate": "08/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06576",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3474,7 +3456,7 @@
     "East Midlands": {
       "pallets": 850,
       "cons": 449,
-      "lates": 3
+      "lates": 2
     },
     "Yorkshire": {
       "pallets": 389,
