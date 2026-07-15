@@ -1,21 +1,21 @@
 {
   "customer": "SAM Mouldings",
-  "lastUpdated": "2026-07-15T14:34:12.657Z",
+  "lastUpdated": "2026-07-15T14:34:30.271Z",
   "months": {
     "2026-06": {
       "cons": 104,
       "pallets": 129,
       "revenue": 18591.25,
-      "lates": 54,
-      "latePallets": 54,
-      "timeliness": 0.5813953488372093,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
       "avgRC": 178.76,
       "avgRP": 144.12,
       "avgPC": 1.24,
       "typeBreakdown": {
         "Next Day": {
           "cons": 104,
-          "lates": 54
+          "lates": 0
         }
       },
       "regionData": {
@@ -23,67 +23,67 @@
           "cons": 6,
           "pallets": 6,
           "revenue": 521.25,
-          "lates": 3
+          "lates": 0
         },
         "Yorkshire": {
           "cons": 26,
           "pallets": 26,
           "revenue": 4170,
-          "lates": 20
+          "lates": 0
         },
         "East Midlands": {
           "cons": 19,
           "pallets": 19,
           "revenue": 2780,
-          "lates": 5
+          "lates": 0
         },
         "North East": {
           "cons": 5,
           "pallets": 30,
           "revenue": 695,
-          "lates": 1
+          "lates": 0
         },
         "East of England": {
           "cons": 1,
           "pallets": 1,
           "revenue": 0,
-          "lates": 1
+          "lates": 0
         },
         "South": {
           "cons": 14,
           "pallets": 14,
           "revenue": 3475,
-          "lates": 8
+          "lates": 0
         },
         "Other": {
           "cons": 2,
           "pallets": 2,
           "revenue": 2085,
-          "lates": 1
+          "lates": 0
         },
         "South East": {
           "cons": 17,
           "pallets": 17,
           "revenue": 1390,
-          "lates": 7
+          "lates": 0
         },
         "North West": {
           "cons": 4,
           "pallets": 4,
           "revenue": 0,
-          "lates": 4
+          "lates": 0
         },
         "Wales": {
           "cons": 5,
           "pallets": 5,
           "revenue": 1390,
-          "lates": 1
+          "lates": 0
         },
         "London": {
           "cons": 4,
           "pallets": 4,
           "revenue": 2085,
-          "lates": 3
+          "lates": 0
         },
         "South West": {
           "cons": 1,
@@ -95,23 +95,23 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 26,
-          "lates": 18
+          "lates": 0
         },
         "Tue": {
           "cons": 24,
-          "lates": 15
+          "lates": 0
         },
         "Wed": {
           "cons": 23,
-          "lates": 16
+          "lates": 0
         },
         "Thu": {
           "cons": 14,
-          "lates": 1
+          "lates": 0
         },
         "Fri": {
           "cons": 17,
-          "lates": 4
+          "lates": 0
         }
       },
       "destData": [
@@ -122,7 +122,7 @@
           "cons": 20,
           "pallets": 45,
           "revenue": 4865,
-          "lates": 9
+          "lates": 0
         },
         {
           "name": "MKM",
@@ -131,7 +131,7 @@
           "cons": 18,
           "pallets": 18,
           "revenue": 2780,
-          "lates": 11
+          "lates": 0
         },
         {
           "name": "SELCO",
@@ -140,7 +140,7 @@
           "cons": 11,
           "pallets": 11,
           "revenue": 1390,
-          "lates": 6
+          "lates": 0
         },
         {
           "name": "Selco Builders Warehouse",
@@ -149,7 +149,7 @@
           "cons": 7,
           "pallets": 7,
           "revenue": 2085,
-          "lates": 5
+          "lates": 0
         },
         {
           "name": "Jewsons",
@@ -158,7 +158,7 @@
           "cons": 3,
           "pallets": 3,
           "revenue": 695,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "SAM Mouldings",
@@ -185,7 +185,7 @@
           "cons": 2,
           "pallets": 2,
           "revenue": 0,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "jewson",
@@ -194,7 +194,7 @@
           "cons": 2,
           "pallets": 2,
           "revenue": 0,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "SPECIAL HEANOR",
@@ -221,7 +221,7 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 0,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "LUMB AND CO",
@@ -230,7 +230,7 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 0,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "SAMS",
@@ -239,7 +239,7 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 0,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "advanced",
@@ -275,7 +275,7 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 695,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "WL Timber",
@@ -284,7 +284,7 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 0,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "MKM Building Supplies Wolverhampton",
@@ -293,7 +293,7 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 0,
-          "lates": 1
+          "lates": 0
         }
       ]
     },
@@ -864,1035 +864,62 @@
       ]
     }
   },
-  "lateRows": [
-    {
-      "id": "LN5173-2",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "DH1 2YN",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5173-3",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Jewson Beverley",
-      "city": "Jewson Beverley",
-      "pc": "HU17 0NU",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5173-4",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "H & B",
-      "city": "H & B",
-      "pc": "LS7 2RE",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5173-5",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "LN11 0YZ",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5173-6",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "LUMB AND CO",
-      "city": "LUMB AND CO",
-      "pc": "WF12 9BD",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5173-7",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "SAMS",
-      "city": "SAMS",
-      "pc": "PE11 4TL",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5173-8",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Jewsons",
-      "city": "Jewsons",
-      "pc": "NG19 9BG",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05437-1",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "DT4 9TB",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "30/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05437-2",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "SO23 7SQ",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "30/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05437-4",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "PO6 2PG",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "30/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05437-5",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "BH14 0RA",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "30/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5269-1",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "RAPIDFIT",
-      "city": "RAPIDFIT",
-      "pc": "B70 0DH",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5269-2",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "WL Timber",
-      "city": "WL Timber",
-      "pc": "NG15 7WE",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5269-3",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM Building Supplies Wolverhampton",
-      "city": "MKM Building Supplies Wolverhampton",
-      "pc": "WV11 3QQ",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN5269-4",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "LN6 3QJ",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-1",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Selco Builders Warehouse",
-      "city": "Selco Builders Warehouse",
-      "pc": "L30 6UZ",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-2",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM - BURNLEY",
-      "city": "MKM - BURNLEY",
-      "pc": "BB12 6LT",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-3",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Selco Builders Warehouse",
-      "city": "Selco Builders Warehouse",
-      "pc": "B30 2BT",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-4",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "WS1 4ND",
-      "city": "WS1 4ND",
-      "pc": "WS1 4ND",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-5",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Selco Builders Warehouse",
-      "city": "Selco Builders Warehouse",
-      "pc": "B11 2DT",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-6",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Selco Builders Warehouse",
-      "city": "Selco Builders Warehouse",
-      "pc": "B42 1BT",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-7",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Selco",
-      "city": "Selco",
-      "pc": "WV10 8HH",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-8",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Stairways",
-      "city": "Stairways",
-      "pc": "SY21 8SL",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05377-9",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM BUILDING SUPPLIES",
-      "city": "MKM BUILDING SUPPLIES",
-      "pc": "CH1 4NL",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05358-1",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "SELCO",
-      "city": "SELCO",
-      "pc": "SE1 5JT",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05358-2",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "SELCO",
-      "city": "SELCO",
-      "pc": "SE7 7RU",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05358-3",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "SE9 4EN",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05358-4",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "SELCO",
-      "city": "SELCO",
-      "pc": "DA14 5AH",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05358-5",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "SELCO",
-      "city": "SELCO",
-      "pc": "DA1 4QN",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05358-7",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "SELCO",
-      "city": "SELCO",
-      "pc": "DA14 5AH",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-1",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "S9 3LR",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-2",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "H & B",
-      "city": "H & B",
-      "pc": "LS7 2RE",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-3",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "HU17 0JX",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-4",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "YO8 8LZ",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-5",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM Building Supplies Hull",
-      "city": "MKM Building Supplies Hull",
-      "pc": "HU8 8DE",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-6",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "YO12 4HE",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-7",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "DN22 6EG",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-8",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "HU10 6RJ",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-9",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "OMAR",
-      "city": "OMAR",
-      "pc": "HU9 5PE",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05320-10",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "DN22 7WF",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05455-6",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "DN5 8QE",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05455-7",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "H &B SPINK",
-      "city": "H &B SPINK",
-      "pc": "DN1 3RA",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05455-8",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "YO8 8LZ",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05455-9",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "YO30 4XH",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05455-10",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "JEWSON",
-      "city": "JEWSON",
-      "pc": "YO25 9DJ",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05455-11",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM",
-      "city": "MKM",
-      "pc": "YO16 4SJ",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-1",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Jewson Farnham",
-      "city": "Jewson Farnham",
-      "pc": "GU9 9NS",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-2",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Jewson Horsham",
-      "city": "Jewson Horsham",
-      "pc": "RH12 4DP",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-3",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "MKM Building Supplies Ashford",
-      "city": "MKM Building Supplies Ashford",
-      "pc": "TN23 1EW",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-4",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "jEWSON",
-      "city": "jEWSON",
-      "pc": "ME8 0QQ",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-5",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "jewson",
-      "city": "jewson",
-      "pc": "GU21 4NQ",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-6",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "SELCO",
-      "city": "SELCO",
-      "pc": "ME2 4XP",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-7",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "TIMBERGROUP",
-      "city": "TIMBERGROUP",
-      "pc": "ME14 3HU",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "LN05296-8",
-      "acct": "SAM",
-      "month": "Jun-26",
-      "dest": "Selco Builders Warehouse",
-      "city": "Selco Builders Warehouse",
-      "pc": "GU1 1RU",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    }
-  ],
+  "lateRows": [],
   "regionData": {
     "West Midlands": {
       "pallets": 13,
       "cons": 13,
-      "lates": 3
+      "lates": 0
     },
     "Yorkshire": {
       "pallets": 31,
       "cons": 31,
-      "lates": 20
+      "lates": 0
     },
     "East Midlands": {
       "pallets": 40,
       "cons": 25,
-      "lates": 5
+      "lates": 0
     },
     "North East": {
       "pallets": 49,
       "cons": 24,
-      "lates": 1
+      "lates": 0
     },
     "East of England": {
       "pallets": 32,
       "cons": 17,
-      "lates": 1
+      "lates": 0
     },
     "South": {
       "pallets": 43,
       "cons": 43,
-      "lates": 8
+      "lates": 0
     },
     "Other": {
       "pallets": 5,
       "cons": 5,
-      "lates": 1
+      "lates": 0
     },
     "South East": {
       "pallets": 19,
       "cons": 19,
-      "lates": 7
+      "lates": 0
     },
     "North West": {
       "pallets": 7,
       "cons": 7,
-      "lates": 4
+      "lates": 0
     },
     "Wales": {
       "pallets": 10,
       "cons": 10,
-      "lates": 1
+      "lates": 0
     },
     "London": {
       "pallets": 7,
       "cons": 7,
-      "lates": 3
+      "lates": 0
     },
     "South West": {
       "pallets": 34,
@@ -1908,7 +935,7 @@
       "cons": 36,
       "pallets": 61,
       "revenue": 7645,
-      "lates": 9
+      "lates": 0
     },
     {
       "name": "MKM",
@@ -1917,7 +944,7 @@
       "cons": 19,
       "pallets": 24,
       "revenue": 2780,
-      "lates": 11
+      "lates": 0
     },
     {
       "name": "SELCO",
@@ -1926,7 +953,7 @@
       "cons": 12,
       "pallets": 12,
       "revenue": 1390,
-      "lates": 6
+      "lates": 0
     },
     {
       "name": "Jewsons",
@@ -1935,7 +962,7 @@
       "cons": 11,
       "pallets": 16,
       "revenue": 6046.5,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "jewson",
@@ -1944,7 +971,7 @@
       "cons": 9,
       "pallets": 9,
       "revenue": 1390,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "Selco Builders Warehouse",
@@ -1953,7 +980,7 @@
       "cons": 8,
       "pallets": 8,
       "revenue": 2085,
-      "lates": 5
+      "lates": 0
     },
     {
       "name": "SAM Mouldings Ltd",
@@ -2034,7 +1061,7 @@
       "cons": 2,
       "pallets": 2,
       "revenue": 0,
-      "lates": 2
+      "lates": 0
     },
     {
       "name": "LUMB AND CO",
@@ -2043,7 +1070,7 @@
       "cons": 2,
       "pallets": 2,
       "revenue": 0,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "Selco",
@@ -2052,7 +1079,7 @@
       "cons": 2,
       "pallets": 2,
       "revenue": 0,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "TPKEYLIN - 3368 MERTHYR TYDFIL",
@@ -2079,7 +1106,7 @@
       "cons": 2,
       "pallets": 2,
       "revenue": 695,
-      "lates": 1
+      "lates": 0
     }
   ]
 }
