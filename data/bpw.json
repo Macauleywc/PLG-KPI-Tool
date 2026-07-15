@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:29:08.129Z",
+  "lastUpdated": "2026-07-15T13:29:24.528Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 13,
-      "latePallets": 16,
-      "timeliness": 0.9776536312849162,
+      "lates": 12,
+      "latePallets": 15,
+      "timeliness": 0.979050279329609,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -2855,24 +2855,6 @@
       "failed": false
     },
     {
-      "id": "C05689",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "CUNNINGHAM TRUCK PARTS",
-      "city": "CUNNINGHAM TRUCK PARTS",
-      "pc": "KA3 1LU",
-      "window": "",
-      "commitDate": "01/04/26",
-      "arrDate": "02/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05702",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -3985,7 +3967,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 54
+      "lates": 53
     },
     "South West": {
       "pallets": 128,
