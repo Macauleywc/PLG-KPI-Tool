@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:29:00.000Z",
+  "lastUpdated": "2026-07-15T13:29:03.089Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 17,
-      "latePallets": 22,
-      "timeliness": 0.9692737430167597,
+      "lates": 16,
+      "latePallets": 20,
+      "timeliness": 0.9720670391061452,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -2855,24 +2855,6 @@
       "failed": false
     },
     {
-      "id": "C05658",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "SILT SIDE SERVICE LIMITED",
-      "city": "SILT SIDE SERVICE LIMITED",
-      "pc": "PE21 8TJ",
-      "window": "",
-      "commitDate": "31/03/26",
-      "arrDate": "01/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05689",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -4087,7 +4069,7 @@
     "East of England": {
       "pallets": 226,
       "cons": 193,
-      "lates": 7
+      "lates": 6
     },
     "Northern Ireland": {
       "pallets": 17,
