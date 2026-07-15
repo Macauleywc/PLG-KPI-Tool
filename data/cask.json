@@ -1,6 +1,6 @@
 {
   "customer": "Cask",
-  "lastUpdated": "2026-07-15T13:03:22.492Z",
+  "lastUpdated": "2026-07-15T13:03:37.510Z",
   "months": {
     "2026-05": {
       "cons": 111,
@@ -603,9 +603,9 @@
       "cons": 116,
       "pallets": 1379,
       "revenue": 41647.83,
-      "lates": 8,
-      "latePallets": 45,
-      "timeliness": 0.967368,
+      "lates": 6,
+      "latePallets": 12,
+      "timeliness": 0.991298,
       "avgRC": 359.03,
       "avgRP": 30.2,
       "avgPC": 11.89,
@@ -616,7 +616,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 97,
-          "lates": 6
+          "lates": 4
         },
         "Economy Booked": {
           "cons": 19,
@@ -664,7 +664,7 @@
           "cons": 11,
           "pallets": 139,
           "revenue": 5208.8099999999995,
-          "lates": 2
+          "lates": 1
         },
         "South East": {
           "cons": 11,
@@ -688,7 +688,7 @@
           "cons": 6,
           "pallets": 81,
           "revenue": 4724.83,
-          "lates": 1
+          "lates": 0
         },
         "London": {
           "cons": 2,
@@ -710,7 +710,7 @@
         },
         "Tue": {
           "cons": 31,
-          "lates": 2
+          "lates": 1
         },
         "Wed": {
           "cons": 22,
@@ -718,7 +718,7 @@
         },
         "Thu": {
           "cons": 20,
-          "lates": 1
+          "lates": 0
         },
         "Fri": {
           "cons": 19,
@@ -2176,24 +2176,6 @@
       "failed": false
     },
     {
-      "id": "3804 3805",
-      "acct": "CASK",
-      "month": "Apr-26",
-      "dest": "Tempest Brewing Co- Updated 2025",
-      "city": "Tempest Brewing Co- Updated 2025",
-      "pc": "TD1 3TE",
-      "window": "",
-      "commitDate": "02/04/26",
-      "arrDate": "07/04/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 13,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "3894",
       "acct": "CASK",
       "month": "Apr-26",
@@ -2207,24 +2189,6 @@
       "mins": 1440,
       "pallets": 1,
       "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "3779",
-      "acct": "CASK",
-      "month": "Apr-26",
-      "dest": "Verdant Brewing Co",
-      "city": "Verdant Brewing Co",
-      "pc": "TR10 9EP",
-      "window": "",
-      "commitDate": "14/04/26",
-      "arrDate": "15/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 20,
-      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
@@ -2468,7 +2432,7 @@
     "Other": {
       "pallets": 1005,
       "cons": 86,
-      "lates": 4
+      "lates": 3
     },
     "North West": {
       "pallets": 486,
@@ -2498,7 +2462,7 @@
     "Scotland": {
       "pallets": 408,
       "cons": 38,
-      "lates": 4
+      "lates": 3
     },
     "West Midlands": {
       "pallets": 300,
