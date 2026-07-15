@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:55:01.301Z",
+  "lastUpdated": "2026-07-15T13:55:04.850Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 13,
-      "latePallets": 17,
-      "timeliness": 0.9755395683453237,
+      "lates": 12,
+      "latePallets": 16,
+      "timeliness": 0.9769784172661871,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -1973,24 +1973,6 @@
       "failed": false
     },
     {
-      "id": "C05790",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
-      "city": "ALLIANCE AUTOMOTIVE UK T/A CV COMPONENTS",
-      "pc": "WF6 1TA",
-      "window": "",
-      "commitDate": "02/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 15840,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05793",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3245,7 +3227,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 9
+      "lates": 8
     },
     "Other": {
       "pallets": 192,
