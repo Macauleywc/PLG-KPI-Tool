@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:29:04.815Z",
+  "lastUpdated": "2026-07-15T13:29:06.647Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 15,
-      "latePallets": 19,
-      "timeliness": 0.973463687150838,
+      "lates": 14,
+      "latePallets": 17,
+      "timeliness": 0.9762569832402235,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -2945,24 +2945,6 @@
       "failed": false
     },
     {
-      "id": "C05213",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "SCANIA ABINGDON",
-      "city": "SCANIA ABINGDON",
-      "pc": "OX14 1TR",
-      "window": "",
-      "commitDate": "24/03/26",
-      "arrDate": "25/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C04596",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -4061,7 +4043,7 @@
     "South East": {
       "pallets": 355,
       "cons": 136,
-      "lates": 7
+      "lates": 6
     },
     "North East": {
       "pallets": 251,
