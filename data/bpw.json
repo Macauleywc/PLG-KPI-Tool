@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:54:21.444Z",
+  "lastUpdated": "2026-07-15T13:54:28.408Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 23,
-      "latePallets": 28,
-      "timeliness": 0.9597122302158273,
+      "lates": 22,
+      "latePallets": 27,
+      "timeliness": 0.9611510791366906,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2225,24 +2225,6 @@
       "failed": false
     },
     {
-      "id": "L08508",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "LARRINGTON TRAILERS LTD",
-      "city": "LARRINGTON TRAILERS LTD",
-      "pc": "PE21 7PB",
-      "window": "",
-      "commitDate": "10/04/26",
-      "arrDate": "13/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06084",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3440,7 +3422,7 @@
     "East of England": {
       "pallets": 226,
       "cons": 193,
-      "lates": 5
+      "lates": 4
     },
     "Northern Ireland": {
       "pallets": 17,
