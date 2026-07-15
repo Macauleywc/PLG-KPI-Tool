@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:29:06.647Z",
+  "lastUpdated": "2026-07-15T13:29:08.129Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 14,
-      "latePallets": 17,
-      "timeliness": 0.9762569832402235,
+      "lates": 13,
+      "latePallets": 16,
+      "timeliness": 0.9776536312849162,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -2963,24 +2963,6 @@
       "failed": false
     },
     {
-      "id": "C05111",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "HI-WAY UNITS LTD",
-      "city": "HI-WAY UNITS LTD",
-      "pc": "OL9 9EF",
-      "window": "",
-      "commitDate": "19/03/26",
-      "arrDate": "20/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C04994",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -4028,7 +4010,7 @@
     "North West": {
       "pallets": 438,
       "cons": 349,
-      "lates": 8
+      "lates": 7
     },
     "East of England": {
       "pallets": 226,
