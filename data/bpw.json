@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:54:47.769Z",
+  "lastUpdated": "2026-07-15T13:55:01.301Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 16,
-      "latePallets": 20,
-      "timeliness": 0.9712230215827338,
+      "lates": 13,
+      "latePallets": 17,
+      "timeliness": 0.9755395683453237,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2099,60 +2099,6 @@
       "failed": false
     },
     {
-      "id": "C06394",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "FLEETWHEEL LTD",
-      "city": "FLEETWHEEL LTD",
-      "pc": "SA31 3RB",
-      "window": "",
-      "commitDate": "17/04/26",
-      "arrDate": "20/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C06362",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "PARTIC MOTOR SPARES LTD-KNOTTINGLEY",
-      "city": "PARTIC MOTOR SPARES LTD-KNOTTINGLEY",
-      "pc": "WF11 8DS",
-      "window": "",
-      "commitDate": "16/04/26",
-      "arrDate": "17/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C06165",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "FLEETWHEEL LTD",
-      "city": "FLEETWHEEL LTD",
-      "pc": "SA31 3RB",
-      "window": "",
-      "commitDate": "14/04/26",
-      "arrDate": "17/04/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05354",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3279,7 +3225,7 @@
     "Wales": {
       "pallets": 136,
       "cons": 110,
-      "lates": 4
+      "lates": 2
     },
     "Scotland": {
       "pallets": 488,
@@ -3299,7 +3245,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 10
+      "lates": 9
     },
     "Other": {
       "pallets": 192,
