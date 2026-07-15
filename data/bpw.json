@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:57.017Z",
+  "lastUpdated": "2026-07-15T14:10:58.009Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 12,
-      "latePallets": 15,
-      "timeliness": 0.9767441860465116,
+      "lates": 11,
+      "latePallets": 14,
+      "timeliness": 0.9782945736434109,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2659,24 +2659,6 @@
       "failed": false
     },
     {
-      "id": "C07996",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "MERLIN COMPONENTS LTD (LONDON)",
-      "city": "MERLIN COMPONENTS LTD (LONDON)",
-      "pc": "RM20 3BJ",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "26/05/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07261",
       "acct": "BPW01",
       "month": "May-26",
@@ -2909,7 +2891,7 @@
     "Other": {
       "pallets": 192,
       "cons": 151,
-      "lates": 1
+      "lates": 0
     },
     "North West": {
       "pallets": 438,
