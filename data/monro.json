@@ -1,0 +1,1430 @@
+{
+  "customer": "Monro",
+  "lastUpdated": "2026-07-15T15:36:15.358Z",
+  "months": {
+    "2026-05": {
+      "cons": 52,
+      "pallets": 347,
+      "revenue": 10367.14,
+      "lates": 1,
+      "latePallets": 1,
+      "timeliness": 0.9971181556195965,
+      "avgRC": 199.37,
+      "avgRP": 29.88,
+      "avgPC": 6.67,
+      "palletSizes": {
+        "Full": 57,
+        "Half": 286,
+        "Quarter": 4
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 52,
+          "lates": 1
+        }
+      },
+      "regionData": {
+        "Yorkshire": {
+          "cons": 7,
+          "pallets": 85,
+          "revenue": 1383.2400000000002,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 5,
+          "pallets": 74,
+          "revenue": 1619.17,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 1,
+          "pallets": 26,
+          "revenue": 200,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 5,
+          "pallets": 19,
+          "revenue": 936.88,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 7,
+          "pallets": 58,
+          "revenue": 1245.31,
+          "lates": 0
+        },
+        "London": {
+          "cons": 11,
+          "pallets": 34,
+          "revenue": 2512.87,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 7,
+          "pallets": 33,
+          "revenue": 1278.88,
+          "lates": 1
+        },
+        "South": {
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 391.75,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 3,
+          "pallets": 12,
+          "revenue": 738.3,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 60.74,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 0,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 5,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 40,
+          "lates": 1
+        },
+        "Thu": {
+          "cons": 5,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 2,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Zoom by Ocado - Leyton",
+          "city": "Zoom by Ocado - Leyton",
+          "pc": "E10 7FE",
+          "cons": 5,
+          "pallets": 18,
+          "revenue": 1302.4399999999998,
+          "lates": 0
+        },
+        {
+          "name": "Ocado Bristol CFC",
+          "city": "Ocado Bristol CFC",
+          "pc": "BS11 8HT",
+          "cons": 3,
+          "pallets": 10,
+          "revenue": 528.56,
+          "lates": 0
+        },
+        {
+          "name": "Ocado Andover",
+          "city": "Ocado Andover",
+          "pc": "SP10 5AF",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 224.77,
+          "lates": 0
+        },
+        {
+          "name": "Ocado BICESTER CFC",
+          "city": "Ocado BICESTER CFC",
+          "pc": "OX26 6GF",
+          "cons": 3,
+          "pallets": 11,
+          "revenue": 532.12,
+          "lates": 0
+        },
+        {
+          "name": "BUNZL RETAIL SUPPLIES",
+          "city": "BUNZL RETAIL SUPPLIES",
+          "pc": "M27 8UJ",
+          "cons": 2,
+          "pallets": 22,
+          "revenue": 639.39,
+          "lates": 0
+        },
+        {
+          "name": "Zoom by Ocado - Acton",
+          "city": "Zoom by Ocado - Acton",
+          "pc": "W3 8BG",
+          "cons": 2,
+          "pallets": 12,
+          "revenue": 833.3499999999999,
+          "lates": 0
+        },
+        {
+          "name": "Yusen Logistics (Hotel Choc)",
+          "city": "Yusen Logistics (Hotel Choc)",
+          "pc": "NN7 4DE",
+          "cons": 2,
+          "pallets": 35,
+          "revenue": 538.29,
+          "lates": 0
+        },
+        {
+          "name": "Next Distribution LTD",
+          "city": "Next Distribution LTD",
+          "pc": "DN6 7BF",
+          "cons": 2,
+          "pallets": 53,
+          "revenue": 539.8299999999999,
+          "lates": 0
+        },
+        {
+          "name": "OCADO DORDON CFC",
+          "city": "OCADO DORDON CFC",
+          "pc": "B78 1SE",
+          "cons": 2,
+          "pallets": 9,
+          "revenue": 408.32,
+          "lates": 0
+        },
+        {
+          "name": "OCADO PARK ROYAL",
+          "city": "OCADO PARK ROYAL",
+          "pc": "NW10 7FW",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 175.53,
+          "lates": 0
+        },
+        {
+          "name": "OCADO CRAWLEY",
+          "city": "OCADO CRAWLEY",
+          "pc": "RH11 7SS",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 166.98000000000002,
+          "lates": 0
+        },
+        {
+          "name": "Next Retail Ltd E3",
+          "city": "Next Retail Ltd E3",
+          "pc": "WF9 2RH",
+          "cons": 2,
+          "pallets": 28,
+          "revenue": 608.01,
+          "lates": 0
+        },
+        {
+          "name": "Ocado Knowsley",
+          "city": "Ocado Knowsley",
+          "pc": "L33 7SA",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 60.17,
+          "lates": 0
+        },
+        {
+          "name": "Moonpig",
+          "city": "Moonpig",
+          "pc": "B78 2FG",
+          "cons": 1,
+          "pallets": 26,
+          "revenue": 200,
+          "lates": 0
+        },
+        {
+          "name": "wed2b Milton Keynes",
+          "city": "wed2b Milton Keynes",
+          "pc": "MK13 8PE",
+          "cons": 1,
+          "pallets": 7,
+          "revenue": 262.59,
+          "lates": 0
+        },
+        {
+          "name": "Jubilee Market",
+          "city": "Jubilee Market",
+          "pc": "WC2E 8BD",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 113.51,
+          "lates": 0
+        },
+        {
+          "name": "OCADO ERITH",
+          "city": "OCADO ERITH",
+          "pc": "DA8 1PQ",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 74.05,
+          "lates": 1
+        },
+        {
+          "name": "Ocado Wimbledon",
+          "city": "Ocado Wimbledon",
+          "pc": "SW19 8UG",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 88.04,
+          "lates": 0
+        },
+        {
+          "name": "OCADO BICESTER CFC",
+          "city": "OCADO BICESTER CFC",
+          "pc": "OX26 6GF",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 66.94,
+          "lates": 0
+        },
+        {
+          "name": "OCADO LUTON CFC",
+          "city": "OCADO LUTON CFC",
+          "pc": "LU4 9TT",
+          "cons": 1,
+          "pallets": 2,
+          "revenue": 104.06,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-07": {
+      "cons": 36,
+      "pallets": 166,
+      "revenue": 6603.93,
+      "lates": 2,
+      "latePallets": 5,
+      "timeliness": 0.9698795180722891,
+      "avgRC": 183.44,
+      "avgRP": 39.78,
+      "avgPC": 4.61,
+      "palletSizes": {
+        "Full": 25,
+        "Half": 137,
+        "Quarter": 4
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 36,
+          "lates": 2
+        }
+      },
+      "regionData": {
+        "London": {
+          "cons": 6,
+          "pallets": 28,
+          "revenue": 1404.16,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 8,
+          "pallets": 37,
+          "revenue": 1506.07,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 5,
+          "pallets": 10,
+          "revenue": 428.47,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 4,
+          "pallets": 31,
+          "revenue": 1158.38,
+          "lates": 1
+        },
+        "South": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 117.32000000000001,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 3,
+          "pallets": 33,
+          "revenue": 715.92,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 250.72,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 3,
+          "pallets": 18,
+          "revenue": 814.2299999999999,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 146.16,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 62.5,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 2,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 2,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 22,
+          "lates": 1
+        },
+        "Thu": {
+          "cons": 1,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 9,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "OCADO ERITH",
+          "city": "OCADO ERITH",
+          "pc": "DA8 1PQ",
+          "cons": 3,
+          "pallets": 9,
+          "revenue": 574.47,
+          "lates": 0
+        },
+        {
+          "name": "OCADO LUTON CFC",
+          "city": "OCADO LUTON CFC",
+          "pc": "LU4 9TT",
+          "cons": 2,
+          "pallets": 5,
+          "revenue": 232.48000000000002,
+          "lates": 0
+        },
+        {
+          "name": "THE ORGANIC PHARMACY",
+          "city": "THE ORGANIC PHARMACY",
+          "pc": "W3 0AF",
+          "cons": 2,
+          "pallets": 6,
+          "revenue": 546.73,
+          "lates": 1
+        },
+        {
+          "name": "Ocado Bristol CFC",
+          "city": "Ocado Bristol CFC",
+          "pc": "BS11 8HT",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 208.42,
+          "lates": 0
+        },
+        {
+          "name": "Ocado BICESTER CFC",
+          "city": "Ocado BICESTER CFC",
+          "pc": "OX26 6GF",
+          "cons": 2,
+          "pallets": 5,
+          "revenue": 305.37,
+          "lates": 0
+        },
+        {
+          "name": "OCADO ENFIELD",
+          "city": "OCADO ENFIELD",
+          "pc": "EN3 7XY",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 73.08,
+          "lates": 0
+        },
+        {
+          "name": "URBN UK LTD (ANTHROPOLOGIE",
+          "city": "URBN UK LTD (ANTHROPOLOGIE",
+          "pc": "EC2M 7SH",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 182.21,
+          "lates": 1
+        },
+        {
+          "name": "Data Plastics Ltd",
+          "city": "Data Plastics Ltd",
+          "pc": "OX28 4BP",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.81,
+          "lates": 0
+        },
+        {
+          "name": "LEICESTER CITY FC FANSTORE WAREHOUSE",
+          "city": "LEICESTER CITY FC FANSTORE WAREHOUSE",
+          "pc": "LE2 7NY",
+          "cons": 1,
+          "pallets": 3,
+          "revenue": 104.24,
+          "lates": 0
+        },
+        {
+          "name": "Ocado Andover",
+          "city": "Ocado Andover",
+          "pc": "SP10 5AF",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 72.43,
+          "lates": 0
+        },
+        {
+          "name": "Design Plus Health & Beauty Logistics Centre",
+          "city": "Design Plus Health & Beauty Logistics Centre",
+          "pc": "LA3 3PA",
+          "cons": 1,
+          "pallets": 3,
+          "revenue": 186.65,
+          "lates": 0
+        },
+        {
+          "name": "Next Distribution LTD",
+          "city": "Next Distribution LTD",
+          "pc": "WF9 2RH",
+          "cons": 1,
+          "pallets": 26,
+          "revenue": 442.56,
+          "lates": 0
+        },
+        {
+          "name": "Ocado Peterborough",
+          "city": "Ocado Peterborough",
+          "pc": "PE1 5BF",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 58.62,
+          "lates": 0
+        },
+        {
+          "name": "OCADO NOTTINGHAM SD",
+          "city": "OCADO NOTTINGHAM SD",
+          "pc": "NG11 2AF",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 58.08,
+          "lates": 0
+        },
+        {
+          "name": "OCADO PARK ROYAL",
+          "city": "OCADO PARK ROYAL",
+          "pc": "NW10 7FW",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 84.73,
+          "lates": 0
+        },
+        {
+          "name": "BUNZL RETAIL SUPPLIES",
+          "city": "BUNZL RETAIL SUPPLIES",
+          "pc": "M27 8UJ",
+          "cons": 1,
+          "pallets": 22,
+          "revenue": 425,
+          "lates": 0
+        },
+        {
+          "name": "ACHESON & ACHESON LTD",
+          "city": "ACHESON & ACHESON LTD",
+          "pc": "BA3 4XD",
+          "cons": 1,
+          "pallets": 14,
+          "revenue": 605.81,
+          "lates": 0
+        },
+        {
+          "name": "OCADO PURFLEET",
+          "city": "OCADO PURFLEET",
+          "pc": "RM15 4XS",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 73.08,
+          "lates": 0
+        },
+        {
+          "name": "NEXT RETAIL LTD",
+          "city": "NEXT RETAIL LTD",
+          "pc": "LE19 4AT",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 33.67,
+          "lates": 0
+        },
+        {
+          "name": "Zoom by Ocado - Leyton",
+          "city": "Zoom by Ocado - Leyton",
+          "pc": "E10 7FE",
+          "cons": 1,
+          "pallets": 7,
+          "revenue": 465.22,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-06": {
+      "cons": 86,
+      "pallets": 495,
+      "revenue": 15934.24,
+      "lates": 2,
+      "latePallets": 5,
+      "timeliness": 0.98989898989899,
+      "avgRC": 185.28,
+      "avgRP": 32.19,
+      "avgPC": 5.76,
+      "palletSizes": {
+        "Full": 59,
+        "Half": 420,
+        "Quarter": 16
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 86,
+          "lates": 2
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 13,
+          "pallets": 17,
+          "revenue": 843.09,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 13,
+          "pallets": 147,
+          "revenue": 2671.52,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 14,
+          "pallets": 87,
+          "revenue": 3123.52,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 7,
+          "pallets": 21,
+          "revenue": 1284.51,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 6,
+          "pallets": 21,
+          "revenue": 1084.44,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 2,
+          "pallets": 74,
+          "revenue": 997.69,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 5,
+          "pallets": 10,
+          "revenue": 524.53,
+          "lates": 0
+        },
+        "London": {
+          "cons": 13,
+          "pallets": 64,
+          "revenue": 3340.96,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 2,
+          "pallets": 29,
+          "revenue": 677.29,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 6,
+          "pallets": 17,
+          "revenue": 801.3799999999999,
+          "lates": 0
+        },
+        "South": {
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 292.26,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 1,
+          "pallets": 4,
+          "revenue": 293.05,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 1,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 8,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 52,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 3,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 22,
+          "lates": 2
+        }
+      },
+      "destData": [
+        {
+          "name": "Next Distribution LTD",
+          "city": "Next Distribution LTD",
+          "pc": "WF9 2RH",
+          "cons": 4,
+          "pallets": 57,
+          "revenue": 1357.11,
+          "lates": 1
+        },
+        {
+          "name": "Victoria's Secret",
+          "city": "Victoria's Secret",
+          "pc": "CT1 2TD",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 133.48,
+          "lates": 0
+        },
+        {
+          "name": "OCADO PURFLEET",
+          "city": "OCADO PURFLEET",
+          "pc": "RM15 4XS",
+          "cons": 3,
+          "pallets": 9,
+          "revenue": 596.0799999999999,
+          "lates": 0
+        },
+        {
+          "name": "J&J Global Fulfilment",
+          "city": "J&J Global Fulfilment",
+          "pc": "NN4 7JE",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 111.27,
+          "lates": 0
+        },
+        {
+          "name": "Next Retail Ltd E3",
+          "city": "Next Retail Ltd E3",
+          "pc": "WF9 2RH",
+          "cons": 3,
+          "pallets": 80,
+          "revenue": 871.8299999999999,
+          "lates": 0
+        },
+        {
+          "name": "OCADO LUTON CFC",
+          "city": "OCADO LUTON CFC",
+          "pc": "LU4 9TT",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 268.21,
+          "lates": 0
+        },
+        {
+          "name": "Ocado Bristol CFC",
+          "city": "Ocado Bristol CFC",
+          "pc": "BS11 8HT",
+          "cons": 3,
+          "pallets": 9,
+          "revenue": 430.73,
+          "lates": 0
+        },
+        {
+          "name": "CCS McLays",
+          "city": "CCS McLays",
+          "pc": "NP12 2XH",
+          "cons": 2,
+          "pallets": 74,
+          "revenue": 997.69,
+          "lates": 0
+        },
+        {
+          "name": "Zoom by Ocado - Leyton",
+          "city": "Zoom by Ocado - Leyton",
+          "pc": "E10 7FE",
+          "cons": 2,
+          "pallets": 15,
+          "revenue": 1014.1600000000001,
+          "lates": 0
+        },
+        {
+          "name": "Zoom by Ocado - Acton",
+          "city": "Zoom by Ocado - Acton",
+          "pc": "W3 8BG",
+          "cons": 2,
+          "pallets": 12,
+          "revenue": 816.65,
+          "lates": 0
+        },
+        {
+          "name": "THE BAIRD GROUP",
+          "city": "THE BAIRD GROUP",
+          "pc": "TS24 8LY",
+          "cons": 2,
+          "pallets": 29,
+          "revenue": 677.29,
+          "lates": 0
+        },
+        {
+          "name": "Ocado BICESTER CFC",
+          "city": "Ocado BICESTER CFC",
+          "pc": "OX26 6GF",
+          "cons": 2,
+          "pallets": 8,
+          "revenue": 381.76,
+          "lates": 0
+        },
+        {
+          "name": "FARA ENTERPRISES LTD",
+          "city": "FARA ENTERPRISES LTD",
+          "pc": "TW15 1TQ",
+          "cons": 2,
+          "pallets": 14,
+          "revenue": 757.9000000000001,
+          "lates": 0
+        },
+        {
+          "name": "HAWES & CURTIS",
+          "city": "HAWES & CURTIS",
+          "pc": "EN1 1DX",
+          "cons": 2,
+          "pallets": 25,
+          "revenue": 654.0500000000001,
+          "lates": 1
+        },
+        {
+          "name": "OCADO BICESTER CFC",
+          "city": "OCADO BICESTER CFC",
+          "pc": "OX26 6GF",
+          "cons": 2,
+          "pallets": 6,
+          "revenue": 290.71999999999997,
+          "lates": 0
+        },
+        {
+          "name": "OCADO ERITH",
+          "city": "OCADO ERITH",
+          "pc": "DA8 1PQ",
+          "cons": 2,
+          "pallets": 6,
+          "revenue": 336.67,
+          "lates": 0
+        },
+        {
+          "name": "OCADO NOTTINGHAM SD",
+          "city": "OCADO NOTTINGHAM SD",
+          "pc": "NG11 2AF",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 118.25,
+          "lates": 0
+        },
+        {
+          "name": "Quick Commerce Ltd (trading as Zapp)",
+          "city": "Quick Commerce Ltd (trading as Zapp)",
+          "pc": "DA17 6FQ",
+          "cons": 2,
+          "pallets": 48,
+          "revenue": 1034.11,
+          "lates": 0
+        },
+        {
+          "name": "GXO Harlow",
+          "city": "GXO Harlow",
+          "pc": "CM19 5TX",
+          "cons": 2,
+          "pallets": 6,
+          "revenue": 309.36,
+          "lates": 0
+        },
+        {
+          "name": "Lakeland Lights Company",
+          "city": "Lakeland Lights Company",
+          "pc": "CA25 5PT",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 209.27999999999997,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-04": {
+      "cons": 17,
+      "pallets": 80,
+      "revenue": 4048.39,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 238.14,
+      "avgRP": 50.6,
+      "avgPC": 4.71,
+      "palletSizes": {
+        "Half": 64,
+        "Full": 13,
+        "Quarter": 3
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 17,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "London": {
+          "cons": 4,
+          "pallets": 16,
+          "revenue": 1062.18,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 3,
+          "pallets": 5,
+          "revenue": 277.17999999999995,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 208.20999999999998,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 1,
+          "pallets": 3,
+          "revenue": 306.66,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 3,
+          "pallets": 25,
+          "revenue": 1128.6599999999999,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 3,
+          "pallets": 11,
+          "revenue": 590.5,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 1,
+          "pallets": 17,
+          "revenue": 475,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 0,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 1,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 12,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 0,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 4,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "OCADO ALIOTO HOUSE",
+          "city": "OCADO ALIOTO HOUSE",
+          "pc": "E10 7FD",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 88.22,
+          "lates": 0
+        },
+        {
+          "name": "OCADO PURFLEET",
+          "city": "OCADO PURFLEET",
+          "pc": "RM15 4XS",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 208.20999999999998,
+          "lates": 0
+        },
+        {
+          "name": "Poppypac",
+          "city": "Poppypac",
+          "pc": "TN35 4NN",
+          "cons": 2,
+          "pallets": 20,
+          "revenue": 895,
+          "lates": 0
+        },
+        {
+          "name": "Ocado Bristol CFC",
+          "city": "Ocado Bristol CFC",
+          "pc": "BS11 8HT",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 216.89,
+          "lates": 0
+        },
+        {
+          "name": "Zoom by Ocado - Leyton",
+          "city": "Zoom by Ocado - Leyton",
+          "pc": "E10 7FE",
+          "cons": 1,
+          "pallets": 7,
+          "revenue": 486.98,
+          "lates": 0
+        },
+        {
+          "name": "OCADO DORDON CFC",
+          "city": "OCADO DORDON CFC",
+          "pc": "B78 1SE",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 60.29,
+          "lates": 0
+        },
+        {
+          "name": "CHISHOLM HUNTER LTD",
+          "city": "CHISHOLM HUNTER LTD",
+          "pc": "G2 8BL",
+          "cons": 1,
+          "pallets": 3,
+          "revenue": 306.66,
+          "lates": 0
+        },
+        {
+          "name": "OCADO BICESTER CFC",
+          "city": "OCADO BICESTER CFC",
+          "pc": "OX26 6GF",
+          "cons": 1,
+          "pallets": 5,
+          "revenue": 233.66,
+          "lates": 0
+        },
+        {
+          "name": "Next Stadium Way 1",
+          "city": "Next Stadium Way 1",
+          "pc": "WF9 2XR",
+          "cons": 1,
+          "pallets": 2,
+          "revenue": 206.34,
+          "lates": 0
+        },
+        {
+          "name": "THE BAIRD GROUP",
+          "city": "THE BAIRD GROUP",
+          "pc": "TS24 8LY",
+          "cons": 1,
+          "pallets": 17,
+          "revenue": 475,
+          "lates": 0
+        },
+        {
+          "name": "Next Distribution LTD",
+          "city": "Next Distribution LTD",
+          "pc": "DN6 7BF",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 62.52,
+          "lates": 0
+        },
+        {
+          "name": "Zoom by Ocado - Acton",
+          "city": "Zoom by Ocado - Acton",
+          "pc": "W3 8BG",
+          "cons": 1,
+          "pallets": 7,
+          "revenue": 486.98,
+          "lates": 0
+        },
+        {
+          "name": "Next Retail Ltd E3",
+          "city": "Next Retail Ltd E3",
+          "pc": "WF9 2RH",
+          "cons": 1,
+          "pallets": 8,
+          "revenue": 321.64,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [
+    {
+      "id": "SOUK44962",
+      "acct": "MONRO",
+      "month": "May-26",
+      "dest": "OCADO ERITH",
+      "city": "OCADO ERITH",
+      "pc": "DA8 1PQ",
+      "window": "",
+      "commitDate": "27/05/26",
+      "arrDate": "28/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SOUK45957",
+      "acct": "MONRO",
+      "month": "Jul-26",
+      "dest": "URBN UK LTD (ANTHROPOLOGIE",
+      "city": "URBN UK LTD (ANTHROPOLOGIE",
+      "pc": "EC2M 7SH",
+      "window": "",
+      "commitDate": "09/07/26",
+      "arrDate": "10/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SOUK45691",
+      "acct": "MONRO",
+      "month": "Jul-26",
+      "dest": "THE ORGANIC PHARMACY",
+      "city": "THE ORGANIC PHARMACY",
+      "pc": "W3 0AF",
+      "window": "",
+      "commitDate": "08/07/26",
+      "arrDate": "09/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 4,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SOUK45547",
+      "acct": "MONRO",
+      "month": "Jun-26",
+      "dest": "Next Distribution LTD",
+      "city": "Next Distribution LTD",
+      "pc": "WF9 2RH",
+      "window": "",
+      "commitDate": "19/06/26",
+      "arrDate": "22/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SOUK45536",
+      "acct": "MONRO",
+      "month": "Jun-26",
+      "dest": "HAWES & CURTIS",
+      "city": "HAWES & CURTIS",
+      "pc": "EN1 1DX",
+      "window": "",
+      "commitDate": "19/06/26",
+      "arrDate": "22/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
+  "regionData": {
+    "Yorkshire": {
+      "pallets": 276,
+      "cons": 26,
+      "lates": 1
+    },
+    "North West": {
+      "pallets": 126,
+      "cons": 15,
+      "lates": 1
+    },
+    "West Midlands": {
+      "pallets": 26,
+      "cons": 1,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 59,
+      "cons": 17,
+      "lates": 0
+    },
+    "East Midlands": {
+      "pallets": 85,
+      "cons": 25,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 142,
+      "cons": 34,
+      "lates": 2
+    },
+    "South East": {
+      "pallets": 182,
+      "cons": 32,
+      "lates": 1
+    },
+    "South": {
+      "pallets": 11,
+      "cons": 11,
+      "lates": 0
+    },
+    "Other": {
+      "pallets": 38,
+      "cons": 14,
+      "lates": 0
+    },
+    "East of England": {
+      "pallets": 15,
+      "cons": 8,
+      "lates": 0
+    },
+    "North East": {
+      "pallets": 47,
+      "cons": 4,
+      "lates": 0
+    },
+    "Wales": {
+      "pallets": 74,
+      "cons": 2,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 7,
+      "cons": 2,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "Ocado Bristol CFC",
+      "city": "Ocado Bristol CFC",
+      "pc": "BS11 8HT",
+      "cons": 10,
+      "pallets": 27,
+      "revenue": 1384.5999999999997,
+      "lates": 0
+    },
+    {
+      "name": "Zoom by Ocado - Leyton",
+      "city": "Zoom by Ocado - Leyton",
+      "pc": "E10 7FE",
+      "cons": 9,
+      "pallets": 47,
+      "revenue": 3268.7999999999997,
+      "lates": 0
+    },
+    {
+      "name": "Next Distribution LTD",
+      "city": "Next Distribution LTD",
+      "pc": "DN6 7BF",
+      "cons": 8,
+      "pallets": 137,
+      "revenue": 2402.02,
+      "lates": 1
+    },
+    {
+      "name": "Ocado BICESTER CFC",
+      "city": "Ocado BICESTER CFC",
+      "pc": "OX26 6GF",
+      "cons": 7,
+      "pallets": 24,
+      "revenue": 1219.25,
+      "lates": 0
+    },
+    {
+      "name": "OCADO PURFLEET",
+      "city": "OCADO PURFLEET",
+      "pc": "RM15 4XS",
+      "cons": 7,
+      "pallets": 18,
+      "revenue": 1219.6,
+      "lates": 0
+    },
+    {
+      "name": "OCADO ERITH",
+      "city": "OCADO ERITH",
+      "pc": "DA8 1PQ",
+      "cons": 6,
+      "pallets": 16,
+      "revenue": 985.19,
+      "lates": 1
+    },
+    {
+      "name": "OCADO LUTON CFC",
+      "city": "OCADO LUTON CFC",
+      "pc": "LU4 9TT",
+      "cons": 6,
+      "pallets": 11,
+      "revenue": 604.75,
+      "lates": 0
+    },
+    {
+      "name": "Next Retail Ltd E3",
+      "city": "Next Retail Ltd E3",
+      "pc": "WF9 2RH",
+      "cons": 6,
+      "pallets": 116,
+      "revenue": 1801.48,
+      "lates": 0
+    },
+    {
+      "name": "Zoom by Ocado - Acton",
+      "city": "Zoom by Ocado - Acton",
+      "pc": "W3 8BG",
+      "cons": 5,
+      "pallets": 31,
+      "revenue": 2136.98,
+      "lates": 0
+    },
+    {
+      "name": "Ocado Andover",
+      "city": "Ocado Andover",
+      "pc": "SP10 5AF",
+      "cons": 5,
+      "pallets": 5,
+      "revenue": 370.24000000000007,
+      "lates": 0
+    },
+    {
+      "name": "OCADO DORDON CFC",
+      "city": "OCADO DORDON CFC",
+      "pc": "B78 1SE",
+      "cons": 4,
+      "pallets": 15,
+      "revenue": 666.42,
+      "lates": 0
+    },
+    {
+      "name": "OCADO BICESTER CFC",
+      "city": "OCADO BICESTER CFC",
+      "pc": "OX26 6GF",
+      "cons": 4,
+      "pallets": 12,
+      "revenue": 591.3199999999999,
+      "lates": 0
+    },
+    {
+      "name": "OCADO PARK ROYAL",
+      "city": "OCADO PARK ROYAL",
+      "pc": "NW10 7FW",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 346.46,
+      "lates": 0
+    },
+    {
+      "name": "Quick Commerce Ltd (trading as Zapp)",
+      "city": "Quick Commerce Ltd (trading as Zapp)",
+      "pc": "DA17 6FQ",
+      "cons": 4,
+      "pallets": 88,
+      "revenue": 2073.36,
+      "lates": 0
+    },
+    {
+      "name": "OCADO NOTTINGHAM SD",
+      "city": "OCADO NOTTINGHAM SD",
+      "pc": "NG11 2AF",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 236.5,
+      "lates": 0
+    },
+    {
+      "name": "OCADO ALIOTO HOUSE",
+      "city": "OCADO ALIOTO HOUSE",
+      "pc": "E10 7FD",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 258.41999999999996,
+      "lates": 0
+    },
+    {
+      "name": "BUNZL RETAIL SUPPLIES",
+      "city": "BUNZL RETAIL SUPPLIES",
+      "pc": "M27 8UJ",
+      "cons": 3,
+      "pallets": 44,
+      "revenue": 1064.3899999999999,
+      "lates": 0
+    },
+    {
+      "name": "Ocado West Drayton",
+      "city": "Ocado West Drayton",
+      "pc": "UB7 9BL",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 223.25,
+      "lates": 0
+    },
+    {
+      "name": "OCADO CRAWLEY",
+      "city": "OCADO CRAWLEY",
+      "pc": "RH11 7SS",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 247.61,
+      "lates": 0
+    },
+    {
+      "name": "Lakeland Lights Company",
+      "city": "Lakeland Lights Company",
+      "pc": "CA25 5PT",
+      "cons": 3,
+      "pallets": 4,
+      "revenue": 274.94,
+      "lates": 0
+    }
+  ]
+}
