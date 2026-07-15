@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:51.330Z",
+  "lastUpdated": "2026-07-15T14:10:52.690Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 16,
-      "latePallets": 20,
-      "timeliness": 0.9689922480620154,
+      "lates": 15,
+      "latePallets": 19,
+      "timeliness": 0.9705426356589147,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2821,24 +2821,6 @@
       "failed": false
     },
     {
-      "id": "C08200",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "CHANNEL COMM. PLC",
-      "city": "CHANNEL COMM. PLC",
-      "pc": "ME2 4DZ",
-      "window": "",
-      "commitDate": "28/05/26",
-      "arrDate": "29/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C08002",
       "acct": "BPW01",
       "month": "May-26",
@@ -3001,7 +2983,7 @@
     "South East": {
       "pallets": 355,
       "cons": 136,
-      "lates": 4
+      "lates": 3
     },
     "North East": {
       "pallets": 251,
