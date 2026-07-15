@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:13:48.552Z",
+  "lastUpdated": "2026-07-15T13:13:52.927Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -319,9 +319,9 @@
       "cons": 355,
       "pallets": 511,
       "revenue": 28863.93,
-      "lates": 9,
-      "latePallets": 12,
-      "timeliness": 0.9765166340508806,
+      "lates": 7,
+      "latePallets": 8,
+      "timeliness": 0.9843444227005871,
       "avgRC": 81.31,
       "avgRP": 56.49,
       "avgPC": 1.44,
@@ -1901,24 +1901,6 @@
       "failed": false
     },
     {
-      "id": "C03363",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "SCANIA",
-      "city": "SCANIA",
-      "pc": "LE10 3BQ",
-      "window": "",
-      "commitDate": "09/02/26",
-      "arrDate": "10/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C04139",
       "acct": "BPW01",
       "month": "Feb-26",
@@ -1931,24 +1913,6 @@
       "arrival": "00:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "C02205",
-      "acct": "BPW01",
-      "month": "Feb-26",
-      "dest": "DRUMMOND MOTOR CO LTD",
-      "city": "DRUMMOND MOTOR CO LTD",
-      "pc": "KY1 2YX",
-      "window": "",
-      "commitDate": "06/02/26",
-      "arrDate": "09/02/26",
-      "arrival": "00:00",
-      "mins": 4320,
-      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -4363,7 +4327,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 62
+      "lates": 61
     },
     "South West": {
       "pallets": 128,
@@ -4373,7 +4337,7 @@
     "East Midlands": {
       "pallets": 850,
       "cons": 449,
-      "lates": 8
+      "lates": 7
     },
     "Yorkshire": {
       "pallets": 389,
