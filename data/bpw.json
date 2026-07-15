@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:55:15.285Z",
+  "lastUpdated": "2026-07-15T13:55:23.054Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 10,
-      "latePallets": 12,
-      "timeliness": 0.9827338129496402,
+      "lates": 9,
+      "latePallets": 11,
+      "timeliness": 0.9841726618705036,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -1973,24 +1973,6 @@
       "failed": false
     },
     {
-      "id": "C05793",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "TRUCKSTOP GROUP",
-      "city": "TRUCKSTOP GROUP",
-      "pc": "WR11 1GP",
-      "window": "",
-      "commitDate": "02/04/26",
-      "arrDate": "07/04/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05747",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3231,7 +3213,7 @@
     "London": {
       "pallets": 34,
       "cons": 29,
-      "lates": 1
+      "lates": 0
     }
   },
   "destData": [
