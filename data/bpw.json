@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:29:03.089Z",
+  "lastUpdated": "2026-07-15T13:29:04.815Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -945,9 +945,9 @@
       "cons": 505,
       "pallets": 716,
       "revenue": 40335.84,
-      "lates": 16,
-      "latePallets": 20,
-      "timeliness": 0.9720670391061452,
+      "lates": 15,
+      "latePallets": 19,
+      "timeliness": 0.973463687150838,
       "avgRC": 79.87,
       "avgRP": 56.33,
       "avgPC": 1.42,
@@ -2909,24 +2909,6 @@
       "failed": false
     },
     {
-      "id": "N13889",
-      "acct": "BPW01",
-      "month": "Mar-26",
-      "dest": "Peter McKerral & Co. Ltd",
-      "city": "Peter McKerral & Co. Ltd",
-      "pc": "PA28 6NT",
-      "window": "",
-      "commitDate": "25/03/26",
-      "arrDate": "26/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05456",
       "acct": "BPW01",
       "month": "Mar-26",
@@ -4039,7 +4021,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 55
+      "lates": 54
     },
     "South West": {
       "pallets": 128,
