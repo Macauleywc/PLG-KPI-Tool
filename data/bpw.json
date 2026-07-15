@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:54:03.616Z",
+  "lastUpdated": "2026-07-15T13:54:21.444Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 24,
-      "latePallets": 29,
-      "timeliness": 0.958273381294964,
+      "lates": 23,
+      "latePallets": 28,
+      "timeliness": 0.9597122302158273,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2261,24 +2261,6 @@
       "failed": false
     },
     {
-      "id": "N13999",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "D  J CAMPBALL LIMITED",
-      "city": "D  J CAMPBALL LIMITED",
-      "pc": "PA37 1QX",
-      "window": "",
-      "commitDate": "24/04/26",
-      "arrDate": "28/04/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C05888",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3428,7 +3410,7 @@
     "Scotland": {
       "pallets": 488,
       "cons": 344,
-      "lates": 35
+      "lates": 34
     },
     "South West": {
       "pallets": 128,
