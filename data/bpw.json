@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T13:52:51.556Z",
+  "lastUpdated": "2026-07-15T13:52:54.413Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -632,9 +632,9 @@
       "cons": 483,
       "pallets": 695,
       "revenue": 40825.19,
-      "lates": 47,
-      "latePallets": 65,
-      "timeliness": 0.9064748201438849,
+      "lates": 46,
+      "latePallets": 64,
+      "timeliness": 0.9079136690647482,
       "avgRC": 84.52,
       "avgRP": 58.74,
       "avgPC": 1.44,
@@ -2585,24 +2585,6 @@
       "failed": false
     },
     {
-      "id": "C06215",
-      "acct": "BPW01",
-      "month": "Apr-26",
-      "dest": "SAPPHIRE VEHICLE SERVICES",
-      "city": "SAPPHIRE VEHICLE SERVICES",
-      "pc": "DA1 5PR",
-      "window": "",
-      "commitDate": "15/04/26",
-      "arrDate": "16/04/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C06048",
       "acct": "BPW01",
       "month": "Apr-26",
@@ -3882,7 +3864,7 @@
     "South East": {
       "pallets": 355,
       "cons": 136,
-      "lates": 5
+      "lates": 4
     },
     "North East": {
       "pallets": 251,
