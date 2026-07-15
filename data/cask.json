@@ -1,16 +1,16 @@
 {
   "customer": "Cask",
-  "lastUpdated": "2026-07-15T13:02:30.180Z",
+  "lastUpdated": "2026-07-15T13:02:56.978Z",
   "months": {
     "2026-05": {
       "cons": 111,
       "pallets": 1467,
-      "revenue": 40989.23,
+      "revenue": 40862.63,
       "lates": 7,
       "latePallets": 19,
       "timeliness": 0.987048,
-      "avgRC": 369.27,
-      "avgRP": 27.94,
+      "avgRC": 368.13,
+      "avgRP": 27.85,
       "avgPC": 13.22,
       "palletSizes": {
         "Full": 73,
@@ -912,9 +912,9 @@
       "cons": 106,
       "pallets": 1190,
       "revenue": 36010.63,
-      "lates": 6,
-      "latePallets": 49,
-      "timeliness": 0.958824,
+      "lates": 3,
+      "latePallets": 8,
+      "timeliness": 0.993277,
       "avgRC": 339.72,
       "avgRP": 30.26,
       "avgPC": 11.23,
@@ -926,7 +926,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 89,
-          "lates": 4
+          "lates": 1
         },
         "Economy Booked": {
           "cons": 17,
@@ -968,7 +968,7 @@
           "cons": 21,
           "pallets": 378,
           "revenue": 5336.17,
-          "lates": 2
+          "lates": 0
         },
         "South East": {
           "cons": 7,
@@ -986,7 +986,7 @@
           "cons": 14,
           "pallets": 131,
           "revenue": 6980.26,
-          "lates": 1
+          "lates": 0
         },
         "Scotland": {
           "cons": 6,
@@ -1020,7 +1020,7 @@
         },
         "Tue": {
           "cons": 26,
-          "lates": 2
+          "lates": 0
         },
         "Wed": {
           "cons": 24,
@@ -1028,7 +1028,7 @@
         },
         "Thu": {
           "cons": 20,
-          "lates": 1
+          "lates": 0
         },
         "Fri": {
           "cons": 13,
@@ -1043,7 +1043,7 @@
           "cons": 16,
           "pallets": 303,
           "revenue": 3894.9,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "Refresco Bondgate Booking/Huel",
@@ -2338,24 +2338,6 @@
       "failed": false
     },
     {
-      "id": "Equinox",
-      "acct": "CASK",
-      "month": "Feb-26",
-      "dest": "IC Filling Systems Srl",
-      "city": "IC Filling Systems Srl",
-      "pc": "30038",
-      "window": "",
-      "commitDate": "05/03/26",
-      "arrDate": "19/03/26",
-      "arrival": "00:00",
-      "mins": 20160,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "3658",
       "acct": "CASK",
       "month": "Feb-26",
@@ -2387,42 +2369,6 @@
       "mins": 1440,
       "pallets": 1,
       "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "88423878",
-      "acct": "CASK",
-      "month": "Feb-26",
-      "dest": "CASK GLOBAL CANNING SOLUTIONS EURO",
-      "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
-      "pc": "LE67 1TA",
-      "window": "",
-      "commitDate": "03/02/26",
-      "arrDate": "04/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 20,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "88423879",
-      "acct": "CASK",
-      "month": "Feb-26",
-      "dest": "CASK GLOBAL CANNING SOLUTIONS EURO",
-      "city": "CASK GLOBAL CANNING SOLUTIONS EURO",
-      "pc": "LE67 1TA",
-      "window": "",
-      "commitDate": "03/02/26",
-      "arrDate": "04/02/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 20,
-      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
@@ -2576,7 +2522,7 @@
     "Other": {
       "pallets": 1005,
       "cons": 86,
-      "lates": 5
+      "lates": 4
     },
     "North West": {
       "pallets": 486,
@@ -2591,7 +2537,7 @@
     "East Midlands": {
       "pallets": 1841,
       "cons": 115,
-      "lates": 5
+      "lates": 3
     },
     "South East": {
       "pallets": 187,
@@ -2647,7 +2593,7 @@
       "cons": 82,
       "pallets": 1471,
       "revenue": 19786.059999999998,
-      "lates": 3
+      "lates": 1
     },
     {
       "name": "Get The Drinks In- Updated",
