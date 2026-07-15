@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:10:58.009Z",
+  "lastUpdated": "2026-07-15T14:11:01.450Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1571,9 +1571,9 @@
       "cons": 431,
       "pallets": 645,
       "revenue": 38210.59,
-      "lates": 11,
-      "latePallets": 14,
-      "timeliness": 0.9782945736434109,
+      "lates": 9,
+      "latePallets": 12,
+      "timeliness": 0.9813953488372092,
       "avgRC": 88.66,
       "avgRP": 59.24,
       "avgPC": 1.5,
@@ -2677,24 +2677,6 @@
       "failed": false
     },
     {
-      "id": "C08223",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "EMS-FP&S LIMITED-SOUTHAMPTON",
-      "city": "EMS-FP&S LIMITED-SOUTHAMPTON",
-      "pc": "SO40 3WW",
-      "window": "",
-      "commitDate": "28/05/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 11520,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07978",
       "acct": "BPW01",
       "month": "May-26",
@@ -2803,24 +2785,6 @@
       "failed": false
     },
     {
-      "id": "C07972",
-      "acct": "BPW01",
-      "month": "May-26",
-      "dest": "ADAMS MOREY",
-      "city": "ADAMS MOREY",
-      "pc": "SO15 0DR",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C07627",
       "acct": "BPW01",
       "month": "May-26",
@@ -2921,7 +2885,7 @@
     "South": {
       "pallets": 199,
       "cons": 114,
-      "lates": 3
+      "lates": 1
     },
     "London": {
       "pallets": 34,
