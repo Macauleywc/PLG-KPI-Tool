@@ -1,6 +1,6 @@
 {
   "customer": "Cask",
-  "lastUpdated": "2026-07-15T13:02:56.978Z",
+  "lastUpdated": "2026-07-15T13:03:22.492Z",
   "months": {
     "2026-05": {
       "cons": 111,
@@ -305,9 +305,9 @@
       "cons": 96,
       "pallets": 1099,
       "revenue": 33704.22,
-      "lates": 12,
-      "latePallets": 26,
-      "timeliness": 0.976342,
+      "lates": 9,
+      "latePallets": 13,
+      "timeliness": 0.988171,
       "avgRC": 351.09,
       "avgRP": 30.67,
       "avgPC": 11.45,
@@ -323,7 +323,7 @@
         },
         "Economy Booked": {
           "cons": 24,
-          "lates": 7
+          "lates": 4
         }
       },
       "regionData": {
@@ -343,7 +343,7 @@
           "cons": 10,
           "pallets": 69,
           "revenue": 2529.3399999999997,
-          "lates": 4
+          "lates": 3
         },
         "East Midlands": {
           "cons": 13,
@@ -367,13 +367,13 @@
           "cons": 18,
           "pallets": 291,
           "revenue": 6472.1900000000005,
-          "lates": 1
+          "lates": 0
         },
         "North East": {
           "cons": 8,
           "pallets": 101,
           "revenue": 3812.3999999999996,
-          "lates": 1
+          "lates": 0
         },
         "South": {
           "cons": 5,
@@ -397,7 +397,7 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 25,
-          "lates": 4
+          "lates": 3
         },
         "Tue": {
           "cons": 22,
@@ -413,7 +413,7 @@
         },
         "Fri": {
           "cons": 23,
-          "lates": 4
+          "lates": 2
         }
       },
       "destData": [
@@ -451,7 +451,7 @@
           "cons": 7,
           "pallets": 81,
           "revenue": 3211.8,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Refresco Bondgate Booking/Huel",
@@ -541,7 +541,7 @@
           "cons": 2,
           "pallets": 4,
           "revenue": 207.79999999999998,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Siren Craft Brew",
@@ -1996,42 +1996,6 @@
       "failed": false
     },
     {
-      "id": "3782",
-      "acct": "CASK",
-      "month": "Mar-26",
-      "dest": "CAMERONS BREWERY LIMITED",
-      "city": "CAMERONS BREWERY LIMITED",
-      "pc": "TS24 7QS",
-      "window": "",
-      "commitDate": "27/03/26",
-      "arrDate": "30/03/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 6,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "3785",
-      "acct": "CASK",
-      "month": "Mar-26",
-      "dest": "Attic Brew Co.",
-      "city": "Attic Brew Co.",
-      "pc": "B30 2DA",
-      "window": "",
-      "commitDate": "30/03/26",
-      "arrDate": "31/03/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "3764",
       "acct": "CASK",
       "month": "Mar-26",
@@ -2152,24 +2116,6 @@
       "arrival": "00:00",
       "mins": 4320,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "3706",
-      "acct": "CASK",
-      "month": "Mar-26",
-      "dest": "DUNKERTONS CIDER COMPANY",
-      "city": "DUNKERTONS CIDER COMPANY",
-      "pc": "GL52 6UT",
-      "window": "",
-      "commitDate": "06/03/26",
-      "arrDate": "07/03/26",
-      "arrival": "00:00",
-      "mins": 1440,
-      "pallets": 3,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
@@ -2532,7 +2478,7 @@
     "Yorkshire": {
       "pallets": 1620,
       "cons": 101,
-      "lates": 1
+      "lates": 0
     },
     "East Midlands": {
       "pallets": 1841,
@@ -2547,7 +2493,7 @@
     "South West": {
       "pallets": 513,
       "cons": 58,
-      "lates": 10
+      "lates": 9
     },
     "Scotland": {
       "pallets": 408,
@@ -2567,7 +2513,7 @@
     "North East": {
       "pallets": 475,
       "cons": 37,
-      "lates": 1
+      "lates": 0
     },
     "East of England": {
       "pallets": 60,
@@ -2629,7 +2575,7 @@
       "cons": 24,
       "pallets": 301,
       "revenue": 12155.190000000004,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "BUXTON BREWERY",
@@ -2728,7 +2674,7 @@
       "cons": 10,
       "pallets": 43,
       "revenue": 1991.2000000000003,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "Wiper & True",
