@@ -1,6 +1,6 @@
 {
   "customer": "BPW",
-  "lastUpdated": "2026-07-15T14:13:52.408Z",
+  "lastUpdated": "2026-07-15T14:13:53.448Z",
   "months": {
     "2026-01": {
       "cons": 357,
@@ -1258,9 +1258,9 @@
       "cons": 461,
       "pallets": 714,
       "revenue": 43117.62,
-      "lates": 16,
-      "latePallets": 23,
-      "timeliness": 0.9677871148459384,
+      "lates": 14,
+      "latePallets": 21,
+      "timeliness": 0.9705882352941176,
       "avgRC": 93.53,
       "avgRP": 60.39,
       "avgPC": 1.55,
@@ -2263,24 +2263,6 @@
       "failed": false
     },
     {
-      "id": "C09210",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "PARTIC MOTOR SPARES LTD-KNOTTINGLEY",
-      "city": "PARTIC MOTOR SPARES LTD-KNOTTINGLEY",
-      "pc": "WF11 8DS",
-      "window": "",
-      "commitDate": "19/06/26",
-      "arrDate": "22/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "C09357",
       "acct": "BPW01",
       "month": "Jun-26",
@@ -2293,24 +2275,6 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "N14150",
-      "acct": "BPW01",
-      "month": "Jun-26",
-      "dest": "ALLSPORTS TRUCK CENTRE",
-      "city": "ALLSPORTS TRUCK CENTRE",
-      "pc": "ST4 3PS",
-      "window": "",
-      "commitDate": "10/06/26",
-      "arrDate": "11/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
       "dtype": "Standard",
       "note": "",
       "reason": "",
@@ -2663,7 +2627,7 @@
     "West Midlands": {
       "pallets": 147,
       "cons": 114,
-      "lates": 2
+      "lates": 1
     },
     "Wales": {
       "pallets": 136,
@@ -2688,7 +2652,7 @@
     "Yorkshire": {
       "pallets": 389,
       "cons": 330,
-      "lates": 4
+      "lates": 3
     },
     "Other": {
       "pallets": 192,
