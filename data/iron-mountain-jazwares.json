@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-06-26T09:43:37.221Z",
+  "lastUpdated": "2026-07-17T09:33:41.749Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -279,7 +279,7 @@
       "revenue": 35260.79,
       "lates": 5,
       "latePallets": 15,
-      "timeliness": 0.981572,
+      "timeliness": 0.9815724815724816,
       "avgRC": 148.78,
       "avgRP": 43.32,
       "avgPC": 3.43,
@@ -596,7 +596,7 @@
       "revenue": 51670.33,
       "lates": 3,
       "latePallets": 10,
-      "timeliness": 0.99247,
+      "timeliness": 0.9924698795180723,
       "avgRC": 203.43,
       "avgRP": 38.91,
       "avgPC": 5.23,
@@ -898,9 +898,577 @@
           "lates": 2
         }
       }
+    },
+    "2026-07": {
+      "cons": 94,
+      "pallets": 562,
+      "revenue": 21475.98,
+      "lates": 13,
+      "latePallets": 35,
+      "timeliness": 0.9377224199288257,
+      "avgRC": 228.47,
+      "avgRP": 38.21,
+      "avgPC": 5.98,
+      "palletSizes": {
+        "Full": 543,
+        "Half": 4,
+        "Quarter": 1
+      },
+      "typeBreakdown": {
+        "Economy Booked": {
+          "cons": 50,
+          "lates": 8
+        },
+        "Next Day": {
+          "cons": 44,
+          "lates": 5
+        }
+      },
+      "regionData": {
+        "North West": {
+          "cons": 17,
+          "pallets": 135,
+          "revenue": 5083.030000000001,
+          "lates": 2
+        },
+        "East Midlands": {
+          "cons": 29,
+          "pallets": 138,
+          "revenue": 5251.06,
+          "lates": 4
+        },
+        "West Midlands": {
+          "cons": 7,
+          "pallets": 32,
+          "revenue": 1243.38,
+          "lates": 1
+        },
+        "South": {
+          "cons": 7,
+          "pallets": 86,
+          "revenue": 3064.54,
+          "lates": 2
+        },
+        "Yorkshire": {
+          "cons": 6,
+          "pallets": 15,
+          "revenue": 788.91,
+          "lates": 2
+        },
+        "North East": {
+          "cons": 4,
+          "pallets": 9,
+          "revenue": 434.62,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 10,
+          "pallets": 96,
+          "revenue": 2291.7,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 4,
+          "pallets": 11,
+          "revenue": 950.74,
+          "lates": 1
+        },
+        "Other": {
+          "cons": 6,
+          "pallets": 16,
+          "revenue": 1079.6200000000001,
+          "lates": 1
+        },
+        "South West": {
+          "cons": 2,
+          "pallets": 17,
+          "revenue": 699.16,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 2,
+          "pallets": 7,
+          "revenue": 589.22,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 21,
+          "lates": 4
+        },
+        "Tue": {
+          "cons": 16,
+          "lates": 5
+        },
+        "Wed": {
+          "cons": 7,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 13,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 36,
+          "lates": 3
+        }
+      },
+      "destData": [
+        {
+          "name": "IRON MOUNTAIN (MPN2)",
+          "city": "IRON MOUNTAIN (MPN2)",
+          "pc": "LE17 4UE",
+          "cons": 5,
+          "pallets": 8,
+          "revenue": 322.73,
+          "lates": 0
+        },
+        {
+          "name": "THE ENTERTAINER - BANBURY",
+          "city": "THE ENTERTAINER - BANBURY",
+          "pc": "OX16 2AA",
+          "cons": 5,
+          "pallets": 60,
+          "revenue": 1175.32,
+          "lates": 0
+        },
+        {
+          "name": "AMAZON EU SARL - UK - BHX4",
+          "city": "AMAZON EU SARL - UK - BHX4",
+          "pc": "CV5 9PF",
+          "cons": 4,
+          "pallets": 7,
+          "revenue": 381.72,
+          "lates": 1
+        },
+        {
+          "name": "AMAZON EU SARL - UK - LPX2",
+          "city": "AMAZON EU SARL - UK - LPX2",
+          "pc": "L33 7TJ",
+          "cons": 4,
+          "pallets": 9,
+          "revenue": 457.84999999999997,
+          "lates": 0
+        },
+        {
+          "name": "B & M RETAIL LIMITED - QUBE -",
+          "city": "B & M RETAIL LIMITED - QUBE -",
+          "pc": "L24 8RJ",
+          "cons": 3,
+          "pallets": 10,
+          "revenue": 519.63,
+          "lates": 0
+        },
+        {
+          "name": "A.B. GEE OF RIPLEY LIMITED",
+          "city": "A.B. GEE OF RIPLEY LIMITED",
+          "pc": "DE5 3SW",
+          "cons": 3,
+          "pallets": 28,
+          "revenue": 1079.47,
+          "lates": 0
+        },
+        {
+          "name": "TJ MORRIS - WILTSHIRE",
+          "city": "TJ MORRIS - WILTSHIRE",
+          "pc": "SP4 7GQ",
+          "cons": 3,
+          "pallets": 68,
+          "revenue": 2173.2599999999998,
+          "lates": 0
+        },
+        {
+          "name": "TJ MORRIS - OMEGA",
+          "city": "TJ MORRIS - OMEGA",
+          "pc": "WA5 3UY",
+          "cons": 2,
+          "pallets": 42,
+          "revenue": 1302.02,
+          "lates": 0
+        },
+        {
+          "name": "ASDA DEPOT 7438 LUTTERWORTH",
+          "city": "ASDA DEPOT 7438 LUTTERWORTH",
+          "pc": "LE17 4XN",
+          "cons": 2,
+          "pallets": 13,
+          "revenue": 558.77,
+          "lates": 0
+        },
+        {
+          "name": "DKB TOYS & DISTRIBUTION",
+          "city": "DKB TOYS & DISTRIBUTION",
+          "pc": "B76 1BA",
+          "cons": 2,
+          "pallets": 31,
+          "revenue": 1354.7,
+          "lates": 0
+        },
+        {
+          "name": "AMAZON EU SARL - UK - LBA4",
+          "city": "AMAZON EU SARL - UK - LBA4",
+          "pc": "DN11 0GU",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 122.1,
+          "lates": 2
+        },
+        {
+          "name": "JOHN LEWIS PLC MP1 079",
+          "city": "JOHN LEWIS PLC MP1 079",
+          "pc": "MK17 8EW",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 191.79,
+          "lates": 0
+        },
+        {
+          "name": "UK Branch",
+          "city": "UK Branch",
+          "pc": "ME10 2XG",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "THE ENTERTAINER - LITTLE CHALF",
+          "city": "THE ENTERTAINER - LITTLE CHALF",
+          "pc": "HP6 6GL",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 246.28000000000003,
+          "lates": 1
+        },
+        {
+          "name": "CREATIVE DISTRIBUTION LTD",
+          "city": "CREATIVE DISTRIBUTION LTD",
+          "pc": "CR0 4TD",
+          "cons": 2,
+          "pallets": 8,
+          "revenue": 462.06,
+          "lates": 0
+        },
+        {
+          "name": "FARMFOODS LIMITED",
+          "city": "FARMFOODS LIMITED",
+          "pc": "BS35 4GH",
+          "cons": 2,
+          "pallets": 41,
+          "revenue": 1064.7,
+          "lates": 0
+        },
+        {
+          "name": "B & M RETAIL LIMITED - FORT -",
+          "city": "B & M RETAIL LIMITED - FORT -",
+          "pc": "MK42 6EY",
+          "cons": 2,
+          "pallets": 17,
+          "revenue": 701.46,
+          "lates": 0
+        },
+        {
+          "name": "JOHN LEWIS PLC MP2 051",
+          "city": "JOHN LEWIS PLC MP2 051",
+          "pc": "MK17 8EW",
+          "cons": 2,
+          "pallets": 11,
+          "revenue": 511.11,
+          "lates": 0
+        },
+        {
+          "name": "ARGOS LIMITED - KT DC",
+          "city": "ARGOS LIMITED - KT DC",
+          "pc": "NN14 1UB",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 239.48,
+          "lates": 0
+        },
+        {
+          "name": "AMAZON EU SARL - UK - EMA3",
+          "city": "AMAZON EU SARL - UK - EMA3",
+          "pc": "NG16 3UA",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 122.1,
+          "lates": 1
+        }
+      ]
     }
   },
   "lateRows": [
+    {
+      "id": "92052",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - LBA4",
+      "city": "AMAZON EU SARL - UK - LBA4",
+      "pc": "DN11 0GU",
+      "window": "",
+      "commitDate": "07/07/26",
+      "arrDate": "09/07/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92145",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - LBA4",
+      "city": "AMAZON EU SARL - UK - LBA4",
+      "pc": "DN11 0GU",
+      "window": "",
+      "commitDate": "13/07/26",
+      "arrDate": "14/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92136",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "WAITROSE",
+      "city": "WAITROSE",
+      "pc": "MK17 8FF",
+      "window": "",
+      "commitDate": "12/07/26",
+      "arrDate": "16/07/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 3,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92124",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "ALDI STORES LTD-SPRINGFIELD-CH",
+      "city": "ALDI STORES LTD-SPRINGFIELD-CH",
+      "pc": "CM2 5AS",
+      "window": "",
+      "commitDate": "10/07/26",
+      "arrDate": "15/07/26",
+      "arrival": "01:00",
+      "mins": 7200,
+      "pallets": 6,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92147",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - LPL2",
+      "city": "AMAZON EU SARL - UK - LPL2",
+      "pc": "L33 7AP",
+      "window": "",
+      "commitDate": "13/07/26",
+      "arrDate": "15/07/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92048",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - MAN2",
+      "city": "AMAZON EU SARL - UK - MAN2",
+      "pc": "WA5 3XA",
+      "window": "",
+      "commitDate": "07/07/26",
+      "arrDate": "10/07/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "91924RTN",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "jazware",
+      "city": "jazware",
+      "pc": "LE17 4JH",
+      "window": "",
+      "commitDate": "07/07/26",
+      "arrDate": "08/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 9,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92051",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - LTN4",
+      "city": "AMAZON EU SARL - UK - LTN4",
+      "pc": "LU5 4FE",
+      "window": "",
+      "commitDate": "07/07/26",
+      "arrDate": "08/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92032",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "TG JONES HIGH STREET LIMITED",
+      "city": "TG JONES HIGH STREET LIMITED",
+      "pc": "SN3 3RX",
+      "window": "",
+      "commitDate": "10/07/26",
+      "arrDate": "14/07/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 8,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92142",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - BRS2",
+      "city": "AMAZON EU SARL - UK - BRS2",
+      "pc": "SN3 4DB",
+      "window": "",
+      "commitDate": "13/07/26",
+      "arrDate": "14/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92026",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - BHX4",
+      "city": "AMAZON EU SARL - UK - BHX4",
+      "pc": "CV5 9PF",
+      "window": "",
+      "commitDate": "06/07/26",
+      "arrDate": "08/07/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "91975",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "THE ENTERTAINER - LITTLE CHALF",
+      "city": "THE ENTERTAINER - LITTLE CHALF",
+      "pc": "HP6 6GL",
+      "window": "",
+      "commitDate": "03/07/26",
+      "arrDate": "06/07/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "92053",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "AMAZON EU SARL - UK - EMA3",
+      "city": "AMAZON EU SARL - UK - EMA3",
+      "pc": "NG16 3UA",
+      "window": "",
+      "commitDate": "07/07/26",
+      "arrDate": "08/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "DGB326",
+      "acct": "IRON",
+      "month": "Apr-26",
+      "dest": "TEMPTATION (GIFTS) LIMITED",
+      "city": "TEMPTATION (GIFTS) LIMITED",
+      "pc": "HP5 3NJ",
+      "window": "",
+      "commitDate": "16/04/26",
+      "arrDate": "20/04/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "90801",
+      "acct": "IRON",
+      "month": "Apr-26",
+      "dest": "TJ MORRIS - WILTSHIRE",
+      "city": "TJ MORRIS - WILTSHIRE",
+      "pc": "SP4 7GQ",
+      "window": "",
+      "commitDate": "01/05/26",
+      "arrDate": "07/05/26",
+      "arrival": "01:00",
+      "mins": 8640,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
     {
       "id": "90934",
       "acct": "IRON",
@@ -1043,42 +1611,6 @@
       "dtype": "Economy Booked",
       "note": "",
       "reason": "Hub Held",
-      "failed": false
-    },
-    {
-      "id": "DGB326",
-      "acct": "IRON",
-      "month": "Apr-26",
-      "dest": "TEMPTATION (GIFTS) LIMITED",
-      "city": "TEMPTATION (GIFTS) LIMITED",
-      "pc": "HP5 3NJ",
-      "window": "",
-      "commitDate": "16/04/26",
-      "arrDate": "20/04/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "90801",
-      "acct": "IRON",
-      "month": "Apr-26",
-      "dest": "TJ MORRIS - WILTSHIRE",
-      "city": "TJ MORRIS - WILTSHIRE",
-      "pc": "SP4 7GQ",
-      "window": "",
-      "commitDate": "01/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
       "failed": false
     }
   ],
