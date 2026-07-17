@@ -1,14 +1,14 @@
 {
   "customer": "Drivers Pickles",
-  "lastUpdated": "2026-07-17T09:45:11.874Z",
+  "lastUpdated": "2026-07-17T09:46:41.330Z",
   "months": {
     "2026-06": {
       "cons": 196,
       "pallets": 328,
       "revenue": 15969.75,
-      "lates": 0,
-      "latePallets": 0,
-      "timeliness": 1,
+      "lates": 1,
+      "latePallets": 4,
+      "timeliness": 0.9878048780487805,
       "avgRC": 81.48,
       "avgRP": 48.69,
       "avgPC": 1.67,
@@ -20,7 +20,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 195,
-          "lates": 0
+          "lates": 1
         },
         "Economy Booked": {
           "cons": 1,
@@ -38,7 +38,7 @@
           "cons": 21,
           "pallets": 36,
           "revenue": 1134.3000000000002,
-          "lates": 0
+          "lates": 1
         },
         "Scotland": {
           "cons": 17,
@@ -128,7 +128,7 @@
         },
         "Thu": {
           "cons": 44,
-          "lates": 0
+          "lates": 1
         },
         "Fri": {
           "cons": 34,
@@ -206,7 +206,7 @@
           "cons": 4,
           "pallets": 9,
           "revenue": 42.95,
-          "lates": 0
+          "lates": 1
         },
         {
           "name": "FERRYSPEED LTD",
@@ -319,7 +319,26 @@
       ]
     }
   },
-  "lateRows": [],
+  "lateRows": [
+    {
+      "id": "R222537",
+      "acct": "DRIVERSP",
+      "month": "Jun-26",
+      "dest": "Drivers Foods Leicester Ltd",
+      "city": "Drivers Foods Leicester Ltd",
+      "pc": "LE3 1UQ",
+      "window": "",
+      "commitDate": "16/07/26",
+      "arrDate": "16/07/26",
+      "arrival": "01:00",
+      "mins": 0,
+      "pallets": 4,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "Other",
+      "failed": true
+    }
+  ],
   "regionData": {
     "East of England": {
       "pallets": 50,
@@ -329,7 +348,7 @@
     "East Midlands": {
       "pallets": 36,
       "cons": 21,
-      "lates": 0
+      "lates": 1
     },
     "Scotland": {
       "pallets": 21,
@@ -463,7 +482,7 @@
       "cons": 4,
       "pallets": 9,
       "revenue": 42.95,
-      "lates": 0
+      "lates": 1
     },
     {
       "name": "FERRYSPEED LTD",
