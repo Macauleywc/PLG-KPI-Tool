@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-07-17T09:33:41.749Z",
+  "lastUpdated": "2026-07-17T09:34:27.560Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -902,12 +902,12 @@
     "2026-07": {
       "cons": 94,
       "pallets": 562,
-      "revenue": 21475.98,
-      "lates": 13,
-      "latePallets": 35,
-      "timeliness": 0.9377224199288257,
-      "avgRC": 228.47,
-      "avgRP": 38.21,
+      "revenue": 21546.36,
+      "lates": 3,
+      "latePallets": 12,
+      "timeliness": 0.9786476868327402,
+      "avgRC": 229.22,
+      "avgRP": 38.34,
       "avgPC": 5.98,
       "palletSizes": {
         "Full": 543,
@@ -917,11 +917,11 @@
       "typeBreakdown": {
         "Economy Booked": {
           "cons": 50,
-          "lates": 8
+          "lates": 3
         },
         "Next Day": {
           "cons": 44,
-          "lates": 5
+          "lates": 0
         }
       },
       "regionData": {
@@ -929,31 +929,31 @@
           "cons": 17,
           "pallets": 135,
           "revenue": 5083.030000000001,
-          "lates": 2
+          "lates": 0
         },
         "East Midlands": {
           "cons": 29,
           "pallets": 138,
           "revenue": 5251.06,
-          "lates": 4
+          "lates": 1
         },
         "West Midlands": {
           "cons": 7,
           "pallets": 32,
           "revenue": 1243.38,
-          "lates": 1
+          "lates": 0
         },
         "South": {
           "cons": 7,
           "pallets": 86,
           "revenue": 3064.54,
-          "lates": 2
+          "lates": 1
         },
         "Yorkshire": {
           "cons": 6,
           "pallets": 15,
           "revenue": 788.91,
-          "lates": 2
+          "lates": 0
         },
         "North East": {
           "cons": 4,
@@ -971,7 +971,7 @@
           "cons": 4,
           "pallets": 11,
           "revenue": 950.74,
-          "lates": 1
+          "lates": 0
         },
         "Other": {
           "cons": 6,
@@ -995,11 +995,11 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 21,
-          "lates": 4
+          "lates": 0
         },
         "Tue": {
           "cons": 16,
-          "lates": 5
+          "lates": 0
         },
         "Wed": {
           "cons": 7,
@@ -1011,7 +1011,7 @@
         },
         "Fri": {
           "cons": 36,
-          "lates": 3
+          "lates": 2
         }
       },
       "destData": [
@@ -1040,7 +1040,7 @@
           "cons": 4,
           "pallets": 7,
           "revenue": 381.72,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "AMAZON EU SARL - UK - LPX2",
@@ -1112,7 +1112,7 @@
           "cons": 2,
           "pallets": 2,
           "revenue": 122.1,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "JOHN LEWIS PLC MP1 079",
@@ -1193,48 +1193,12 @@
           "cons": 2,
           "pallets": 2,
           "revenue": 122.1,
-          "lates": 1
+          "lates": 0
         }
       ]
     }
   },
   "lateRows": [
-    {
-      "id": "92052",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - LBA4",
-      "city": "AMAZON EU SARL - UK - LBA4",
-      "pc": "DN11 0GU",
-      "window": "",
-      "commitDate": "07/07/26",
-      "arrDate": "09/07/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92145",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - LBA4",
-      "city": "AMAZON EU SARL - UK - LBA4",
-      "pc": "DN11 0GU",
-      "window": "",
-      "commitDate": "13/07/26",
-      "arrDate": "14/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "92136",
       "acct": "IRON",
@@ -1248,96 +1212,6 @@
       "arrival": "01:00",
       "mins": 5760,
       "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92124",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "ALDI STORES LTD-SPRINGFIELD-CH",
-      "city": "ALDI STORES LTD-SPRINGFIELD-CH",
-      "pc": "CM2 5AS",
-      "window": "",
-      "commitDate": "10/07/26",
-      "arrDate": "15/07/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 6,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92147",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - LPL2",
-      "city": "AMAZON EU SARL - UK - LPL2",
-      "pc": "L33 7AP",
-      "window": "",
-      "commitDate": "13/07/26",
-      "arrDate": "15/07/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92048",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - MAN2",
-      "city": "AMAZON EU SARL - UK - MAN2",
-      "pc": "WA5 3XA",
-      "window": "",
-      "commitDate": "07/07/26",
-      "arrDate": "10/07/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "91924RTN",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "jazware",
-      "city": "jazware",
-      "pc": "LE17 4JH",
-      "window": "",
-      "commitDate": "07/07/26",
-      "arrDate": "08/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 9,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92051",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - LTN4",
-      "city": "AMAZON EU SARL - UK - LTN4",
-      "pc": "LU5 4FE",
-      "window": "",
-      "commitDate": "07/07/26",
-      "arrDate": "08/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
@@ -1362,42 +1236,6 @@
       "failed": false
     },
     {
-      "id": "92142",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - BRS2",
-      "city": "AMAZON EU SARL - UK - BRS2",
-      "pc": "SN3 4DB",
-      "window": "",
-      "commitDate": "13/07/26",
-      "arrDate": "14/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92026",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - BHX4",
-      "city": "AMAZON EU SARL - UK - BHX4",
-      "pc": "CV5 9PF",
-      "window": "",
-      "commitDate": "06/07/26",
-      "arrDate": "08/07/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "91975",
       "acct": "IRON",
       "month": "Jul-26",
@@ -1409,24 +1247,6 @@
       "arrDate": "06/07/26",
       "arrival": "01:00",
       "mins": 4320,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92053",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "AMAZON EU SARL - UK - EMA3",
-      "city": "AMAZON EU SARL - UK - EMA3",
-      "pc": "NG16 3UA",
-      "window": "",
-      "commitDate": "07/07/26",
-      "arrDate": "08/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
