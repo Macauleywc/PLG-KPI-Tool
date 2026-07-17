@@ -1,0 +1,577 @@
+{
+  "customer": "Drivers Pickles",
+  "lastUpdated": "2026-07-17T09:45:11.874Z",
+  "months": {
+    "2026-06": {
+      "cons": 196,
+      "pallets": 328,
+      "revenue": 15969.75,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 81.48,
+      "avgRP": 48.69,
+      "avgPC": 1.67,
+      "palletSizes": {
+        "Full": 290,
+        "Half": 21,
+        "Quarter": 17
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 195,
+          "lates": 0
+        },
+        "Economy Booked": {
+          "cons": 1,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "East of England": {
+          "cons": 24,
+          "pallets": 50,
+          "revenue": 2179.7000000000007,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 21,
+          "pallets": 36,
+          "revenue": 1134.3000000000002,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 17,
+          "pallets": 21,
+          "revenue": 1590.3,
+          "lates": 0
+        },
+        "South": {
+          "cons": 24,
+          "pallets": 37,
+          "revenue": 1772.5500000000002,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 23,
+          "pallets": 26,
+          "revenue": 1366.5000000000007,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 6,
+          "pallets": 19,
+          "revenue": 950.55,
+          "lates": 0
+        },
+        "London": {
+          "cons": 14,
+          "pallets": 21,
+          "revenue": 1285.3,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 23,
+          "pallets": 38,
+          "revenue": 1878.9,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 12,
+          "pallets": 16,
+          "revenue": 855.9,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 12,
+          "pallets": 17,
+          "revenue": 786.85,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 326.75,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 6,
+          "pallets": 16,
+          "revenue": 679.25,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 8,
+          "pallets": 19,
+          "revenue": 868.8499999999999,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 2,
+          "pallets": 7,
+          "revenue": 294.05,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 50,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 6,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 62,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 44,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 34,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "BIDFOOD",
+          "city": "BIDFOOD",
+          "pc": "NG16 4HY",
+          "cons": 8,
+          "pallets": 23,
+          "revenue": 1107.15,
+          "lates": 0
+        },
+        {
+          "name": "HENRY COLBECK & CO",
+          "city": "HENRY COLBECK & CO",
+          "pc": "ML5 4EG",
+          "cons": 8,
+          "pallets": 10,
+          "revenue": 628.1999999999999,
+          "lates": 0
+        },
+        {
+          "name": "T.J.MORRIS LTD",
+          "city": "T.J.MORRIS LTD",
+          "pc": "WA5 1UY",
+          "cons": 7,
+          "pallets": 9,
+          "revenue": 595.0000000000001,
+          "lates": 0
+        },
+        {
+          "name": "T. QUALITY LIMITED",
+          "city": "T. QUALITY LIMITED",
+          "pc": "TN12 0QY",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 309.3,
+          "lates": 0
+        },
+        {
+          "name": "HOLDSWORTH FOODSERVICE",
+          "city": "HOLDSWORTH FOODSERVICE",
+          "pc": "S44 5NH",
+          "cons": 5,
+          "pallets": 7,
+          "revenue": 298.05,
+          "lates": 0
+        },
+        {
+          "name": "FRIARS PRIDE LTD",
+          "city": "FRIARS PRIDE LTD",
+          "pc": "BH15 3NT",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 229.8,
+          "lates": 0
+        },
+        {
+          "name": "Extra Cash and Carry",
+          "city": "Extra Cash and Carry",
+          "pc": "N17 0YD",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 258.55,
+          "lates": 0
+        },
+        {
+          "name": "Drivers Foods Leicester Ltd",
+          "city": "Drivers Foods Leicester Ltd",
+          "pc": "LE3 1UQ",
+          "cons": 4,
+          "pallets": 9,
+          "revenue": 42.95,
+          "lates": 0
+        },
+        {
+          "name": "FERRYSPEED LTD",
+          "city": "FERRYSPEED LTD",
+          "pc": "PO3 5JT",
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 258.09999999999997,
+          "lates": 0
+        },
+        {
+          "name": "Pilgrim Foodservice",
+          "city": "Pilgrim Foodservice",
+          "pc": "PE21 7SJ",
+          "cons": 4,
+          "pallets": 13,
+          "revenue": 541.05,
+          "lates": 0
+        },
+        {
+          "name": "BRAKES/LINEAGE LOGISTICS",
+          "city": "BRAKES/LINEAGE LOGISTICS",
+          "pc": "NG22 8TX",
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 131.9,
+          "lates": 0
+        },
+        {
+          "name": "HOLLEYS FINE FOODS",
+          "city": "HOLLEYS FINE FOODS",
+          "pc": "BS10 7SB",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 180.85,
+          "lates": 0
+        },
+        {
+          "name": "JMP FOODSERVICE",
+          "city": "JMP FOODSERVICE",
+          "pc": "LA10 5HQ",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 151.35000000000002,
+          "lates": 0
+        },
+        {
+          "name": "T.QUALITY LTD",
+          "city": "T.QUALITY LTD",
+          "pc": "PO16 8TT",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 166.85000000000002,
+          "lates": 0
+        },
+        {
+          "name": "R. D. Johns Foodservice",
+          "city": "R. D. Johns Foodservice",
+          "pc": "TQ12 3GP",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 250.05,
+          "lates": 0
+        },
+        {
+          "name": "BOOKER CASH & CARRY",
+          "city": "BOOKER CASH & CARRY",
+          "pc": "AL10 9TR",
+          "cons": 3,
+          "pallets": 12,
+          "revenue": 550.0999999999999,
+          "lates": 0
+        },
+        {
+          "name": "STRACHANS LTD",
+          "city": "STRACHANS LTD",
+          "pc": "AB42 1US",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 287.65,
+          "lates": 0
+        },
+        {
+          "name": "Holland Bazaar Croydon",
+          "city": "Holland Bazaar Croydon",
+          "pc": "CR0 4XH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 108.3,
+          "lates": 0
+        },
+        {
+          "name": "T. QUALITY LTD",
+          "city": "T. QUALITY LTD",
+          "pc": "G52 4NZ",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 201.4,
+          "lates": 0
+        },
+        {
+          "name": "ANATOLIAN FOODS LTD",
+          "city": "ANATOLIAN FOODS LTD",
+          "pc": "E6 6LP",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 249.9,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [],
+  "regionData": {
+    "East of England": {
+      "pallets": 50,
+      "cons": 24,
+      "lates": 0
+    },
+    "East Midlands": {
+      "pallets": 36,
+      "cons": 21,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 21,
+      "cons": 17,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 37,
+      "cons": 24,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 26,
+      "cons": 23,
+      "lates": 0
+    },
+    "Other": {
+      "pallets": 19,
+      "cons": 6,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 21,
+      "cons": 14,
+      "lates": 0
+    },
+    "North West": {
+      "pallets": 38,
+      "cons": 23,
+      "lates": 0
+    },
+    "South East": {
+      "pallets": 16,
+      "cons": 12,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 17,
+      "cons": 12,
+      "lates": 0
+    },
+    "Northern Ireland": {
+      "pallets": 5,
+      "cons": 4,
+      "lates": 0
+    },
+    "North East": {
+      "pallets": 16,
+      "cons": 6,
+      "lates": 0
+    },
+    "Yorkshire": {
+      "pallets": 19,
+      "cons": 8,
+      "lates": 0
+    },
+    "Wales": {
+      "pallets": 7,
+      "cons": 2,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "BIDFOOD",
+      "city": "BIDFOOD",
+      "pc": "NG16 4HY",
+      "cons": 8,
+      "pallets": 23,
+      "revenue": 1107.15,
+      "lates": 0
+    },
+    {
+      "name": "HENRY COLBECK & CO",
+      "city": "HENRY COLBECK & CO",
+      "pc": "ML5 4EG",
+      "cons": 8,
+      "pallets": 10,
+      "revenue": 628.1999999999999,
+      "lates": 0
+    },
+    {
+      "name": "T.J.MORRIS LTD",
+      "city": "T.J.MORRIS LTD",
+      "pc": "WA5 1UY",
+      "cons": 7,
+      "pallets": 9,
+      "revenue": 595.0000000000001,
+      "lates": 0
+    },
+    {
+      "name": "T. QUALITY LIMITED",
+      "city": "T. QUALITY LIMITED",
+      "pc": "TN12 0QY",
+      "cons": 6,
+      "pallets": 6,
+      "revenue": 309.3,
+      "lates": 0
+    },
+    {
+      "name": "HOLDSWORTH FOODSERVICE",
+      "city": "HOLDSWORTH FOODSERVICE",
+      "pc": "S44 5NH",
+      "cons": 5,
+      "pallets": 7,
+      "revenue": 298.05,
+      "lates": 0
+    },
+    {
+      "name": "FRIARS PRIDE LTD",
+      "city": "FRIARS PRIDE LTD",
+      "pc": "BH15 3NT",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 229.8,
+      "lates": 0
+    },
+    {
+      "name": "Extra Cash and Carry",
+      "city": "Extra Cash and Carry",
+      "pc": "N17 0YD",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 258.55,
+      "lates": 0
+    },
+    {
+      "name": "Drivers Foods Leicester Ltd",
+      "city": "Drivers Foods Leicester Ltd",
+      "pc": "LE3 1UQ",
+      "cons": 4,
+      "pallets": 9,
+      "revenue": 42.95,
+      "lates": 0
+    },
+    {
+      "name": "FERRYSPEED LTD",
+      "city": "FERRYSPEED LTD",
+      "pc": "PO3 5JT",
+      "cons": 4,
+      "pallets": 5,
+      "revenue": 258.09999999999997,
+      "lates": 0
+    },
+    {
+      "name": "Pilgrim Foodservice",
+      "city": "Pilgrim Foodservice",
+      "pc": "PE21 7SJ",
+      "cons": 4,
+      "pallets": 13,
+      "revenue": 541.05,
+      "lates": 0
+    },
+    {
+      "name": "BRAKES/LINEAGE LOGISTICS",
+      "city": "BRAKES/LINEAGE LOGISTICS",
+      "pc": "NG22 8TX",
+      "cons": 3,
+      "pallets": 6,
+      "revenue": 131.9,
+      "lates": 0
+    },
+    {
+      "name": "HOLLEYS FINE FOODS",
+      "city": "HOLLEYS FINE FOODS",
+      "pc": "BS10 7SB",
+      "cons": 3,
+      "pallets": 4,
+      "revenue": 180.85,
+      "lates": 0
+    },
+    {
+      "name": "JMP FOODSERVICE",
+      "city": "JMP FOODSERVICE",
+      "pc": "LA10 5HQ",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 151.35000000000002,
+      "lates": 0
+    },
+    {
+      "name": "T.QUALITY LTD",
+      "city": "T.QUALITY LTD",
+      "pc": "PO16 8TT",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 166.85000000000002,
+      "lates": 0
+    },
+    {
+      "name": "R. D. Johns Foodservice",
+      "city": "R. D. Johns Foodservice",
+      "pc": "TQ12 3GP",
+      "cons": 3,
+      "pallets": 4,
+      "revenue": 250.05,
+      "lates": 0
+    },
+    {
+      "name": "BOOKER CASH & CARRY",
+      "city": "BOOKER CASH & CARRY",
+      "pc": "AL10 9TR",
+      "cons": 3,
+      "pallets": 12,
+      "revenue": 550.0999999999999,
+      "lates": 0
+    },
+    {
+      "name": "STRACHANS LTD",
+      "city": "STRACHANS LTD",
+      "pc": "AB42 1US",
+      "cons": 2,
+      "pallets": 3,
+      "revenue": 287.65,
+      "lates": 0
+    },
+    {
+      "name": "Holland Bazaar Croydon",
+      "city": "Holland Bazaar Croydon",
+      "pc": "CR0 4XH",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 108.3,
+      "lates": 0
+    },
+    {
+      "name": "T. QUALITY LTD",
+      "city": "T. QUALITY LTD",
+      "pc": "G52 4NZ",
+      "cons": 2,
+      "pallets": 3,
+      "revenue": 201.4,
+      "lates": 0
+    },
+    {
+      "name": "ANATOLIAN FOODS LTD",
+      "city": "ANATOLIAN FOODS LTD",
+      "pc": "E6 6LP",
+      "cons": 2,
+      "pallets": 4,
+      "revenue": 249.9,
+      "lates": 0
+    }
+  ]
+}
