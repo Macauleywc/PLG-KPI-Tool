@@ -1,6 +1,6 @@
 {
   "customer": "Greiner Bio One",
-  "lastUpdated": "2026-06-30T15:14:18.649Z",
+  "lastUpdated": "2026-07-17T09:28:02.288Z",
   "months": {
     "2026-02": {
       "cons": 301,
@@ -8,7 +8,7 @@
       "revenue": 26282.35,
       "lates": 5,
       "latePallets": 5,
-      "timeliness": 0.98829,
+      "timeliness": 0.9882903981264637,
       "avgRC": 87.32,
       "avgRP": 61.55,
       "avgPC": 1.42,
@@ -308,7 +308,7 @@
       "revenue": 31865.25,
       "lates": 6,
       "latePallets": 6,
-      "timeliness": 0.988189,
+      "timeliness": 0.9881889763779528,
       "avgRC": 96.85,
       "avgRP": 62.73,
       "avgPC": 1.54,
@@ -614,7 +614,7 @@
       "revenue": 24501.41,
       "lates": 4,
       "latePallets": 4,
-      "timeliness": 0.990025,
+      "timeliness": 0.9900249376558603,
       "avgRC": 92.11,
       "avgRP": 61.1,
       "avgPC": 1.51,
@@ -919,7 +919,7 @@
       "pallets": 391,
       "revenue": 25805.53,
       "lates": 10,
-      "latePallets": 10.0,
+      "latePallets": 10,
       "timeliness": 0.9744245524296675,
       "avgRC": 97.01,
       "avgRP": 66,
@@ -1225,7 +1225,7 @@
       "revenue": 27208.04,
       "lates": 8,
       "latePallets": 8,
-      "timeliness": 0.980149,
+      "timeliness": 0.9801488833746899,
       "avgRC": 110.15,
       "avgRP": 67.51,
       "avgPC": 1.63,
@@ -1524,9 +1524,513 @@
           "lates": 0
         }
       ]
+    },
+    "2026-06": {
+      "cons": 310,
+      "pallets": 459,
+      "revenue": 28105.45,
+      "lates": 11,
+      "latePallets": 13,
+      "timeliness": 0.971677559912854,
+      "avgRC": 90.66,
+      "avgRP": 61.23,
+      "avgPC": 1.48,
+      "palletSizes": {
+        "Half": 365,
+        "Quarter": 92,
+        "Full": 2
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 310,
+          "lates": 11
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 47,
+          "pallets": 69,
+          "revenue": 3613.6300000000006,
+          "lates": 1
+        },
+        "Yorkshire": {
+          "cons": 42,
+          "pallets": 60,
+          "revenue": 2848.78,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 53,
+          "pallets": 65,
+          "revenue": 4430.56,
+          "lates": 1
+        },
+        "Scotland": {
+          "cons": 18,
+          "pallets": 18,
+          "revenue": 1411.3200000000004,
+          "lates": 3
+        },
+        "North West": {
+          "cons": 29,
+          "pallets": 47,
+          "revenue": 2459.0100000000007,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 7,
+          "pallets": 20,
+          "revenue": 991.1799999999998,
+          "lates": 0
+        },
+        "London": {
+          "cons": 21,
+          "pallets": 27,
+          "revenue": 1956.4,
+          "lates": 4
+        },
+        "Wales": {
+          "cons": 12,
+          "pallets": 20,
+          "revenue": 1417.5500000000002,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 28,
+          "pallets": 32,
+          "revenue": 1817.1800000000003,
+          "lates": 1
+        },
+        "South West": {
+          "cons": 22,
+          "pallets": 57,
+          "revenue": 3895.59,
+          "lates": 0
+        },
+        "South": {
+          "cons": 27,
+          "pallets": 40,
+          "revenue": 2800.78,
+          "lates": 1
+        },
+        "Other": {
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 408.77,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 54.7,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 53,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 71,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 67,
+          "lates": 1
+        },
+        "Thu": {
+          "cons": 61,
+          "lates": 6
+        },
+        "Fri": {
+          "cons": 58,
+          "lates": 3
+        }
+      },
+      "destData": [
+        {
+          "name": "ABBOTT (GLASGOW MSC)",
+          "city": "ABBOTT (GLASGOW MSC)",
+          "pc": "G68 0LL",
+          "cons": 9,
+          "pallets": 39,
+          "revenue": 2907.48,
+          "lates": 0
+        },
+        {
+          "name": "Leeds General Infirmary (2036644)",
+          "city": "Leeds General Infirmary (2036644)",
+          "pc": "LS9 7TU",
+          "cons": 8,
+          "pallets": 12,
+          "revenue": 637.6899999999999,
+          "lates": 0
+        },
+        {
+          "name": "LCL STORES (2037692)",
+          "city": "LCL STORES (2037692)",
+          "pc": "L8 4UG",
+          "cons": 7,
+          "pallets": 13,
+          "revenue": 701.34,
+          "lates": 0
+        },
+        {
+          "name": "ROYAL SUSSEX C. HOSPITAL (2020345)",
+          "city": "ROYAL SUSSEX C. HOSPITAL (2020345)",
+          "pc": "BN2 5BE",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 500.11,
+          "lates": 0
+        },
+        {
+          "name": "THE MAIDSTONE HOSPITAL",
+          "city": "THE MAIDSTONE HOSPITAL",
+          "pc": "ME16 9QQ",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 380.34000000000003,
+          "lates": 0
+        },
+        {
+          "name": "SCIENTIFIC LABORATORY SUPPLIES LTD (2039907)",
+          "city": "SCIENTIFIC LABORATORY SUPPLIES LTD (2039907)",
+          "pc": "NG11 2AF",
+          "cons": 6,
+          "pallets": 8,
+          "revenue": 426.91999999999996,
+          "lates": 0
+        },
+        {
+          "name": "FISHER SCIENTIFIC UK",
+          "city": "FISHER SCIENTIFIC UK",
+          "pc": "LE11 5TR",
+          "cons": 6,
+          "pallets": 10,
+          "revenue": 520.71,
+          "lates": 1
+        },
+        {
+          "name": "SHERRINGTON BUILDING - STORES",
+          "city": "SHERRINGTON BUILDING - STORES",
+          "pc": "L69 3GE",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 264.7,
+          "lates": 0
+        },
+        {
+          "name": "NHS BLOOD AND TRANSPLANT (1008047)",
+          "city": "NHS BLOOD AND TRANSPLANT (1008047)",
+          "pc": "WA3 6PL",
+          "cons": 5,
+          "pallets": 10,
+          "revenue": 518.37,
+          "lates": 0
+        },
+        {
+          "name": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
+          "city": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
+          "pc": "DD1 5EH",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 462.04999999999995,
+          "lates": 1
+        },
+        {
+          "name": "SYGNATURE DISCOVERY",
+          "city": "SYGNATURE DISCOVERY",
+          "pc": "NG1 1GR",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 266.52000000000004,
+          "lates": 0
+        },
+        {
+          "name": "METLAB SUPPLIES LIMITED",
+          "city": "METLAB SUPPLIES LIMITED",
+          "pc": "CH5 2QP",
+          "cons": 5,
+          "pallets": 12,
+          "revenue": 593.9999999999999,
+          "lates": 0
+        },
+        {
+          "name": "UNIVERSITY OF CAMBRIDGE",
+          "city": "UNIVERSITY OF CAMBRIDGE",
+          "pc": "CB2 0AW",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 282.54,
+          "lates": 1
+        },
+        {
+          "name": "PATHOLOGY STORES STEPPING HILL (2026190)",
+          "city": "PATHOLOGY STORES STEPPING HILL (2026190)",
+          "pc": "SK2 7JE",
+          "cons": 4,
+          "pallets": 8,
+          "revenue": 427.62,
+          "lates": 0
+        },
+        {
+          "name": "RECEIPT & DISTRIBUTION CENTRE (2024609)",
+          "city": "RECEIPT & DISTRIBUTION CENTRE (2024609)",
+          "pc": "SY3 8XQ",
+          "cons": 4,
+          "pallets": 7,
+          "revenue": 541.75,
+          "lates": 0
+        },
+        {
+          "name": "Bentley Bridge Distribution Centre (2034136)",
+          "city": "Bentley Bridge Distribution Centre (2034136)",
+          "pc": "WV11 3DR",
+          "cons": 4,
+          "pallets": 15,
+          "revenue": 737.66,
+          "lates": 0
+        },
+        {
+          "name": "DELIVERY POINT B (2034301)",
+          "city": "DELIVERY POINT B (2034301)",
+          "pc": "NG7 2RD",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 209.20999999999998,
+          "lates": 0
+        },
+        {
+          "name": "FRIMLEY PARK HOSPITAL (2038673)",
+          "city": "FRIMLEY PARK HOSPITAL (2038673)",
+          "pc": "GU16 7UJ",
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 349.52,
+          "lates": 0
+        },
+        {
+          "name": "DIANA",
+          "city": "DIANA",
+          "pc": "DN33 2BA",
+          "cons": 4,
+          "pallets": 6,
+          "revenue": 325.71,
+          "lates": 0
+        },
+        {
+          "name": "University of Oxford(1006647)",
+          "city": "University of Oxford(1006647)",
+          "pc": "OX3 7BN",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 173.93,
+          "lates": 0
+        }
+      ]
     }
   },
   "lateRows": [
+    {
+      "id": "7310609632",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "UNIVERSITY OF EDINBURGH (1041327)",
+      "city": "UNIVERSITY OF EDINBURGH (1041327)",
+      "pc": "EH16 4UU",
+      "window": "",
+      "commitDate": "18/06/26",
+      "arrDate": "19/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310608927",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "KCL - Craniofacial Regenerative Bio (2038148)",
+      "city": "KCL - Craniofacial Regenerative Bio (2038148)",
+      "pc": "SE1 9RT",
+      "window": "",
+      "commitDate": "12/06/26",
+      "arrDate": "15/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310610324",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "FISHER SCIENTIFIC UK",
+      "city": "FISHER SCIENTIFIC UK",
+      "pc": "LE11 5TR",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310608878",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "UNIVERSITY OF CAMBRIDGE",
+      "city": "UNIVERSITY OF CAMBRIDGE",
+      "pc": "CB2 0AW",
+      "window": "",
+      "commitDate": "11/06/26",
+      "arrDate": "12/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310607675",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
+      "city": "UNIVERSITY OF DUNDEE SCHOOL OF (1008363)",
+      "pc": "DD1 5EH",
+      "window": "",
+      "commitDate": "02/06/26",
+      "arrDate": "03/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310608249",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "Easter Bush campus Stores University of Edinburgh(2009951)",
+      "city": "Easter Bush campus Stores University of Edinburgh(2009951)",
+      "pc": "EH25 9RG",
+      "window": "",
+      "commitDate": "05/06/26",
+      "arrDate": "08/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310609564",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "GSG - SYNNOVIS SERVICES",
+      "city": "GSG - SYNNOVIS SERVICES",
+      "pc": "SE15 6NF",
+      "window": "",
+      "commitDate": "18/06/26",
+      "arrDate": "19/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310610558",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "BHS FWB STORES (2010132)",
+      "city": "BHS FWB STORES (2010132)",
+      "pc": "SE1 9NH",
+      "window": "",
+      "commitDate": "26/06/26",
+      "arrDate": "29/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310609552",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "KRZYSTOFBFALKOWSKI",
+      "city": "KRZYSTOFBFALKOWSKI",
+      "pc": "SE5 9NU",
+      "window": "",
+      "commitDate": "18/06/26",
+      "arrDate": "19/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310610917",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "PRINCESS ROYAL HOSPITAL (1009083)",
+      "city": "PRINCESS ROYAL HOSPITAL (1009083)",
+      "pc": "RH16 4EX",
+      "window": "",
+      "commitDate": "01/07/26",
+      "arrDate": "02/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "7310608854",
+      "acct": "GREINER",
+      "month": "Jun-26",
+      "dest": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
+      "city": "MEDWAY HOSPITAL - PATHOLOGY (1039590)",
+      "pc": "ME7 5NY",
+      "window": "",
+      "commitDate": "11/06/26",
+      "arrDate": "12/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
     {
       "id": "7310596780",
       "acct": "GREINER",
