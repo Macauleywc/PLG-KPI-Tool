@@ -1,14 +1,14 @@
 {
   "customer": "Drivers Pickles",
-  "lastUpdated": "2026-07-17T09:51:25.168Z",
+  "lastUpdated": "2026-07-17T09:54:15.971Z",
   "months": {
     "2026-06": {
       "cons": 196,
       "pallets": 328,
       "revenue": 15969.75,
-      "lates": 53,
-      "latePallets": 92,
-      "timeliness": 0.7195121951219512,
+      "lates": 1,
+      "latePallets": 3,
+      "timeliness": 0.9908536585365854,
       "avgRC": 81.48,
       "avgRP": 48.69,
       "avgPC": 1.67,
@@ -20,7 +20,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 195,
-          "lates": 53
+          "lates": 1
         },
         "Economy Booked": {
           "cons": 1,
@@ -32,61 +32,61 @@
           "cons": 24,
           "pallets": 50,
           "revenue": 2179.7000000000007,
-          "lates": 6
+          "lates": 0
         },
         "East Midlands": {
           "cons": 21,
           "pallets": 36,
           "revenue": 1134.3000000000002,
-          "lates": 3
+          "lates": 0
         },
         "Scotland": {
           "cons": 17,
           "pallets": 21,
           "revenue": 1590.3,
-          "lates": 10
+          "lates": 0
         },
         "South": {
           "cons": 24,
           "pallets": 37,
           "revenue": 1772.5500000000002,
-          "lates": 6
+          "lates": 0
         },
         "South West": {
           "cons": 23,
           "pallets": 26,
           "revenue": 1366.5000000000007,
-          "lates": 1
+          "lates": 0
         },
         "Other": {
           "cons": 6,
           "pallets": 19,
           "revenue": 950.55,
-          "lates": 2
+          "lates": 0
         },
         "London": {
           "cons": 14,
           "pallets": 21,
           "revenue": 1285.3,
-          "lates": 9
+          "lates": 0
         },
         "North West": {
           "cons": 23,
           "pallets": 38,
           "revenue": 1878.9,
-          "lates": 3
+          "lates": 1
         },
         "South East": {
           "cons": 12,
           "pallets": 16,
           "revenue": 855.9,
-          "lates": 3
+          "lates": 0
         },
         "West Midlands": {
           "cons": 12,
           "pallets": 17,
           "revenue": 786.85,
-          "lates": 1
+          "lates": 0
         },
         "Northern Ireland": {
           "cons": 4,
@@ -98,41 +98,41 @@
           "cons": 6,
           "pallets": 16,
           "revenue": 679.25,
-          "lates": 4
+          "lates": 0
         },
         "Yorkshire": {
           "cons": 8,
           "pallets": 19,
           "revenue": 868.8499999999999,
-          "lates": 3
+          "lates": 0
         },
         "Wales": {
           "cons": 2,
           "pallets": 7,
           "revenue": 294.05,
-          "lates": 2
+          "lates": 0
         }
       },
       "dowBreakdown": {
         "Mon": {
           "cons": 50,
-          "lates": 16
+          "lates": 0
         },
         "Tue": {
           "cons": 6,
-          "lates": 1
+          "lates": 0
         },
         "Wed": {
           "cons": 62,
-          "lates": 18
+          "lates": 0
         },
         "Thu": {
           "cons": 44,
-          "lates": 9
+          "lates": 0
         },
         "Fri": {
           "cons": 34,
-          "lates": 9
+          "lates": 1
         }
       },
       "destData": [
@@ -143,7 +143,7 @@
           "cons": 8,
           "pallets": 23,
           "revenue": 1107.15,
-          "lates": 2
+          "lates": 1
         },
         {
           "name": "HENRY COLBECK & CO",
@@ -152,7 +152,7 @@
           "cons": 8,
           "pallets": 10,
           "revenue": 628.1999999999999,
-          "lates": 5
+          "lates": 0
         },
         {
           "name": "T.J.MORRIS LTD",
@@ -170,7 +170,7 @@
           "cons": 6,
           "pallets": 6,
           "revenue": 309.3,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "HOLDSWORTH FOODSERVICE",
@@ -197,7 +197,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 258.55,
-          "lates": 3
+          "lates": 0
         },
         {
           "name": "Drivers Foods Leicester Ltd",
@@ -224,7 +224,7 @@
           "cons": 4,
           "pallets": 13,
           "revenue": 541.05,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "BRAKES/LINEAGE LOGISTICS",
@@ -233,7 +233,7 @@
           "cons": 3,
           "pallets": 6,
           "revenue": 131.9,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "HOLLEYS FINE FOODS",
@@ -260,7 +260,7 @@
           "cons": 3,
           "pallets": 3,
           "revenue": 166.85000000000002,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "R. D. Johns Foodservice",
@@ -287,7 +287,7 @@
           "cons": 2,
           "pallets": 3,
           "revenue": 287.65,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "Holland Bazaar Croydon",
@@ -305,7 +305,7 @@
           "cons": 2,
           "pallets": 3,
           "revenue": 201.4,
-          "lates": 2
+          "lates": 0
         },
         {
           "name": "ANATOLIAN FOODS LTD",
@@ -314,948 +314,12 @@
           "cons": 2,
           "pallets": 4,
           "revenue": 249.9,
-          "lates": 2
+          "lates": 0
         }
       ]
     }
   },
   "lateRows": [
-    {
-      "id": "33118",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "BRAKES/LINEAGE LOGISTICS",
-      "city": "BRAKES/LINEAGE LOGISTICS",
-      "pc": "NG22 8TX",
-      "window": "",
-      "commitDate": "24/06/26",
-      "arrDate": "14/07/26",
-      "arrival": "01:00",
-      "mins": 28800,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32960",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "STRACHANS LTD",
-      "city": "STRACHANS LTD",
-      "pc": "AB42 1US",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32973",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "The Flava People",
-      "city": "The Flava People",
-      "pc": "M22 4XR",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33017",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T. QUALITY LTD",
-      "city": "T. QUALITY LTD",
-      "pc": "G52 4NZ",
-      "window": "",
-      "commitDate": "10/06/26",
-      "arrDate": "12/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33083",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "ANATOLIAN FOODS LTD",
-      "city": "ANATOLIAN FOODS LTD",
-      "pc": "E6 6LP",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33141",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "ROYS (WROXHAM) LTD",
-      "city": "ROYS (WROXHAM) LTD",
-      "pc": "NR7 9BB",
-      "window": "",
-      "commitDate": "26/06/26",
-      "arrDate": "10/07/26",
-      "arrival": "01:00",
-      "mins": 20160,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33003",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "HENRY COLBECK & CO",
-      "city": "HENRY COLBECK & CO",
-      "pc": "ML5 4EG",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "09/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32982",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "ROYS (WROXHAM) LTD",
-      "city": "ROYS (WROXHAM) LTD",
-      "pc": "NR7 9BB",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33166",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "AMATO PRODUCTS",
-      "city": "AMATO PRODUCTS",
-      "pc": "M1 2NS",
-      "window": "",
-      "commitDate": "01/07/26",
-      "arrDate": "02/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32997",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Cotswold Gold",
-      "city": "Cotswold Gold",
-      "pc": "WR12 7NH",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "10/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33094",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "THE CHILTERN BREWERY",
-      "city": "THE CHILTERN BREWERY",
-      "pc": "HP17 0TQ",
-      "window": "",
-      "commitDate": "19/06/26",
-      "arrDate": "22/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33123",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T.QUALITY LTD",
-      "city": "T.QUALITY LTD",
-      "pc": "PO16 8TT",
-      "window": "",
-      "commitDate": "24/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33076-r47-1",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Medina Foodservice",
-      "city": "Medina Foodservice",
-      "pc": "SO15 0LF",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33076-r47-2",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "a Sysco Company",
-      "city": "a Sysco Company",
-      "pc": "SO15 0LF",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32992",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Vanguard Dowson Ltd",
-      "city": "Vanguard Dowson Ltd",
-      "pc": "NE8 1QD",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33032",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "TYNESIDE FOODSERVICE LTD",
-      "city": "TYNESIDE FOODSERVICE LTD",
-      "pc": "NE21 5SN",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33109",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Extra Cash and Carry",
-      "city": "Extra Cash and Carry",
-      "pc": "N17 0YD",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "25/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "4961",
-      "acct": "DRIVERS2",
-      "month": "Jun-26",
-      "dest": "THE CAMBRIDGE FOOD CO/ CHEESE PLUS",
-      "city": "THE CAMBRIDGE FOOD CO/ CHEESE PLUS",
-      "pc": "CB23 3GY",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "02/07/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33170",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "STRACHANS LTD",
-      "city": "STRACHANS LTD",
-      "pc": "AB42 1US",
-      "window": "",
-      "commitDate": "02/07/26",
-      "arrDate": "06/07/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32975",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Q Catering",
-      "city": "Q Catering",
-      "pc": "ME10 3BF",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32978",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "ANATOLIAN FOODS LTD",
-      "city": "ANATOLIAN FOODS LTD",
-      "pc": "E6 6LP",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32998",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Pilgrim Foodservice",
-      "city": "Pilgrim Foodservice",
-      "pc": "PE21 7SJ",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "09/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32993",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "FRESH N FRUITY",
-      "city": "FRESH N FRUITY",
-      "pc": "CF47 8BW",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33028",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "S. WILLIAMS (WILLY)",
-      "city": "S. WILLIAMS (WILLY)",
-      "pc": "CF48 1RD",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 6,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32990",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T. QUALITY LIMITED",
-      "city": "T. QUALITY LIMITED",
-      "pc": "SN5 7YY",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33102",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T.QUALITY LIMITED",
-      "city": "T.QUALITY LIMITED",
-      "pc": "LS11 8AU",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "24/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32966",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "HENRY COLBECK & CO",
-      "city": "HENRY COLBECK & CO",
-      "pc": "ML5 4EG",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33071",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "HENRY COLBECK & CO",
-      "city": "HENRY COLBECK & CO",
-      "pc": "NE11 0HG",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "22/06/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "DF-7947",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "PE KING",
-      "city": "PE KING",
-      "pc": "BS37 9XD",
-      "window": "",
-      "commitDate": "10/06/26",
-      "arrDate": "11/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33068",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T. QUALITY LTD",
-      "city": "T. QUALITY LTD",
-      "pc": "G52 4NZ",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "19/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32996",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T.QUALITY LIMITED",
-      "city": "T.QUALITY LIMITED",
-      "pc": "LS11 8AU",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "10/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33137",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "HENRY COLBECK & CO",
-      "city": "HENRY COLBECK & CO",
-      "pc": "ML5 4EG",
-      "window": "",
-      "commitDate": "26/06/26",
-      "arrDate": "29/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "4950",
-      "acct": "DRIVERS2",
-      "month": "Jun-26",
-      "dest": "BEDFORD CHEESE COMPANY",
-      "city": "BEDFORD CHEESE COMPANY",
-      "pc": "MK44 3SH",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33104",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "KEEJAYS LTD",
-      "city": "KEEJAYS LTD",
-      "pc": "IP7 6RD",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "4962",
-      "acct": "DRIVERS2",
-      "month": "Jun-26",
-      "dest": "SHIRE FOODS EAST ANGLIA LTD",
-      "city": "SHIRE FOODS EAST ANGLIA LTD",
-      "pc": "PE38 9SW",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "30/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33006",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Food Options UK Ltd",
-      "city": "Food Options UK Ltd",
-      "pc": "EH53 0TN",
-      "window": "",
-      "commitDate": "08/06/26",
-      "arrDate": "09/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32988",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "SEPCO INTERNATIONAL LTD",
-      "city": "SEPCO INTERNATIONAL LTD",
-      "pc": "NE35 9LZ",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 6,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33013",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Holdsworth",
-      "city": "Holdsworth",
-      "pc": "WR11 2QL",
-      "window": "",
-      "commitDate": "10/06/26",
-      "arrDate": "11/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33105",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "BIDFOOD",
-      "city": "BIDFOOD",
-      "pc": "NG16 4HY",
-      "window": "",
-      "commitDate": "23/06/26",
-      "arrDate": "08/07/26",
-      "arrival": "01:00",
-      "mins": 21600,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33158",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Extra Cash and Carry",
-      "city": "Extra Cash and Carry",
-      "pc": "N17 0YD",
-      "window": "",
-      "commitDate": "01/07/26",
-      "arrDate": "06/07/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33121",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Wing Yip Superstore Croydon",
-      "city": "Wing Yip Superstore Croydon",
-      "pc": "CR0 4NZ",
-      "window": "",
-      "commitDate": "24/06/26",
-      "arrDate": "26/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 3,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32963",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "THE FUNKY VILLAGE STORE LTD",
-      "city": "THE FUNKY VILLAGE STORE LTD",
-      "pc": "WS12 1UF",
-      "window": "",
-      "commitDate": "03/06/26",
-      "arrDate": "04/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33103",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "HENRY COLBECK & CO",
-      "city": "HENRY COLBECK & CO",
-      "pc": "ML5 4EG",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "23/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32980",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T QUALITY LTD",
-      "city": "T QUALITY LTD",
-      "pc": "PO16 8TT",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33148",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "PK TRADING UK LTD",
-      "city": "PK TRADING UK LTD",
-      "pc": "TW15 1YQ",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "02/07/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33107",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "PK TRADING UK LTD",
-      "city": "PK TRADING UK LTD",
-      "pc": "TW15 1YQ",
-      "window": "",
-      "commitDate": "22/06/26",
-      "arrDate": "24/06/26",
-      "arrival": "01:00",
-      "mins": 2880,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33021",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "A To Z Catering Supplies",
-      "city": "A To Z Catering Supplies",
-      "pc": "N8 9DG",
-      "window": "",
-      "commitDate": "10/06/26",
-      "arrDate": "11/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33038",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "STREAMLINE SHIPPING",
-      "city": "STREAMLINE SHIPPING",
-      "pc": "AB11 5PU",
-      "window": "",
-      "commitDate": "11/06/26",
-      "arrDate": "12/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33050",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Wing Yip Superstore Cricklewood",
-      "city": "Wing Yip Superstore Cricklewood",
-      "pc": "NW2 7JN",
-      "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 4,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33046",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Extra Cash and Carry",
-      "city": "Extra Cash and Carry",
-      "pc": "N17 0YD",
-      "window": "",
-      "commitDate": "12/06/26",
-      "arrDate": "15/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "32974",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "Golden Union",
-      "city": "Golden Union",
-      "pc": "W1F 7LY",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "33072",
-      "acct": "DRIVERSP",
-      "month": "Jun-26",
-      "dest": "T. QUALITY LIMITED",
-      "city": "T. QUALITY LIMITED",
-      "pc": "SN5 7YY",
-      "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "33042",
       "acct": "DRIVERSP",
@@ -1279,52 +343,52 @@
     "East of England": {
       "pallets": 50,
       "cons": 24,
-      "lates": 6
+      "lates": 0
     },
     "East Midlands": {
       "pallets": 36,
       "cons": 21,
-      "lates": 3
+      "lates": 0
     },
     "Scotland": {
       "pallets": 21,
       "cons": 17,
-      "lates": 10
+      "lates": 0
     },
     "South": {
       "pallets": 37,
       "cons": 24,
-      "lates": 6
+      "lates": 0
     },
     "South West": {
       "pallets": 26,
       "cons": 23,
-      "lates": 1
+      "lates": 0
     },
     "Other": {
       "pallets": 19,
       "cons": 6,
-      "lates": 2
+      "lates": 0
     },
     "London": {
       "pallets": 21,
       "cons": 14,
-      "lates": 9
+      "lates": 0
     },
     "North West": {
       "pallets": 38,
       "cons": 23,
-      "lates": 3
+      "lates": 1
     },
     "South East": {
       "pallets": 16,
       "cons": 12,
-      "lates": 3
+      "lates": 0
     },
     "West Midlands": {
       "pallets": 17,
       "cons": 12,
-      "lates": 1
+      "lates": 0
     },
     "Northern Ireland": {
       "pallets": 5,
@@ -1334,17 +398,17 @@
     "North East": {
       "pallets": 16,
       "cons": 6,
-      "lates": 4
+      "lates": 0
     },
     "Yorkshire": {
       "pallets": 19,
       "cons": 8,
-      "lates": 3
+      "lates": 0
     },
     "Wales": {
       "pallets": 7,
       "cons": 2,
-      "lates": 2
+      "lates": 0
     }
   },
   "destData": [
@@ -1355,7 +419,7 @@
       "cons": 8,
       "pallets": 23,
       "revenue": 1107.15,
-      "lates": 2
+      "lates": 1
     },
     {
       "name": "HENRY COLBECK & CO",
@@ -1364,7 +428,7 @@
       "cons": 8,
       "pallets": 10,
       "revenue": 628.1999999999999,
-      "lates": 5
+      "lates": 0
     },
     {
       "name": "T.J.MORRIS LTD",
@@ -1382,7 +446,7 @@
       "cons": 6,
       "pallets": 6,
       "revenue": 309.3,
-      "lates": 2
+      "lates": 0
     },
     {
       "name": "HOLDSWORTH FOODSERVICE",
@@ -1409,7 +473,7 @@
       "cons": 4,
       "pallets": 4,
       "revenue": 258.55,
-      "lates": 3
+      "lates": 0
     },
     {
       "name": "Drivers Foods Leicester Ltd",
@@ -1436,7 +500,7 @@
       "cons": 4,
       "pallets": 13,
       "revenue": 541.05,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "BRAKES/LINEAGE LOGISTICS",
@@ -1445,7 +509,7 @@
       "cons": 3,
       "pallets": 6,
       "revenue": 131.9,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "HOLLEYS FINE FOODS",
@@ -1472,7 +536,7 @@
       "cons": 3,
       "pallets": 3,
       "revenue": 166.85000000000002,
-      "lates": 1
+      "lates": 0
     },
     {
       "name": "R. D. Johns Foodservice",
@@ -1499,7 +563,7 @@
       "cons": 2,
       "pallets": 3,
       "revenue": 287.65,
-      "lates": 2
+      "lates": 0
     },
     {
       "name": "Holland Bazaar Croydon",
@@ -1517,7 +581,7 @@
       "cons": 2,
       "pallets": 3,
       "revenue": 201.4,
-      "lates": 2
+      "lates": 0
     },
     {
       "name": "ANATOLIAN FOODS LTD",
@@ -1526,7 +590,7 @@
       "cons": 2,
       "pallets": 4,
       "revenue": 249.9,
-      "lates": 2
+      "lates": 0
     }
   ]
 }
