@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-07-17T09:34:27.560Z",
+  "lastUpdated": "2026-07-17T09:34:35.383Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -903,9 +903,9 @@
       "cons": 94,
       "pallets": 562,
       "revenue": 21546.36,
-      "lates": 3,
-      "latePallets": 12,
-      "timeliness": 0.9786476868327402,
+      "lates": 2,
+      "latePallets": 4,
+      "timeliness": 0.9928825622775801,
       "avgRC": 229.22,
       "avgRP": 38.34,
       "avgPC": 5.98,
@@ -917,7 +917,7 @@
       "typeBreakdown": {
         "Economy Booked": {
           "cons": 50,
-          "lates": 3
+          "lates": 2
         },
         "Next Day": {
           "cons": 44,
@@ -947,7 +947,7 @@
           "cons": 7,
           "pallets": 86,
           "revenue": 3064.54,
-          "lates": 1
+          "lates": 0
         },
         "Yorkshire": {
           "cons": 6,
@@ -1011,7 +1011,7 @@
         },
         "Fri": {
           "cons": 36,
-          "lates": 2
+          "lates": 1
         }
       },
       "destData": [
@@ -1212,24 +1212,6 @@
       "arrival": "01:00",
       "mins": 5760,
       "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92032",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "TG JONES HIGH STREET LIMITED",
-      "city": "TG JONES HIGH STREET LIMITED",
-      "pc": "SN3 3RX",
-      "window": "",
-      "commitDate": "10/07/26",
-      "arrDate": "14/07/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 8,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
