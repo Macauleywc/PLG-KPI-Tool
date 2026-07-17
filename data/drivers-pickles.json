@@ -1,14 +1,14 @@
 {
   "customer": "Drivers Pickles",
-  "lastUpdated": "2026-07-17T09:46:41.330Z",
+  "lastUpdated": "2026-07-17T09:49:37.625Z",
   "months": {
     "2026-06": {
       "cons": 196,
       "pallets": 328,
       "revenue": 15969.75,
-      "lates": 1,
-      "latePallets": 4,
-      "timeliness": 0.9878048780487805,
+      "lates": 2,
+      "latePallets": 7,
+      "timeliness": 0.9786585365853658,
       "avgRC": 81.48,
       "avgRP": 48.69,
       "avgPC": 1.67,
@@ -337,6 +337,25 @@
       "note": "",
       "reason": "Other",
       "failed": true
+    },
+    {
+      "id": "33042",
+      "custref": "",
+      "acct": "",
+      "month": "Jun-26",
+      "dest": "M6 6TZ Salford",
+      "city": "M6 6TZ Salford",
+      "pc": "M6 6TZ",
+      "window": "",
+      "commitDate": "12/06/26",
+      "arrDate": "",
+      "arrival": "",
+      "mins": 0,
+      "pallets": 3,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": true
     }
   ],
   "regionData": {
@@ -378,7 +397,7 @@
     "North West": {
       "pallets": 38,
       "cons": 23,
-      "lates": 0
+      "lates": 1
     },
     "South East": {
       "pallets": 16,
