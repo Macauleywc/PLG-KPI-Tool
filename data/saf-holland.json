@@ -1,0 +1,813 @@
+{
+  "customer": "SAF Holland",
+  "lastUpdated": "2026-07-22T06:51:44.334Z",
+  "months": {
+    "2026-05": {
+      "cons": 291,
+      "pallets": 655,
+      "revenue": 35850.51,
+      "lates": 13,
+      "latePallets": 15,
+      "timeliness": 0.9770992366412213,
+      "avgRC": 123.2,
+      "avgRP": 54.73,
+      "avgPC": 2.25,
+      "palletSizes": {
+        "Full": 181,
+        "Half": 204.35,
+        "Full Oversize": 146.65,
+        "Quarter": 83
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 285,
+          "lates": 13
+        },
+        "Economy Booked": {
+          "cons": 6,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "North West": {
+          "cons": 40,
+          "pallets": 93,
+          "revenue": 4438.179999999999,
+          "lates": 1
+        },
+        "East Midlands": {
+          "cons": 44,
+          "pallets": 103,
+          "revenue": 4568.669999999998,
+          "lates": 1
+        },
+        "Northern Ireland": {
+          "cons": 25,
+          "pallets": 95,
+          "revenue": 8408.529999999999,
+          "lates": 4
+        },
+        "North East": {
+          "cons": 18,
+          "pallets": 27,
+          "revenue": 1346.28,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 22,
+          "pallets": 33,
+          "revenue": 1504.0300000000002,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 39,
+          "pallets": 50,
+          "revenue": 3984.1899999999987,
+          "lates": 6
+        },
+        "South West": {
+          "cons": 17,
+          "pallets": 27,
+          "revenue": 1324.11,
+          "lates": 1
+        },
+        "Other": {
+          "cons": 15,
+          "pallets": 15,
+          "revenue": 841.4100000000002,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 9,
+          "pallets": 13,
+          "revenue": 712.3599999999999,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 28,
+          "pallets": 50,
+          "revenue": 2190.01,
+          "lates": 0
+        },
+        "London": {
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 278.61,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 425.01,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 318.02,
+          "lates": 0
+        },
+        "South": {
+          "cons": 16,
+          "pallets": 128,
+          "revenue": 5414.98,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 54,
+          "lates": 1
+        },
+        "Tue": {
+          "cons": 54,
+          "lates": 3
+        },
+        "Wed": {
+          "cons": 71,
+          "lates": 6
+        },
+        "Thu": {
+          "cons": 62,
+          "lates": 3
+        },
+        "Fri": {
+          "cons": 50,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "H G V Direct",
+          "city": "H G V Direct",
+          "pc": "DE6 1HD",
+          "cons": 11,
+          "pallets": 14,
+          "revenue": 628.9,
+          "lates": 0
+        },
+        {
+          "name": "Dingbro Ltd",
+          "city": "Dingbro Ltd",
+          "pc": "DG1 1NF",
+          "cons": 11,
+          "pallets": 13,
+          "revenue": 1163.01,
+          "lates": 2
+        },
+        {
+          "name": "S D C Trailers Ltd",
+          "city": "S D C Trailers Ltd",
+          "pc": "BT41 3SS",
+          "cons": 10,
+          "pallets": 35,
+          "revenue": 2943.31,
+          "lates": 2
+        },
+        {
+          "name": "Maxi Haulage Ltd",
+          "city": "Maxi Haulage Ltd",
+          "pc": "WA4 4TQ",
+          "cons": 7,
+          "pallets": 19,
+          "revenue": 785.02,
+          "lates": 0
+        },
+        {
+          "name": "Tiger Trailers",
+          "city": "Tiger Trailers",
+          "pc": "CW7 3RL",
+          "cons": 7,
+          "pallets": 14,
+          "revenue": 665.14,
+          "lates": 0
+        },
+        {
+          "name": "Partic Motor Spares Ltd",
+          "city": "Partic Motor Spares Ltd",
+          "pc": "NG24 2EG",
+          "cons": 6,
+          "pallets": 8,
+          "revenue": 372.54,
+          "lates": 0
+        },
+        {
+          "name": "E M S-F P & S Ltd",
+          "city": "E M S-F P & S Ltd",
+          "pc": "NN5 5BB",
+          "cons": 6,
+          "pallets": 29,
+          "revenue": 1232.34,
+          "lates": 0
+        },
+        {
+          "name": "Fleet Factors Ltd",
+          "city": "Fleet Factors Ltd",
+          "pc": "HU9 1NB",
+          "cons": 5,
+          "pallets": 6,
+          "revenue": 277.08,
+          "lates": 0
+        },
+        {
+          "name": "Artic Trailer Services (Falkirk) Ltd",
+          "city": "Artic Trailer Services (Falkirk) Ltd",
+          "pc": "FK2 7HP",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 330.82,
+          "lates": 2
+        },
+        {
+          "name": "Merlin Components Ltd",
+          "city": "Merlin Components Ltd",
+          "pc": "RM20 3BJ",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 305.78999999999996,
+          "lates": 0
+        },
+        {
+          "name": "Gray & Adams Ltd",
+          "city": "Gray & Adams Ltd",
+          "pc": "AB43 9HU",
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 487.64,
+          "lates": 1
+        },
+        {
+          "name": "Dingbro",
+          "city": "Dingbro",
+          "pc": "TD1 1PR",
+          "cons": 4,
+          "pallets": 6,
+          "revenue": 388.6,
+          "lates": 0
+        },
+        {
+          "name": "Greenhouse Commercials Ltd",
+          "city": "Greenhouse Commercials Ltd",
+          "pc": "SY1 3JE",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 185.33,
+          "lates": 0
+        },
+        {
+          "name": "HGV Direct Ltd",
+          "city": "HGV Direct Ltd",
+          "pc": "dn15 8qz",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 170.76999999999998,
+          "lates": 0
+        },
+        {
+          "name": "Neovia Logistics Services Ltd",
+          "city": "Neovia Logistics Services Ltd",
+          "pc": "LE10 3BQ",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 170.82999999999998,
+          "lates": 1
+        },
+        {
+          "name": "imperial engineering",
+          "city": "imperial engineering",
+          "pc": "CM20 2DP",
+          "cons": 4,
+          "pallets": 12,
+          "revenue": 532.14,
+          "lates": 0
+        },
+        {
+          "name": "Montracon Ltd",
+          "city": "Montracon Ltd",
+          "pc": "DN4 8DE",
+          "cons": 4,
+          "pallets": 6,
+          "revenue": 275.38,
+          "lates": 0
+        },
+        {
+          "name": "SDC PARTS CENTRAL WAREHOUSE",
+          "city": "SDC PARTS CENTRAL WAREHOUSE",
+          "pc": "BT41 3UF",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 497.12,
+          "lates": 1
+        },
+        {
+          "name": "Waveney Truck Parts Ltd",
+          "city": "Waveney Truck Parts Ltd",
+          "pc": "NR10 3JU",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 129.44,
+          "lates": 0
+        },
+        {
+          "name": "nets darlington",
+          "city": "nets darlington",
+          "pc": "dl5 6aa",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 187.46,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [
+    {
+      "id": "OE79940",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "S D C Trailers Ltd",
+      "city": "S D C Trailers Ltd",
+      "pc": "BT41 3SS",
+      "window": "",
+      "commitDate": "20/05/26",
+      "arrDate": "21/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "wm16302",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "Neovia Logistics Services Ltd",
+      "city": "Neovia Logistics Services Ltd",
+      "pc": "LE10 3BQ",
+      "window": "",
+      "commitDate": "13/05/26",
+      "arrDate": "14/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "WM16749",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "E X B UK Ltd",
+      "city": "E X B UK Ltd",
+      "pc": "BS5 9DF",
+      "window": "",
+      "commitDate": "27/05/26",
+      "arrDate": "28/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "WM16312",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "Dingbro Ltd",
+      "city": "Dingbro Ltd",
+      "pc": "AB16 6HQ",
+      "window": "",
+      "commitDate": "13/05/26",
+      "arrDate": "14/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "WM15985",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "Artic Trailer Services (Falkirk) Ltd",
+      "city": "Artic Trailer Services (Falkirk) Ltd",
+      "pc": "FK2 7HP",
+      "window": "",
+      "commitDate": "06/05/26",
+      "arrDate": "07/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "AM80779",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "SDC PARTS CENTRAL WAREHOUSE",
+      "city": "SDC PARTS CENTRAL WAREHOUSE",
+      "pc": "BT41 3UF",
+      "window": "",
+      "commitDate": "02/06/26",
+      "arrDate": "03/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "OE79982",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "S D C Trailers Ltd",
+      "city": "S D C Trailers Ltd",
+      "pc": "BT41 3SS",
+      "window": "",
+      "commitDate": "27/05/26",
+      "arrDate": "28/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "AM16038",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "Artic Trailer Services (Falkirk) Ltd",
+      "city": "Artic Trailer Services (Falkirk) Ltd",
+      "pc": "FK2 7HP",
+      "window": "",
+      "commitDate": "07/05/26",
+      "arrDate": "08/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "AM80156",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "J M Autoparts Ltd",
+      "city": "J M Autoparts Ltd",
+      "pc": "BT80 8DR",
+      "window": "",
+      "commitDate": "14/05/26",
+      "arrDate": "15/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "WM16869",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "Dingbro Ltd",
+      "city": "Dingbro Ltd",
+      "pc": "FK2 9EQ",
+      "window": "",
+      "commitDate": "01/06/26",
+      "arrDate": "02/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "WM15991",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "L T & T",
+      "city": "L T & T",
+      "pc": "WA1 4RZ",
+      "window": "",
+      "commitDate": "05/05/26",
+      "arrDate": "06/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "wm16227",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "Dingbro - Falkirk",
+      "city": "Dingbro - Falkirk",
+      "pc": "FK2 9EQ",
+      "window": "",
+      "commitDate": "12/05/26",
+      "arrDate": "13/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "OE16811",
+      "acct": "SAFHOL",
+      "month": "May-26",
+      "dest": "Gray & Adams Ltd",
+      "city": "Gray & Adams Ltd",
+      "pc": "AB43 9HU",
+      "window": "",
+      "commitDate": "28/05/26",
+      "arrDate": "29/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
+  "regionData": {
+    "North West": {
+      "pallets": 93,
+      "cons": 40,
+      "lates": 1
+    },
+    "East Midlands": {
+      "pallets": 103,
+      "cons": 44,
+      "lates": 1
+    },
+    "Northern Ireland": {
+      "pallets": 95,
+      "cons": 25,
+      "lates": 4
+    },
+    "North East": {
+      "pallets": 27,
+      "cons": 18,
+      "lates": 0
+    },
+    "East of England": {
+      "pallets": 33,
+      "cons": 22,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 50,
+      "cons": 39,
+      "lates": 6
+    },
+    "South West": {
+      "pallets": 27,
+      "cons": 17,
+      "lates": 1
+    },
+    "Other": {
+      "pallets": 15,
+      "cons": 15,
+      "lates": 0
+    },
+    "Wales": {
+      "pallets": 13,
+      "cons": 9,
+      "lates": 0
+    },
+    "Yorkshire": {
+      "pallets": 50,
+      "cons": 28,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 6,
+      "cons": 3,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 9,
+      "cons": 9,
+      "lates": 0
+    },
+    "South East": {
+      "pallets": 6,
+      "cons": 6,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 128,
+      "cons": 16,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "H G V Direct",
+      "city": "H G V Direct",
+      "pc": "DE6 1HD",
+      "cons": 11,
+      "pallets": 14,
+      "revenue": 628.9,
+      "lates": 0
+    },
+    {
+      "name": "Dingbro Ltd",
+      "city": "Dingbro Ltd",
+      "pc": "DG1 1NF",
+      "cons": 11,
+      "pallets": 13,
+      "revenue": 1163.01,
+      "lates": 2
+    },
+    {
+      "name": "S D C Trailers Ltd",
+      "city": "S D C Trailers Ltd",
+      "pc": "BT41 3SS",
+      "cons": 10,
+      "pallets": 35,
+      "revenue": 2943.31,
+      "lates": 2
+    },
+    {
+      "name": "Maxi Haulage Ltd",
+      "city": "Maxi Haulage Ltd",
+      "pc": "WA4 4TQ",
+      "cons": 7,
+      "pallets": 19,
+      "revenue": 785.02,
+      "lates": 0
+    },
+    {
+      "name": "Tiger Trailers",
+      "city": "Tiger Trailers",
+      "pc": "CW7 3RL",
+      "cons": 7,
+      "pallets": 14,
+      "revenue": 665.14,
+      "lates": 0
+    },
+    {
+      "name": "Partic Motor Spares Ltd",
+      "city": "Partic Motor Spares Ltd",
+      "pc": "NG24 2EG",
+      "cons": 6,
+      "pallets": 8,
+      "revenue": 372.54,
+      "lates": 0
+    },
+    {
+      "name": "E M S-F P & S Ltd",
+      "city": "E M S-F P & S Ltd",
+      "pc": "NN5 5BB",
+      "cons": 6,
+      "pallets": 29,
+      "revenue": 1232.34,
+      "lates": 0
+    },
+    {
+      "name": "Fleet Factors Ltd",
+      "city": "Fleet Factors Ltd",
+      "pc": "HU9 1NB",
+      "cons": 5,
+      "pallets": 6,
+      "revenue": 277.08,
+      "lates": 0
+    },
+    {
+      "name": "Artic Trailer Services (Falkirk) Ltd",
+      "city": "Artic Trailer Services (Falkirk) Ltd",
+      "pc": "FK2 7HP",
+      "cons": 5,
+      "pallets": 5,
+      "revenue": 330.82,
+      "lates": 2
+    },
+    {
+      "name": "Merlin Components Ltd",
+      "city": "Merlin Components Ltd",
+      "pc": "RM20 3BJ",
+      "cons": 5,
+      "pallets": 5,
+      "revenue": 305.78999999999996,
+      "lates": 0
+    },
+    {
+      "name": "Gray & Adams Ltd",
+      "city": "Gray & Adams Ltd",
+      "pc": "AB43 9HU",
+      "cons": 4,
+      "pallets": 5,
+      "revenue": 487.64,
+      "lates": 1
+    },
+    {
+      "name": "Dingbro",
+      "city": "Dingbro",
+      "pc": "TD1 1PR",
+      "cons": 4,
+      "pallets": 6,
+      "revenue": 388.6,
+      "lates": 0
+    },
+    {
+      "name": "Greenhouse Commercials Ltd",
+      "city": "Greenhouse Commercials Ltd",
+      "pc": "SY1 3JE",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 185.33,
+      "lates": 0
+    },
+    {
+      "name": "HGV Direct Ltd",
+      "city": "HGV Direct Ltd",
+      "pc": "dn15 8qz",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 170.76999999999998,
+      "lates": 0
+    },
+    {
+      "name": "Neovia Logistics Services Ltd",
+      "city": "Neovia Logistics Services Ltd",
+      "pc": "LE10 3BQ",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 170.82999999999998,
+      "lates": 1
+    },
+    {
+      "name": "imperial engineering",
+      "city": "imperial engineering",
+      "pc": "CM20 2DP",
+      "cons": 4,
+      "pallets": 12,
+      "revenue": 532.14,
+      "lates": 0
+    },
+    {
+      "name": "Montracon Ltd",
+      "city": "Montracon Ltd",
+      "pc": "DN4 8DE",
+      "cons": 4,
+      "pallets": 6,
+      "revenue": 275.38,
+      "lates": 0
+    },
+    {
+      "name": "SDC PARTS CENTRAL WAREHOUSE",
+      "city": "SDC PARTS CENTRAL WAREHOUSE",
+      "pc": "BT41 3UF",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 497.12,
+      "lates": 1
+    },
+    {
+      "name": "Waveney Truck Parts Ltd",
+      "city": "Waveney Truck Parts Ltd",
+      "pc": "NR10 3JU",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 129.44,
+      "lates": 0
+    },
+    {
+      "name": "nets darlington",
+      "city": "nets darlington",
+      "pc": "dl5 6aa",
+      "cons": 3,
+      "pallets": 4,
+      "revenue": 187.46,
+      "lates": 0
+    }
+  ]
+}
