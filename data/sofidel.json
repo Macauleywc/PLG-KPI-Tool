@@ -1,0 +1,473 @@
+{
+  "customer": "Sofidel",
+  "lastUpdated": "2026-07-23T13:42:31.215Z",
+  "months": {
+    "2026-06": {
+      "cons": 220,
+      "pallets": 8515,
+      "revenue": 84161.6,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 382.55,
+      "avgRP": 9.88,
+      "avgPC": 38.7,
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 220,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "South East": {
+          "cons": 73,
+          "pallets": 2428,
+          "revenue": 33216.96999999997,
+          "lates": 0
+        },
+        "South": {
+          "cons": 39,
+          "pallets": 1287,
+          "revenue": 22576.14999999999,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 22,
+          "pallets": 1089,
+          "revenue": 5452.080000000001,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 17,
+          "pallets": 599,
+          "revenue": 6772.330000000002,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 64,
+          "pallets": 2944,
+          "revenue": 14629.119999999997,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 4,
+          "pallets": 151,
+          "revenue": 1166.94,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 1,
+          "pallets": 17,
+          "revenue": 348.01,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 30,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 46,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 32,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 34,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 29,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Lidl UK - Belvedere DC",
+          "city": "Lidl UK - Belvedere DC",
+          "pc": "DA17 6BS",
+          "cons": 72,
+          "pallets": 2376,
+          "revenue": 32686.91999999997,
+          "lates": 0
+        },
+        {
+          "name": "Lidl UK - Southampton DC",
+          "city": "Lidl UK - Southampton DC",
+          "pc": "SO16 0AW",
+          "cons": 39,
+          "pallets": 1287,
+          "revenue": 22576.14999999999,
+          "lates": 0
+        },
+        {
+          "name": "Lidl UK - Luton DC",
+          "city": "Lidl UK - Luton DC",
+          "pc": "LU5 5AY",
+          "cons": 20,
+          "pallets": 660,
+          "revenue": 6063.910000000002,
+          "lates": 0
+        },
+        {
+          "name": "Lidl UK - Avonmouth DC",
+          "city": "Lidl UK - Avonmouth DC",
+          "pc": "BS35 4GH",
+          "cons": 15,
+          "pallets": 495,
+          "revenue": 5984.1500000000015,
+          "lates": 0
+        },
+        {
+          "name": "Aldi Stores Ltd (Sawley)",
+          "city": "Aldi Stores Ltd (Sawley)",
+          "pc": "DE72 2HP",
+          "cons": 14,
+          "pallets": 924,
+          "revenue": 4150.99,
+          "lates": 0
+        },
+        {
+          "name": "Amazon - Ellistown UXD2",
+          "city": "Amazon - Ellistown UXD2",
+          "pc": "LE67 1GQ",
+          "cons": 13,
+          "pallets": 676,
+          "revenue": 2965.1700000000005,
+          "lates": 0
+        },
+        {
+          "name": "Lidl UK - Wednesbury DC",
+          "city": "Lidl UK - Wednesbury DC",
+          "pc": "WS10 9QY",
+          "cons": 11,
+          "pallets": 363,
+          "revenue": 2767.3599999999997,
+          "lates": 0
+        },
+        {
+          "name": "Aldi Stores Ltd (Centurion120)",
+          "city": "Aldi Stores Ltd (Centurion120)",
+          "pc": "B77 5PW",
+          "cons": 6,
+          "pallets": 396,
+          "revenue": 1500.48,
+          "lates": 0
+        },
+        {
+          "name": "ALDI STORES LTD (Atherstone)",
+          "city": "ALDI STORES LTD (Atherstone)",
+          "pc": "CV9 2SQ",
+          "cons": 5,
+          "pallets": 330,
+          "revenue": 1184.24,
+          "lates": 0
+        },
+        {
+          "name": "SOFIDEL UK LTD at Rothley Lodge",
+          "city": "SOFIDEL UK LTD at Rothley Lodge",
+          "pc": "LE7 7NL",
+          "cons": 5,
+          "pallets": 97,
+          "revenue": 543,
+          "lates": 0
+        },
+        {
+          "name": "SOFIDEL UK LTD at Mountain Road",
+          "city": "SOFIDEL UK LTD at Mountain Road",
+          "pc": "LE5 1TZ",
+          "cons": 5,
+          "pallets": 260,
+          "revenue": 283.5,
+          "lates": 0
+        },
+        {
+          "name": "Lidl UK - Doncaster DC",
+          "city": "Lidl UK - Doncaster DC",
+          "pc": "DN11 0BF",
+          "cons": 3,
+          "pallets": 99,
+          "revenue": 877.94,
+          "lates": 0
+        },
+        {
+          "name": "Viking Office UK Ltd",
+          "city": "Viking Office UK Ltd",
+          "pc": "LE4 0NB",
+          "cons": 3,
+          "pallets": 87,
+          "revenue": 622.55,
+          "lates": 0
+        },
+        {
+          "name": "Amazon - Bristol BRS1",
+          "city": "Amazon - Bristol BRS1",
+          "pc": "BS35 4DJ",
+          "cons": 2,
+          "pallets": 104,
+          "revenue": 788.18,
+          "lates": 0
+        },
+        {
+          "name": "Sofidel UK",
+          "city": "Sofidel UK",
+          "pc": "LE7 7NL",
+          "cons": 2,
+          "pallets": 120,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "Rothley Lodge",
+          "city": "Rothley Lodge",
+          "pc": "LE7 7NL",
+          "cons": 2,
+          "pallets": 120,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "Amazon - LBA4 (IP9)",
+          "city": "Amazon - LBA4 (IP9)",
+          "pc": "DN11 0BF",
+          "cons": 1,
+          "pallets": 52,
+          "revenue": 289,
+          "lates": 0
+        },
+        {
+          "name": "Booker Retail Partners - Londis (666)",
+          "city": "Booker Retail Partners - Londis (666)",
+          "pc": "DA18 4AG",
+          "cons": 1,
+          "pallets": 52,
+          "revenue": 530.05,
+          "lates": 0
+        },
+        {
+          "name": "Ace Janitorial Supplies",
+          "city": "Ace Janitorial Supplies",
+          "pc": "S9 3RP",
+          "cons": 1,
+          "pallets": 17,
+          "revenue": 348.01,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [],
+  "regionData": {
+    "South East": {
+      "pallets": 2428,
+      "cons": 73,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 1287,
+      "cons": 39,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 1089,
+      "cons": 22,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 599,
+      "cons": 17,
+      "lates": 0
+    },
+    "East Midlands": {
+      "pallets": 2944,
+      "cons": 64,
+      "lates": 0
+    },
+    "Yorkshire": {
+      "pallets": 151,
+      "cons": 4,
+      "lates": 0
+    },
+    "North East": {
+      "pallets": 17,
+      "cons": 1,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "Lidl UK - Belvedere DC",
+      "city": "Lidl UK - Belvedere DC",
+      "pc": "DA17 6BS",
+      "cons": 72,
+      "pallets": 2376,
+      "revenue": 32686.91999999997,
+      "lates": 0
+    },
+    {
+      "name": "Lidl UK - Southampton DC",
+      "city": "Lidl UK - Southampton DC",
+      "pc": "SO16 0AW",
+      "cons": 39,
+      "pallets": 1287,
+      "revenue": 22576.14999999999,
+      "lates": 0
+    },
+    {
+      "name": "Lidl UK - Luton DC",
+      "city": "Lidl UK - Luton DC",
+      "pc": "LU5 5AY",
+      "cons": 20,
+      "pallets": 660,
+      "revenue": 6063.910000000002,
+      "lates": 0
+    },
+    {
+      "name": "Lidl UK - Avonmouth DC",
+      "city": "Lidl UK - Avonmouth DC",
+      "pc": "BS35 4GH",
+      "cons": 15,
+      "pallets": 495,
+      "revenue": 5984.1500000000015,
+      "lates": 0
+    },
+    {
+      "name": "Aldi Stores Ltd (Sawley)",
+      "city": "Aldi Stores Ltd (Sawley)",
+      "pc": "DE72 2HP",
+      "cons": 14,
+      "pallets": 924,
+      "revenue": 4150.99,
+      "lates": 0
+    },
+    {
+      "name": "Amazon - Ellistown UXD2",
+      "city": "Amazon - Ellistown UXD2",
+      "pc": "LE67 1GQ",
+      "cons": 13,
+      "pallets": 676,
+      "revenue": 2965.1700000000005,
+      "lates": 0
+    },
+    {
+      "name": "Lidl UK - Wednesbury DC",
+      "city": "Lidl UK - Wednesbury DC",
+      "pc": "WS10 9QY",
+      "cons": 11,
+      "pallets": 363,
+      "revenue": 2767.3599999999997,
+      "lates": 0
+    },
+    {
+      "name": "Aldi Stores Ltd (Centurion120)",
+      "city": "Aldi Stores Ltd (Centurion120)",
+      "pc": "B77 5PW",
+      "cons": 6,
+      "pallets": 396,
+      "revenue": 1500.48,
+      "lates": 0
+    },
+    {
+      "name": "ALDI STORES LTD (Atherstone)",
+      "city": "ALDI STORES LTD (Atherstone)",
+      "pc": "CV9 2SQ",
+      "cons": 5,
+      "pallets": 330,
+      "revenue": 1184.24,
+      "lates": 0
+    },
+    {
+      "name": "SOFIDEL UK LTD at Rothley Lodge",
+      "city": "SOFIDEL UK LTD at Rothley Lodge",
+      "pc": "LE7 7NL",
+      "cons": 5,
+      "pallets": 97,
+      "revenue": 543,
+      "lates": 0
+    },
+    {
+      "name": "SOFIDEL UK LTD at Mountain Road",
+      "city": "SOFIDEL UK LTD at Mountain Road",
+      "pc": "LE5 1TZ",
+      "cons": 5,
+      "pallets": 260,
+      "revenue": 283.5,
+      "lates": 0
+    },
+    {
+      "name": "Lidl UK - Doncaster DC",
+      "city": "Lidl UK - Doncaster DC",
+      "pc": "DN11 0BF",
+      "cons": 3,
+      "pallets": 99,
+      "revenue": 877.94,
+      "lates": 0
+    },
+    {
+      "name": "Viking Office UK Ltd",
+      "city": "Viking Office UK Ltd",
+      "pc": "LE4 0NB",
+      "cons": 3,
+      "pallets": 87,
+      "revenue": 622.55,
+      "lates": 0
+    },
+    {
+      "name": "Amazon - Bristol BRS1",
+      "city": "Amazon - Bristol BRS1",
+      "pc": "BS35 4DJ",
+      "cons": 2,
+      "pallets": 104,
+      "revenue": 788.18,
+      "lates": 0
+    },
+    {
+      "name": "Sofidel UK",
+      "city": "Sofidel UK",
+      "pc": "LE7 7NL",
+      "cons": 2,
+      "pallets": 120,
+      "revenue": 0,
+      "lates": 0
+    },
+    {
+      "name": "Rothley Lodge",
+      "city": "Rothley Lodge",
+      "pc": "LE7 7NL",
+      "cons": 2,
+      "pallets": 120,
+      "revenue": 0,
+      "lates": 0
+    },
+    {
+      "name": "Amazon - LBA4 (IP9)",
+      "city": "Amazon - LBA4 (IP9)",
+      "pc": "DN11 0BF",
+      "cons": 1,
+      "pallets": 52,
+      "revenue": 289,
+      "lates": 0
+    },
+    {
+      "name": "Booker Retail Partners - Londis (666)",
+      "city": "Booker Retail Partners - Londis (666)",
+      "pc": "DA18 4AG",
+      "cons": 1,
+      "pallets": 52,
+      "revenue": 530.05,
+      "lates": 0
+    },
+    {
+      "name": "Ace Janitorial Supplies",
+      "city": "Ace Janitorial Supplies",
+      "pc": "S9 3RP",
+      "cons": 1,
+      "pallets": 17,
+      "revenue": 348.01,
+      "lates": 0
+    }
+  ]
+}
