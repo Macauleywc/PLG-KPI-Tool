@@ -1,0 +1,826 @@
+{
+  "customer": "Mediq",
+  "lastUpdated": "2026-07-23T13:39:53.460Z",
+  "months": {
+    "2026-06": {
+      "cons": 495,
+      "pallets": 705,
+      "revenue": 45530.95,
+      "lates": 14,
+      "latePallets": 14,
+      "timeliness": 0.9801418439716312,
+      "avgRC": 91.98,
+      "avgRP": 64.58,
+      "avgPC": 1.42,
+      "palletSizes": {
+        "Full": 556,
+        "Half": 111,
+        "Quarter": 38
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 495,
+          "lates": 14
+        }
+      },
+      "regionData": {
+        "North East": {
+          "cons": 45,
+          "pallets": 75,
+          "revenue": 4338.350000000001,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 108,
+          "pallets": 159,
+          "revenue": 8736.65,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 17,
+          "pallets": 17,
+          "revenue": 1071.2500000000002,
+          "lates": 2
+        },
+        "East of England": {
+          "cons": 31,
+          "pallets": 36,
+          "revenue": 2059.2999999999997,
+          "lates": 1
+        },
+        "Other": {
+          "cons": 19,
+          "pallets": 25,
+          "revenue": 1900.7000000000003,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 56,
+          "pallets": 84,
+          "revenue": 7752.999999999998,
+          "lates": 3
+        },
+        "Northern Ireland": {
+          "cons": 8,
+          "pallets": 12,
+          "revenue": 607.6,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 28,
+          "pallets": 62,
+          "revenue": 4566.45,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 40,
+          "pallets": 58,
+          "revenue": 3615.899999999998,
+          "lates": 1
+        },
+        "Yorkshire": {
+          "cons": 59,
+          "pallets": 76,
+          "revenue": 4192.999999999999,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 19,
+          "pallets": 27,
+          "revenue": 1358.3,
+          "lates": 0
+        },
+        "South": {
+          "cons": 26,
+          "pallets": 28,
+          "revenue": 1665.55,
+          "lates": 2
+        },
+        "Wales": {
+          "cons": 18,
+          "pallets": 20,
+          "revenue": 1628.6000000000001,
+          "lates": 0
+        },
+        "London": {
+          "cons": 21,
+          "pallets": 26,
+          "revenue": 2036.3,
+          "lates": 4
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 82,
+          "lates": 5
+        },
+        "Tue": {
+          "cons": 112,
+          "lates": 2
+        },
+        "Wed": {
+          "cons": 95,
+          "lates": 2
+        },
+        "Thu": {
+          "cons": 118,
+          "lates": 4
+        },
+        "Fri": {
+          "cons": 88,
+          "lates": 1
+        }
+      },
+      "destData": [
+        {
+          "name": "SHD MEDICAL",
+          "city": "SHD MEDICAL",
+          "pc": "PL4 0ST",
+          "cons": 14,
+          "pallets": 18,
+          "revenue": 1383.7000000000005,
+          "lates": 0
+        },
+        {
+          "name": "Mediq - Castle Donnington",
+          "city": "Mediq - Castle Donnington",
+          "pc": "DE74 2HJ",
+          "cons": 12,
+          "pallets": 15,
+          "revenue": 1010.1000000000001,
+          "lates": 0
+        },
+        {
+          "name": "Ramsay The Duchy Hospital",
+          "city": "Ramsay The Duchy Hospital",
+          "pc": "TR1 3UP",
+          "cons": 9,
+          "pallets": 12,
+          "revenue": 1017.4500000000003,
+          "lates": 0
+        },
+        {
+          "name": "Premier Healthcare & Hygiene Ltd",
+          "city": "Premier Healthcare & Hygiene Ltd",
+          "pc": "NE11 9JT",
+          "cons": 9,
+          "pallets": 18,
+          "revenue": 962.5,
+          "lates": 0
+        },
+        {
+          "name": "UNIVERSITY HOSPITALS BIRMINGHAM",
+          "city": "UNIVERSITY HOSPITALS BIRMINGHAM",
+          "pc": "B7 5TE",
+          "cons": 8,
+          "pallets": 12,
+          "revenue": 607.6,
+          "lates": 0
+        },
+        {
+          "name": "PINES HOSPITAL",
+          "city": "PINES HOSPITAL",
+          "pc": "M22 4RZ",
+          "cons": 8,
+          "pallets": 11,
+          "revenue": 666.1500000000001,
+          "lates": 0
+        },
+        {
+          "name": "NHS GRAMPIAN",
+          "city": "NHS GRAMPIAN",
+          "pc": "AB25 2ZN",
+          "cons": 7,
+          "pallets": 11,
+          "revenue": 1326.8000000000002,
+          "lates": 1
+        },
+        {
+          "name": "RAMSAY TEES VALLEY",
+          "city": "RAMSAY TEES VALLEY",
+          "pc": "TS5 7DX",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 448.75,
+          "lates": 0
+        },
+        {
+          "name": "Nuffield Health Tees Hospital",
+          "city": "Nuffield Health Tees Hospital",
+          "pc": "TS20 1PX",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 527.2,
+          "lates": 0
+        },
+        {
+          "name": "FISCHEALTHCARE LTD",
+          "city": "FISCHEALTHCARE LTD",
+          "pc": "PR7 7NB",
+          "cons": 6,
+          "pallets": 9,
+          "revenue": 482.54999999999995,
+          "lates": 0
+        },
+        {
+          "name": "IMS Euro Ltd",
+          "city": "IMS Euro Ltd",
+          "pc": "SK3 0XA",
+          "cons": 6,
+          "pallets": 9,
+          "revenue": 597.4,
+          "lates": 0
+        },
+        {
+          "name": "YORK & SCARBOROUGH HOSP",
+          "city": "YORK & SCARBOROUGH HOSP",
+          "pc": "YO12 6QL",
+          "cons": 6,
+          "pallets": 8,
+          "revenue": 478.2,
+          "lates": 0
+        },
+        {
+          "name": "BEAUCARE MEDICAL LTD",
+          "city": "BEAUCARE MEDICAL LTD",
+          "pc": "HG2 8PA",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 337.25,
+          "lates": 0
+        },
+        {
+          "name": "THE CHRISTIE NHS",
+          "city": "THE CHRISTIE NHS",
+          "pc": "M20 4BX",
+          "cons": 5,
+          "pallets": 10,
+          "revenue": 485.29999999999995,
+          "lates": 0
+        },
+        {
+          "name": "YORK & SCARBOROUGH",
+          "city": "YORK & SCARBOROUGH",
+          "pc": "YO31 8HE",
+          "cons": 5,
+          "pallets": 6,
+          "revenue": 361.9,
+          "lates": 0
+        },
+        {
+          "name": "VET DIRECT SERVICES LTD",
+          "city": "VET DIRECT SERVICES LTD",
+          "pc": "NE15 8NZ",
+          "cons": 5,
+          "pallets": 9,
+          "revenue": 484.25,
+          "lates": 0
+        },
+        {
+          "name": "DIAVERUM FACILITIES",
+          "city": "DIAVERUM FACILITIES",
+          "pc": "WS2 8HB",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 275.05,
+          "lates": 0
+        },
+        {
+          "name": "C&P MEDICAL TRADING LTD",
+          "city": "C&P MEDICAL TRADING LTD",
+          "pc": "SN12 6TP",
+          "cons": 5,
+          "pallets": 6,
+          "revenue": 334.90000000000003,
+          "lates": 0
+        },
+        {
+          "name": "Warrington & halton",
+          "city": "Warrington & halton",
+          "pc": "WA5 1QG",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 306.5,
+          "lates": 0
+        },
+        {
+          "name": "ROSS HALL MATERIALS",
+          "city": "ROSS HALL MATERIALS",
+          "pc": "G52 4LB",
+          "cons": 5,
+          "pallets": 28,
+          "revenue": 2120.65,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [
+    {
+      "id": "AK92C01-r51",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "the new Foscote Hospital",
+      "city": "the new Foscote Hospital",
+      "pc": "OX16 9XP",
+      "window": "",
+      "commitDate": "05/06/26",
+      "arrDate": "08/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "CT18B01",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "EPIC SIMIAN LTD T/A",
+      "city": "EPIC SIMIAN LTD T/A",
+      "pc": "W1T 1PJ",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "HA02B131",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "NHS GRAMPIAN",
+      "city": "NHS GRAMPIAN",
+      "pc": "AB25 2XE",
+      "window": "",
+      "commitDate": "11/06/26",
+      "arrDate": "12/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "AN10B02-r78",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "REFLEX MEDICAL LIMITED",
+      "city": "REFLEX MEDICAL LIMITED",
+      "pc": "SN16 0ES",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SO27B01",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "MEDI MOVE LTD",
+      "city": "MEDI MOVE LTD",
+      "pc": "SE10 8PB",
+      "window": "",
+      "commitDate": "03/06/26",
+      "arrDate": "04/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "AJ86B12-r177",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "DIAVERUMU",
+      "city": "DIAVERUMU",
+      "pc": "TN4 9TF",
+      "window": "",
+      "commitDate": "23/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "UU17L01",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "optegra eye clinic",
+      "city": "optegra eye clinic",
+      "pc": "le19 1rp",
+      "window": "",
+      "commitDate": "08/06/26",
+      "arrDate": "10/06/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "HA45B08",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "national distribution centre",
+      "city": "national distribution centre",
+      "pc": "ML9 2QX",
+      "window": "",
+      "commitDate": "15/06/26",
+      "arrDate": "16/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "AN32B01",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "CARE CORNER LIMITED",
+      "city": "CARE CORNER LIMITED",
+      "pc": "BL2 2HH",
+      "window": "",
+      "commitDate": "22/06/26",
+      "arrDate": "23/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "HA03B561",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "SCOTTISH AMBULANCE",
+      "city": "SCOTTISH AMBULANCE",
+      "pc": "EH28 8QN",
+      "window": "",
+      "commitDate": "08/06/26",
+      "arrDate": "09/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "AM59B01",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "ELYSIUM SAWBRIDGEWORTH STORES",
+      "city": "ELYSIUM SAWBRIDGEWORTH STORES",
+      "pc": "CM21 0HH",
+      "window": "",
+      "commitDate": "02/06/26",
+      "arrDate": "03/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "CP15B01",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "ADNOVA CLINIC LTD",
+      "city": "ADNOVA CLINIC LTD",
+      "pc": "PO15 5TD",
+      "window": "",
+      "commitDate": "03/06/26",
+      "arrDate": "04/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "CP25B01",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "BLUKOO LTD",
+      "city": "BLUKOO LTD",
+      "pc": "NW9 8AU",
+      "window": "",
+      "commitDate": "29/06/26",
+      "arrDate": "30/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "KG06B606",
+      "acct": "MEDIQEMD",
+      "month": "Jun-26",
+      "dest": "LEWISHAM & GREENWICH NHS",
+      "city": "LEWISHAM & GREENWICH NHS",
+      "pc": "SE18 4QH",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
+  "regionData": {
+    "North East": {
+      "pallets": 75,
+      "cons": 45,
+      "lates": 0
+    },
+    "North West": {
+      "pallets": 159,
+      "cons": 108,
+      "lates": 1
+    },
+    "South East": {
+      "pallets": 17,
+      "cons": 17,
+      "lates": 2
+    },
+    "East of England": {
+      "pallets": 36,
+      "cons": 31,
+      "lates": 1
+    },
+    "Other": {
+      "pallets": 25,
+      "cons": 19,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 84,
+      "cons": 56,
+      "lates": 3
+    },
+    "Northern Ireland": {
+      "pallets": 12,
+      "cons": 8,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 62,
+      "cons": 28,
+      "lates": 0
+    },
+    "East Midlands": {
+      "pallets": 58,
+      "cons": 40,
+      "lates": 1
+    },
+    "Yorkshire": {
+      "pallets": 76,
+      "cons": 59,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 27,
+      "cons": 19,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 28,
+      "cons": 26,
+      "lates": 2
+    },
+    "Wales": {
+      "pallets": 20,
+      "cons": 18,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 26,
+      "cons": 21,
+      "lates": 4
+    }
+  },
+  "destData": [
+    {
+      "name": "SHD MEDICAL",
+      "city": "SHD MEDICAL",
+      "pc": "PL4 0ST",
+      "cons": 14,
+      "pallets": 18,
+      "revenue": 1383.7000000000005,
+      "lates": 0
+    },
+    {
+      "name": "Mediq - Castle Donnington",
+      "city": "Mediq - Castle Donnington",
+      "pc": "DE74 2HJ",
+      "cons": 12,
+      "pallets": 15,
+      "revenue": 1010.1000000000001,
+      "lates": 0
+    },
+    {
+      "name": "Ramsay The Duchy Hospital",
+      "city": "Ramsay The Duchy Hospital",
+      "pc": "TR1 3UP",
+      "cons": 9,
+      "pallets": 12,
+      "revenue": 1017.4500000000003,
+      "lates": 0
+    },
+    {
+      "name": "Premier Healthcare & Hygiene Ltd",
+      "city": "Premier Healthcare & Hygiene Ltd",
+      "pc": "NE11 9JT",
+      "cons": 9,
+      "pallets": 18,
+      "revenue": 962.5,
+      "lates": 0
+    },
+    {
+      "name": "UNIVERSITY HOSPITALS BIRMINGHAM",
+      "city": "UNIVERSITY HOSPITALS BIRMINGHAM",
+      "pc": "B7 5TE",
+      "cons": 8,
+      "pallets": 12,
+      "revenue": 607.6,
+      "lates": 0
+    },
+    {
+      "name": "PINES HOSPITAL",
+      "city": "PINES HOSPITAL",
+      "pc": "M22 4RZ",
+      "cons": 8,
+      "pallets": 11,
+      "revenue": 666.1500000000001,
+      "lates": 0
+    },
+    {
+      "name": "NHS GRAMPIAN",
+      "city": "NHS GRAMPIAN",
+      "pc": "AB25 2ZN",
+      "cons": 7,
+      "pallets": 11,
+      "revenue": 1326.8000000000002,
+      "lates": 1
+    },
+    {
+      "name": "RAMSAY TEES VALLEY",
+      "city": "RAMSAY TEES VALLEY",
+      "pc": "TS5 7DX",
+      "cons": 7,
+      "pallets": 7,
+      "revenue": 448.75,
+      "lates": 0
+    },
+    {
+      "name": "Nuffield Health Tees Hospital",
+      "city": "Nuffield Health Tees Hospital",
+      "pc": "TS20 1PX",
+      "cons": 6,
+      "pallets": 6,
+      "revenue": 527.2,
+      "lates": 0
+    },
+    {
+      "name": "FISCHEALTHCARE LTD",
+      "city": "FISCHEALTHCARE LTD",
+      "pc": "PR7 7NB",
+      "cons": 6,
+      "pallets": 9,
+      "revenue": 482.54999999999995,
+      "lates": 0
+    },
+    {
+      "name": "IMS Euro Ltd",
+      "city": "IMS Euro Ltd",
+      "pc": "SK3 0XA",
+      "cons": 6,
+      "pallets": 9,
+      "revenue": 597.4,
+      "lates": 0
+    },
+    {
+      "name": "YORK & SCARBOROUGH HOSP",
+      "city": "YORK & SCARBOROUGH HOSP",
+      "pc": "YO12 6QL",
+      "cons": 6,
+      "pallets": 8,
+      "revenue": 478.2,
+      "lates": 0
+    },
+    {
+      "name": "BEAUCARE MEDICAL LTD",
+      "city": "BEAUCARE MEDICAL LTD",
+      "pc": "HG2 8PA",
+      "cons": 6,
+      "pallets": 6,
+      "revenue": 337.25,
+      "lates": 0
+    },
+    {
+      "name": "THE CHRISTIE NHS",
+      "city": "THE CHRISTIE NHS",
+      "pc": "M20 4BX",
+      "cons": 5,
+      "pallets": 10,
+      "revenue": 485.29999999999995,
+      "lates": 0
+    },
+    {
+      "name": "YORK & SCARBOROUGH",
+      "city": "YORK & SCARBOROUGH",
+      "pc": "YO31 8HE",
+      "cons": 5,
+      "pallets": 6,
+      "revenue": 361.9,
+      "lates": 0
+    },
+    {
+      "name": "VET DIRECT SERVICES LTD",
+      "city": "VET DIRECT SERVICES LTD",
+      "pc": "NE15 8NZ",
+      "cons": 5,
+      "pallets": 9,
+      "revenue": 484.25,
+      "lates": 0
+    },
+    {
+      "name": "DIAVERUM FACILITIES",
+      "city": "DIAVERUM FACILITIES",
+      "pc": "WS2 8HB",
+      "cons": 5,
+      "pallets": 5,
+      "revenue": 275.05,
+      "lates": 0
+    },
+    {
+      "name": "C&P MEDICAL TRADING LTD",
+      "city": "C&P MEDICAL TRADING LTD",
+      "pc": "SN12 6TP",
+      "cons": 5,
+      "pallets": 6,
+      "revenue": 334.90000000000003,
+      "lates": 0
+    },
+    {
+      "name": "Warrington & halton",
+      "city": "Warrington & halton",
+      "pc": "WA5 1QG",
+      "cons": 5,
+      "pallets": 5,
+      "revenue": 306.5,
+      "lates": 0
+    },
+    {
+      "name": "ROSS HALL MATERIALS",
+      "city": "ROSS HALL MATERIALS",
+      "pc": "G52 4LB",
+      "cons": 5,
+      "pallets": 28,
+      "revenue": 2120.65,
+      "lates": 0
+    }
+  ]
+}
