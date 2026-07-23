@@ -1,0 +1,718 @@
+{
+  "customer": "Iron Mountain (Sterimax)",
+  "lastUpdated": "2026-07-23T13:37:30.329Z",
+  "months": {
+    "2026-06": {
+      "cons": 182,
+      "pallets": 353,
+      "revenue": 14401.16,
+      "lates": 8,
+      "latePallets": 8,
+      "timeliness": 0.9773371104815864,
+      "avgRC": 79.13,
+      "avgRP": 40.8,
+      "avgPC": 1.94,
+      "palletSizes": {
+        "Quarter": 83,
+        "Half": 81,
+        "Full": 57
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 182,
+          "lates": 8
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 26,
+          "pallets": 157,
+          "revenue": 2775.0099999999998,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 406.08,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 12,
+          "pallets": 20,
+          "revenue": 1072.33,
+          "lates": 0
+        },
+        "London": {
+          "cons": 11,
+          "pallets": 13,
+          "revenue": 843.6500000000001,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 30,
+          "pallets": 31,
+          "revenue": 1826.33,
+          "lates": 3
+        },
+        "South": {
+          "cons": 16,
+          "pallets": 19,
+          "revenue": 1253.0700000000002,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 24,
+          "pallets": 35,
+          "revenue": 1911.6000000000001,
+          "lates": 1
+        },
+        "Other": {
+          "cons": 16,
+          "pallets": 20,
+          "revenue": 1289.01,
+          "lates": 3
+        },
+        "South West": {
+          "cons": 13,
+          "pallets": 16,
+          "revenue": 997.9300000000001,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 13,
+          "pallets": 19,
+          "revenue": 1115.62,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 6,
+          "pallets": 7,
+          "revenue": 374.82,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 6,
+          "pallets": 7,
+          "revenue": 377.45,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 97.82,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 60.44,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 40,
+          "lates": 2
+        },
+        "Tue": {
+          "cons": 43,
+          "lates": 4
+        },
+        "Wed": {
+          "cons": 22,
+          "lates": 1
+        },
+        "Thu": {
+          "cons": 29,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 48,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Seldram Supplies Oxford Ltd",
+          "city": "Seldram Supplies Oxford Ltd",
+          "pc": "OX29 4JB",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 380.19,
+          "lates": 2
+        },
+        {
+          "name": "Total Supplies Limited",
+          "city": "Total Supplies Limited",
+          "pc": "CT9 1RD",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 401.9100000000001,
+          "lates": 0
+        },
+        {
+          "name": "M & A Hygiene Ltd",
+          "city": "M & A Hygiene Ltd",
+          "pc": "CR6 9PQ",
+          "cons": 5,
+          "pallets": 7,
+          "revenue": 451.19999999999993,
+          "lates": 0
+        },
+        {
+          "name": "Seldram Supplies (Camberley) Limited",
+          "city": "Seldram Supplies (Camberley) Limited",
+          "pc": "GU15 3DT",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 315.57,
+          "lates": 0
+        },
+        {
+          "name": "Professional Paper Supplies Ltd",
+          "city": "Professional Paper Supplies Ltd",
+          "pc": "YO26 6QR",
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 344.46000000000004,
+          "lates": 0
+        },
+        {
+          "name": "Krystal Hygiene Limited",
+          "city": "Krystal Hygiene Limited",
+          "pc": "MK11 3HD",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 199.03,
+          "lates": 0
+        },
+        {
+          "name": "Lioncroft Wholesale Ltd",
+          "city": "Lioncroft Wholesale Ltd",
+          "pc": "B6 5AD",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 201.59,
+          "lates": 0
+        },
+        {
+          "name": "Core Hygiene Limited",
+          "city": "Core Hygiene Limited",
+          "pc": "HR4 9QJ",
+          "cons": 4,
+          "pallets": 6,
+          "revenue": 328.57000000000005,
+          "lates": 0
+        },
+        {
+          "name": "Ideal 365 Ltd",
+          "city": "Ideal 365 Ltd",
+          "pc": "BL4 7EY",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 146.86999999999998,
+          "lates": 0
+        },
+        {
+          "name": "Chespack Hygiene Ltd",
+          "city": "Chespack Hygiene Ltd",
+          "pc": "CH3 9BD",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 206.05999999999997,
+          "lates": 0
+        },
+        {
+          "name": "East End Wholesale Stores",
+          "city": "East End Wholesale Stores",
+          "pc": "B66 2NW",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 140.66,
+          "lates": 0
+        },
+        {
+          "name": "Findel Education",
+          "city": "Findel Education",
+          "pc": "NG4 2SG",
+          "cons": 3,
+          "pallets": 132,
+          "revenue": 1425,
+          "lates": 0
+        },
+        {
+          "name": "ESPO",
+          "city": "ESPO",
+          "pc": "LE19 1ES",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 96.7,
+          "lates": 0
+        },
+        {
+          "name": "Colbrook Supplies Direct Ltd",
+          "city": "Colbrook Supplies Direct Ltd",
+          "pc": "ML6 8QH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 132.93,
+          "lates": 0
+        },
+        {
+          "name": "SceneSafe Limited",
+          "city": "SceneSafe Limited",
+          "pc": "CM0 8TE",
+          "cons": 2,
+          "pallets": 10,
+          "revenue": 554.15,
+          "lates": 0
+        },
+        {
+          "name": "Stephen James (Automotive) Limited",
+          "city": "Stephen James (Automotive) Limited",
+          "pc": "EN1 1SP",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 122.09,
+          "lates": 0
+        },
+        {
+          "name": "Hygiene Systems Ltd - NATIONWIDE",
+          "city": "Hygiene Systems Ltd - NATIONWIDE",
+          "pc": "EN11 0BZ",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 269.89,
+          "lates": 0
+        },
+        {
+          "name": "Church Farm Nursing Home Ltd",
+          "city": "Church Farm Nursing Home Ltd",
+          "pc": "NG12 3PU",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 107.17,
+          "lates": 0
+        },
+        {
+          "name": "Aspire Industrial Services Ltd.",
+          "city": "Aspire Industrial Services Ltd.",
+          "pc": "G52 4LT",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 249.06,
+          "lates": 0
+        },
+        {
+          "name": "Elite Office Supplies",
+          "city": "Elite Office Supplies",
+          "pc": "ML6 8QH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 124.41,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [
+    {
+      "id": "004806",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "HOME SWEET HOME CARE LTD",
+      "city": "HOME SWEET HOME CARE LTD",
+      "pc": "RM7 0YL",
+      "window": "",
+      "commitDate": "09/06/26",
+      "arrDate": "10/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004902",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Lancaster Rubber and Industrial Supplies Limited",
+      "city": "Lancaster Rubber and Industrial Supplies Limited",
+      "pc": "LA1 3PE",
+      "window": "",
+      "commitDate": "15/06/26",
+      "arrDate": "17/06/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004930",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Seldram Supplies Oxford Ltd",
+      "city": "Seldram Supplies Oxford Ltd",
+      "pc": "OX29 4JB",
+      "window": "",
+      "commitDate": "16/06/26",
+      "arrDate": "17/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "04836.1",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Memphies",
+      "city": "Memphies",
+      "pc": "HP17 8TX",
+      "window": "",
+      "commitDate": "22/06/26",
+      "arrDate": "23/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004815",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Car Colour Services Ltd",
+      "city": "Car Colour Services Ltd",
+      "pc": "RM7 7JB",
+      "window": "",
+      "commitDate": "09/06/26",
+      "arrDate": "10/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004929",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Vertical Pharma Resources t/a IPS Pharma",
+      "city": "Vertical Pharma Resources t/a IPS Pharma",
+      "pc": "KT8 2QZ",
+      "window": "",
+      "commitDate": "17/06/26",
+      "arrDate": "18/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004776",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Hy-Clean Supplies Limited",
+      "city": "Hy-Clean Supplies Limited",
+      "pc": "WR4 9EL",
+      "window": "",
+      "commitDate": "04/06/26",
+      "arrDate": "05/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004868",
+      "acct": "IRON",
+      "month": "Jun-26",
+      "dest": "Seldram Supplies Oxford Ltd",
+      "city": "Seldram Supplies Oxford Ltd",
+      "pc": "OX29 4JB",
+      "window": "",
+      "commitDate": "09/06/26",
+      "arrDate": "10/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
+  "regionData": {
+    "East Midlands": {
+      "pallets": 157,
+      "cons": 26,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 6,
+      "cons": 6,
+      "lates": 0
+    },
+    "East of England": {
+      "pallets": 20,
+      "cons": 12,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 13,
+      "cons": 11,
+      "lates": 1
+    },
+    "South East": {
+      "pallets": 31,
+      "cons": 30,
+      "lates": 3
+    },
+    "South": {
+      "pallets": 19,
+      "cons": 16,
+      "lates": 0
+    },
+    "North West": {
+      "pallets": 35,
+      "cons": 24,
+      "lates": 1
+    },
+    "Other": {
+      "pallets": 20,
+      "cons": 16,
+      "lates": 3
+    },
+    "South West": {
+      "pallets": 16,
+      "cons": 13,
+      "lates": 0
+    },
+    "Yorkshire": {
+      "pallets": 19,
+      "cons": 13,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 7,
+      "cons": 6,
+      "lates": 0
+    },
+    "Wales": {
+      "pallets": 7,
+      "cons": 6,
+      "lates": 0
+    },
+    "Northern Ireland": {
+      "pallets": 2,
+      "cons": 2,
+      "lates": 0
+    },
+    "North East": {
+      "pallets": 1,
+      "cons": 1,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "Seldram Supplies Oxford Ltd",
+      "city": "Seldram Supplies Oxford Ltd",
+      "pc": "OX29 4JB",
+      "cons": 7,
+      "pallets": 7,
+      "revenue": 380.19,
+      "lates": 2
+    },
+    {
+      "name": "Total Supplies Limited",
+      "city": "Total Supplies Limited",
+      "pc": "CT9 1RD",
+      "cons": 6,
+      "pallets": 6,
+      "revenue": 401.9100000000001,
+      "lates": 0
+    },
+    {
+      "name": "M & A Hygiene Ltd",
+      "city": "M & A Hygiene Ltd",
+      "pc": "CR6 9PQ",
+      "cons": 5,
+      "pallets": 7,
+      "revenue": 451.19999999999993,
+      "lates": 0
+    },
+    {
+      "name": "Seldram Supplies (Camberley) Limited",
+      "city": "Seldram Supplies (Camberley) Limited",
+      "pc": "GU15 3DT",
+      "cons": 5,
+      "pallets": 5,
+      "revenue": 315.57,
+      "lates": 0
+    },
+    {
+      "name": "Professional Paper Supplies Ltd",
+      "city": "Professional Paper Supplies Ltd",
+      "pc": "YO26 6QR",
+      "cons": 4,
+      "pallets": 5,
+      "revenue": 344.46000000000004,
+      "lates": 0
+    },
+    {
+      "name": "Krystal Hygiene Limited",
+      "city": "Krystal Hygiene Limited",
+      "pc": "MK11 3HD",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 199.03,
+      "lates": 0
+    },
+    {
+      "name": "Lioncroft Wholesale Ltd",
+      "city": "Lioncroft Wholesale Ltd",
+      "pc": "B6 5AD",
+      "cons": 4,
+      "pallets": 4,
+      "revenue": 201.59,
+      "lates": 0
+    },
+    {
+      "name": "Core Hygiene Limited",
+      "city": "Core Hygiene Limited",
+      "pc": "HR4 9QJ",
+      "cons": 4,
+      "pallets": 6,
+      "revenue": 328.57000000000005,
+      "lates": 0
+    },
+    {
+      "name": "Ideal 365 Ltd",
+      "city": "Ideal 365 Ltd",
+      "pc": "BL4 7EY",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 146.86999999999998,
+      "lates": 0
+    },
+    {
+      "name": "Chespack Hygiene Ltd",
+      "city": "Chespack Hygiene Ltd",
+      "pc": "CH3 9BD",
+      "cons": 3,
+      "pallets": 4,
+      "revenue": 206.05999999999997,
+      "lates": 0
+    },
+    {
+      "name": "East End Wholesale Stores",
+      "city": "East End Wholesale Stores",
+      "pc": "B66 2NW",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 140.66,
+      "lates": 0
+    },
+    {
+      "name": "Findel Education",
+      "city": "Findel Education",
+      "pc": "NG4 2SG",
+      "cons": 3,
+      "pallets": 132,
+      "revenue": 1425,
+      "lates": 0
+    },
+    {
+      "name": "ESPO",
+      "city": "ESPO",
+      "pc": "LE19 1ES",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 96.7,
+      "lates": 0
+    },
+    {
+      "name": "Colbrook Supplies Direct Ltd",
+      "city": "Colbrook Supplies Direct Ltd",
+      "pc": "ML6 8QH",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 132.93,
+      "lates": 0
+    },
+    {
+      "name": "SceneSafe Limited",
+      "city": "SceneSafe Limited",
+      "pc": "CM0 8TE",
+      "cons": 2,
+      "pallets": 10,
+      "revenue": 554.15,
+      "lates": 0
+    },
+    {
+      "name": "Stephen James (Automotive) Limited",
+      "city": "Stephen James (Automotive) Limited",
+      "pc": "EN1 1SP",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 122.09,
+      "lates": 0
+    },
+    {
+      "name": "Hygiene Systems Ltd - NATIONWIDE",
+      "city": "Hygiene Systems Ltd - NATIONWIDE",
+      "pc": "EN11 0BZ",
+      "cons": 2,
+      "pallets": 4,
+      "revenue": 269.89,
+      "lates": 0
+    },
+    {
+      "name": "Church Farm Nursing Home Ltd",
+      "city": "Church Farm Nursing Home Ltd",
+      "pc": "NG12 3PU",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 107.17,
+      "lates": 0
+    },
+    {
+      "name": "Aspire Industrial Services Ltd.",
+      "city": "Aspire Industrial Services Ltd.",
+      "pc": "G52 4LT",
+      "cons": 2,
+      "pallets": 3,
+      "revenue": 249.06,
+      "lates": 0
+    },
+    {
+      "name": "Elite Office Supplies",
+      "city": "Elite Office Supplies",
+      "pc": "ML6 8QH",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 124.41,
+      "lates": 0
+    }
+  ]
+}
