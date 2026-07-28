@@ -13,7 +13,7 @@ PLG.KPI_DATA_URL  = PLG.SB_URL + '/functions/v1/kpi-data';
 // page: filename the sidebar links to
 // adminOnly: true = only shown/allowed if role === 'admin', regardless of modules list
 PLG.MODULES = [
-  { key: 'home',          label: 'Home',           page: 'index.html',    icon: 'home',    adminOnly: false },
+  { key: 'home',          label: 'Home',           page: 'home.html',    icon: 'home',    adminOnly: false },
   { key: 'reports',       label: 'Reports',        page: 'reports.html', icon: 'chart',   adminOnly: false },
   { key: 'import',        label: 'Import',         page: 'import.html',  icon: 'upload',  adminOnly: false },
   { key: 'control_tower', label: 'Control Tower',  page: 'https://triadcontroltower.netlify.app', icon: 'truck', adminOnly: false, external: true },
