@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="shared/config.js"></script>
+<script src="shared/auth-guard.js" data-module="users"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Users — Premier Logistics Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/platform.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+.main { max-width: 900px; margin: 0 auto; padding: 32px 36px 80px; }
+.page-title { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 24px; overflow: hidden; }
+.panel-head { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.panel-title { font-size: 14px; font-weight: 700; }
+
+.user-row { padding: 14px 20px; border-bottom: 1px solid var(--border); }
+.user-row:last-child { border-bottom: none; }
+.user-row-top { display: flex; align-items: center; gap: 10px; }
+.user-avatar { width: 32px; height: 32px; border-radius: 8px; background: var(--orange-dim); color: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.user-info { flex: 1; min-width: 0; }
+.user-name { font-size: 13px; font-weight: 600; }
+.user-name .admin-tag { font-size: 9px; font-weight: 700; color: var(--orange); margin-left: 6px; vertical-align: middle; }
+.user-sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.user-modules { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.user-status { font-size: 11px; font-weight: 600; white-space: nowrap; }
+.user-status.active { color: var(--green); }
+.user-status.disabled { color: var(--red); }
+.user-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.mini-btn { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 5px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s; }
+.mini-btn:hover { background: var(--faint); }
+.mini-btn.danger { color: var(--red); }
+.mini-btn.danger:hover { background: #FEF2F2; border-color: #FCA5A5; }
+
+.edit-panel { display: none; margin-top: 12px; padding: 14px; background: var(--bg); border-radius: 8px; }
+.edit-panel.show { display: block; }
+.edit-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.edit-modules { display: flex; gap: 14px; flex-wrap: wrap; }
+.edit-modules label { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+.edit-modules input { width: auto; margin: 0; }
+.edit-role select { font-size: 12px; padding: 5px 8px; border-radius: 5px; border: 1px solid var(--border); font-family: 'Inter', sans-serif; }
+.edit-save { margin-left: auto; }
+
+.form-grid { padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+.modal-input {
+  width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg);
+  outline: none; transition: border-color 0.15s;
+}
+.modal-input:focus { border-color: var(--orange); background: var(--surface); }
+.modal-label { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 2px; display: block; }
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modules-check { display: flex; flex-direction: column; gap: 6px; }
+.modules-check label { display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+.modules-check input { width: auto; margin: 0; }
+.btn {
+  height: 38px; padding: 0 18px; border-radius: 7px; border: none;
+  cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif;
+  font-weight: 600; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary { background: var(--orange); color: #fff; }
+.btn-primary:hover { background: var(--orange-dk); }
+.btn-outline { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+.btn-outline:hover { background: var(--faint); color: var(--text); }
+.status-msg { font-size: 12px; padding: 8px 12px; border-radius: 6px; margin: 0 20px 14px; display: none; }
+.status-msg.show { display: block; }
+.status-msg.error { background: #FEF2F2; color: #991B1B; }
+.status-msg.success { background: #F0FDF4; color: #166534; }
+details summary { cursor: pointer; font-size: 12px; font-weight: 600; color: var(--muted); padding: 0 20px 16px; }
+.invite-fields { padding: 0 20px 16px; display: flex; flex-direction: column; gap: 8px; }
+</style>
+</head>
+<body>
+
+<div class="plg-layout">
+  <div id="plg-sidebar-root"></div>
+  <div class="plg-content">
+    <div class="main">
+      <div class="page-title">Users</div>
+      <div class="page-sub">Add people to the platform and control exactly which sections each of them can see</div>
+
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">Everyone with access</div></div>
+        <div id="users-list">
+          <div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">Loading users…</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><div class="panel-title">Add a new user</div></div>
+        <div id="add-status" class="status-msg"></div>
+        <div class="form-grid">
+          <div class="two-col">
+            <div class="field-group"><label class="modal-label">Username</label><input class="modal-input" id="nu-username" placeholder="e.g. sarah"></div>
+            <div class="field-group"><label class="modal-label">Full name</label><input class="modal-input" id="nu-name" placeholder="Sarah Smith"></div>
+          </div>
+          <div class="two-col">
+            <div class="field-group"><label class="modal-label">Email</label><input class="modal-input" id="nu-email" type="email" placeholder="sarah@premier-logistics.co.uk"></div>
+            <div class="field-group"><label class="modal-label">Role</label>
+              <select class="modal-input" id="nu-role" onchange="onRoleChange()">
+                <option value="user">User</option>
+                <option value="admin">Admin (sees everything, can manage users)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group" id="nu-modules-wrap">
+            <label class="modal-label">Sections this user can see</label>
+            <div class="modules-check">
+              <label><input type="checkbox" value="reports" class="nu-module" checked>Reports</label>
+              <label><input type="checkbox" value="import" class="nu-module" checked>Import</label>
+              <label><input type="checkbox" value="control_tower" class="nu-module">Control Tower</label>
+            </div>
+          </div>
+          <div class="two-col" style="align-items:end">
+            <div class="field-group"><label class="modal-label">Temporary password</label><input class="modal-input" id="nu-password" placeholder="Temporary password"></div>
+            <button type="button" class="btn btn-outline" onclick="generateTempPassword()">Generate password</button>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="checkbox" id="nu-sendinvite" checked style="width:auto;margin:0">
+            Email this person their login details
+          </label>
+        </div>
+        <details>
+          <summary>Invite email settings (EmailJS) — set once</summary>
+          <div class="invite-fields">
+            <input class="modal-input" id="inv-ejs-service" placeholder="EmailJS Service ID">
+            <input class="modal-input" id="inv-ejs-template" placeholder="Invite Template ID">
+            <input class="modal-input" id="inv-ejs-pubkey" placeholder="EmailJS Public Key">
+            <input class="modal-input" id="inv-admin-secret" type="password" placeholder="Admin Secret (given to you separately)">
+          </div>
+        </details>
+        <div style="padding:0 20px 20px;display:flex;justify-content:flex-end">
+          <button class="btn btn-primary" id="nu-submit" onclick="submitNewUser()">Add user</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="shared/sidebar.js"></script>
+<script>
+window.addEventListener('load', function () {
+  PLG.renderSidebar('users');
+  loadInviteConfig();
+  loadUsersList();
+});
+
+function statusMsg(id, msg, kind) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'status-msg' + (msg ? ' show' : '') + (kind ? ' ' + kind : '');
+}
+
+async function sha256Hex(str) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+}
+
+function generateTempPassword() {
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  var out = '';
+  for (var i = 0; i < 10; i++) out += chars[Math.floor(Math.random() * chars.length)];
+  document.getElementById('nu-password').value = out;
+}
+
+function onRoleChange() {
+  var isAdmin = document.getElementById('nu-role').value === 'admin';
+  document.getElementById('nu-modules-wrap').style.display = isAdmin ? 'none' : '';
+}
+
+function loadInviteConfig() {
+  try {
+    var s = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
+    document.getElementById('inv-ejs-service').value = s.service || '';
+    document.getElementById('inv-ejs-pubkey').value = s.pubkey || '';
+  } catch (e) {}
+  document.getElementById('inv-ejs-template').value = localStorage.getItem('plg_ejs_invite_template') || '';
+  document.getElementById('inv-admin-secret').value = localStorage.getItem('plg_admin_secret') || '';
+}
+function saveInviteConfig() {
+  localStorage.setItem('plg_ejs_invite_template', document.getElementById('inv-ejs-template').value.trim());
+  localStorage.setItem('plg_admin_secret', document.getElementById('inv-admin-secret').value.trim());
+  try {
+    var s = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
+    s.service = document.getElementById('inv-ejs-service').value.trim();
+    s.pubkey = document.getElementById('inv-ejs-pubkey').value.trim();
+    localStorage.setItem('plg_ejs', JSON.stringify(s));
+  } catch (e) {}
+}
+
+async function callAdminEdge(payload) {
+  var secret = document.getElementById('inv-admin-secret').value.trim();
+  if (!secret) { throw new Error('Enter the Admin Secret (see "Invite email settings" below) before making changes.'); }
+  var res = await fetch(PLG.EDGE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-admin-secret': secret },
+    body: JSON.stringify(payload)
+  });
+  var data = await res.json();
+  if (!res.ok || data.error) { throw new Error(data.error || 'Request failed'); }
+  return data;
+}
+
+var ALL_MODULES = [
+  { key: 'reports', label: 'Reports' },
+  { key: 'import', label: 'Import' },
+  { key: 'control_tower', label: 'Control Tower' }
+];
+
+async function loadUsersList() {
+  var box = document.getElementById('users-list');
+  box.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">Loading users…</div>';
+  try {
+    var res = await fetch(PLG.SB_URL + '/rest/v1/rpc/kpi_list_users', {
+      method: 'POST',
+      headers: { 'apikey': PLG.SB_ANON, 'Authorization': 'Bearer ' + PLG.SB_ANON, 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    });
+    var users = await res.json();
+    if (!Array.isArray(users) || users.length === 0) {
+      box.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">No users yet.</div>';
+      return;
+    }
+    box.innerHTML = users.map(userRowHtml).join('');
+  } catch (e) {
+    box.innerHTML = '<div style="padding:24px;text-align:center;color:#991B1B;font-size:13px">Could not load users.</div>';
+  }
+}
+
+function inits(n) { return (n || '?').split(' ').map(function (w) { return w[0] || ''; }).slice(0, 2).join('').toUpperCase(); }
+
+function userRowHtml(u) {
+  var lastLogin = u.last_login ? new Date(u.last_login).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : 'Never';
+  var modsLabel = u.role === 'admin' ? 'All sections (admin)' : ((u.modules || []).filter(function (m) { return m !== 'home'; }).join(', ') || 'Home only');
+  var moduleChecks = ALL_MODULES.map(function (m) {
+    var checked = (u.modules || []).indexOf(m.key) > -1 ? ' checked' : '';
+    return '<label><input type="checkbox" class="edit-module" value="' + m.key + '"' + checked + '>' + m.label + '</label>';
+  }).join('');
+
+  return '<div class="user-row" id="row-' + u.username + '">' +
+    '<div class="user-row-top">' +
+      '<div class="user-avatar">' + inits(u.name || u.username) + '</div>' +
+      '<div class="user-info">' +
+        '<div class="user-name">' + (u.name || u.username) + (u.role === 'admin' ? '<span class="admin-tag">ADMIN</span>' : '') + '</div>' +
+        '<div class="user-sub">@' + u.username + (u.email ? ' · ' + u.email : '') + ' · last login ' + lastLogin + '</div>' +
+        '<div class="user-modules">' + modsLabel + '</div>' +
+      '</div>' +
+      '<div class="user-status ' + (u.active ? 'active' : 'disabled') + '">' + (u.active ? 'Active' : 'Disabled') + '</div>' +
+      '<div class="user-actions">' +
+        '<button class="mini-btn" onclick="toggleEditPanel(\'' + u.username + '\')">Edit access</button>' +
+        '<button class="mini-btn" onclick="toggleUserActive(\'' + u.username + '\',' + (!u.active) + ')">' + (u.active ? 'Disable' : 'Enable') + '</button>' +
+        '<button class="mini-btn danger" onclick="removeUser(\'' + u.username + '\')">Remove</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="edit-panel" id="edit-' + u.username + '">' +
+      '<div class="edit-row">' +
+        '<div class="edit-modules">' + moduleChecks + '</div>' +
+        '<div class="edit-role"><select id="role-' + u.username + '">' +
+          '<option value="user"' + (u.role !== 'admin' ? ' selected' : '') + '>User</option>' +
+          '<option value="admin"' + (u.role === 'admin' ? ' selected' : '') + '>Admin</option>' +
+        '</select></div>' +
+        '<button class="btn btn-primary edit-save" onclick="saveModules(\'' + u.username + '\')">Save</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function toggleEditPanel(username) {
+  var el = document.getElementById('edit-' + username);
+  el.classList.toggle('show');
+}
+
+async function saveModules(username) {
+  var row = document.getElementById('row-' + username);
+  var modules = Array.prototype.slice.call(row.querySelectorAll('.edit-module:checked')).map(function (el) { return el.value; });
+  var role = document.getElementById('role-' + username).value;
+  try {
+    await callAdminEdge({ action: 'set_modules', username: username, modules: modules, role: role });
+    loadUsersList();
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+}
+
+async function toggleUserActive(username, active) {
+  try {
+    await callAdminEdge({ action: 'set_active', username: username, active: active });
+    loadUsersList();
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+}
+
+async function removeUser(username) {
+  if (!confirm('Remove user "' + username + '"? They will lose access immediately.')) return;
+  try {
+    await callAdminEdge({ action: 'remove', username: username });
+    loadUsersList();
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+}
+
+async function submitNewUser() {
+  saveInviteConfig();
+  var username = document.getElementById('nu-username').value.trim().toLowerCase();
+  var name = document.getElementById('nu-name').value.trim();
+  var email = document.getElementById('nu-email').value.trim();
+  var role = document.getElementById('nu-role').value;
+  var password = document.getElementById('nu-password').value;
+  var sendInvite = document.getElementById('nu-sendinvite').checked;
+  var modules = Array.prototype.slice.call(document.querySelectorAll('.nu-module:checked')).map(function (el) { return el.value; });
+  modules.unshift('home');
+
+  if (!username) { statusMsg('add-status', 'Enter a username.', 'error'); return; }
+  if (!password) { statusMsg('add-status', 'Enter or generate a temporary password.', 'error'); return; }
+  if (sendInvite && !email) { statusMsg('add-status', 'Enter an email address, or untick "email this person".', 'error'); return; }
+
+  var btn = document.getElementById('nu-submit');
+  btn.disabled = true; btn.textContent = 'Adding…';
+
+  try {
+    var hash = await sha256Hex(password);
+    await callAdminEdge({ action: 'add', username: username, name: name, email: email, password_hash: hash, role: role, modules: modules });
+
+    if (sendInvite) {
+      var ejs = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
+      var tplId = document.getElementById('inv-ejs-template').value.trim();
+      if (ejs.service && tplId && ejs.pubkey) {
+        emailjs.init(ejs.pubkey);
+        await emailjs.send(ejs.service, tplId, {
+          to_email: email,
+          to_name: name || username,
+          username: username,
+          temp_password: password,
+          login_url: window.location.origin + window.location.pathname.replace('users.html', 'login.html')
+        });
+      } else {
+        statusMsg('add-status', 'User added, but invite email settings are incomplete — email not sent.', 'error');
+        btn.disabled = false; btn.textContent = 'Add user';
+        loadUsersList();
+        return;
+      }
+    }
+
+    statusMsg('add-status', 'User added' + (sendInvite ? ' and invited.' : '.'), 'success');
+    document.getElementById('nu-username').value = '';
+    document.getElementById('nu-name').value = '';
+    document.getElementById('nu-email').value = '';
+    document.getElementById('nu-password').value = '';
+    loadUsersList();
+  } catch (e) {
+    statusMsg('add-status', 'Error: ' + e.message, 'error');
+  }
+  btn.disabled = false; btn.textContent = 'Add user';
+}
+</script>
+</body>
+</html>
