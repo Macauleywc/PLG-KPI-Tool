@@ -32,19 +32,28 @@ PLG.renderSidebar = function (activeKey) {
     return userModules.indexOf(m.key) > -1;
   });
 
-  var linksHtml = visible.map(function (m) {
+  var linksHtml = '';
+  var lastGroup = null;
+  visible.forEach(function (m) {
+    if (m.group !== lastGroup) {
+      lastGroup = m.group;
+      if (m.group) {
+        linksHtml += '<div class="plg-sb-section-label">' + m.group + '</div>';
+      }
+    }
     var isActive = m.key === activeKey;
     var target = m.external ? ' target="_blank" rel="noopener"' : '';
-    return '<a class="plg-sb-link' + (isActive ? ' active' : '') + '" href="' + m.page + '"' + target + '>'
+    var indentClass = m.group ? ' plg-sb-link--nested' : '';
+    linksHtml += '<a class="plg-sb-link' + indentClass + (isActive ? ' active' : '') + '" href="' + m.page + '"' + target + '>'
       + PLG.ICONS[m.icon] + '<span>' + m.label + '</span>'
       + (m.external ? PLG.ICONS.external : '')
       + '</a>';
-  }).join('');
+  });
 
   root.innerHTML =
     '<div class="plg-sidebar">' +
       '<div class="plg-sb-brand">' +
-        '<div class="plg-sb-brand-text">Premier Logistics<div class="plg-sb-brand-sub">Group Platform</div></div>' +
+        '<div class="plg-sb-brand-text">PLG Central<div class="plg-sb-brand-sub">Premier Logistics Group</div></div>' +
       '</div>' +
       '<div class="plg-sb-nav">' + linksHtml + '</div>' +
       '<div class="plg-sb-footer">' +
