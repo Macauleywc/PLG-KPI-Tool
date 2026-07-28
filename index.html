@@ -2,732 +2,106 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){
-  if(!sessionStorage.getItem('plg_auth')){
-    window.location.href='login.html';
-  }
-})();
-</script>
+<script src="shared/config.js"></script>
+<script src="shared/auth-guard.js" data-module="home"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLG KPI Portal</title>
+<title>Home — Premier Logistics Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/platform.css">
 <style>
-:root {
-  --bg: #F5F4F0; --surface: #FFFFFF; --border: #E4E2DD;
-  --text: #18181A; --muted: #6B6865; --faint: #EFEDE8;
-  --orange: #F47920; --orange-dim: #FFF0E6; --orange-dk: #E06810;
-  --dark: #121212;
-  --green: #15803D; --amber: #B45309; --red: #DC2626;
-  --radius: 8px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow: 0 4px 14px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+.home-header { padding: 32px 36px 8px; }
+.home-greeting { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.home-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
-/* ── Header (single consolidated bar) ── */
-.hdr {
-  background: var(--surface); border-bottom: 1px solid var(--border);
-  padding: 14px 28px; display: flex; align-items: center; gap: 20px;
-  position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm);
+.denied-banner {
+  display: none; margin: 20px 36px 0; background: #FEF2F2; border: 1px solid #FCA5A5;
+  color: #991B1B; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
 }
-.hdr-left { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.hdr-logo { height: 22px; width: auto; }
-.hdr-divider { width: 1px; height: 20px; background: var(--border); }
-.hdr-title { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; white-space: nowrap; }
+.denied-banner.show { display: block; }
 
-.hdr-mid { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.search-wrap {
-  display: flex; align-items: center; gap: 8px;
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: 7px; padding: 0 12px; height: 36px; transition: border-color 0.15s;
-  width: 100%; max-width: 280px;
+.tile-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px; padding: 24px 36px 40px;
 }
-.search-wrap:focus-within { border-color: var(--orange); background: var(--surface); }
-.search-wrap svg { color: var(--muted); flex-shrink: 0; }
-.search-input { border: none; background: none; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--text); width: 100%; outline: none; }
-.search-input::placeholder { color: var(--muted); }
-.count-badge {
-  font-size: 12px; font-weight: 500; color: var(--muted);
-  background: var(--surface); border: 1px solid var(--border);
-  padding: 4px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+.tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px; text-decoration: none; color: var(--text); box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s, transform 0.15s; display: flex; flex-direction: column; gap: 12px;
 }
-/* Stat pills — hidden from view but in DOM for JS */
-#s-total, #s-data, #s-best, #s-bestname, #s-att { display: none; }
-
-.hdr-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.icon-btn {
-  width: 36px; height: 36px; border-radius: 7px; border: 1px solid var(--border);
-  background: var(--surface); color: var(--muted); cursor: pointer;
-  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
-}
-.icon-btn:hover { background: var(--faint); color: var(--text); }
-.signout-btn {
-  background: none; border: 1px solid var(--border); border-radius: 7px;
-  color: var(--muted); font-size: 12px; font-weight: 600; font-family: 'Inter', sans-serif;
-  padding: 0 14px; height: 36px; cursor: pointer; transition: all 0.15s;
-}
-.signout-btn:hover { border-color: #d4d1cb; color: var(--text); background: var(--faint); }
-
-.btn {
-  height: 36px; padding: 0 18px; border-radius: 7px; border: none;
-  cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif;
-  font-weight: 600; transition: all 0.12s; display: flex; align-items: center; gap: 6px;
-  flex-shrink: 0;
-}
-.btn:active { transform: scale(0.97); }
-.btn-outline { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
-.btn-outline:hover { background: var(--faint); color: var(--text); }
-.btn-primary { background: var(--orange); color: #fff; }
-.btn-primary:hover { background: var(--orange-dk); }
-
-/* ── Grid ── */
-.grid-wrap { max-width: 1280px; margin: 0 auto 60px; padding: 20px 28px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-
-/* ── Customer cards ── */
-.card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 18px;
-  cursor: pointer; transition: box-shadow 0.15s, transform 0.15s;
-  position: relative; overflow: hidden;
-  box-shadow: var(--shadow-sm); display: flex; flex-direction: column; min-height: 160px;
-}
-.card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; background: var(--border); transition: background 0.18s;
-}
-.card.card--good::before  { background: var(--green); }
-.card.card--warn::before  { background: var(--amber); }
-.card.card--bad::before   { background: var(--red); }
-.card:not(.has-data):hover::before { background: var(--orange); }
-.card.card--good:hover::before { background: #166534; }
-.card.card--warn:hover::before { background: #92400E; }
-.card.card--bad::before   { background: var(--red); }
-.card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
-.edit-mode .card { cursor: default; }
-.edit-mode .card:hover { transform: none; box-shadow: var(--shadow-sm); }
-.card-head {
-  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;
-}
-.avatar {
-  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
-  background: var(--orange-dim); color: var(--orange);
+.tile:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.tile-icon {
+  width: 38px; height: 38px; border-radius: 9px; background: var(--orange-dim); color: var(--orange);
   display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; margin-top: 1px;
 }
-.card-name {
-  flex: 1; font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4;
-}
-.del-btn {
-  width: 26px; height: 26px; flex-shrink: 0; border-radius: 6px;
-  background: var(--faint); border: 1px solid var(--border);
-  color: var(--muted); cursor: pointer; font-size: 13px;
-  display: none; align-items: center; justify-content: center; transition: all 0.15s;
-}
-.del-btn:hover { background: #FEF2F2; border-color: #FCA5A5; color: var(--red); }
-.edit-mode .del-btn { display: flex; }
-.card-kpi { margin-top: auto; }
-.kpi-big { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
-.kpi-big.good { color: var(--green); }
-.kpi-big.warn { color: var(--amber); }
-.kpi-big.bad  { color: var(--red); }
-.kpi-big-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 9px; }
-.otif-track { height: 4px; background: var(--faint); border-radius: 2px; overflow: hidden; margin-bottom: 9px; }
-.otif-fill { height: 100%; border-radius: 2px; }
-.kpi-months { font-size: 11px; color: var(--muted); font-weight: 500; }
-.card-no-data { font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 8px; }
-.add-card {
-  background: transparent; border: 1.5px dashed var(--border);
-  border-radius: var(--radius); display: flex; flex-direction: column;
-  align-items: center; justify-content: center; min-height: 160px;
-  cursor: pointer; transition: all 0.15s;
-}
-.add-card:hover { border-color: var(--orange); background: var(--orange-dim); }
-.add-icon { font-size: 24px; color: #d0cec9; margin-bottom: 7px; transition: color 0.15s; }
-.add-card:hover .add-icon { color: var(--orange); }
-.add-lbl { font-size: 12px; font-weight: 500; color: var(--muted); }
-.empty-state { text-align: center; padding: 60px 0; }
-.empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.3; }
-.empty-state-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-.empty-state-sub { font-size: 13px; color: var(--muted); }
-.overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 200;
-}
-.modal {
-  background: var(--surface); border-radius: 12px;
-  padding: 28px; width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-}
-.modal-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-.modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
-.modal-input {
-  width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 7px;
-  font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg);
-  outline: none; margin-bottom: 14px; transition: border-color 0.15s;
-}
-.modal-input:focus { border-color: var(--orange); background: var(--surface); }
-.modal-footer { display: flex; gap: 8px; justify-content: flex-end; }
-.modal-label { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; display: block; }
-.token-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-top: -6px; margin-bottom: 14px; }
-.token-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
-.token-status-dot.active { background: #22C55E; }
-footer { text-align: center; padding: 18px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); }
+.tile-title { font-size: 14px; font-weight: 700; }
+.tile-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
-<div class="hdr">
-  <div class="hdr-left">
-    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8IS0tIENyZWF0b3I6IENvcmVsRFJBVyBYNyAtLT4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMjEwbW0iIGhlaWdodD0iMjk3bW0iIHZlcnNpb249IjEuMSIgc3R5bGU9InNoYXBlLXJlbmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247IHRleHQtcmVuZGVyaW5nOmdlb21ldHJpY1ByZWNpc2lvbjsgaW1hZ2UtcmVuZGVyaW5nOm9wdGltaXplUXVhbGl0eTsgZmlsbC1ydWxlOmV2ZW5vZGQ7IGNsaXAtcnVsZTpldmVub2RkIg0Kdmlld0JveD0iMCAwIDIxMDAwIDI5NzAwIg0KIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiA8ZGVmcz4NCiAgPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCiAgIDwhW0NEQVRBWw0KICAgIC5maWwxMCB7ZmlsbDojNUI1QjVCO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw0IHtmaWxsOiNFRjdBNDQ7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDEge2ZpbGw6I0U5NTUyNDtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsOSB7ZmlsbDojQzY0QzIyO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw4IHtmaWxsOiNBMTQyMUY7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDAge2ZpbGw6I0JGRENCMjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsNSB7ZmlsbDojOTlDQTg5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw2IHtmaWxsOiM2OEI3NjA7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDcge2ZpbGw6IzI3QTg0MjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsMiB7ZmlsbDojMUY4QkI5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWwzIHtmaWxsOiMyNzc0OTI7ZmlsbC1ydWxlOm5vbnplcmnaio KICAgIC5maWwxMSB7ZmlsbDojMjY1QjcwO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgXV0+DQogIDwvc3R5bGU+DQogPC9kZWZzPg0KPC9zdmc+DQo=" alt="PLG" class="hdr-logo" onerror="this.style.display='none'">
-    <div class="hdr-divider"></div>
-    <span class="hdr-title">KPI Portal</span>
-  </div>
-
-  <div class="hdr-mid">
-    <input type="text" name="username" autocomplete="username" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" tabindex="-1" aria-hidden="true">
-    <input type="password" name="password" autocomplete="current-password" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" tabindex="-1" aria-hidden="true">
-    <div class="search-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" class="search-input" id="search" name="kpi-search-query" placeholder="Search customers..." oninput="render()" autocomplete="off">
+<div class="plg-layout">
+  <div id="plg-sidebar-root"></div>
+  <div class="plg-content">
+    <div class="home-header">
+      <div class="home-greeting" id="greeting">Welcome back</div>
+      <div class="home-sub">Premier Logistics Group internal platform</div>
     </div>
-    <div class="count-badge" id="count-badge">--</div>
-    <span id="s-total"></span><span id="s-data"></span><span id="s-best"></span><span id="s-bestname"></span><span id="s-att"></span>
-  </div>
-
-  <div class="hdr-right">
-    <button class="btn btn-outline" id="edit-btn" style="display:none" onclick="toggleEdit()">Manage</button>
-    <button class="btn btn-primary" id="add-customer-btn" style="display:none" onclick="showModal()">+ Add customer</button>
-    <button class="icon-btn" id="settings-btn" title="Settings" style="display:none" onclick="openSettingsModal()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    </button>
-    <button class="btn btn-outline" id="users-btn" style="display:none" onclick="openUsersModal()">Users</button>
-    <button onclick="sessionStorage.removeItem('plg_auth');window.location.href='login.html'" class="signout-btn">Sign out</button>
+    <div class="denied-banner" id="denied-banner"></div>
+    <div class="tile-grid" id="tile-grid"></div>
   </div>
 </div>
 
-<div class="grid-wrap"><div class="grid" id="grid"></div></div>
-
-<div class="overlay" id="overlay" style="display:none" onclick="if(event.target===this)hideModal()">
-  <div class="modal">
-    <div class="modal-title">Add customer</div>
-    <div class="modal-sub">Enter the customer name as it appears in Qargo</div>
-    <input class="modal-input" id="modal-input" type="text" placeholder="e.g. Anand International" onkeydown="if(event.key==='Enter')addCustomer()">
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="hideModal()">Cancel</button>
-      <button class="btn btn-primary" id="modal-add-btn" onclick="addCustomer()">Add customer</button>
-    </div>
-  </div>
-</div>
-
-<div class="overlay" id="settings-overlay" style="display:none" onclick="if(event.target===this)closeSettingsModal()">
-  <div class="modal" style="width:420px">
-    <div class="modal-title">Settings</div>
-    <div class="modal-sub">Admin-only connection settings</div>
-
-    <label class="modal-label">Your personal GitHub token (for editing/uploading data)</label>
-    <input type="password" class="modal-input" id="gh-token" placeholder="ghp_..." oninput="saveToken()" autocomplete="off">
-    <div class="token-status">
-      <div class="token-status-dot" id="tok-dot"></div>
-      <span id="tok-status-text">Not connected</span>
-    </div>
-
-    <div style="border-top:1px solid var(--border);margin:16px 0;padding-top:14px">
-      <label class="modal-label">Shared data source token (powers everyone's view — set once)</label>
-      <input type="password" class="modal-input" id="shared-gh-token" placeholder="ghp_..." autocomplete="off" style="margin-bottom:8px">
-      <div id="shared-token-status" style="font-size:12px;color:var(--muted);margin-bottom:10px"></div>
-      <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="saveSharedToken()">Save shared token</button>
-    </div>
-
-    <div class="modal-footer">
-      <button class="btn btn-primary" onclick="closeSettingsModal()">Done</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="overlay" id="users-overlay" style="display:none" onclick="if(event.target===this)closeUsersModal()">
-  <div class="modal" style="width:560px;max-height:86vh;overflow-y:auto">
-    <div class="modal-title">Manage Users</div>
-    <div class="modal-sub">Add, remove, or invite users to the KPI Portal</div>
-
-    <div id="users-status" style="display:none;font-size:12px;padding:8px 12px;border-radius:6px;margin-bottom:12px"></div>
-
-    <div id="users-list" style="border:1px solid var(--border);border-radius:8px;margin-bottom:20px;overflow:hidden">
-      <div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">Loading users…</div>
-    </div>
-
-    <div style="border-top:1px solid var(--border);padding-top:16px;margin-bottom:16px">
-      <div style="font-size:13px;font-weight:700;margin-bottom:10px">Add a new user</div>
-      <input class="modal-input" id="nu-username" type="text" placeholder="Username (e.g. sarah)" style="margin-bottom:8px">
-      <input class="modal-input" id="nu-name" type="text" placeholder="Full name" style="margin-bottom:8px">
-      <input class="modal-input" id="nu-email" type="email" placeholder="Email address" style="margin-bottom:8px">
-      <select class="modal-input" id="nu-role" style="margin-bottom:8px">
-        <option value="user">User</option>
-        <option value="admin">Admin (can manage users)</option>
-      </select>
-      <input class="modal-input" id="nu-password" type="text" placeholder="Temporary password" style="margin-bottom:4px">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
-        <button type="button" style="background:none;border:none;color:var(--orange);font-size:12px;font-weight:600;cursor:pointer" onclick="generateTempPassword()">Generate password</button>
-      </div>
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px;cursor:pointer">
-        <input type="checkbox" id="nu-sendinvite" checked style="width:auto;margin:0">
-        Email this person their login details
-      </label>
-    </div>
-
-    <details style="margin-bottom:16px" id="ejs-invite-details">
-      <summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--muted)">Invite email settings (EmailJS)</summary>
-      <div style="margin-top:10px">
-        <input class="modal-input" id="inv-ejs-service" placeholder="EmailJS Service ID" style="margin-bottom:8px">
-        <input class="modal-input" id="inv-ejs-template" placeholder="Invite Template ID" style="margin-bottom:8px">
-        <input class="modal-input" id="inv-ejs-pubkey" placeholder="EmailJS Public Key" style="margin-bottom:8px">
-        <input class="modal-input" id="inv-admin-secret" type="password" placeholder="Admin Secret (given to you separately)" style="margin-bottom:0">
-      </div>
-    </details>
-
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeUsersModal()">Close</button>
-      <button class="btn btn-primary" id="nu-submit" onclick="submitNewUser()">Add user</button>
-    </div>
-  </div>
-</div>
-
-<footer>Premier Logistics Group &middot; KPI Portal &middot; Data stored securely on GitHub</footer>
-
+<script src="shared/sidebar.js"></script>
 <script>
-var OWNER = 'Macauleywc', REPO = 'PLG-KPI-Tool';
-var DEFAULTS = ['Anand International','Bonnington Plastics','BPW','Charles Bentley','Christmas Tree','Drivers Pickles','Geodis','Greiner Bio One','Mediq','Monro','Red Monkey','SAF Holland','SAM Mouldings','Sarstedt','Tom Chambers','VPK'];
-var editMode = false, meta = {};
-
-// Global navigation function - called from inline onclick on cards
-window.goTo = function(name) {
-  window.location.href = 'customer.html?c=' + encodeURIComponent(name);
+var TILE_ICONS = {
+  reports:       '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>',
+  import:        '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 21h14a2 2 0 0 0 2-2v-4"/><path d="M3 15v4a2 2 0 0 0 2 2"/></svg>',
+  control_tower: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+  users:         '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',
+  settings:      '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82"/></svg>'
+};
+var TILE_DESCRIPTIONS = {
+  reports: 'Customer OTIF, KPI dashboards and PDF exports.',
+  import: 'Convert customer delivery schedules into Qargo-ready import files.',
+  control_tower: 'Live load-sharing and transfer coordination across the VPK Triad network.',
+  users: 'Add, remove or adjust access for platform users.',
+  settings: 'Connection settings and shared data source configuration.'
 };
 
-function saveToken() {
-  var t = document.getElementById('gh-token').value;
-  localStorage.setItem('plg_gh_token', t);
-  var connected = t.length > 4;
-  document.getElementById('tok-dot').classList.toggle('active', connected);
-  document.getElementById('tok-status-text').textContent = connected ? 'Connected' : 'Not connected';
-}
-function openSettingsModal() {
-  var t = getToken();
-  document.getElementById('gh-token').value = t;
-  var connected = t.length > 4;
-  document.getElementById('tok-dot').classList.toggle('active', connected);
-  document.getElementById('tok-status-text').textContent = connected ? 'Connected' : 'Not connected';
-  document.getElementById('settings-overlay').style.display = 'flex';
-}
-function closeSettingsModal() {
-  document.getElementById('settings-overlay').style.display = 'none';
-}
-function getToken() { return localStorage.getItem('plg_gh_token') || ''; }
-function slug(n) { return n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
-function inits(n) { return n.split(' ').map(function(w) { return w[0] || ''; }).slice(0, 2).join('').toUpperCase(); }
-var customerList = null;
-function getList() {
-  if (Array.isArray(customerList)) return customerList;
-  try { var a = JSON.parse(localStorage.getItem('plg_customers')); if (Array.isArray(a) && a.length > 0) return a; } catch(e) {}
-  return DEFAULTS.slice();
-}
-function cacheList(a) { localStorage.setItem('plg_customers', JSON.stringify(a)); }
-function otifClass(v) { if (v == null) return ''; return parseFloat(v) >= 98 ? 'good' : parseFloat(v) >= 95 ? 'warn' : 'bad'; }
+window.addEventListener('load', function () {
+  PLG.renderSidebar('home');
+  var name = sessionStorage.getItem('plg_name') || 'there';
+  document.getElementById('greeting').textContent = 'Welcome back, ' + name.split(' ')[0];
 
-function delCustomer(name) {
-  if (!confirm('Remove ' + name + ' from the portal? This removes it for everyone.')) return;
-  var secret = getAdminSecret();
-  if (!secret) { alert('Admin secret required to remove a customer. Set it via the Users panel first.'); return; }
-  fetch(EDGE_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
-    body: JSON.stringify({action: 'remove_customer', name: name})
-  }).then(function(r){ return r.json(); }).then(function(data){
-    if (data.error) { alert('Error removing customer: ' + data.error); return; }
-    customerList = data.customers; cacheList(customerList);
-    delete meta[name]; render();
-  }).catch(function(e){ alert('Error removing customer: ' + e.message); });
-}
-
-
-function render() {
-  var list = getList();
-  var q = (document.getElementById('search').value || '').toLowerCase();
-  var filtered = q ? list.filter(function(n) { return n.toLowerCase().indexOf(q) >= 0; }) : list.slice();
-  filtered.sort(function(a,b){ return a.localeCompare(b); });
-
-  document.getElementById('s-total').textContent = list.length;
-  document.getElementById('count-badge').textContent = filtered.length + ' customer' + (filtered.length !== 1 ? 's' : '');
-
-  var withData = 0, bestOTIF = null, bestName = '', att = 0;
-  list.forEach(function(n) {
-    var m = meta[n];
-    if (m && m.months > 0) {
-      withData++;
-      if (m.otif != null) {
-        if (bestOTIF === null || parseFloat(m.otif) > parseFloat(bestOTIF)) { bestOTIF = m.otif; bestName = n; }
-        if (parseFloat(m.otif) < 95) att++;
-      }
-    }
-  });
-  document.getElementById('s-data').textContent = withData;
-  document.getElementById('s-best').textContent = bestOTIF != null ? bestOTIF + '%' : '--';
-  document.getElementById('s-bestname').textContent = bestName || 'No data yet';
-  document.getElementById('s-att').textContent = att;
-
-  var grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  grid.className = 'grid' + (editMode ? ' edit-mode' : '');
-
-  if (filtered.length === 0 && q) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#128269;</div><div class="empty-state-title">No customers found</div><div class="empty-state-sub">Try a different search term</div></div>';
-    return;
+  var params = new URLSearchParams(window.location.search);
+  var denied = params.get('denied');
+  if (denied) {
+    var b = document.getElementById('denied-banner');
+    b.textContent = "You don't have access to that section. Ask an admin to enable it if you need it.";
+    b.classList.add('show');
   }
 
-  filtered.forEach(function(name) {
-    var m = meta[name] || {};
-    var hasData = m.months > 0;
-    var safeName = name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  var role = sessionStorage.getItem('plg_role') || 'user';
+  var userModules = [];
+  try { userModules = JSON.parse(sessionStorage.getItem('plg_modules') || '[]'); } catch (e) {}
 
-    var otifV = m.otif != null ? parseFloat(m.otif) : null;
-    var barW = otifV != null ? Math.min(otifV, 100).toFixed(1) : 0;
-    var barC = otifV != null ? (otifV >= 98 ? '#15803D' : otifV >= 95 ? '#B45309' : '#DC2626') : '#ccc';
-    var statusClass = hasData && otifV != null ? (otifV >= 98 ? ' card--good' : otifV >= 95 ? ' card--warn' : ' card--bad') : '';
-
-    var kpiHtml = hasData
-      ? '<div class="card-kpi">'
-          + '<div class="kpi-big ' + otifClass(m.otif) + '">' + (otifV != null ? otifV.toFixed(1) + '%' : '\u2014') + '</div>'
-          + '<div class="kpi-big-lbl">Pallet OTIF</div>'
-          + '<div class="otif-track"><div class="otif-fill" style="width:' + barW + '%;background:' + barC + '"></div></div>'
-          + '<div class="kpi-months">' + m.months + ' month' + (m.months !== 1 ? 's' : '') + ' of data</div>'
-          + '</div>'
-      : '<div class="card-no-data">No data saved yet</div>';
-
-    var onclickAttr = editMode ? '' : ' onclick="goTo(\'' + safeName + '\')"';
-    var delBtnHtml = editMode ? '<button class="del-btn" onclick="event.stopPropagation();delCustomer(\'' + safeName + '\')">&#215;</button>' : '';
-
-    var html = '<div class="card' + (hasData ? ' has-data' : '') + statusClass + '"' + onclickAttr + '>'
-      + '<div class="card-head">'
-      + '<div class="avatar">' + inits(name) + '</div>'
-      + '<div class="card-name">' + name + '</div>'
-      + delBtnHtml
-      + '</div>'
-      + kpiHtml
-      + '</div>';
-
-    grid.insertAdjacentHTML('beforeend', html);
+  var tiles = PLG.MODULES.filter(function (m) {
+    if (m.key === 'home') return false;
+    if (role === 'admin') return true;
+    if (m.adminOnly) return false;
+    return userModules.indexOf(m.key) > -1;
   });
 
-  if (!editMode) {
-    grid.insertAdjacentHTML('beforeend', '<div class="add-card" onclick="showModal()"><div class="add-icon">+</div><div class="add-lbl">Add customer</div></div>');
-  }
-}
-
-async function loadMeta() {
-  hideMetaError();
-  try {
-    var res = await fetch(KPI_DATA_URL, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'get_many', customers: getList()})
-    });
-    var payload = await res.json();
-    if (!res.ok || payload.error) {
-      showMetaError('Could not load KPI data: ' + (payload.error || ('HTTP ' + res.status)) + '. Ask your admin to check the shared data source in Settings.');
-      render();
-      return;
-    }
-    Object.keys(payload.data || {}).forEach(function(name) {
-      var d = payload.data[name];
-      var months = Object.keys(d.months || {}).sort();
-      var otif = null, totPlt = 0, totLatePlt = 0, hasPlt = false;
-      months.forEach(function(k) {
-        var mo = d.months[k]; if (!mo) return;
-        totPlt += mo.pallets || 0;
-        if (mo.latePallets != null) { totLatePlt += mo.latePallets || 0; hasPlt = true; }
-        else if (mo.timeliness != null && mo.pallets) { totLatePlt += Math.round((mo.pallets || 0) * (1 - (mo.timeliness || 0))); hasPlt = true; }
-      });
-      if (hasPlt && totPlt > 0) otif = ((totPlt - totLatePlt) / totPlt * 100).toFixed(1);
-      meta[name] = { months: months.length, otif: otif };
-    });
-    var errs = payload.errors || {};
-    if (Object.keys(errs).length > 0) console.error('loadMeta partial errors:', errs);
-  } catch(e) {
-    showMetaError('Could not reach the shared data service: ' + e.message);
-  }
-  render();
-}
-
-function showMetaError(msg) {
-  var el = document.getElementById('meta-error-banner');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'meta-error-banner';
-    el.style.cssText = 'background:#FEF2F2;color:#991B1B;border-bottom:1px solid #FCA5A5;padding:10px 28px;font-size:13px;font-weight:500';
-    var hdr = document.querySelector('.hdr');
-    hdr.parentNode.insertBefore(el, hdr.nextSibling);
-  }
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-function hideMetaError() {
-  var el = document.getElementById('meta-error-banner');
-  if (el) el.style.display = 'none';
-}
-
-function toggleEdit() { editMode = !editMode; document.getElementById('edit-btn').textContent = editMode ? 'Done' : 'Manage'; render(); }
-function showModal() { document.getElementById('overlay').style.display = 'flex'; setTimeout(function() { document.getElementById('modal-input').focus(); }, 50); }
-function hideModal() { document.getElementById('overlay').style.display = 'none'; document.getElementById('modal-input').value = ''; }
-function addCustomer() {
-  var name = document.getElementById('modal-input').value.trim(); if (!name) return;
-  var secret = getAdminSecret();
-  if (!secret) { alert('Admin secret required to add a customer. Set it via the Users panel first.'); return; }
-  var btn = document.getElementById('modal-add-btn');
-  if (btn) { btn.disabled = true; btn.textContent = 'Adding…'; }
-  fetch(EDGE_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
-    body: JSON.stringify({action: 'add_customer', name: name})
-  }).then(function(r){ return r.json(); }).then(function(data){
-    if (btn) { btn.disabled = false; btn.textContent = 'Add customer'; }
-    if (data.error) { alert('Error adding customer: ' + data.error); return; }
-    customerList = data.customers; cacheList(customerList);
-    hideModal(); render(); loadMeta();
-  }).catch(function(e){
-    if (btn) { btn.disabled = false; btn.textContent = 'Add customer'; }
-    alert('Error adding customer: ' + e.message);
-  });
-}
-function getAdminSecret() { return localStorage.getItem('plg_admin_secret') || ''; }
-
-function saveSharedToken() {
-  var token = document.getElementById('shared-gh-token').value.trim();
-  var statusEl = document.getElementById('shared-token-status');
-  if (!token) { statusEl.textContent = 'Enter a token first.'; statusEl.style.color = '#991B1B'; return; }
-  var secret = getAdminSecret();
-  if (!secret) { statusEl.textContent = 'Set your Admin Secret in the Users panel first.'; statusEl.style.color = '#991B1B'; return; }
-  statusEl.textContent = 'Saving…'; statusEl.style.color = 'var(--muted)';
-  fetch(EDGE_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
-    body: JSON.stringify({action: 'set_github_token', github_token: token})
-  }).then(function(r){ return r.json(); }).then(function(data){
-    if (data.error) { statusEl.textContent = 'Error: ' + data.error; statusEl.style.color = '#991B1B'; return; }
-    statusEl.textContent = 'Saved. Everyone\'s view now uses this token.'; statusEl.style.color = '#166534';
-    document.getElementById('shared-gh-token').value = '';
-    refreshCustomerList().then(loadMeta);
-  }).catch(function(e){ statusEl.textContent = 'Error: ' + e.message; statusEl.style.color = '#991B1B'; });
-}
-
-
-async function refreshCustomerList() {
-  try {
-    var res = await fetch(KPI_DATA_URL, {
-      method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'list'})
-    });
-    var payload = await res.json();
-    if (res.ok && Array.isArray(payload.customers)) {
-      customerList = payload.customers.slice().sort(function(a,b){return a.localeCompare(b);});
-      cacheList(customerList);
-      render();
-    } else if (payload.error) {
-      console.error('refreshCustomerList error:', payload.error);
-    }
-  } catch(e) {
-    console.error('refreshCustomerList failed:', e.message);
-  }
-}
-
-window.addEventListener('load', function() {
-  document.getElementById('search').value = '';
-  render();
-  refreshCustomerList().then(loadMeta);
-  if (sessionStorage.getItem('plg_role') === 'admin') {
-    document.getElementById('users-btn').style.display = '';
-    document.getElementById('edit-btn').style.display = '';
-    document.getElementById('add-customer-btn').style.display = '';
-    document.getElementById('settings-btn').style.display = '';
-  }
-  // Some browsers autofill after the load event fires — clear it again shortly after
-  setTimeout(function(){ var s=document.getElementById('search'); if(s && s.value){ s.value=''; render(); } }, 300);
+  var grid = document.getElementById('tile-grid');
+  grid.innerHTML = tiles.map(function (m) {
+    var target = m.external ? ' target="_blank" rel="noopener"' : '';
+    return '<a class="tile" href="' + m.page + '"' + target + '>' +
+      '<div class="tile-icon">' + (TILE_ICONS[m.key] || '') + '</div>' +
+      '<div><div class="tile-title">' + m.label + '</div>' +
+      '<div class="tile-desc">' + (TILE_DESCRIPTIONS[m.key] || '') + '</div></div>' +
+      '</a>';
+  }).join('');
 });
-
-// ===== USER MANAGEMENT =====
-var SB_URL = 'https://ahvyirnebbbfmktewdva.supabase.co';
-var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFodnlpcm5lYmJiZm1rdGV3ZHZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODQxMzAsImV4cCI6MjA5MjI2MDEzMH0.4uOvx11sNPOYGRSAxu4J7MwtgOQpHJsNtCg2BaP1Y3c';
-var EDGE_URL = SB_URL + '/functions/v1/kpi-admin';
-var KPI_DATA_URL = SB_URL + '/functions/v1/kpi-data';
-
-function usersStatus(msg, kind) {
-  var el = document.getElementById('users-status');
-  el.textContent = msg;
-  el.style.display = msg ? 'block' : 'none';
-  el.style.background = kind === 'error' ? '#FEF2F2' : '#F0FDF4';
-  el.style.color = kind === 'error' ? '#991B1B' : '#166534';
-}
-
-async function sha256Hex(str) {
-  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
-}
-
-function generateTempPassword() {
-  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
-  var out = '';
-  for (var i = 0; i < 10; i++) out += chars[Math.floor(Math.random() * chars.length)];
-  document.getElementById('nu-password').value = out;
-}
-
-function loadInviteConfig() {
-  try {
-    var s = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
-    document.getElementById('inv-ejs-service').value = s.service || '';
-    document.getElementById('inv-ejs-pubkey').value = s.pubkey || '';
-  } catch(e) {}
-  document.getElementById('inv-ejs-template').value = localStorage.getItem('plg_ejs_invite_template') || '';
-  document.getElementById('inv-admin-secret').value = localStorage.getItem('plg_admin_secret') || '';
-}
-function saveInviteConfig() {
-  localStorage.setItem('plg_ejs_invite_template', document.getElementById('inv-ejs-template').value.trim());
-  localStorage.setItem('plg_admin_secret', document.getElementById('inv-admin-secret').value.trim());
-  try {
-    var s = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
-    s.service = document.getElementById('inv-ejs-service').value.trim();
-    s.pubkey = document.getElementById('inv-ejs-pubkey').value.trim();
-    localStorage.setItem('plg_ejs', JSON.stringify(s));
-  } catch(e) {}
-}
-
-function openUsersModal() {
-  document.getElementById('users-overlay').style.display = 'flex';
-  loadInviteConfig();
-  loadUsersList();
-}
-function closeUsersModal() {
-  document.getElementById('users-overlay').style.display = 'none';
-  usersStatus('');
-}
-
-async function loadUsersList() {
-  var box = document.getElementById('users-list');
-  box.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">Loading users…</div>';
-  try {
-    var res = await fetch(SB_URL + '/rest/v1/rpc/kpi_list_users', {
-      method: 'POST',
-      headers: {'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON, 'Content-Type': 'application/json'},
-      body: JSON.stringify({})
-    });
-    var users = await res.json();
-    if (!Array.isArray(users) || users.length === 0) { box.innerHTML = '<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">No users yet.</div>'; return; }
-    var rows = users.map(function(u) {
-      var lastLogin = u.last_login ? new Date(u.last_login).toLocaleDateString('en-GB', {day:'numeric', month:'short'}) : 'Never';
-      var statusColor = u.active ? '#166534' : '#991B1B';
-      var statusText = u.active ? 'Active' : 'Disabled';
-      return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px">' +
-        '<div style="flex:1;min-width:0">' +
-          '<div style="font-weight:600">' + (u.name || u.username) + (u.role === 'admin' ? ' <span style="font-size:10px;font-weight:700;color:var(--orange)">ADMIN</span>' : '') + '</div>' +
-          '<div style="color:var(--muted);font-size:12px">@' + u.username + (u.email ? ' · ' + u.email : '') + '</div>' +
-        '</div>' +
-        '<div style="font-size:11px;color:' + statusColor + ';font-weight:600;white-space:nowrap">' + statusText + '</div>' +
-        '<div style="font-size:11px;color:var(--muted);white-space:nowrap;width:70px">' + lastLogin + '</div>' +
-        '<button type="button" style="background:none;border:1px solid var(--border);border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer" onclick="toggleUserActive(\'' + u.username + '\',' + (!u.active) + ')">' + (u.active ? 'Disable' : 'Enable') + '</button>' +
-        '<button type="button" style="background:none;border:1px solid var(--border);border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer;color:#991B1B" onclick="removeUser(\'' + u.username + '\')">Remove</button>' +
-      '</div>';
-    }).join('');
-    box.innerHTML = rows;
-  } catch (e) {
-    box.innerHTML = '<div style="padding:20px;text-align:center;color:#991B1B;font-size:13px">Could not load users.</div>';
-  }
-}
-
-async function callAdminEdge(payload) {
-  var secret = document.getElementById('inv-admin-secret').value.trim();
-  if (!secret) { usersStatus('Enter the Admin Secret (see invite email settings) before making changes.', 'error'); throw new Error('no secret'); }
-  var res = await fetch(EDGE_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
-    body: JSON.stringify(payload)
-  });
-  var data = await res.json();
-  if (!res.ok || data.error) { throw new Error(data.error || 'Request failed'); }
-  return data;
-}
-
-async function submitNewUser() {
-  saveInviteConfig();
-  var username = document.getElementById('nu-username').value.trim().toLowerCase();
-  var name = document.getElementById('nu-name').value.trim();
-  var email = document.getElementById('nu-email').value.trim();
-  var role = document.getElementById('nu-role').value;
-  var password = document.getElementById('nu-password').value;
-  var sendInvite = document.getElementById('nu-sendinvite').checked;
-
-  if (!username) { usersStatus('Enter a username.', 'error'); return; }
-  if (!password) { usersStatus('Enter or generate a temporary password.', 'error'); return; }
-  if (sendInvite && !email) { usersStatus('Enter an email address, or untick "email this person".', 'error'); return; }
-
-  var btn = document.getElementById('nu-submit');
-  btn.disabled = true; btn.textContent = 'Adding…';
-
-  try {
-    var hash = await sha256Hex(password);
-    await callAdminEdge({action: 'add', username: username, name: name, email: email, password_hash: hash, role: role});
-
-    if (sendInvite) {
-      var ejs = JSON.parse(localStorage.getItem('plg_ejs') || '{}');
-      var tplId = document.getElementById('inv-ejs-template').value.trim();
-      if (ejs.service && tplId && ejs.pubkey) {
-        emailjs.init(ejs.pubkey);
-        await emailjs.send(ejs.service, tplId, {
-          to_email: email,
-          to_name: name || username,
-          username: username,
-          temp_password: password,
-          login_url: window.location.origin + window.location.pathname.replace('index.html', 'login.html')
-        });
-      } else {
-        usersStatus('User added, but invite email settings are incomplete — email not sent.', 'error');
-        btn.disabled = false; btn.textContent = 'Add user';
-        loadUsersList();
-        return;
-      }
-    }
-
-    usersStatus('User added' + (sendInvite ? ' and invited.' : '.'), 'success');
-    document.getElementById('nu-username').value = '';
-    document.getElementById('nu-name').value = '';
-    document.getElementById('nu-email').value = '';
-    document.getElementById('nu-password').value = '';
-    loadUsersList();
-  } catch (e) {
-    usersStatus('Error: ' + e.message, 'error');
-  }
-  btn.disabled = false; btn.textContent = 'Add user';
-}
-
-async function removeUser(username) {
-  if (!confirm('Remove user "' + username + '"? They will lose access immediately.')) return;
-  try {
-    await callAdminEdge({action: 'remove', username: username});
-    usersStatus('User removed.', 'success');
-    loadUsersList();
-  } catch (e) {
-    usersStatus('Error: ' + e.message, 'error');
-  }
-}
-
-async function toggleUserActive(username, active) {
-  try {
-    await callAdminEdge({action: 'set_active', username: username, active: active});
-    loadUsersList();
-  } catch (e) {
-    usersStatus('Error: ' + e.message, 'error');
-  }
-}
 </script>
 </body>
 </html>
