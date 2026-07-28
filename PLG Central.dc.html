@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo:wght@400&family=Figtree:wght@400;600;700&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    ::selection { background: rgba(198,113,57,0.3); }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; background: #f5ead8; color: #201e1d; font-family: 'Figtree', system-ui, sans-serif; position: relative; overflow: hidden;">
+
+  <div style="position: absolute; top: -180px; right: -160px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(122,138,94,0.16), transparent 70%); pointer-events: none;"></div>
+  <div style="position: absolute; bottom: -220px; left: -180px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(198,113,57,0.12), transparent 70%); pointer-events: none;"></div>
+
+  <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+    <div style="position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;">
+      <div style="width: 100%; max-width: 400px;">
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 28px;">
+          <img src="assets/premier-logo.svg" alt="Premier Logistics Group" style="height: 44px; width: auto;"></img>
+          <div style="text-align: center;">
+            <h1 style="font-family: 'Caprasimo', system-ui, sans-serif; font-weight: 400; font-size: 32px; margin: 10px 0 4px; letter-spacing: -0.01em;">PLG Central</h1>
+            <div style="font-size: 13px; color: rgba(32,30,29,0.55);">Internal tools</div>
+          </div>
+        </div>
+
+        <form style="background: #ebddc5; border-radius: 32px; padding: 36px 32px; box-shadow: 0 12px 32px rgba(46,43,37,0.16); display: flex; flex-direction: column; gap: 20px;" onSubmit="{{ handleSignIn }}">
+          <div>
+            <h3 style="font-family: 'Caprasimo', system-ui, sans-serif; font-weight: 400; font-size: 19px; margin: 0 0 4px;">Sign in to continue</h3>
+            <div style="font-size: 13px; color: rgba(32,30,29,0.6);">Enter your credentials to access the platform</div>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(32,30,29,0.6); margin-bottom: 6px;">Username</label>
+            <div style="position: relative;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a19786" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);">
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+              </svg>
+              <input type="text" defaultValue="macauley" style="width: 100%; padding: 12px 14px 12px 40px; font-size: 14px; font-family: inherit; color: #201e1d; background: #f9f4ed; border: 1px solid rgba(32,30,29,0.16); border-radius: 999px;" style-focus="border-color: #c67139; outline: 2px solid #c67139; outline-offset: 1px;"></input>
+            </div>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(32,30,29,0.6); margin-bottom: 6px;">Password</label>
+            <div style="position: relative;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a19786" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);">
+                <rect x="5" y="11" width="14" height="9" rx="2"></rect>
+                <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+              </svg>
+              <input type="{{ passwordInputType }}" defaultValue="supersecret123" style="width: 100%; padding: 12px 40px 12px 40px; font-size: 14px; font-family: inherit; color: #201e1d; background: #f9f4ed; border: 1px solid rgba(32,30,29,0.16); border-radius: 999px;" style-focus="border-color: #c67139; outline: 2px solid #c67139; outline-offset: 1px;"></input>
+              <button type="button" onClick="{{ togglePassword }}" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 6px; cursor: pointer; display: flex;" aria-label="Toggle password visibility">
+                <sc-if value="{{ showPassword }}" hint-placeholder-val="{{ false }}">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3l18 18"></path>
+                    <path d="M10.6 5.2A10.6 10.6 0 0 1 12 5c6.5 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.5 6.6C3.7 8.4 2 12 2 12s3.5 7 10 7c1.4 0 2.6-.3 3.7-.8"></path>
+                    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path>
+                  </svg>
+                </sc-if>
+                <sc-if value="{{ showPasswordOff }}" hint-placeholder-val="{{ true }}">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#645c50" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </sc-if>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: #c67139; color: #f5ead8; border: none; padding: 13px; border-radius: 999px; font-family: 'Caprasimo', system-ui, sans-serif; font-weight: 400; font-size: 15px; cursor: pointer; margin-top: 4px;" style-hover="background: #b2622d;" style-active="background: #8c491a;">
+            Sign in
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"></path><path d="m13 5 7 7-7 7"></path></svg>
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 22px; font-size: 11px; color: rgba(32,30,29,0.5); line-height: 1.6;">
+          Authorised PLG personnel only<br></br>
+          Contact your system administrator if you need access
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+    <div style="position: relative;">
+      <div style="display: flex; align-items: center; gap: 32px; padding: 18px 40px; background: rgba(245,234,216,0.7); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(32,30,29,0.1);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-right: auto;">
+          <img src="assets/premier-mark.svg" alt="Premier Logistics Group" style="height: 28px; width: auto;"></img>
+          <span style="font-family: 'Caprasimo', system-ui, sans-serif; font-size: 17px;">PLG Central</span>
+        </div>
+        <nav style="display: flex; align-items: center; gap: 26px; font-size: 14px;">
+          <a href="#" style="color: #c67139; text-decoration: none; font-weight: 600;">Home</a>
+          <a href="#" style="color: #201e1d; text-decoration: none;" style-hover="color: #c67139;">Reports</a>
+          <a href="#" style="color: #201e1d; text-decoration: none;" style-hover="color: #c67139;">Import</a>
+          <a href="#" style="color: #201e1d; text-decoration: none; display: flex; align-items: center; gap: 4px;" style-hover="color: #c67139;">
+            Control Tower
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"></path><path d="M20 4 10 14"></path><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"></path></svg>
+          </a>
+          <a href="#" style="color: #201e1d; text-decoration: none;" style-hover="color: #c67139;">Users</a>
+          <a href="#" style="color: #201e1d; text-decoration: none;" style-hover="color: #c67139;">Settings</a>
+        </nav>
+        <button onClick="{{ signOut }}" style="background: none; border: 1px solid rgba(32,30,29,0.16); color: #201e1d; font-size: 13px; padding: 8px 16px; border-radius: 999px; cursor: pointer; font-family: inherit;" style-hover="background: rgba(32,30,29,0.07);">Sign out</button>
+      </div>
+
+      <div style="padding: 56px 40px 64px; max-width: 1100px;">
+        <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #c67139; margin-bottom: 10px;">PLG Central — Internal Platform</div>
+        <h1 style="font-family: 'Caprasimo', system-ui, sans-serif; font-weight: 400; font-size: 40px; margin: 0 0 40px; letter-spacing: -0.01em;">Welcome back, Macauley</h1>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+
+          <div style="background: #ebddc5; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 10px rgba(46,43,37,0.1);">
+            <div style="width: 44px; height: 44px; border-radius: 14px; background: #fff2eb; display: flex; align-items: center; justify-content: center;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#8c491a" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"></path><path d="M10 20V4"></path><path d="M16 20v-7"></path><path d="M4 20h16"></path></svg>
+            </div>
+            <div style="font-family: 'Caprasimo', system-ui, sans-serif; font-size: 17px;">Reports</div>
+            <div style="font-size: 13px; opacity: 0.75; line-height: 1.5; flex: 1;">Customer OTIF, KPI dashboards and PDF exports.</div>
+          </div>
+
+          <div style="background: #ebddc5; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 10px rgba(46,43,37,0.1);">
+            <div style="width: 44px; height: 44px; border-radius: 14px; background: #fff2eb; display: flex; align-items: center; justify-content: center;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#8c491a" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"></path><path d="M7 9l5-5 5 5"></path><path d="M5 20h14"></path></svg>
+            </div>
+            <div style="font-family: 'Caprasimo', system-ui, sans-serif; font-size: 17px;">Import</div>
+            <div style="font-size: 13px; opacity: 0.75; line-height: 1.5; flex: 1;">Convert customer delivery schedules into Qargo-ready import files.</div>
+          </div>
+
+          <div style="background: #ebddc5; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 10px rgba(46,43,37,0.1);">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="width: 44px; height: 44px; border-radius: 14px; background: #fff2eb; display: flex; align-items: center; justify-content: center;">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#8c491a" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="13" height="9" rx="1.5"></rect><path d="M15 11h4l3 3v3h-7"></path><circle cx="6.5" cy="19" r="1.8"></circle><circle cx="17.5" cy="19" r="1.8"></circle></svg>
+              </div>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(32,30,29,0.4)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"></path><path d="M20 4 10 14"></path><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"></path></svg>
+            </div>
+            <div style="font-family: 'Caprasimo', system-ui, sans-serif; font-size: 17px;">Control Tower</div>
+            <div style="font-size: 13px; opacity: 0.75; line-height: 1.5; flex: 1;">Live load-sharing and transfer coordination across the VPK Triad network.</div>
+          </div>
+
+          <div style="background: #ebddc5; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 10px rgba(46,43,37,0.1);">
+            <div style="width: 44px; height: 44px; border-radius: 14px; background: #fff2eb; display: flex; align-items: center; justify-content: center;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#8c491a" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 20c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5"></path><circle cx="17" cy="9" r="2.6"></circle><path d="M15.5 14.3c2.6.3 4.5 2.3 4.5 5.7"></path></svg>
+            </div>
+            <div style="font-family: 'Caprasimo', system-ui, sans-serif; font-size: 17px;">Users</div>
+            <div style="font-size: 13px; opacity: 0.75; line-height: 1.5; flex: 1;">Add, remove or adjust access for platform users.</div>
+          </div>
+
+          <div style="background: #ebddc5; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 10px rgba(46,43,37,0.1);">
+            <div style="width: 44px; height: 44px; border-radius: 14px; background: #fff2eb; display: flex; align-items: center; justify-content: center;">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#8c491a" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg>
+            </div>
+            <div style="font-family: 'Caprasimo', system-ui, sans-serif; font-size: 17px;">Settings</div>
+            <div style="font-size: 13px; opacity: 0.75; line-height: 1.5; flex: 1;">Connection settings and shared data source configuration.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view: 'login', showPassword: false };
+
+  renderVals() {
+    return {
+      isLogin: this.state.view === 'login',
+      isHome: this.state.view === 'home',
+      showPassword: this.state.showPassword,
+      showPasswordOff: !this.state.showPassword,
+      passwordInputType: this.state.showPassword ? 'text' : 'password',
+      togglePassword: () => this.setState(s => ({ showPassword: !s.showPassword })),
+      handleSignIn: (e) => { e.preventDefault(); this.setState({ view: 'home' }); },
+      signOut: () => this.setState({ view: 'login', showPassword: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>
