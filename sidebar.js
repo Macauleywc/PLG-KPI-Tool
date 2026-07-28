@@ -1,71 +1,75 @@
-/* ===== SHARED PLATFORM STYLES ===== */
-/* Design tokens lifted straight from the existing KPI Portal (index.html) so every
-   page in the platform looks like one product, not three stitched together. */
-:root {
-  --bg: #F5F4F0; --surface: #FFFFFF; --border: #E4E2DD;
-  --text: #18181A; --muted: #6B6865; --faint: #EFEDE8;
-  --orange: #F47920; --orange-dim: #FFF0E6; --orange-dk: #E06810;
-  --dark: #121212;
-  --green: #15803D; --amber: #B45309; --red: #DC2626;
-  --radius: 8px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow: 0 4px 14px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
-  --sidebar-w: 224px;
-}
-* { box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; margin: 0; }
+// ===== SHARED SIDEBAR =====
+// Requires config.js loaded first. Call PLG.renderSidebar('reports') after DOM is ready,
+// where 'reports' is the current page's module key (or null on pages with no nav highlight).
+window.PLG = window.PLG || {};
 
-/* ── Layout shell: fixed sidebar + scrollable content ── */
-.plg-layout { display: flex; min-height: 100vh; }
+PLG.ICONS = {
+  home:     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>',
+  chart:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>',
+  upload:   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 21h14a2 2 0 0 0 2-2v-4"/><path d="M3 15v4a2 2 0 0 0 2 2"/></svg>',
+  truck:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+  users:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  settings: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+  external: '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:.5"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>'
+};
 
-.plg-sidebar {
-  width: var(--sidebar-w); flex-shrink: 0; background: var(--dark);
-  display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh;
-}
-.plg-sb-brand {
-  display: flex; align-items: center; gap: 10px; padding: 20px 18px 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.plg-sb-logo { height: 20px; width: auto; }
-.plg-sb-brand-text { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
-.plg-sb-brand-sub { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 1px; }
-
-.plg-sb-nav { flex: 1; padding: 14px 10px; overflow-y: auto; }
-.plg-sb-link {
-  display: flex; align-items: center; gap: 10px; padding: 9px 12px; margin-bottom: 2px;
-  border-radius: 7px; color: rgba(255,255,255,0.6); text-decoration: none;
-  font-size: 13px; font-weight: 500; transition: all 0.15s; cursor: pointer;
-}
-.plg-sb-link svg { flex-shrink: 0; opacity: 0.8; }
-.plg-sb-link:hover { background: rgba(255,255,255,0.06); color: #fff; }
-.plg-sb-link.active { background: var(--orange); color: #fff; }
-.plg-sb-link.active svg { opacity: 1; }
-.plg-sb-link--nested { padding-left: 20px; }
-.plg-sb-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 10px 12px; }
-.plg-sb-section-label {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.3); padding: 8px 12px 4px;
+function plgInits(n) {
+  return (n || '?').split(' ').map(function (w) { return w[0] || ''; }).slice(0, 2).join('').toUpperCase();
 }
 
-.plg-sb-footer { padding: 14px; border-top: 1px solid rgba(255,255,255,0.08); }
-.plg-sb-user { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
-.plg-sb-avatar {
-  width: 28px; height: 28px; border-radius: 7px; background: var(--orange-dim); color: var(--orange);
-  display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0;
-}
-.plg-sb-user-name { font-size: 12px; font-weight: 600; color: #fff; line-height: 1.3; }
-.plg-sb-user-role { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: capitalize; }
-.plg-sb-signout {
-  width: 100%; background: none; border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
-  color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 600; font-family: 'Inter', sans-serif;
-  padding: 8px; cursor: pointer; transition: all 0.15s;
-}
-.plg-sb-signout:hover { background: rgba(255,255,255,0.06); color: #fff; }
+PLG.renderSidebar = function (activeKey) {
+  var root = document.getElementById('plg-sidebar-root');
+  if (!root) return;
 
-.plg-content { flex: 1; min-width: 0; }
+  var role = sessionStorage.getItem('plg_role') || 'user';
+  var name = sessionStorage.getItem('plg_name') || sessionStorage.getItem('plg_username') || 'User';
+  var userModules = [];
+  try { userModules = JSON.parse(sessionStorage.getItem('plg_modules') || '[]'); } catch (e) {}
 
-@media (max-width: 860px) {
-  .plg-sidebar { position: fixed; z-index: 500; transform: translateX(-100%); transition: transform 0.2s; }
-  .plg-sidebar.open { transform: translateX(0); }
-  .plg-content { width: 100%; }
-}
+  var visible = PLG.MODULES.filter(function (m) {
+    if (role === 'admin') return true;
+    if (m.adminOnly) return false;
+    return userModules.indexOf(m.key) > -1;
+  });
+
+  var linksHtml = '';
+  var lastGroup = null;
+  visible.forEach(function (m) {
+    if (m.group !== lastGroup) {
+      lastGroup = m.group;
+      if (m.group) {
+        linksHtml += '<div class="plg-sb-section-label">' + m.group + '</div>';
+      }
+    }
+    var isActive = m.key === activeKey;
+    var target = m.external ? ' target="_blank" rel="noopener"' : '';
+    var indentClass = m.group ? ' plg-sb-link--nested' : '';
+    linksHtml += '<a class="plg-sb-link' + indentClass + (isActive ? ' active' : '') + '" href="' + m.page + '"' + target + '>'
+      + PLG.ICONS[m.icon] + '<span>' + m.label + '</span>'
+      + (m.external ? PLG.ICONS.external : '')
+      + '</a>';
+  });
+
+  root.innerHTML =
+    '<div class="plg-sidebar">' +
+      '<div class="plg-sb-brand">' +
+        '<div class="plg-sb-brand-text">PLG Central<div class="plg-sb-brand-sub">Premier Logistics Group</div></div>' +
+      '</div>' +
+      '<div class="plg-sb-nav">' + linksHtml + '</div>' +
+      '<div class="plg-sb-footer">' +
+        '<div class="plg-sb-user">' +
+          '<div class="plg-sb-avatar">' + plgInits(name) + '</div>' +
+          '<div><div class="plg-sb-user-name">' + name + '</div><div class="plg-sb-user-role">' + role + '</div></div>' +
+        '</div>' +
+        '<button class="plg-sb-signout" onclick="PLG.signOut()">Sign out</button>' +
+      '</div>' +
+    '</div>';
+};
+
+PLG.signOut = function () {
+  sessionStorage.removeItem('plg_auth');
+  sessionStorage.removeItem('plg_role');
+  sessionStorage.removeItem('plg_name');
+  sessionStorage.removeItem('plg_modules');
+  window.location.href = 'login.html';
+};
