@@ -214,7 +214,7 @@ async function doLogin(){
       // fall back to a safe default so login still works either way.
       sessionStorage.setItem('plg_modules', JSON.stringify(data.modules || ['home','reports','import']));
       btnText.textContent = 'Redirecting...';
-      setTimeout(function(){ window.location.href = 'home.html'; }, 300);
+      setTimeout(function(){ window.location.href = 'index.html'; }, 300);
       return;
     }
     btn.classList.remove('loading');
@@ -231,7 +231,7 @@ async function doLogin(){
 
 // If already authenticated, skip login
 if(sessionStorage.getItem('plg_auth')){
-  window.location.href = 'home.html';
+  window.location.href = 'index.html';
 }
 </script>
 </body>
