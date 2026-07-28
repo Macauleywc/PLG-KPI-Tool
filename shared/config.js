@@ -13,10 +13,10 @@ PLG.KPI_DATA_URL  = PLG.SB_URL + '/functions/v1/kpi-data';
 // page: filename the sidebar links to
 // adminOnly: true = only shown/allowed if role === 'admin', regardless of modules list
 PLG.MODULES = [
-  { key: 'home',          label: 'Home',           page: 'index.html',    icon: 'home',    adminOnly: false },
-  { key: 'reports',       label: 'Reports',        page: 'reports.html', icon: 'chart',   adminOnly: false },
-  { key: 'import',        label: 'Import',         page: 'import.html',  icon: 'upload',  adminOnly: false },
-  { key: 'control_tower', label: 'Control Tower',  page: 'https://triadcontroltower.netlify.app', icon: 'truck', adminOnly: false, external: true },
-  { key: 'users',         label: 'Users',          page: 'users.html',   icon: 'users',   adminOnly: true },
-  { key: 'settings',      label: 'Settings',       page: 'settings.html',icon: 'settings',adminOnly: true },
+  { key: 'home',          label: 'Home',              page: 'index.html',    icon: 'home',    adminOnly: false },
+  { key: 'reports',       label: "Customer KPI's",    page: 'reports.html',  icon: 'chart',   adminOnly: false, group: 'Customers' },
+  { key: 'import',        label: 'Import',            page: 'import.html',   icon: 'upload',  adminOnly: false, group: 'Transport' },
+  { key: 'control_tower', label: 'Control Tower',     page: 'https://triadcontroltower.netlify.app', icon: 'truck', adminOnly: false, external: true, group: 'Transport' },
+  { key: 'users',         label: 'Users',             page: 'users.html',    icon: 'users',   adminOnly: true },
+  { key: 'settings',      label: 'Settings',          page: 'settings.html', icon: 'settings',adminOnly: true },
 ];
