@@ -4,122 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PLG Central — Sign In</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --o:#F47920;--o-dk:#E06810;--dk:#121212;
-  --border:#1f1f1f;--font:'Inter',sans-serif;
+  --bg:#f5ead8;--surface:#ebddc5;--o:#c67139;--o-dk:#b2622d;--text:#201e1d;
+  --border:rgba(32,30,29,0.16);--muted:rgba(32,30,29,0.55);
+  --heading:'Caprasimo',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;
 }
 body{
-  font-family:var(--font);background:var(--dk);
+  font-family:var(--body);background:var(--bg);
   min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   -webkit-font-smoothing:antialiased;
 }
-body::before{
-  content:'';position:fixed;inset:0;
-  background:linear-gradient(135deg,#0c0c0c 0%,#181818 50%,#0c0c0c 100%);
-  z-index:0;
+.login-wrap{ width:100%;max-width:400px;padding:24px; }
+.brand{text-align:center;margin-bottom:28px;}
+.brand-mark{
+  width:64px;height:64px;border-radius:20px;
+  background:var(--o);display:inline-flex;
+  align-items:center;justify-content:center;margin-bottom:16px;
 }
-body::after{
-  content:'';position:fixed;inset:0;
-  background:repeating-linear-gradient(
-    45deg,transparent,transparent 40px,
-    rgba(244,121,32,0.015) 40px,rgba(244,121,32,0.015) 41px
-  );
-  z-index:0;
-}
-.login-wrap{
-  position:relative;z-index:1;
-  width:100%;max-width:400px;padding:24px;
-}
-.brand{text-align:center;margin-bottom:32px;}
-.brand-logo{
-  width:76px;height:76px;border-radius:20px;
-  background:linear-gradient(155deg,var(--o) 0%,var(--o-dk) 100%);
-  display:inline-flex;align-items:center;justify-content:center;margin-bottom:22px;
-  box-shadow:0 20px 44px rgba(244,121,32,0.28), 0 2px 6px rgba(0,0,0,0.4);
-}
-.brand-logo svg{width:38px;height:38px;}
 .brand-name{
-  font-size:11px;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:#444;margin-bottom:6px;
+  font-size:11px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px;
 }
 .brand-title{
-  font-size:22px;font-weight:700;color:#fff;letter-spacing:-.02em;
+  font-family:var(--heading);font-weight:400;font-size:24px;color:var(--text);letter-spacing:-.01em;
 }
-.brand-sub{font-size:12px;color:#3e3e3e;margin-top:5px;}
+.brand-sub{font-size:12px;color:var(--muted);margin-top:5px;}
 .card{
-  background:#161616;border:1px solid #1f1f1f;border-radius:12px;
-  padding:28px;box-shadow:0 24px 80px rgba(0,0,0,0.6);
-}
-.accent-bar{
-  height:2px;background:var(--o);border-radius:2px 2px 0 0;
-  margin:-28px -28px 24px;
+  background:var(--surface);border:1px solid var(--border);border-radius:24px;
+  padding:28px;box-shadow:0 3px 10px rgba(46,43,37,0.16);
 }
 .card-title{
-  font-size:15px;font-weight:700;color:#e8e8e8;margin-bottom:5px;
+  font-family:var(--heading);font-weight:400;font-size:19px;color:var(--text);margin-bottom:5px;
 }
-.card-sub{font-size:12px;color:#444;margin-bottom:22px;}
+.card-sub{font-size:12px;color:var(--muted);margin-bottom:22px;}
 .field{margin-bottom:16px;}
 .field label{
   display:block;font-size:10px;font-weight:700;
   text-transform:uppercase;letter-spacing:.1em;
-  color:#484848;margin-bottom:7px;
+  color:var(--muted);margin-bottom:7px;
 }
 .field-wrap{position:relative;}
 .field input{
-  width:100%;background:#1e1e1e;border:1px solid #262626;
-  border-radius:7px;padding:11px 44px 11px 14px;
-  font-size:14px;color:#e0e0e0;font-family:var(--font);
+  width:100%;background:var(--bg);border:1px solid var(--border);
+  border-radius:12px;padding:11px 44px 11px 14px;
+  font-size:14px;color:var(--text);font-family:var(--body);
   transition:border-color .2s;outline:none;
-  -webkit-text-security:disc;
 }
-.field input[type=text]{-webkit-text-security:none;}
-.field input::placeholder{color:#383838;}
-.field input:focus{border-color:var(--o);background:#222;}
+.field input::placeholder{color:var(--muted);}
+.field input:focus{border-color:var(--o);}
 .field-icon{
   position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  color:#383838;font-size:16px;cursor:pointer;user-select:none;
+  color:var(--muted);font-size:16px;cursor:pointer;user-select:none;
   transition:color .2s;
 }
-.field-icon:hover{color:#777;}
+.field-icon:hover{color:var(--text);}
 .error-msg{
-  display:none;background:#1a0a0a;border:1px solid #3d1212;
-  border-radius:7px;padding:10px 14px;margin-bottom:16px;
-  font-size:12px;color:#f87171;line-height:1.5;
+  display:none;background:#fdeceb;border:1px solid #eab3ab;
+  border-radius:12px;padding:10px 14px;margin-bottom:16px;
+  font-size:12px;color:#b3261e;line-height:1.5;
 }
 .error-msg.show{display:block;}
 .btn-login{
-  width:100%;background:var(--o);color:#fff;border:none;
-  border-radius:7px;padding:12px;font-size:14px;font-weight:700;
-  font-family:var(--font);cursor:pointer;letter-spacing:.01em;
+  width:100%;background:var(--o);color:var(--bg);border:none;
+  border-radius:999px;padding:12px;font-size:14px;font-weight:600;
+  font-family:var(--heading);cursor:pointer;letter-spacing:.01em;
   transition:all .2s;display:flex;align-items:center;
   justify-content:center;gap:8px;
 }
-.btn-login:hover{background:var(--o-dk);transform:translateY(-1px);
-  box-shadow:0 6px 20px rgba(244,121,32,0.3);}
-.btn-login:active{transform:translateY(0);}
+.btn-login:hover{background:var(--o-dk);}
 .btn-login.loading{opacity:.7;pointer-events:none;}
 .footer{
   text-align:center;margin-top:22px;
-  font-size:11px;color:#333;line-height:1.6;
+  font-size:11px;color:var(--muted);line-height:1.6;
 }
-.footer span{color:#2e2e2e;}
 </style>
 </head>
 <body>
 
 <div class="login-wrap">
   <div class="brand">
-    <div class="brand-logo">
-      <svg viewBox="0 0 24 24" fill="none">
-        <circle cx="5" cy="18" r="2.6" fill="white"/>
-        <circle cx="19" cy="6" r="2.6" fill="white"/>
-        <circle cx="12" cy="12" r="2.2" fill="white" opacity="0.55"/>
-        <path d="M6.9 16.4 L10.3 13.4 M13.7 10.6 L17.1 7.6" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
+    <div class="brand-mark">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f5ead8" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 19 5"/><path d="M9 5h10v10"/></svg>
     </div>
     <div class="brand-name">Premier Logistics Group</div>
     <div class="brand-title">PLG Central</div>
@@ -127,7 +96,6 @@ body::after{
   </div>
 
   <div class="card">
-    <div class="accent-bar"></div>
     <div class="card-title">Sign in to continue</div>
     <div class="card-sub">Enter your credentials to access the platform</div>
 
@@ -214,8 +182,6 @@ async function doLogin(){
       sessionStorage.setItem('plg_role', data.role || 'user');
       sessionStorage.setItem('plg_name', data.name || data.username);
       sessionStorage.setItem('plg_username', data.username);
-      // data.modules may not exist yet if the Supabase migration hasn't been applied —
-      // fall back to a safe default so login still works either way.
       sessionStorage.setItem('plg_modules', JSON.stringify(data.modules || ['home','reports','import']));
       btnText.textContent = 'Redirecting...';
       setTimeout(function(){ window.location.href = 'index.html'; }, 300);
@@ -233,7 +199,6 @@ async function doLogin(){
   }
 }
 
-// If already authenticated, skip login
 if(sessionStorage.getItem('plg_auth')){
   window.location.href = 'index.html';
 }
