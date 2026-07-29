@@ -1,0 +1,563 @@
+{
+  "customer": "Panasonic",
+  "lastUpdated": "2026-07-29T08:29:31.643Z",
+  "months": {
+    "2026-07": {
+      "cons": 170,
+      "pallets": 631,
+      "revenue": 24242.58,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 142.6,
+      "avgRP": 38.42,
+      "avgPC": 3.71,
+      "palletSizes": {
+        "HALF": 229,
+        "Full": 377,
+        "Full Oversize": 4,
+        "Half Oversized": 12
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 170,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "East of England": {
+          "cons": 15,
+          "pallets": 103,
+          "revenue": 2633.8799999999997,
+          "lates": 0
+        },
+        "East Midlands": {
+          "cons": 54,
+          "pallets": 285,
+          "revenue": 9842.950000000004,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 36,
+          "pallets": 120,
+          "revenue": 3593.7799999999997,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 12,
+          "pallets": 12,
+          "revenue": 793.23,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 10,
+          "pallets": 23,
+          "revenue": 1737.1899999999998,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 9,
+          "pallets": 15,
+          "revenue": 781.23,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 492.3,
+          "lates": 0
+        },
+        "South": {
+          "cons": 13,
+          "pallets": 36,
+          "revenue": 2625.0799999999995,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 7,
+          "pallets": 17,
+          "revenue": 720.7199999999999,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 173.24,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 77.84,
+          "lates": 0
+        },
+        "London": {
+          "cons": 6,
+          "pallets": 10,
+          "revenue": 630.9599999999999,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 140.18,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 31,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 33,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 32,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 29,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 44,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Panasonic C/O GXO",
+          "city": "Panasonic C/O GXO",
+          "pc": "OL9 7AA",
+          "cons": 9,
+          "pallets": 14,
+          "revenue": 42,
+          "lates": 0
+        },
+        {
+          "name": "Amazon EMA3",
+          "city": "Amazon EMA3",
+          "pc": "NG16 3UA",
+          "cons": 8,
+          "pallets": 39,
+          "revenue": 1561.5599999999997,
+          "lates": 0
+        },
+        {
+          "name": "John Lewis MP2",
+          "city": "John Lewis MP2",
+          "pc": "MK17 8EW",
+          "cons": 8,
+          "pallets": 51,
+          "revenue": 1806.6,
+          "lates": 0
+        },
+        {
+          "name": "ambassador communications ltd",
+          "city": "ambassador communications ltd",
+          "pc": "d12 dt35",
+          "cons": 6,
+          "pallets": 16,
+          "revenue": 1240.3999999999999,
+          "lates": 0
+        },
+        {
+          "name": "Regale Microwave Ovens Ltd",
+          "city": "Regale Microwave Ovens Ltd",
+          "pc": "PO13 0FG",
+          "cons": 5,
+          "pallets": 15,
+          "revenue": 838.95,
+          "lates": 0
+        },
+        {
+          "name": "Amazon UXD2",
+          "city": "Amazon UXD2",
+          "pc": "LE67 1GQ",
+          "cons": 5,
+          "pallets": 16,
+          "revenue": 812.41,
+          "lates": 0
+        },
+        {
+          "name": "Amazon XBH9",
+          "city": "Amazon XBH9",
+          "pc": "BS10 7SD",
+          "cons": 5,
+          "pallets": 8,
+          "revenue": 372.88,
+          "lates": 0
+        },
+        {
+          "name": "Argos Distributors Ltd",
+          "city": "Argos Distributors Ltd",
+          "pc": "OL10 2TT",
+          "cons": 4,
+          "pallets": 30,
+          "revenue": 1371.25,
+          "lates": 0
+        },
+        {
+          "name": "Service care",
+          "city": "Service care",
+          "pc": "OL9 7AA",
+          "cons": 4,
+          "pallets": 8,
+          "revenue": 51,
+          "lates": 0
+        },
+        {
+          "name": "EXPERT 360",
+          "city": "EXPERT 360",
+          "pc": "CW1 6XL",
+          "cons": 4,
+          "pallets": 46,
+          "revenue": 1680,
+          "lates": 0
+        },
+        {
+          "name": "Hughes TV and Audio Ltd",
+          "city": "Hughes TV and Audio Ltd",
+          "pc": "IP24 1HT",
+          "cons": 4,
+          "pallets": 16,
+          "revenue": 697.47,
+          "lates": 0
+        },
+        {
+          "name": "Boots  Burton Warehouse",
+          "city": "Boots  Burton Warehouse",
+          "pc": "DE14 2WA",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 120.12,
+          "lates": 0
+        },
+        {
+          "name": "Ligo Electronics",
+          "city": "Ligo Electronics",
+          "pc": "G41 1NG",
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 419.82,
+          "lates": 0
+        },
+        {
+          "name": "Newark Regional Dist Ctre RDC A",
+          "city": "Newark Regional Dist Ctre RDC A",
+          "pc": "NG24 2NH",
+          "cons": 3,
+          "pallets": 14,
+          "revenue": 687.7,
+          "lates": 0
+        },
+        {
+          "name": "Avensys Ltd",
+          "city": "Avensys Ltd",
+          "pc": "RH10 9JY",
+          "cons": 3,
+          "pallets": 13,
+          "revenue": 1314.05,
+          "lates": 0
+        },
+        {
+          "name": "Boots Stores Service Centre SSC",
+          "city": "Boots Stores Service Centre SSC",
+          "pc": "NG7 2SD",
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 240.24,
+          "lates": 0
+        },
+        {
+          "name": "Argos Plc Barton CDC",
+          "city": "Argos Plc Barton CDC",
+          "pc": "DE13 8BX",
+          "cons": 3,
+          "pallets": 30,
+          "revenue": 750.4000000000001,
+          "lates": 0
+        },
+        {
+          "name": "Swains International Limited",
+          "city": "Swains International Limited",
+          "pc": "PE30 4LS",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 129.12,
+          "lates": 0
+        },
+        {
+          "name": "AMAZON EU SARL UK Branch LTN7",
+          "city": "AMAZON EU SARL UK Branch LTN7",
+          "pc": "MK43 9ST",
+          "cons": 3,
+          "pallets": 10,
+          "revenue": 425,
+          "lates": 0
+        },
+        {
+          "name": "Argos HR Barton",
+          "city": "Argos HR Barton",
+          "pc": "DE13 8BX",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 134.75,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [],
+  "regionData": {
+    "East of England": {
+      "pallets": 103,
+      "cons": 15,
+      "lates": 0
+    },
+    "East Midlands": {
+      "pallets": 285,
+      "cons": 54,
+      "lates": 0
+    },
+    "North West": {
+      "pallets": 120,
+      "cons": 36,
+      "lates": 0
+    },
+    "Other": {
+      "pallets": 12,
+      "cons": 12,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 23,
+      "cons": 10,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 15,
+      "cons": 9,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 4,
+      "cons": 3,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 36,
+      "cons": 13,
+      "lates": 0
+    },
+    "Yorkshire": {
+      "pallets": 17,
+      "cons": 7,
+      "lates": 0
+    },
+    "North East": {
+      "pallets": 3,
+      "cons": 2,
+      "lates": 0
+    },
+    "Northern Ireland": {
+      "pallets": 1,
+      "cons": 1,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 10,
+      "cons": 6,
+      "lates": 0
+    },
+    "South East": {
+      "pallets": 2,
+      "cons": 2,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "Panasonic C/O GXO",
+      "city": "Panasonic C/O GXO",
+      "pc": "OL9 7AA",
+      "cons": 9,
+      "pallets": 14,
+      "revenue": 42,
+      "lates": 0
+    },
+    {
+      "name": "Amazon EMA3",
+      "city": "Amazon EMA3",
+      "pc": "NG16 3UA",
+      "cons": 8,
+      "pallets": 39,
+      "revenue": 1561.5599999999997,
+      "lates": 0
+    },
+    {
+      "name": "John Lewis MP2",
+      "city": "John Lewis MP2",
+      "pc": "MK17 8EW",
+      "cons": 8,
+      "pallets": 51,
+      "revenue": 1806.6,
+      "lates": 0
+    },
+    {
+      "name": "ambassador communications ltd",
+      "city": "ambassador communications ltd",
+      "pc": "d12 dt35",
+      "cons": 6,
+      "pallets": 16,
+      "revenue": 1240.3999999999999,
+      "lates": 0
+    },
+    {
+      "name": "Regale Microwave Ovens Ltd",
+      "city": "Regale Microwave Ovens Ltd",
+      "pc": "PO13 0FG",
+      "cons": 5,
+      "pallets": 15,
+      "revenue": 838.95,
+      "lates": 0
+    },
+    {
+      "name": "Amazon UXD2",
+      "city": "Amazon UXD2",
+      "pc": "LE67 1GQ",
+      "cons": 5,
+      "pallets": 16,
+      "revenue": 812.41,
+      "lates": 0
+    },
+    {
+      "name": "Amazon XBH9",
+      "city": "Amazon XBH9",
+      "pc": "BS10 7SD",
+      "cons": 5,
+      "pallets": 8,
+      "revenue": 372.88,
+      "lates": 0
+    },
+    {
+      "name": "Argos Distributors Ltd",
+      "city": "Argos Distributors Ltd",
+      "pc": "OL10 2TT",
+      "cons": 4,
+      "pallets": 30,
+      "revenue": 1371.25,
+      "lates": 0
+    },
+    {
+      "name": "Service care",
+      "city": "Service care",
+      "pc": "OL9 7AA",
+      "cons": 4,
+      "pallets": 8,
+      "revenue": 51,
+      "lates": 0
+    },
+    {
+      "name": "EXPERT 360",
+      "city": "EXPERT 360",
+      "pc": "CW1 6XL",
+      "cons": 4,
+      "pallets": 46,
+      "revenue": 1680,
+      "lates": 0
+    },
+    {
+      "name": "Hughes TV and Audio Ltd",
+      "city": "Hughes TV and Audio Ltd",
+      "pc": "IP24 1HT",
+      "cons": 4,
+      "pallets": 16,
+      "revenue": 697.47,
+      "lates": 0
+    },
+    {
+      "name": "Boots  Burton Warehouse",
+      "city": "Boots  Burton Warehouse",
+      "pc": "DE14 2WA",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 120.12,
+      "lates": 0
+    },
+    {
+      "name": "Ligo Electronics",
+      "city": "Ligo Electronics",
+      "pc": "G41 1NG",
+      "cons": 3,
+      "pallets": 6,
+      "revenue": 419.82,
+      "lates": 0
+    },
+    {
+      "name": "Newark Regional Dist Ctre RDC A",
+      "city": "Newark Regional Dist Ctre RDC A",
+      "pc": "NG24 2NH",
+      "cons": 3,
+      "pallets": 14,
+      "revenue": 687.7,
+      "lates": 0
+    },
+    {
+      "name": "Avensys Ltd",
+      "city": "Avensys Ltd",
+      "pc": "RH10 9JY",
+      "cons": 3,
+      "pallets": 13,
+      "revenue": 1314.05,
+      "lates": 0
+    },
+    {
+      "name": "Boots Stores Service Centre SSC",
+      "city": "Boots Stores Service Centre SSC",
+      "pc": "NG7 2SD",
+      "cons": 3,
+      "pallets": 6,
+      "revenue": 240.24,
+      "lates": 0
+    },
+    {
+      "name": "Argos Plc Barton CDC",
+      "city": "Argos Plc Barton CDC",
+      "pc": "DE13 8BX",
+      "cons": 3,
+      "pallets": 30,
+      "revenue": 750.4000000000001,
+      "lates": 0
+    },
+    {
+      "name": "Swains International Limited",
+      "city": "Swains International Limited",
+      "pc": "PE30 4LS",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 129.12,
+      "lates": 0
+    },
+    {
+      "name": "AMAZON EU SARL UK Branch LTN7",
+      "city": "AMAZON EU SARL UK Branch LTN7",
+      "pc": "MK43 9ST",
+      "cons": 3,
+      "pallets": 10,
+      "revenue": 425,
+      "lates": 0
+    },
+    {
+      "name": "Argos HR Barton",
+      "city": "Argos HR Barton",
+      "pc": "DE13 8BX",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 134.75,
+      "lates": 0
+    }
+  ]
+}
