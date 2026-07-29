@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="shared/config.js"></script>
+<script src="shared/auth-guard.js" data-module="settings"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings — PLG Central</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/platform.css">
+<style>
+.main { max-width: 700px; margin: 0 auto; padding: 32px 36px 80px; }
+.page-title { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 20px; overflow: hidden; }
+.panel-head { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.panel-title { font-size: 14px; font-weight: 700; }
+.panel-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.panel-body { padding: 18px 20px; }
+
+.modal-input {
+  width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg);
+  outline: none; transition: border-color 0.15s;
+}
+.modal-input:focus { border-color: var(--orange); background: var(--surface); }
+.modal-label { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; display: block; }
+.field { margin-bottom: 14px; }
+
+.token-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.token-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+.token-status-dot.active { background: #22C55E; }
+
+.btn {
+  height: 38px; padding: 0 18px; border-radius: 7px; border: none;
+  cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif;
+  font-weight: 600; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary { background: var(--orange); color: #fff; }
+.btn-primary:hover { background: var(--orange-dk); }
+.btn-full { width: 100%; justify-content: center; }
+.status-msg { font-size: 12px; margin-top: 8px; }
+.status-msg.error { color: #991B1B; }
+.status-msg.success { color: #166534; }
+</style>
+</head>
+<body>
+
+<div class="plg-layout">
+  <div id="plg-sidebar-root"></div>
+  <div class="plg-content">
+    <div class="main">
+      <div class="page-title">Settings</div>
+      <div class="page-sub">Connection settings and shared data source configuration</div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Admin Secret</div>
+          <div class="panel-desc">Required to make any change on the Users or Settings pages. Given to you separately — stored only in this browser.</div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <input type="password" class="modal-input" id="admin-secret" placeholder="Admin Secret" autocomplete="off">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Your personal GitHub token</div>
+          <div class="panel-desc">Used when editing or uploading data as yourself. Stored only in this browser.</div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <input type="password" class="modal-input" id="gh-token" placeholder="ghp_..." oninput="savePersonalToken()" autocomplete="off">
+          </div>
+          <div class="token-status">
+            <div class="token-status-dot" id="tok-dot"></div>
+            <span id="tok-status-text">Not connected</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Shared data source token</div>
+          <div class="panel-desc">Powers everyone's view of Reports — set this once. Requires the Admin Secret above.</div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <input type="password" class="modal-input" id="shared-gh-token" placeholder="ghp_..." autocomplete="off">
+          </div>
+          <button class="btn btn-primary btn-full" onclick="saveSharedToken()">Save shared token</button>
+          <div class="status-msg" id="shared-token-status"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="shared/sidebar.js"></script>
+<script>
+window.addEventListener('load', function () {
+  PLG.renderSidebar('settings');
+  loadAll();
+});
+
+function loadAll() {
+  document.getElementById('admin-secret').value = localStorage.getItem('plg_admin_secret') || '';
+  var t = localStorage.getItem('plg_gh_token') || '';
+  document.getElementById('gh-token').value = t;
+  updateTokenStatus(t);
+}
+
+function updateTokenStatus(t) {
+  var connected = t.length > 4;
+  document.getElementById('tok-dot').classList.toggle('active', connected);
+  document.getElementById('tok-status-text').textContent = connected ? 'Connected' : 'Not connected';
+}
+
+document.getElementById('admin-secret').addEventListener('input', function () {
+  localStorage.setItem('plg_admin_secret', this.value.trim());
+});
+
+function savePersonalToken() {
+  var t = document.getElementById('gh-token').value;
+  localStorage.setItem('plg_gh_token', t);
+  updateTokenStatus(t);
+}
+
+function saveSharedToken() {
+  var token = document.getElementById('shared-gh-token').value.trim();
+  var statusEl = document.getElementById('shared-token-status');
+  statusEl.className = 'status-msg';
+  if (!token) { statusEl.textContent = 'Enter a token first.'; statusEl.classList.add('error'); return; }
+  var secret = localStorage.getItem('plg_admin_secret') || '';
+  if (!secret) { statusEl.textContent = 'Enter the Admin Secret above first.'; statusEl.classList.add('error'); return; }
+  statusEl.textContent = 'Saving…';
+  fetch(PLG.EDGE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-admin-secret': secret },
+    body: JSON.stringify({ action: 'set_github_token', github_token: token })
+  }).then(function (r) { return r.json(); }).then(function (data) {
+    if (data.error) { statusEl.textContent = 'Error: ' + data.error; statusEl.classList.add('error'); return; }
+    statusEl.textContent = "Saved. Everyone's view now uses this token.";
+    statusEl.classList.add('success');
+    document.getElementById('shared-gh-token').value = '';
+  }).catch(function (e) { statusEl.textContent = 'Error: ' + e.message; statusEl.classList.add('error'); });
+}
+</script>
+</body>
+</html>
