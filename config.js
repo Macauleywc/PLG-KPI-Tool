@@ -1,27 +1,21 @@
-// ===== SHARED AUTH GUARD =====
-// Include with: <script src="shared/config.js"></script>
-//               <script src="shared/auth-guard.js" data-module="reports"></script>
-// Must be a plain (non-async, non-defer) <script> tag placed in <head> BEFORE any visible content,
-// so it blocks rendering exactly like the old inline redirect check did.
-(function () {
-  var thisScript = document.currentScript;
-  var requiredModule = thisScript ? thisScript.getAttribute('data-module') : null;
+// ===== SHARED PLATFORM CONFIG =====
+// One place for connection details. Every page includes this before anything else.
+window.PLG = window.PLG || {};
 
-  // 1. Must be logged in at all
-  if (!sessionStorage.getItem('plg_auth')) {
-    window.location.href = 'login.html';
-    return;
-  }
+PLG.SB_URL   = 'https://ahvyirnebbbfmktewdva.supabase.co';
+PLG.SB_ANON  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFodnlpcm5lYmJiZm1rdGV3ZHZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2ODQxMzAsImV4cCI6MjA5MjI2MDEzMH0.4uOvx11sNPOYGRSAxu4J7MwtgOQpHJsNtCg2BaP1Y3c';
 
-  // 2. If this page declares a module, the user must have it (admins always pass)
-  if (requiredModule) {
-    var role = sessionStorage.getItem('plg_role') || 'user';
-    var modules = [];
-    try { modules = JSON.parse(sessionStorage.getItem('plg_modules') || '[]'); } catch (e) {}
+PLG.EDGE_URL      = PLG.SB_URL + '/functions/v1/kpi-admin';
+PLG.KPI_DATA_URL  = PLG.SB_URL + '/functions/v1/kpi-data';
 
-    var allowed = role === 'admin' || modules.indexOf(requiredModule) > -1;
-    if (!allowed) {
-      window.location.href = 'index.html?denied=' + encodeURIComponent(requiredModule);
-    }
-  }
-})();
+// Every module the platform knows about. Sidebar + auth guard both read this.
+// key: matches the "modules" jsonb values stored per-user in Supabase
+// page: filename the sidebar links to
+// adminOnly: true = only shown/allowed if role === 'admin', regardless of modules list
+PLG.MODULES = [
+  { key: 'home',          label: 'Home',              page: 'index.html',    icon: 'home',    adminOnly: false },
+  { key: 'reports',       label: "Customer KPI's",    page: 'reports.html',  icon: 'chart',   adminOnly: false, group: 'Customers & CRM' },
+  { key: 'import',        label: 'Import',            page: 'import.html',   icon: 'upload',  adminOnly: false, group: 'Operations' },
+  { key: 'users',         label: 'Users',             page: 'users.html',    icon: 'users',   adminOnly: true, group: 'Admin', pinned: true },
+  { key: 'settings',      label: 'Settings',          page: 'settings.html', icon: 'settings',adminOnly: true, group: 'Admin' },
+];
