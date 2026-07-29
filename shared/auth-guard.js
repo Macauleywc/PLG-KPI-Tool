@@ -21,7 +21,7 @@
 
     var allowed = role === 'admin' || modules.indexOf(requiredModule) > -1;
     if (!allowed) {
-      window.location.href = 'home.html?denied=' + encodeURIComponent(requiredModule);
+      window.location.href = 'index.html?denied=' + encodeURIComponent(requiredModule);
     }
   }
 })();
