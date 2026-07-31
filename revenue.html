@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="shared/config.js"></script>
+<script src="shared/auth-guard.js" data-module="revenue"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Report — PLG Central</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/platform.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+.rp-header { padding: 32px 36px 8px; }
+.rp-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.rp-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+.rp-error {
+  display: none; margin: 20px 36px 0; background: #FEF2F2; border: 1px solid #FCA5A5;
+  color: #991B1B; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+}
+.rp-error.show { display: block; }
+
+.rp-loading { padding: 24px 36px; color: var(--muted); font-size: 13px; }
+
+.rp-body { display: none; }
+.rp-body.show { display: block; }
+
+.metrics-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px; padding: 20px 36px;
+}
+.metric-card {
+  background: var(--surface); border-radius: 20px; padding: 20px;
+  border: 2px solid var(--border); display: flex; flex-direction: column; gap: 10px;
+  transition: all 0.2s ease;
+}
+.metric-card:hover { border-color: var(--orange); box-shadow: 0 4px 16px rgba(198,113,57,0.1); }
+.metric-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.metric-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.metric-icon {
+  width: 36px; height: 36px; border-radius: 12px; background: var(--orange-dim); color: var(--orange);
+  display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.metric-value { font-family: var(--font-heading); font-size: 28px; font-weight: 600; color: var(--orange); }
+.metric-value.plain { color: var(--text); }
+.metric-change { font-size: 12px; color: var(--muted); }
+.metric-change.positive { color: var(--green); }
+.metric-change.negative { color: var(--red); }
+
+.content-section {
+  background: var(--surface); border-radius: 20px; border: 2px solid var(--border);
+  padding: 24px; margin: 0 36px 24px;
+}
+.section-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.section-title { font-family: var(--font-heading); font-size: 17px; font-weight: 600; color: var(--text); margin: 0; }
+.section-note { font-size: 12px; color: var(--muted); }
+
+.chart-wrap { position: relative; height: 280px; }
+
+table.rp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.rp-table th {
+  background: var(--faint); color: var(--muted); padding: 10px 14px; text-align: left;
+  font-weight: 700; border-bottom: 1px solid var(--border); font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+table.rp-table th.r, table.rp-table td.r { text-align: right; }
+table.rp-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+table.rp-table tbody tr:hover { background: var(--faint); }
+table.rp-table tbody tr:last-child td { border-bottom: none; }
+.rp-cust-link { color: var(--text); text-decoration: none; font-weight: 600; }
+.rp-cust-link:hover { color: var(--orange); }
+.rp-bar-wrap { display: flex; align-items: center; gap: 8px; }
+.rp-bar-bg { flex: 1; height: 6px; background: var(--faint); border-radius: 3px; overflow: hidden; min-width: 60px; }
+.rp-bar-fill { height: 100%; background: var(--orange); border-radius: 3px; }
+
+@media (max-width: 700px) {
+  .rp-header, .metrics-grid, .content-section { padding-left: 16px; padding-right: 16px; }
+  .content-section { margin-left: 16px; margin-right: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="plg-layout">
+<div id="plg-sidebar-root"></div>
+<div class="plg-content">
+
+  <div class="rp-header">
+    <div class="rp-title">Revenue Report</div>
+    <div class="rp-sub" id="rp-sub">Loading live data across all customers&hellip;</div>
+  </div>
+
+  <div class="rp-error" id="rp-error"></div>
+  <div class="rp-loading" id="rp-loading">Fetching customer data&hellip;</div>
+
+  <div class="rp-body" id="rp-body">
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-top"><div class="metric-label">YTD Revenue</div><div class="metric-icon">&#163;</div></div>
+        <div class="metric-value" id="m-ytd-revenue">&mdash;</div>
+        <div class="metric-change" id="m-ytd-sub">Base cost across all customers</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-top"><div class="metric-label">This Month</div><div class="metric-icon">&#128197;</div></div>
+        <div class="metric-value plain" id="m-month-revenue">&mdash;</div>
+        <div class="metric-change" id="m-month-change">&mdash;</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-top"><div class="metric-label">Avg / Consignment</div><div class="metric-icon">&#128230;</div></div>
+        <div class="metric-value plain" id="m-avg-con">&mdash;</div>
+        <div class="metric-change" id="m-total-cons">&mdash;</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-top"><div class="metric-label">Top Customer</div><div class="metric-icon">&#127942;</div></div>
+        <div class="metric-value plain" id="m-top-customer" style="font-size:18px">&mdash;</div>
+        <div class="metric-change" id="m-top-customer-rev">&mdash;</div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div class="section-header">
+        <div class="section-title">Revenue by month</div>
+        <div class="section-note" id="rp-months-note"></div>
+      </div>
+      <div class="chart-wrap"><canvas id="chart-revenue-month"></canvas></div>
+    </div>
+
+    <div class="content-section">
+      <div class="section-header">
+        <div class="section-title">Revenue by customer</div>
+        <div class="section-note">Year to date, highest first</div>
+      </div>
+      <div class="tracker-table-wrap" style="overflow-x:auto">
+        <table class="rp-table" id="rp-customer-table">
+          <thead><tr>
+            <th>Customer</th><th class="r">Consignments</th><th class="r">Pallets</th>
+            <th class="r">Revenue</th><th class="r">Avg / Con</th><th style="width:160px">Share</th>
+          </tr></thead>
+          <tbody id="rp-customer-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<script src="shared/sidebar.js"></script>
+<script>
+PLG.renderSidebar('revenue');
+
+var MONTH_NAMES = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
+var chartInstance = null;
+
+function fmtGBP(n) {
+  return '£' + (n || 0).toLocaleString('en-GB', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+}
+
+function showError(msg) {
+  var el = document.getElementById('rp-error');
+  el.textContent = msg;
+  el.classList.add('show');
+  document.getElementById('rp-loading').style.display = 'none';
+}
+
+async function loadRevenueData() {
+  try {
+    var listRes = await fetch(PLG.KPI_DATA_URL, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'list'})
+    });
+    var listPayload = await listRes.json();
+    if (!listRes.ok || listPayload.error) {
+      showError('Could not load customer list: ' + (listPayload.error || ('HTTP ' + listRes.status)));
+      return;
+    }
+    var customers = listPayload.customers || [];
+
+    var dataRes = await fetch(PLG.KPI_DATA_URL, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'get_many', customers: customers})
+    });
+    var dataPayload = await dataRes.json();
+    if (!dataRes.ok || dataPayload.error) {
+      showError('Could not load revenue data: ' + (dataPayload.error || ('HTTP ' + dataRes.status)));
+      return;
+    }
+
+    renderRevenue(dataPayload.data || {});
+  } catch (e) {
+    showError('Could not reach the shared data service: ' + e.message);
+  }
+}
+
+function renderRevenue(data) {
+  var byMonth = {};   // '2026-04' -> {revenue, cons, pallets}
+  var byCustomer = {}; // name -> {revenue, cons, pallets}
+  var totalRevenue = 0, totalCons = 0, customersWithData = 0;
+
+  Object.keys(data).forEach(function(name) {
+    var d = data[name];
+    var months = d.months || {};
+    var monthKeys = Object.keys(months);
+    if (monthKeys.length === 0) return;
+    customersWithData++;
+    byCustomer[name] = {revenue: 0, cons: 0, pallets: 0};
+    monthKeys.forEach(function(k) {
+      var mo = months[k]; if (!mo) return;
+      var rev = mo.revenue || 0, cons = mo.cons || 0, pallets = mo.pallets || 0;
+      if (!byMonth[k]) byMonth[k] = {revenue: 0, cons: 0, pallets: 0};
+      byMonth[k].revenue += rev; byMonth[k].cons += cons; byMonth[k].pallets += pallets;
+      byCustomer[name].revenue += rev; byCustomer[name].cons += cons; byCustomer[name].pallets += pallets;
+      totalRevenue += rev; totalCons += cons;
+    });
+  });
+
+  document.getElementById('rp-loading').style.display = 'none';
+  document.getElementById('rp-body').classList.add('show');
+  document.getElementById('rp-sub').textContent = customersWithData + ' customer' + (customersWithData !== 1 ? 's' : '') + ' with saved data · updated ' + new Date().toLocaleString('en-GB', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+
+  // Hero metrics
+  document.getElementById('m-ytd-revenue').textContent = fmtGBP(totalRevenue);
+  document.getElementById('m-avg-con').textContent = totalCons > 0 ? fmtGBP(totalRevenue / totalCons) : '—';
+  document.getElementById('m-total-cons').textContent = totalCons.toLocaleString('en-GB') + ' consignments';
+
+  var sortedMonths = Object.keys(byMonth).sort();
+  var lastKey = sortedMonths[sortedMonths.length - 1];
+  var prevKey = sortedMonths[sortedMonths.length - 2];
+  if (lastKey) {
+    document.getElementById('m-month-revenue').textContent = fmtGBP(byMonth[lastKey].revenue);
+    if (prevKey && byMonth[prevKey].revenue > 0) {
+      var pct = ((byMonth[lastKey].revenue - byMonth[prevKey].revenue) / byMonth[prevKey].revenue * 100);
+      var el = document.getElementById('m-month-change');
+      el.textContent = (pct >= 0 ? '↑ ' : '↓ ') + Math.abs(pct).toFixed(1) + '% vs prior month';
+      el.className = 'metric-change ' + (pct >= 0 ? 'positive' : 'negative');
+    } else {
+      document.getElementById('m-month-change').textContent = 'No prior month to compare';
+    }
+  }
+
+  var custSorted = Object.keys(byCustomer).map(function(name) {
+    return {name: name, revenue: byCustomer[name].revenue, cons: byCustomer[name].cons, pallets: byCustomer[name].pallets};
+  }).sort(function(a, b) { return b.revenue - a.revenue; });
+
+  if (custSorted.length > 0) {
+    document.getElementById('m-top-customer').textContent = custSorted[0].name;
+    document.getElementById('m-top-customer-rev').textContent = fmtGBP(custSorted[0].revenue) + ' YTD';
+  }
+
+  // Monthly chart
+  document.getElementById('rp-months-note').textContent = sortedMonths.length + ' month' + (sortedMonths.length !== 1 ? 's' : '') + ' of data';
+  var labels = sortedMonths.map(function(k) {
+    var parts = k.split('-'); return (MONTH_NAMES[parseInt(parts[1], 10)] || k) + ' \'' + parts[0].slice(2);
+  });
+  var chartData = sortedMonths.map(function(k) { return byMonth[k].revenue; });
+  var ctx = document.getElementById('chart-revenue-month');
+  if (chartInstance) chartInstance.destroy();
+  chartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {labels: labels, datasets: [{label: 'Revenue', data: chartData, backgroundColor: '#c67139', borderRadius: 4}]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {display: false}, tooltip: {callbacks: {label: function(c) { return fmtGBP(c.parsed.y); }}}},
+      scales: {
+        y: {beginAtZero: true, ticks: {callback: function(v) { return '£' + (v / 1000) + 'k'; }, font: {size: 11}}, grid: {color: 'rgba(32,30,29,0.08)'}},
+        x: {ticks: {font: {size: 11}}, grid: {display: false}}
+      }
+    }
+  });
+
+  // Customer table
+  var maxRev = custSorted.length > 0 ? custSorted[0].revenue : 1;
+  var tbody = document.getElementById('rp-customer-tbody');
+  if (custSorted.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">No customer data saved yet.</td></tr>';
+  } else {
+    tbody.innerHTML = custSorted.map(function(c) {
+      var pct = maxRev > 0 ? (c.revenue / maxRev * 100).toFixed(0) : 0;
+      var avgCon = c.cons > 0 ? fmtGBP(c.revenue / c.cons) : '—';
+      return '<tr>'
+        + '<td><a class="rp-cust-link" href="customer.html?c=' + encodeURIComponent(c.name) + '">' + c.name + '</a></td>'
+        + '<td class="r">' + c.cons.toLocaleString('en-GB') + '</td>'
+        + '<td class="r">' + c.pallets.toLocaleString('en-GB') + '</td>'
+        + '<td class="r">' + fmtGBP(c.revenue) + '</td>'
+        + '<td class="r">' + avgCon + '</td>'
+        + '<td><div class="rp-bar-wrap"><div class="rp-bar-bg"><div class="rp-bar-fill" style="width:' + pct + '%"></div></div></div></td>'
+        + '</tr>';
+    }).join('');
+  }
+}
+
+window.addEventListener('load', loadRevenueData);
+</script>
+</body>
+</html>
