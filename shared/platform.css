@@ -1,5 +1,5 @@
 /* ===== SHARED PLATFORM STYLES ===== */
-/* "Organic" design system — warm cream ground, terracotta accent, Caprasimo headings, Figtree body. */
+/* "Organic" design system — warm cream ground, terracotta accent, Space Grotesk headings, Figtree body. */
 :root {
   --bg: #f5ead8; --surface: #ebddc5; --border: rgba(32,30,29,0.16);
   --text: #201e1d; --muted: rgba(32,30,29,0.55); --faint: #eee7db;
@@ -10,13 +10,13 @@
   --shadow-sm: 0 1px 2px rgba(46,43,37,0.14);
   --shadow: 0 3px 10px rgba(46,43,37,0.16);
   --sidebar-w: 260px;
-  --font-heading: 'Caprasimo', system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Figtree', system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 body { font-family: var(--font-body); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; margin: 0; }
 
-/* Anything that reads as a heading/title/display number across the platform gets Caprasimo,
+/* Anything that reads as a heading/title/display number across the platform gets Space Grotesk,
    regardless of which page's custom class names it's wearing. */
 .page-title, .modal-title, .card-title, .card-name, .kpi-big, .brand-title, .brand-name,
 .plg-sb-brand-text, .dt, .ctitle, .empty-state-title, h1, h2, h3, h4 {
