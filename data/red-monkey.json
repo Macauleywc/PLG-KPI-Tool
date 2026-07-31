@@ -1,0 +1,704 @@
+{
+  "customer": "Red Monkey",
+  "lastUpdated": "2026-07-31T15:49:18.741Z",
+  "months": {
+    "2026-06": {
+      "cons": 179,
+      "pallets": 203,
+      "revenue": 9695.32,
+      "lates": 7,
+      "latePallets": 7,
+      "timeliness": 0.9655172413793104,
+      "avgRC": 54.16,
+      "avgRP": 47.76,
+      "avgPC": 1.13,
+      "palletSizes": {
+        "Quarter": 102,
+        "Half": 99,
+        "Full Oversize": 2
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 174,
+          "lates": 7
+        },
+        "Economy Booked": {
+          "cons": 5,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "Yorkshire": {
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 324.46000000000004,
+          "lates": 0
+        },
+        "London": {
+          "cons": 11,
+          "pallets": 11,
+          "revenue": 605.7,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 364.49,
+          "lates": 1
+        },
+        "North West": {
+          "cons": 19,
+          "pallets": 21,
+          "revenue": 780.6800000000002,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 12,
+          "pallets": 14,
+          "revenue": 1421.8299999999997,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 184.68,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 11,
+          "pallets": 14,
+          "revenue": 549.93,
+          "lates": 1
+        },
+        "East of England": {
+          "cons": 17,
+          "pallets": 17,
+          "revenue": 610.5200000000001,
+          "lates": 0
+        },
+        "South": {
+          "cons": 14,
+          "pallets": 16,
+          "revenue": 665.57,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 14,
+          "pallets": 16,
+          "revenue": 760.6500000000001,
+          "lates": 2
+        },
+        "East Midlands": {
+          "cons": 20,
+          "pallets": 33,
+          "revenue": 1288.31,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 13,
+          "pallets": 13,
+          "revenue": 936.8499999999999,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 16,
+          "pallets": 16,
+          "revenue": 734.0600000000002,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 10,
+          "pallets": 10,
+          "revenue": 363.76000000000005,
+          "lates": 1
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 30,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 41,
+          "lates": 2
+        },
+        "Wed": {
+          "cons": 46,
+          "lates": 2
+        },
+        "Thu": {
+          "cons": 36,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 26,
+          "lates": 2
+        }
+      },
+      "destData": [
+        {
+          "name": "Findel Education",
+          "city": "Findel Education",
+          "pc": "NG4 2SG",
+          "cons": 6,
+          "pallets": 18,
+          "revenue": 752.55,
+          "lates": 0
+        },
+        {
+          "name": "Kids Planet Day Nursery",
+          "city": "Kids Planet Day Nursery",
+          "pc": "WA4 4NB",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 118.66,
+          "lates": 0
+        },
+        {
+          "name": "Kids Planet Day Nurseries",
+          "city": "Kids Planet Day Nurseries",
+          "pc": "CW1 5QX",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 107.6,
+          "lates": 1
+        },
+        {
+          "name": "Rainbow Nursery",
+          "city": "Rainbow Nursery",
+          "pc": "DY8 5QU",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 70.6,
+          "lates": 1
+        },
+        {
+          "name": "St John's playgroup",
+          "city": "St John's playgroup",
+          "pc": "HG1 3EW",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 35.63,
+          "lates": 0
+        },
+        {
+          "name": "ABACUS NURSERY SCHOOL",
+          "city": "ABACUS NURSERY SCHOOL",
+          "pc": "SE27 0RN",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 57.5,
+          "lates": 0
+        },
+        {
+          "name": "Bright Horizons Lewisham Day Nursery and Preschool",
+          "city": "Bright Horizons Lewisham Day Nursery and Preschool",
+          "pc": "SE13 5AX",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 57.5,
+          "lates": 0
+        },
+        {
+          "name": "Bright Horizons Chigwell Eton Manor",
+          "city": "Bright Horizons Chigwell Eton Manor",
+          "pc": "IG9 6BJ",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 48.06,
+          "lates": 0
+        },
+        {
+          "name": "St. Lewis's Catholic Primary School",
+          "city": "St. Lewis's Catholic Primary School",
+          "pc": "WA3 7BD",
+          "cons": 1,
+          "pallets": 2,
+          "revenue": 73.69,
+          "lates": 0
+        },
+        {
+          "name": "St. Matthews Pre School",
+          "city": "St. Matthews Pre School",
+          "pc": "WA4 4NT",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 36.24,
+          "lates": 0
+        },
+        {
+          "name": "Sophie Conn",
+          "city": "Sophie Conn",
+          "pc": "BT38 9NT",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 94.27,
+          "lates": 0
+        },
+        {
+          "name": "LITTLE LEPRECHAUNS DAY NURSERY",
+          "city": "LITTLE LEPRECHAUNS DAY NURSERY",
+          "pc": "S40 1RP",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 34.36,
+          "lates": 0
+        },
+        {
+          "name": "Little Pioneers",
+          "city": "Little Pioneers",
+          "pc": "GL51 6UP",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 39.23,
+          "lates": 0
+        },
+        {
+          "name": "St. Felix School",
+          "city": "St. Felix School",
+          "pc": "IP18 6SD",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 38.47,
+          "lates": 0
+        },
+        {
+          "name": "ALL SAINTS PRE SCHOOL",
+          "city": "ALL SAINTS PRE SCHOOL",
+          "pc": "SO23 0JD",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 45.12,
+          "lates": 0
+        },
+        {
+          "name": "Busy Bees",
+          "city": "Busy Bees",
+          "pc": "HU17 9GP",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 35.63,
+          "lates": 0
+        },
+        {
+          "name": "BALLYBEEN PLAYGROUP - Ballybeen Womens Centre",
+          "city": "BALLYBEEN PLAYGROUP - Ballybeen Womens Centre",
+          "pc": "BT16 2QE",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 93.76,
+          "lates": 0
+        },
+        {
+          "name": "cylch meithrin waunfawr",
+          "city": "cylch meithrin waunfawr",
+          "pc": "LL55 4YY",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 55.62,
+          "lates": 0
+        },
+        {
+          "name": "Dingley's Promise Newtown nursery",
+          "city": "Dingley's Promise Newtown nursery",
+          "pc": "SO14 0EL",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 42.73,
+          "lates": 0
+        },
+        {
+          "name": "Latchford & Kindergarten",
+          "city": "Latchford & Kindergarten",
+          "pc": "WA4 1JN",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 34.36,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [
+    {
+      "id": "6068788",
+      "acct": "RED001",
+      "month": "Jun-26",
+      "dest": "Oak Green School",
+      "city": "Oak Green School",
+      "pc": "HP21 8LJ",
+      "window": "",
+      "commitDate": "26/06/26",
+      "arrDate": "29/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "2017904",
+      "acct": "RED001",
+      "month": "Jun-26",
+      "dest": "Building Blocks Childrens Nursery",
+      "city": "Building Blocks Childrens Nursery",
+      "pc": "NP44 2LH",
+      "window": "",
+      "commitDate": "05/06/26",
+      "arrDate": "08/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1863819",
+      "acct": "RED001",
+      "month": "Jun-26",
+      "dest": "Kids Planet Day Nurseries",
+      "city": "Kids Planet Day Nurseries",
+      "pc": "BS6 5BT",
+      "window": "",
+      "commitDate": "10/06/26",
+      "arrDate": "11/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1863283",
+      "acct": "RED001",
+      "month": "Jun-26",
+      "dest": "Kaimes Special School",
+      "city": "Kaimes Special School",
+      "pc": "EH16 6RT",
+      "window": "",
+      "commitDate": "10/06/26",
+      "arrDate": "11/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1863922",
+      "acct": "RED001",
+      "month": "Jun-26",
+      "dest": "Rainbow Nursery",
+      "city": "Rainbow Nursery",
+      "pc": "DY8 5QU",
+      "window": "",
+      "commitDate": "18/06/26",
+      "arrDate": "19/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1865485",
+      "acct": "RED001",
+      "month": "Jun-26",
+      "dest": "Childsplay Nursery",
+      "city": "Childsplay Nursery",
+      "pc": "SA15 1AU",
+      "window": "",
+      "commitDate": "30/06/26",
+      "arrDate": "01/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1163070",
+      "acct": "RED001",
+      "month": "Jun-26",
+      "dest": "Abbey Surestart",
+      "city": "Abbey Surestart",
+      "pc": "BT37 9RU",
+      "window": "",
+      "commitDate": "09/06/26",
+      "arrDate": "16/06/26",
+      "arrival": "01:00",
+      "mins": 10080,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
+  "regionData": {
+    "Yorkshire": {
+      "pallets": 9,
+      "cons": 9,
+      "lates": 0
+    },
+    "London": {
+      "pallets": 11,
+      "cons": 11,
+      "lates": 0
+    },
+    "Other": {
+      "pallets": 8,
+      "cons": 8,
+      "lates": 1
+    },
+    "North West": {
+      "pallets": 21,
+      "cons": 19,
+      "lates": 0
+    },
+    "Northern Ireland": {
+      "pallets": 14,
+      "cons": 12,
+      "lates": 1
+    },
+    "North East": {
+      "pallets": 5,
+      "cons": 5,
+      "lates": 0
+    },
+    "South West": {
+      "pallets": 14,
+      "cons": 11,
+      "lates": 1
+    },
+    "East of England": {
+      "pallets": 17,
+      "cons": 17,
+      "lates": 0
+    },
+    "South": {
+      "pallets": 16,
+      "cons": 14,
+      "lates": 0
+    },
+    "Wales": {
+      "pallets": 16,
+      "cons": 14,
+      "lates": 2
+    },
+    "East Midlands": {
+      "pallets": 33,
+      "cons": 20,
+      "lates": 0
+    },
+    "Scotland": {
+      "pallets": 13,
+      "cons": 13,
+      "lates": 1
+    },
+    "South East": {
+      "pallets": 16,
+      "cons": 16,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 10,
+      "cons": 10,
+      "lates": 1
+    }
+  },
+  "destData": [
+    {
+      "name": "Findel Education",
+      "city": "Findel Education",
+      "pc": "NG4 2SG",
+      "cons": 6,
+      "pallets": 18,
+      "revenue": 752.55,
+      "lates": 0
+    },
+    {
+      "name": "Kids Planet Day Nursery",
+      "city": "Kids Planet Day Nursery",
+      "pc": "WA4 4NB",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 118.66,
+      "lates": 0
+    },
+    {
+      "name": "Kids Planet Day Nurseries",
+      "city": "Kids Planet Day Nurseries",
+      "pc": "CW1 5QX",
+      "cons": 3,
+      "pallets": 3,
+      "revenue": 107.6,
+      "lates": 1
+    },
+    {
+      "name": "Rainbow Nursery",
+      "city": "Rainbow Nursery",
+      "pc": "DY8 5QU",
+      "cons": 2,
+      "pallets": 2,
+      "revenue": 70.6,
+      "lates": 1
+    },
+    {
+      "name": "St John's playgroup",
+      "city": "St John's playgroup",
+      "pc": "HG1 3EW",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 35.63,
+      "lates": 0
+    },
+    {
+      "name": "ABACUS NURSERY SCHOOL",
+      "city": "ABACUS NURSERY SCHOOL",
+      "pc": "SE27 0RN",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 57.5,
+      "lates": 0
+    },
+    {
+      "name": "Bright Horizons Lewisham Day Nursery and Preschool",
+      "city": "Bright Horizons Lewisham Day Nursery and Preschool",
+      "pc": "SE13 5AX",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 57.5,
+      "lates": 0
+    },
+    {
+      "name": "Bright Horizons Chigwell Eton Manor",
+      "city": "Bright Horizons Chigwell Eton Manor",
+      "pc": "IG9 6BJ",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 48.06,
+      "lates": 0
+    },
+    {
+      "name": "St. Lewis's Catholic Primary School",
+      "city": "St. Lewis's Catholic Primary School",
+      "pc": "WA3 7BD",
+      "cons": 1,
+      "pallets": 2,
+      "revenue": 73.69,
+      "lates": 0
+    },
+    {
+      "name": "St. Matthews Pre School",
+      "city": "St. Matthews Pre School",
+      "pc": "WA4 4NT",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 36.24,
+      "lates": 0
+    },
+    {
+      "name": "Sophie Conn",
+      "city": "Sophie Conn",
+      "pc": "BT38 9NT",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 94.27,
+      "lates": 0
+    },
+    {
+      "name": "LITTLE LEPRECHAUNS DAY NURSERY",
+      "city": "LITTLE LEPRECHAUNS DAY NURSERY",
+      "pc": "S40 1RP",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 34.36,
+      "lates": 0
+    },
+    {
+      "name": "Little Pioneers",
+      "city": "Little Pioneers",
+      "pc": "GL51 6UP",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 39.23,
+      "lates": 0
+    },
+    {
+      "name": "St. Felix School",
+      "city": "St. Felix School",
+      "pc": "IP18 6SD",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 38.47,
+      "lates": 0
+    },
+    {
+      "name": "ALL SAINTS PRE SCHOOL",
+      "city": "ALL SAINTS PRE SCHOOL",
+      "pc": "SO23 0JD",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 45.12,
+      "lates": 0
+    },
+    {
+      "name": "Busy Bees",
+      "city": "Busy Bees",
+      "pc": "HU17 9GP",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 35.63,
+      "lates": 0
+    },
+    {
+      "name": "BALLYBEEN PLAYGROUP - Ballybeen Womens Centre",
+      "city": "BALLYBEEN PLAYGROUP - Ballybeen Womens Centre",
+      "pc": "BT16 2QE",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 93.76,
+      "lates": 0
+    },
+    {
+      "name": "cylch meithrin waunfawr",
+      "city": "cylch meithrin waunfawr",
+      "pc": "LL55 4YY",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 55.62,
+      "lates": 0
+    },
+    {
+      "name": "Dingley's Promise Newtown nursery",
+      "city": "Dingley's Promise Newtown nursery",
+      "pc": "SO14 0EL",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 42.73,
+      "lates": 0
+    },
+    {
+      "name": "Latchford & Kindergarten",
+      "city": "Latchford & Kindergarten",
+      "pc": "WA4 1JN",
+      "cons": 1,
+      "pallets": 1,
+      "revenue": 34.36,
+      "lates": 0
+    }
+  ]
+}
