@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Sterimax)",
-  "lastUpdated": "2026-07-31T15:44:03.776Z",
+  "lastUpdated": "2026-07-31T15:44:43.467Z",
   "months": {
     "2026-06": {
       "cons": 182,
@@ -318,9 +318,9 @@
       "cons": 164,
       "pallets": 379,
       "revenue": 15828.96,
-      "lates": 11,
-      "latePallets": 13,
-      "timeliness": 0.9656992084432717,
+      "lates": 2,
+      "latePallets": 2,
+      "timeliness": 0.9947229551451188,
       "avgRC": 96.52,
       "avgRP": 41.77,
       "avgPC": 2.31,
@@ -332,7 +332,7 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 163,
-          "lates": 11
+          "lates": 2
         },
         "Economy Booked": {
           "cons": 1,
@@ -350,31 +350,31 @@
           "cons": 10,
           "pallets": 11,
           "revenue": 660.98,
-          "lates": 1
+          "lates": 0
         },
         "South West": {
           "cons": 9,
           "pallets": 9,
           "revenue": 509.61999999999995,
-          "lates": 1
+          "lates": 0
         },
         "Other": {
           "cons": 8,
           "pallets": 10,
           "revenue": 641.72,
-          "lates": 1
+          "lates": 0
         },
         "North West": {
           "cons": 20,
           "pallets": 26,
           "revenue": 3839.600000000001,
-          "lates": 1
+          "lates": 0
         },
         "East Midlands": {
           "cons": 37,
           "pallets": 218,
           "revenue": 4120.18,
-          "lates": 4
+          "lates": 2
         },
         "West Midlands": {
           "cons": 8,
@@ -392,13 +392,13 @@
           "cons": 13,
           "pallets": 13,
           "revenue": 774.4000000000001,
-          "lates": 1
+          "lates": 0
         },
         "South": {
           "cons": 22,
           "pallets": 24,
           "revenue": 1402.3199999999997,
-          "lates": 2
+          "lates": 0
         },
         "East of England": {
           "cons": 11,
@@ -426,19 +426,19 @@
         },
         "Tue": {
           "cons": 41,
-          "lates": 3
+          "lates": 0
         },
         "Wed": {
           "cons": 32,
-          "lates": 2
+          "lates": 1
         },
         "Thu": {
           "cons": 30,
-          "lates": 2
+          "lates": 0
         },
         "Fri": {
           "cons": 27,
-          "lates": 4
+          "lates": 1
         }
       },
       "destData": [
@@ -485,7 +485,7 @@
           "cons": 4,
           "pallets": 4,
           "revenue": 220.04,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Pattersons (Bristol) Limited",
@@ -503,7 +503,7 @@
           "cons": 3,
           "pallets": 3,
           "revenue": 181.51999999999998,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Seldram Supplies (Camberley) Limited",
@@ -521,7 +521,7 @@
           "cons": 3,
           "pallets": 4,
           "revenue": 315.14000000000004,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "ESPO",
@@ -548,7 +548,7 @@
           "cons": 3,
           "pallets": 5,
           "revenue": 334.15999999999997,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Krystal Hygiene Limited",
@@ -575,7 +575,7 @@
           "cons": 2,
           "pallets": 2,
           "revenue": 97.28999999999999,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Stephen James (Automotive) Limited",
@@ -611,7 +611,7 @@
           "cons": 2,
           "pallets": 2,
           "revenue": 143.45,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Betapak Limited",
@@ -626,78 +626,6 @@
     }
   },
   "lateRows": [
-    {
-      "id": "004548",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Crisp Websites Limited t/a PestFix",
-      "city": "Crisp Websites Limited t/a PestFix",
-      "pc": "PO19 8GT",
-      "window": "",
-      "commitDate": "08/05/26",
-      "arrDate": "11/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "004771",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Delifresh Ltd",
-      "city": "Delifresh Ltd",
-      "pc": "BD12 7AZ",
-      "window": "",
-      "commitDate": "02/06/26",
-      "arrDate": "03/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "004712",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Aspire Industrial Services Ltd.",
-      "city": "Aspire Industrial Services Ltd.",
-      "pc": "G52 4LT",
-      "window": "",
-      "commitDate": "22/05/26",
-      "arrDate": "23/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "004639",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "M & A Hygiene Ltd",
-      "city": "M & A Hygiene Ltd",
-      "pc": "CR6 9PQ",
-      "window": "",
-      "commitDate": "15/05/26",
-      "arrDate": "18/05/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
     {
       "id": "004753",
       "acct": "IRON",
@@ -717,60 +645,6 @@
       "failed": false
     },
     {
-      "id": "004584",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "B Conway Tail Lifts Limited",
-      "city": "B Conway Tail Lifts Limited",
-      "pc": "OL1 4AE",
-      "window": "",
-      "commitDate": "13/05/26",
-      "arrDate": "14/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "004536",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Seldram Supplies Oxford Ltd",
-      "city": "Seldram Supplies Oxford Ltd",
-      "pc": "OX29 4JB",
-      "window": "",
-      "commitDate": "12/05/26",
-      "arrDate": "13/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "004610",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Wayside Adhesives Ltd",
-      "city": "Wayside Adhesives Ltd",
-      "pc": "NG13 8WB",
-      "window": "",
-      "commitDate": "14/05/26",
-      "arrDate": "15/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "004748",
       "acct": "IRON",
       "month": "May-26",
@@ -782,42 +656,6 @@
       "arrDate": "28/05/26",
       "arrival": "01:00",
       "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "04549.1",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Polycopy Ltd",
-      "city": "Polycopy Ltd",
-      "pc": "LE11 1QD",
-      "window": "",
-      "commitDate": "26/05/26",
-      "arrDate": "27/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "004517",
-      "acct": "IRON",
-      "month": "May-26",
-      "dest": "Thermo King UK Limited",
-      "city": "Thermo King UK Limited",
-      "pc": "SO32 2BH",
-      "window": "",
-      "commitDate": "07/05/26",
-      "arrDate": "11/05/26",
-      "arrival": "01:00",
-      "mins": 5760,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
