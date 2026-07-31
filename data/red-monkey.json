@@ -1,6 +1,6 @@
 {
   "customer": "Red Monkey",
-  "lastUpdated": "2026-07-31T16:06:20.301Z",
+  "lastUpdated": "2026-07-31T16:06:44.452Z",
   "months": {
     "2026-06": {
       "cons": 179,
@@ -322,9 +322,9 @@
       "cons": 168,
       "pallets": 181,
       "revenue": 8556.98,
-      "lates": 13,
-      "latePallets": 13,
-      "timeliness": 0.9281767955801105,
+      "lates": 9,
+      "latePallets": 9,
+      "timeliness": 0.9502762430939227,
       "avgRC": 50.93,
       "avgRP": 47.28,
       "avgPC": 1.08,
@@ -340,7 +340,7 @@
         },
         "Next Day": {
           "cons": 164,
-          "lates": 13
+          "lates": 9
         }
       },
       "regionData": {
@@ -354,13 +354,13 @@
           "cons": 10,
           "pallets": 12,
           "revenue": 401.12999999999994,
-          "lates": 1
+          "lates": 0
         },
         "North West": {
           "cons": 20,
           "pallets": 23,
           "revenue": 823.8300000000002,
-          "lates": 2
+          "lates": 1
         },
         "London": {
           "cons": 19,
@@ -402,13 +402,13 @@
           "cons": 19,
           "pallets": 19,
           "revenue": 870.58,
-          "lates": 2
+          "lates": 1
         },
         "Other": {
           "cons": 11,
           "pallets": 11,
           "revenue": 465.87999999999994,
-          "lates": 1
+          "lates": 0
         },
         "West Midlands": {
           "cons": 8,
@@ -432,7 +432,7 @@
       "dowBreakdown": {
         "Mon": {
           "cons": 37,
-          "lates": 6
+          "lates": 3
         },
         "Tue": {
           "cons": 24,
@@ -440,7 +440,7 @@
         },
         "Wed": {
           "cons": 28,
-          "lates": 3
+          "lates": 2
         },
         "Thu": {
           "cons": 47,
@@ -477,7 +477,7 @@
           "cons": 3,
           "pallets": 3,
           "revenue": 117.85000000000001,
-          "lates": 1
+          "lates": 0
         },
         {
           "name": "Findel Education",
@@ -1729,60 +1729,6 @@
       "failed": false
     },
     {
-      "id": "1161888",
-      "acct": "RED001",
-      "month": "May-26",
-      "dest": "Little Inspirations Nursery School",
-      "city": "Little Inspirations Nursery School",
-      "pc": "CF72 8YW",
-      "window": "",
-      "commitDate": "06/05/26",
-      "arrDate": "07/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "1860150",
-      "acct": "RED001",
-      "month": "May-26",
-      "dest": "Kids Planet Day Nursery",
-      "city": "Kids Planet Day Nursery",
-      "pc": "WA4 4NB",
-      "window": "",
-      "commitDate": "11/05/26",
-      "arrDate": "12/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "1861413",
-      "acct": "RED001",
-      "month": "May-26",
-      "dest": "Claremont Fan Court School",
-      "city": "Claremont Fan Court School",
-      "pc": "KT10 9LY",
-      "window": "",
-      "commitDate": "11/05/26",
-      "arrDate": "12/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "1863041",
       "acct": "RED001",
       "month": "May-26",
@@ -1794,24 +1740,6 @@
       "arrDate": "26/05/26",
       "arrival": "01:00",
       "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "1860826",
-      "acct": "RED001",
-      "month": "May-26",
-      "dest": "Brunel",
-      "city": "Brunel",
-      "pc": "UB10 0AA",
-      "window": "",
-      "commitDate": "11/05/26",
-      "arrDate": "12/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
