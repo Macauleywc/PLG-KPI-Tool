@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){
-  if(!sessionStorage.getItem('plg_auth')){
-    window.location.href='login.html';
-  }
-})();
-</script>
+<script src="shared/config.js"></script>
+<script src="shared/auth-guard.js" data-module="reports"></script>
 <script>
 (function(){
   function hideStep1b(){
@@ -20,8 +15,9 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>PLG KPI Tool</title>
+<title>Customer — PLG Central</title>
 <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/platform.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -31,11 +27,11 @@
 <script src="https://code.highcharts.com/maps/modules/map.js"></script>
 <style>
 :root{
-  --bg:#f5ead8;--surface:#fff;--border:#e6dcc9;
-  --text:#201e1d;--muted:#6B6865;--faint:#eee7db;
-  --orange:#c67139;--orange-lt:#fff2eb;--orange-dk:#b2622d;
-  --dark:#201e1d;--green:#7a8a5e;--amber:#B45309;--red:#DC2626;
-  --r:14px;--font:'Figtree',sans-serif;--font-heading:'Caprasimo',Georgia,serif;--mono:'DM Mono',monospace;
+  /* Colours/fonts come from shared/platform.css. These are page-local aliases so the
+     rest of this file's existing var(--r), var(--font) etc. keep working unchanged. */
+  --r:var(--radius);--font:var(--font-body);
+  --orange-lt:var(--orange-dim);
+  --mono:'DM Mono',monospace;
   --shadow-sm:0 1px 2px rgba(0,0,0,0.06);
   --shadow:0 2px 8px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
 }
@@ -59,10 +55,12 @@ h1,h2,h3,.modal-title{font-family:var(--font-heading);font-weight:400;letter-spa
 .cust-name{font-size:22px;font-family:var(--font-heading);font-weight:400;letter-spacing:-0.01em;color:var(--text);}
 .cust-sub{font-size:12px;color:var(--muted);margin-top:3px;}
 /* ── YTD stats strip ──────────────────────────────── */
-.ytd-strip{display:grid;grid-template-columns:repeat(5,1fr);background:var(--surface);border-bottom:1px solid var(--border);}
-.ytd-cell{padding:18px 24px;border-right:1px solid var(--border);}
-.ytd-cell:last-child{border-right:none;}
-.ytd-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;}
+.ytd-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px 28px;background:var(--bg);}
+.ytd-cell{background:var(--surface);border:2px solid var(--border);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:all 0.2s;}
+.ytd-cell:hover{border-color:var(--orange);box-shadow:0 4px 16px rgba(198,113,57,0.1);}
+.ytd-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.ytd-icon{width:36px;height:36px;border-radius:12px;background:var(--orange-dim);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.ytd-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
 .ytd-value{font-size:26px;font-family:var(--font-heading);font-weight:400;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-0.01em;line-height:1;}
 .ytd-value.orange{color:var(--orange);}
 /* ── Months bar ───────────────────────────────────── */
@@ -230,14 +228,12 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
 <body>
 <div id="map-hover-tip"><div class="tip-region" id="tip-region"></div><div class="tip-row">Pallets: <span id="tip-pallets"></span></div><div class="tip-row">Consignments: <span id="tip-cons"></span></div><div class="tip-row">Lates: <span id="tip-lates"></span></div><div class="tip-row">OTIF: <span id="tip-otif"></span></div></div>
 
+<div class="plg-layout">
+<div id="plg-sidebar-root"></div>
+<div class="plg-content">
+
 <div class="hdr">
-  <a href="index.html" class="back-btn">&#8592; All customers</a>
-  <div class="hdr-l">
-    <div class="hdr-logo"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8IS0tIENyZWF0b3I6IENvcmVsRFJBVyBYNyAtLT4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMjEwbW0iIGhlaWdodD0iMjk3bW0iIHZlcnNpb249IjEuMSIgc3R5bGU9InNoYXBlLXJlbmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247IHRleHQtcmVuZGVyaW5nOmdlb21ldHJpY1ByZWNpc2lvbjsgaW1hZ2UtcmVuZGVyaW5nOm9wdGltaXplUXVhbGl0eTsgZmlsbC1ydWxlOmV2ZW5vZGQ7IGNsaXAtcnVsZTpldmVub2RkIg0Kdmlld0JveD0iMCAwIDIxMDAwIDI5NzAwIg0KIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiA8ZGVmcz4NCiAgPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCiAgIDwhW0NEQVRBWw0KICAgIC5maWwxMCB7ZmlsbDojNUI1QjVCO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw0IHtmaWxsOiNFRjdBNDQ7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDEge2ZpbGw6I0U5NTUyNDtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsOSB7ZmlsbDojQzY0QzIyO2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw4IHtmaWxsOiNBMTQyMUY7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDAge2ZpbGw6I0JGRENCMjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsNSB7ZmlsbDojOTlDQTg5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWw2IHtmaWxsOiM2OEI3NjA7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDcge2ZpbGw6IzI3QTg0MjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsMiB7ZmlsbDojMUY4QkI5O2ZpbGwtcnVsZTpub256ZXJvfQ0KICAgIC5maWwzIHtmaWxsOiMyNzc0OTI7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDExIHtmaWxsOiMyNjVCNzA7ZmlsbC1ydWxlOm5vbnplcm99DQogICBdXT4NCiAgPC9zdHlsZT4NCiA8L2RlZnM+DQogPGcgaWQ9IkxheWVyX3gwMDIwXzEiPg0KICA8bWV0YWRhdGEgaWQ9IkNvcmVsQ29ycElEXzBDb3JlbC1MYXllciIvPg0KICA8ZyBpZD0iXzczMjA3OTM5MiI+DQogICA8Zz4NCiAgICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTI5NTIgODY4MmMtNjksNTIgLTQsMTI2IDEzMywxNzMgMTM3LDQ3IDI5Niw1MSAzNjUsMiA3MCwtNDkgMjQsLTEzNiAtMTEzLC0xODYgLTEzOCwtNTAgLTMxNiwtNDIgLTM4NSwxMXoiLz4NCiAgICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTQyMDEgODU0N2MtNzIsNTEgMTM1LDE2OSA0MzAsMzAzIDI5NCwxMzQgNTY0LDIzMyA2MzgsMTg0IDczLC00OSAtNzcsLTIyOSAtMzc0LC0zNjYgLTI5NiwtMTM2IC02MjEsLTE3MyAtNjk0LC0xMjF6Ii8+DQogICA8L2c+DQogIDwvZz4NCiA8L2c+DQo8L3N2Zz4NCg==" alt="PLG"></div>
-    <div class="hdr-div"></div>
-    <div class="hdr-tool">KPI Tool</div>
-  </div>
-  <button onclick="sessionStorage.removeItem('plg_auth');window.location.href='login.html'" style="background:none;border:1px solid #2a2a2a;border-radius:6px;color:#888;font-size:12px;padding:5px 12px;cursor:pointer;font-family:inherit;margin-right:8px">Sign out</button>
+  <a href="reports.html" class="back-btn">&#8592; All customers</a>
   <div class="gh-badge">
     <div class="gh-dot" id="gh-dot"></div>
     <span id="gh-status">Connecting...</span>
@@ -252,12 +248,13 @@ footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);border-t
   </div>
 </div>
 
+
 <div class="ytd-strip">
-  <div class="ytd-cell"><div class="ytd-label" id="lbl-cons">YTD Consignments</div><div class="ytd-value orange" id="h-cons">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label" id="lbl-pallets">YTD Pallets</div><div class="ytd-value" id="h-pallets">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label" id="lbl-rev">YTD Base Cost</div><div class="ytd-value" id="h-rev">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label" id="lbl-otif">YTD Pallet OTIF</div><div class="ytd-value" id="h-otif">—</div></div>
-  <div class="ytd-cell"><div class="ytd-label" id="lbl-lates">YTD Lates</div><div class="ytd-value" id="h-lates">—</div></div>
+  <div class="ytd-cell"><div class="ytd-top"><div class="ytd-label" id="lbl-cons">YTD Consignments</div><div class="ytd-icon">📦</div></div><div class="ytd-value orange" id="h-cons">—</div></div>
+  <div class="ytd-cell"><div class="ytd-top"><div class="ytd-label" id="lbl-pallets">YTD Pallets</div><div class="ytd-icon">🧱</div></div><div class="ytd-value" id="h-pallets">—</div></div>
+  <div class="ytd-cell"><div class="ytd-top"><div class="ytd-label" id="lbl-rev">YTD Base Cost</div><div class="ytd-icon">💰</div></div><div class="ytd-value" id="h-rev">—</div></div>
+  <div class="ytd-cell"><div class="ytd-top"><div class="ytd-label" id="lbl-otif">YTD Pallet OTIF</div><div class="ytd-icon">🎯</div></div><div class="ytd-value" id="h-otif">—</div></div>
+  <div class="ytd-cell"><div class="ytd-top"><div class="ytd-label" id="lbl-lates">YTD Lates</div><div class="ytd-icon">⏱️</div></div><div class="ytd-value" id="h-lates">—</div></div>
 </div>
 
 <div class="months-bar">
@@ -794,7 +791,7 @@ function renderCarbon(key){
     K('Carbon intensity',N(gPalletKm,1)+' g','per pallet-km')+
     K('Consolidation saving',T(c.tSave),N(savePct,1)+'% saved',true)+'</div>';
   var rowsH=c.rows.map(function(r){var gpk=(r.pallets>0&&r.dist>0)?(r.co2/(r.pallets*r.dist))*1000:0;return '<tr><td style="padding:7px 10px;border-bottom:1px solid #eee">'+r.region+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right">'+N(r.pallets)+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right">'+N(r.dist)+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right">'+T(r.co2)+'</td><td style="padding:7px 10px;border-bottom:1px solid #eee;text-align:right;color:#166534">'+T(r.save)+'</td></tr>';}).join('');
-  var tbl='<div class="section-card-standalone" style="margin-top:6px"><div class="section-title">CO\u2082 by region</div><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="background:#111;color:#fff"><th style="padding:8px 10px;text-align:left;font-size:11px">REGION</th><th style="padding:8px 10px;text-align:right;font-size:11px">PALLETS</th><th style="padding:8px 10px;text-align:right;font-size:11px">EST KM</th><th style="padding:8px 10px;text-align:right;font-size:11px">CO\u2082e</th><th style="padding:8px 10px;text-align:right;font-size:11px">SAVING</th></tr></thead><tbody>'+rowsH+'</tbody></table></div>';
+  var tbl='<div class="section-card-standalone" style="margin-top:6px"><div class="section-title">CO\u2082 by region</div><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="background:var(--faint);color:var(--muted)"><th style="padding:8px 10px;text-align:left;font-size:11px">REGION</th><th style="padding:8px 10px;text-align:right;font-size:11px">PALLETS</th><th style="padding:8px 10px;text-align:right;font-size:11px">EST KM</th><th style="padding:8px 10px;text-align:right;font-size:11px">CO\u2082e</th><th style="padding:8px 10px;text-align:right;font-size:11px">SAVING</th></tr></thead><tbody>'+rowsH+'</tbody></table></div>';
   var note='<div class="section-card-standalone" style="margin-top:6px"><div style="font-size:11px;color:#999;line-height:1.6"><b>How this is calculated.</b> Distance estimated from Bardon to each UK region centroid (haversine \u00d7 '+CARBON.circ+' circuity, one-way). Each region\u2019s pallets are allocated their share of a vehicle\u2019s emissions at '+CARBON.vf+' kgCO\u2082e/km (well-to-wheel, derived from DEFRA/DESNZ 2025 diesel '+CARBON.diesel+' kgCO\u2082e/litre), '+CARBON.cap+'-pallet capacity, '+(CARBON.uc*100)+'% consolidated load factor. Consolidation saving compares this with a '+(CARBON.us*100)+'% standalone load factor (shipping alone). CO\u2082e covers CO\u2082, CH\u2084, N\u2082O at AR5 GWP. Region-level estimate; the standalone calculator gives postcode-level detail.</div></div>';
   el.innerHTML='<div class="section-card-standalone"><div class="section-title">Carbon &amp; Net Zero \u2014 '+_clbl+'</div>'+cards+'</div>'+tbl+note;
 }
@@ -2410,5 +2407,9 @@ window.mapSVGtoPNG=function(svgStr,callback){var blob=new Blob([svgStr],{type:'i
   </div>
 </div>
 
+</div>
+</div>
+<script src="shared/sidebar.js"></script>
+<script>PLG.renderSidebar('reports');</script>
 </body>
 </html>
