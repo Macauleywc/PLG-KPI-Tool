@@ -1,6 +1,6 @@
 {
   "customer": "Red Monkey",
-  "lastUpdated": "2026-07-31T16:02:07.654Z",
+  "lastUpdated": "2026-07-31T16:04:58.133Z",
   "months": {
     "2026-06": {
       "cons": 179,
@@ -322,9 +322,9 @@
       "cons": 168,
       "pallets": 181,
       "revenue": 8556.98,
-      "lates": 14,
-      "latePallets": 14,
-      "timeliness": 0.9226519337016574,
+      "lates": 13,
+      "latePallets": 13,
+      "timeliness": 0.9281767955801105,
       "avgRC": 50.93,
       "avgRP": 47.28,
       "avgPC": 1.08,
@@ -340,7 +340,7 @@
         },
         "Next Day": {
           "cons": 164,
-          "lates": 14
+          "lates": 13
         }
       },
       "regionData": {
@@ -354,7 +354,7 @@
           "cons": 10,
           "pallets": 12,
           "revenue": 401.12999999999994,
-          "lates": 2
+          "lates": 1
         },
         "North West": {
           "cons": 20,
@@ -444,7 +444,7 @@
         },
         "Thu": {
           "cons": 47,
-          "lates": 2
+          "lates": 1
         },
         "Fri": {
           "cons": 32,
@@ -635,26 +635,26 @@
       ]
     },
     "2026-04": {
-      "cons": 195,
-      "pallets": 204,
-      "revenue": 9812.46,
+      "cons": 191,
+      "pallets": 200,
+      "revenue": 9669.19,
       "lates": 7,
       "latePallets": 7,
-      "timeliness": 0.9656862745098039,
-      "avgRC": 50.32,
-      "avgRP": 48.1,
+      "timeliness": 0.965,
+      "avgRC": 50.62,
+      "avgRP": 48.35,
       "avgPC": 1.05,
       "palletSizes": {
-        "Half": 97,
-        "Quarter": 107
+        "Half": 96,
+        "Quarter": 104
       },
       "typeBreakdown": {
         "Next Day": {
-          "cons": 157,
+          "cons": 156,
           "lates": 7
         },
         "Economy Booked": {
-          "cons": 38,
+          "cons": 35,
           "lates": 0
         }
       },
@@ -690,9 +690,9 @@
           "lates": 0
         },
         "North West": {
-          "cons": 20,
-          "pallets": 20,
-          "revenue": 731.5200000000001,
+          "cons": 19,
+          "pallets": 19,
+          "revenue": 697.1600000000001,
           "lates": 0
         },
         "South East": {
@@ -708,21 +708,21 @@
           "lates": 0
         },
         "Wales": {
-          "cons": 21,
-          "pallets": 21,
-          "revenue": 921.83,
+          "cons": 20,
+          "pallets": 20,
+          "revenue": 882.7,
           "lates": 1
         },
         "South West": {
-          "cons": 11,
-          "pallets": 12,
-          "revenue": 546.52,
+          "cons": 10,
+          "pallets": 11,
+          "revenue": 512.16,
           "lates": 0
         },
         "East of England": {
-          "cons": 17,
-          "pallets": 18,
-          "revenue": 682.6799999999998,
+          "cons": 16,
+          "pallets": 17,
+          "revenue": 647.26,
           "lates": 1
         },
         "Yorkshire": {
@@ -746,11 +746,11 @@
       },
       "dowBreakdown": {
         "Mon": {
-          "cons": 37,
+          "cons": 36,
           "lates": 0
         },
         "Tue": {
-          "cons": 47,
+          "cons": 44,
           "lates": 4
         },
         "Wed": {
@@ -945,6 +945,323 @@
           "cons": 1,
           "pallets": 1,
           "revenue": 132.97,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-03": {
+      "cons": 236,
+      "pallets": 259,
+      "revenue": 12497.09,
+      "lates": 8,
+      "latePallets": 9,
+      "timeliness": 0.9652509652509652,
+      "avgRC": 52.95,
+      "avgRP": 48.25,
+      "avgPC": 1.1,
+      "palletSizes": {
+        "Half": 128,
+        "Quarter": 128,
+        "Full Oversize": 2,
+        "Full": 1
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 227,
+          "lates": 8
+        },
+        "Economy Booked": {
+          "cons": 9,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "East of England": {
+          "cons": 20,
+          "pallets": 23,
+          "revenue": 886.7999999999998,
+          "lates": 0
+        },
+        "South": {
+          "cons": 16,
+          "pallets": 17,
+          "revenue": 808.85,
+          "lates": 2
+        },
+        "Northern Ireland": {
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 594.6,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 33,
+          "pallets": 38,
+          "revenue": 2410.6699999999996,
+          "lates": 2
+        },
+        "London": {
+          "cons": 18,
+          "pallets": 18,
+          "revenue": 1040.58,
+          "lates": 1
+        },
+        "East Midlands": {
+          "cons": 26,
+          "pallets": 35,
+          "revenue": 1284.6599999999999,
+          "lates": 1
+        },
+        "Wales": {
+          "cons": 24,
+          "pallets": 25,
+          "revenue": 1301.03,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 19,
+          "pallets": 19,
+          "revenue": 867.9799999999999,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 15,
+          "pallets": 15,
+          "revenue": 690.71,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 9,
+          "pallets": 10,
+          "revenue": 420.59000000000003,
+          "lates": 1
+        },
+        "Other": {
+          "cons": 7,
+          "pallets": 8,
+          "revenue": 424.17,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 29,
+          "pallets": 30,
+          "revenue": 1091.5100000000002,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 227.26,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 9,
+          "pallets": 10,
+          "revenue": 358.26000000000005,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 38,
+          "lates": 2
+        },
+        "Tue": {
+          "cons": 39,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 51,
+          "lates": 2
+        },
+        "Thu": {
+          "cons": 55,
+          "lates": 3
+        },
+        "Fri": {
+          "cons": 53,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "RED MONKEY PLAY LTD",
+          "city": "RED MONKEY PLAY LTD",
+          "pc": "LE18 2DB",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 129.05,
+          "lates": 0
+        },
+        {
+          "name": "Kids Planet Day Nursery",
+          "city": "Kids Planet Day Nursery",
+          "pc": "M34 5XX",
+          "cons": 5,
+          "pallets": 6,
+          "revenue": 216.16,
+          "lates": 1
+        },
+        {
+          "name": "Findel Education",
+          "city": "Findel Education",
+          "pc": "NG4 2SG",
+          "cons": 4,
+          "pallets": 11,
+          "revenue": 485.60999999999996,
+          "lates": 0
+        },
+        {
+          "name": "R M Educational Resources Ltd",
+          "city": "R M Educational Resources Ltd",
+          "pc": "NG15 6XJ",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 103.08,
+          "lates": 0
+        },
+        {
+          "name": "Kids Planet Westhagbourne",
+          "city": "Kids Planet Westhagbourne",
+          "pc": "OX11 0NA",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 111,
+          "lates": 0
+        },
+        {
+          "name": "Oldbrook First School & Nursery",
+          "city": "Oldbrook First School & Nursery",
+          "pc": "MK6 2NH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 70.6,
+          "lates": 0
+        },
+        {
+          "name": "The Sunshine Day Nursery",
+          "city": "The Sunshine Day Nursery",
+          "pc": "SR8 5UD",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 75.16,
+          "lates": 0
+        },
+        {
+          "name": "Tollbrae Primary School",
+          "city": "Tollbrae Primary School",
+          "pc": "ML6 9LZ",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 114.6,
+          "lates": 0
+        },
+        {
+          "name": "Stockwell Gardens Nursery",
+          "city": "Stockwell Gardens Nursery",
+          "pc": "SW9 9ES",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 115,
+          "lates": 0
+        },
+        {
+          "name": "Heathside Nursery",
+          "city": "Heathside Nursery",
+          "pc": "WA7 4QR",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 70.6,
+          "lates": 0
+        },
+        {
+          "name": "Kindred Durrington Day Nursery & Pre-School",
+          "city": "Kindred Durrington Day Nursery & Pre-School",
+          "pc": "SP4 8HJ",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 97.44,
+          "lates": 1
+        },
+        {
+          "name": "Hunstanton Primary School",
+          "city": "Hunstanton Primary School",
+          "pc": "PE36 5DY",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.39,
+          "lates": 0
+        },
+        {
+          "name": "Highfield Lane Day Nursery School",
+          "city": "Highfield Lane Day Nursery School",
+          "pc": "AL4 0GX",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 37.4,
+          "lates": 0
+        },
+        {
+          "name": "Playaway Day Nursery",
+          "city": "Playaway Day Nursery",
+          "pc": "SO14 5FE",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 42.73,
+          "lates": 0
+        },
+        {
+          "name": "Cranmore Integrated Primary School",
+          "city": "Cranmore Integrated Primary School",
+          "pc": "BT10 0JB",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 94.27,
+          "lates": 0
+        },
+        {
+          "name": "Nanny Jennys",
+          "city": "Nanny Jennys",
+          "pc": "CO15 4AR",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 38.47,
+          "lates": 0
+        },
+        {
+          "name": "PARKHILL ELC CENTRE - St. Margarets Primary School",
+          "city": "PARKHILL ELC CENTRE - St. Margarets Primary School",
+          "pc": "FK2 0XF",
+          "cons": 1,
+          "pallets": 2,
+          "revenue": 123.07,
+          "lates": 0
+        },
+        {
+          "name": "Wingfield Primary School",
+          "city": "Wingfield Primary School",
+          "pc": "SE3 9GJ",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 57.5,
+          "lates": 0
+        },
+        {
+          "name": "Evolve",
+          "city": "Evolve",
+          "pc": "SA4 4FE",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 54.4,
+          "lates": 0
+        },
+        {
+          "name": "Dalmeny Primary School",
+          "city": "Dalmeny Primary School",
+          "pc": "EH30 9TZ",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 53.24,
           "lates": 0
         }
       ]
@@ -1150,24 +1467,6 @@
       "failed": false
     },
     {
-      "id": "1862278",
-      "acct": "RED001",
-      "month": "May-26",
-      "dest": "Greenhill Primary School",
-      "city": "Greenhill Primary School",
-      "pc": "CF82 8EU",
-      "window": "",
-      "commitDate": "14/05/26",
-      "arrDate": "18/05/26",
-      "arrival": "01:00",
-      "mins": 5760,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "1863041",
       "acct": "RED001",
       "month": "May-26",
@@ -1324,6 +1623,150 @@
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1156758",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Essex Primary School",
+      "city": "Essex Primary School",
+      "pc": "E12 6QX",
+      "window": "",
+      "commitDate": "12/03/26",
+      "arrDate": "13/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1856798",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Stores Reception",
+      "city": "Stores Reception",
+      "pc": "EH54 6PP",
+      "window": "",
+      "commitDate": "30/03/26",
+      "arrDate": "31/03/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1853394",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Balmalloch Primary School",
+      "city": "Balmalloch Primary School",
+      "pc": "G65 9UJ",
+      "window": "",
+      "commitDate": "11/03/26",
+      "arrDate": "12/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1855278",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Kindred Durrington Day Nursery & Pre-School",
+      "city": "Kindred Durrington Day Nursery & Pre-School",
+      "pc": "SP4 8HJ",
+      "window": "",
+      "commitDate": "26/03/26",
+      "arrDate": "27/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1150377",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Quarter Primary School",
+      "city": "Quarter Primary School",
+      "pc": "ML3 7XA",
+      "window": "",
+      "commitDate": "11/03/26",
+      "arrDate": "12/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "2015616",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Pickhurst Infant School",
+      "city": "Pickhurst Infant School",
+      "pc": "BR4 0HL",
+      "window": "",
+      "commitDate": "05/03/26",
+      "arrDate": "06/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1157993",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Asquith Primary School",
+      "city": "Asquith Primary School",
+      "pc": "NG18 3DG",
+      "window": "",
+      "commitDate": "24/03/26",
+      "arrDate": "25/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1856793",
+      "acct": "RED001",
+      "month": "Mar-26",
+      "dest": "Kids Planet Day Nursery",
+      "city": "Kids Planet Day Nursery",
+      "pc": "M7 4HT",
+      "window": "",
+      "commitDate": "30/03/26",
+      "arrDate": "31/03/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
       "dtype": "Standard",
       "note": "",
       "reason": "",
