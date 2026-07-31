@@ -1,0 +1,231 @@
+{
+  "customer": "IPS",
+  "lastUpdated": "2026-07-31T14:57:38.283Z",
+  "months": {
+    "2026-07": {
+      "cons": 29,
+      "pallets": 765,
+      "revenue": 5940,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 204.83,
+      "avgRP": 7.76,
+      "avgPC": 26.38,
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 29,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 22,
+          "pallets": 534,
+          "revenue": 4405,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 6,
+          "pallets": 198,
+          "revenue": 1040,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 1,
+          "pallets": 33,
+          "revenue": 495,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 1,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 5,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 4,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 5,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 4,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Aldi Bardon",
+          "city": "Aldi Bardon",
+          "pc": "LE57 1GE",
+          "cons": 7,
+          "pallets": 231,
+          "revenue": 1155,
+          "lates": 0
+        },
+        {
+          "name": "Aldi Distribution Centre (Sawley)",
+          "city": "Aldi Distribution Centre (Sawley)",
+          "pc": "DE72 2HP",
+          "cons": 5,
+          "pallets": 165,
+          "revenue": 875,
+          "lates": 0
+        },
+        {
+          "name": "ALDI Atherstone",
+          "city": "ALDI Atherstone",
+          "pc": "CV9 2SQ",
+          "cons": 5,
+          "pallets": 165,
+          "revenue": 875,
+          "lates": 0
+        },
+        {
+          "name": "IPS Mountpark",
+          "city": "IPS Mountpark",
+          "pc": "LE67 1GQ",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 1250,
+          "lates": 0
+        },
+        {
+          "name": "IPS CO PACKAGING (CULINA)",
+          "city": "IPS CO PACKAGING (CULINA)",
+          "pc": "LE67 1GQ",
+          "cons": 3,
+          "pallets": 99,
+          "revenue": 750,
+          "lates": 0
+        },
+        {
+          "name": "Aldi",
+          "city": "Aldi",
+          "pc": "LE67 1GY",
+          "cons": 2,
+          "pallets": 34,
+          "revenue": 375,
+          "lates": 0
+        },
+        {
+          "name": "ALDI Darlington",
+          "city": "ALDI Darlington",
+          "pc": "DL3 0UW",
+          "cons": 1,
+          "pallets": 33,
+          "revenue": 495,
+          "lates": 0
+        },
+        {
+          "name": "ALDI STORES LTD (Atherstone)",
+          "city": "ALDI STORES LTD (Atherstone)",
+          "pc": "CV9 2SQ",
+          "cons": 1,
+          "pallets": 33,
+          "revenue": 165,
+          "lates": 0
+        }
+      ]
+    }
+  },
+  "lateRows": [],
+  "regionData": {
+    "East Midlands": {
+      "pallets": 534,
+      "cons": 22,
+      "lates": 0
+    },
+    "West Midlands": {
+      "pallets": 198,
+      "cons": 6,
+      "lates": 0
+    },
+    "North East": {
+      "pallets": 33,
+      "cons": 1,
+      "lates": 0
+    }
+  },
+  "destData": [
+    {
+      "name": "Aldi Bardon",
+      "city": "Aldi Bardon",
+      "pc": "LE57 1GE",
+      "cons": 7,
+      "pallets": 231,
+      "revenue": 1155,
+      "lates": 0
+    },
+    {
+      "name": "Aldi Distribution Centre (Sawley)",
+      "city": "Aldi Distribution Centre (Sawley)",
+      "pc": "DE72 2HP",
+      "cons": 5,
+      "pallets": 165,
+      "revenue": 875,
+      "lates": 0
+    },
+    {
+      "name": "ALDI Atherstone",
+      "city": "ALDI Atherstone",
+      "pc": "CV9 2SQ",
+      "cons": 5,
+      "pallets": 165,
+      "revenue": 875,
+      "lates": 0
+    },
+    {
+      "name": "IPS Mountpark",
+      "city": "IPS Mountpark",
+      "pc": "LE67 1GQ",
+      "cons": 5,
+      "pallets": 5,
+      "revenue": 1250,
+      "lates": 0
+    },
+    {
+      "name": "IPS CO PACKAGING (CULINA)",
+      "city": "IPS CO PACKAGING (CULINA)",
+      "pc": "LE67 1GQ",
+      "cons": 3,
+      "pallets": 99,
+      "revenue": 750,
+      "lates": 0
+    },
+    {
+      "name": "Aldi",
+      "city": "Aldi",
+      "pc": "LE67 1GY",
+      "cons": 2,
+      "pallets": 34,
+      "revenue": 375,
+      "lates": 0
+    },
+    {
+      "name": "ALDI Darlington",
+      "city": "ALDI Darlington",
+      "pc": "DL3 0UW",
+      "cons": 1,
+      "pallets": 33,
+      "revenue": 495,
+      "lates": 0
+    },
+    {
+      "name": "ALDI STORES LTD (Atherstone)",
+      "city": "ALDI STORES LTD (Atherstone)",
+      "pc": "CV9 2SQ",
+      "cons": 1,
+      "pallets": 33,
+      "revenue": 165,
+      "lates": 0
+    }
+  ]
+}
