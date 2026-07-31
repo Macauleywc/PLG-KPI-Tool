@@ -1,6 +1,6 @@
 {
   "customer": "SAF Holland",
-  "lastUpdated": "2026-07-31T16:15:47.259Z",
+  "lastUpdated": "2026-07-31T16:17:13.840Z",
   "months": {
     "2026-05": {
       "cons": 289,
@@ -637,24 +637,24 @@
       ]
     },
     "2026-04": {
-      "cons": 315,
-      "pallets": 692,
-      "revenue": 40602.22,
+      "cons": 314,
+      "pallets": 691,
+      "revenue": 40541.01,
       "lates": 29,
       "latePallets": 32,
-      "timeliness": 0.953757225433526,
-      "avgRC": 128.9,
+      "timeliness": 0.9536903039073806,
+      "avgRC": 129.11,
       "avgRP": 58.67,
       "avgPC": 2.2,
       "palletSizes": {
         "Half": 167.317,
         "Full Oversize": 129.666,
         "Full": 258,
-        "Quarter": 99.017
+        "Quarter": 98.017
       },
       "typeBreakdown": {
         "Next Day": {
-          "cons": 302,
+          "cons": 301,
           "lates": 29
         },
         "Economy Booked": {
@@ -700,9 +700,9 @@
           "lates": 0
         },
         "North East": {
-          "cons": 21,
-          "pallets": 38,
-          "revenue": 1813.8700000000003,
+          "cons": 20,
+          "pallets": 37,
+          "revenue": 1752.6600000000003,
           "lates": 0
         },
         "Scotland": {
@@ -758,7 +758,7 @@
           "lates": 6
         },
         "Wed": {
-          "cons": 54,
+          "cons": 53,
           "lates": 8
         },
         "Thu": {
@@ -949,6 +949,323 @@
           "cons": 4,
           "pallets": 5,
           "revenue": 279.97,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-03": {
+      "cons": 387,
+      "pallets": 810,
+      "revenue": 46049.08,
+      "lates": 6,
+      "latePallets": 6,
+      "timeliness": 0.9925925925925926,
+      "avgRC": 118.99,
+      "avgRP": 56.85,
+      "avgPC": 2.09,
+      "palletSizes": {
+        "Full": 258.25,
+        "Half": 252.642,
+        "Quarter": 131.5,
+        "Full Oversize": 157.608
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 369,
+          "lates": 6
+        },
+        "Economy Booked": {
+          "cons": 18,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 67,
+          "pallets": 142,
+          "revenue": 5990.249999999998,
+          "lates": 1
+        },
+        "North West": {
+          "cons": 63,
+          "pallets": 129,
+          "revenue": 5674.499999999996,
+          "lates": 0
+        },
+        "South": {
+          "cons": 19,
+          "pallets": 69,
+          "revenue": 3105.9600000000005,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 26,
+          "pallets": 47,
+          "revenue": 2195.44,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 30,
+          "pallets": 48,
+          "revenue": 2160.75,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 41,
+          "pallets": 59,
+          "revenue": 4536.049999999999,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 40,
+          "pallets": 178,
+          "revenue": 15282.840000000004,
+          "lates": 3
+        },
+        "Wales": {
+          "cons": 17,
+          "pallets": 22,
+          "revenue": 1178.1999999999998,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 20,
+          "pallets": 27,
+          "revenue": 1571.48,
+          "lates": 1
+        },
+        "West Midlands": {
+          "cons": 15,
+          "pallets": 25,
+          "revenue": 1330.8899999999999,
+          "lates": 0
+        },
+        "London": {
+          "cons": 8,
+          "pallets": 14,
+          "revenue": 664.98,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 28,
+          "pallets": 37,
+          "revenue": 1684.5799999999995,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 354.81,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 318.35,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 80,
+          "lates": 2
+        },
+        "Tue": {
+          "cons": 92,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 74,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 69,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 72,
+          "lates": 2
+        }
+      },
+      "destData": [
+        {
+          "name": "Dingbro Ltd",
+          "city": "Dingbro Ltd",
+          "pc": "AB16 6HQ",
+          "cons": 18,
+          "pallets": 24,
+          "revenue": 1847.34,
+          "lates": 0
+        },
+        {
+          "name": "H G V Direct",
+          "city": "H G V Direct",
+          "pc": "DE6 1HD",
+          "cons": 18,
+          "pallets": 20,
+          "revenue": 810.7,
+          "lates": 0
+        },
+        {
+          "name": "Maxi Haulage Ltd",
+          "city": "Maxi Haulage Ltd",
+          "pc": "WA4 4TQ",
+          "cons": 14,
+          "pallets": 31,
+          "revenue": 1247.29,
+          "lates": 0
+        },
+        {
+          "name": "S D C Trailers Ltd",
+          "city": "S D C Trailers Ltd",
+          "pc": "BT41 3SS",
+          "cons": 12,
+          "pallets": 60,
+          "revenue": 5747.96,
+          "lates": 1
+        },
+        {
+          "name": "SAF HOLLAND",
+          "city": "SAF HOLLAND",
+          "pc": "LE12 9NH",
+          "cons": 10,
+          "pallets": 34,
+          "revenue": 1580.86,
+          "lates": 0
+        },
+        {
+          "name": "Montracon Ltd",
+          "city": "Montracon Ltd",
+          "pc": "DN4 8DE",
+          "cons": 9,
+          "pallets": 18,
+          "revenue": 799.68,
+          "lates": 0
+        },
+        {
+          "name": "Dennison Trailers",
+          "city": "Dennison Trailers",
+          "pc": "LA1 3PE",
+          "cons": 8,
+          "pallets": 15,
+          "revenue": 873.39,
+          "lates": 0
+        },
+        {
+          "name": "E M S-F P & S Ltd",
+          "city": "E M S-F P & S Ltd",
+          "pc": "NN5 5BB",
+          "cons": 7,
+          "pallets": 38,
+          "revenue": 1483.65,
+          "lates": 0
+        },
+        {
+          "name": "Fleet Factors Ltd",
+          "city": "Fleet Factors Ltd",
+          "pc": "TS6 6JB",
+          "cons": 7,
+          "pallets": 9,
+          "revenue": 389.12,
+          "lates": 1
+        },
+        {
+          "name": "Newton Trailers Ltd",
+          "city": "Newton Trailers Ltd",
+          "pc": "MK43 0XP",
+          "cons": 7,
+          "pallets": 18,
+          "revenue": 725.1899999999999,
+          "lates": 0
+        },
+        {
+          "name": "L T & T",
+          "city": "L T & T",
+          "pc": "WA1 4RZ",
+          "cons": 6,
+          "pallets": 7,
+          "revenue": 319.04,
+          "lates": 0
+        },
+        {
+          "name": "T2 Euro Car Parts",
+          "city": "T2 Euro Car Parts",
+          "pc": "B78 1SE",
+          "cons": 6,
+          "pallets": 19,
+          "revenue": 903.4499999999999,
+          "lates": 0
+        },
+        {
+          "name": "Tiger Trailers",
+          "city": "Tiger Trailers",
+          "pc": "CW7 3RL",
+          "cons": 6,
+          "pallets": 20,
+          "revenue": 850.35,
+          "lates": 0
+        },
+        {
+          "name": "Tractair Ltd",
+          "city": "Tractair Ltd",
+          "pc": "HU15 1YS",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 302.21,
+          "lates": 0
+        },
+        {
+          "name": "3G Truck & Trailer Parts Ltd",
+          "city": "3G Truck & Trailer Parts Ltd",
+          "pc": "S62 6EF",
+          "cons": 6,
+          "pallets": 12,
+          "revenue": 549.73,
+          "lates": 0
+        },
+        {
+          "name": "Greenhouse Commercials Ltd",
+          "city": "Greenhouse Commercials Ltd",
+          "pc": "SY1 3JE",
+          "cons": 6,
+          "pallets": 7,
+          "revenue": 335.38,
+          "lates": 0
+        },
+        {
+          "name": "FPS",
+          "city": "FPS",
+          "pc": "S66 8PU",
+          "cons": 6,
+          "pallets": 31,
+          "revenue": 1279.38,
+          "lates": 0
+        },
+        {
+          "name": "Partic Motor Spares Ltd",
+          "city": "Partic Motor Spares Ltd",
+          "pc": "NG24 2EG",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 247.19,
+          "lates": 1
+        },
+        {
+          "name": "Fleetwheel Ltd",
+          "city": "Fleetwheel Ltd",
+          "pc": "SA6 8RX",
+          "cons": 5,
+          "pallets": 6,
+          "revenue": 317.21999999999997,
+          "lates": 0
+        },
+        {
+          "name": "Dingbro",
+          "city": "Dingbro",
+          "pc": "DG1 1NF",
+          "cons": 5,
+          "pallets": 8,
+          "revenue": 515.51,
           "lates": 0
         }
       ]
@@ -1471,6 +1788,114 @@
       "arrDate": "17/04/26",
       "arrival": "01:00",
       "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "oe77971",
+      "acct": "SAFHOL",
+      "month": "Mar-26",
+      "dest": "S D C Trailers Ltd",
+      "city": "S D C Trailers Ltd",
+      "pc": "BT41 3SS",
+      "window": "",
+      "commitDate": "23/03/26",
+      "arrDate": "24/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "wm14976",
+      "acct": "SAFHOL",
+      "month": "Mar-26",
+      "dest": "Partic Motor Spares Ltd",
+      "city": "Partic Motor Spares Ltd",
+      "pc": "NG24 2EG",
+      "window": "",
+      "commitDate": "07/04/26",
+      "arrDate": "08/04/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "WM14204",
+      "acct": "SAFHOL",
+      "month": "Mar-26",
+      "dest": "Fleet Factors Ltd",
+      "city": "Fleet Factors Ltd",
+      "pc": "TS6 6JB",
+      "window": "",
+      "commitDate": "13/03/26",
+      "arrDate": "16/03/26",
+      "arrival": "00:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "wm14790",
+      "acct": "SAFHOL",
+      "month": "Mar-26",
+      "dest": "montracon",
+      "city": "montracon",
+      "pc": "BT36 4PX",
+      "window": "",
+      "commitDate": "27/03/26",
+      "arrDate": "30/03/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "wm14286",
+      "acct": "SAFHOL",
+      "month": "Mar-26",
+      "dest": "Montracon - Aftermarket Ire",
+      "city": "Montracon - Aftermarket Ire",
+      "pc": "BT36 4PX",
+      "window": "",
+      "commitDate": "16/03/26",
+      "arrDate": "17/03/26",
+      "arrival": "00:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "wm13862",
+      "acct": "SAFHOL",
+      "month": "Mar-26",
+      "dest": "Shropshire Truck & Trailer Parts",
+      "city": "Shropshire Truck & Trailer Parts",
+      "pc": "SY4 5BA",
+      "window": "",
+      "commitDate": "05/03/26",
+      "arrDate": "09/03/26",
+      "arrival": "00:00",
+      "mins": 5760,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
