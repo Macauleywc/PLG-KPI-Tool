@@ -11,7 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-.rp-header { padding: 32px 36px 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.rp-header { padding: 28px 36px 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
 .rp-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
 .rp-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
@@ -24,12 +24,12 @@
 #rp-file-input { display: none; }
 
 .rp-error {
-  display: none; margin: 20px 36px 0; background: #FEF2F2; border: 1px solid #FCA5A5;
+  display: none; margin: 16px 36px 0; background: #FEF2F2; border: 1px solid #FCA5A5;
   color: #991B1B; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
 }
 .rp-error.show { display: block; }
 .rp-notice {
-  display: none; margin: 20px 36px 0; background: #F0FDF4; border: 1px solid #86EFAC;
+  display: none; margin: 16px 36px 0; background: #F0FDF4; border: 1px solid #86EFAC;
   color: #166534; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
 }
 .rp-notice.show { display: block; }
@@ -37,6 +37,30 @@
 .rp-loading { padding: 24px 36px; color: var(--muted); font-size: 13px; }
 .rp-body { display: none; }
 .rp-body.show { display: block; }
+
+/* Controls bar */
+.rp-controls {
+  display: flex; align-items: center; gap: 20px; padding: 14px 36px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--border); margin-bottom: 4px;
+}
+.rp-control-group { display: flex; align-items: center; gap: 8px; }
+.rp-control-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-right: 2px; }
+.rp-seg { display: flex; background: var(--faint); border-radius: 999px; padding: 3px; gap: 2px; }
+.rp-seg-btn {
+  border: none; background: none; border-radius: 999px; padding: 6px 14px; font-size: 12px;
+  font-weight: 600; color: var(--muted); cursor: pointer; font-family: var(--font-body); transition: all 0.15s;
+}
+.rp-seg-btn.active { background: var(--orange); color: #fff; }
+.rp-fleet-input-wrap { display: flex; align-items: center; gap: 6px; }
+.rp-fleet-input {
+  width: 54px; border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px;
+  font-size: 12px; font-family: var(--font-body); background: var(--surface); color: var(--text);
+}
+.rp-fleet-save {
+  border: 1px solid var(--border); background: var(--surface); border-radius: 6px; padding: 5px 10px;
+  font-size: 11px; font-weight: 600; cursor: pointer; color: var(--muted);
+}
+.rp-fleet-save:hover { color: var(--text); border-color: var(--orange); }
 
 .metrics-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -92,7 +116,7 @@ table.rp-table tbody tr:hover td { background: var(--faint); }
 table.rp-table tbody tr:hover td:first-child { background: var(--faint); }
 
 @media (max-width: 700px) {
-  .rp-header, .metrics-grid, .content-section { padding-left: 16px; padding-right: 16px; }
+  .rp-header, .metrics-grid, .content-section, .rp-controls { padding-left: 16px; padding-right: 16px; }
   .content-section { margin-left: 16px; margin-right: 16px; }
 }
 </style>
@@ -116,59 +140,59 @@ table.rp-table tbody tr:hover td:first-child { background: var(--faint); }
 
   <div class="rp-error" id="rp-error"></div>
   <div class="rp-notice" id="rp-notice"></div>
-  <div class="rp-loading" id="rp-loading">Fetching weekly turnover records&hellip;</div>
+  <div class="rp-loading" id="rp-loading">Fetching turnover records&hellip;</div>
 
   <div class="rp-body" id="rp-body">
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">Avg Weekly Total</div><div class="metric-icon">&#163;</div></div>
-        <div class="metric-value" id="m-avg-weekly">&mdash;</div>
+
+    <div class="rp-controls">
+      <div class="rp-control-group">
+        <span class="rp-control-label">View</span>
+        <div class="rp-seg" id="seg-granularity">
+          <button class="rp-seg-btn active" data-val="weekly" onclick="setGranularity('weekly')">Weekly</button>
+          <button class="rp-seg-btn" data-val="daily" onclick="setGranularity('daily')">Daily</button>
+        </div>
       </div>
-      <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">Best Week</div><div class="metric-icon">&#127942;</div></div>
-        <div class="metric-value plain" id="m-best-week">&mdash;</div>
-        <div class="metric-change" id="m-best-week-date"></div>
+      <div class="rp-control-group">
+        <span class="rp-control-label">Department</span>
+        <div class="rp-seg" id="seg-department">
+          <button class="rp-seg-btn active" data-val="all" onclick="setDepartment('all')">All</button>
+          <button class="rp-seg-btn" data-val="palletforce" onclick="setDepartment('palletforce')">Palletforce</button>
+          <button class="rp-seg-btn" data-val="haulage" onclick="setDepartment('haulage')">General Haulage</button>
+          <button class="rp-seg-btn" data-val="fleet" onclick="setDepartment('fleet')">Fleet &amp; Staffing</button>
+        </div>
       </div>
-      <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">Avg Margin %</div><div class="metric-icon">&#128202;</div></div>
-        <div class="metric-value plain" id="m-avg-margin">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">Avg Pallets / Wk</div><div class="metric-icon">&#128230;</div></div>
-        <div class="metric-value plain" id="m-avg-pallets">&mdash;</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">Total Weeks</div><div class="metric-icon">&#128197;</div></div>
-        <div class="metric-value plain" id="m-total-weeks">&mdash;</div>
+      <div class="rp-control-group" id="fleet-size-control" style="display:none">
+        <span class="rp-control-label">Total Fleet Size</span>
+        <div class="rp-fleet-input-wrap">
+          <input type="number" class="rp-fleet-input" id="fleet-size-input" min="1">
+          <button class="rp-fleet-save" onclick="saveFleetSize()">Save</button>
+        </div>
       </div>
     </div>
 
+    <div class="metrics-grid" id="metrics-grid"></div>
+
     <div class="content-section">
       <div class="section-header">
-        <div class="section-title">Grand total by week</div>
+        <div class="section-title" id="chart-title">Trend</div>
         <div class="rp-tabs">
           <button class="rp-tab active" id="tab-26" onclick="setChartRange(26)">6 months</button>
           <button class="rp-tab" id="tab-52" onclick="setChartRange(52)">1 year</button>
           <button class="rp-tab" id="tab-999" onclick="setChartRange(999)">All time</button>
         </div>
       </div>
-      <div class="chart-wrap"><canvas id="chart-weekly"></canvas></div>
+      <div class="chart-wrap"><canvas id="chart-main"></canvas></div>
     </div>
 
     <div class="content-section">
       <div class="section-header">
-        <div class="section-title">Weekly data table</div>
+        <div class="section-title">Data table</div>
         <div class="section-note" id="rp-table-note">Most recent first</div>
       </div>
       <div class="tracker-table-wrap" style="overflow-x:auto">
-        <table class="rp-table" id="rp-weekly-table">
-          <thead><tr>
-            <th>Week Commencing</th><th>Grand Total (£)</th><th>PF Coll (£)</th><th>PF Del (£)</th>
-            <th>Pallets</th><th>PF Fails</th><th>Gen Own Fleet (£)</th><th>VPK Fleet (£)</th>
-            <th>Group Coll (£)</th><th>Subbed Rev (£)</th><th>Subbed Cost (£)</th><th>General Total (£)</th>
-            <th>Subbed Margin %</th><th>Trucks Stood</th><th>Trucks VOR</th>
-          </tr></thead>
-          <tbody id="rp-weekly-tbody"></tbody>
+        <table class="rp-table" id="rp-table">
+          <thead id="rp-table-head"></thead>
+          <tbody id="rp-table-body"></tbody>
         </table>
       </div>
     </div>
@@ -181,19 +205,23 @@ table.rp-table tbody tr:hover td:first-child { background: var(--faint); }
 PLG.renderSidebar('revenue');
 
 var allWeeks = [];
+var allDays = [];
+var fleetSize = 25;
 var chartInstance = null;
 var chartRange = 26;
+var granularity = 'weekly'; // 'weekly' | 'daily'
+var department = 'all';     // 'all' | 'palletforce' | 'haulage' | 'fleet'
 
 function fmtGBP(n, decimals) {
-  if (n === null || n === undefined) return '—';
+  if (n === null || n === undefined || isNaN(n)) return '—';
   return '£' + Number(n).toLocaleString('en-GB', {minimumFractionDigits: decimals || 0, maximumFractionDigits: decimals || 0});
 }
-function fmtNum(n) {
-  if (n === null || n === undefined) return '—';
-  return Number(n).toLocaleString('en-GB', {maximumFractionDigits: 0});
+function fmtNum(n, decimals) {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  return Number(n).toLocaleString('en-GB', {minimumFractionDigits: decimals || 0, maximumFractionDigits: decimals || 0});
 }
 function fmtPct(n) {
-  if (n === null || n === undefined) return '—';
+  if (n === null || n === undefined || isNaN(n)) return '—';
   return (Number(n) * 100).toFixed(1) + '%';
 }
 function fmtWeekLabel(wc) {
@@ -201,6 +229,11 @@ function fmtWeekLabel(wc) {
   if (!m) return wc;
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return m[1] + ' ' + MONTHS[parseInt(m[2], 10) - 1] + " '" + m[3].slice(2);
+}
+function fmtDayLabel(d) {
+  var dt = new Date(d);
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return dt.getDate() + ' ' + MONTHS[dt.getMonth()];
 }
 
 function showError(msg) {
@@ -223,100 +256,261 @@ async function loadRevenueData() {
       body: JSON.stringify({action: 'revenue_weeks'})
     });
     var payload = await res.json();
-    if (!res.ok || payload.error) {
-      showError('Could not load revenue data: ' + (payload.error || ('HTTP ' + res.status)));
-      return;
-    }
+    if (!res.ok || payload.error) { showError('Could not load weekly data: ' + (payload.error || ('HTTP ' + res.status))); return; }
     allWeeks = payload.weeks || [];
+
+    var res2 = await fetch(PLG.KPI_DATA_URL, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'revenue_days'})
+    });
+    var payload2 = await res2.json();
+    if (res2.ok && !payload2.error) allDays = payload2.days || [];
+
+    var res3 = await fetch(PLG.KPI_DATA_URL, {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'revenue_settings'})
+    });
+    var payload3 = await res3.json();
+    if (res3.ok && payload3.settings && payload3.settings.total_fleet_size) fleetSize = payload3.settings.total_fleet_size;
+    document.getElementById('fleet-size-input').value = fleetSize;
+
     renderAll();
   } catch (e) {
     showError('Could not reach the shared data service: ' + e.message);
   }
 }
 
+function setGranularity(g) {
+  granularity = g;
+  document.querySelectorAll('#seg-granularity .rp-seg-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.val === g); });
+  renderAll();
+}
+function setDepartment(d) {
+  department = d;
+  document.querySelectorAll('#seg-department .rp-seg-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.val === d); });
+  document.getElementById('fleet-size-control').style.display = (d === 'fleet' && sessionStorage.getItem('plg_role') === 'admin') ? 'flex' : 'none';
+  renderAll();
+}
+function setChartRange(n) {
+  chartRange = n;
+  ['26', '52', '999'].forEach(function(k) { document.getElementById('tab-' + k).classList.toggle('active', String(n) === k); });
+  renderChart();
+}
+
+async function saveFleetSize() {
+  var v = parseInt(document.getElementById('fleet-size-input').value, 10);
+  if (!v || v < 1) { showError('Enter a valid fleet size.'); return; }
+  var secret = getAdminSecret();
+  if (!secret) { showError('Admin secret required. Set it via Users panel first.'); return; }
+  try {
+    var res = await fetch(PLG.EDGE_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
+      body: JSON.stringify({action: 'revenue_set_setting', key: 'total_fleet_size', value: v})
+    });
+    var result = await res.json();
+    if (!res.ok || result.error) { showError('Could not save: ' + (result.error || ('HTTP ' + res.status))); return; }
+    fleetSize = v;
+    showNotice('Fleet size updated to ' + v + '.');
+    renderAll();
+  } catch (e) { showError('Error: ' + e.message); }
+}
+function getAdminSecret() { return localStorage.getItem('plg_admin_secret') || ''; }
+
+function activeRows() {
+  var rows = granularity === 'weekly' ? allWeeks.slice() : allDays.slice();
+  var dateKey = granularity === 'weekly' ? 'week_date' : 'day_date';
+  rows.sort(function(a, b) { return new Date(a[dateKey]) - new Date(b[dateKey]); });
+  return rows;
+}
+
 function renderAll() {
   document.getElementById('rp-loading').style.display = 'none';
   document.getElementById('rp-body').classList.add('show');
 
-  if (allWeeks.length === 0) {
-    document.getElementById('rp-sub').textContent = 'No weekly turnover data yet.';
-    document.getElementById('rp-weekly-tbody').innerHTML = '<tr><td colspan="15" style="text-align:center;color:var(--muted);padding:24px">No data uploaded yet.</td></tr>';
+  var rows = activeRows();
+  if (rows.length === 0) {
+    document.getElementById('rp-sub').textContent = 'No turnover data yet.';
     return;
   }
+  var dateKey = granularity === 'weekly' ? 'week_date' : 'day_date';
+  var labelFn = granularity === 'weekly' ? function(r){return fmtWeekLabel(r.week_commencing);} : function(r){return fmtDayLabel(r.day_date);};
 
-  var sorted = allWeeks.slice().sort(function(a, b) { return new Date(a.week_date) - new Date(b.week_date); });
-  var totals = sorted.reduce(function(acc, w) { return acc + (parseFloat(w.grand_total) || 0); }, 0);
-  var avgWeekly = totals / sorted.length;
-  var best = sorted.reduce(function(a, b) { return (parseFloat(b.grand_total) || 0) > (parseFloat(a.grand_total) || 0) ? b : a; });
-  var margins = sorted.filter(function(w) { return w.subbed_margin != null; }).map(function(w) { return parseFloat(w.subbed_margin); });
-  var avgMargin = margins.length ? margins.reduce(function(a, b) { return a + b; }, 0) / margins.length : null;
-  var avgPallets = sorted.reduce(function(acc, w) { return acc + (parseFloat(w.pallets) || 0); }, 0) / sorted.length;
+  document.getElementById('rp-sub').textContent = rows.length + ' ' + (granularity === 'weekly' ? 'weeks' : 'days') + ' of data \u00b7 ' + labelFn(rows[0]) + ' \u2192 ' + labelFn(rows[rows.length - 1]);
 
-  document.getElementById('rp-sub').textContent = sorted.length + ' weeks of data \u00b7 ' + fmtWeekLabel(sorted[0].week_commencing) + ' \u2192 ' + fmtWeekLabel(sorted[sorted.length - 1].week_commencing);
-  document.getElementById('m-avg-weekly').textContent = fmtGBP(avgWeekly);
-  document.getElementById('m-best-week').textContent = fmtGBP(best.grand_total);
-  document.getElementById('m-best-week-date').textContent = fmtWeekLabel(best.week_commencing);
-  document.getElementById('m-avg-margin').textContent = fmtPct(avgMargin);
-  document.getElementById('m-avg-pallets').textContent = fmtNum(avgPallets);
-  document.getElementById('m-total-weeks').textContent = sorted.length;
-
-  renderChart(sorted);
-  renderTable(sorted);
+  renderMetrics(rows);
+  renderChart();
+  renderTable(rows, labelFn);
 }
 
-function renderChart(sorted) {
-  var slice = chartRange >= sorted.length ? sorted : sorted.slice(sorted.length - chartRange);
-  var labels = slice.map(function(w) { return fmtWeekLabel(w.week_commencing); });
-  var data = slice.map(function(w) { return parseFloat(w.grand_total) || 0; });
-  var ctx = document.getElementById('chart-weekly');
+function activeFleet(r) {
+  var stood = parseFloat(r.trucks_stood) || 0;
+  var vor = parseFloat(r.trucks_vor) || 0;
+  return Math.max(fleetSize - stood - vor, 0);
+}
+
+function renderMetrics(rows) {
+  var grid = document.getElementById('metrics-grid');
+  var n = rows.length;
+
+  if (department === 'all') {
+    var totalKey = granularity === 'weekly' ? 'grand_total' : null; // daily has no reliable grand total
+    var totals = rows.map(function(r) {
+      if (granularity === 'weekly') return parseFloat(r.grand_total) || 0;
+      return (parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0) + (parseFloat(r.general_total) || 0);
+    });
+    var avg = totals.reduce(function(a, b) { return a + b; }, 0) / n;
+    var bestIdx = totals.indexOf(Math.max.apply(null, totals));
+    var margins = rows.filter(function(r) { return r.subbed_margin != null; }).map(function(r) { return parseFloat(r.subbed_margin); });
+    var avgMargin = margins.length ? margins.reduce(function(a, b) { return a + b; }, 0) / margins.length : null;
+    var avgPallets = rows.reduce(function(a, r) { return a + (parseFloat(r.pallets) || 0); }, 0) / n;
+    var avgActiveFleet = rows.reduce(function(a, r) { return a + activeFleet(r); }, 0) / n;
+    var revPerTruck = avgActiveFleet > 0 ? avg / avgActiveFleet : null;
+
+    grid.innerHTML = metricCard('&#163;', granularity === 'weekly' ? 'Avg Weekly Total' : 'Avg Daily Total', fmtGBP(avg), true)
+      + metricCard('&#127942;', 'Best ' + (granularity === 'weekly' ? 'Week' : 'Day'), fmtGBP(totals[bestIdx]), false, (granularity === 'weekly' ? fmtWeekLabel(rows[bestIdx].week_commencing) : fmtDayLabel(rows[bestIdx].day_date)))
+      + metricCard('&#128202;', 'Avg Margin %', fmtPct(avgMargin), false)
+      + metricCard('&#128230;', 'Avg Pallets', fmtNum(avgPallets, 0), false)
+      + metricCard('&#128666;', 'Revenue / Active Truck', fmtGBP(revPerTruck), false, avgActiveFleet.toFixed(1) + ' avg active trucks');
+  }
+
+  else if (department === 'palletforce') {
+    var pfTotals = rows.map(function(r) { return (parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0); });
+    var avgPf = pfTotals.reduce(function(a, b) { return a + b; }, 0) / n;
+    var totalPallets = rows.reduce(function(a, r) { return a + (parseFloat(r.pallets) || 0); }, 0);
+    var totalFails = rows.reduce(function(a, r) { return a + (parseFloat(r.pf_fails) || 0); }, 0);
+    var perPallet = totalPallets > 0 ? rows.reduce(function(a, r) { return a + (parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0); }, 0) / totalPallets : null;
+
+    grid.innerHTML = metricCard('&#163;', granularity === 'weekly' ? 'Avg Weekly PF Revenue' : 'Avg Daily PF Revenue', fmtGBP(avgPf), true)
+      + metricCard('&#128230;', 'Total Pallets', fmtNum(totalPallets, 0), false)
+      + metricCard('&#9888;', 'Total PF Fails', fmtNum(totalFails, 0), false)
+      + metricCard('&#163;', '£ / Pallet', fmtGBP(perPallet, 2), false);
+  }
+
+  else if (department === 'haulage') {
+    var ownFleet = rows.reduce(function(a, r) { return a + (parseFloat(r.gen_own_fleet) || 0); }, 0);
+    var vpkFleet = rows.reduce(function(a, r) { return a + (parseFloat(r.vpk_fleet) || 0); }, 0);
+    var groupColl = rows.reduce(function(a, r) { return a + (parseFloat(r.group_coll) || 0); }, 0);
+    var subbedRev = rows.reduce(function(a, r) { return a + (parseFloat(r.subbed_rev) || 0); }, 0);
+    var haulageMargins = rows.filter(function(r) { return r.subbed_margin != null; }).map(function(r) { return parseFloat(r.subbed_margin); });
+    var avgHaulageMargin = haulageMargins.length ? haulageMargins.reduce(function(a, b) { return a + b; }, 0) / haulageMargins.length : null;
+
+    grid.innerHTML = metricCard('&#128666;', 'Own Fleet Total', fmtGBP(ownFleet), true)
+      + metricCard('&#128666;', 'VPK Fleet Total', fmtGBP(vpkFleet), false)
+      + metricCard('&#163;', 'Group Coll Total', fmtGBP(groupColl), false)
+      + metricCard('&#163;', 'Subbed Revenue Total', fmtGBP(subbedRev), false)
+      + metricCard('&#128202;', 'Avg Margin %', fmtPct(avgHaulageMargin), false);
+  }
+
+  else if (department === 'fleet') {
+    var avgStood = rows.reduce(function(a, r) { return a + (parseFloat(r.trucks_stood) || 0); }, 0) / n;
+    var avgVor = rows.reduce(function(a, r) { return a + (parseFloat(r.trucks_vor) || 0); }, 0) / n;
+    var totalsF = rows.map(function(r) {
+      if (granularity === 'weekly') return parseFloat(r.grand_total) || 0;
+      return (parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0) + (parseFloat(r.general_total) || 0);
+    });
+    var avgTotalF = totalsF.reduce(function(a, b) { return a + b; }, 0) / n;
+    var avgActiveF = rows.reduce(function(a, r) { return a + activeFleet(r); }, 0) / n;
+    var revPerTruckF = avgActiveF > 0 ? avgTotalF / avgActiveF : null;
+
+    grid.innerHTML = metricCard('&#128665;', 'Total Fleet Size', fmtNum(fleetSize, 0), true)
+      + metricCard('&#9888;', 'Avg Trucks Stood', fmtNum(avgStood, 1), false)
+      + metricCard('&#128295;', 'Avg Trucks VOR', fmtNum(avgVor, 1), false)
+      + metricCard('&#9989;', 'Avg Active Trucks', fmtNum(avgActiveF, 1), false)
+      + metricCard('&#163;', 'Revenue / Active Truck', fmtGBP(revPerTruckF), false);
+  }
+}
+
+function metricCard(icon, label, value, isOrange, sub) {
+  return '<div class="metric-card"><div class="metric-top"><div class="metric-label">' + label + '</div><div class="metric-icon">' + icon + '</div></div>'
+    + '<div class="metric-value' + (isOrange ? '' : ' plain') + '">' + value + '</div>'
+    + (sub ? '<div class="metric-change">' + sub + '</div>' : '')
+    + '</div>';
+}
+
+function seriesForDepartment(rows) {
+  if (department === 'all') {
+    return rows.map(function(r) {
+      if (granularity === 'weekly') return parseFloat(r.grand_total) || 0;
+      return (parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0) + (parseFloat(r.general_total) || 0);
+    });
+  }
+  if (department === 'palletforce') return rows.map(function(r) { return (parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0); });
+  if (department === 'haulage') return rows.map(function(r) { return parseFloat(r.general_total) || 0; });
+  if (department === 'fleet') return rows.map(function(r) { return activeFleet(r) > 0 ? ((granularity === 'weekly' ? (parseFloat(r.grand_total) || 0) : ((parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0) + (parseFloat(r.general_total) || 0))) / activeFleet(r)) : 0; });
+  return rows.map(function() { return 0; });
+}
+
+function chartLabel() {
+  if (department === 'all') return granularity === 'weekly' ? 'Grand Total by week' : 'Total (PF + General) by day';
+  if (department === 'palletforce') return 'Palletforce revenue';
+  if (department === 'haulage') return 'General Haulage total';
+  if (department === 'fleet') return 'Revenue per active truck';
+  return 'Trend';
+}
+
+function renderChart() {
+  var rows = activeRows();
+  var slice = chartRange >= rows.length ? rows : rows.slice(rows.length - chartRange);
+  var labelFn = granularity === 'weekly' ? function(r){return fmtWeekLabel(r.week_commencing);} : function(r){return fmtDayLabel(r.day_date);};
+  var labels = slice.map(labelFn);
+  var data = seriesForDepartment(slice);
+  document.getElementById('chart-title').textContent = chartLabel();
+
+  var ctx = document.getElementById('chart-main');
   if (chartInstance) chartInstance.destroy();
   chartInstance = new Chart(ctx, {
     type: 'bar',
-    data: {labels: labels, datasets: [{label: 'Grand Total', data: data, backgroundColor: '#c67139', borderRadius: 3}]},
+    data: {labels: labels, datasets: [{label: chartLabel(), data: data, backgroundColor: '#c67139', borderRadius: 3}]},
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: {legend: {display: false}, tooltip: {callbacks: {label: function(c) { return fmtGBP(c.parsed.y); }}}},
+      plugins: {legend: {display: false}, tooltip: {callbacks: {label: function(c) { return fmtGBP(c.parsed.y, department === 'fleet' ? 0 : 0); }}}},
       scales: {
-        y: {beginAtZero: true, ticks: {callback: function(v) { return '£' + (v / 1000) + 'k'; }, font: {size: 11}}, grid: {color: 'rgba(32,30,29,0.08)'}},
+        y: {beginAtZero: true, ticks: {callback: function(v) { return '£' + (v >= 1000 ? (v / 1000) + 'k' : v); }, font: {size: 11}}, grid: {color: 'rgba(32,30,29,0.08)'}},
         x: {ticks: {font: {size: 10}, maxRotation: 60, minRotation: slice.length > 20 ? 60 : 0}, grid: {display: false}}
       }
     }
   });
 }
 
-function setChartRange(n) {
-  chartRange = n;
-  ['26', '52', '999'].forEach(function(k) { document.getElementById('tab-' + k).classList.toggle('active', String(n) === k); });
-  var sorted = allWeeks.slice().sort(function(a, b) { return new Date(a.week_date) - new Date(b.week_date); });
-  renderChart(sorted);
-}
+function renderTable(rows, labelFn) {
+  var head, bodyRows;
+  var mostRecentFirst = rows.slice().reverse();
+  var dateCol = granularity === 'weekly' ? 'Week Commencing' : 'Date';
 
-function renderTable(sorted) {
-  var mostRecentFirst = sorted.slice().reverse();
-  document.getElementById('rp-weekly-tbody').innerHTML = mostRecentFirst.map(function(w) {
+  head = '<tr><th>' + dateCol + '</th><th>Grand Total (£)</th><th>PF Coll (£)</th><th>PF Del (£)</th>'
+    + '<th>Pallets</th><th>PF Fails</th><th>Gen Own Fleet (£)</th><th>VPK Fleet (£)</th>'
+    + '<th>Group Coll (£)</th><th>Subbed Rev (£)</th><th>Subbed Cost (£)</th><th>General Total (£)</th>'
+    + '<th>Subbed Margin %</th><th>Trucks Stood</th><th>Trucks VOR</th></tr>';
+
+  bodyRows = mostRecentFirst.map(function(r) {
+    var dateLabel = granularity === 'weekly' ? r.week_commencing : fmtDayLabel(r.day_date) + ' ' + new Date(r.day_date).getFullYear();
+    var grandDisplay = granularity === 'weekly' ? fmtGBP(r.grand_total) : fmtGBP((parseFloat(r.pf_coll) || 0) + (parseFloat(r.pf_del) || 0) + (parseFloat(r.general_total) || 0));
     return '<tr>'
-      + '<td>' + w.week_commencing + '</td>'
-      + '<td>' + fmtGBP(w.grand_total) + '</td>'
-      + '<td>' + fmtGBP(w.pf_coll) + '</td>'
-      + '<td>' + fmtGBP(w.pf_del) + '</td>'
-      + '<td>' + fmtNum(w.pallets) + '</td>'
-      + '<td>' + fmtNum(w.pf_fails) + '</td>'
-      + '<td>' + fmtGBP(w.gen_own_fleet) + '</td>'
-      + '<td>' + fmtGBP(w.vpk_fleet) + '</td>'
-      + '<td>' + fmtGBP(w.group_coll) + '</td>'
-      + '<td>' + fmtGBP(w.subbed_rev) + '</td>'
-      + '<td>' + fmtGBP(w.subbed_cost) + '</td>'
-      + '<td>' + fmtGBP(w.general_total) + '</td>'
-      + '<td>' + fmtPct(w.subbed_margin) + '</td>'
-      + '<td>' + fmtNum(w.trucks_stood) + '</td>'
-      + '<td>' + fmtNum(w.trucks_vor) + '</td>'
+      + '<td>' + dateLabel + '</td>'
+      + '<td>' + grandDisplay + '</td>'
+      + '<td>' + fmtGBP(r.pf_coll) + '</td>'
+      + '<td>' + fmtGBP(r.pf_del) + '</td>'
+      + '<td>' + fmtNum(r.pallets) + '</td>'
+      + '<td>' + fmtNum(r.pf_fails) + '</td>'
+      + '<td>' + fmtGBP(r.gen_own_fleet) + '</td>'
+      + '<td>' + fmtGBP(r.vpk_fleet) + '</td>'
+      + '<td>' + fmtGBP(r.group_coll) + '</td>'
+      + '<td>' + fmtGBP(r.subbed_rev) + '</td>'
+      + '<td>' + fmtGBP(r.subbed_cost) + '</td>'
+      + '<td>' + fmtGBP(r.general_total) + '</td>'
+      + '<td>' + fmtPct(r.subbed_margin) + '</td>'
+      + '<td>' + fmtNum(r.trucks_stood) + '</td>'
+      + '<td>' + fmtNum(r.trucks_vor) + '</td>'
       + '</tr>';
   }).join('');
+
+  document.getElementById('rp-table-head').innerHTML = head;
+  document.getElementById('rp-table-body').innerHTML = bodyRows;
+  document.getElementById('rp-table-note').textContent = rows.length + ' ' + (granularity === 'weekly' ? 'weeks' : 'days') + ' \u00b7 most recent first';
 }
 
-// ===== ADMIN UPLOAD =====
-function getAdminSecret() { return localStorage.getItem('plg_admin_secret') || ''; }
-
+// ===== ADMIN UPLOAD (weekly Dashboard-sheet backfill/refresh) =====
 async function handleUpload(evt) {
   var file = evt.target.files[0];
   if (!file) return;
@@ -367,7 +561,7 @@ async function handleUpload(evt) {
       evt.target.value = '';
       return;
     }
-    showNotice('Uploaded ' + result.count + ' week' + (result.count !== 1 ? 's' : '') + ' successfully.');
+    showNotice('Uploaded ' + result.count + ' week' + (result.count !== 1 ? 's' : '') + ' successfully. Note: this updates weekly totals only \u2014 the daily breakdown view keeps its existing data.');
     evt.target.value = '';
     loadRevenueData();
   } catch (e) {
