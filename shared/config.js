@@ -16,6 +16,7 @@ PLG.MODULES = [
   { key: 'home',          label: 'Home',              page: 'index.html',    icon: 'home',    adminOnly: false },
   { key: 'reports',       label: "Customer KPI's",    page: 'reports.html',  icon: 'chart',   adminOnly: false, group: 'Customers & CRM' },
   { key: 'import',        label: 'Import',            page: 'import.html',   icon: 'upload',  adminOnly: false, group: 'Operations' },
+  { key: 'revenue',       label: 'Revenue Report',    page: 'revenue.html',  icon: 'revenue', adminOnly: false, group: 'Finance' },
   { key: 'users',         label: 'Users',             page: 'users.html',    icon: 'users',   adminOnly: true, group: 'Admin', pinned: true },
   { key: 'settings',      label: 'Settings',          page: 'settings.html', icon: 'settings',adminOnly: true, group: 'Admin' },
 ];
