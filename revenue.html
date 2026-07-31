@@ -9,24 +9,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared/platform.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-.rp-header { padding: 32px 36px 8px; }
+.rp-header { padding: 32px 36px 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
 .rp-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
 .rp-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+.rp-upload-btn {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 999px;
+  color: var(--text); font-size: 13px; font-weight: 600; font-family: var(--font-body);
+  padding: 9px 18px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.rp-upload-btn:hover { background: var(--faint); border-color: var(--orange); }
+#rp-file-input { display: none; }
 
 .rp-error {
   display: none; margin: 20px 36px 0; background: #FEF2F2; border: 1px solid #FCA5A5;
   color: #991B1B; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
 }
 .rp-error.show { display: block; }
+.rp-notice {
+  display: none; margin: 20px 36px 0; background: #F0FDF4; border: 1px solid #86EFAC;
+  color: #166534; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+}
+.rp-notice.show { display: block; }
 
 .rp-loading { padding: 24px 36px; color: var(--muted); font-size: 13px; }
-
 .rp-body { display: none; }
 .rp-body.show { display: block; }
 
 .metrics-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px; padding: 20px 36px;
 }
 .metric-card {
@@ -41,11 +54,9 @@
   width: 36px; height: 36px; border-radius: 12px; background: var(--orange-dim); color: var(--orange);
   display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
 }
-.metric-value { font-family: var(--font-heading); font-size: 28px; font-weight: 600; color: var(--orange); }
+.metric-value { font-family: var(--font-heading); font-size: 26px; font-weight: 600; color: var(--orange); }
 .metric-value.plain { color: var(--text); }
 .metric-change { font-size: 12px; color: var(--muted); }
-.metric-change.positive { color: var(--green); }
-.metric-change.negative { color: var(--red); }
 
 .content-section {
   background: var(--surface); border-radius: 20px; border: 2px solid var(--border);
@@ -53,28 +64,32 @@
 }
 .section-header {
   display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px;
 }
 .section-title { font-family: var(--font-heading); font-size: 17px; font-weight: 600; color: var(--text); margin: 0; }
 .section-note { font-size: 12px; color: var(--muted); }
 
 .chart-wrap { position: relative; height: 280px; }
 
-table.rp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-table.rp-table th {
-  background: var(--faint); color: var(--muted); padding: 10px 14px; text-align: left;
-  font-weight: 700; border-bottom: 1px solid var(--border); font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.06em;
+.rp-tabs { display: flex; gap: 6px; }
+.rp-tab {
+  border: 1px solid var(--border); background: var(--faint); border-radius: 999px;
+  padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--muted);
+  cursor: pointer; font-family: var(--font-body);
 }
-table.rp-table th.r, table.rp-table td.r { text-align: right; }
-table.rp-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
-table.rp-table tbody tr:hover { background: var(--faint); }
-table.rp-table tbody tr:last-child td { border-bottom: none; }
-.rp-cust-link { color: var(--text); text-decoration: none; font-weight: 600; }
-.rp-cust-link:hover { color: var(--orange); }
-.rp-bar-wrap { display: flex; align-items: center; gap: 8px; }
-.rp-bar-bg { flex: 1; height: 6px; background: var(--faint); border-radius: 3px; overflow: hidden; min-width: 60px; }
-.rp-bar-fill { height: 100%; background: var(--orange); border-radius: 3px; }
+.rp-tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+table.rp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.rp-table th {
+  background: var(--faint); color: var(--muted); padding: 9px 12px; text-align: right;
+  font-weight: 700; border-bottom: 1px solid var(--border); font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
+}
+table.rp-table th:first-child, table.rp-table td:first-child { text-align: left; position: sticky; left: 0; background: var(--faint); }
+table.rp-table td:first-child { background: var(--surface); font-weight: 600; }
+table.rp-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+table.rp-table tbody tr:hover td { background: var(--faint); }
+table.rp-table tbody tr:hover td:first-child { background: var(--faint); }
 
 @media (max-width: 700px) {
   .rp-header, .metrics-grid, .content-section { padding-left: 16px; padding-right: 16px; }
@@ -89,57 +104,71 @@ table.rp-table tbody tr:last-child td { border-bottom: none; }
 <div class="plg-content">
 
   <div class="rp-header">
-    <div class="rp-title">Revenue Report</div>
-    <div class="rp-sub" id="rp-sub">Loading live data across all customers&hellip;</div>
+    <div>
+      <div class="rp-title">Revenue Report</div>
+      <div class="rp-sub" id="rp-sub">Loading weekly turnover data&hellip;</div>
+    </div>
+    <div id="rp-admin-controls" style="display:none">
+      <button class="rp-upload-btn" onclick="document.getElementById('rp-file-input').click()">&#8593; Upload weekly turnover</button>
+      <input type="file" id="rp-file-input" accept=".xlsx" onchange="handleUpload(event)">
+    </div>
   </div>
 
   <div class="rp-error" id="rp-error"></div>
-  <div class="rp-loading" id="rp-loading">Fetching customer data&hellip;</div>
+  <div class="rp-notice" id="rp-notice"></div>
+  <div class="rp-loading" id="rp-loading">Fetching weekly turnover records&hellip;</div>
 
   <div class="rp-body" id="rp-body">
     <div class="metrics-grid">
       <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">YTD Revenue</div><div class="metric-icon">&#163;</div></div>
-        <div class="metric-value" id="m-ytd-revenue">&mdash;</div>
-        <div class="metric-change" id="m-ytd-sub">Base cost across all customers</div>
+        <div class="metric-top"><div class="metric-label">Avg Weekly Total</div><div class="metric-icon">&#163;</div></div>
+        <div class="metric-value" id="m-avg-weekly">&mdash;</div>
       </div>
       <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">This Month</div><div class="metric-icon">&#128197;</div></div>
-        <div class="metric-value plain" id="m-month-revenue">&mdash;</div>
-        <div class="metric-change" id="m-month-change">&mdash;</div>
+        <div class="metric-top"><div class="metric-label">Best Week</div><div class="metric-icon">&#127942;</div></div>
+        <div class="metric-value plain" id="m-best-week">&mdash;</div>
+        <div class="metric-change" id="m-best-week-date"></div>
       </div>
       <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">Avg / Consignment</div><div class="metric-icon">&#128230;</div></div>
-        <div class="metric-value plain" id="m-avg-con">&mdash;</div>
-        <div class="metric-change" id="m-total-cons">&mdash;</div>
+        <div class="metric-top"><div class="metric-label">Avg Margin %</div><div class="metric-icon">&#128202;</div></div>
+        <div class="metric-value plain" id="m-avg-margin">&mdash;</div>
       </div>
       <div class="metric-card">
-        <div class="metric-top"><div class="metric-label">Top Customer</div><div class="metric-icon">&#127942;</div></div>
-        <div class="metric-value plain" id="m-top-customer" style="font-size:18px">&mdash;</div>
-        <div class="metric-change" id="m-top-customer-rev">&mdash;</div>
+        <div class="metric-top"><div class="metric-label">Avg Pallets / Wk</div><div class="metric-icon">&#128230;</div></div>
+        <div class="metric-value plain" id="m-avg-pallets">&mdash;</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-top"><div class="metric-label">Total Weeks</div><div class="metric-icon">&#128197;</div></div>
+        <div class="metric-value plain" id="m-total-weeks">&mdash;</div>
       </div>
     </div>
 
     <div class="content-section">
       <div class="section-header">
-        <div class="section-title">Revenue by month</div>
-        <div class="section-note" id="rp-months-note"></div>
+        <div class="section-title">Grand total by week</div>
+        <div class="rp-tabs">
+          <button class="rp-tab active" id="tab-26" onclick="setChartRange(26)">6 months</button>
+          <button class="rp-tab" id="tab-52" onclick="setChartRange(52)">1 year</button>
+          <button class="rp-tab" id="tab-999" onclick="setChartRange(999)">All time</button>
+        </div>
       </div>
-      <div class="chart-wrap"><canvas id="chart-revenue-month"></canvas></div>
+      <div class="chart-wrap"><canvas id="chart-weekly"></canvas></div>
     </div>
 
     <div class="content-section">
       <div class="section-header">
-        <div class="section-title">Revenue by customer</div>
-        <div class="section-note">Year to date, highest first</div>
+        <div class="section-title">Weekly data table</div>
+        <div class="section-note" id="rp-table-note">Most recent first</div>
       </div>
       <div class="tracker-table-wrap" style="overflow-x:auto">
-        <table class="rp-table" id="rp-customer-table">
+        <table class="rp-table" id="rp-weekly-table">
           <thead><tr>
-            <th>Customer</th><th class="r">Consignments</th><th class="r">Pallets</th>
-            <th class="r">Revenue</th><th class="r">Avg / Con</th><th style="width:160px">Share</th>
+            <th>Week Commencing</th><th>Grand Total (£)</th><th>PF Coll (£)</th><th>PF Del (£)</th>
+            <th>Pallets</th><th>PF Fails</th><th>Gen Own Fleet (£)</th><th>VPK Fleet (£)</th>
+            <th>Group Coll (£)</th><th>Subbed Rev (£)</th><th>Subbed Cost (£)</th><th>General Total (£)</th>
+            <th>Subbed Margin %</th><th>Trucks Stood</th><th>Trucks VOR</th>
           </tr></thead>
-          <tbody id="rp-customer-tbody"></tbody>
+          <tbody id="rp-weekly-tbody"></tbody>
         </table>
       </div>
     </div>
@@ -151,11 +180,27 @@ table.rp-table tbody tr:last-child td { border-bottom: none; }
 <script>
 PLG.renderSidebar('revenue');
 
-var MONTH_NAMES = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'};
+var allWeeks = [];
 var chartInstance = null;
+var chartRange = 26;
 
-function fmtGBP(n) {
-  return '£' + (n || 0).toLocaleString('en-GB', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+function fmtGBP(n, decimals) {
+  if (n === null || n === undefined) return '—';
+  return '£' + Number(n).toLocaleString('en-GB', {minimumFractionDigits: decimals || 0, maximumFractionDigits: decimals || 0});
+}
+function fmtNum(n) {
+  if (n === null || n === undefined) return '—';
+  return Number(n).toLocaleString('en-GB', {maximumFractionDigits: 0});
+}
+function fmtPct(n) {
+  if (n === null || n === undefined) return '—';
+  return (Number(n) * 100).toFixed(1) + '%';
+}
+function fmtWeekLabel(wc) {
+  var m = String(wc).match(/(\d{2})-(\d{2})-(\d{4})/);
+  if (!m) return wc;
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return m[1] + ' ' + MONTHS[parseInt(m[2], 10) - 1] + " '" + m[3].slice(2);
 }
 
 function showError(msg) {
@@ -164,134 +209,180 @@ function showError(msg) {
   el.classList.add('show');
   document.getElementById('rp-loading').style.display = 'none';
 }
+function showNotice(msg) {
+  var el = document.getElementById('rp-notice');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 6000);
+}
 
 async function loadRevenueData() {
   try {
-    var listRes = await fetch(PLG.KPI_DATA_URL, {
+    var res = await fetch(PLG.KPI_DATA_URL, {
       method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'list'})
+      body: JSON.stringify({action: 'revenue_weeks'})
     });
-    var listPayload = await listRes.json();
-    if (!listRes.ok || listPayload.error) {
-      showError('Could not load customer list: ' + (listPayload.error || ('HTTP ' + listRes.status)));
+    var payload = await res.json();
+    if (!res.ok || payload.error) {
+      showError('Could not load revenue data: ' + (payload.error || ('HTTP ' + res.status)));
       return;
     }
-    var customers = listPayload.customers || [];
-
-    var dataRes = await fetch(PLG.KPI_DATA_URL, {
-      method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({action: 'get_many', customers: customers})
-    });
-    var dataPayload = await dataRes.json();
-    if (!dataRes.ok || dataPayload.error) {
-      showError('Could not load revenue data: ' + (dataPayload.error || ('HTTP ' + dataRes.status)));
-      return;
-    }
-
-    renderRevenue(dataPayload.data || {});
+    allWeeks = payload.weeks || [];
+    renderAll();
   } catch (e) {
     showError('Could not reach the shared data service: ' + e.message);
   }
 }
 
-function renderRevenue(data) {
-  var byMonth = {};   // '2026-04' -> {revenue, cons, pallets}
-  var byCustomer = {}; // name -> {revenue, cons, pallets}
-  var totalRevenue = 0, totalCons = 0, customersWithData = 0;
-
-  Object.keys(data).forEach(function(name) {
-    var d = data[name];
-    var months = d.months || {};
-    var monthKeys = Object.keys(months);
-    if (monthKeys.length === 0) return;
-    customersWithData++;
-    byCustomer[name] = {revenue: 0, cons: 0, pallets: 0};
-    monthKeys.forEach(function(k) {
-      var mo = months[k]; if (!mo) return;
-      var rev = mo.revenue || 0, cons = mo.cons || 0, pallets = mo.pallets || 0;
-      if (!byMonth[k]) byMonth[k] = {revenue: 0, cons: 0, pallets: 0};
-      byMonth[k].revenue += rev; byMonth[k].cons += cons; byMonth[k].pallets += pallets;
-      byCustomer[name].revenue += rev; byCustomer[name].cons += cons; byCustomer[name].pallets += pallets;
-      totalRevenue += rev; totalCons += cons;
-    });
-  });
-
+function renderAll() {
   document.getElementById('rp-loading').style.display = 'none';
   document.getElementById('rp-body').classList.add('show');
-  document.getElementById('rp-sub').textContent = customersWithData + ' customer' + (customersWithData !== 1 ? 's' : '') + ' with saved data · updated ' + new Date().toLocaleString('en-GB', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
 
-  // Hero metrics
-  document.getElementById('m-ytd-revenue').textContent = fmtGBP(totalRevenue);
-  document.getElementById('m-avg-con').textContent = totalCons > 0 ? fmtGBP(totalRevenue / totalCons) : '—';
-  document.getElementById('m-total-cons').textContent = totalCons.toLocaleString('en-GB') + ' consignments';
-
-  var sortedMonths = Object.keys(byMonth).sort();
-  var lastKey = sortedMonths[sortedMonths.length - 1];
-  var prevKey = sortedMonths[sortedMonths.length - 2];
-  if (lastKey) {
-    document.getElementById('m-month-revenue').textContent = fmtGBP(byMonth[lastKey].revenue);
-    if (prevKey && byMonth[prevKey].revenue > 0) {
-      var pct = ((byMonth[lastKey].revenue - byMonth[prevKey].revenue) / byMonth[prevKey].revenue * 100);
-      var el = document.getElementById('m-month-change');
-      el.textContent = (pct >= 0 ? '↑ ' : '↓ ') + Math.abs(pct).toFixed(1) + '% vs prior month';
-      el.className = 'metric-change ' + (pct >= 0 ? 'positive' : 'negative');
-    } else {
-      document.getElementById('m-month-change').textContent = 'No prior month to compare';
-    }
+  if (allWeeks.length === 0) {
+    document.getElementById('rp-sub').textContent = 'No weekly turnover data yet.';
+    document.getElementById('rp-weekly-tbody').innerHTML = '<tr><td colspan="15" style="text-align:center;color:var(--muted);padding:24px">No data uploaded yet.</td></tr>';
+    return;
   }
 
-  var custSorted = Object.keys(byCustomer).map(function(name) {
-    return {name: name, revenue: byCustomer[name].revenue, cons: byCustomer[name].cons, pallets: byCustomer[name].pallets};
-  }).sort(function(a, b) { return b.revenue - a.revenue; });
+  var sorted = allWeeks.slice().sort(function(a, b) { return new Date(a.week_date) - new Date(b.week_date); });
+  var totals = sorted.reduce(function(acc, w) { return acc + (parseFloat(w.grand_total) || 0); }, 0);
+  var avgWeekly = totals / sorted.length;
+  var best = sorted.reduce(function(a, b) { return (parseFloat(b.grand_total) || 0) > (parseFloat(a.grand_total) || 0) ? b : a; });
+  var margins = sorted.filter(function(w) { return w.subbed_margin != null; }).map(function(w) { return parseFloat(w.subbed_margin); });
+  var avgMargin = margins.length ? margins.reduce(function(a, b) { return a + b; }, 0) / margins.length : null;
+  var avgPallets = sorted.reduce(function(acc, w) { return acc + (parseFloat(w.pallets) || 0); }, 0) / sorted.length;
 
-  if (custSorted.length > 0) {
-    document.getElementById('m-top-customer').textContent = custSorted[0].name;
-    document.getElementById('m-top-customer-rev').textContent = fmtGBP(custSorted[0].revenue) + ' YTD';
-  }
+  document.getElementById('rp-sub').textContent = sorted.length + ' weeks of data \u00b7 ' + fmtWeekLabel(sorted[0].week_commencing) + ' \u2192 ' + fmtWeekLabel(sorted[sorted.length - 1].week_commencing);
+  document.getElementById('m-avg-weekly').textContent = fmtGBP(avgWeekly);
+  document.getElementById('m-best-week').textContent = fmtGBP(best.grand_total);
+  document.getElementById('m-best-week-date').textContent = fmtWeekLabel(best.week_commencing);
+  document.getElementById('m-avg-margin').textContent = fmtPct(avgMargin);
+  document.getElementById('m-avg-pallets').textContent = fmtNum(avgPallets);
+  document.getElementById('m-total-weeks').textContent = sorted.length;
 
-  // Monthly chart
-  document.getElementById('rp-months-note').textContent = sortedMonths.length + ' month' + (sortedMonths.length !== 1 ? 's' : '') + ' of data';
-  var labels = sortedMonths.map(function(k) {
-    var parts = k.split('-'); return (MONTH_NAMES[parseInt(parts[1], 10)] || k) + ' \'' + parts[0].slice(2);
-  });
-  var chartData = sortedMonths.map(function(k) { return byMonth[k].revenue; });
-  var ctx = document.getElementById('chart-revenue-month');
+  renderChart(sorted);
+  renderTable(sorted);
+}
+
+function renderChart(sorted) {
+  var slice = chartRange >= sorted.length ? sorted : sorted.slice(sorted.length - chartRange);
+  var labels = slice.map(function(w) { return fmtWeekLabel(w.week_commencing); });
+  var data = slice.map(function(w) { return parseFloat(w.grand_total) || 0; });
+  var ctx = document.getElementById('chart-weekly');
   if (chartInstance) chartInstance.destroy();
   chartInstance = new Chart(ctx, {
     type: 'bar',
-    data: {labels: labels, datasets: [{label: 'Revenue', data: chartData, backgroundColor: '#c67139', borderRadius: 4}]},
+    data: {labels: labels, datasets: [{label: 'Grand Total', data: data, backgroundColor: '#c67139', borderRadius: 3}]},
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {legend: {display: false}, tooltip: {callbacks: {label: function(c) { return fmtGBP(c.parsed.y); }}}},
       scales: {
         y: {beginAtZero: true, ticks: {callback: function(v) { return '£' + (v / 1000) + 'k'; }, font: {size: 11}}, grid: {color: 'rgba(32,30,29,0.08)'}},
-        x: {ticks: {font: {size: 11}}, grid: {display: false}}
+        x: {ticks: {font: {size: 10}, maxRotation: 60, minRotation: slice.length > 20 ? 60 : 0}, grid: {display: false}}
       }
     }
   });
-
-  // Customer table
-  var maxRev = custSorted.length > 0 ? custSorted[0].revenue : 1;
-  var tbody = document.getElementById('rp-customer-tbody');
-  if (custSorted.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">No customer data saved yet.</td></tr>';
-  } else {
-    tbody.innerHTML = custSorted.map(function(c) {
-      var pct = maxRev > 0 ? (c.revenue / maxRev * 100).toFixed(0) : 0;
-      var avgCon = c.cons > 0 ? fmtGBP(c.revenue / c.cons) : '—';
-      return '<tr>'
-        + '<td><a class="rp-cust-link" href="customer.html?c=' + encodeURIComponent(c.name) + '">' + c.name + '</a></td>'
-        + '<td class="r">' + c.cons.toLocaleString('en-GB') + '</td>'
-        + '<td class="r">' + c.pallets.toLocaleString('en-GB') + '</td>'
-        + '<td class="r">' + fmtGBP(c.revenue) + '</td>'
-        + '<td class="r">' + avgCon + '</td>'
-        + '<td><div class="rp-bar-wrap"><div class="rp-bar-bg"><div class="rp-bar-fill" style="width:' + pct + '%"></div></div></div></td>'
-        + '</tr>';
-    }).join('');
-  }
 }
 
-window.addEventListener('load', loadRevenueData);
+function setChartRange(n) {
+  chartRange = n;
+  ['26', '52', '999'].forEach(function(k) { document.getElementById('tab-' + k).classList.toggle('active', String(n) === k); });
+  var sorted = allWeeks.slice().sort(function(a, b) { return new Date(a.week_date) - new Date(b.week_date); });
+  renderChart(sorted);
+}
+
+function renderTable(sorted) {
+  var mostRecentFirst = sorted.slice().reverse();
+  document.getElementById('rp-weekly-tbody').innerHTML = mostRecentFirst.map(function(w) {
+    return '<tr>'
+      + '<td>' + w.week_commencing + '</td>'
+      + '<td>' + fmtGBP(w.grand_total) + '</td>'
+      + '<td>' + fmtGBP(w.pf_coll) + '</td>'
+      + '<td>' + fmtGBP(w.pf_del) + '</td>'
+      + '<td>' + fmtNum(w.pallets) + '</td>'
+      + '<td>' + fmtNum(w.pf_fails) + '</td>'
+      + '<td>' + fmtGBP(w.gen_own_fleet) + '</td>'
+      + '<td>' + fmtGBP(w.vpk_fleet) + '</td>'
+      + '<td>' + fmtGBP(w.group_coll) + '</td>'
+      + '<td>' + fmtGBP(w.subbed_rev) + '</td>'
+      + '<td>' + fmtGBP(w.subbed_cost) + '</td>'
+      + '<td>' + fmtGBP(w.general_total) + '</td>'
+      + '<td>' + fmtPct(w.subbed_margin) + '</td>'
+      + '<td>' + fmtNum(w.trucks_stood) + '</td>'
+      + '<td>' + fmtNum(w.trucks_vor) + '</td>'
+      + '</tr>';
+  }).join('');
+}
+
+// ===== ADMIN UPLOAD =====
+function getAdminSecret() { return localStorage.getItem('plg_admin_secret') || ''; }
+
+async function handleUpload(evt) {
+  var file = evt.target.files[0];
+  if (!file) return;
+  var secret = getAdminSecret();
+  if (!secret) { showError('Admin secret required to upload. Set it via Users/Settings first.'); evt.target.value = ''; return; }
+
+  try {
+    var data = await file.arrayBuffer();
+    var wb = XLSX.read(data, {type: 'array'});
+    if (wb.SheetNames.indexOf('Dashboard') === -1) {
+      showError('No "Dashboard" sheet found in this file \u2014 expected the same layout as the Weekly Turnover workbook.');
+      evt.target.value = '';
+      return;
+    }
+    var ws = wb.Sheets['Dashboard'];
+    var rows = XLSX.utils.sheet_to_json(ws, {header: 1, range: 9});
+    var weeks = [];
+    rows.forEach(function(r) {
+      if (!r[0] || typeof r[0] !== 'string' || r[0].indexOf('WC') !== 0) return;
+      var m = String(r[0]).match(/(\d{2})-(\d{2})-(\d{4})/);
+      if (!m) return;
+      var weekDate = m[3] + '-' + m[2] + '-' + m[1];
+      weeks.push({
+        week_commencing: r[0],
+        week_date: weekDate,
+        grand_total: numOrNull(r[1]), pf_coll: numOrNull(r[2]), pf_del: numOrNull(r[3]),
+        pallets: numOrNull(r[4]), pf_fails: numOrNull(r[5]), gen_own_fleet: numOrNull(r[6]),
+        vpk_fleet: numOrNull(r[7]), group_coll: numOrNull(r[8]), subbed_rev: numOrNull(r[9]),
+        subbed_cost: numOrNull(r[10]), general_total: numOrNull(r[11]), subbed_margin: numOrNull(r[12]),
+        trucks_stood: numOrNull(r[13]), trucks_vor: numOrNull(r[14])
+      });
+    });
+
+    if (weeks.length === 0) {
+      showError('No week rows found in the Dashboard sheet\'s weekly data table.');
+      evt.target.value = '';
+      return;
+    }
+
+    var res = await fetch(PLG.EDGE_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'x-admin-secret': secret},
+      body: JSON.stringify({action: 'revenue_upsert', weeks: weeks})
+    });
+    var result = await res.json();
+    if (!res.ok || result.error) {
+      showError('Upload failed: ' + (result.error || ('HTTP ' + res.status)));
+      evt.target.value = '';
+      return;
+    }
+    showNotice('Uploaded ' + result.count + ' week' + (result.count !== 1 ? 's' : '') + ' successfully.');
+    evt.target.value = '';
+    loadRevenueData();
+  } catch (e) {
+    showError('Could not read file: ' + e.message);
+    evt.target.value = '';
+  }
+}
+function numOrNull(v) { return (v === undefined || v === null || v === '') ? null : (typeof v === 'number' ? v : parseFloat(v)) || 0; }
+
+window.addEventListener('load', function() {
+  loadRevenueData();
+  if (sessionStorage.getItem('plg_role') === 'admin') {
+    document.getElementById('rp-admin-controls').style.display = 'block';
+  }
+});
 </script>
 </body>
 </html>
