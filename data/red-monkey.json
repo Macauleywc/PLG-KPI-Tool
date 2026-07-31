@@ -1,6 +1,6 @@
 {
   "customer": "Red Monkey",
-  "lastUpdated": "2026-07-31T15:49:18.741Z",
+  "lastUpdated": "2026-07-31T15:53:40.886Z",
   "months": {
     "2026-06": {
       "cons": 179,
@@ -317,9 +317,577 @@
           "lates": 0
         }
       ]
+    },
+    "2026-05": {
+      "cons": 172,
+      "pallets": 186,
+      "revenue": 8968.11,
+      "lates": 14,
+      "latePallets": 14,
+      "timeliness": 0.9247311827956989,
+      "avgRC": 52.14,
+      "avgRP": 48.22,
+      "avgPC": 1.08,
+      "palletSizes": {
+        "Full Oversize": 2,
+        "Half": 86,
+        "Quarter": 98
+      },
+      "typeBreakdown": {
+        "Economy Booked": {
+          "cons": 4,
+          "lates": 0
+        },
+        "Next Day": {
+          "cons": 168,
+          "lates": 14
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 13,
+          "pallets": 18,
+          "revenue": 602.83,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 11,
+          "pallets": 13,
+          "revenue": 440.25999999999993,
+          "lates": 2
+        },
+        "North West": {
+          "cons": 21,
+          "pallets": 24,
+          "revenue": 858.1900000000002,
+          "lates": 2
+        },
+        "London": {
+          "cons": 19,
+          "pallets": 20,
+          "revenue": 1127.53,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 19,
+          "pallets": 20,
+          "revenue": 755.6000000000001,
+          "lates": 2
+        },
+        "South": {
+          "cons": 12,
+          "pallets": 13,
+          "revenue": 577.26,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 316.76000000000005,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 843.6400000000001,
+          "lates": 1
+        },
+        "South West": {
+          "cons": 12,
+          "pallets": 12,
+          "revenue": 494.4100000000001,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 1045.55,
+          "lates": 2
+        },
+        "South East": {
+          "cons": 19,
+          "pallets": 19,
+          "revenue": 870.58,
+          "lates": 2
+        },
+        "Other": {
+          "cons": 11,
+          "pallets": 11,
+          "revenue": 465.87999999999994,
+          "lates": 1
+        },
+        "Yorkshire": {
+          "cons": 6,
+          "pallets": 7,
+          "revenue": 280.55,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 76.94,
+          "lates": 2
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 37,
+          "lates": 6
+        },
+        "Tue": {
+          "cons": 24,
+          "lates": 2
+        },
+        "Wed": {
+          "cons": 30,
+          "lates": 3
+        },
+        "Thu": {
+          "cons": 48,
+          "lates": 2
+        },
+        "Fri": {
+          "cons": 33,
+          "lates": 1
+        }
+      },
+      "destData": [
+        {
+          "name": "RED MONKEY PLAY LTD",
+          "city": "RED MONKEY PLAY LTD",
+          "pc": "LE18 2DB",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 113.76,
+          "lates": 0
+        },
+        {
+          "name": "Kids Planet Day Nurseries",
+          "city": "Kids Planet Day Nurseries",
+          "pc": "BL1 6NS",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 140.59000000000003,
+          "lates": 0
+        },
+        {
+          "name": "Kids Planet Day Nursery",
+          "city": "Kids Planet Day Nursery",
+          "pc": "RH15 9NF",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 117.85000000000001,
+          "lates": 1
+        },
+        {
+          "name": "Findel Education",
+          "city": "Findel Education",
+          "pc": "NG4 2SG",
+          "cons": 2,
+          "pallets": 7,
+          "revenue": 277.78,
+          "lates": 0
+        },
+        {
+          "name": "The Avenue Primary School & Childrens Centre",
+          "city": "The Avenue Primary School & Childrens Centre",
+          "pc": "BA12 9AA",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 80.28,
+          "lates": 0
+        },
+        {
+          "name": "Bournes Green Infant School",
+          "city": "Bournes Green Infant School",
+          "pc": "SS1 3PS",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 73.13,
+          "lates": 0
+        },
+        {
+          "name": "Muddy Boots Nursery",
+          "city": "Muddy Boots Nursery",
+          "pc": "YO24 3HP",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 82.26,
+          "lates": 0
+        },
+        {
+          "name": "Busy Bugs Day Nursery",
+          "city": "Busy Bugs Day Nursery",
+          "pc": "SA17 4TA",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 54.4,
+          "lates": 0
+        },
+        {
+          "name": "Flowery Field Primary",
+          "city": "Flowery Field Primary",
+          "pc": "SK14 4SQ",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 36.24,
+          "lates": 0
+        },
+        {
+          "name": "ST RAPHAELS FAMILY WELLBEING CENTRE CENTRE",
+          "city": "ST RAPHAELS FAMILY WELLBEING CENTRE CENTRE",
+          "pc": "NW10 0TR",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 57.5,
+          "lates": 0
+        },
+        {
+          "name": "Bright Horizons Epping St Margarets Hospital - St. Margarets Hospital",
+          "city": "Bright Horizons Epping St Margarets Hospital - St. Margarets Hospital",
+          "pc": "CM16 6TN",
+          "cons": 1,
+          "pallets": 2,
+          "revenue": 89.27,
+          "lates": 0
+        },
+        {
+          "name": "RAFA Kidz Nursery",
+          "city": "RAFA Kidz Nursery",
+          "pc": "RG29 1QH",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 38.21,
+          "lates": 0
+        },
+        {
+          "name": "Yew Tree Community School Nc",
+          "city": "Yew Tree Community School Nc",
+          "pc": "B6 6RX",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 36.24,
+          "lates": 0
+        },
+        {
+          "name": "Tobermory High School",
+          "city": "Tobermory High School",
+          "pc": "PA75 6PB",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 144.74,
+          "lates": 0
+        },
+        {
+          "name": "Thurgoland C of E Primary School",
+          "city": "Thurgoland C of E Primary School",
+          "pc": "S35 7AL",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 34.36,
+          "lates": 0
+        },
+        {
+          "name": "Puriton Primary School",
+          "city": "Puriton Primary School",
+          "pc": "TA7 8BT",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 40.09,
+          "lates": 0
+        },
+        {
+          "name": "Oakfield Community Development Centre",
+          "city": "Oakfield Community Development Centre",
+          "pc": "BT38 7SP",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 94.27,
+          "lates": 0
+        },
+        {
+          "name": "Meadow Kindergarten",
+          "city": "Meadow Kindergarten",
+          "pc": "FY3 9HH",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 35.63,
+          "lates": 0
+        },
+        {
+          "name": "Penmaes School",
+          "city": "Penmaes School",
+          "pc": "LD3 7HL",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 51.87,
+          "lates": 0
+        },
+        {
+          "name": "The Laurels Kiddi Caru Day Nursery",
+          "city": "The Laurels Kiddi Caru Day Nursery",
+          "pc": "LE7 3FN",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 34.36,
+          "lates": 0
+        }
+      ]
     }
   },
   "lateRows": [
+    {
+      "id": "1857168",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Patacake Day Nursery",
+      "city": "Patacake Day Nursery",
+      "pc": "CB1 3LW",
+      "window": "",
+      "commitDate": "14/05/26",
+      "arrDate": "15/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1855465",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Rachael's Childcare",
+      "city": "Rachael's Childcare",
+      "pc": "TS13 5AE",
+      "window": "",
+      "commitDate": "20/05/26",
+      "arrDate": "21/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1864415",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "St. Marys Primary School",
+      "city": "St. Marys Primary School",
+      "pc": "BT12 4AL",
+      "window": "",
+      "commitDate": "18/05/26",
+      "arrDate": "19/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1861689",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Kids Planet Chris Abell Nursery",
+      "city": "Kids Planet Chris Abell Nursery",
+      "pc": "CB2 8PH",
+      "window": "",
+      "commitDate": "02/06/26",
+      "arrDate": "03/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1860833",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Canal VIEW Primary School",
+      "city": "Canal VIEW Primary School",
+      "pc": "EH14 2SL",
+      "window": "",
+      "commitDate": "18/05/26",
+      "arrDate": "19/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1863813",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Bright Horizons Kew Day Nursery and Preschool",
+      "city": "Bright Horizons Kew Day Nursery and Preschool",
+      "pc": "TW9 4ES",
+      "window": "",
+      "commitDate": "02/06/26",
+      "arrDate": "03/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1162233",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "APPLEBY",
+      "city": "APPLEBY",
+      "pc": "NE3 5ND",
+      "window": "",
+      "commitDate": "06/05/26",
+      "arrDate": "07/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0554138",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "St. Johns C of E Thornham School",
+      "city": "St. Johns C of E Thornham School",
+      "pc": "M24 2SB",
+      "window": "",
+      "commitDate": "11/05/26",
+      "arrDate": "12/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1161888",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Little Inspirations Nursery School",
+      "city": "Little Inspirations Nursery School",
+      "pc": "CF72 8YW",
+      "window": "",
+      "commitDate": "06/05/26",
+      "arrDate": "07/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1860150",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Kids Planet Day Nursery",
+      "city": "Kids Planet Day Nursery",
+      "pc": "WA4 4NB",
+      "window": "",
+      "commitDate": "11/05/26",
+      "arrDate": "12/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1861413",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Claremont Fan Court School",
+      "city": "Claremont Fan Court School",
+      "pc": "KT10 9LY",
+      "window": "",
+      "commitDate": "11/05/26",
+      "arrDate": "12/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1862278",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Greenhill Primary School",
+      "city": "Greenhill Primary School",
+      "pc": "CF82 8EU",
+      "window": "",
+      "commitDate": "14/05/26",
+      "arrDate": "18/05/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1863041",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Castle Tower School",
+      "city": "Castle Tower School",
+      "pc": "BT43 7FT",
+      "window": "",
+      "commitDate": "22/05/26",
+      "arrDate": "26/05/26",
+      "arrival": "01:00",
+      "mins": 5760,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "1860826",
+      "acct": "RED001",
+      "month": "May-26",
+      "dest": "Brunel",
+      "city": "Brunel",
+      "pc": "UB10 0AA",
+      "window": "",
+      "commitDate": "11/05/26",
+      "arrDate": "12/05/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
     {
       "id": "6068788",
       "acct": "RED001",
