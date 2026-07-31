@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Jazwares)",
-  "lastUpdated": "2026-07-31T07:50:13.527Z",
+  "lastUpdated": "2026-07-31T07:50:22.111Z",
   "months": {
     "2026-04": {
       "cons": 37,
@@ -903,9 +903,9 @@
       "cons": 311,
       "pallets": 1969,
       "revenue": 72506.1,
-      "lates": 10,
-      "latePallets": 44,
-      "timeliness": 0.9776536312849162,
+      "lates": 8,
+      "latePallets": 24,
+      "timeliness": 0.9878110716099543,
       "avgRC": 233.14,
       "avgRP": 36.82,
       "avgPC": 6.33,
@@ -917,11 +917,11 @@
       "typeBreakdown": {
         "Next Day": {
           "cons": 130,
-          "lates": 2
+          "lates": 1
         },
         "Economy Booked": {
           "cons": 181,
-          "lates": 8
+          "lates": 7
         }
       },
       "regionData": {
@@ -977,7 +977,7 @@
           "cons": 13,
           "pallets": 48,
           "revenue": 2809.38,
-          "lates": 1
+          "lates": 0
         },
         "South East": {
           "cons": 24,
@@ -995,7 +995,7 @@
           "cons": 4,
           "pallets": 23,
           "revenue": 1132.75,
-          "lates": 1
+          "lates": 0
         },
         "London": {
           "cons": 3,
@@ -1023,7 +1023,7 @@
         },
         "Fri": {
           "cons": 95,
-          "lates": 4
+          "lates": 2
         }
       },
       "destData": [
@@ -1248,24 +1248,6 @@
       "failed": false
     },
     {
-      "id": "92124",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "ALDI STORES LTD-SPRINGFIELD-CH",
-      "city": "ALDI STORES LTD-SPRINGFIELD-CH",
-      "pc": "CM2 5AS",
-      "window": "",
-      "commitDate": "10/07/26",
-      "arrDate": "15/07/26",
-      "arrival": "01:00",
-      "mins": 7200,
-      "pallets": 6,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
       "id": "92406",
       "acct": "IRON",
       "month": "Jul-26",
@@ -1350,24 +1332,6 @@
       "arrival": "01:00",
       "mins": 5760,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "92315",
-      "acct": "IRON",
-      "month": "Jul-26",
-      "dest": "ALDI STORES LTD - CARDIFF - TR",
-      "city": "ALDI STORES LTD - CARDIFF - TR",
-      "pc": "CF3 2GJ",
-      "window": "",
-      "commitDate": "17/07/26",
-      "arrDate": "24/07/26",
-      "arrival": "01:00",
-      "mins": 10080,
-      "pallets": 14,
       "dtype": "Economy Booked",
       "note": "",
       "reason": "",
