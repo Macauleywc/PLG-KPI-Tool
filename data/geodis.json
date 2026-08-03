@@ -1,6 +1,6 @@
 {
   "customer": "Geodis",
-  "lastUpdated": "2026-08-03T16:15:34.473Z",
+  "lastUpdated": "2026-08-03T16:23:19.014Z",
   "months": {
     "2026-06": {
       "cons": 240,
@@ -142,66 +142,66 @@
       ]
     },
     "2026-01": {
-      "cons": 116,
-      "pallets": 181,
-      "revenue": 41730.65,
+      "cons": 221,
+      "pallets": 309,
+      "revenue": 81764.17,
       "lates": 0,
       "latePallets": 0,
       "timeliness": 1,
-      "avgRC": 359.75,
-      "avgRP": 230.56,
-      "avgPC": 1.56,
+      "avgRC": 369.97,
+      "avgRP": 264.61,
+      "avgPC": 1.4,
       "typeBreakdown": {
         "Next Day": {
-          "cons": 116,
+          "cons": 221,
           "lates": 0
         }
       },
       "regionData": {
         "London": {
-          "cons": 71,
-          "pallets": 71,
-          "revenue": 24821.27,
+          "cons": 152,
+          "pallets": 152,
+          "revenue": 54841.68,
           "lates": 0
         },
         "West Midlands": {
-          "cons": 14,
-          "pallets": 23,
-          "revenue": 5945.67,
+          "cons": 24,
+          "pallets": 33,
+          "revenue": 11507.759999999998,
           "lates": 0
         },
         "North West": {
-          "cons": 24,
-          "pallets": 70,
-          "revenue": 9499.8,
+          "cons": 34,
+          "pallets": 96,
+          "revenue": 13462.85,
           "lates": 0
         },
         "Yorkshire": {
-          "cons": 7,
-          "pallets": 17,
-          "revenue": 1463.91,
+          "cons": 11,
+          "pallets": 28,
+          "revenue": 1951.88,
           "lates": 0
         }
       },
       "dowBreakdown": {
         "Mon": {
-          "cons": 24,
+          "cons": 40,
           "lates": 0
         },
         "Tue": {
-          "cons": 17,
+          "cons": 37,
           "lates": 0
         },
         "Wed": {
-          "cons": 16,
+          "cons": 42,
           "lates": 0
         },
         "Thu": {
-          "cons": 19,
+          "cons": 39,
           "lates": 0
         },
         "Fri": {
-          "cons": 35,
+          "cons": 51,
           "lates": 0
         }
       },
@@ -209,73 +209,73 @@
         {
           "name": "Alo Yoga Store",
           "city": "Alo Yoga Store",
-          "pc": "W1B 5SJ",
-          "cons": 43,
-          "pallets": 43,
-          "revenue": 15882.119999999999,
-          "lates": 0
-        },
-        {
-          "name": "ALO Yoga (Manchester)",
-          "city": "ALO Yoga (Manchester)",
-          "pc": "M1 1AD",
-          "cons": 16,
-          "pallets": 62,
-          "revenue": 9499.8,
-          "lates": 0
-        },
-        {
-          "name": "Harrods",
-          "city": "Harrods",
-          "pc": "SW1X 7DY",
-          "cons": 12,
-          "pallets": 12,
-          "revenue": 1587.0900000000001,
-          "lates": 0
-        },
-        {
-          "name": "Rimowa NBS125",
-          "city": "Rimowa NBS125",
-          "pc": "W1S 1DY",
-          "cons": 11,
-          "pallets": 11,
-          "revenue": 4998.17,
-          "lates": 0
-        },
-        {
-          "name": "Selfridges",
-          "city": "Selfridges",
-          "pc": "W1A 1AB",
-          "cons": 8,
-          "pallets": 8,
-          "revenue": 0,
+          "pc": "SW3 4LX",
+          "cons": 86,
+          "pallets": 86,
+          "revenue": 32289.30000000001,
           "lates": 0
         },
         {
           "name": "ALO Yoga (Westfield)",
           "city": "ALO Yoga (Westfield)",
           "pc": "W12 7GA",
-          "cons": 8,
-          "pallets": 8,
-          "revenue": 6427.49,
+          "cons": 22,
+          "pallets": 22,
+          "revenue": 18352.489999999998,
           "lates": 0
         },
         {
           "name": "ALO Yoga (Battersea)",
           "city": "ALO Yoga (Battersea)",
           "pc": "SW8 5BN",
-          "cons": 8,
-          "pallets": 8,
-          "revenue": 924.57,
+          "cons": 22,
+          "pallets": 22,
+          "revenue": 1842.3200000000002,
+          "lates": 0
+        },
+        {
+          "name": "Harrods",
+          "city": "Harrods",
+          "pc": "SW1X 7DY",
+          "cons": 22,
+          "pallets": 22,
+          "revenue": 2357.57,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Manchester)",
+          "city": "ALO Yoga (Manchester)",
+          "pc": "M1 1AD",
+          "cons": 22,
+          "pallets": 84,
+          "revenue": 13462.85,
+          "lates": 0
+        },
+        {
+          "name": "Rimowa NBS125",
+          "city": "Rimowa NBS125",
+          "pc": "W1S 1DY",
+          "cons": 21,
+          "pallets": 21,
+          "revenue": 10560.259999999998,
+          "lates": 0
+        },
+        {
+          "name": "Selfridges",
+          "city": "Selfridges",
+          "pc": "W1A 1AB",
+          "cons": 12,
+          "pallets": 12,
+          "revenue": 0,
           "lates": 0
         },
         {
           "name": "AL YOGA",
           "city": "AL YOGA",
           "pc": "LS1 6BE",
-          "cons": 7,
-          "pallets": 17,
-          "revenue": 1463.91,
+          "cons": 11,
+          "pallets": 28,
+          "revenue": 1951.88,
           "lates": 0
         },
         {
@@ -290,66 +290,66 @@
       ]
     },
     "2026-02": {
-      "cons": 211,
-      "pallets": 267,
-      "revenue": 71955.43,
+      "cons": 106,
+      "pallets": 110,
+      "revenue": 35588.75,
       "lates": 0,
       "latePallets": 0,
       "timeliness": 1,
-      "avgRC": 341.02,
-      "avgRP": 269.5,
-      "avgPC": 1.27,
+      "avgRC": 335.74,
+      "avgRP": 323.53,
+      "avgPC": 1.04,
       "typeBreakdown": {
         "Next Day": {
-          "cons": 211,
+          "cons": 106,
           "lates": 0
         }
       },
       "regionData": {
-        "West Midlands": {
-          "cons": 20,
-          "pallets": 20,
-          "revenue": 9949.250000000004,
-          "lates": 0
-        },
         "London": {
-          "cons": 139,
-          "pallets": 139,
-          "revenue": 48107.74000000001,
+          "cons": 90,
+          "pallets": 90,
+          "revenue": 30917.630000000012,
           "lates": 0
         },
         "North West": {
-          "cons": 32,
-          "pallets": 60,
-          "revenue": 13218.19,
+          "cons": 6,
+          "pallets": 8,
+          "revenue": 1360.5,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 3310.62,
           "lates": 0
         },
         "Yorkshire": {
-          "cons": 20,
-          "pallets": 48,
-          "revenue": 680.25,
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 0,
           "lates": 0
         }
       },
       "dowBreakdown": {
         "Mon": {
-          "cons": 44,
+          "cons": 22,
           "lates": 0
         },
         "Tue": {
-          "cons": 39,
+          "cons": 20,
           "lates": 0
         },
         "Wed": {
-          "cons": 43,
+          "cons": 20,
           "lates": 0
         },
         "Thu": {
-          "cons": 41,
+          "cons": 26,
           "lates": 0
         },
         "Fri": {
-          "cons": 44,
+          "cons": 18,
           "lates": 0
         }
       },
@@ -357,46 +357,10 @@
         {
           "name": "Alo Yoga Store",
           "city": "Alo Yoga Store",
-          "pc": "SW3 4LX",
-          "cons": 79,
-          "pallets": 79,
-          "revenue": 29844.800000000017,
-          "lates": 0
-        },
-        {
-          "name": "Rimowa NBS125",
-          "city": "Rimowa NBS125",
-          "pc": "W1S 1DY",
-          "cons": 20,
-          "pallets": 20,
-          "revenue": 9949.250000000004,
-          "lates": 0
-        },
-        {
-          "name": "Harrods",
-          "city": "Harrods",
-          "pc": "SW1X 7DY",
-          "cons": 20,
-          "pallets": 20,
-          "revenue": 1103.54,
-          "lates": 0
-        },
-        {
-          "name": "ALO Yoga (Manchester)",
-          "city": "ALO Yoga (Manchester)",
-          "pc": "M1 1AD",
-          "cons": 20,
-          "pallets": 48,
-          "revenue": 13218.19,
-          "lates": 0
-        },
-        {
-          "name": "AL YOGA",
-          "city": "AL YOGA",
-          "pc": "LS1 6BE",
-          "cons": 20,
-          "pallets": 48,
-          "revenue": 680.25,
+          "pc": "SW3 1DB",
+          "cons": 42,
+          "pallets": 42,
+          "revenue": 13206.46,
           "lates": 0
         },
         {
@@ -418,18 +382,640 @@
           "lates": 0
         },
         {
+          "name": "Rimowa NBS125",
+          "city": "Rimowa NBS125",
+          "pc": "W1S 1DY",
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 3310.62,
+          "lates": 0
+        },
+        {
+          "name": "Harrods",
+          "city": "Harrods",
+          "pc": "SW1X 7DY",
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 551.77,
+          "lates": 0
+        },
+        {
           "name": "Selfridges",
           "city": "Selfridges",
           "pc": "W1A 1AB",
-          "cons": 12,
-          "pallets": 12,
+          "cons": 4,
+          "pallets": 4,
           "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Manchester)",
+          "city": "ALO Yoga (Manchester)",
+          "pc": "M1 1AD",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 1360.5,
+          "lates": 0
+        },
+        {
+          "name": "AL YOGA",
+          "city": "AL YOGA",
+          "pc": "LS1 6BE",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 0,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-07": {
+      "cons": 213,
+      "pallets": 1122,
+      "revenue": 76627.76,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 359.75,
+      "avgRP": 68.3,
+      "avgPC": 5.27,
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 213,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "London": {
+          "cons": 125,
+          "pallets": 632,
+          "revenue": 52402.4,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 40,
+          "pallets": 235,
+          "revenue": 14470.65,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 27,
+          "pallets": 193,
+          "revenue": 5113.21,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 21,
+          "pallets": 62,
+          "revenue": 4641.5,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 38,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 36,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 41,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 48,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 50,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Alo Yoga Store",
+          "city": "Alo Yoga Store",
+          "pc": "SW3 1DB",
+          "cons": 70,
+          "pallets": 381,
+          "revenue": 28650.25,
+          "lates": 0
+        },
+        {
+          "name": "Rimowa NBS125",
+          "city": "Rimowa NBS125",
+          "pc": "W1S 1DY",
+          "cons": 22,
+          "pallets": 188,
+          "revenue": 4208.71,
+          "lates": 0
+        },
+        {
+          "name": "Harrods",
+          "city": "Harrods",
+          "pc": "SW1X 7DY",
+          "cons": 22,
+          "pallets": 188,
+          "revenue": 9284,
+          "lates": 0
+        },
+        {
+          "name": "AL YOGA",
+          "city": "AL YOGA",
+          "pc": "LS1 6BE",
+          "cons": 21,
+          "pallets": 62,
+          "revenue": 4641.5,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Manchester)",
+          "city": "ALO Yoga (Manchester)",
+          "pc": "M1 1AD",
+          "cons": 21,
+          "pallets": 62,
+          "revenue": 9406.65,
+          "lates": 0
+        },
+        {
+          "name": "Selfridges",
+          "city": "Selfridges",
+          "pc": "W1A 1AB",
+          "cons": 19,
+          "pallets": 173,
+          "revenue": 5064,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Westfield)",
+          "city": "ALO Yoga (Westfield)",
+          "pc": "W12 7GA",
+          "cons": 17,
+          "pallets": 32,
+          "revenue": 10850.15,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Battersea)",
+          "city": "ALO Yoga (Battersea)",
+          "pc": "SW8 5BN",
+          "cons": 16,
+          "pallets": 31,
+          "revenue": 3618,
+          "lates": 0
+        },
+        {
+          "name": "(GSP) Geodis Contract Logistics UK Ltd",
+          "city": "(GSP) Geodis Contract Logistics UK Ltd",
+          "pc": "WS13 8SU",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 904.5,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-05": {
+      "cons": 212,
+      "pallets": 998,
+      "revenue": 79660.5,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 375.76,
+      "avgRP": 79.82,
+      "avgPC": 4.71,
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 212,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "London": {
+          "cons": 146,
+          "pallets": 658,
+          "revenue": 60617.5,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 14,
+          "pallets": 116,
+          "revenue": 5718.5,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 31,
+          "pallets": 162,
+          "revenue": 10152,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 21,
+          "pallets": 62,
+          "revenue": 3172.5,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 36,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 39,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 45,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 37,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 51,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Alo Yoga Store",
+          "city": "Alo Yoga Store",
+          "pc": "WC2H 9PR",
+          "cons": 84,
+          "pallets": 428,
+          "revenue": 33012,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Battersea)",
+          "city": "ALO Yoga (Battersea)",
+          "pc": "SW8 5BN",
+          "cons": 23,
+          "pallets": 57,
+          "revenue": 2713.5,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Westfield)",
+          "city": "ALO Yoga (Westfield)",
+          "pc": "W12 7GA",
+          "cons": 22,
+          "pallets": 55,
+          "revenue": 18140,
+          "lates": 0
+        },
+        {
+          "name": "AL YOGA",
+          "city": "AL YOGA",
+          "pc": "LS1 6BE",
+          "cons": 21,
+          "pallets": 62,
+          "revenue": 3172.5,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Manchester)",
+          "city": "ALO Yoga (Manchester)",
+          "pc": "M1 1AD",
+          "cons": 20,
+          "pallets": 61,
+          "revenue": 10152,
+          "lates": 0
+        },
+        {
+          "name": "Harrods",
+          "city": "Harrods",
+          "pc": "SW1X 7DY",
+          "cons": 14,
+          "pallets": 107,
+          "revenue": 6752,
+          "lates": 0
+        },
+        {
+          "name": "Rimowa NBS125",
+          "city": "Rimowa NBS125",
+          "pc": "W1S 1DY",
+          "cons": 13,
+          "pallets": 102,
+          "revenue": 5064,
+          "lates": 0
+        },
+        {
+          "name": "Selfridges",
+          "city": "Selfridges",
+          "pc": "W1A 1AB",
+          "cons": 11,
+          "pallets": 101,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "Condé Nast",
+          "city": "Condé Nast",
+          "pc": "WC2N 6HT",
+          "cons": 2,
+          "pallets": 6,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "RIMOWA *New Site*",
+          "city": "RIMOWA *New Site*",
+          "pc": "W1S 1RZ",
+          "cons": 1,
+          "pallets": 14,
+          "revenue": 654.5,
+          "lates": 0
+        },
+        {
+          "name": "W12 7JS",
+          "city": "W12 7JS",
+          "pc": "W12 7JS",
+          "cons": 1,
+          "pallets": 5,
+          "revenue": 0,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-04": {
+      "cons": 67,
+      "pallets": 256,
+      "revenue": 21194.12,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 316.33,
+      "avgRP": 82.79,
+      "avgPC": 3.82,
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 67,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "North West": {
+          "cons": 11,
+          "pallets": 51,
+          "revenue": 1945.5,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 4,
+          "pallets": 13,
+          "revenue": 1454.38,
+          "lates": 0
+        },
+        "London": {
+          "cons": 45,
+          "pallets": 160,
+          "revenue": 15305.369999999999,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 7,
+          "pallets": 32,
+          "revenue": 2488.87,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 7,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 14,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 14,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 17,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 14,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Alo Yoga Store",
+          "city": "Alo Yoga Store",
+          "pc": "WC2H 9PR",
+          "cons": 26,
+          "pallets": 81,
+          "revenue": 8900.91,
+          "lates": 0
+        },
+        {
+          "name": "Harrods",
+          "city": "Harrods",
+          "pc": "SW1X 7DY",
+          "cons": 13,
+          "pallets": 65,
+          "revenue": 3698.4,
+          "lates": 0
+        },
+        {
+          "name": "Selfridges",
+          "city": "Selfridges",
+          "pc": "W1A 1AB",
+          "cons": 7,
+          "pallets": 38,
+          "revenue": 594,
+          "lates": 0
+        },
+        {
+          "name": "Rimowa NBS125",
+          "city": "Rimowa NBS125",
+          "pc": "W1S 1DY",
+          "cons": 7,
+          "pallets": 32,
+          "revenue": 2488.87,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Manchester)",
+          "city": "ALO Yoga (Manchester)",
+          "pc": "M1 1AD",
+          "cons": 4,
+          "pallets": 13,
+          "revenue": 1351.5,
+          "lates": 0
+        },
+        {
+          "name": "AL YOGA",
+          "city": "AL YOGA",
+          "pc": "LS1 6BE",
+          "cons": 4,
+          "pallets": 13,
+          "revenue": 1454.38,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Westfield)",
+          "city": "ALO Yoga (Westfield)",
+          "pc": "W12 7GA",
+          "cons": 3,
+          "pallets": 7,
+          "revenue": 2706.06,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Battersea)",
+          "city": "ALO Yoga (Battersea)",
+          "pc": "SW8 5BN",
+          "cons": 3,
+          "pallets": 7,
+          "revenue": 0,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-03": {
+      "cons": 67,
+      "pallets": 67,
+      "revenue": 22925.38,
+      "lates": 1,
+      "latePallets": 1,
+      "timeliness": 0.9850746268656716,
+      "avgRC": 342.17,
+      "avgRP": 342.17,
+      "avgPC": 1,
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 67,
+          "lates": 1
+        }
+      },
+      "regionData": {
+        "London": {
+          "cons": 57,
+          "pallets": 57,
+          "revenue": 20048.48,
+          "lates": 1
+        },
+        "West Midlands": {
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 1710.5,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 1166.4,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 22,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 14,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 11,
+          "lates": 1
+        },
+        "Thu": {
+          "cons": 7,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 13,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Alo Yoga Store",
+          "city": "Alo Yoga Store",
+          "pc": "WC2H 9PR",
+          "cons": 35,
+          "pallets": 35,
+          "revenue": 13042.139999999998,
+          "lates": 1
+        },
+        {
+          "name": "ALO Yoga (Westfield)",
+          "city": "ALO Yoga (Westfield)",
+          "pc": "W12 7GA",
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 3475.68,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Battersea)",
+          "city": "ALO Yoga (Battersea)",
+          "pc": "SW8 5BN",
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 3530.66,
+          "lates": 0
+        },
+        {
+          "name": "Rimowa NBS125",
+          "city": "Rimowa NBS125",
+          "pc": "W1S 1DY",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 1710.5,
+          "lates": 0
+        },
+        {
+          "name": "Harrods",
+          "city": "Harrods",
+          "pc": "SW1X 7DY",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "Selfridges",
+          "city": "Selfridges",
+          "pc": "W1A 1AB",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 1166.4,
           "lates": 0
         }
       ]
     }
   },
   "lateRows": [
+    {
+      "id": "-r15",
+      "acct": "GEODIS",
+      "month": "Mar-26",
+      "dest": "Alo Yoga Store",
+      "city": "Alo Yoga Store",
+      "pc": "WC2H 9PR",
+      "window": "",
+      "commitDate": "04/03/26",
+      "arrDate": "06/03/26",
+      "arrival": "00:00",
+      "mins": 2880,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
     {
       "id": "Covent Garden-r55",
       "acct": "GEODIS",
