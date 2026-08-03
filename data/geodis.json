@@ -1,6 +1,6 @@
 {
   "customer": "Geodis",
-  "lastUpdated": "2026-07-17T15:35:09.409Z",
+  "lastUpdated": "2026-08-03T16:14:58.873Z",
   "months": {
     "2026-06": {
       "cons": 240,
@@ -137,6 +137,154 @@
           "cons": 18,
           "pallets": 183,
           "revenue": 3376,
+          "lates": 0
+        }
+      ]
+    },
+    "2026-01": {
+      "cons": 221,
+      "pallets": 309,
+      "revenue": 81764.17,
+      "lates": 0,
+      "latePallets": 0,
+      "timeliness": 1,
+      "avgRC": 369.97,
+      "avgRP": 264.61,
+      "avgPC": 1.4,
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 221,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "London": {
+          "cons": 152,
+          "pallets": 152,
+          "revenue": 54841.68,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 24,
+          "pallets": 33,
+          "revenue": 11507.759999999998,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 34,
+          "pallets": 96,
+          "revenue": 13462.85,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 11,
+          "pallets": 28,
+          "revenue": 1951.88,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 40,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 37,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 42,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 39,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 51,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "Alo Yoga Store",
+          "city": "Alo Yoga Store",
+          "pc": "SW3 4LX",
+          "cons": 86,
+          "pallets": 86,
+          "revenue": 32289.30000000001,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Westfield)",
+          "city": "ALO Yoga (Westfield)",
+          "pc": "W12 7GA",
+          "cons": 22,
+          "pallets": 22,
+          "revenue": 18352.489999999998,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Battersea)",
+          "city": "ALO Yoga (Battersea)",
+          "pc": "SW8 5BN",
+          "cons": 22,
+          "pallets": 22,
+          "revenue": 1842.3200000000002,
+          "lates": 0
+        },
+        {
+          "name": "Harrods",
+          "city": "Harrods",
+          "pc": "SW1X 7DY",
+          "cons": 22,
+          "pallets": 22,
+          "revenue": 2357.57,
+          "lates": 0
+        },
+        {
+          "name": "ALO Yoga (Manchester)",
+          "city": "ALO Yoga (Manchester)",
+          "pc": "M1 1AD",
+          "cons": 22,
+          "pallets": 84,
+          "revenue": 13462.85,
+          "lates": 0
+        },
+        {
+          "name": "Rimowa NBS125",
+          "city": "Rimowa NBS125",
+          "pc": "W1S 1DY",
+          "cons": 21,
+          "pallets": 21,
+          "revenue": 10560.259999999998,
+          "lates": 0
+        },
+        {
+          "name": "Selfridges",
+          "city": "Selfridges",
+          "pc": "W1A 1AB",
+          "cons": 12,
+          "pallets": 12,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "AL YOGA",
+          "city": "AL YOGA",
+          "pc": "LS1 6BE",
+          "cons": 11,
+          "pallets": 28,
+          "revenue": 1951.88,
+          "lates": 0
+        },
+        {
+          "name": "(GSP) Geodis Contract Logistics UK Ltd",
+          "city": "(GSP) Geodis Contract Logistics UK Ltd",
+          "pc": "WS13 8SU",
+          "cons": 3,
+          "pallets": 12,
+          "revenue": 947.5,
           "lates": 0
         }
       ]
