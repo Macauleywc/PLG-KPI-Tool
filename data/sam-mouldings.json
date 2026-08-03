@@ -1,6 +1,6 @@
 {
   "customer": "SAM Mouldings",
-  "lastUpdated": "2026-07-15T14:34:30.271Z",
+  "lastUpdated": "2026-08-03T16:36:47.224Z",
   "months": {
     "2026-06": {
       "cons": 104,
@@ -862,9 +862,332 @@
           "lates": 0
         }
       ]
+    },
+    "2026-07": {
+      "cons": 122,
+      "pallets": 122,
+      "revenue": 18070,
+      "lates": 1,
+      "latePallets": 1,
+      "timeliness": 0.9918032786885246,
+      "avgRC": 148.11,
+      "avgRP": 148.11,
+      "avgPC": 1,
+      "palletSizes": {
+        "Full": 12
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 122,
+          "lates": 1
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 19,
+          "pallets": 19,
+          "revenue": 2780,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 0,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 13,
+          "pallets": 13,
+          "revenue": 1390,
+          "lates": 0
+        },
+        "London": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 0,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 20,
+          "pallets": 20,
+          "revenue": 3475,
+          "lates": 1
+        },
+        "North East": {
+          "cons": 14,
+          "pallets": 14,
+          "revenue": 1390,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 1390,
+          "lates": 0
+        },
+        "South": {
+          "cons": 11,
+          "pallets": 11,
+          "revenue": 2085,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 1390,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 695,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 1390,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 13,
+          "pallets": 13,
+          "revenue": 2085,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 20,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 14,
+          "lates": 0
+        },
+        "Wed": {
+          "cons": 35,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 31,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 22,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "JEWSON",
+          "city": "JEWSON",
+          "pc": "NG19 9BG",
+          "cons": 42,
+          "pallets": 42,
+          "revenue": 7645,
+          "lates": 0
+        },
+        {
+          "name": "MKM",
+          "city": "MKM",
+          "pc": "OX26 4LD",
+          "cons": 23,
+          "pallets": 23,
+          "revenue": 1390,
+          "lates": 0
+        },
+        {
+          "name": "SELCO",
+          "city": "SELCO",
+          "pc": "MK1 1DF",
+          "cons": 9,
+          "pallets": 9,
+          "revenue": 695,
+          "lates": 0
+        },
+        {
+          "name": "TPKEYLIN",
+          "city": "TPKEYLIN",
+          "pc": "CF48 1BS",
+          "cons": 6,
+          "pallets": 6,
+          "revenue": 695,
+          "lates": 0
+        },
+        {
+          "name": "SETRA",
+          "city": "SETRA",
+          "pc": "PE30 2HJ",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 0,
+          "lates": 1
+        },
+        {
+          "name": "H&B SPINK",
+          "city": "H&B SPINK",
+          "pc": "LS7 2RE",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 1390,
+          "lates": 0
+        },
+        {
+          "name": "DORPLAN",
+          "city": "DORPLAN",
+          "pc": "PE38 9GA",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "M44 5BZ",
+          "city": "M44 5BZ",
+          "pc": "M44 5BZ",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "H&B SWM",
+          "city": "H&B SWM",
+          "pc": "GL15 5HL",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "Elite Ground Support Services Ltd",
+          "city": "Elite Ground Support Services Ltd",
+          "pc": "MK44 2NX",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "H &B SPINK",
+          "city": "H &B SPINK",
+          "pc": "DN1 3RA",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "MKM Building Supplies Newark",
+          "city": "MKM Building Supplies Newark",
+          "pc": "NG24 2TQ",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 695,
+          "lates": 0
+        },
+        {
+          "name": "DATIM Ltd - Sheepbridge Warehouse (Unit 11A)",
+          "city": "DATIM Ltd - Sheepbridge Warehouse (Unit 11A)",
+          "pc": "S41 9RX",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "The Timber Group | Timber Merchant | High Wycombe",
+          "city": "The Timber Group | Timber Merchant | High Wycombe",
+          "pc": "HP11 2LT",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 1390,
+          "lates": 0
+        },
+        {
+          "name": "Selco",
+          "city": "Selco",
+          "pc": "RG30 1EA",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "GL7 4DT",
+          "city": "GL7 4DT",
+          "pc": "GL7 4DT",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "NP18 3XH",
+          "city": "NP18 3XH",
+          "pc": "NP18 3XH",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "CV47 0FA",
+          "city": "CV47 0FA",
+          "pc": "CV47 0FA",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        },
+        {
+          "name": "Jewson",
+          "city": "Jewson",
+          "pc": "NE3 1QL",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 1390,
+          "lates": 0
+        },
+        {
+          "name": "PREMIERFOREST",
+          "city": "PREMIERFOREST",
+          "pc": "HU9 1RH",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 0,
+          "lates": 0
+        }
+      ]
     }
   },
-  "lateRows": [],
+  "lateRows": [
+    {
+      "id": "LN05484-r2-2",
+      "acct": "SAM",
+      "month": "Jul-26",
+      "dest": "SETRA",
+      "city": "SETRA",
+      "pc": "PE30 2HJ",
+      "window": "",
+      "commitDate": "02/07/26",
+      "arrDate": "03/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    }
+  ],
   "regionData": {
     "West Midlands": {
       "pallets": 13,
