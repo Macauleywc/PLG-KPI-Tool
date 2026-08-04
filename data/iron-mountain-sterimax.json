@@ -1,6 +1,6 @@
 {
   "customer": "Iron Mountain (Sterimax)",
-  "lastUpdated": "2026-07-31T15:44:43.467Z",
+  "lastUpdated": "2026-08-04T07:44:56.976Z",
   "months": {
     "2026-06": {
       "cons": 182,
@@ -623,21 +623,333 @@
           "lates": 0
         }
       ]
+    },
+    "2026-07": {
+      "cons": 166,
+      "pallets": 488,
+      "revenue": 14760.09,
+      "lates": 5,
+      "latePallets": 5,
+      "timeliness": 0.9897540983606558,
+      "avgRC": 88.92,
+      "avgRP": 30.25,
+      "avgPC": 2.94,
+      "palletSizes": {
+        "Half": 65,
+        "Quarter": 82,
+        "Full": 64
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 166,
+          "lates": 5
+        }
+      },
+      "regionData": {
+        "Wales": {
+          "cons": 9,
+          "pallets": 14,
+          "revenue": 794.9499999999999,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 20,
+          "pallets": 35,
+          "revenue": 1775.4700000000003,
+          "lates": 0
+        },
+        "Northern Ireland": {
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 92.31,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 23,
+          "pallets": 30,
+          "revenue": 1488.03,
+          "lates": 1
+        },
+        "East Midlands": {
+          "cons": 30,
+          "pallets": 301,
+          "revenue": 4385.210000000001,
+          "lates": 2
+        },
+        "South East": {
+          "cons": 15,
+          "pallets": 20,
+          "revenue": 1121.61,
+          "lates": 0
+        },
+        "South": {
+          "cons": 8,
+          "pallets": 8,
+          "revenue": 434.06,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 4,
+          "pallets": 8,
+          "revenue": 396.5,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 7,
+          "pallets": 8,
+          "revenue": 527.23,
+          "lates": 0
+        },
+        "London": {
+          "cons": 11,
+          "pallets": 12,
+          "revenue": 809.21,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 12,
+          "pallets": 16,
+          "revenue": 767.7000000000002,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 9,
+          "pallets": 12,
+          "revenue": 744.4200000000001,
+          "lates": 2
+        },
+        "West Midlands": {
+          "cons": 7,
+          "pallets": 12,
+          "revenue": 587.9599999999999,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 9,
+          "pallets": 10,
+          "revenue": 835.43,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 31,
+          "lates": 1
+        },
+        "Tue": {
+          "cons": 28,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 22,
+          "lates": 0
+        },
+        "Thu": {
+          "cons": 37,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 48,
+          "lates": 2
+        }
+      },
+      "destData": [
+        {
+          "name": "Findel Education",
+          "city": "Findel Education",
+          "pc": "NG4 2SG",
+          "cons": 7,
+          "pallets": 277,
+          "revenue": 3325,
+          "lates": 0
+        },
+        {
+          "name": "Mr Overalls Ltd",
+          "city": "Mr Overalls Ltd",
+          "pc": "NR18 9SB",
+          "cons": 5,
+          "pallets": 5,
+          "revenue": 224.98000000000002,
+          "lates": 1
+        },
+        {
+          "name": "Poundland Limited",
+          "city": "Poundland Limited",
+          "pc": "WN4 8DE",
+          "cons": 5,
+          "pallets": 14,
+          "revenue": 759.43,
+          "lates": 0
+        },
+        {
+          "name": "Partic Motor Spares Ltd",
+          "city": "Partic Motor Spares Ltd",
+          "pc": "NG24 2EG",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 182.81,
+          "lates": 0
+        },
+        {
+          "name": "IMS Euro Limited",
+          "city": "IMS Euro Limited",
+          "pc": "SK3 0XA",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 210.52,
+          "lates": 0
+        },
+        {
+          "name": "Aspire Industrial Services Ltd.",
+          "city": "Aspire Industrial Services Ltd.",
+          "pc": "G52 4LT",
+          "cons": 4,
+          "pallets": 7,
+          "revenue": 514.65,
+          "lates": 1
+        },
+        {
+          "name": "Total Supplies Limited",
+          "city": "Total Supplies Limited",
+          "pc": "CT9 1RD",
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 306.56,
+          "lates": 0
+        },
+        {
+          "name": "Solar Medical & Chemical Ltd",
+          "city": "Solar Medical & Chemical Ltd",
+          "pc": "NP44 1XE",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 147.89,
+          "lates": 0
+        },
+        {
+          "name": "Thurlow Nunn Distrigo",
+          "city": "Thurlow Nunn Distrigo",
+          "pc": "NR4 6DW",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 134.57999999999998,
+          "lates": 0
+        },
+        {
+          "name": "NPS Caremore Limited",
+          "city": "NPS Caremore Limited",
+          "pc": "TS10 5RS",
+          "cons": 3,
+          "pallets": 7,
+          "revenue": 346.48,
+          "lates": 0
+        },
+        {
+          "name": "D and E Products Limited",
+          "city": "D and E Products Limited",
+          "pc": "G72 0ND",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 175.09,
+          "lates": 0
+        },
+        {
+          "name": "Elliott Hygiene - SOCIUS",
+          "city": "Elliott Hygiene - SOCIUS",
+          "pc": "HU3 4XA",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 135.26,
+          "lates": 0
+        },
+        {
+          "name": "Merton Group (UK) Limited",
+          "city": "Merton Group (UK) Limited",
+          "pc": "LE3 1TH",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 127.42999999999999,
+          "lates": 1
+        },
+        {
+          "name": "Wren Hall Nursing Home Ltd",
+          "city": "Wren Hall Nursing Home Ltd",
+          "pc": "NG16 6AB",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 131.55,
+          "lates": 0
+        },
+        {
+          "name": "GC & Associates Ltd t/a Red Parrot",
+          "city": "GC & Associates Ltd t/a Red Parrot",
+          "pc": "CO6 1JG",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 150.06,
+          "lates": 0
+        },
+        {
+          "name": "Krystal Hygiene Limited",
+          "city": "Krystal Hygiene Limited",
+          "pc": "MK11 3HD",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 130.89000000000001,
+          "lates": 0
+        },
+        {
+          "name": "Quickco BDR Warehouse",
+          "city": "Quickco BDR Warehouse",
+          "pc": "M32 0ZH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 89.44,
+          "lates": 0
+        },
+        {
+          "name": "Curco Ltd",
+          "city": "Curco Ltd",
+          "pc": "CT4 7PP",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 186.42000000000002,
+          "lates": 0
+        },
+        {
+          "name": "First Stop Catering & Hygiene Supplies Limited",
+          "city": "First Stop Catering & Hygiene Supplies Limited",
+          "pc": "BH21 6SU",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 116.08000000000001,
+          "lates": 0
+        },
+        {
+          "name": "The Safety Supply Company Ltd.",
+          "city": "The Safety Supply Company Ltd.",
+          "pc": "NW2 7HF",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 132.28,
+          "lates": 0
+        }
+      ]
     }
   },
   "lateRows": [
     {
-      "id": "004753",
+      "id": "005110",
       "acct": "IRON",
-      "month": "May-26",
-      "dest": "Wren Hall Nursing Home Ltd",
-      "city": "Wren Hall Nursing Home Ltd",
-      "pc": "NG16 6AB",
+      "month": "Jul-26",
+      "dest": "R Cleaning Ltd",
+      "city": "R Cleaning Ltd",
+      "pc": "B45 9AL",
       "window": "",
-      "commitDate": "29/05/26",
-      "arrDate": "09/06/26",
+      "commitDate": "02/07/26",
+      "arrDate": "03/07/26",
       "arrival": "01:00",
-      "mins": 15840,
+      "mins": 1440,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -645,15 +957,69 @@
       "failed": false
     },
     {
-      "id": "004748",
+      "id": "05061.1",
       "acct": "IRON",
-      "month": "May-26",
-      "dest": "Krystal Hygiene Limited",
-      "city": "Krystal Hygiene Limited",
-      "pc": "MK11 3HD",
+      "month": "Jul-26",
+      "dest": "Merton Group (UK) Limited",
+      "city": "Merton Group (UK) Limited",
+      "pc": "LE3 1TH",
       "window": "",
-      "commitDate": "27/05/26",
-      "arrDate": "28/05/26",
+      "commitDate": "20/07/26",
+      "arrDate": "21/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "005211",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "Mr Overalls Ltd",
+      "city": "Mr Overalls Ltd",
+      "pc": "NR18 9SB",
+      "window": "",
+      "commitDate": "10/07/26",
+      "arrDate": "13/07/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "005122",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "Aspire Industrial Services Ltd.",
+      "city": "Aspire Industrial Services Ltd.",
+      "pc": "G52 4LT",
+      "window": "",
+      "commitDate": "03/07/26",
+      "arrDate": "06/07/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "005159",
+      "acct": "IRON",
+      "month": "Jul-26",
+      "dest": "Fisher Motor Factors Limited",
+      "city": "Fisher Motor Factors Limited",
+      "pc": "LN6 3TA",
+      "window": "",
+      "commitDate": "07/07/26",
+      "arrDate": "08/07/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
@@ -798,6 +1164,42 @@
       "window": "",
       "commitDate": "09/06/26",
       "arrDate": "10/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004753",
+      "acct": "IRON",
+      "month": "May-26",
+      "dest": "Wren Hall Nursing Home Ltd",
+      "city": "Wren Hall Nursing Home Ltd",
+      "pc": "NG16 6AB",
+      "window": "",
+      "commitDate": "29/05/26",
+      "arrDate": "09/06/26",
+      "arrival": "01:00",
+      "mins": 15840,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "004748",
+      "acct": "IRON",
+      "month": "May-26",
+      "dest": "Krystal Hygiene Limited",
+      "city": "Krystal Hygiene Limited",
+      "pc": "MK11 3HD",
+      "window": "",
+      "commitDate": "27/05/26",
+      "arrDate": "28/05/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
