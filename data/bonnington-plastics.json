@@ -1,6 +1,6 @@
 {
   "customer": "Bonnington Plastics",
-  "lastUpdated": "2026-07-30T09:52:58.787Z",
+  "lastUpdated": "2026-08-04T07:11:16.115Z",
   "months": {
     "2026-04": {
       "cons": 644,
@@ -1875,39 +1875,330 @@
           "lates": 0
         }
       ]
+    },
+    "2026-07": {
+      "cons": 231,
+      "pallets": 988,
+      "revenue": 25611.9,
+      "lates": 8,
+      "latePallets": 12,
+      "timeliness": 0.9878542510121457,
+      "avgRC": 110.87,
+      "avgRP": 25.92,
+      "avgPC": 4.28,
+      "palletSizes": {
+        "Full": 335,
+        "Half": 18
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 119,
+          "lates": 3
+        },
+        "Economy Booked": {
+          "cons": 112,
+          "lates": 5
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 50,
+          "pallets": 542,
+          "revenue": 5601.9,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 21,
+          "pallets": 37,
+          "revenue": 2264.9500000000003,
+          "lates": 1
+        },
+        "North West": {
+          "cons": 15,
+          "pallets": 65,
+          "revenue": 1601.3000000000002,
+          "lates": 2
+        },
+        "East of England": {
+          "cons": 35,
+          "pallets": 65,
+          "revenue": 3507.55,
+          "lates": 4
+        },
+        "South": {
+          "cons": 25,
+          "pallets": 126,
+          "revenue": 3043,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 7,
+          "pallets": 10,
+          "revenue": 1013.75,
+          "lates": 1
+        },
+        "South East": {
+          "cons": 15,
+          "pallets": 24,
+          "revenue": 1609.4999999999998,
+          "lates": 0
+        },
+        "Wales": {
+          "cons": 17,
+          "pallets": 34,
+          "revenue": 2178.4500000000003,
+          "lates": 0
+        },
+        "Yorkshire": {
+          "cons": 9,
+          "pallets": 17,
+          "revenue": 733.6499999999999,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 8,
+          "pallets": 9,
+          "revenue": 559.2,
+          "lates": 0
+        },
+        "London": {
+          "cons": 16,
+          "pallets": 29,
+          "revenue": 1861.5499999999997,
+          "lates": 0
+        },
+        "Other": {
+          "cons": 9,
+          "pallets": 25,
+          "revenue": 1379.1,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 4,
+          "pallets": 5,
+          "revenue": 258,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 49,
+          "lates": 1
+        },
+        "Tue": {
+          "cons": 45,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 41,
+          "lates": 4
+        },
+        "Thu": {
+          "cons": 40,
+          "lates": 1
+        },
+        "Fri": {
+          "cons": 56,
+          "lates": 1
+        }
+      },
+      "destData": [
+        {
+          "name": "Premier Warehouse",
+          "city": "Premier Warehouse",
+          "pc": "LE67 1TA",
+          "cons": 23,
+          "pallets": 498,
+          "revenue": 2875,
+          "lates": 0
+        },
+        {
+          "name": "BONNINGTON PLASTICS",
+          "city": "BONNINGTON PLASTICS",
+          "pc": "NG10 5AD",
+          "cons": 8,
+          "pallets": 18,
+          "revenue": 1112,
+          "lates": 0
+        },
+        {
+          "name": "Kemetyl Ltd",
+          "city": "Kemetyl Ltd",
+          "pc": "NG8 4GP",
+          "cons": 7,
+          "pallets": 7,
+          "revenue": 575.4,
+          "lates": 0
+        },
+        {
+          "name": "E.F.G housewares limited",
+          "city": "E.F.G housewares limited",
+          "pc": "EN3 7NJ",
+          "cons": 5,
+          "pallets": 7,
+          "revenue": 487.70000000000005,
+          "lates": 0
+        },
+        {
+          "name": "ROYS (WROXHAM) LTD",
+          "city": "ROYS (WROXHAM) LTD",
+          "pc": "NR7 9BB",
+          "cons": 5,
+          "pallets": 11,
+          "revenue": 687.75,
+          "lates": 1
+        },
+        {
+          "name": "Galla Trading Ltd",
+          "city": "Galla Trading Ltd",
+          "pc": "RH1 2GD",
+          "cons": 4,
+          "pallets": 4,
+          "revenue": 355.6,
+          "lates": 0
+        },
+        {
+          "name": "Value House Stores",
+          "city": "Value House Stores",
+          "pc": "EX39 3HN",
+          "cons": 3,
+          "pallets": 5,
+          "revenue": 295.65,
+          "lates": 0
+        },
+        {
+          "name": "Mark Up Tools",
+          "city": "Mark Up Tools",
+          "pc": "M8 8FN",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 222.9,
+          "lates": 1
+        },
+        {
+          "name": "Buyology",
+          "city": "Buyology",
+          "pc": "NP26 4XB",
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 388.20000000000005,
+          "lates": 0
+        },
+        {
+          "name": "Vivo Technologies",
+          "city": "Vivo Technologies",
+          "pc": "NW10 7RG",
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 279.75,
+          "lates": 0
+        },
+        {
+          "name": "SHS Trading Broxburn",
+          "city": "SHS Trading Broxburn",
+          "pc": "EH52 5NN",
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 365.40000000000003,
+          "lates": 1
+        },
+        {
+          "name": "B24 8HJ",
+          "city": "B24 8HJ",
+          "pc": "B24 8HJ",
+          "cons": 3,
+          "pallets": 76,
+          "revenue": 945,
+          "lates": 0
+        },
+        {
+          "name": "Trago Mills",
+          "city": "Trago Mills",
+          "pc": "CF48 1HT",
+          "cons": 3,
+          "pallets": 6,
+          "revenue": 320.75,
+          "lates": 0
+        },
+        {
+          "name": "Proper Job Superstores Ltd",
+          "city": "Proper Job Superstores Ltd",
+          "pc": "BS48 4RZ",
+          "cons": 3,
+          "pallets": 10,
+          "revenue": 354.2,
+          "lates": 0
+        },
+        {
+          "name": "QD Distribution Centre",
+          "city": "QD Distribution Centre",
+          "pc": "NR16 2JU",
+          "cons": 2,
+          "pallets": 7,
+          "revenue": 302.65,
+          "lates": 0
+        },
+        {
+          "name": "TRAGO MILLS (SOUTH DEVON) LTD",
+          "city": "TRAGO MILLS (SOUTH DEVON) LTD",
+          "pc": "TQ12 6JD",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 200.05,
+          "lates": 0
+        },
+        {
+          "name": "TRAGO MILLS (MERTHYR) LTD",
+          "city": "TRAGO MILLS (MERTHYR) LTD",
+          "pc": "CF48 1HT",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 149.05,
+          "lates": 0
+        },
+        {
+          "name": "WRIGHTS RETAIL LIMITED",
+          "city": "WRIGHTS RETAIL LIMITED",
+          "pc": "IP8 3HE",
+          "cons": 2,
+          "pallets": 7,
+          "revenue": 256.65,
+          "lates": 0
+        },
+        {
+          "name": "TRAGO MILLS (FALMOUTH) LIMITED",
+          "city": "TRAGO MILLS (FALMOUTH) LIMITED",
+          "pc": "PL14 6HY",
+          "cons": 2,
+          "pallets": 4,
+          "revenue": 254.5,
+          "lates": 0
+        },
+        {
+          "name": "HOUSEHOLD ESSENTIALS",
+          "city": "HOUSEHOLD ESSENTIALS",
+          "pc": "CT9 2QD",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 187.39999999999998,
+          "lates": 0
+        }
+      ]
     }
   },
   "lateRows": [
     {
-      "id": "SH171680",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "MOORES NURSERY & GARDEN CNTRE",
-      "city": "MOORES NURSERY & GARDEN CNTRE",
-      "pc": "NG12 5BQ",
+      "id": "410030",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "Bar Activity ",
+      "city": "Bar Activity ",
+      "pc": "TA7 0RW",
       "window": "",
-      "commitDate": "18/06/26",
-      "arrDate": "19/06/26",
+      "commitDate": "24/07/26",
+      "arrDate": "27/07/26",
       "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "SH171941",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "W E DAYMAN & SONS",
-      "city": "W E DAYMAN & SONS",
-      "pc": "LE3 5QG",
-      "window": "",
-      "commitDate": "26/06/26",
-      "arrDate": "27/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
+      "mins": 4320,
       "pallets": 1,
       "dtype": "Standard",
       "note": "",
@@ -1915,15 +2206,51 @@
       "failed": false
     },
     {
-      "id": "SH171894",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "Anthony Gavin",
-      "city": "Anthony Gavin",
-      "pc": "NP11 4RT",
+      "id": "390003",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "MR PETER MARTIN",
+      "city": "MR PETER MARTIN",
+      "pc": "PE38 9DH",
       "window": "",
-      "commitDate": "25/06/26",
-      "arrDate": "26/06/26",
+      "commitDate": "29/07/26",
+      "arrDate": "31/07/26",
+      "arrival": "01:00",
+      "mins": 2880,
+      "pallets": 2,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "390004",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "S.F.C (ANGILA)",
+      "city": "S.F.C (ANGILA)",
+      "pc": "IP25 6AB",
+      "window": "",
+      "commitDate": "15/07/26",
+      "arrDate": "16/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "380035",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "Mark Up Tools",
+      "city": "Mark Up Tools",
+      "pc": "M8 8FN",
+      "window": "",
+      "commitDate": "27/07/26",
+      "arrDate": "28/07/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
@@ -1933,91 +2260,73 @@
       "failed": false
     },
     {
-      "id": "SH171621",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "In-Excess - Salisbury Store",
-      "city": "In-Excess - Salisbury Store",
-      "pc": "SP2 8RA",
+      "id": "380065",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "MJM Hardware",
+      "city": "MJM Hardware",
+      "pc": "L4 2RL",
       "window": "",
-      "commitDate": "17/06/26",
-      "arrDate": "18/06/26",
+      "commitDate": "29/07/26",
+      "arrDate": "30/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "410032",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "SHS Trading Broxburn",
+      "city": "SHS Trading Broxburn",
+      "pc": "EH52 5NN",
+      "window": "",
+      "commitDate": "28/07/26",
+      "arrDate": "29/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "410009",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "THE FACTORY SHOPS",
+      "city": "THE FACTORY SHOPS",
+      "pc": "SS4 1ND",
+      "window": "",
+      "commitDate": "16/07/26",
+      "arrDate": "17/07/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 3,
-      "dtype": "Economy Booked",
+      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
     },
     {
-      "id": "SH171535",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "CK Supermarkets",
-      "city": "CK Supermarkets",
-      "pc": "SA5 8BA",
+      "id": "390064",
+      "acct": "NTINTER",
+      "month": "Jul-26",
+      "dest": "ROYS (WROXHAM) LTD",
+      "city": "ROYS (WROXHAM) LTD",
+      "pc": "NR7 9BB",
       "window": "",
-      "commitDate": "15/06/26",
-      "arrDate": "16/06/26",
+      "commitDate": "22/07/26",
+      "arrDate": "23/07/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "SH171369",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "N T International plc",
-      "city": "N T International plc",
-      "pc": "B20 3BT",
-      "window": "",
-      "commitDate": "05/06/26",
-      "arrDate": "08/06/26",
-      "arrival": "01:00",
-      "mins": 4320,
-      "pallets": 3,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "SH171831",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "JANSVANS LTD T/A JANS MICA",
-      "city": "JANSVANS LTD T/A JANS MICA",
-      "pc": "IV51 9HL",
-      "window": "",
-      "commitDate": "25/06/26",
-      "arrDate": "26/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "SH171324",
-      "acct": "BONN01",
-      "month": "Jun-26",
-      "dest": "HARRISON AND DUNN",
-      "city": "HARRISON AND DUNN",
-      "pc": "PE9 2PA",
-      "window": "",
-      "commitDate": "04/06/26",
-      "arrDate": "05/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Economy Booked",
+      "dtype": "Standard",
       "note": "",
       "reason": "",
       "failed": false
@@ -5074,6 +5383,150 @@
       "arrDate": "11/05/26",
       "arrival": "01:00",
       "mins": 7200,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171680",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "MOORES NURSERY & GARDEN CNTRE",
+      "city": "MOORES NURSERY & GARDEN CNTRE",
+      "pc": "NG12 5BQ",
+      "window": "",
+      "commitDate": "18/06/26",
+      "arrDate": "19/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171941",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "W E DAYMAN & SONS",
+      "city": "W E DAYMAN & SONS",
+      "pc": "LE3 5QG",
+      "window": "",
+      "commitDate": "26/06/26",
+      "arrDate": "27/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171894",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "Anthony Gavin",
+      "city": "Anthony Gavin",
+      "pc": "NP11 4RT",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171621",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "In-Excess - Salisbury Store",
+      "city": "In-Excess - Salisbury Store",
+      "pc": "SP2 8RA",
+      "window": "",
+      "commitDate": "17/06/26",
+      "arrDate": "18/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 3,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171535",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "CK Supermarkets",
+      "city": "CK Supermarkets",
+      "pc": "SA5 8BA",
+      "window": "",
+      "commitDate": "15/06/26",
+      "arrDate": "16/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171369",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "N T International plc",
+      "city": "N T International plc",
+      "pc": "B20 3BT",
+      "window": "",
+      "commitDate": "05/06/26",
+      "arrDate": "08/06/26",
+      "arrival": "01:00",
+      "mins": 4320,
+      "pallets": 3,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171831",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "JANSVANS LTD T/A JANS MICA",
+      "city": "JANSVANS LTD T/A JANS MICA",
+      "pc": "IV51 9HL",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Economy Booked",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "SH171324",
+      "acct": "BONN01",
+      "month": "Jun-26",
+      "dest": "HARRISON AND DUNN",
+      "city": "HARRISON AND DUNN",
+      "pc": "PE9 2PA",
+      "window": "",
+      "commitDate": "04/06/26",
+      "arrDate": "05/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
       "pallets": 1,
       "dtype": "Economy Booked",
       "note": "",
