@@ -1,6 +1,6 @@
 {
   "customer": "Sarstedt",
-  "lastUpdated": "2026-07-06T14:51:16.940Z",
+  "lastUpdated": "2026-08-07T12:43:24.998Z",
   "months": {
     "2026-06": {
       "cons": 290,
@@ -8,7 +8,7 @@
       "revenue": 28097.9,
       "lates": 6,
       "latePallets": 8,
-      "timeliness": 0.986111,
+      "timeliness": 0.9861111111111112,
       "avgRC": 96.89,
       "avgRP": 48.78,
       "avgPC": 1.99,
@@ -318,7 +318,7 @@
       "revenue": 27494.7,
       "lates": 5,
       "latePallets": 12,
-      "timeliness": 0.97913,
+      "timeliness": 0.9791304347826087,
       "avgRC": 95.47,
       "avgRP": 47.82,
       "avgPC": 2,
@@ -628,7 +628,7 @@
       "revenue": 27887.75,
       "lates": 4,
       "latePallets": 5,
-      "timeliness": 0.991582,
+      "timeliness": 0.9915824915824916,
       "avgRC": 106.85,
       "avgRP": 46.95,
       "avgPC": 2.28,
@@ -938,7 +938,7 @@
       "revenue": 24854.3,
       "lates": 2,
       "latePallets": 2,
-      "timeliness": 0.996176,
+      "timeliness": 0.9961759082217974,
       "avgRC": 93.44,
       "avgRP": 47.52,
       "avgPC": 1.97,
@@ -1248,7 +1248,7 @@
       "revenue": 31389.55,
       "lates": 7,
       "latePallets": 9,
-      "timeliness": 0.986301,
+      "timeliness": 0.9863013698630136,
       "avgRC": 115.4,
       "avgRP": 47.78,
       "avgPC": 2.42,
@@ -1558,7 +1558,7 @@
       "revenue": 28615.85,
       "lates": 7,
       "latePallets": 12,
-      "timeliness": 0.98036,
+      "timeliness": 0.9803600654664485,
       "avgRC": 105.59,
       "avgRP": 46.83,
       "avgPC": 2.25,
@@ -1861,9 +1861,457 @@
           "lates": 0
         }
       ]
+    },
+    "2026-08": {
+      "cons": 60,
+      "pallets": 118,
+      "revenue": 5104.7,
+      "lates": 2,
+      "latePallets": 2,
+      "timeliness": 0.9830508474576272,
+      "avgRC": 85.08,
+      "avgRP": 43.26,
+      "avgPC": 1.97,
+      "palletSizes": {
+        "Half": 114,
+        "Full": 3,
+        "Quarter": 1
+      },
+      "typeBreakdown": {
+        "Next Day": {
+          "cons": 52,
+          "lates": 2
+        },
+        "Economy Booked": {
+          "cons": 8,
+          "lates": 0
+        }
+      },
+      "regionData": {
+        "East Midlands": {
+          "cons": 7,
+          "pallets": 11,
+          "revenue": 488.90000000000003,
+          "lates": 0
+        },
+        "North East": {
+          "cons": 3,
+          "pallets": 3,
+          "revenue": 157.35000000000002,
+          "lates": 0
+        },
+        "North West": {
+          "cons": 11,
+          "pallets": 36,
+          "revenue": 1304.2,
+          "lates": 0
+        },
+        "East of England": {
+          "cons": 10,
+          "pallets": 15,
+          "revenue": 682.6,
+          "lates": 1
+        },
+        "Yorkshire": {
+          "cons": 6,
+          "pallets": 15,
+          "revenue": 639.6999999999999,
+          "lates": 1
+        },
+        "Wales": {
+          "cons": 5,
+          "pallets": 8,
+          "revenue": 370.55,
+          "lates": 0
+        },
+        "South West": {
+          "cons": 6,
+          "pallets": 7,
+          "revenue": 330,
+          "lates": 0
+        },
+        "West Midlands": {
+          "cons": 4,
+          "pallets": 13,
+          "revenue": 548.8,
+          "lates": 0
+        },
+        "South East": {
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 244.29999999999998,
+          "lates": 0
+        },
+        "Scotland": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 66.25,
+          "lates": 0
+        },
+        "London": {
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 68.3,
+          "lates": 0
+        },
+        "South": {
+          "cons": 3,
+          "pallets": 4,
+          "revenue": 203.75,
+          "lates": 0
+        }
+      },
+      "dowBreakdown": {
+        "Mon": {
+          "cons": 13,
+          "lates": 0
+        },
+        "Tue": {
+          "cons": 12,
+          "lates": 1
+        },
+        "Wed": {
+          "cons": 10,
+          "lates": 1
+        },
+        "Thu": {
+          "cons": 13,
+          "lates": 0
+        },
+        "Fri": {
+          "cons": 12,
+          "lates": 0
+        }
+      },
+      "destData": [
+        {
+          "name": "NORTHERN CARE ALLIANCE NHSFT",
+          "city": "NORTHERN CARE ALLIANCE NHSFT",
+          "pc": "OL1 2JH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 86.1,
+          "lates": 0
+        },
+        {
+          "name": "nhs supply chain",
+          "city": "nhs supply chain",
+          "pc": "pl6 7lx",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 107.55,
+          "lates": 0
+        },
+        {
+          "name": "FRIMLEY HEALTH NHSFT",
+          "city": "FRIMLEY HEALTH NHSFT",
+          "pc": "RG1 8NQ",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 148.6,
+          "lates": 0
+        },
+        {
+          "name": "University of Nottingham",
+          "city": "University of Nottingham",
+          "pc": "LE12 5RD",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 86.1,
+          "lates": 0
+        },
+        {
+          "name": "NOTTINGHAM TRENT UNIVERSITY",
+          "city": "NOTTINGHAM TRENT UNIVERSITY",
+          "pc": "NG11 8NS",
+          "cons": 2,
+          "pallets": 3,
+          "revenue": 132.7,
+          "lates": 0
+        },
+        {
+          "name": "MRC - IPROC-LMB-FCC",
+          "city": "MRC - IPROC-LMB-FCC",
+          "pc": "CB2 0QH",
+          "cons": 2,
+          "pallets": 2,
+          "revenue": 87.6,
+          "lates": 0
+        },
+        {
+          "name": "NHS SUPPLY CHAIN RUGBY C",
+          "city": "NHS SUPPLY CHAIN RUGBY C",
+          "pc": "CV21 1TN",
+          "cons": 2,
+          "pallets": 5,
+          "revenue": 228.05,
+          "lates": 0
+        },
+        {
+          "name": "socotec uk ltd",
+          "city": "socotec uk ltd",
+          "pc": "de15 0yz",
+          "cons": 1,
+          "pallets": 3,
+          "revenue": 123.9,
+          "lates": 0
+        },
+        {
+          "name": "Northumbria Healthcare NHSFT",
+          "city": "Northumbria Healthcare NHSFT",
+          "pc": "NE46 1QJ",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 55.95,
+          "lates": 0
+        },
+        {
+          "name": "NHS Supply Chain",
+          "city": "NHS Supply Chain",
+          "pc": "SK10 3BL",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.05,
+          "lates": 0
+        },
+        {
+          "name": "BOLTON NHSFT",
+          "city": "BOLTON NHSFT",
+          "pc": "BL4 0JR",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.05,
+          "lates": 0
+        },
+        {
+          "name": "MEDICAL RESEARCH COUNCIL -CAMB",
+          "city": "MEDICAL RESEARCH COUNCIL -CAMB",
+          "pc": "CB2 0QH",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.8,
+          "lates": 0
+        },
+        {
+          "name": "university of manchester",
+          "city": "university of manchester",
+          "pc": "m13 9pt",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.05,
+          "lates": 0
+        },
+        {
+          "name": "NORTH WEST ANGLIA NHSFT",
+          "city": "NORTH WEST ANGLIA NHSFT",
+          "pc": "PE29 6NT",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.8,
+          "lates": 0
+        },
+        {
+          "name": "MOY PARK",
+          "city": "MOY PARK",
+          "pc": "NG34 9SL",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 43.05,
+          "lates": 0
+        },
+        {
+          "name": "NHS SUPPLY CHAIN ALFRETON",
+          "city": "NHS SUPPLY CHAIN ALFRETON",
+          "pc": "DE55 4QJ",
+          "cons": 1,
+          "pallets": 2,
+          "revenue": 103.15,
+          "lates": 0
+        },
+        {
+          "name": "NHS SUPPLY CHAIN NORMANTON",
+          "city": "NHS SUPPLY CHAIN NORMANTON",
+          "pc": "WF6 1TL",
+          "cons": 1,
+          "pallets": 10,
+          "revenue": 374,
+          "lates": 0
+        },
+        {
+          "name": "York & Scarb Teaching Hosp NHSFT",
+          "city": "York & Scarb Teaching Hosp NHSFT",
+          "pc": "YO12 6QL",
+          "cons": 1,
+          "pallets": 1,
+          "revenue": 46.75,
+          "lates": 0
+        },
+        {
+          "name": "NHS Supply Chain Bury St Edmunds",
+          "city": "NHS Supply Chain Bury St Edmunds",
+          "pc": "IP32 7FQ",
+          "cons": 1,
+          "pallets": 4,
+          "revenue": 182.2,
+          "lates": 0
+        },
+        {
+          "name": "NHS Supply Chain - Gorsey Point",
+          "city": "NHS Supply Chain - Gorsey Point",
+          "pc": "WA8 0RP",
+          "cons": 1,
+          "pallets": 25,
+          "revenue": 900.5,
+          "lates": 0
+        }
+      ]
     }
   },
   "lateRows": [
+    {
+      "id": "0745404/00",
+      "acct": "SARSTEDT",
+      "month": "Aug-26",
+      "dest": "IDEXX LABORATORIES LTD",
+      "city": "IDEXX LABORATORIES LTD",
+      "pc": "LS22 7GH",
+      "window": "",
+      "commitDate": "05/08/26",
+      "arrDate": "06/08/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0755537/00",
+      "acct": "SARSTEDT",
+      "month": "Aug-26",
+      "dest": "UK HEALTH SECURITY AGENCY-CAMB",
+      "city": "UK HEALTH SECURITY AGENCY-CAMB",
+      "pc": "CB2 0QQ",
+      "window": "",
+      "commitDate": "04/08/26",
+      "arrDate": "05/08/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0751591/00",
+      "acct": "SARSTEDT",
+      "month": "Jun-26",
+      "dest": "NHS Highland",
+      "city": "NHS Highland",
+      "pc": "PA34 4HH",
+      "window": "",
+      "commitDate": "30/06/26",
+      "arrDate": "01/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0750681/00A",
+      "acct": "SARSTEDT",
+      "month": "Jun-26",
+      "dest": "York & Scarb Teaching Hosp NHSFT",
+      "city": "York & Scarb Teaching Hosp NHSFT",
+      "pc": "YO12 6QL",
+      "window": "",
+      "commitDate": "24/06/26",
+      "arrDate": "30/06/26",
+      "arrival": "01:00",
+      "mins": 8640,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0750724/01",
+      "acct": "SARSTEDT",
+      "month": "Jun-26",
+      "dest": "NHS SUPPLY CHAIN",
+      "city": "NHS SUPPLY CHAIN",
+      "pc": "CR4 3HG",
+      "window": "",
+      "commitDate": "29/06/26",
+      "arrDate": "30/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0751168/00",
+      "acct": "SARSTEDT",
+      "month": "Jun-26",
+      "dest": "Cambridge Univ Hospitals NHSF Trust",
+      "city": "Cambridge Univ Hospitals NHSF Trust",
+      "pc": "CB23 8EL",
+      "window": "",
+      "commitDate": "25/06/26",
+      "arrDate": "26/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0751552/00",
+      "acct": "SARSTEDT",
+      "month": "Jun-26",
+      "dest": "solus scientific  solutions ltd",
+      "city": "solus scientific  solutions ltd",
+      "pc": "ng19 7jz",
+      "window": "",
+      "commitDate": "30/06/26",
+      "arrDate": "01/07/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 2,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
+    {
+      "id": "0750346/01",
+      "acct": "SARSTEDT",
+      "month": "Jun-26",
+      "dest": "NHS AYRSHIRE & ARRAN",
+      "city": "NHS AYRSHIRE & ARRAN",
+      "pc": "KA2 0BE",
+      "window": "",
+      "commitDate": "29/06/26",
+      "arrDate": "30/06/26",
+      "arrival": "01:00",
+      "mins": 1440,
+      "pallets": 1,
+      "dtype": "Standard",
+      "note": "",
+      "reason": "",
+      "failed": false
+    },
     {
       "id": "0739734/00",
       "acct": "SARSTEDT",
@@ -2306,114 +2754,6 @@
       "window": "",
       "commitDate": "27/05/26",
       "arrDate": "28/05/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0751591/00",
-      "acct": "SARSTEDT",
-      "month": "Jun-26",
-      "dest": "NHS Highland",
-      "city": "NHS Highland",
-      "pc": "PA34 4HH",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0750681/00A",
-      "acct": "SARSTEDT",
-      "month": "Jun-26",
-      "dest": "York & Scarb Teaching Hosp NHSFT",
-      "city": "York & Scarb Teaching Hosp NHSFT",
-      "pc": "YO12 6QL",
-      "window": "",
-      "commitDate": "24/06/26",
-      "arrDate": "30/06/26",
-      "arrival": "01:00",
-      "mins": 8640,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0750724/01",
-      "acct": "SARSTEDT",
-      "month": "Jun-26",
-      "dest": "NHS SUPPLY CHAIN",
-      "city": "NHS SUPPLY CHAIN",
-      "pc": "CR4 3HG",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "30/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0751168/00",
-      "acct": "SARSTEDT",
-      "month": "Jun-26",
-      "dest": "Cambridge Univ Hospitals NHSF Trust",
-      "city": "Cambridge Univ Hospitals NHSF Trust",
-      "pc": "CB23 8EL",
-      "window": "",
-      "commitDate": "25/06/26",
-      "arrDate": "26/06/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 1,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0751552/00",
-      "acct": "SARSTEDT",
-      "month": "Jun-26",
-      "dest": "solus scientific  solutions ltd",
-      "city": "solus scientific  solutions ltd",
-      "pc": "ng19 7jz",
-      "window": "",
-      "commitDate": "30/06/26",
-      "arrDate": "01/07/26",
-      "arrival": "01:00",
-      "mins": 1440,
-      "pallets": 2,
-      "dtype": "Standard",
-      "note": "",
-      "reason": "",
-      "failed": false
-    },
-    {
-      "id": "0750346/01",
-      "acct": "SARSTEDT",
-      "month": "Jun-26",
-      "dest": "NHS AYRSHIRE & ARRAN",
-      "city": "NHS AYRSHIRE & ARRAN",
-      "pc": "KA2 0BE",
-      "window": "",
-      "commitDate": "29/06/26",
-      "arrDate": "30/06/26",
       "arrival": "01:00",
       "mins": 1440,
       "pallets": 1,
